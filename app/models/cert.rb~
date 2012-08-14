@@ -1,0 +1,4 @@
+class Cert < ActiveRecord::Base
+  attr_accessible :category, :comments, :course_id, :date_expires, :date_issued, :id_number, :instructor_id, :level, :person_id, :status
+  belongs_to :Person
+end

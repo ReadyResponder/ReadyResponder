@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Person:</b>
+  <%= @cert.person_id %>
+</p>
+
+<p>
+  <b>Course:</b>
+  <%= @cert.course_id %>
+</p>
+
+<p>
+  <b>Instructor:</b>
+  <%= @cert.instructor_id %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @cert.status %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @cert.category %>
+</p>
+
+<p>
+  <b>Level:</b>
+  <%= @cert.level %>
+</p>
+
+<p>
+  <b>Id number:</b>
+  <%= @cert.id_number %>
+</p>
+
+<p>
+  <b>Date issued:</b>
+  <%= @cert.date_issued %>
+</p>
+
+<p>
+  <b>Date expires:</b>
+  <%= @cert.date_expires %>
+</p>
+
+<p>
+  <b>Comments:</b>
+  <%= @cert.comments %>
+</p>
+
+
+<%= link_to 'Edit', edit_cert_path(@cert) %> |
+<%= link_to 'Back', certs_path %>

@@ -1,0 +1,18 @@
+<%= semantic_form_for @cert do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :person_id %>
+    <%= f.input :course_id %>
+    <%= f.input :instructor_id %>
+    <%= f.input :status %>
+    <%= f.input :category %>
+    <%= f.input :level %>
+    <%= f.input :id_number %>
+    <%= f.input :date_issued %>
+    <%= f.input :date_expires %>
+    <%= f.input :comments %>
+  <% end %>
+
+  <%= f.actions do %>
+    <%= f.action :submit, :as => :input %>
+  <% end %>
+<% end %>

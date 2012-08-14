@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  person_id: 1
+  course_id: 1
+  instructor_id: 1
+  status: MyString
+  category: MyString
+  level: MyString
+  id_number: MyString
+  date_issued: 2012-08-11
+  date_expires: 2012-08-11
+  comments: MyText
+
+two:
+  person_id: 1
+  course_id: 1
+  instructor_id: 1
+  status: MyString
+  category: MyString
+  level: MyString
+  id_number: MyString
+  date_issued: 2012-08-11
+  date_expires: 2012-08-11
+  comments: MyText
