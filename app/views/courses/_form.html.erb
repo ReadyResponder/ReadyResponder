@@ -1,0 +1,16 @@
+<%= semantic_form_for @course do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :title %>
+    <%= f.input :status %>
+    <%= f.input :description %>
+    <%= f.input :comments %>
+    <%= f.input :category %>
+    <%= f.input :duration %>
+    <%= f.input :term %>
+    <%= f.input :required_for %>
+  <% end %>
+
+  <%= f.actions do %>
+    <%= f.action :submit, :as => :input %>
+  <% end %>
+<% end %>

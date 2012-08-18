@@ -1,4 +1,6 @@
 Lims3::Application.routes.draw do
+  resources :courses
+
   resources :certs
 
   resources :people do |people|
