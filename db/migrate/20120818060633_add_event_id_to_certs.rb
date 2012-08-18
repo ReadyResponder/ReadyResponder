@@ -5,5 +5,6 @@ class AddEventIdToCerts < ActiveRecord::Migration
     add_column :certs, :event_id, :integer
     rename_column :certs, :date_issued, :issued_date
     rename_column :certs, :date_expires, :expiration_date
+    remove_column :certs, :instructor_id
   end
 end

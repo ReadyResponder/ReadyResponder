@@ -16,7 +16,6 @@ ActiveRecord::Schema.define(:version => 20120818060633) do
   create_table "certs", :force => true do |t|
     t.integer  "person_id"
     t.integer  "course_id"
-    t.integer  "instructor_id"
     t.string   "status"
     t.string   "category"
     t.string   "level"
