@@ -25,6 +25,7 @@ class Person < ActiveRecord::Base
                                         :status => "Active"}
   scope :squad1, :order => 'position, start_date ASC', :conditions => {:division2 => "Squad 1",:status => "Active"}
   scope :squad2, :order => 'position, start_date ASC', :conditions => {:division2 => "Squad 2",:status => "Active"}
+
   TITLES = ['Director','Chief','Deputy','Captain', 'Lieutenant','Sargeant', 'Corporal', 'Senior Officer', 'Officer', 'CERT', 'Dispatcher', 'Recruit','Student Officer']
   
   def fullname
