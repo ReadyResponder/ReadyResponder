@@ -7,7 +7,7 @@ class Person < ActiveRecord::Base
   validates_presence_of :firstname, :lastname, :status
   validates_uniqueness_of :icsid, :allow_nil => true   # this needs to be scoped to active members, or more sophisticated rules
   validates_length_of :state, :is =>2, :allow_nil => true
-  validates_numericality_of :position, :height, :weight, :allow_nil => true
+  validates_numericality_of  :position, :height, :weight, :allow_nil => true
   #validates_presence_of :division2 unless division1.blank?
   #validates_presence_of :division1 unless division2.blank?
   
