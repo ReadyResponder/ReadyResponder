@@ -5,9 +5,11 @@ class Person < ActiveRecord::Base
   #has_many :courses, :through => :certs
 
   validates_presence_of :firstname, :lastname, :status
-  validates_uniqueness_of :icsid   # this needs to be scoped to active members, or more sophisticated rules
+  validates_uniqueness_of :icsid, :allow_nil => true   # this needs to be scoped to active members, or more sophisticated rules
   validates_length_of :state, :is =>2, :allow_nil => true
-
+  #validates_presence_of :division2 unless division1.blank?
+  #validates_presence_of :division1 unless division2.blank?
+  
   scope :leave, :conditions => {:status => "Leave of Absence"}
   scope :inactive, :conditions => {:status => "Inactive"}
   scope :active, :order => 'position, start_date ASC', :conditions => {:status => "Active"}
@@ -22,6 +24,7 @@ class Person < ActiveRecord::Base
                                         :status => "Active"}
   scope :squad1, :order => 'position, start_date ASC', :conditions => {:division2 => "Squad 1",:status => "Active"}
   scope :squad2, :order => 'position, start_date ASC', :conditions => {:division2 => "Squad 2",:status => "Active"}
+  TITLES = ['Director','Chief','Deputy','Captain', 'Lieutenant','Sargeant', 'Corporal', 'Senior Officer', 'Officer', 'CERT', 'Dispatcher', 'Recruit','Student Officer']
   
   def fullname
     (self.firstname + " " + (self.middleinitial || "") + " " + self.lastname).squeeze(" ")

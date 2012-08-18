@@ -12,6 +12,18 @@ class PersonTest < ActiveSupport::TestCase
     person.state = "MA"
     assert person.valid?
   end
+  test "division 1 and division 2 must be valid" do
+    person = Person.new(firstname: "CJ",
+                        lastname: "Fallon",
+                        status: "Active",
+                        division1: "Command")
+    assert person.invalid?, "division2 blank when division1 entered should be invalid"
+    person.division1 = ""
+    person.division2 = "Command"
+    assert person.invalid?, "division1 blank when division2 entered should be invalid"
+    person.division1 = "Command"
+    assert person.valid?
+  end
   test "icsid (badge) should be unique" do
     person1 = Person.new(firstname: "CJ",
                          lastname: "Fallon",
@@ -25,5 +37,6 @@ class PersonTest < ActiveSupport::TestCase
     assert person2.invalid?, " ICSID badge duplicated."
     person2.icsid = "555"
     assert person2.valid?
+  end
   
 end
