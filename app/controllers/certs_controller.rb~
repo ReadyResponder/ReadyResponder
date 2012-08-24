@@ -24,7 +24,8 @@ class CertsController < ApplicationController
   # GET /certs/new
   # GET /certs/new.json
   def new
-    @cert = Cert.new(:status => 'Active')
+    @cert = Cert.new(:status => 'Inactive')
+    #@cert.status = 'Active'
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @cert }

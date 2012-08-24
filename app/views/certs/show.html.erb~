@@ -7,9 +7,8 @@
 </p>
 
 <p>
-  <h2>
-  <%= link_to @cert.course.title, @cert.course %>
-  </h2>
+  <b>Course:</b>
+  <%= @cert.course.title %>
 </p>
 
 <p>

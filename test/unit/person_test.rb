@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class PersonTest < ActiveSupport::TestCase
+
+
   test "address state must be equal to 2 characters" do
     person = Person.new(firstname: "CJ",
                         lastname: "Fallon",
@@ -13,18 +15,18 @@ class PersonTest < ActiveSupport::TestCase
     assert person.valid?
   end
 
-  #test "division 1 and division 2 must be valid" do
-  #  person = Person.new(firstname: "CJ",
-  #                      lastname: "Fallon",
-  #                      status: "Active",
-  #                      division1: "Command")
-  #  assert person.invalid?, "division2 blank when division1 entered should be invalid"
-  #  person.division1 = ""
-  #  person.division2 = "Command"
-  #  assert person.invalid?, "division1 blank when division2 entered should be invalid"
-  #  person.division1 = "Command"
-  #  assert person.valid?
-  #end
+  test "division 1 and division 2 must be valid" do
+    person = Person.new(firstname: "CJ",
+                        lastname: "Fallon",
+                        status: "Active",
+                        division1: "Command")
+    assert person.invalid?, "division2 blank when division1 entered should be invalid"
+    person.division1 = ""
+    person.division2 = "Command"
+    assert person.invalid?, "division1 blank when division2 entered should be invalid"
+    person.division1 = "Command"
+    assert person.valid?
+  end
 
   test "icsid (badge) should be unique" do
     person1 = Person.new(firstname: "CJ",

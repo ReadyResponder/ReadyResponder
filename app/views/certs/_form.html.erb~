@@ -2,7 +2,7 @@
   <%= f.inputs do %>
     <%= f.input :person %>
     <%= f.input :course %>
-    <%= f.input :status, :as => :select, :collection => ['Active', 'Inactive'] %>
+    <%= f.input :status %>
     <%= f.input :category %>
     <%= f.input :level %>
     <%= f.input :cert_number %>

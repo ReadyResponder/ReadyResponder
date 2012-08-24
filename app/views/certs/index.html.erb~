@@ -21,12 +21,13 @@
   <tr>
     <td><%= cert.person_id %></td>
     <td><%= cert.course_id %></td>
+    <td><%= cert.instructor_id %></td>
     <td><%= cert.status %></td>
     <td><%= cert.category %></td>
     <td><%= cert.level %></td>
-    <td><%= cert.cert_number %></td>
-    <td><%= cert.issued_date %></td>
-    <td><%= cert.expiration_date %></td>
+    <td><%= cert.id_number %></td>
+    <td><%= cert.date_issued %></td>
+    <td><%= cert.date_expires %></td>
     <td><%= cert.comments %></td>
     <td><%= link_to 'Show', cert %></td>
     <td><%= link_to 'Edit', edit_cert_path(cert) %></td>
