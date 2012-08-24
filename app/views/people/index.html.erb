@@ -1,27 +1,30 @@
-<h1>Listing people</h1>
+<h1><center>Listing People</center></h1>
 
-<table>
-  <tr>
-    <th>Firstname</th>
-    <th>Lastname</th>
-    <th>Status</th>
-    <th>Division</th>
-    <th>Squad</th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @people.each do |person| %>
-  <tr>
-    <td><%= link_to person.firstname, person %></td>
-    <td><%= link_to person.lastname, person %></td>
-    <td><%= person.status %></td>
-    <td><%= person.division1 %></td>
-    <td><%= person.division2 %></td>
-    <td><%= link_to 'Edit', edit_person_path(person) %></td>
-    <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+<table id="people" class="display" >
+  <thead>
+    <tr>
+      <th>Badge</th>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Status</th>
+      <th>Division</th>
+      <th>Squad</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @people.each do |person| %>
+      <tr>
+	<td><%= person.icsid %></td>
+	<td><%= link_to person.firstname, person %></td>
+	<td><%= link_to person.lastname, person %></td>
+	<td><%= person.status %></td>
+	<td><%= person.division1 %></td>
+	<td><%= person.division2 %></td>
+	<td><%= link_to 'Edit', edit_person_path(person) %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
 <br />

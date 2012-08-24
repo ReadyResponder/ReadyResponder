@@ -9,7 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  * 
  *= require formtastic
- *= require my_formtastic_changes
  *= require_self
+ *= require dataTables/jquery.dataTables
  *= require_tree .
  */
