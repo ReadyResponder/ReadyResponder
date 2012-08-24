@@ -4,13 +4,14 @@
     <%= f.input :lastname %>
     <%= f.input :city %>
     <%= f.input :state %>
-    <%= f.input :zipcode %>
+    <%= f.input :zipcode, :input_html => { :size => 10 }  %>
     <%= f.input :status, :as => :select, :collection => ['Active', 'Inactive'] %>
+    <%= f.input :icsid, :input_html => { :size => 11 } %>
     <%= f.input :title, :as => :select, :collection => Person::TITLES %>
     <%= f.input :gender, :as => :select, :collection => ['Female', 'Male'] %>
-    <%= f.input :start_date %>
+    <%= f.input :start_date, :as => :string, :input_html => { :size => 11 }  %>
     <%= f.input :division1, :as => :radio, :label => 'Division', :collection => ['Command', 'Division 1', 'Division 2', 'CERT'] %>
-    <%= f.input :division2, :as => :select, :label => 'Squad', :collection => ['Command', 'Squad 1', 'Squad 2'] %>
+    <%= f.input :division2, :as => :radio, :label => 'Squad', :collection => ['Command', 'Squad 1', 'Squad 2'] %>
   <% end %>
 
   <%= f.actions do %>

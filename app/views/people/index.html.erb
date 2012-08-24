@@ -4,11 +4,13 @@
   <thead>
     <tr>
       <th>Badge</th>
+      <th>Title</th>
       <th>Firstname</th>
       <th>Lastname</th>
-      <th>Status</th>
+      <th>Start Date</th>
       <th>Division</th>
       <th>Squad</th>
+      <th>Trainings</th>
       <th></th>
     </tr>
   </thead>
@@ -16,11 +18,13 @@
     <% @people.each do |person| %>
       <tr>
 	<td><%= person.icsid %></td>
+	<td><%= person.title %></td>
 	<td><%= link_to person.firstname, person %></td>
 	<td><%= link_to person.lastname, person %></td>
-	<td><%= person.status %></td>
+	<td><%= person.start_date %></td>
 	<td><%= person.division1 %></td>
 	<td><%= person.division2 %></td>
+	<td><%= person.certs.size %></td>
 	<td><%= link_to 'Edit', edit_person_path(person) %></td>
       </tr>
     <% end %>

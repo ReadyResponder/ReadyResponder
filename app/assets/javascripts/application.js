@@ -13,4 +13,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require dataTables/jquery.dataTables
+//= require jquery.ui.datepicker
 //= require_tree .

@@ -1,4 +1,4 @@
-<h1>Listing People</h1>
+<h1><center>Listing People</center></h1>
 
 <table id="people" class="display" >
   <thead>
@@ -6,9 +6,10 @@
       <th>Badge</th>
       <th>Firstname</th>
       <th>Lastname</th>
-      <th>Status</th>
+      <th>Start Date</th>
       <th>Division</th>
       <th>Squad</th>
+      <th>Trainings</th>
       <th></th>
     </tr>
   </thead>
@@ -18,9 +19,10 @@
 	<td><%= person.icsid %></td>
 	<td><%= link_to person.firstname, person %></td>
 	<td><%= link_to person.lastname, person %></td>
-	<td><%= person.status %></td>
+	<td><%= person.start_date %></td>
 	<td><%= person.division1 %></td>
 	<td><%= person.division2 %></td>
+	<td><%= person.certs.size %></td>
 	<td><%= link_to 'Edit', edit_person_path(person) %></td>
       </tr>
     <% end %>

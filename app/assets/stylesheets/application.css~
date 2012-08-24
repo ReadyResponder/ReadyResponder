@@ -10,6 +10,8 @@
  * 
  *= require formtastic
  *= require_self
- *= require dataTables/jquery.dataTables
+ *= require jquery.ui.core
+ *= require jquery.ui.theme
+ *= require dataTables/src/demo_table_jui
  *= require_tree .
  */
