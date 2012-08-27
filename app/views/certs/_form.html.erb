@@ -3,11 +3,10 @@
     <%= f.input :person %>
     <%= f.input :course %>
     <%= f.input :status, :as => :select, :collection => ['Active', 'Inactive'] %>
-    <%= f.input :category %>
-    <%= f.input :level %>
-    <%= f.input :cert_number %>
-    <%= f.input :issued_date %>
-    <%= f.input :expiration_date %>
+    <%= f.input :level, :input_html => { :size => 22 }  %>
+    <%= f.input :cert_number, :input_html => { :size => 22 }  %>
+    <%= f.input :issued_date, :as => :string, :input_html => { :size => 11 }  %>
+    <%= f.input :expiration_date, :as => :string, :input_html => { :size => 11 }  %>
     <%= f.input :comments %>
   <% end %>
 

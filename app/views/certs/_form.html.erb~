@@ -2,12 +2,11 @@
   <%= f.inputs do %>
     <%= f.input :person %>
     <%= f.input :course %>
-    <%= f.input :status %>
-    <%= f.input :category %>
+    <%= f.input :status, :as => :select, :collection => ['Active', 'Inactive'] %>
     <%= f.input :level %>
     <%= f.input :cert_number %>
-    <%= f.input :issued_date %>
-    <%= f.input :expiration_date %>
+    <%= f.input :issued_date, :as => :string, :input_html => { :size => 11 }  %>
+    <%= f.input :expiration_date, :as => :string, :input_html => { :size => 11 }  %>
     <%= f.input :comments %>
   <% end %>
 

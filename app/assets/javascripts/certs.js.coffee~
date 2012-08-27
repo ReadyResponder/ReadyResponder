@@ -4,5 +4,3 @@
 jQuery ->
         $('#cert_expiration_date').datepicker
           dateFormat: 'yy-mm-dd'
-        $('#cert_issued_date').datepicker
-          dateFormat: 'yy-mm-dd'
