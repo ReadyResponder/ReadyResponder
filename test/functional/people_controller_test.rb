@@ -11,6 +11,7 @@ class PeopleControllerTest < ActionController::TestCase
     assert_not_nil assigns(:people)
   end
 
+    
   test "should get new" do
     get :new
     assert_response :success

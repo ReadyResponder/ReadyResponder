@@ -1,13 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  title: MyString
-  status: MyString
-  description: MyText
+ICS:
+  id: 1
+  title: ICS
+  status: Active
+  description: FEMA
   comments: MyText
-  category: MyString
-  duration: 1
-  term: 1
+  category: General
+  duration: 4
+  term: 100
   required_for: MyString
 
 two:

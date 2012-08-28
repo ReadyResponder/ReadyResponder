@@ -5,7 +5,7 @@ class CertTest < ActiveSupport::TestCase
     person = Person.new(firstname: "CJ",
                         lastname: "Fallon",
                         status: "Active",
-                        state: "MA")
+                        state: "M")
     person.save!
     cert = person.certs.new( course_id: courses(:ICS).id,
                              issued_date: Date.today,

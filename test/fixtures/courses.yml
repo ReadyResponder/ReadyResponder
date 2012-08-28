@@ -1,7 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
+ICS:
   id: 1
+  title: ICS
+  status: Active
+  description: FEMA
+  comments: MyText
+  category: General
+  duration: 4
+  term: 100
+  required_for: MyString
+
+one:
   title: MyString
   status: MyString
   description: MyText
@@ -10,7 +20,7 @@ one:
   duration: 1
   term: 1
   required_for: MyString
-
+  
 two:
   title: MyString
   status: MyString
