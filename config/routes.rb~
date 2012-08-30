@@ -1,8 +1,11 @@
 Lims3::Application.routes.draw do
+  resources :courses
+
   resources :certs
 
   resources :people do |people|
-    people.resources :contacts, :controller => "person_contacts"
+    people.resource :certs, :controller => 'certs'
+   # people.resources :contacts, :controller => "person_contacts"
   end
 
   # The priority is based upon order of creation:

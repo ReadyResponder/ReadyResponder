@@ -25,6 +25,7 @@ class CertsController < ApplicationController
   # GET /certs/new.json
   def new
     @cert = Cert.new(:status => 'Active')
+    @cert.person_id = (params[:person_id]) if (params[:person_id]).present?  
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @cert }

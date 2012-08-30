@@ -3,13 +3,23 @@
 <p>
   <%= @person.fullname %> (<%= @person.icsid %>)
 </p>
-
+<p>
+  <%= @person.age %></br>
+  <%= Date.today.yday %></br>
+  <%= @person.date_of_birth.yday %>
+</p>
+<p>
+DOB <%= @person.date_of_birth %>
+</p>
+<p>
+Start Date <%= @person.start_date %>
+</p>
 <p>
   <b>Status:</b>
   <%= @person.status %>
 </p>
 
 <%= render @person.certs %>
-
+<%= link_to 'New Cert', new_cert_path(@person) %>
 <%= link_to 'Edit', edit_person_path(@person) %> |
 <%= link_to 'Back', people_path %>

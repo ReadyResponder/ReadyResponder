@@ -6,11 +6,11 @@
     <%= f.input :level, :input_html => { :size => 22 }  %>
     <%= f.input :cert_number, :input_html => { :size => 22 }  %>
     <%= f.input :issued_date, :as => :string, :input_html => { :size => 11 }  %>
-    <%= f.input :expiration_date, :as => :string, :input_html => { :size => 11 }  %>
+    <%= f.input :expiration_date, :hint => 'Leave blank to set from course default', :as => :string, :input_html => { :size => 11 }  %>
     <%= f.input :comments %>
   <% end %>
 
   <%= f.actions do %>
-    <%= f.action :submit, :as => :input %>
+    <%= f.action :submit, :as => :input, :label => 'Create Certification' %>
   <% end %>
 <% end %>

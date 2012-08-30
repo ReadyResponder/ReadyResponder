@@ -1,7 +1,7 @@
 class Person < ActiveRecord::Base
   
   attr_accessible :firstname, :lastname, :status, :icsid, :city, :state, :zipcode, :start_date, :title, :gender, :date_of_birth,:division1, :division2, :certs_attributes
-  has_many :certs, :dependent => :destroy
+  has_many :certs
   has_many :courses, :through => :certs
   accepts_nested_attributes_for :certs
   
@@ -61,8 +61,11 @@ class Person < ActiveRecord::Base
   end
   def age
     if self.date_of_birth.present?
-      Date.today.year - self.date_of_birth.year + ( self.date_of_birth.yday < Date.today.yday ? 1 : 0 )
+      now = Date.today
+      age = now.year - self.date_of_birth.year
+      age -= 1 if now.yday < self.date_of_birth.yday
     end
+      age
   end
   
   def service_duration

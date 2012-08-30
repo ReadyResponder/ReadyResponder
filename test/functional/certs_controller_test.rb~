@@ -18,7 +18,7 @@ class CertsControllerTest < ActionController::TestCase
 
   test "should create cert" do
     assert_difference('Cert.count') do
-      post :create, cert: { category: @cert.category, comments: @cert.comments, course_id: @cert.course_id, date_expires: @cert.date_expires, date_issued: @cert.date_issued, cert_number: @cert.cert_number, level: @cert.level, person_id: @cert.person_id, status: @cert.status }
+      post :create, cert: { category: @cert.category, comments: @cert.comments, course_id: @cert.course_id, expiration_date: @cert.expiration_date, issued_date: @cert.issued_date, cert_number: @cert.cert_number, level: @cert.level, person_id: @cert.person_id, status: @cert.status }
     end
 
     assert_redirected_to cert_path(assigns(:cert))
@@ -35,7 +35,7 @@ class CertsControllerTest < ActionController::TestCase
   end
 
   test "should update cert" do
-    put :update, id: @cert, cert: { category: @cert.category, comments: @cert.comments, course_id: @cert.course_id, date_expires: @cert.date_expires, date_issued: @cert.date_issued, cert_number: @cert.cert_number, level: @cert.level, person_id: @cert.person_id, status: @cert.status }
+    put :update, id: @cert, cert: { category: @cert.category, comments: @cert.comments, course_id: @cert.course_id, expiration_date: @cert.expiration_date, issued_date: @cert.issued_date, cert_number: @cert.cert_number, level: @cert.level, person_id: @cert.person_id, status: @cert.status }
     assert_redirected_to cert_path(assigns(:cert))
   end
 

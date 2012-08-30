@@ -3,6 +3,7 @@ require 'test_helper'
 class CertsControllerTest < ActionController::TestCase
   setup do
     @cert = certs(:one)
+    @person = people(:one)
   end
 
   test "should get index" do
@@ -13,6 +14,10 @@ class CertsControllerTest < ActionController::TestCase
 
   test "should get new" do
     get :new
+    assert_response :success
+  end
+  test "should get new with person defined" do
+    get :new, person_id: @person
     assert_response :success
   end
 

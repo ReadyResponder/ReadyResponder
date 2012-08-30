@@ -21,7 +21,7 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
   gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
-  
+  gem 'bootstrap-sass'
 end
 
 gem 'jquery-rails'
