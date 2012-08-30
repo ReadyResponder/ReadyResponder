@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120818074230) do
+ActiveRecord::Schema.define(:version => 20120830101133) do
 
   create_table "certs", :force => true do |t|
     t.integer  "person_id"
@@ -39,9 +39,11 @@ ActiveRecord::Schema.define(:version => 20120818074230) do
     t.string   "category"
     t.integer  "duration"
     t.integer  "term"
-    t.string   "required_for"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.string   "required_for_pd"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "required_for_cert"
+    t.string   "required_for_sar"
   end
 
   create_table "people", :force => true do |t|
