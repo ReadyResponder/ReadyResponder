@@ -5,8 +5,6 @@
 </p>
 <p>
   <%= @person.age %></br>
-  <%= Date.today.yday %></br>
-  <%= @person.date_of_birth.yday %>
 </p>
 <p>
 DOB <%= @person.date_of_birth %>
@@ -21,5 +19,4 @@ Start Date <%= @person.start_date %>
 
 <%= render @person.certs %>
 <%= link_to 'New Cert', new_cert_path(@person) %>
-<%= link_to 'Edit', edit_person_path(@person) %> |
-<%= link_to 'Back', people_path %>
+<%= link_to 'Edit', edit_person_path(@person), :class => 'btn btn-mini' %> |
