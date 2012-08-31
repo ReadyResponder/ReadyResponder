@@ -7,8 +7,32 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div class="container">
-  <%= yield %>
-</div>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+	<span class="icon-bar"></span>
+	<span class="icon-bar"></span>
+	<span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="#">LIMS</a>
+      <div class="nav-collapse">
+	<ul class="nav">
+	  <li><%= link_to "People", people_path %></li>
+	  <li><%= link_to "Courses", courses_path %></li>
+	</ul>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="span3">
+	Hello from 3 column span
+      </div>
+      <div class="span9">
+	<%= yield %>
+      </div>
+    </div>  
+  </div>
 </body>
 </html>

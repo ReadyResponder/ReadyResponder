@@ -25,7 +25,14 @@
     </div>
   </div>
   <div class="container">
-    <%= yield %>
+    <div class="row">
+      <div class="span3">
+	<%= yield :sidebar %>
+      </div>
+      <div class="span9">
+	<%= yield %>
+      </div>
+    </div>  
   </div>
 </body>
 </html>
