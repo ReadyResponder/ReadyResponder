@@ -32,7 +32,7 @@
 
 <p>
   <b>Term:</b>
-  <%= pluralize(@course.term, 'month' %>
+  <%= pluralize(@course.term, 'month') %>
 </p>
 
 <p>
