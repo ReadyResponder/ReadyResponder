@@ -9,7 +9,7 @@ ICS:
   category: General
   duration: 4
   term: 100
-  required_for: MyString
+  required_for_pd: MyString
 
 one:
   title: MyString
@@ -19,7 +19,7 @@ one:
   category: MyString
   duration: 1
   term: 1
-  required_for: MyString
+  required_for_pd: MyString
   
 two:
   title: MyString
@@ -29,4 +29,4 @@ two:
   category: MyString
   duration: 1
   term: 1
-  required_for: MyString
+  required_for_pd: MyString

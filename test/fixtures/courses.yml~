@@ -11,6 +11,16 @@ ICS:
   term: 100
   required_for: MyString
 
+one:
+  title: MyString
+  status: MyString
+  description: MyText
+  comments: MyText
+  category: MyString
+  duration: 1
+  term: 1
+  required_for: MyString
+  
 two:
   title: MyString
   status: MyString
