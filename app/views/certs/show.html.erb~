@@ -7,13 +7,16 @@
 </p>
 
 <p>
-  <b>Course:</b>
-  <%= @cert.course.title %>
+  <h2>
+  <%= link_to @cert.course.title, @cert.course %>
+  </h2>
 </p>
 
 <p>
   <b>Status:</b>
-  <%= @cert.status %>
+  <div class="alert alert-<%= @cert.status.to_s == 'Active' ? "success" : "error" %>">
+    <%= @cert.status %>
+  </div>
 </p>
 
 <p>

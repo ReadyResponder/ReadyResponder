@@ -13,8 +13,10 @@
 </p>
 
 <p>
-  <b>Status:</b>
-  <%= @cert.status %>
+  
+  <div class="alert alert-<%= @cert.status.to_s == 'Active' ? "success" : "error" %>">
+   <b>Status:</b> <%= @cert.status %>
+  </div>
 </p>
 
 <p>
