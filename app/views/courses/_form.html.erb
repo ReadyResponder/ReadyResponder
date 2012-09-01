@@ -1,18 +1,14 @@
-<%= semantic_form_for @course do |f| %>
-  <%= f.inputs do %>
+<%= simple_form_for(@course, :html => {:class => 'form-horizontal' }) do |f| %>
     <%= f.input :title %>
     <%= f.input :status, :as => :select, :collection => ['Active', 'Inactive'] %>
-    <%= f.input :description %>
+    <%= f.input :description, :rows => '10' %>
     <%= f.input :comments %>
     <%= f.input :category, :as => :select, :collection => Course::CATEGORY_CHOICES %>
     <%= f.input :duration, :hint => "in hours" %>
     <%= f.input :term, :hint => "in months" %>
     <%= f.input :required_for_pd, :as => :check_boxes, :label => 'Required for ', :collection => ['Police'] %>
-    <%= f.input :required_for_cert, :as => :check_boxes, :label => '', :collection => ['CERT'] %>
-    <%= f.input :required_for_sar, :as => :check_boxes, :label => '', :collection => ['SAR'] %>
-  <% end %>
+    <%= f.input :required_for_cert, :as => :check_boxes, :label => false, :collection => ['CERT'] %>
+    <%= f.input :required_for_sar, :as => :check_boxes, :label => false, :collection => ['SAR'] %>
 
-  <%= f.actions do %>
-    <%= f.action :submit, :as => :input %>
-  <% end %>
+    <%= f.button :submit %>
 <% end %>

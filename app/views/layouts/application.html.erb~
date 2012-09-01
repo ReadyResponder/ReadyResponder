@@ -27,7 +27,7 @@
   <div class="container">
     <div class="row">
       <div class="span3">
-	Hello from 3 column span
+	<%= yield :sidebar %>
       </div>
       <div class="span9">
 	<%= yield %>

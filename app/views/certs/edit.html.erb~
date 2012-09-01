@@ -1,0 +1,6 @@
+<h1>Editing cert</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', @cert %> |
+<%= link_to 'Back', certs_path %>
