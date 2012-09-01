@@ -3,9 +3,7 @@
 <p>
   <%= @person.fullname %> (<%= @person.icsid %>)
 </p>
-<p>
-  <%= @person.age %></br>
-</p>
+<p><%= @person.age %></br></p>
 <p>
 DOB <%= @person.date_of_birth %>
 </p>
@@ -18,5 +16,5 @@ Start Date <%= @person.start_date %>
 </p>
 
 <%= render @person.certs %>
-<%= link_to 'New Cert', new_cert_path(@person) %>
-<%= link_to 'Edit', edit_person_path(@person), :class => 'btn btn-mini' %> |
+<%= link_to 'New Cert', new_cert_path(@person), :class => 'btn btn-mini' %>
+<%= link_to 'Edit', edit_person_path(@person), :class => 'btn btn-mini' %>

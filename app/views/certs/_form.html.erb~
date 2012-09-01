@@ -1,4 +1,4 @@
-<%= semantic_form_for @cert do |f| %>
+<%= semantic_form_for @cert, :html => {:multipart => true} do |f| %>
   <%= f.inputs do %>
     <%= f.input :person %>
     <%= f.input :course %>
@@ -7,6 +7,7 @@
     <%= f.input :cert_number, :input_html => { :size => 22 }  %>
     <%= f.input :issued_date, :as => :string, :input_html => { :size => 11 }  %>
     <%= f.input :expiration_date, :hint => 'Leave blank to set from course default', :as => :string, :input_html => { :size => 11 }  %>
+    <%= f.file_field :certification %>
     <%= f.input :comments %>
   <% end %>
 

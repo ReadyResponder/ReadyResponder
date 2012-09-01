@@ -13,9 +13,6 @@
     <%= f.input :start_date, :as => :string, :input_html => { :size => 11 }  %>
     <%= f.input :division1, :as => :radio, :label => 'Division', :collection => ['Command', 'Division 1', 'Division 2', 'CERT'] %>
     <%= f.input :division2, :as => :radio, :label => 'Squad', :collection => ['Command', 'Squad 1', 'Squad 2'] %>
-    <%= f.semantic_fields_for :cert do |cert| %>
-      <%= cert.input :status %>
-    <% end %>
   <% end %>
 
   <%= f.actions do %>

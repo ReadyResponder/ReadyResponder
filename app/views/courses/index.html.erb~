@@ -26,7 +26,7 @@
 	<td><%= course.category %></td>
 	<td><%= course.duration %></td>
 	<td><%= course.term %></td>
-	<td><%= course.required_for %></td>
+	<td><%= course.required_for_pd %></td>
 	<td><%= link_to 'Show', course %></td>
 	<td><%= link_to 'Edit', edit_course_path(course) %></td>
 	<td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -1,5 +1,4 @@
-<%= semantic_form_for @course do |f| %>
-  <%= f.inputs do %>
+<%= simple_form_for @course do |f| %>
     <%= f.input :title %>
     <%= f.input :status, :as => :select, :collection => ['Active', 'Inactive'] %>
     <%= f.input :description %>
@@ -10,9 +9,6 @@
     <%= f.input :required_for_pd, :as => :check_boxes, :label => 'Required for ', :collection => ['Police'] %>
     <%= f.input :required_for_cert, :as => :check_boxes, :label => '', :collection => ['CERT'] %>
     <%= f.input :required_for_sar, :as => :check_boxes, :label => '', :collection => ['SAR'] %>
-  <% end %>
 
-  <%= f.actions do %>
-    <%= f.action :submit, :as => :input %>
-  <% end %>
+    <%= f.button :submit %>
 <% end %>
