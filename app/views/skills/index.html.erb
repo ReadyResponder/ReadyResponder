@@ -1,0 +1,31 @@
+<h1>Listing skills</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Status</th>
+    <th>Required for pd</th>
+    <th>Required for cert</th>
+    <th>Required for sar</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @skills.each do |skill| %>
+  <tr>
+    <td><%= skill.title %></td>
+    <td><%= skill.status %></td>
+    <td><%= skill.required_for_pd %></td>
+    <td><%= skill.required_for_cert %></td>
+    <td><%= skill.required_for_sar %></td>
+    <td><%= link_to 'Show', skill %></td>
+    <td><%= link_to 'Edit', edit_skill_path(skill) %></td>
+    <td><%= link_to 'Destroy', skill, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Skill', new_skill_path %>

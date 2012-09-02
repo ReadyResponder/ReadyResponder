@@ -1,0 +1,15 @@
+<%= simple_form_for(@skill) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :title %>
+    <%= f.input :status %>
+    <%= f.input :required_for_pd %>
+    <%= f.input :required_for_cert %>
+    <%= f.input :required_for_sar %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

@@ -15,6 +15,7 @@ Start Date <%= @person.start_date %>
   <%= @person.status %>
 </p>
 
-<%= render @person.certs %>
+<fieldset><%= render @person.certs %></fieldset>
+
 <%= link_to 'New Cert', new_cert_path(@person), :class => 'btn btn-mini' %>
 <%= link_to 'Edit', edit_person_path(@person), :class => 'btn btn-mini' %>
