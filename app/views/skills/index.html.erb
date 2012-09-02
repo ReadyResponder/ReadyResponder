@@ -1,4 +1,9 @@
-<h1>Listing skills</h1>
+<% content_for :sidebar do %>
+  <center><h1>Listing skills</h1></br>
+  <%= link_to 'New Skill', new_skill_path, :class => 'btn' %></center>
+<% end %>
+
+
 
 <table>
   <tr>
@@ -20,8 +25,7 @@
     <td><%= skill.required_for_cert %></td>
     <td><%= skill.required_for_sar %></td>
     <td><%= link_to 'Show', skill %></td>
-    <td><%= link_to 'Edit', edit_skill_path(skill) %></td>
-    <td><%= link_to 'Destroy', skill, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Edit', edit_skill_path(skill), :class => 'btn btn-mini btn-primary' %></td>
   </tr>
 <% end %>
 </table>

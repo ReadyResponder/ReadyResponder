@@ -12,7 +12,7 @@
  *= require jquery.ui.core
  *= require jquery.ui.theme
  *= require jquery.ui.datepicker
- *= require dataTables/src/demo_table_jui
+ *= xxrequire dataTables/src/demo_table_jui
  *= require_tree .
  */
 

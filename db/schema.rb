@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120902061005) do
+ActiveRecord::Schema.define(:version => 20120902071807) do
 
   create_table "certs", :force => true do |t|
     t.integer  "person_id"
@@ -46,6 +46,13 @@ ActiveRecord::Schema.define(:version => 20120902061005) do
     t.string   "required_for_cert"
     t.string   "required_for_sar"
   end
+
+  create_table "courses_skills", :id => false, :force => true do |t|
+    t.integer "course_id"
+    t.integer "skill_id"
+  end
+
+  add_index "courses_skills", ["course_id", "skill_id"], :name => "index_courses_skills_on_course_id_and_skill_id"
 
   create_table "people", :force => true do |t|
     t.string   "firstname"

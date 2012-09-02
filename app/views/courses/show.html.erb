@@ -1,10 +1,11 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <b>Title:</b>
-  <%= @course.title %>
-</p>
-
+<% content_for :sidebar do %>
+  <p><h2><%= @course.title %></h2></p>
+  </br>
+  <%= link_to 'Edit', edit_course_path(@course), :class => 'btn btn-mini btn-primary' %>
+  <%= link_to 'Destroy', @course, method: :delete, :class => 'btn btn-mini btn-danger', data: { confirm: 'Are you sure?' } %>
+  <%= link_to 'Course Listings', courses_path, :class => 'btn btn-mini' %>
+<% end %>
 <p>
   <b>Status:</b>
   <%= @course.status %>
@@ -39,8 +40,3 @@
   <b>Required for :</b>
   <%= @course.required_for_pd %>
 </p>
-
-<%= link_to 'Destroy', @course, method: :delete, data: { confirm: 'Are you sure?' } %>
-  
-<%= link_to 'Edit', edit_course_path(@course) %> |
-<%= link_to 'Back', courses_path %>

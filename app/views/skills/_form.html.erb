@@ -3,7 +3,8 @@
 
   <div class="form-inputs">
     <%= f.input :title %>
-    <%= f.input :status %>
+    <%= f.association :courses %>
+    <%= f.input :status, :as => :select, :collection => ['Active', 'Inactive'] %>
     <%= f.input :required_for_pd %>
     <%= f.input :required_for_cert %>
     <%= f.input :required_for_sar %>

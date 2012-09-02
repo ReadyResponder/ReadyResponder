@@ -17,9 +17,34 @@ Start Date <%= @person.start_date %>
 
 
 <%= render @person.certs %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+	<th>Skills</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @person.skills %>
+  </tbody>
+</table>
 
+<% if (Skill.police - @person.skills).empty? then %>
+  Howdy officer
+<% else %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+	<th>Skills Missing for Police</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render (Skill.police - @person.skills) %>
+  </tbody>
+</table>
+  
+<% end %>
 <% content_for :sidebar do %>
-<%= link_to 'Edit', edit_person_path(@person), :class => 'btn btn-mini' %></br>
-<%= link_to 'New Cert', new_cert_path(@person), :class => 'btn btn-mini' %>
+<%= link_to 'Edit Person', edit_person_path(@person), :class => 'btn btn-mini btn-primary' %></br></br>
+<%= link_to 'New Cert', new_person_cert_path(@person), :class => 'btn btn-mini' %>
 
 <% end %>

@@ -8,11 +8,14 @@ gem 'thin', group: :development
 #gem 'quiet-assets', group: :development
 gem 'ransack'
 gem 'sqlite3'
-#gem 'formtastic'
-gem 'simple_form'
+
 gem 'carrierwave'
 gem 'rmagick'
 gem 'simple_form'
+
+gem 'carrierwave'
+gem 'devise'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
