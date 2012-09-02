@@ -1,9 +1,13 @@
-<h1><center>Listing People</center></h1>
+<% content_for :sidebar do %>
+  <center><h1>Listing People</h1>
+  <%= link_to 'New Person', new_person_path, :class => 'btn' %></center>
+<% end %>
 
-<table id="people" class="display" >
+<table id="people" class="display table table-striped table-bordered" >
   <thead>
     <tr>
       <th>Badge</th>
+      <th>Title</th>
       <th>Firstname</th>
       <th>Lastname</th>
       <th>Start Date</th>
@@ -17,6 +21,7 @@
     <% @people.each do |person| %>
       <tr>
 	<td><%= person.icsid %></td>
+	<td><%= person.title %></td>
 	<td><%= link_to person.firstname, person %></td>
 	<td><%= link_to person.lastname, person %></td>
 	<td><%= person.start_date %></td>
@@ -31,4 +36,4 @@
 
 <br />
 
-<%= link_to 'New Person', new_person_path %>
+

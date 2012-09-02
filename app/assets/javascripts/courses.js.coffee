@@ -5,4 +5,4 @@ jQuery ->
         $('#courses').dataTable
           sPaginationType: "full_numbers"
           bJQueryUI: true
- 
+          iDisplayLength: 50

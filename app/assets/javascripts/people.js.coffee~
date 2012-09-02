@@ -5,5 +5,5 @@ jQuery ->
         $('#people').dataTable
           sPaginationType: "full_numbers"
           bJQueryUI: true
-        $('#start_date').datepicker
+        $('#person_start_date').datepicker
           dateFormat: 'yy-mm-dd'

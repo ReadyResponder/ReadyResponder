@@ -4,12 +4,14 @@ gem 'rails', '3.2.6'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-
+gem 'thin', group: :development
+#gem 'quiet-assets', group: :development
+gem 'ransack'
 gem 'sqlite3'
 #gem 'formtastic'
 gem 'simple_form'
 gem 'carrierwave'
-
+gem 'devise'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

@@ -15,6 +15,3 @@
  *= require dataTables/src/demo_table_jui
  *= require_tree .
  */
-@import "bootstrap";
-
-@import "bootstrap-responsive";
