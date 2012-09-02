@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/rweng/jquery-datatables-rails.git
+  revision: 2b1b57e61853be12544fb64b3b5b25e43999c106
+  specs:
+    jquery-datatables-rails (1.11.0)
+      jquery-rails
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -140,6 +147,7 @@ DEPENDENCIES
   carrierwave
   coffee-rails (~> 3.2.1)
   devise
+  jquery-datatables-rails!
   jquery-rails
   jquery-ui-rails
   rails (= 3.2.6)

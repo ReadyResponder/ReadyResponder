@@ -21,7 +21,7 @@ class SkillsControllerTest < ActionController::TestCase
       post :create, skill: { required_for_cert: @skill.required_for_cert, required_for_pd: @skill.required_for_pd, required_for_sar: @skill.required_for_sar, status: @skill.status, title: @skill.title }
     end
 
-    assert_redirected_to skill_path(assigns(:skill))
+    assert_redirected_to skills_path
   end
 
   test "should show skill" do
@@ -36,7 +36,8 @@ class SkillsControllerTest < ActionController::TestCase
 
   test "should update skill" do
     put :update, id: @skill, skill: { required_for_cert: @skill.required_for_cert, required_for_pd: @skill.required_for_pd, required_for_sar: @skill.required_for_sar, status: @skill.status, title: @skill.title }
-    assert_redirected_to skill_path(assigns(:skill))
+    
+    assert_redirected_to skills_path
   end
 
   test "should destroy skill" do
