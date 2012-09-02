@@ -1,5 +1,4 @@
-<%= semantic_form_for @person do |f| %>
-  <%= f.inputs do %>
+<%= simple_form_for @person do |f| %>
     <%= f.input :firstname %>
     <%= f.input :lastname %>
     <%= f.input :city %>
@@ -11,11 +10,9 @@
     <%= f.input :gender, :as => :select, :collection => ['Female', 'Male'] %>
     <%= f.input :date_of_birth, :as => :string, :input_html => { :size => 11 }  %>
     <%= f.input :start_date, :as => :string, :input_html => { :size => 11 }  %>
-    <%= f.input :division1, :as => :radio, :label => 'Division', :collection => ['Command', 'Division 1', 'Division 2', 'CERT'] %>
-    <%= f.input :division2, :as => :radio, :label => 'Squad', :collection => ['Command', 'Squad 1', 'Squad 2'] %>
-  <% end %>
-
-  <%= f.actions do %>
-    <%= f.action :submit, :as => :button %>
-  <% end %>
+    <%= f.input :division1, :as => :radio_buttons, :label => 'Division', :collection => ['Command', 'Division 1', 'Division 2', 'CERT'] %>
+    <%= f.input :division2, :as => :radio_buttons, :label => 'Squad', :collection => ['Command', 'Squad 1', 'Squad 2'] %>
+  
+    <%= f.button :submit %>
+  
 <% end %>

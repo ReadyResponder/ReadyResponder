@@ -43,12 +43,11 @@
   <b>Date expires:</b>
   <%= @cert.expiration_date %>
 </p>
-
+<% image_tag @cert.certification_url.to_s %>
 <p>
   <b>Comments:</b>
   <%= @cert.comments %>
 </p>
 
 
-<%= link_to 'Edit', edit_cert_path(@cert) %> |
-<%= link_to 'Back', certs_path %>
+<%= link_to 'Edit', edit_cert_path(@cert), :class => 'btn btn-mini'%>

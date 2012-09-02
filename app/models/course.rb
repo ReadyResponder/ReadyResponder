@@ -6,5 +6,5 @@ class Course < ActiveRecord::Base
   REQUIRED_FOR_CHOICES = ['Police', 'CERT','SAR']
 
   validates_presence_of :title, :status
-
+  scope :active,  :conditions => {:status => "Active"}
 end

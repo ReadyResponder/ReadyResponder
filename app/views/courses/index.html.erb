@@ -1,10 +1,13 @@
-<h1>Listing courses</h1>
+<% content_for :sidebar do %>
+  <center><h1>Listing courses</h1></br>
+  <%= link_to 'New Course', new_course_path, :class => 'btn' %></center>
+<% end %>
+
 
 <table id="courses" class="display" >
   <thead>
     <tr>
       <th>Title</th>
-      <th>Status</th>
       <th>Description</th>
       <th>Category</th>
       <th>Duration</th>
@@ -17,7 +20,6 @@
     <% @courses.each do |course| %>
       <tr>
 	<td><%= link_to course.title, course %></td>
-	<td><%= course.status %></td>
 	<td><%= course.description %></td>
 	<td><%= course.category %></td>
 	<td><%= course.duration %></td>
@@ -27,9 +29,17 @@
     </tr>
     <% end %>
   </tbody>
+  <tfoot>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Category</th>
+      <th>Duration</th>
+      <th>Term</th>
+      <th>Required for</th>
+      <th></th>
+    </tr>
+  </tfoot>
 
 </table>
 
-<br />
-
-<%= link_to 'New Course', new_course_path %>

@@ -1,5 +1,5 @@
 class Course < ActiveRecord::Base
-  attr_accessible :category, :comments, :description, :duration, :required_for, :status, :term, :title
+  attr_accessible :category, :comments, :description, :duration, :required_for_pd, :required_for_cert, :required_for_sar, :status, :term, :title
   has_many :certs
   
   CATEGORY_CHOICES = ['General', 'Police', 'Admin', 'CERT', 'SAR']

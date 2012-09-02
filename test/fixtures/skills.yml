@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  status: MyString
+  required_for_pd: false
+  required_for_cert: false
+  required_for_sar: false
+
+two:
+  title: MyString
+  status: MyString
+  required_for_pd: false
+  required_for_cert: false
+  required_for_sar: false

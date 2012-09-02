@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @skill.title %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @skill.status %>
+</p>
+
+<p>
+  <b>Required for pd:</b>
+  <%= @skill.required_for_pd %>
+</p>
+
+<p>
+  <b>Required for cert:</b>
+  <%= @skill.required_for_cert %>
+</p>
+
+<p>
+  <b>Required for sar:</b>
+  <%= @skill.required_for_sar %>
+</p>
+
+
+<%= link_to 'Edit', edit_skill_path(@skill) %> |
+<%= link_to 'Back', skills_path %>

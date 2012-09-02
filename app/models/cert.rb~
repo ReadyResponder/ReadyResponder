@@ -10,7 +10,7 @@ class Cert < ActiveRecord::Base
   def set_defaults
     if self.expiration_date.blank? then
       #course = Course.find(self.course_id)
-      self.expiration_date = self.issued_date + course.term.to_i.months + 1 unless course.nil?
+      self.expiration_date = self.issued_date + course.term.to_i.months unless course.nil?
     end
   end
 

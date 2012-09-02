@@ -1,16 +1,14 @@
-<%= semantic_form_for @cert do |f| %>
-  <%= f.inputs do %>
-    <%= f.input :person %>
-    <%= f.input :course %>
+<%= simple_form_for @cert, :class => "well form-horizontal", :html => {:multipart => true} do |f| %>
+    <%= f.association :person %>
+    <%= f.association :course %>
     <%= f.input :status, :as => :select, :collection => ['Active', 'Inactive'] %>
-    <%= f.input :level, :input_html => { :size => 22 }  %>
+    <%= f.input :level, :hint => 'eg. EMT-Basic', :input_html => { :size => 22 }  %>
     <%= f.input :cert_number, :input_html => { :size => 22 }  %>
     <%= f.input :issued_date, :as => :string, :input_html => { :size => 11 }  %>
     <%= f.input :expiration_date, :hint => 'Leave blank to set from course default', :as => :string, :input_html => { :size => 11 }  %>
+    <%= f.input :certification, :as => :file, :hint => 'Upload a scanned image of the documentation' %>
     <%= f.input :comments %>
-  <% end %>
+  
+    <%= f.button :submit, :label => 'Create Certification' %>
 
-  <%= f.actions do %>
-    <%= f.action :submit, :as => :input, :label => 'Create Certification' %>
-  <% end %>
 <% end %>

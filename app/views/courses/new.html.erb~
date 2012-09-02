@@ -1,5 +1,0 @@
-<h1>New course</h1>
-<% content_for :sidebar do %>
-<h2>This is the sidebar</h2>
-<% end %>
-<%= render 'form' %>

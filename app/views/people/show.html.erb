@@ -3,9 +3,7 @@
 <p>
   <%= @person.fullname %> (<%= @person.icsid %>)
 </p>
-<p>
-  <%= @person.age %></br>
-</p>
+<p><%= @person.age %></br></p>
 <p>
 DOB <%= @person.date_of_birth %>
 </p>
@@ -16,6 +14,7 @@ Start Date <%= @person.start_date %>
   <b>Status:</b>
   <%= @person.status %>
 </p>
+
 
 <%= render @person.certs %>
 
