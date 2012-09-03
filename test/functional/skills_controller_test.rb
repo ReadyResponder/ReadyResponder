@@ -3,6 +3,7 @@ require 'test_helper'
 class SkillsControllerTest < ActionController::TestCase
   setup do
     @skill = skills(:one)
+    @title = titles(:one)
   end
 
   test "should get index" do
@@ -18,7 +19,7 @@ class SkillsControllerTest < ActionController::TestCase
 
   test "should create skill" do
     assert_difference('Skill.count') do
-      post :create, skill: { required_for_cert: @skill.required_for_cert, required_for_pd: @skill.required_for_pd, required_for_sar: @skill.required_for_sar, status: @skill.status, title: @skill.title }
+      post :create, skill: { status: @skill.status, title: @skill.title }
     end
 
     assert_redirected_to skills_path
@@ -35,7 +36,7 @@ class SkillsControllerTest < ActionController::TestCase
   end
 
   test "should update skill" do
-    put :update, id: @skill, skill: { required_for_cert: @skill.required_for_cert, required_for_pd: @skill.required_for_pd, required_for_sar: @skill.required_for_sar, status: @skill.status, title: @skill.title }
+    put :update, id: @skill, skill: {status: @skill.status, title: @skill.title }
     
     assert_redirected_to skills_path
   end

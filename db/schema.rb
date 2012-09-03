@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120903044646) do
+ActiveRecord::Schema.define(:version => 20120903055015) do
 
   create_table "certs", :force => true do |t|
     t.integer  "person_id"
@@ -89,6 +89,13 @@ ActiveRecord::Schema.define(:version => 20120903044646) do
     t.integer  "duration"
   end
 
+  create_table "people_titles", :id => false, :force => true do |t|
+    t.integer "person_id"
+    t.integer "title_id"
+  end
+
+  add_index "people_titles", ["person_id", "title_id"], :name => "index_people_titles_on_person_id_and_title_id"
+
   create_table "skills", :force => true do |t|
     t.string   "title"
     t.string   "status"
@@ -97,6 +104,22 @@ ActiveRecord::Schema.define(:version => 20120903044646) do
     t.boolean  "required_for_sar"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+  end
+
+  create_table "skills_titles", :id => false, :force => true do |t|
+    t.integer "skill_id"
+    t.integer "title_id"
+  end
+
+  add_index "skills_titles", ["skill_id", "title_id"], :name => "index_skills_titles_on_skill_id_and_title_id"
+
+  create_table "titles", :force => true do |t|
+    t.string   "title"
+    t.string   "status"
+    t.string   "description"
+    t.text     "comments"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
 end

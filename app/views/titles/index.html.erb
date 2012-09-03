@@ -1,0 +1,29 @@
+<h1>Listing titles</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Status</th>
+    <th>Description</th>
+    <th>Comments</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @titles.each do |title| %>
+  <tr>
+    <td><%= title.title %></td>
+    <td><%= title.status %></td>
+    <td><%= title.description %></td>
+    <td><%= title.comments %></td>
+    <td><%= link_to 'Show', title %></td>
+    <td><%= link_to 'Edit', edit_title_path(title) %></td>
+    <td><%= link_to 'Destroy', title, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Title', new_title_path %>

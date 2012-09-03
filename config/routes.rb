@@ -1,4 +1,6 @@
 Lims3::Application.routes.draw do
+  resources :titles
+
   resources :skills
 
   resources :courses

@@ -3,6 +3,8 @@ class Person < ActiveRecord::Base
   attr_accessible :firstname, :lastname, :status, :icsid, :city, :state, :zipcode, :start_date, :title, :gender, :date_of_birth,:division1, :division2, :certs_attributes
   has_many :certs
   has_many :courses, :through => :certs
+  has_many :skills, :through => :courses
+  
   accepts_nested_attributes_for :certs
   
   validates_presence_of :firstname, :lastname, :status

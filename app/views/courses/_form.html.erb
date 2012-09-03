@@ -7,11 +7,6 @@
     <%= f.input :category, :as => :select, :collection => Course::CATEGORY_CHOICES %>
     <%= f.input :duration, :hint => "in hours" %>
     <%= f.input :term, :hint => "in months" %>
-    <%= f.input :required_for_pd, :as => :check_boxes, :label => 'Required for ', :collection => ['Police'] %>
-    <%= f.input :required_for_cert, :as => :check_boxes, :label => false, :collection => ['CERT'] %>
-    <%= f.input :required_for_sar, :as => :check_boxes, :label => false, :collection => ['SAR'] %>
-    <%= f.input :required_for_cert, :as => :check_boxes, :label => '', :collection => ['CERT'] %>
-    <%= f.input :required_for_sar, :as => :check_boxes, :label => '', :collection => ['SAR'] %>
     <%= f.input :comments %>
 
 

@@ -4,7 +4,8 @@ class Person < ActiveRecord::Base
   has_many :certs
   has_many :courses, :through => :certs
   has_many :skills, :through => :courses
-  
+  has_and_belongs_to_many :titles
+
   accepts_nested_attributes_for :certs
   
   validates_presence_of :firstname, :lastname, :status

@@ -12,7 +12,6 @@
       <th>Category</th>
       <th>Duration</th>
       <th>Term</th>
-      <th>Required for</th>
       <th></th>
     </tr>
   </thead>
@@ -24,7 +23,6 @@
 	<td><%= course.category %></td>
 	<td><%= course.duration %></td>
 	<td><%= course.term %></td>
-	<td><%= course.required_for_pd %></td>
 	<td><%= link_to 'Edit', edit_course_path(course) %></td>
     </tr>
     <% end %>

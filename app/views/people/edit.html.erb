@@ -1,6 +1,6 @@
-<h1>Editing person</h1>
+<% content_for :sidebar do %>
+  <h1>Editing person</h1>
+  <%= link_to 'Cancel', people_path %>
+<% end %>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @person %> |
-<%= link_to 'Back', people_path %>
