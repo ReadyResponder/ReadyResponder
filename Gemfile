@@ -5,9 +5,6 @@ gem 'rails', '3.2.6'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem 'thin', group: :development
-group :test do
-  gem 'factory_girl_rails', "~> 4.0"
-end
 #gem 'quiet-assets', group: :development
 gem 'ransack'
 gem 'sqlite3'
@@ -17,6 +14,12 @@ gem 'rmagick'
 gem 'simple_form'
 gem 'jquery-rails'
 
+gem "rspec-rails", :group => [:test, :development]
+group :test do
+  gem 'factory_girl_rails', "~> 4.0"
+  gem "capybara"
+  gem "guard-rspec"
+end
 #Handles authentication
 gem 'devise'
 
