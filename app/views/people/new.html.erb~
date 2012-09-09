@@ -1,7 +1,7 @@
 <% content_for :sidebar do %>
   <h1>New person</h1>
+  <%= link_to 'Cancel', people_path %>
 <% end %>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', people_path %>

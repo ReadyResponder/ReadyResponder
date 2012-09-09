@@ -9,18 +9,12 @@
   <tr>
     <th></th>
     <th>Title</th>
-    <th>Required for pd</th>
-    <th>Required for cert</th>
-    <th>Required for sar</th>
   </tr>
 
-<% @skills.each do |skill| %>
-  <tr>
-    <td><%= link_to 'Edit', edit_skill_path(skill), :class => 'btn btn-mini btn-primary' %></td>
-    <td><%= link_to skill.title, skill %></td>
-    <td><%= skill.required_for_pd %></td>
-    <td><%= skill.required_for_cert %></td>
-    <td><%= skill.required_for_sar %></td>
-  </tr>
-<% end %>
+  <% @skills.each do |skill| %>
+    <tr>
+      <td><%= link_to 'Edit', edit_skill_path(skill), :class => 'btn btn-mini btn-primary' %></td>
+      <td><%= link_to skill.title, skill %></td>
+    </tr>
+  <% end %>
 </table>

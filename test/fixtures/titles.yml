@@ -11,3 +11,15 @@ two:
   status: MyString
   description: MyString
   comments: MyText
+
+police:
+  title: Police Officer
+  status: Active
+  description: MyString
+  comments: MyText
+
+sarteam:
+  title: SAR Team
+  status: Active
+  description: MyString
+  comments: MyText

@@ -1,9 +1,10 @@
 class Cert < ActiveRecord::Base
-  attr_accessible :category, :comments, :course_id, :expiration_date, :issued_date, :cert_number, :level, :person_id, :status
+  attr_accessible :category, :person_id, :course_id, :expiration_date, :issued_date, :cert_number, :level,  :status, :certification, :comments
   belongs_to :person
   belongs_to :course
+  mount_uploader :certification, CertificationUploader
   before_save :set_defaults
-  validates_presence_of :person_id, :course_id, :status, :issued_date
+  validates_presence_of :status, :person_id, :course_id, :issued_date
   
   private
   

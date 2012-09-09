@@ -1,9 +1,18 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  title: MyString
-  status: MyString
+  title: Test Dummy
+  status: Active
 
-two:
-  title: MyString
-  status: MyString
+CPR:
+  title: CPR
+  status: Active
+
+
+leeching:
+  title: Leeching
+  status: Inactive
+
+landnav:
+  title: Land Navigation
+  status: Active

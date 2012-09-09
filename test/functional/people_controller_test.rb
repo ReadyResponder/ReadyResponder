@@ -44,7 +44,9 @@ class PeopleControllerTest < ActionController::TestCase
     assert_difference('Person.count', -1) do
       delete :destroy, id: @person
     end
-
     assert_redirected_to people_path
+  end
+  test "should only show active cert" do
+    
   end
 end

@@ -1,7 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  id: 1
   firstname: MyString
   lastname: MyString
   status: MyString
@@ -10,3 +9,8 @@ two:
   firstname: MyString
   lastname: MyString
   status: MyString
+
+driver:
+  firstname: Racer
+  lastname: X
+  status: Active

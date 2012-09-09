@@ -2,7 +2,7 @@
 
 <p>
   <h2>
-  <%= link_to @cert.person.fullname, @cert.person %>
+  <%= link_to @cert.person.fullname, @cert.person unless @cert.person.blank? %>
   </h2>
 </p>
 

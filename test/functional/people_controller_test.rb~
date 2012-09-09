@@ -11,6 +11,7 @@ class PeopleControllerTest < ActionController::TestCase
     assert_not_nil assigns(:people)
   end
 
+    
   test "should get new" do
     get :new
     assert_response :success
@@ -45,5 +46,8 @@ class PeopleControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to people_path
+  end
+  test "should only show active cert"
+    
   end
 end

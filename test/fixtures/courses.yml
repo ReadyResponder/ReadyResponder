@@ -29,3 +29,11 @@ two:
   duration: 1
   term: 1
   
+MADL:
+  title: MA Driver's License
+  status: Active
+  description: none
+  comments: MyText
+  category: MyString
+  duration: 40
+  term: 60

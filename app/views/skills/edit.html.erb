@@ -1,6 +1,7 @@
-<h1>Editing skill</h1>
+<% content_for :sidebar do %>
+  <h1>Editing Skill <%= @skill.title %></h1>
+  <%= link_to 'Cancel', skills_path %>
+<% end %>
+
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @skill %> |
-<%= link_to 'Back', skills_path %>

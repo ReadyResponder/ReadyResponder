@@ -21,3 +21,15 @@ two:
   issued_date: 2012-08-11
   expiration_date: 2012-08-11
   comments: MyText
+
+MADLcert:
+  status: Active
+  issued_date: 2012-1-1
+  expiration_date: 2020-01-01
+  comments: This is used to test skilled people code
+  
+expiredlicense:
+  status: Expired
+  issued_date: 2007--01-01
+  expiration_date: 2012-01-01
+  comments: This is used to test skilled people code

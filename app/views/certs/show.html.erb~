@@ -13,9 +13,9 @@
 </p>
 
 <p>
-  <b>Status:</b>
+  
   <div class="alert alert-<%= @cert.status.to_s == 'Active' ? "success" : "error" %>">
-    <%= @cert.status %>
+   <b>Status:</b> <%= @cert.status %>
   </div>
 </p>
 
@@ -43,7 +43,7 @@
   <b>Date expires:</b>
   <%= @cert.expiration_date %>
 </p>
-<% image_tag cert.certification_url.to_s %>
+<% image_tag @cert.certification_url.to_s %>
 <p>
   <b>Comments:</b>
   <%= @cert.comments %>

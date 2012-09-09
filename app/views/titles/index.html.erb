@@ -1,29 +1,29 @@
-<h1>Listing titles</h1>
-
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Status</th>
-    <th>Description</th>
-    <th>Comments</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @titles.each do |title| %>
-  <tr>
-    <td><%= title.title %></td>
-    <td><%= title.status %></td>
-    <td><%= title.description %></td>
-    <td><%= title.comments %></td>
-    <td><%= link_to 'Show', title %></td>
-    <td><%= link_to 'Edit', edit_title_path(title) %></td>
-    <td><%= link_to 'Destroy', title, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+<% content_for :sidebar do %>
+  <center><h1>Listing Titles</h1></br>
+  <%= link_to 'New Title', new_title_path, :class => 'btn' %></center>
 <% end %>
+
+<table id="titles" class="display table table-striped table-bordered" >
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Status</th>
+      <th>Description</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @titles.each do |title| %>
+      <tr>
+	<td><%= link_to title.title, title_path(title) %></td>
+	<td><%= title.status %></td>
+	<td><%= title.description %></td>
+	<td><%= link_to 'Edit', edit_title_path(title), :class => 'btn btn-mini btn-primary' %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
 <br />
 
-<%= link_to 'New Title', new_title_path %>
+
