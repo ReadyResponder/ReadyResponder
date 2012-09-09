@@ -1,7 +1,7 @@
 class Person < ActiveRecord::Base
   
   attr_accessible :firstname, :lastname, :status, :icsid, :city, :state, :zipcode, :start_date, :title, :gender, :date_of_birth,:division1, :division2, :certs_attributes, :title_ids
-  has_many :certs
+  has_many :certs, :conditions => {:status =>'Active' }
   has_many :courses, :through => :certs
   has_many :skills, :through => :courses
   has_and_belongs_to_many :titles
@@ -72,13 +72,12 @@ class Person < ActiveRecord::Base
   end
   
   def skilled?(skill_title)
-    skill = Skill.active.find_by_title(skill_title)
+    skill = Skill.find_by_title(skill_title)
     if skill.blank?
       false
     else
       #self.certs.active.courses.skills.include?(skill)
-      #self.skills #person.skills.include?(drivingskill)
-      true
+      self.skills.include?(skill)
     end
   end
   

@@ -33,27 +33,6 @@ class PersonTest < ActiveSupport::TestCase
     assert person2.valid?
   end
   
-  test "driver is skilled at driving" do
-    #From the top
-    drivingskill = FactoryGirl.create(:skill, title: "Driving")
-    assert_equal 'Driving', drivingskill.title
-    
-    courseMADL = courses(:MADL)
-    courseMADL.skills << drivingskill
-    assert courseMADL.skills.include?(drivingskill)
-    
-    drivingcert = certs(:one)
-    drivingcert.course = courseMADL
-    assert drivingcert.course.skills.include?(drivingskill)
-    
-    person = people(:driver)
-    assert_equal 'X', person.lastname
-    
-    person.certs << drivingcert
-    assert person.skills.include?(drivingskill)
-    assert_equal true, person.skilled?('Driving')
-  end
-  
   test "driver is not skilled at driving when license expired" do
     drivingskill = FactoryGirl.create(:skill, title: "Driving")
     evoc_course = FactoryGirl.create(:course)
@@ -64,14 +43,12 @@ class PersonTest < ActiveSupport::TestCase
     person = drivingcert.person
     
     assert drivingcert.course.skills.include?(drivingskill)
-    #assert person.skills.include?(drivingskill), 'Skills does not include driving !'
-    #assert_equal false, person.skilled?('Driving')
+    assert_equal false, person.skilled?('Driving')
   end
 
   test "driver is not skilled at leeching" do
     #This tests that it is false for a skill that does exist
-    drivingskill = skills(:leeching)
-    assert_equal 'Leeching', drivingskill.title
+    skill = FactoryGirl.create(:skill, title: "Leeching")
     
     person = FactoryGirl.create(:person)    
     assert_equal false, person.skilled?('Leeching')
@@ -87,25 +64,16 @@ class PersonTest < ActiveSupport::TestCase
   
   test "driver is qualified at policing" do
     #From the top
-    policetitle = titles(:police)
-    assert_equal 'Police Officer', policetitle.title
+    policetitle = FactoryGirl.create(:title, title: "Police Officer")
     drivingskill = FactoryGirl.create(:skill, title: "Driving")
-    assert_equal 'Driving', drivingskill.title
     policetitle.skills << drivingskill
-    
-    courseMADL = courses(:MADL)
-    courseMADL.skills << drivingskill
-    assert courseMADL.skills.include?(drivingskill)
-    
-    drivingcert = certs(:one)
-    drivingcert.course = courseMADL
-    assert drivingcert.course.skills.include?(drivingskill)
-    
-    person = people(:driver)
-    assert_equal 'X', person.lastname
-    
-    person.certs << drivingcert
-    assert person.skills.include?(drivingskill)
+    evoc_course = FactoryGirl.create(:course)
+    evoc_course.skills << drivingskill
+    #cert factory creates the person
+    drivingcert = FactoryGirl.create(:cert, course: evoc_course)
+    person = drivingcert.person
+   
+    assert_equal true, person.skilled?('Driving')
     assert_equal true, person.qualified?('Police Officer')
   end
   
@@ -131,7 +99,6 @@ class PersonTest < ActiveSupport::TestCase
     assert_equal 'X', person.lastname
     
     person.certs << drivingcert
-    assert person.skills.include?(drivingskill)
     assert_equal false, person.qualified?('SAR Team')
   end
 
