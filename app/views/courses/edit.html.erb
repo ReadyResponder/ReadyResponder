@@ -1,6 +1,7 @@
-<h1>Editing course</h1>
+
+<% content_for :sidebar do %>
+  <h1>Editing course</h1>
+  <%= link_to 'Cancel', people_path, :class => 'btn'  %>
+<% end %>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @course %> |
-<%= link_to 'Back', courses_path %>

@@ -1,31 +1,35 @@
+<% content_for :sidebar do %>
+<%= link_to 'Edit Person', edit_person_path(@person), :class => 'btn btn-primary' %></br></br>
+<%= link_to 'New Cert', new_person_cert_path(@person), :class => 'btn' %>
+<% end %>
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <%= @person.fullname %> (<%= @person.icsid %>)
-</p>
-<p><%= @person.age %></br></p>
-<p>
-DOB <%= @person.date_of_birth %>
-</p>
+<p><%= @person.fullname %> (<%= @person.icsid %>)</p>
+
+<p>DOB <%= @person.date_of_birth %> (<%= @person.age %>)</p>
 <p>
 Start Date <%= @person.start_date %>
 </p>
 <p>
   <b>Status:</b>
-  <span class="badge badge-success"><%= @person.status %></span>
+  <span class="badge <%= 'badge-success' if @person.status == 'Active' %>">
+    <%= @person.status %>
+  </span>
 </p>
 
+<% @person.titles.each do |title| %>
+  <% if @person.qualified?(title.title) then %>
+    <span class="badge badge-success">
+      Person qualified for <%= title.title %>
+    </span></br>
+  <% else %>
+    <span class="badge badge-important">
+      Person NOT qualified for <%= title.title %>
+    </span></br>
+  <% end %>
+<% end %>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-	<th>Certification</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= render @person.certs %>
-  </tbody>
-</table>
 
 <table class="table table-striped">
   <thead>
@@ -34,16 +38,37 @@ Start Date <%= @person.start_date %>
     </tr>
   </thead>
   <tbody>
-    <%= render @person.skills %>
+    <%= render @person.skills.uniq %>
   </tbody>
 </table>
 
-<% @person.titles.each do |title| %>
-  <% if @person.qualified?(title.title) then %>
-    <span class="badge badge-success">
-      Person qualified for <%= title.title %>
-    </span></br>
-  <% else %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+	<th>Courses</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @person.courses.uniq %>
+  </tbody>
+</table>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+	<th>Certifications</th>
+    </tr>
+  </thead>
+  <tbody>
+    <td>
+      <%= render @person.certs.unscoped %>
+    </td>
+  </tbody>
+</table>
+
+
+
+<% content_for :parking do %>
     <table class="table table-striped">
       <thead>
 	<tr>
@@ -54,17 +79,8 @@ Start Date <%= @person.start_date %>
 	<%= render (Title.find(1).skills - @person.skills) %>
       </tbody>
     </table>
-  <% end %>
-<% end %>
+    
     <span class="badge badge-warning">
-      Person qualified for something, but some certification is expiring soon
+      Person qualified, but some certification is expiring soon
     </span></br>
-    <span class="badge badge-important">
-      Person NOT qualified for something
-    </span>
-
-<% content_for :sidebar do %>
-<%= link_to 'Edit Person', edit_person_path(@person), :class => 'btn btn-mini btn-primary' %></br></br>
-<%= link_to 'New Cert', new_person_cert_path(@person), :class => 'btn btn-mini' %>
-
 <% end %>

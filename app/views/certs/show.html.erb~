@@ -1,8 +1,11 @@
+<% content_for :sidebar do %>
+<%= link_to 'Edit Cert', edit_cert_path(@cert), :class => 'btn btn-primary' %></br></br>
+
 <p id="notice"><%= notice %></p>
 
 <p>
   <h2>
-  <%= link_to @cert.person.fullname, @cert.person %>
+  <%= link_to @cert.person.fullname, @cert.person unless @cert.person.blank? %>
   </h2>
 </p>
 

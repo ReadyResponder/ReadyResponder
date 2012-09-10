@@ -9,6 +9,8 @@ Lims3::Application.routes.draw do
 
   resources :people do
     resources :certs, :controller => 'certs'
+    resources :titles, :controller => 'titles'
+    
    # people.resources :contacts, :controller => "person_contacts"
   end
 

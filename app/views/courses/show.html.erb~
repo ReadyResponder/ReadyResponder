@@ -2,9 +2,9 @@
 <% content_for :sidebar do %>
   <p><h2><%= @course.title %></h2></p>
   </br>
-  <%= link_to 'Edit', edit_course_path(@course), :class => 'btn btn-mini btn-primary' %>
-  <%= link_to 'Destroy', @course, method: :delete, :class => 'btn btn-mini btn-danger', data: { confirm: 'Are you sure?' } %>
-  <%= link_to 'Course Listings', courses_path, :class => 'btn btn-mini' %>
+  <%= link_to 'Edit', edit_course_path(@course), :class => 'btn btn-primary' %>
+  <%#= link_to 'Destroy', @course, method: :delete, :class => 'btn btn-danger', data: { confirm: 'Are you sure?' } %></br></br>
+  <%= link_to 'Course Listings', courses_path, :class => 'btn' %>
 <% end %>
 <p>
   <b>Status:</b>
@@ -35,8 +35,15 @@
   <b>Term:</b>
   <%= pluralize(@course.term, 'month') %>
 </p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+	<th>People</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @person.courses.uniq %>
+  </tbody>
+</table>
 
-<p>
-  <b>Required for :</b>
-  <%= @course.required_for_pd %>
-</p>
+<%= render @course.people.uniq %>

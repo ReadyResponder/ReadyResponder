@@ -1,16 +1,36 @@
 <p id="notice"><%= notice %></p>
 <% content_for :sidebar do %>
 
-  <p><h2><%= @skill.title %></h2></p>
+  <p><h2>Skill</br><%= @skill.title %></h2></p>
 
-  <%= link_to 'Edit', edit_skill_path(@skill), :class => 'btn btn-mini btn-primary' %> |
-  <%= link_to 'Destroy', @skill, method: :delete, :class => 'btn btn-mini btn-danger', data: { confirm: 'Are you sure?' } %></br></br>
-  <%= link_to 'Skills Listing', skills_path, :class => 'btn btn-mini' %>
+  <%= link_to 'Edit', edit_skill_path(@skill), :class => 'btn btn-primary' %>
+  <%#= link_to 'Destroy', @skill, method: :delete, :class => 'btn btn-danger', data: { confirm: 'Are you sure?' } %></br></br>
+  <%= link_to 'Skills Listing', skills_path, :class => 'btn' %>
 <% end %>
 <p>
   <b>Status:</b>
   <%= @skill.status %>
 </p>
 
+<table class="table table-striped">
+  <thead>
+    <tr>
+	<th>Courses</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @skill.courses %>
+  </tbody>
+</table>
 
-<%= render @skill.courses %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+	<th>Titles</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @skill.titles %>
+  </tbody>
+</table>
+

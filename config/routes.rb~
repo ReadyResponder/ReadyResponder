@@ -1,10 +1,14 @@
 Lims3::Application.routes.draw do
+  resources :titles
+
+  resources :skills
+
   resources :courses
 
   resources :certs
 
-  resources :people do |people|
-    people.resource :certs, :controller => 'certs'
+  resources :people do
+    resources :certs, :controller => 'certs'
    # people.resources :contacts, :controller => "person_contacts"
   end
 
