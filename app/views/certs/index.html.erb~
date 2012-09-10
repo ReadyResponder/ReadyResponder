@@ -1,41 +1,40 @@
-<h1>Listing certs</h1>
-
-<table>
-  <tr>
-    <th>Person</th>
-    <th>Course</th>
-    <th>Instructor</th>
-    <th>Status</th>
-    <th>Category</th>
-    <th>Level</th>
-    <th>Id number</th>
-    <th>Date issued</th>
-    <th>Date expires</th>
-    <th>Comments</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @certs.each do |cert| %>
-  <tr>
-    <td><%= cert.person_id %></td>
-    <td><%= cert.course_id %></td>
-    <td><%= cert.instructor_id %></td>
-    <td><%= cert.status %></td>
-    <td><%= cert.category %></td>
-    <td><%= cert.level %></td>
-    <td><%= cert.id_number %></td>
-    <td><%= cert.date_issued %></td>
-    <td><%= cert.date_expires %></td>
-    <td><%= cert.comments %></td>
-    <td><%= link_to 'Show', cert %></td>
-    <td><%= link_to 'Edit', edit_cert_path(cert) %></td>
-    <td><%= link_to 'Destroy', cert, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+<% content_for :sidebar do %>
+  <center><h1>Listing Certs</h1></br>
+  <%= link_to 'New Cert', new_cert_path, :class => 'btn' %></center>
 <% end %>
+
+<table id="certs" class="display table table-striped table-bordered" >
+  <thead>
+    <tr>
+      <th>Person</th>
+      <th>Course</th>
+      <th>Instructor</th>
+      <th>Status</th>
+      <th>Category</th>
+      <th>Level</th>
+      <th>Id number</th>
+      <th>Date issued</th>
+      <th>Date expires</th>
+      <th>Comments</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @certs.each do |cert| %>
+      <tr>
+	<td><%= cert.person.fullname %></td>
+	<td><%= cert.course.title %></td>
+	<td><%= cert.status %></td>
+	<td><%= cert.category %></td>
+	<td><%= cert.level %></td>
+	<td><%= cert.cert_number %></td>
+	<td><%= cert.issued_date %></td>
+	<td><%= cert.expiration_date %></td>
+	<td><%= cert.comments %></td>
+	<td><%= link_to 'Edit', edit_cert_path(cert), :class => 'btn btn-mini btn-primary' %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
 <br />
-
-<%= link_to 'New Cert', new_cert_path %>

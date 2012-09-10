@@ -1,5 +1,5 @@
 <% content_for :sidebar do %>
-  <center><h1>Listing People</h1>
+  <center><h1>Listing People</h1></br>
   <%= link_to 'New Person', new_person_path, :class => 'btn' %></center>
 <% end %>
 
@@ -13,8 +13,6 @@
       <th>Start Date</th>
       <th>Division</th>
       <th>Squad</th>
-      <th>Trainings</th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -28,7 +26,7 @@
 	<td><%= person.division1 %></td>
 	<td><%= person.division2 %></td>
 	<td><%= person.certs.size %></td>
-	<td><%= link_to 'Edit', edit_person_path(person) %></td>
+	<td><%= link_to 'Edit', edit_person_path(person), :class => "btn btn-primary" %></td>
       </tr>
     <% end %>
   </tbody>

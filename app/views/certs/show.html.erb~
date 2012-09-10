@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
 <%= link_to 'Edit Cert', edit_cert_path(@cert), :class => 'btn btn-primary' %></br></br>
-
+<% end %>
 <p id="notice"><%= notice %></p>
 
 <p>

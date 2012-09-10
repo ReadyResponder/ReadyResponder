@@ -1,5 +1,5 @@
 <% content_for :sidebar do %>
-  <h1>New cert</h1>
+  <h1>New Certification</h1>
 <% end %>
 
 <%= render 'form' %>

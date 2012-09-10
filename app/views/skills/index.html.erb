@@ -1,20 +1,22 @@
 <% content_for :sidebar do %>
-  <center><h1>Listing skills</h1></br>
+  <center><h1>Listing Skills</h1></br>
   <%= link_to 'New Skill', new_skill_path, :class => 'btn' %></center>
 <% end %>
 
 
-
-<table>
-  <tr>
-    <th></th>
-    <th>Title</th>
-  </tr>
-
-  <% @skills.each do |skill| %>
+<table id="skills" class="display table table-striped table-bordered">
+  <thead>
     <tr>
-      <td><%= link_to 'Edit', edit_skill_path(skill), :class => 'btn btn-mini btn-primary' %></td>
-      <td><%= link_to skill.title, skill %></td>
+      <th>Title</th>
+      <th></th>
     </tr>
-  <% end %>
+  </thead>
+  <tbody>
+    <% @skills.each do |skill| %>
+      <tr>
+	<td><%= link_to skill.title, skill %></td>
+	<td><%= link_to 'Edit', edit_skill_path(skill), :class => 'btn btn-mini btn-primary' %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>

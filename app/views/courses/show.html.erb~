@@ -8,24 +8,15 @@
 <% end %>
 <p>
   <b>Status:</b>
-  <%= @course.status %>
+  <span class="badge <%= 'badge-success' if @course.status == 'Active' %>">
+    <%= @course.status %>
+  </span>
 </p>
 
 <p>
   <b>Description:</b>
   <%= @course.description %>
 </p>
-
-<p>
-  <b>Comments:</b>
-  <%= @course.comments %>
-</p>
-
-<p>
-  <b>Category:</b>
-  <%= @course.category %>
-</p>
-
 <p>
   <b>Duration:</b>
   <%= pluralize(@course.duration, 'hour') %>
@@ -35,15 +26,33 @@
   <b>Term:</b>
   <%= pluralize(@course.term, 'month') %>
 </p>
-<table class="table table-striped">
+
+<p><b>Comments:</b> <%= @course.comments %></p>
+
+<p>
+  <b>Category:</b>
+  <%= @course.category %>
+</p>
+</br>
+
+<table class="table table-striped table-bordered">
   <thead>
     <tr>
-	<th>People</th>
+	<th>People Who Took This Course</th>
     </tr>
   </thead>
   <tbody>
-    <%= render @person.courses.uniq %>
+    <%= render @course.people.active.uniq %>
   </tbody>
 </table>
 
-<%= render @course.people.uniq %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+	<th>Skills This Course Advances</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @course.skills.uniq %>
+  </tbody>
+</table>

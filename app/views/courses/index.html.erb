@@ -23,7 +23,7 @@
 	<td><%= course.category %></td>
 	<td><%= course.duration %></td>
 	<td><%= course.term %></td>
-	<td><%= link_to 'Edit', edit_course_path(course) %></td>
+	<td><%= link_to 'Edit', edit_course_path(course), :class => 'btn btn-mini btn-primary' %></td>
     </tr>
     <% end %>
   </tbody>
