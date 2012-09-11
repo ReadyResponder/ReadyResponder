@@ -1,3 +1,5 @@
-<fieldset>
-  <%= link_to cert.course.title, cert %> - <%= cert.expiration_date.to_s %>
-</fieldset>
+<tr>
+  <td>
+    <%= link_to cert.course.title, cert %> - <%= cert.expiration_date.to_s %>
+  </td>
+</tr>

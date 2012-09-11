@@ -71,8 +71,8 @@ class Person < ActiveRecord::Base
       age
   end
   
-  def skilled?(skill_title)
-    skill = Skill.find_by_title(skill_title)
+  def skilled?(skill_name)
+    skill = Skill.find_by_name(skill_name)
     if skill.blank?
       false
     else
@@ -81,9 +81,8 @@ class Person < ActiveRecord::Base
     end
   end
   
-  def qualified?(title_title) #I know, seems redundant, 
-	#but I want to distinguish the field from the object
-    title = Title.find_by_title(title_title)
+  def qualified?(title_name)
+    title = Title.find_by_name(title_name)
     if title
       (title.skills - self.skills).empty?  # then true
     else

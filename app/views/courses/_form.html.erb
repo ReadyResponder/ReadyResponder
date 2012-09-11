@@ -1,6 +1,6 @@
 <%= simple_form_for(@course, :html => {:class => 'form-horizontal' }) do |f| %>
 
-    <%= f.input :title %>
+    <%= f.input :name %>
     <%= f.input :status, :as => :select, :collection => ['Active', 'Inactive'] %>
     <%= f.input :description, :rows => '10' %>
     <%= f.association :skills %>

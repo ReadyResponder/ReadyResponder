@@ -14,7 +14,7 @@
   <tbody>
     <% @skills.each do |skill| %>
       <tr>
-	<td><%= link_to skill.title, skill %></td>
+	<td><%= link_to skill.name, skill %></td>
 	<td><%= link_to 'Edit', edit_skill_path(skill), :class => 'btn btn-mini btn-primary' %></td>
       </tr>
     <% end %>

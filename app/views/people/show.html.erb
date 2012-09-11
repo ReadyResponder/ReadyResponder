@@ -5,7 +5,7 @@
 
 <p id="notice"><%= notice %></p>
 
-<p><%= @person.fullname %> (<%= @person.icsid %>)</p>
+<p><h2><%= @person.fullname %> (<%= @person.icsid %>)</h2></p>
 
 <p>DOB <%= @person.date_of_birth %> (<%= @person.age %>)</p>
 <p>Start Date <%= @person.start_date %></p>
@@ -17,13 +17,13 @@
 </p>
 
 <% @person.titles.each do |title| %>
-  <% if @person.qualified?(title.title) then %>
+  <% if @person.qualified?(title.name) then %>
     <span class="badge badge-success">
-      Person qualified for <%= title.title %>
+      Person qualified for <%= title.name %>
     </span>
   <% else %>
     <span class="badge badge-important">
-      Person NOT qualified for <%= title.title %>
+      Person NOT qualified for <%= title.name %>
     </span>
   <% end %></br></br>
 <% end %>
@@ -36,7 +36,7 @@
     </tr>
   </thead>
   <tbody>
-    <%= render @person.skills.uniq %>
+    <%= render(@person.skills.uniq) || raw("<tr><td>No skills yet !</tr></td>") %>
   </tbody>
 </table>
 
@@ -47,7 +47,7 @@
     </tr>
   </thead>
   <tbody>
-    <%= render @person.courses.uniq %>
+    <%= render(@person.courses.uniq) || raw("<tr><td>No courses yet !</tr></td>") %>
   </tbody>
 </table>
 
@@ -58,9 +58,7 @@
     </tr>
   </thead>
   <tbody>
-    <td>
-      <%= render @person.certs.unscoped %>
-    </td>
+      <%= render(:partial => "certs/cert", :collection => Cert.find_by_person_id(@person.id)) || raw("<tr><td>No certifications yet !</tr></td>") %>
   </tbody>
 </table>
 
@@ -74,7 +72,7 @@
 	</tr>
       </thead>
       <tbody>
-	<%= render (Title.find(1).skills - @person.skills) %>
+	<%#= render (Title.find(1).skills - @person.skills) %>
       </tbody>
     </table>
     

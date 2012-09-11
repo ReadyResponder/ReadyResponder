@@ -34,7 +34,7 @@ class PersonTest < ActiveSupport::TestCase
   end
   
   test "driver is not skilled at driving when license expired" do
-    drivingskill = FactoryGirl.create(:skill, title: "Driving")
+    drivingskill = FactoryGirl.create(:skill, name: "Driving")
     evoc_course = FactoryGirl.create(:course)
     evoc_course.skills << drivingskill
     
@@ -48,7 +48,7 @@ class PersonTest < ActiveSupport::TestCase
 
   test "driver is not skilled at leeching" do
     #This tests that it is false for a skill that does exist
-    skill = FactoryGirl.create(:skill, title: "Leeching")
+    skill = FactoryGirl.create(:skill, name: "Leeching")
     
     person = FactoryGirl.create(:person)    
     assert_equal false, person.skilled?('Leeching')
@@ -56,16 +56,14 @@ class PersonTest < ActiveSupport::TestCase
 
   test "driver is not skill at barking " do
     #This skill doesn't even exist
-    person = people(:driver)
-    assert_equal 'X', person.lastname
-    
+    person = FactoryGirl.create(:person, icsid: "509")
     assert_equal false, person.skilled?('Barking')
   end
   
   test "driver is qualified at policing" do
     #From the top
-    policetitle = FactoryGirl.create(:title, title: "Police Officer")
-    drivingskill = FactoryGirl.create(:skill, title: "Driving")
+    policetitle = FactoryGirl.create(:title, name: "Police Officer")
+    drivingskill = FactoryGirl.create(:skill, name: "Driving")
     policetitle.skills << drivingskill
     evoc_course = FactoryGirl.create(:course)
     evoc_course.skills << drivingskill
@@ -79,26 +77,20 @@ class PersonTest < ActiveSupport::TestCase
   
   test "driver is NOT qualified at SAR" do
     #From the top
-    title = titles(:sarteam)
-    assert_equal 'SAR Team', title.title
-    landnavskill = skills(:landnav)
-    assert_equal 'Land Navigation', landnavskill.title
-    title.skills << landnavskill
+    policetitle = FactoryGirl.create(:title, name: "SAR Team")
+    landnavskill = FactoryGirl.create(:skill, name: "Land Navigation")
+    policetitle.skills << landnavskill
+
+    drivingskill = FactoryGirl.create(:skill, name: "Driving")
+    evoc_course = FactoryGirl.create(:course)
+    evoc_course.skills << drivingskill
+    assert evoc_course.skills.include?(drivingskill)
     
-    drivingskill = FactoryGirl.create(:skill, title: "Driving")
-    assert_equal 'Driving', drivingskill.title
-    courseMADL = courses(:MADL)
-    courseMADL.skills << drivingskill
-    assert courseMADL.skills.include?(drivingskill)
-    
-    drivingcert = certs(:one)
-    drivingcert.course = courseMADL
+    drivingcert = FactoryGirl.create(:cert, course: evoc_course)
+    person = drivingcert.person
+
     assert drivingcert.course.skills.include?(drivingskill)
     
-    person = people(:driver)
-    assert_equal 'X', person.lastname
-    
-    person.certs << drivingcert
     assert_equal false, person.qualified?('SAR Team')
   end
 

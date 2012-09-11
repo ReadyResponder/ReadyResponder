@@ -29,7 +29,7 @@ group :assets do
 
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-  #The following provides the styling for the datatables, among other things
+  #The following provides the stylinmg for the datatables, among other things
   gem 'jquery-ui-rails'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby

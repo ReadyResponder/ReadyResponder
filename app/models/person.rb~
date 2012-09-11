@@ -78,7 +78,6 @@ class Person < ActiveRecord::Base
     else
       #self.certs.active.courses.skills.include?(skill)
       self.skills.include?(skill)
-      true
     end
   end
   

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class TitlesControllerTest < ActionController::TestCase
   setup do
-    @title = titles(:one)
+    @title = FactoryGirl.create(:title, name: "Police Officer")
   end
 
   test "should get index" do
@@ -18,7 +18,7 @@ class TitlesControllerTest < ActionController::TestCase
 
   test "should create title" do
     assert_difference('Title.count') do
-      post :create, title: { comments: @title.comments, description: @title.description, status: @title.status, title: @title.title }
+      post :create, title: { comments: @title.comments, description: @title.description, status: @title.status, name: @title.name }
     end
 
     assert_redirected_to title_path(assigns(:title))
@@ -35,7 +35,7 @@ class TitlesControllerTest < ActionController::TestCase
   end
 
   test "should update title" do
-    put :update, id: @title, title: { comments: @title.comments, description: @title.description, status: @title.status, title: @title.title }
+    put :update, id: @title, title: { comments: @title.comments, description: @title.description, status: @title.status, name: @title.name }
     assert_redirected_to title_path(assigns(:title))
   end
 

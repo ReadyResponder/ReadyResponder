@@ -8,14 +8,12 @@
     <tr>
       <th>Person</th>
       <th>Course</th>
-      <th>Instructor</th>
       <th>Status</th>
       <th>Category</th>
       <th>Level</th>
       <th>Id number</th>
       <th>Date issued</th>
       <th>Date expires</th>
-      <th>Comments</th>
       <th></th>
     </tr>
   </thead>
@@ -30,7 +28,6 @@
 	<td><%= cert.cert_number %></td>
 	<td><%= cert.issued_date %></td>
 	<td><%= cert.expiration_date %></td>
-	<td><%= cert.comments %></td>
 	<td><%= link_to 'Edit', edit_cert_path(cert), :class => 'btn btn-mini btn-primary' %></td>
       </tr>
     <% end %>

@@ -6,7 +6,7 @@
 <table id="titles" class="display table table-striped table-bordered" >
   <thead>
     <tr>
-      <th>Title</th>
+      <th>Name</th>
       <th>Status</th>
       <th>Description</th>
       <th></th>
@@ -15,7 +15,7 @@
   <tbody>
     <% @titles.each do |title| %>
       <tr>
-	<td><%= link_to title.title, title_path(title) %></td>
+	<td><%= link_to title.name, title_path(title) %></td>
 	<td><%= title.status %></td>
 	<td><%= title.description %></td>
 	<td><%= link_to 'Edit', edit_title_path(title), :class => 'btn btn-mini btn-primary' %></td>

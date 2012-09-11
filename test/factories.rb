@@ -6,21 +6,21 @@ FactoryGirl.define do
   end
   factory :cert do
     status "Active"
-    issued_date 2012-8-3
+    issued_date Date.today
     person
     course
   end
   factory :title do
     status "Active"
-    sequence (:title) {|n|  "Skill#{n}" }
+    sequence (:name) {|n|  "Skill#{n}" }
   end
   factory :skill do
     status "Active"
-    sequence (:title) {|n|  "Skill#{n}" }
+    sequence (:name) {|n|  "Skill#{n}" }
   end
   factory :course do
     status "Active"
-    sequence (:title) {|n| "Course#{n}" }
+    sequence (:name) {|n| "Course#{n}" }
   end
 
 end

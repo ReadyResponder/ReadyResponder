@@ -2,8 +2,9 @@ require 'test_helper'
 
 class CertsControllerTest < ActionController::TestCase
   setup do
-    @cert = certs(:one)
-    @person = people(:one)
+    @cert = FactoryGirl.create(:cert)
+    @person = @cert.person
+
   end
 
   test "should get index" do

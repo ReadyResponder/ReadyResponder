@@ -11,7 +11,7 @@
 
 <p>
   <h2>
-  <%= link_to @cert.course.title, @cert.course %>
+  <%= link_to @cert.course.name, @cert.course %>
   </h2>
 </p>
 
@@ -51,6 +51,3 @@
   <b>Comments:</b>
   <%= @cert.comments %>
 </p>
-
-
-<%= link_to 'Edit', edit_cert_path(@cert), :class => 'btn btn-mini'%>
