@@ -13,6 +13,7 @@
       <th>Start Date</th>
       <th>Division</th>
       <th>Squad</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -24,8 +25,7 @@
 	<td><%= link_to person.lastname, person %></td>
 	<td><%= person.start_date %></td>
 	<td><%= person.division1 %></td>
-	<td><%= person.division2 %></td>
-	<td><%= person.certs.size %></td>
+	<td><%= person.title_order %></td>
 	<td><%= link_to 'Edit', edit_person_path(person), :class => "btn btn-primary" %></td>
       </tr>
     <% end %>
@@ -33,5 +33,3 @@
 </table>
 
 <br />
-
-

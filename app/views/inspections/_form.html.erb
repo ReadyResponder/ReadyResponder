@@ -1,0 +1,12 @@
+<%= simple_form_for(@inspection) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :person_id %>
+    <%= f.input :inspection_date %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

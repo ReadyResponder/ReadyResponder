@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Person:</b>
+  <%= @inspection.person_id %>
+</p>
+
+<p>
+  <b>Inspection date:</b>
+  <%= @inspection.inspection_date %>
+</p>
+
+
+<%= link_to 'Edit', edit_inspection_path(@inspection) %> |
+<%= link_to 'Back', inspections_path %>

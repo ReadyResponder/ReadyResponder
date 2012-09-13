@@ -1,4 +1,6 @@
 Lims3::Application.routes.draw do
+  resources :inspections
+
   resources :titles
 
   resources :skills
@@ -8,6 +10,15 @@ Lims3::Application.routes.draw do
   resources :certs
 
   resources :people do
+     member do
+        get 'roster'
+      end
+      collection do
+	get 'inactive'
+        get 'leave'
+        get 'active'
+        get 'signin'
+      end
     resources :certs, :controller => 'certs'
     resources :titles, :controller => 'titles'
     

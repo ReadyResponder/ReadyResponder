@@ -1,0 +1,187 @@
+<style type="text/css" media="all">
+body {
+  padding: 0;
+  margin: 0;
+}
+h1, h2, #thedate{
+  text-align: center;
+  width: 500pt;
+  padding: 0 7pt;
+  margin: 7pt 18pt;
+}
+ul {
+ position: absolute;
+ list-style: none;
+}
+li {
+  border: 2pt solid #ccf;
+  text-align: center;
+  width: 105pt;
+  padding: 5pt;
+}
+
+ul.senior_staff {
+  position: absolute;
+  top: 70pt;
+  left: 160pt;
+  margin: 0;
+  padding: 0;
+}
+ul.senior_staff > li {
+  width: 216pt;
+  margin: 7pt 0 0 0;
+  border: 4pt solid #868;
+  font-weight: bold;
+}
+#chief {
+  color:#00f;
+  font-size: 125%;
+}
+.divisions {
+  position: absolute;
+  top: 235pt;
+  left: 0pt;
+  color: #000;
+  /*border: 1pt solid #000;*/
+  padding: 2pt;
+  width: 555pt;
+  height: 580pt;
+  margin: 0;
+}
+
+.divisions li {
+  padding: 7pt;
+  margin: 3pt 0 0 0;
+  display: block;
+}
+.divisions > ul {
+/*This should only apply to the divisions themselves  */
+  width: 270pt;
+  margin: 7pt 0 0 0;
+  padding: 0;
+  text-align: center;
+  height: 500pt;
+  position: absolute;
+  top: 7pt;
+  /*border: 1pt solid #888;*/
+}
+.division > li {
+  margin: 7pt 0 0 70pt;
+  font-size: 80%;
+}
+li.lieutenant {
+ width: 130pt;
+}
+ul#division1 {
+ left: 7pt;
+}
+
+ul#division2 {
+ right: 7pt;
+}
+
+.squads ul {
+  padding: 0;
+  margin: 16pt 0;
+  top: 75pt;
+}
+#thedate {
+  position: absolute;
+  top: 550pt;
+  text-align: center;
+}
+ul.squad1 {
+  left: 7pt;
+}
+ul.squad2 {
+  right: 7pt;
+}
+li.squads {
+  border: 0;
+}
+.division_heading,
+.squad_heading {
+  font-weight: bold;
+  font-size: 115%;
+}
+
+.chief,
+.deputy,
+.captain,
+.lieutenant,
+.sargeant,
+.corporal,
+.senior,
+.division_heading,
+.squad_heading {
+  border: 2px solid #555;
+}
+table {
+  width: 7in;
+}
+td {
+  border: 1px solid #555;
+  font-size: 75%;
+}
+td.id {
+width: 5%;
+padding: 0, .5em;
+  text-align: center;
+}
+td.name {
+width: 25%;
+padding: 0, .5em;
+}
+td.signature {
+width: 40%;
+}
+td.time {
+width: 15%;
+}
+thead td {
+  border: 2px solid #555;
+  font-size: 100%;
+  text-align: center;
+}
+thead td.left {
+  text-align: left;
+}
+</style>
+<table>
+  <thead>
+   <tr><td colspan = 2 class="left">Date:</td><td class="left">Event:</td>
+   <td >Time In</td><td>Time Out</td></tr>
+   <tr><td colspan = 5>Command Staff</td></tr>
+  </thead>
+   <tbody>
+   <% Person.active.divisionC.each do |p| %>
+           <%= render :partial => 'signin_boxes', :locals => { :p => p} %>
+  <% end %>
+  </tbody>
+  <thead>
+   <tr><td colspan = 5>Division 1</td></tr>
+  </thead>
+  <tbody>
+   <% Person.active.division1.each do |p| %>
+           <%= render :partial => 'signin_boxes', :locals => { :p => p} %>
+  <% end %>
+  </tbody>
+  <thead>
+   <tr><td colspan = 5>Division 2</td></tr>
+  </thead>
+  <tbody>
+   <% Person.active.division2.each do |p| %>
+           <%= render :partial => 'signin_boxes', :locals => { :p => p} %>
+  <% end %>
+  </tbody>
+  <thead>
+   <tr><td colspan = 5>Recruits</td></tr>
+  </thead>
+  <tbody>
+   <% 3.times do %>
+           <%= render :partial => 'signin_blank_boxes' %>
+  <% end %>
+  </tbody>
+</table>
+<span id="thedate" > <%#= Date::today().to_s %></span>
+</div>

@@ -12,8 +12,9 @@ gem 'sqlite3'
 gem 'carrierwave'
 gem 'rmagick'
 gem 'simple_form'
+gem 'geocoder'
 gem 'jquery-rails'
-
+gem 'guard-livereload', :group => :development
 gem "rspec-rails", :group => [:test, :development]
 group :test do
   gem 'factory_girl_rails', "~> 4.0"

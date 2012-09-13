@@ -8,3 +8,4 @@ jQuery ->
           iDisplayLength: 50
         $('#person_start_date').datepicker
           dateFormat: 'yy-mm-dd'
+        $('#person_titles').accordion
