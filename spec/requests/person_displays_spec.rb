@@ -1,11 +1,11 @@
 require 'spec_helper'
-#Don't use capybara (ie visit/have_content and       #response.status.should be(200)
 
 describe "Person" do
   describe "GET /people" do
     it "returns a page" do
       visit people_path
       page.should have_content("Listing People")
+      page.should have_content("LIMS") # This is in the nav bar
     end
   end
 

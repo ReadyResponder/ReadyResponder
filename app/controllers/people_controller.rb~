@@ -3,7 +3,7 @@ class PeopleController < ApplicationController
   def signin
     @people = Person.active.all
     @page_title = "Sign-in"
-    render :layout => "print_signin", :action => "signin"
+    render :layout => "print_signin"
   end
 
   def index

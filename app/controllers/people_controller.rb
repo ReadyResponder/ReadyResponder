@@ -7,7 +7,7 @@ class PeopleController < ApplicationController
   end
 
   def index
-    @people = Person.all
+    @people = Person.active.all
 
     respond_to do |format|
       format.html # index.html.erb
