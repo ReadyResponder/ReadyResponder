@@ -5,10 +5,14 @@ describe "Cert" do
   describe "should display" do
    it "a list" do
       cert = FactoryGirl.create(:cert, status: 'Active')
+      person = cert.person
+      
       visit certs_path
       page.should have_content("Listing Certs")
       page.should have_content("LIMS") # This is in the nav bar
       page.should have_content("Active") # This is in the cert
+      page.should have_link(person.fullname)
+      page.should have_link(cert.name)
       #clink_link('
     end
 
