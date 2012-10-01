@@ -4,6 +4,9 @@ FactoryGirl.define do
     sequence (:lastname) {|n| "Doe#{n}" }
     status "Active"
     start_date Date.yesterday
+    division1 'Command'
+    division2 'Command'
+    title 'Captain'
   end
   factory :cert do
     status "Active"

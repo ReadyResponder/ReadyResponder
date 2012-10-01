@@ -9,7 +9,6 @@
       <th>Badge</th>
       <th>Title</th>
       <th>Firstname</th>
-      <th>Lastname</th>
       <th>Start Date</th>
       <th>Division</th>
       <th>Squad</th>
@@ -21,11 +20,11 @@
       <tr>
 	<td><%= person.icsid %></td>
 	<td><%= person.title %></td>
-	<td><%= link_to person.firstname, person %></td>
-	<td><%= link_to person.lastname, person %></td>
+	<td><%= link_to person.fullname, person %></td>
+	
 	<td><%= person.start_date %></td>
 	<td><%= person.division1 %></td>
-	<td><%= person.title_order %></td>
+	<td><%= person.division2 %></td>
 	<td><%= link_to 'Edit', edit_person_path(person), :class => "btn btn-primary" %></td>
       </tr>
     <% end %>

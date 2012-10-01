@@ -11,12 +11,19 @@ describe "Person" do
 
   describe " should display" do
     it "a signin sheet when requested" do
+      person1 = FactoryGirl.create(:person, lastname: 'YesDoe')
+      person2 = FactoryGirl.create(:person, lastname: 'NoDoe', status: 'Inactive')
       visit signin_people_path
-      page.should have_content("Sign-in")
+      #save_and_open_page
+      page.should have_content("Command Staff") #This is in the first heading
+      page.should have_content("YesDoe")
+      page.should_not have_content("NoDoe")
     end
+    
     it "a new person form with a first name field" do
       visit new_person_path
       page.should have_content("First Name")
+      fill_in('First Name', :with => 'John')
     end
 
     it "qualified only if all skills are present" do

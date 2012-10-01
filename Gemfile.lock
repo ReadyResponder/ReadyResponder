@@ -107,6 +107,8 @@ GEM
       railties (>= 3.1.0)
     jruby-pageant (1.1.1)
     json (1.7.4)
+    launchy (2.1.2)
+      addressable (~> 2.3)
     libwebsocket (0.1.5)
       addressable
     listen (0.5.0)
@@ -227,6 +229,7 @@ DEPENDENCIES
   jquery-datatables-rails!
   jquery-rails
   jquery-ui-rails
+  launchy
   rails (= 3.2.6)
   ransack
   rmagick

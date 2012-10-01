@@ -12,7 +12,7 @@ describe "Cert" do
       page.should have_content("LIMS") # This is in the nav bar
       page.should have_content("Active") # This is in the cert
       page.should have_link(person.fullname)
-      page.should have_link(cert.name)
+      page.should have_link(cert.course.name)
       #clink_link('
     end
 

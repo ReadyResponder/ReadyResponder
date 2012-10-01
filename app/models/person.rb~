@@ -26,7 +26,7 @@ class Person < ActiveRecord::Base
   
   scope :leave, :conditions => {:status => "Leave of Absence"}
   scope :inactive, :conditions => {:status => "Inactive"}
-  scope :active, :order => 'title_order, start_date ASC', :conditions => {:status => "Active"}
+  scope :active, :order => 'division1, division2, title_order, start_date ASC', :conditions => {:status => "Active"}
   scope :divisionC, :order => 'title_order, start_date ASC', :conditions => {:division1 => "Command", :status => "Active"}
   scope :division1, :order => 'title_order, start_date ASC', :conditions => {:division1 => "Division 1", :status => "Active"}
   scope :division2, :order => 'title_order, start_date ASC', :conditions => {:division1 => "Division 2", :status => "Active"}
