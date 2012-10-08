@@ -19,6 +19,7 @@
       <div class="nav-collapse">
 	<ul class="nav">
 	  <li><%= link_to "People", people_path %></li>
+	  <li><%= link_to "Certs", certs_path %></li>
 	  <li class="dropdown">
 	    <a href="#" class=dropdown-toggle" data-toggle="dropdown">
 	      Admin <b class="caret"></b>
@@ -29,6 +30,29 @@
 	      <li><%= link_to "Titles", titles_path %></li>
 	    </ul>
 	  </li>
+	  <li class="dropdown">
+	    <a href="#" class=dropdown-toggle" data-toggle="dropdown">
+	      Reports <b class="caret"></b>
+	    </a>
+	    <ul class="dropdown-menu">
+	      <li><%= link_to "Signin Sheet", signin_people_path %></li>
+	      <li><%= link_to "Skills", skills_path %></li>
+	      <li><%= link_to "Titles", titles_path %></li>
+	    </ul>
+	  </li>
+	  <li class="dropdown">
+	    <a href="#" class=dropdown-toggle pull-right" data-toggle="dropdown">
+	      Access <b class="caret"></b>
+	    </a>
+	    <ul class="dropdown-menu" >
+	      <% if user_signed_in? %>
+		<li><%= link_to "#{current_user.email} Profile", edit_user_registration_path %></li>
+		<li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
+	      <% else %>
+		<li><%= link_to "Login", new_user_session_path %></li>
+	      <% end %>
+	    </ul>
+	  </li>
 	</ul>
       </div>
     </div>
@@ -36,11 +60,16 @@
   </div>
   <div class="container">
     <div class="row">
-      <div class="span3">
+      <div class="span2">
 	<%= yield :sidebar %>
       </div>
-      <div class="span9">
-	<%= yield %>
+      <div class="span10">
+        <% flash.each do |name,msg| %>
+          <%= content_tag :div, msg, id: "flash_#{name}", class: "success" %>
+        <% end %>
+        <%#= '<p class="notice"> #{notice} </p>' if notice %>
+        <%#= '<p class="alert"> #{alert} </p>' if alert %>
+        <%= yield %>
       </div>
     </div>  
   </div>

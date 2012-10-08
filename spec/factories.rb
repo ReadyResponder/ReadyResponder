@@ -1,4 +1,5 @@
 FactoryGirl.define do
+  #factory :user is located in the factories directory
   factory :person do
     firstname "CJ"
     sequence (:lastname) {|n| "Doe#{n}" }

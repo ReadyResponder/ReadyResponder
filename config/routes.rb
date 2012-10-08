@@ -1,4 +1,12 @@
 Lims3::Application.routes.draw do
+  get "landing/index"
+
+  #authenticated :user do
+  #  root :to => "people#index" 
+  #end
+
+  devise_for :users
+
   resources :inspections
 
   resources :titles
@@ -77,6 +85,7 @@ Lims3::Application.routes.draw do
   # root :to => 'welcome#index'
 #root :to => 'people/index'
   # See how all your routes lay out with "rake routes"
+  root :to => "landing#index"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.

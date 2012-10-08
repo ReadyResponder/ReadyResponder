@@ -166,9 +166,9 @@ SimpleForm.setup do |config|
 
   # Default size for text inputs.
 
-  config.default_input_size = 30
+  #config.default_input_size = 30
 
-  # config.default_input_size = 50
+  config.default_input_size = 50
 
 
   # When false, do not use translations for labels.

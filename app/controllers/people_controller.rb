@@ -1,5 +1,5 @@
 class PeopleController < ApplicationController
-  
+  before_filter :authenticate_user!
   def signin
     @people = Person.active.all
     @page_title = "Sign-in"

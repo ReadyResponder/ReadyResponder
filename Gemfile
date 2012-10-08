@@ -12,7 +12,7 @@ gem 'rmagick'
 gem 'simple_form'
 gem 'geocoder'
 gem 'jquery-rails'
-
+gem 'cancan'
 
 group :test, :development do
   gem "rspec-rails"

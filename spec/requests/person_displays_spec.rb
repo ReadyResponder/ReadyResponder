@@ -1,6 +1,13 @@
 require 'spec_helper'
-
+      #save_and_open_page
 describe "Person" do
+  before do
+    somebody = User.create(:email => 'user@example.com', :username => 'Test1', :password => 'secret')
+    visit new_user_session_path
+    fill_in('user_email', :with => somebody.email)
+    fill_in('user_password', :with => somebody.password)
+    click_on 'Sign in'
+  end
   describe "GET /people" do
     it "returns a page" do
       visit people_path
@@ -70,5 +77,4 @@ describe "Person" do
       page.should have_content("Basket Weaving")
     end
   end
-
 end
