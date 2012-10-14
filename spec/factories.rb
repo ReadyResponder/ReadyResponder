@@ -1,5 +1,12 @@
 FactoryGirl.define do
-  #factory :user is located in the factories directory
+  factory :user do
+    sequence (:username) {|n| "test#{n}" }
+    sequence (:email) {|n| "test#{n}@example.com" }
+    confirmed_at Time.now
+    password 'secret'
+    password_confirmation 'secret'
+  end
+
   factory :person do
     firstname "CJ"
     sequence (:lastname) {|n| "Doe#{n}" }

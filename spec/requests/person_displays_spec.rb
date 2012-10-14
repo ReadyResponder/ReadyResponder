@@ -1,8 +1,8 @@
 require 'spec_helper'
       #save_and_open_page
 describe "Person" do
-  before do
-    somebody = User.create(:email => 'user@example.com', :username => 'Test1', :password => 'secret')
+  before  do
+    somebody = FactoryGirl.create(:user)
     visit new_user_session_path
     fill_in('user_email', :with => somebody.email)
     fill_in('user_password', :with => somebody.password)

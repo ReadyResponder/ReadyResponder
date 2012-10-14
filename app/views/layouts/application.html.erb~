@@ -65,7 +65,7 @@
       </div>
       <div class="span10">
         <% flash.each do |name,msg| %>
-          <%= content_tag :div, msg, id: "flash_#{name}", class: "success" %>
+          <%= content_tag :div, msg, id: "flash_#{name}", class: "alert alert-success" %>
         <% end %>
         <%#= '<p class="notice"> #{notice} </p>' if notice %>
         <%#= '<p class="alert"> #{alert} </p>' if alert %>
