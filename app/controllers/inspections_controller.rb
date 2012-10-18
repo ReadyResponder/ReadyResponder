@@ -1,6 +1,6 @@
 class InspectionsController < ApplicationController
-  # GET /inspections
-  # GET /inspections.json
+  before_filter :authenticate_user!
+  
   def index
     @inspections = Inspection.all
 

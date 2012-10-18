@@ -9,16 +9,16 @@ describe "Cert" do
     fill_in('user_password', :with => somebody.password)
     click_on 'Sign in'
   end
-  describe "not logged in" do
-    it "should not display a listing" do
+  describe "when not logged in" do
+    it "should not display anything" do
       click_on 'Sign Out'
       visit certs_path
       page.should have_content("LIMS") # This is in the nav bar
       page.should_not have_content("Listing")
       page.should have_content('You need to sign in')
       visit new_cert_path
-      acert = FactoryGirl.create(:cert)
       page.should have_content('You need to sign in')
+      acert = FactoryGirl.create(:cert)
       visit edit_cert_path(acert)
       page.should have_content('You need to sign in')
     end

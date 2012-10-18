@@ -4,8 +4,8 @@ describe "Person" do
   before  do
     somebody = FactoryGirl.create(:user)
     visit new_user_session_path
-    fill_in('user_email', :with => somebody.email)
-    fill_in('user_password', :with => somebody.password)
+    fill_in 'user_email', :with => somebody.email
+    fill_in 'user_password', :with => somebody.password
     click_on 'Sign in'
   end
   describe "GET /people" do
