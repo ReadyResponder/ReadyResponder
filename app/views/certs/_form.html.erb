@@ -3,9 +3,9 @@
     <%= f.association :course %>
     <%= f.input :status, :as => :select, :collection => ['Active', 'Inactive'] %>
     <%= f.input :level, :hint => 'eg. EMT-Basic', :input_html => { :size => 22 }  %>
-    <%= f.input :cert_number, :input_html => { :size => 22 }  %>
+    <%= f.input :cert_number, :label => 'Certification Number', :hint => "eg. Driver's License S number", :input_html => { :size => 22 }  %>
     <%= f.input :issued_date, :as => :string, :label => 'Issued Date', :input_html => { :size => 11 }  %>
-    <%= f.input :expiration_date, :hint => 'Leave blank to set from course default', :as => :string, :input_html => { :size => 11 }  %>
+    <%= f.input :expiration_date, :hint => 'Leave blank to set expiration date from course default', :as => :string, :input_html => { :size => 11 }  %>
     <%= f.input :certification, :as => :file, :hint => 'Upload a scanned image of the documentation' %>
     <%= f.input :comments %>
   

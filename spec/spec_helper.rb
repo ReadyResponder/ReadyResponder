@@ -38,4 +38,6 @@ RSpec.configure do |config|
   config.order = "random"
   
   config.include Devise::TestHelpers, :type => :controller
+  config.include(MailerMacros)
+  #config.before(:each) {reset_email}
 end

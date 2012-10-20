@@ -14,6 +14,7 @@ describe "Cert" do
       click_on 'Sign Out'
       visit certs_path
       page.should have_content("LIMS") # This is in the nav bar
+      current_path.should eq(new_user_session_path)
       page.should_not have_content("Listing")
       page.should have_content('You need to sign in')
       visit new_cert_path

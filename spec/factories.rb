@@ -34,5 +34,9 @@ FactoryGirl.define do
     status "Active"
     sequence (:name) {|n| "Course#{n}" }
   end
+  factory :inspection do
+    status "Passed"
+    person
+  end
 
 end

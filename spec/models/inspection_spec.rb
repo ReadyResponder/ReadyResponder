@@ -1,5 +1,7 @@
 require 'spec_helper'
 
 describe Inspection do
-  pending "add some examples to (or delete) #{__FILE__}"
+  an_example = FactoryGirl.create(:inspection)
+  #mail.subject.should eq("Cert expiring")
+  #an_example.status.should eq("Active")
 end

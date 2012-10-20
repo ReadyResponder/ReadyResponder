@@ -21,7 +21,7 @@
     <% @certs.each do |cert| %>
       <tr>
 	<td><%= link_to cert.person.fullname, cert.person %></td>
-	<td><%= link_to cert.course.name, course %></td>
+	<td><%= link_to cert.course.name, cert %></td>
 	<td><%= cert.status %></td>
 	<td><%= cert.category %></td>
 	<td><%= cert.level %></td>
