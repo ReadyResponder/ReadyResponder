@@ -5,8 +5,7 @@ gem 'rails', '3.2.6'
 gem 'thin', group: :development
 #gem 'quiet-assets', group: :development
 gem 'ransack'
-gem 'sqlite3'
-
+gem 'pg', group: :production
 gem 'carrierwave'
 gem 'rmagick'
 gem 'simple_form'
@@ -21,6 +20,8 @@ group :test, :development do
   gem "guard-rspec"
   gem "launchy"
   gem 'guard-livereload'
+  gem 'sqlite3'
+
 end
 #Handles authentication
 gem 'devise'
