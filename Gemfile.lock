@@ -130,6 +130,7 @@ GEM
       net-ssh (>= 1.99.1)
     nokogiri (1.5.5)
     orm_adapter (0.4.0)
+    pg (0.14.1)
     polyamorous (0.5.0)
       activerecord (~> 3.0)
     polyglot (0.3.3)
@@ -238,6 +239,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   launchy
+  pg
   rails (= 3.2.6)
   ransack
   rmagick
