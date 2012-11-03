@@ -6,6 +6,10 @@ FactoryGirl.define do
     password 'secret'
     password_confirmation 'secret'
   end
+  
+  factory :role do
+    sequence (:name) {|n| "testrole#{n}" }
+  end
 
   factory :person do
     firstname "CJ"

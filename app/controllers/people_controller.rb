@@ -1,7 +1,9 @@
 class PeopleController < ApplicationController
   before_filter :authenticate_user!
+  load_and_authorize_resource
   
   def signin
+    #This is the sign-in sheet, not anything about authentication
     @people = Person.active.all
     @page_title = "Sign-in"
     render :layout => "print_signin"
