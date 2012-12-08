@@ -13,6 +13,6 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
   
   def role?(role)
-    roles.include? role.to_s
+    self.roles.include? role.to_s
   end
 end

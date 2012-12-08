@@ -70,7 +70,8 @@
         <%#= '<p class="notice"> #{notice} </p>' if notice %>
         <%#= '<p class="alert"> #{alert} </p>' if alert %>
         <%= yield %></br>
-        <%= current_user.roles %>
+        <%#= current_user.roles unless current_user.nil? %>
+        <%= current_user.username unless current_user.nil? %>
       </div>
     </div>  
   </div>

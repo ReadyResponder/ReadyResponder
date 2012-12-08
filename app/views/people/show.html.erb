@@ -1,11 +1,12 @@
 <% content_for :sidebar do %>
-<%= link_to 'Edit Person', edit_person_path(@person), :class => 'btn btn-primary' %></br></br>
-<%= link_to 'New Cert', new_person_cert_path(@person), :class => 'btn' %>
+  <%= link_to 'Return to Listing', people_path, :class => 'btn' %></br></br>
+  <%= link_to 'Edit Person', edit_person_path(@person), :class => 'btn btn-primary' unless cannot? :edit, @person  %></br></br>
+  <%= link_to 'New Cert', new_person_cert_path(@person), :class => 'btn' unless cannot? :create, Cert  %>
 <% end %>
 
 <p id="notice"><%= notice %></p>
 
-<p><h2><%= @person.fullname %> (<%= @person.icsid %>)</h2></p>
+<p><h2><%= @person.shortrank %> <%= @person.fullname %> (<%= @person.icsid %>)</h2></p>
 
 <p>DOB <%= @person.date_of_birth %> (<%= @person.age %>)</p>
 <p>Start Date <%= @person.start_date %> (<%= distance_of_time_in_words(((@person.end_date) || Date.today), @person.start_date) if @person.start_date %>)</p>
@@ -15,9 +16,8 @@
     <%= @person.status %>
   </span>
 </p>
-<%= @person.title_order %>
 
-<div>
+<div class="titles">
   <% @person.titles.each do |title| %>
     <% if @person.qualified?(title.name) then %>
       <h3><a href="#">

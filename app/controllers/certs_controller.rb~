@@ -1,4 +1,6 @@
 class CertsController < ApplicationController
+  before_filter :authenticate_user!
+
   # GET /certs
   # GET /certs.json
   def index

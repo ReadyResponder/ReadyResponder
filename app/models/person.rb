@@ -3,13 +3,7 @@ class Person < ActiveRecord::Base
   
   attr_accessible :firstname, :lastname, :status, :icsid, :city, :state, :zipcode, :start_date, :title, :gender, :date_of_birth,:division1, :division2, :certs_attributes, :title_ids, :title_order
   has_many :certs, :conditions => {:status =>'Active' }
-=begin
-  has_many :certs do
-    def active
-      where{'status == "Active"' }
-    end
-  end
-=end
+
   has_many :courses, :through => :certs
   has_many :skills, :through => :courses
   has_and_belongs_to_many :titles

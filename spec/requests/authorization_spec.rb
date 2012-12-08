@@ -1,34 +1,48 @@
 require 'spec_helper'
       #save_and_open_page
-describe "Person" do
-  before (:each)  do
-    somebody = FactoryGirl.create(:user)
-    r = FactoryGirl.create(:role, name: 'Editor')
-    somebody.roles << r
-    visit new_user_session_path
-    fill_in 'user_email', :with => somebody.email
-    fill_in 'user_password', :with => somebody.password
-    click_on 'Sign in'
-  end
-
-  describe "GET /people" do
-    it "returns a page" do
-      visit people_path
-      page.should have_content("Listing People")
-      page.should have_content("LIMS") # This is in the nav bar
+describe "a user" do
+  describe "in the reader role" do
+    before (:each) do
+      person = FactoryGirl.create(:person, lastname: 'YesDoe')
+      somebody = FactoryGirl.create(:user)
+      r = FactoryGirl.create(:role, name: 'Reader')
+      somebody.roles << r
+      visit new_user_session_path
+      fill_in 'user_email', :with => somebody.email
+      fill_in 'user_password', :with => somebody.password
+      click_on 'Sign in'
     end
-  end
-
-  describe " should display" do
-    pending "a signin sheet when requested", 'not RESTful, how to specifiy in CanCan' do
+    it "cannot edit people" do
+      visit people_path
+      page.should_not have_content('Edit') #Need to scope this, or it will fail on Edith
+      person = FactoryGirl.create(:person, lastname: 'YesDoe')
+      visit edit_person_path(person)
+      page.should have_content("Access Denied")
+    end
+    it "cannot create a new person" do
+      visit people_path
+      page.should_not have_content('Create')
+      visit new_person_path
+      page.should have_content("Access Denied")
+    end
+    it "can read a person" do
+      person = FactoryGirl.create(:person, lastname: 'YesDoe')
+      visit people_path
+      #save_and_open_page
+      click_on person.lastname
+      page.should have_content(person.lastname)
+    end
+    pending "a signin sheet when requested" do
       person1 = FactoryGirl.create(:person, lastname: 'YesDoe')
       person2 = FactoryGirl.create(:person, lastname: 'NoDoe', status: 'Inactive')
       visit signin_people_path
+      #save_and_open_page
       page.should have_content("Command Staff") #This is in the first heading
       page.should have_content("YesDoe")
       page.should_not have_content("NoDoe")
     end
-    
+end
+=begin
     it "a new person form with a first name field" do
       visit new_person_path
       page.should have_content("First Name")
@@ -58,25 +72,6 @@ describe "Person" do
       page.should have_content("Qualified for Police Officer")
       page.should_not have_content("NOT Qualified")
     end
-
-    it "a person page" do
-      person = FactoryGirl.create(:person, icsid: "509")
-      visit person_path(person)
-      page.should have_content("(509)")
-    end
-
-    it "a person without a start date" do
-      person = FactoryGirl.create(:person, start_date: nil)
-      visit person_path(person)
-      page.should have_content("Status")
-    end
-    
-    it "all certs, even expired" do
-      person = FactoryGirl.create(:person)
-      course = FactoryGirl.create(:course, name: "Basket Weaving")
-      expiredcert = FactoryGirl.create(:cert, person: person, course: course, status: "Expired")
-      visit person_path(person)
-      page.should have_content("Basket Weaving")
-    end
   end
+=end
 end
