@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "a user" do
   describe "in the reader role" do
     before (:each) do
-      person = FactoryGirl.create(:person, lastname: 'YesDoe')
+      person = FactoryGirl.create(:person)
       somebody = FactoryGirl.create(:user)
       r = FactoryGirl.create(:role, name: 'Reader')
       somebody.roles << r
@@ -26,7 +26,7 @@ describe "a user" do
       page.should have_content("Access Denied")
     end
     it "can read a person" do
-      person = FactoryGirl.create(:person, lastname: 'YesDoe')
+      person = FactoryGirl.create(:person)
       visit people_path
       #save_and_open_page
       click_on person.lastname

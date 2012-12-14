@@ -24,9 +24,7 @@ class CertsController < ApplicationController
     end
   end
 
-  # GET /certs/new
-  # GET /certs/new.json
-  def new
+ def new
     @cert = Cert.new(:status => 'Active')
     @cert.person_id = (params[:person_id]) if (params[:person_id]).present?  
     respond_to do |format|
@@ -47,7 +45,7 @@ class CertsController < ApplicationController
 
     respond_to do |format|
       if @cert.save
-        format.html { redirect_to @cert, notice: 'Cert was successfully created.' }
+        format.html { redirect_to person_path(@cert.person), notice: 'Cert was successfully created.' }
         format.json { render json: @cert, status: :created, location: @cert }
       else
         format.html { render action: "new" }

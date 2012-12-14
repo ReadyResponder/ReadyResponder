@@ -65,13 +65,15 @@
       </div>
       <div class="span10">
         <% flash.each do |name,msg| %>
-          <%= content_tag :div, msg, id: "flash_#{name}", class: "alert" %>
+          <%#= content_tag :div, msg, id: "flash_#{name}", class: "#{name ? 'notice' || 'alert'}" %>
         <% end %>
-        <%#= '<p class="notice"> #{notice} </p>' if notice %>
-        <%#= '<p class="alert"> #{alert} </p>' if alert %>
+        <%= '<p class="notice"> #{notice} </p>' if notice %>
+        <%= '<p class="alert"> #{alert} </p>' if alert %>
         <%= yield %></br>
-        <%#= current_user.roles unless current_user.nil? %>
-        <%= current_user.username unless current_user.nil? %>
+        </br>
+        Version 0.6
+        <%= current_user.email unless current_user.nil? %>
+        <%= current_user.roles.map{ |role| role.name.to_s } unless current_user.nil? %>
       </div>
     </div>  
   </div>

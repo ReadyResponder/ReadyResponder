@@ -4,11 +4,9 @@
   <%= link_to 'New Cert', new_person_cert_path(@person), :class => 'btn' unless cannot? :create, Cert  %>
 <% end %>
 
-<p id="notice"><%= notice %></p>
-
 <p><h2><%= @person.shortrank %> <%= @person.fullname %> (<%= @person.icsid %>)</h2></p>
 
-<p>DOB <%= @person.date_of_birth %> (<%= @person.age %>)</p>
+<p>Date of Birth <%= @person.date_of_birth %> (<%= @person.age %>)</p>
 <p>Start Date <%= @person.start_date %> (<%= distance_of_time_in_words(((@person.end_date) || Date.today), @person.start_date) if @person.start_date %>)</p>
 <p>
   <b>Status:</b>
@@ -29,6 +27,7 @@
 	NOT qualified for <%= title.name %>
       </a></h3>
       <div>
+      Skills Missing:
 	<ul>
 	<% (title.skills - @person.skills).each do |skill| %>
 	  <li><%= skill.name  %> skill needed</li>

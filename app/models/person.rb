@@ -29,8 +29,8 @@ class Person < ActiveRecord::Base
   scope :squad1, :order => 'title_order, start_date ASC', :conditions => {:division2 => "Squad 1",:status => "Active"}
   scope :squad2, :order => 'title_order, start_date ASC', :conditions => {:division2 => "Squad 2",:status => "Active"}
 
-  TITLES = ['Director','Chief','Deputy','Captain', 'Lieutenant','Sargeant', 'Corporal', 'Senior Officer', 'Officer', 'CERT', 'Dispatcher', 'Recruit','Student Officer']
-  TITLE_ORDER = {'Director' => 1, 'Chief' => 3, 'Deputy Chief' => 5,'Captain' => 7, 'Lieutenant' => 9, 'Sargeant' => 11, 'Corporal' => 13, 'Senior Officer' => 15, 'Officer' => 17, 'CERT Member' => 19, 'Dispatcher' => 19, 'Student Officer' => 21}
+  TITLES = ['Director','Chief','Deputy','Captain', 'Lieutenant','Sargeant', 'Corporal', 'Senior Officer', 'Officer', 'CERT Member', 'Dispatcher','Student Officer', 'Recruit']
+  TITLE_ORDER = {'Director' => 1, 'Chief' => 3, 'Deputy Chief' => 5,'Captain' => 7, 'Lieutenant' => 9, 'Sargeant' => 11, 'Corporal' => 13, 'Senior Officer' => 15, 'Officer' => 17, 'CERT Member' => 19, 'Dispatcher' => 19, 'Student Officer' => 21, 'Recruit' => 23, 'Applicant' => 25}
   
   def fullname
     (self.firstname + " " + (self.middleinitial || "") + " " + self.lastname).squeeze(" ")
@@ -40,7 +40,7 @@ class Person < ActiveRecord::Base
     ranks = { "Chief" => "Chief", "Deputy Chief" => "Deputy", "Captain" => "Capt",
             "Lieutenant" => "Lt", "Sargeant" => "Sgt", "Corporal" => "Cpl",
             "Senior Officer" => "SrO", "Officer" => "Ofc", "Dispatcher" => "Dsp",
-            "Recruit" => "Rct" }
+            "CERT Member" => "CERT", "Recruit" => "Rct" }
     ranks[self.title] || ''
   end
   def title_order

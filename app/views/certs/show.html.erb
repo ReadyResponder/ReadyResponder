@@ -2,7 +2,6 @@
   <%= link_to 'Return to List', certs_path, :class => 'btn' %></br></br>
   <%= link_to 'Edit Cert', edit_cert_path(@cert), :class => 'btn btn-primary' unless cannot? :edit, @cert %></br></br>
 <% end %>
-<p id="notice"><%= notice %></p>
 
 <p>
   <h2>
@@ -12,7 +11,7 @@
 
 <p>
   <h2>
-  <%= link_to @cert.course.name, @cert.course %>
+  <%= link_to @cert.course.name, @cert.course unless @cert.course.blank? %>
   </h2>
 </p>
 
@@ -25,7 +24,7 @@
 
 <p>
   <b>Category:</b>
-  <%= @cert.course.category %>
+  <%= @cert.course.category unless @cert.course.blank? %>
 </p>
 
 <p>
@@ -47,7 +46,7 @@
   <b>Date expires:</b>
   <%= @cert.expiration_date %>
 </p>
-<% image_tag @cert.certification_url.to_s %>
+<% image_tag @cert.certification_url.to_s unless @cert.certification_url.blank?%>
 <p>
   <b>Comments:</b>
   <%= @cert.comments %>

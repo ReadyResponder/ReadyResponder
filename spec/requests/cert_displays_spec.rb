@@ -44,13 +44,18 @@ describe "Cert" do
     end
 
     it "a new cert form with an issued date field" do
+      a_person = FactoryGirl.create(:person)
+      a_course = FactoryGirl.create(:course)
       visit new_cert_path
       page.should have_content("Issued Date")
+      select(a_person.fullname, :from => 'cert_person_id')
+      select(a_course.name, :from => 'cert_course_id')
+      
     end
     it 'should update a cert' do
       
     end
-    it "a cert page" do
+    it "should show a cert page" do
       cert = FactoryGirl.create(:cert)
       visit cert_path(cert)
       page.should have_content("Status: Active")
