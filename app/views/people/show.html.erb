@@ -73,6 +73,16 @@
   </tbody>
 </table>
 
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+	<th>Items</th>
+    </tr>
+  </thead>
+  <tbody>
+      <%= render(:partial => "items/item", :collection => Item.find_all_by_person_id(@person.id)) || raw("<tr><td>No Items Found !</td></tr>") %>
+  </tbody>
+</table>
 
 
 <% content_for :parking do %>

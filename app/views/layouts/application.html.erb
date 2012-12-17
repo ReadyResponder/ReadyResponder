@@ -68,10 +68,8 @@
         <% flash.each do |name,msg| %>
           <%= content_tag :div, msg, id: "flash_#{name}" %>
         <% end %>
-        <p class="notice"><%= flash[:notice] %></p>
-        <p class="alert"><%= flash[:alert] %></p>
-        <%= '<p class="notice"> #{notice} </p>' if notice %>
-        <%= '<p class="alert"> #{alert} </p>' if alert %>
+        <%= content_tag :p, flash[notice], :class => "notice" if flash[notice] %>
+        <%= content_tag :p, flash[alert], :class => "alert" if flash[alert] %>
         <%= yield %></br>
         </br>
         Version 0.6

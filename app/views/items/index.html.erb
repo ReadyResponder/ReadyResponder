@@ -9,8 +9,8 @@
       <th>Name</th>
       <th>Location</th>
       <th>Category</th>
-      <th>Model</th>
       <th>Serial</th>
+      <th>Local Serial</th>
       <th>Owner</th>
       <th>Status</th>
       <th></th>
@@ -19,11 +19,11 @@
   <tbody>
     <% @items.each do |item| %>
       <tr>
-	<td><%= link_to item.name, item_path(item) %></td>
+	<td><%= link_to item.model + " " + item.name, item_path(item) %></td>
 	<td><%= item.location_id %></td>
 	<td><%= item.category %></td>
-	<td><%= item.model %></td>
 	<td><%= item.serial %></td>
+	<td><%= item.local_serial %></td>
 	<td><%= item.person.fullname unless item.person_id.blank? %></td>
 	<td><%= item.status %></td>
 	<td><%= link_to 'Edit', edit_item_path(item), :class => 'btn btn-mini btn-primary' unless cannot? :edit, item %></td>
