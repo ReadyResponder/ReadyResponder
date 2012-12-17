@@ -1,0 +1,70 @@
+<% content_for :sidebar do %>
+  <%= link_to 'Return to Listing', items_path, :class => 'btn' %></br></br>
+  <%= link_to 'Edit Item', edit_item_path(@item), :class => 'btn btn-primary' unless cannot? :edit, @item  %></br></br>
+<% end %>
+
+<p>
+  <b>Location:</b>
+  <%= @item.location_id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @item.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @item.description %>
+</p>
+
+<p>
+  <b>Source:</b>
+  <%= @item.source %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @item.category %>
+</p>
+
+<p>
+  <b>Model:</b>
+  <%= @item.model %>
+</p>
+
+<p>
+  <b>Serial:</b>
+  <%= @item.serial %>
+</p>
+
+<p>
+  <b>Owner:</b>
+  <%= @item.person.fullname unless @item.person_id.blank? %>
+</p>
+
+<p>
+  <b>Purchase date:</b>
+  <%= @item.purchase_date %>
+</p>
+
+<p>
+  <b>Purchase amt:</b>
+  <%= @item.purchase_amt %>
+</p>
+
+<p>
+  <b>Sell date:</b>
+  <%= @item.sell_date %>
+</p>
+
+<p>
+  <b>Sell amt:</b>
+  <%= @item.sell_amt %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @item.status %>
+</p>
+

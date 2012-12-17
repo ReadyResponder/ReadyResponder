@@ -1,0 +1,18 @@
+<%= simple_form_for(@repair) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :item_id %>
+    <%= f.input :user_id %>
+    <%= f.input :person_id %>
+    <%= f.input :category %>
+    <%= f.input :service_date %>
+    <%= f.input :status %>
+    <%= f.input :description %>
+    <%= f.input :comments %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

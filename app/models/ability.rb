@@ -8,6 +8,8 @@ class Ability
     elsif current_user.roles.to_s.include? "Editor"
       can [:read, :update, :create, :edit], Person
       can [:read, :update, :create, :edit], Cert
+      can [:read, :update, :create, :edit], Item
+      can [:read, :update, :create, :edit], Event
       #can :update, People
       can :read, :all
     elsif current_user.roles.to_s.include? 'Reader'

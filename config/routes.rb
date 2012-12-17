@@ -1,4 +1,14 @@
 Lims3::Application.routes.draw do
+  resources :events
+
+  resources :moves
+
+  resources :repairs
+
+  resources :locations
+
+  resources :items
+
   resources :roles
 
   get "landing/index"

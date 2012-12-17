@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121028085030) do
+ActiveRecord::Schema.define(:version => 20121217082700) do
 
   create_table "certs", :force => true do |t|
     t.integer  "person_id"
@@ -51,12 +51,67 @@ ActiveRecord::Schema.define(:version => 20121028085030) do
 
   add_index "courses_skills", ["course_id", "skill_id"], :name => "index_courses_skills_on_course_id_and_skill_id"
 
+  create_table "events", :force => true do |t|
+    t.integer  "course_id"
+    t.string   "instructor"
+    t.string   "location"
+    t.string   "description"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.integer  "duration"
+    t.string   "category"
+    t.string   "status"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "inspections", :force => true do |t|
     t.integer  "person_id"
     t.datetime "inspection_date"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.string   "status"
+  end
+
+  create_table "items", :force => true do |t|
+    t.integer  "location_id"
+    t.string   "name"
+    t.string   "description"
+    t.string   "source"
+    t.string   "category"
+    t.string   "model"
+    t.string   "serial"
+    t.integer  "person_id"
+    t.date     "purchase_date"
+    t.float    "purchase_amt"
+    t.date     "sell_date"
+    t.float    "sell_amt"
+    t.string   "status"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.string   "local_serial"
+  end
+
+  create_table "locations", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "category"
+    t.string   "status"
+    t.string   "comments"
+    t.float    "lat"
+    t.float    "lon"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "moves", :force => true do |t|
+    t.integer  "item_id"
+    t.integer  "locatable_id"
+    t.string   "locatable_type"
+    t.string   "comments"
+    t.string   "reason"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "people", :force => true do |t|
@@ -104,6 +159,19 @@ ActiveRecord::Schema.define(:version => 20121028085030) do
   end
 
   add_index "people_titles", ["person_id", "title_id"], :name => "index_people_titles_on_person_id_and_title_id"
+
+  create_table "repairs", :force => true do |t|
+    t.integer  "item_id"
+    t.integer  "user_id"
+    t.string   "person_id"
+    t.string   "category"
+    t.date     "service_date"
+    t.string   "status"
+    t.string   "description"
+    t.string   "comments"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "roles", :force => true do |t|
     t.string   "name"

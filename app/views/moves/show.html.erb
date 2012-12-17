@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Item:</b>
+  <%= @move.item_id %>
+</p>
+
+<p>
+  <b>Locatable:</b>
+  <%= @move.locatable_id %>
+</p>
+
+<p>
+  <b>Locatable type:</b>
+  <%= @move.locatable_type %>
+</p>
+
+<p>
+  <b>Comments:</b>
+  <%= @move.comments %>
+</p>
+
+<p>
+  <b>Reason:</b>
+  <%= @move.reason %>
+</p>
+
+
+<%= link_to 'Edit', edit_move_path(@move) %> |
+<%= link_to 'Back', moves_path %>

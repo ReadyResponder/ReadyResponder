@@ -1,0 +1,6 @@
+<% content_for :sidebar do %>
+  <h1>New Item</h1>
+  <%= link_to 'Cancel', items_path , :class => 'btn' %>
+<% end %>
+
+<%= render 'form' %>

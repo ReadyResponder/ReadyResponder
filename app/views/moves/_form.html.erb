@@ -1,0 +1,15 @@
+<%= simple_form_for(@move) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :item_id %>
+    <%= f.input :locatable_id %>
+    <%= f.input :locatable_type %>
+    <%= f.input :comments %>
+    <%= f.input :reason %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

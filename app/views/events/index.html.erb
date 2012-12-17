@@ -1,0 +1,34 @@
+<% content_for :sidebar do %>
+  <h1>Listing Events</h1>
+  <%= link_to 'New Event', new_event_path, :class => 'btn' unless cannot? :create, Event %>
+<% end %>
+
+<table id="people" class="display table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Location</th>
+      <th>Start date</th>
+      <th>End date</th>
+      <th>Duration</th>
+      <th>Category</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+	<td><%= event.description %></td>
+	<td><%= event.location %></td>
+	<td><%= event.start_date %></td>
+	<td><%= event.end_date %></td>
+	<td><%= event.duration %></td>
+	<td><%= event.category %></td>
+	<td><%= event.status %></td>
+	<td><%= link_to 'Edit', edit_event_path(event) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,4 +1,5 @@
 require 'spec_helper'
+
       #save_and_open_page
 describe "a user" do
   describe "in the reader role" do
@@ -28,7 +29,6 @@ describe "a user" do
     it "can read a person" do
       person = FactoryGirl.create(:person)
       visit people_path
-      #save_and_open_page
       click_on person.lastname
       page.should have_content(person.lastname)
     end
@@ -36,7 +36,6 @@ describe "a user" do
       person1 = FactoryGirl.create(:person, lastname: 'YesDoe')
       person2 = FactoryGirl.create(:person, lastname: 'NoDoe', status: 'Inactive')
       visit signin_people_path
-      #save_and_open_page
       page.should have_content("Command Staff") #This is in the first heading
       page.should have_content("YesDoe")
       page.should_not have_content("NoDoe")

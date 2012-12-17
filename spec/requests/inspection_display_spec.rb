@@ -13,7 +13,7 @@ describe "Inspection" do
     it "should not display a listing" do
       click_on 'Sign Out'
       visit inspections_path
-      page.should have_content("LIMS") # This is in the nav bar
+      page.should_not have_css("div.navbar")
       page.should_not have_content("Listing")
       page.should have_content('You need to sign in')
       visit new_inspection_path

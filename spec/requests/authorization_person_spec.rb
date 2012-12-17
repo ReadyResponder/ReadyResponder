@@ -37,7 +37,9 @@ describe "a user" do
       click_on 'Sign in'
     end
     it "cannot edit people" do
-      #cannot_edit_person
+      person = FactoryGirl.create(:person)
+      visit edit_person_path(person)
+      page.should have_content("Access Denied")
     end
     it "cannot create a new person" do
       visit people_path
@@ -48,7 +50,6 @@ describe "a user" do
     it "can read a person" do
       person = FactoryGirl.create(:person, lastname: 'YesDoe')
       visit people_path
-      #save_and_open_page
       click_on person.lastname
       page.should have_content(person.lastname)
     end
@@ -56,7 +57,6 @@ describe "a user" do
       person1 = FactoryGirl.create(:person, lastname: 'YesDoe')
       person2 = FactoryGirl.create(:person, lastname: 'NoDoe', status: 'Inactive')
       visit signin_people_path
-      #save_and_open_page
       page.should have_content("Command Staff") #This is in the first heading
       page.should have_content("YesDoe")
       page.should_not have_content("NoDoe")
@@ -76,7 +76,7 @@ end
     it "can edit people" do
       visit people_path
       page.should have_content('Edit') #Need to scope this, or it will fail on Edith
-      page.should have_content('New') #Need to scope this, or it will fail on Edith
+      page.should have_content('New')
       
       person = FactoryGirl.create(:person, lastname: 'YesDoe')
       visit person_path(person)
@@ -87,9 +87,9 @@ end
     end
     it "can create a new person" do
       visit people_path
-      page.should_not have_content('Create')
+      page.should have_content('New')
       visit new_person_path
-      current_path.should ==new_person_path
+      current_path.should == new_person_path
       page.should_not have_content("Access Denied")
     end
     it "can read a person" do
