@@ -58,7 +58,7 @@
     </tr>
   </thead>
   <tbody>
-    <%= render(@person.courses.uniq) || raw("<tr><td>No courses yet !</td></tr>") %>
+    <%= render(@person.courses.unscoped.uniq) || raw("<tr><td>No courses yet !</td></tr>") %>
   </tbody>
 </table>
 
@@ -69,18 +69,18 @@
     </tr>
   </thead>
   <tbody>
-      <%= render(:partial => "certs/cert", :collection => Cert.find_all_by_person_id(@person.id)) || raw("<tr><td>No certifications yet !</td></tr>") %>
+      <%= render(:partial => "certs/cert", :collection => @person.certs.unscoped) || raw("<tr><td>No certifications yet !</td></tr>") %>
   </tbody>
 </table>
 
-<table class="table table-striped table-bordered">
+<table class="table table-striped table-bordered"> 
   <thead>
     <tr>
 	<th>Items</th>
     </tr>
   </thead>
   <tbody>
-      <%= render(:partial => "items/item", :collection => Item.find_all_by_person_id(@person.id)) || raw("<tr><td>No Items Found !</td></tr>") %>
+      <%= render(:partial => "items/item", :collection => @person.items) || raw("<tr><td>No Items Found !</td></tr>") %>
   </tbody>
 </table>
 

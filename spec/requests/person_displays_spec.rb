@@ -76,6 +76,7 @@ describe "Person" do
       course = FactoryGirl.create(:course, name: "Basket Weaving")
       expiredcert = FactoryGirl.create(:cert, person: person, course: course, status: "Expired")
       visit person_path(person)
+      save_and_open_page
       page.should have_content("Basket Weaving")
     end
   end

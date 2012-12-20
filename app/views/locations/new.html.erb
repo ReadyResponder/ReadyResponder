@@ -1,5 +1,6 @@
-<h1>New location</h1>
+<% content_for :sidebar do %>
+  <center><h1>New Location</h1>
+  <%= link_to 'Cancel', locations_path , :class => 'btn' %></center>
+<% end %>
 
 <%= render 'form' %>
-
-<%= link_to 'Back', locations_path %>

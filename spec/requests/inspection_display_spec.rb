@@ -2,8 +2,11 @@ require 'spec_helper'
 #Don't use capybara (ie visit/have_content) and rspec matchers together  {response.status.should be(200)}
 
 describe "Inspection" do
-  before  do
+  before (:each)  do
     somebody = FactoryGirl.create(:user)
+    r = FactoryGirl.create(:role, name: 'Editor')
+    somebody.roles << r
+
     visit new_user_session_path
     fill_in('user_email', :with => somebody.email)
     fill_in('user_password', :with => somebody.password)
@@ -27,6 +30,7 @@ describe "Inspection" do
     it "a new inspection form with a field with people listed" do
       a_person = FactoryGirl.create(:person)
       visit new_inspection_path
+     # save_and_open_page
       page.should have_content(a_person.lastname.to_s)
     end
   end

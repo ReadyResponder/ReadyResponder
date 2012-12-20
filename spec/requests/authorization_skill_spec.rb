@@ -3,31 +3,29 @@ require 'spec_helper'
 describe "a user" do
   describe "without a role" do
     before (:each) do
-      person = FactoryGirl.create(:person, lastname: 'YesDoe')
       somebody = FactoryGirl.create(:user)
       visit new_user_session_path
       fill_in 'user_email', :with => somebody.email
       fill_in 'user_password', :with => somebody.password
       click_on 'Sign in'
     end
-    it "cannot view people" do
-      person = FactoryGirl.create(:person)
+    it "cannot view skills" do
+      skill = FactoryGirl.create(:skill)
       visit people_path
       page.should_not have_content('Edit') #Need to scope this, or it will fail on Edith
       page.should_not have_content('New')
-      page.should_not have_content(person.lastname)
+      page.should_not have_content(skill.name)
       page.should have_content("Access Denied")
       
-      visit person_path(person)
+      visit skill_path(skill)
       page.should_not have_content('Edit') #Need to scope this, or it will fail on Edith
-      page.should_not have_content(person.lastname)
-      visit edit_person_path(person)
+      page.should_not have_content(skill.name)
+      visit edit_skill_path(skill)
       page.should have_content("Access Denied")
     end
   end
   describe "in the reader role" do
     before (:each) do
-      person = FactoryGirl.create(:person, lastname: 'YesDoe')
       somebody = FactoryGirl.create(:user)
       r = FactoryGirl.create(:role, name: 'Reader')
       somebody.roles << r
@@ -36,32 +34,24 @@ describe "a user" do
       fill_in 'user_password', :with => somebody.password
       click_on 'Sign in'
     end
-    it "cannot edit people" do
-      person = FactoryGirl.create(:person)
-      visit edit_person_path(person)
+    it "cannot edit skills" do
+      skill = FactoryGirl.create(:skill)
+      visit edit_skill_path(skill)
       page.should have_content("Access Denied")
     end
-    it "cannot create a new person" do
-      visit people_path
+    it "cannot create a new skill" do
+      visit skills_path
       page.should_not have_content('Create')
-      visit new_person_path
+      visit new_skill_path
       page.should have_content("Access Denied")
     end
-    it "can read a person" do
-      person = FactoryGirl.create(:person, lastname: 'YesDoe')
-      visit people_path
-      click_on person.lastname
-      page.should have_content(person.lastname)
+    it "can read a skill" do
+      skill = FactoryGirl.create(:skill)
+      visit skills_path
+      click_on skill.name
+      page.should have_content(skill.name)
     end
-    pending "a signin sheet when requested" do
-      person1 = FactoryGirl.create(:person, lastname: 'YesDoe')
-      person2 = FactoryGirl.create(:person, lastname: 'NoDoe', status: 'Inactive')
-      visit signin_people_path
-      page.should have_content("Command Staff") #This is in the first heading
-      page.should have_content("YesDoe")
-      page.should_not have_content("NoDoe")
-    end
-end
+  end
   describe "in the editor role" do
     before (:each) do
       person = FactoryGirl.create(:person, lastname: 'YesDoe')
@@ -97,14 +87,6 @@ end
       visit people_path
       click_on person.lastname
       page.should have_content(person.lastname)
-    end
-    pending "a signin sheet when requested" do
-      person1 = FactoryGirl.create(:person, lastname: 'YesDoe')
-      person2 = FactoryGirl.create(:person, lastname: 'NoDoe', status: 'Inactive')
-      visit signin_people_path
-      page.should have_content("Command Staff") #This is in the first heading
-      page.should have_content("YesDoe")
-      page.should_not have_content("NoDoe")
     end
   end
 end

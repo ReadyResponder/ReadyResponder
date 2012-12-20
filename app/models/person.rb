@@ -10,6 +10,7 @@ class Person < ActiveRecord::Base
   has_and_belongs_to_many :events
   #accepts_nested_attributes_for :certs
   has_many :items
+  has_many :inspections
   
   validates_presence_of :firstname, :lastname, :status
   validates_uniqueness_of :icsid, :allow_nil => true, :allow_blank => true   # this needs to be scoped to active members, or more sophisticated rules
@@ -91,6 +92,13 @@ class Person < ActiveRecord::Base
     else
       false
     end
+  end
+  def certs_expiring?
+    self.certs
+=begin
+    need array math
+
+=end
   end
   def service_duration
     if self.start_date.present?

@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
   <center><h1>Listing People</h1></br>
-  <%= link_to 'New Person', new_person_path, :class => 'btn' unless cannot? :create, person %></center>
+  <%= link_to 'New Person', new_person_path, :class => 'btn' unless cannot? :create, Person %></center>
 <% end %>
 
 <table id="people" class="display table table-striped table-bordered" >
@@ -24,11 +24,11 @@
 	<td><%= person.start_date %></td>
 	<td><%= person.division1 %></td>
 	<td><%= person.division2 %></td>
-	<% if can? :update, person %>
-	  <td><%= link_to 'Edit', edit_person_path(person), :class => "btn btn-primary" %></td>
-	<% else %>
+	<%# if can? :update, person %>
+	  <td><%= link_to 'Edit', edit_person_path(person), :class => "btn btn-primary" unless cannot? :update, person %></td>
+	<%# else %>
 	  <td></td>
-	<% end %>
+	<%# end %>
       </tr>
     <% end %>
   </tbody>

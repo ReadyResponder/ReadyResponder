@@ -1,18 +1,9 @@
 require 'spec_helper'
 #Don't use capybara (ie visit/have_content) and rspec matchers together  {response.status.should be(200)}
 
-describe "Course" do
-  before  do
-    somebody = FactoryGirl.create(:user)
-    visit new_user_session_path
-    fill_in('user_email', :with => somebody.email)
-    fill_in('user_password', :with => somebody.password)
-    click_on 'Sign in'
-  end
-  
+describe "Course" do  
   describe " when not logged in" do
     it "should not allow much of anything" do
-      click_on 'Sign Out'
       visit courses_path
       page.should_not have_content("Listing")
       page.should have_content('You need to sign in')
@@ -29,9 +20,19 @@ describe "Course" do
   end
       
   describe "should display" do
+    before  do
+      somebody = FactoryGirl.create(:user)
+      r = FactoryGirl.create(:role, name: 'Editor')
+      somebody.roles << r
+      visit new_user_session_path
+      fill_in('user_email', :with => somebody.email)
+      fill_in('user_password', :with => somebody.password)
+      click_on 'Sign in'
+    end
+
+  
    it "a list" do
       an_example = FactoryGirl.create(:course, name: 'Zombie Hunting')
-      
       visit courses_path
       page.should have_content("Listing Courses")
       page.should have_content("LIMS") # This is in the nav bar

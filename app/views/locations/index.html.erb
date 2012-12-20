@@ -1,35 +1,27 @@
-<h1>Listing locations</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Category</th>
-    <th>Status</th>
-    <th>Comments</th>
-    <th>Lat</th>
-    <th>Lon</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @locations.each do |location| %>
-  <tr>
-    <td><%= location.name %></td>
-    <td><%= location.description %></td>
-    <td><%= location.category %></td>
-    <td><%= location.status %></td>
-    <td><%= location.comments %></td>
-    <td><%= location.lat %></td>
-    <td><%= location.lon %></td>
-    <td><%= link_to 'Show', location %></td>
-    <td><%= link_to 'Edit', edit_location_path(location) %></td>
-    <td><%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+<% content_for :sidebar do %>
+  <center><h1>Listing Locations</h1></br>
+  <%= link_to 'New Location', new_location_path, :class => 'btn' unless cannot? :create, Location %></center>
 <% end %>
+
+<table id="locations" class="display table table-striped table-bordered" >
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Category</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @locations.each do |location| %>
+      <tr>
+	<td><%= link_to location.name, location %></td>
+	<td><%= location.description %></td>
+	<td><%= location.category %></td>
+	<td><%= location.status %></td>
+	<td><%= link_to 'Edit', edit_location_path(location), :class => "btn btn-primary" unless cannot? :update, location %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
-
-<br />
-
-<%= link_to 'New Location', new_location_path %>
