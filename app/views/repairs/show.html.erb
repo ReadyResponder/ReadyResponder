@@ -1,18 +1,18 @@
-<p id="notice"><%= notice %></p>
+<% content_for :sidebar do %>
+  <h1>Repair</h1>
+  <%= link_to 'Repairs List', repairs_path , :class => 'btn' %></br></br>
+  <%= link_to 'Items List', items_path , :class => 'btn' %>
+<% end %>
 
 <p>
   <b>Item:</b>
-  <%= @repair.item_id %>
+  <%= link_to @repair.item.name, @repair.item %>
 </p>
 
-<p>
-  <b>User:</b>
-  <%= @repair.user_id %>
-</p>
 
 <p>
-  <b>Person:</b>
-  <%= @repair.person_id %>
+  <b>Repairer:</b>
+  <%= @repair.person.fullname unless @repair.person.blank? %>
 </p>
 
 <p>
@@ -40,6 +40,3 @@
   <%= @repair.comments %>
 </p>
 
-
-<%= link_to 'Edit', edit_repair_path(@repair) %> |
-<%= link_to 'Back', repairs_path %>

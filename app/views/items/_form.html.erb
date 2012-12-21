@@ -9,7 +9,8 @@
     <%= f.input :category %>
     <%= f.input :model %>
     <%= f.input :serial %>
-    <%= f.association :person %>
+    <%= f.input :serial %>
+    <%= f.association :person, :label => 'Owner' %>
     <%= f.input :purchase_date, :as => :string, :input_html => { :size => 11 }  %>
     <%= f.input :purchase_amt %>
     <%= f.input :sell_date, :as => :string, :input_html => { :size => 11 }  %>

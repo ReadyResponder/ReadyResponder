@@ -7,12 +7,18 @@ class Cert < ActiveRecord::Base
   validates_presence_of :status, :person_id, :course_id, :issued_date
   
   scope :active, :conditions => {:status => "Active"}
-
+  def expiring?
+    #self.expiration_date <= 10.days.from_now #&& !(self.expiration_date <= Date.today)
+    false
+  end
+  def expired?
+    self.expiration_date <= Date.today
+  end
+  
   private
   
   def set_defaults
     if self.expiration_date.blank? then
-      #course = Course.find(self.course_id)
       self.expiration_date = self.issued_date + course.term.to_i.months unless course.nil?
     end
   end

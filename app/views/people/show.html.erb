@@ -54,22 +54,22 @@
 <table class="table table-striped table-bordered">
   <thead>
     <tr>
-	<th>Courses</th>
+	<th>Courses </th>
     </tr>
   </thead>
   <tbody>
-    <%= render(@person.courses.unscoped.uniq) || raw("<tr><td>No courses yet !</td></tr>") %>
+    <%= render(@person.courses.uniq) || raw("<tr><td>No courses yet !</td></tr>") %>
   </tbody>
 </table>
 
 <table class="table table-striped table-bordered">
   <thead>
     <tr>
-	<th>Certifications</th>
+	<th>Certifications <%= link_to 'New Certification', new_person_cert_path(@person) %></th>
     </tr>
   </thead>
   <tbody>
-      <%= render(:partial => "certs/cert", :collection => @person.certs.unscoped) || raw("<tr><td>No certifications yet !</td></tr>") %>
+      <%= render(:partial => "certs/cert", :collection => @person.certs) || raw("<tr><td>No certifications yet !</td></tr>") %>
   </tbody>
 </table>
 

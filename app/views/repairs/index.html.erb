@@ -1,17 +1,18 @@
-<h1>Listing repairs</h1>
+<% content_for :sidebar do %>
+  <h1>Listing repairs</h1>
+  <%= link_to 'Items List', items_path , :class => 'btn' %>
+<% end %>
 
 <table>
   <tr>
     <th>Item</th>
     <th>User</th>
-    <th>Person</th>
+    <th>Repairer</th>
     <th>Category</th>
     <th>Service date</th>
     <th>Status</th>
     <th>Description</th>
     <th>Comments</th>
-    <th></th>
-    <th></th>
     <th></th>
   </tr>
 
@@ -19,15 +20,13 @@
   <tr>
     <td><%= repair.item_id %></td>
     <td><%= repair.user_id %></td>
-    <td><%= repair.person_id %></td>
+    <td><%= repair.person.fullname %></td>
     <td><%= repair.category %></td>
     <td><%= repair.service_date %></td>
     <td><%= repair.status %></td>
     <td><%= repair.description %></td>
     <td><%= repair.comments %></td>
-    <td><%= link_to 'Show', repair %></td>
     <td><%= link_to 'Edit', edit_repair_path(repair) %></td>
-    <td><%= link_to 'Destroy', repair, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

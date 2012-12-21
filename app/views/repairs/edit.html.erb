@@ -1,6 +1,7 @@
-<h1>Editing repair</h1>
+<% content_for :sidebar do %>
+  <h1>Editting Repair</h1>
+  <%= link_to 'Items List', items_path , :class => 'btn' %>
+<% end %>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @repair %> |
-<%= link_to 'Back', repairs_path %>

@@ -68,3 +68,13 @@
   <%= @item.status %>
 </p>
 
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+	<th>Repairs <%= link_to 'New Repair or Service', new_item_repair_path(@item) %></th>
+    </tr>
+  </thead>
+  <tbody>
+      <%= render(:partial => "repairs/repair", :collection => @item.repairs) || raw("<tr><td>No repairs yet !</td></tr>") %>
+  </tbody>
+</table>

@@ -7,7 +7,10 @@ Lims3::Application.routes.draw do
 
   resources :locations
 
-  resources :items
+  resources :items do
+    resources :repairs, :controller => 'repairs'
+  end
+  
 
   resources :roles
 

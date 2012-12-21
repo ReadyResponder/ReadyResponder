@@ -80,7 +80,6 @@ class Person < ActiveRecord::Base
     if skill.blank?
       false
     else
-      #self.certs.active.courses.skills.include?(skill)
       self.skills.include?(skill)
     end
   end
@@ -93,13 +92,7 @@ class Person < ActiveRecord::Base
       false
     end
   end
-  def certs_expiring?
-    self.certs
-=begin
-    need array math
-
-=end
-  end
+  
   def service_duration
     if self.start_date.present?
       if self.end_date.present?
