@@ -5,7 +5,7 @@ gem 'rails', '3.2.6'
 gem 'thin', group: :development
 #gem 'quiet-assets', group: :development
 gem 'ransack'
-gem 'pg'
+gem 'pg', group: :production
 gem 'carrierwave'
 gem 'rmagick'
 gem 'simple_form'
@@ -40,6 +40,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
   gem 'bootstrap-sass', '~> 2.0.4.1'
+  gem 'chosen-rails'
 end
 
 

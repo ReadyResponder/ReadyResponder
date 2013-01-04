@@ -5,7 +5,7 @@
 <% end %>
 
 <h3>
-  <%= @event.course.name %>
+  <%= @event.course.name unless @event.course.blank? %>
 </h3>
 
 <p>

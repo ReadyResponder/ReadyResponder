@@ -12,7 +12,10 @@ Lims3::Application.configure do
   config.serve_static_assets = false
 
   # Compress JavaScripts and CSS
-  config.assets.compress = true
+  #config.assets.compress = true
+  #Changed to false 1/3/2013 to work around a bug when trying to deploy. Wanted the new version more than the speed increase
+  #Oddly, did not seem to make a difference, still attempted precompile
+  config.assets.compress = false
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
   config.assets.compile = false

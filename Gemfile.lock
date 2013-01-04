@@ -59,6 +59,10 @@ GEM
       activesupport (>= 3.2.0)
     childprocess (0.3.5)
       ffi (~> 1.0, >= 1.0.6)
+    chosen-rails (0.9.11)
+      coffee-rails (~> 3.2)
+      railties (~> 3.0)
+      sass-rails (~> 3.2)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -229,6 +233,7 @@ DEPENDENCIES
   capistrano
   capybara
   carrierwave
+  chosen-rails
   coffee-rails (~> 3.2.1)
   devise
   factory_girl_rails (~> 4.0)

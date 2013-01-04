@@ -10,7 +10,6 @@ gem 'carrierwave'
 gem 'rmagick'
 gem 'simple_form'
 gem 'geocoder'
-gem 'jquery-rails'
 gem 'cancan'
 
 group :test, :development do
@@ -29,6 +28,7 @@ gem 'devise'
 group :assets do
   # Gems used only for assets and not required
   # in production environments by default.
+  gem 'jquery-rails'
 
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -40,6 +40,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
   gem 'bootstrap-sass', '~> 2.0.4.1'
+  gem 'chosen-rails'
 end
 
 

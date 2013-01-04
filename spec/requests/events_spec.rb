@@ -2,6 +2,9 @@ require 'spec_helper'
 
 describe "Events" do
   before (:each)  do
+    @attendance = FactoryGirl.create(:attendance)
+    @event = @attendance.event
+    @person = @attendance.person
     somebody = FactoryGirl.create(:user)
     r = FactoryGirl.create(:role, name: 'Editor')
     somebody.roles << r
@@ -18,15 +21,17 @@ describe "Events" do
       page.should have_css('#sidebar')
       within_table("events") do
 	within("tbody") do
+	  page.should have_content(@event.description)
 	  #pending page.should have_css("td")  # this is only picking up the edit button at the end, not an event show link
 	end
       end
     end
     
     it "displays a single event" do
-      e = FactoryGirl.create(:event)
-      visit event_path(e)
+      visit event_path(@event)
       page.should have_css('#sidebar')
+      page.should have_content(@event.description)
+      #save_and_load_page
     end
   end
 end
