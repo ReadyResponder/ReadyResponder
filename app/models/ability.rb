@@ -15,11 +15,13 @@ class Ability
       can [:read, :update, :create, :edit], Inspection
       can [:read, :update, :create, :edit], Location
       can [:read, :update, :create, :edit], Repair
-      
+      can [:signin], Person
       #can :update, People
       can :read, :all
     elsif current_user.roles.to_s.include? 'Reader'
       can :read, [Person, Cert, Item, Event, Course, Skill, Inspection, Repair]
+      can [:signin], Person
+
     end
     #can :signin, :people
  #   can :manage, :all

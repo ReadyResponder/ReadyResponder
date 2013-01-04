@@ -4,10 +4,9 @@ require 'spec_helper'
 describe "a user" do
   describe "in the reader role" do
     before (:each) do
-      person = FactoryGirl.create(:person)
+      @person = FactoryGirl.create(:person)
       somebody = FactoryGirl.create(:user)
-      r = FactoryGirl.create(:role, name: 'Reader')
-      somebody.roles << r
+      somebody.roles << FactoryGirl.create(:role, name: 'Reader')
       visit new_user_session_path
       fill_in 'user_email', :with => somebody.email
       fill_in 'user_password', :with => somebody.password
@@ -16,8 +15,7 @@ describe "a user" do
     it "cannot edit people" do
       visit people_path
       page.should_not have_content('Edit') #Need to scope this, or it will fail on Edith
-      person = FactoryGirl.create(:person, lastname: 'YesDoe')
-      visit edit_person_path(person)
+      visit edit_person_path(@person)
       page.should have_content("Access Denied")
     end
     it "cannot create a new person" do
@@ -27,18 +25,9 @@ describe "a user" do
       page.should have_content("Access Denied")
     end
     it "can read a person" do
-      person = FactoryGirl.create(:person)
       visit people_path
-      click_on person.lastname
-      page.should have_content(person.lastname)
-    end
-    pending "a signin sheet when requested" do
-      person1 = FactoryGirl.create(:person, lastname: 'YesDoe')
-      person2 = FactoryGirl.create(:person, lastname: 'NoDoe', status: 'Inactive')
-      visit signin_people_path
-      page.should have_content("Command Staff") #This is in the first heading
-      page.should have_content("YesDoe")
-      page.should_not have_content("NoDoe")
+      click_on @person.lastname
+      page.should have_content(@person.lastname)
     end
 end
 =begin

@@ -1,9 +1,12 @@
-<p id="notice"><%= notice %></p>
+<% content_for :sidebar do %>
+  <%= link_to 'Return to Events', events_path, :class => 'btn' %></br></br>
+  <%= link_to 'Edit Event', edit_event_path(@event), :class => 'btn btn-primary' unless cannot? :edit, @event  %></br></br>
+  <%#= link_to 'New Cert', new_person_cert_path(@person), :class => 'btn' unless cannot? :create, Event  %>
+<% end %>
 
-<p>
-  <b>Course:</b>
-  <%= @event.course_id %>
-</p>
+<h3>
+  <%= @event.course.name %>
+</h3>
 
 <p>
   <b>Instructor:</b>
@@ -32,7 +35,7 @@
 
 <p>
   <b>Duration:</b>
-  <%= @event.duration %>
+  <%= @event.duration %> hours
 </p>
 
 <p>
@@ -44,7 +47,3 @@
   <b>Status:</b>
   <%= @event.status %>
 </p>
-
-
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>

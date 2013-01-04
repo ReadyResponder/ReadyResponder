@@ -69,9 +69,7 @@
           <%= content_tag :div, msg, id: "flash_#{name}" %>
         <% end %>
         <%= content_tag :p, flash[notice], :class => "notice" if flash[notice] %>
-        <p class="alert"><%= flash[:alert] %>A</p>
-        <%= '<p class="notice"> #{notice} </p>' if notice %>
-        <%= '<p class="alert"> #{alert} </p>' if alert %>
+        <%= content_tag :p, flash[alert], :class => "alert" if flash[alert] %>
         <%= yield %></br>
         </br>
         Version 0.6

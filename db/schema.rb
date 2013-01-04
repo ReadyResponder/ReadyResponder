@@ -11,7 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121217082700) do
+ActiveRecord::Schema.define(:version => 20121223083131) do
+
+  create_table "attendances", :force => true do |t|
+    t.integer  "person_id"
+    t.integer  "event_id"
+    t.string   "category"
+    t.datetime "est_start_time"
+    t.datetime "start_time"
+    t.datetime "est_end_time"
+    t.datetime "end_time"
+    t.decimal  "duration",       :precision => 7, :scale => 2
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+  end
+
+  add_index "attendances", ["event_id"], :name => "index_attendances_on_event_id"
+  add_index "attendances", ["person_id"], :name => "index_attendances_on_person_id"
 
   create_table "certs", :force => true do |t|
     t.integer  "person_id"

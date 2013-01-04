@@ -9,7 +9,7 @@
     <%= f.input :location %>
     <%= f.input :description %>
     <%= f.input :start_date, :as => :string, :input_html => { :size => 11 }  %>
-    <%= f.input :end_date, :as => :string, :input_html => { :size => 11 }  %>
+    <%= f.input :end_date, :as => :string, :input_html => {:class => "datepicker", :size => 11 }  %>
     <%= f.input :duration %>
   </div>
 

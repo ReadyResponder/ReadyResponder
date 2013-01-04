@@ -20,15 +20,7 @@ describe "Person" do
   end
 
   describe " should display" do
-    pending "a signin sheet when requested", 'not RESTful, how to specifiy in CanCan' do
-      person1 = FactoryGirl.create(:person, lastname: 'YesDoe')
-      person2 = FactoryGirl.create(:person, lastname: 'NoDoe', status: 'Inactive')
-      visit signin_people_path
-      page.should have_content("Command Staff") #This is in the first heading
-      page.should have_content("YesDoe")
-      page.should_not have_content("NoDoe")
-    end
-    
+
     it "a new person form with a first name field" do
       visit new_person_path
       page.should have_content("First Name")
@@ -71,7 +63,7 @@ describe "Person" do
       page.should have_content("Status")
     end
     
-    it "all certs, even expired" do
+    pending "all certs, even expired" do
       person = FactoryGirl.create(:person)
       course = FactoryGirl.create(:course, name: "Basket Weaving")
       expiredcert = FactoryGirl.create(:cert, person: person, course: course, status: "Expired")

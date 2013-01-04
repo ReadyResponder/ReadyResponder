@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Person:</b>
+  <%= @attendance.person_id %>
+</p>
+
+<p>
+  <b>Event:</b>
+  <%= @attendance.event_id %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @attendance.category %>
+</p>
+
+<p>
+  <b>Est start time:</b>
+  <%= @attendance.est_start_time %>
+</p>
+
+<p>
+  <b>Start time:</b>
+  <%= @attendance.start_time %>
+</p>
+
+<p>
+  <b>Est end time:</b>
+  <%= @attendance.est_end_time %>
+</p>
+
+<p>
+  <b>End time:</b>
+  <%= @attendance.end_time %>
+</p>
+
+<p>
+  <b>Duration:</b>
+  <%= @attendance.duration %>
+</p>
+
+
+<%= link_to 'Edit', edit_attendance_path(@attendance) %> |
+<%= link_to 'Back', attendances_path %>

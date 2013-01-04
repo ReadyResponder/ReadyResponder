@@ -3,7 +3,7 @@
   <%= link_to 'New Event', new_event_path, :class => 'btn' unless cannot? :create, Event %>
 <% end %>
 
-<table id="people" class="display table table-striped table-bordered">
+<table id="events" class="display table table-striped table-bordered">
   <thead>
     <tr>
       <th>Description</th>
@@ -20,14 +20,14 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
-	<td><%= event.description %></td>
+	<td><%= link_to event.description, event, :id => "description_link" %></td>
 	<td><%= event.location %></td>
 	<td><%= event.start_date %></td>
 	<td><%= event.end_date %></td>
 	<td><%= event.duration %></td>
 	<td><%= event.category %></td>
 	<td><%= event.status %></td>
-	<td><%= link_to 'Edit', edit_event_path(event) %></td>
+	<td><%= link_to 'Edit', edit_event_path(event), :class => "btn btn-primary" unless cannot? :update, event %></td>
       </tr>
     <% end %>
   </tbody>

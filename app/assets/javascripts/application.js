@@ -19,3 +19,6 @@
 //= require jquery.ui.accordion
 //= require bootstrap
 //= require_tree .
+jQuery ->
+        $('.datepicker').datepicker
+          dateFormat: 'yy-mm-dd'

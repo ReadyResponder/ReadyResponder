@@ -2,7 +2,6 @@
 
 FactoryGirl.define do
   factory :event do
-    course_id 1
     instructor "MyString"
     location "MyString"
     description "MyString"
@@ -11,5 +10,6 @@ FactoryGirl.define do
     duration 1
     category "MyString"
     status "MyString"
+    course
   end
 end
