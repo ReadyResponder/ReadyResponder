@@ -31,6 +31,7 @@ describe "Events" do
       visit event_path(@event)
       page.should have_css('#sidebar')
       page.should have_content(@event.description)
+      
       #save_and_load_page
     end
   end
