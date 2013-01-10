@@ -1,0 +1,39 @@
+<% content_for :sidebar do %>
+  <%= link_to 'Return to Listing', channels_path, :class => 'btn' %></br></br>
+  <%#= link_to 'Edit Channel', edit_channel_path(@channel), :class => 'btn btn-primary' unless cannot? :edit, @channel  %></br></br>
+  <%= link_to 'New Channel', new_person_channel_path(@channel.person), :class => 'btn' unless cannot? :create, Channel  %>
+<% end %>
+
+<p>
+  <h2><%= @channel.person.fullname %>  <%= @channel.name %></h2>
+</p>
+
+<p>
+  <%= @channel.content %>
+</p>
+
+<p>
+  <b>Priority:</b>
+  <%= @channel.priority %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @channel.category %>
+</p>
+
+<p>
+  <b>Carrier:</b>
+  <%= @channel.carrier %>
+</p>
+
+<p>
+  <b>Last verified:</b>
+  <%= @channel.last_verified %>
+</p>
+
+<p>
+  <b>Usage:</b>
+  <%= @channel.usage %>
+</p>
+

@@ -1,0 +1,38 @@
+<% content_for :sidebar do %>
+  <h1>Listing Channels</h1>
+  <%= link_to 'New Channel', new_channel_path, :class => 'btn' unless cannot? :create, Channel  %>
+<% end %>
+
+<table id="channels" class="datatable display table table-striped table-bordered" >
+  <thead>
+    <tr>
+      <th>Person</th>
+      <th>Name</th>
+      <th>Content</th>
+      <th>Priority</th>
+      <th>Category</th>
+      <th>Carrier</th>
+      <th>Last verified</th>
+      <th>Usage</th>
+      <th></th>
+    </tr>
+  </thead>
+
+<% @channels.each do |channel| %>
+  <tr>
+    <td><%= channel.person_id %></td>
+    <td><%= channel.name %></td>
+    <td><%= channel.content %></td>
+    <td><%= channel.priority %></td>
+    <td><%= channel.category %></td>
+    <td><%= channel.carrier %></td>
+    <td><%= channel.last_verified %></td>
+    <td><%= channel.usage %></td>
+    <td><%= link_to 'Edit', edit_channel_path(channel), :class => 'btn btn-mini btn-primary' unless cannot? :edit, channel %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Channel', new_channel_path %>
