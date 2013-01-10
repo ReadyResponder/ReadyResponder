@@ -7,6 +7,7 @@ class Ability
       can :manage, :all
     elsif current_user.roles.to_s.include? "Editor"
       can [:read, :update, :create, :edit], Person
+      can [:read, :update, :create, :edit], Channel
       can [:read, :update, :create, :edit], Cert
       can [:read, :update, :create, :edit], Item
       can [:read, :update, :create, :edit], Event
@@ -19,7 +20,7 @@ class Ability
       #can :update, People
       can :read, :all
     elsif current_user.roles.to_s.include? 'Reader'
-      can :read, [Person, Cert, Item, Event, Course, Skill, Inspection, Repair]
+      can :read, [Person, Channel, Cert, Item, Event, Course, Skill, Inspection, Repair]
       can [:signin], Person
 
     end

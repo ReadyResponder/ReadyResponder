@@ -2,6 +2,7 @@ class Person < ActiveRecord::Base
   before_save :title_order
   
   attr_accessible :firstname, :lastname, :status, :icsid, :city, :state, :zipcode, :start_date, :title, :gender, :date_of_birth,:division1, :division2, :certs_attributes, :title_ids, :title_order
+  has_many :channels
   has_many :certs, :conditions => {:status =>'Active' }
 
   has_many :courses, :through => :certs
@@ -32,7 +33,7 @@ class Person < ActiveRecord::Base
   scope :squad1, :order => 'title_order, start_date ASC', :conditions => {:division2 => "Squad 1",:status => "Active"}
   scope :squad2, :order => 'title_order, start_date ASC', :conditions => {:division2 => "Squad 2",:status => "Active"}
 
-  TITLES = ['Director','Chief','Deputy','Captain', 'Lieutenant','Sargeant', 'Corporal', 'Senior Officer', 'Officer', 'CERT Member', 'Dispatcher','Student Officer', 'Recruit']
+  TITLES = ['Director','Chief','Deputy','Captain', 'Lieutenant','Sargeant', 'Corporal', 'Senior Officer', 'Officer', 'CERT Member', 'Dispatcher','Student Officer', 'Recruit', 'Applicant','Prospect']
   TITLE_ORDER = {'Director' => 1, 'Chief' => 3, 'Deputy Chief' => 5,'Captain' => 7, 'Lieutenant' => 9, 'Sargeant' => 11, 'Corporal' => 13, 'Senior Officer' => 15, 'Officer' => 17, 'CERT Member' => 19, 'Dispatcher' => 19, 'Student Officer' => 21, 'Recruit' => 23, 'Applicant' => 25}
   
   def fullname

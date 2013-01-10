@@ -7,8 +7,8 @@ class CertMailer < ActionMailer::Base
   #   en.cert_mailer.cert_expiring.subject
   #
   def cert_expiring(person)
-    @person = person
+    @person = person  #This instance variable can now be used in the view
 
-    #mail to: person.contacts.emails.info, subject: 'One of your certifications is expiring'
+    mail to: person.channels.first.content, subject: 'Some of your certifications are expiring.'
   end
 end

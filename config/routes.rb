@@ -1,4 +1,6 @@
 Lims3::Application.routes.draw do
+  resources :channels
+
   resources :attendances
 
   resources :events

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121223083131) do
+ActiveRecord::Schema.define(:version => 20130106063046) do
 
   create_table "attendances", :force => true do |t|
     t.integer  "person_id"
@@ -47,6 +47,24 @@ ActiveRecord::Schema.define(:version => 20121223083131) do
     t.integer  "event_id"
     t.string   "certification"
   end
+
+  create_table "channels", :force => true do |t|
+    t.integer  "person_id"
+    t.string   "name"
+    t.string   "status"
+    t.string   "content"
+    t.integer  "priority"
+    t.string   "category"
+    t.string   "carrier"
+    t.datetime "last_verified"
+    t.string   "usage"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "channels", ["category"], :name => "index_channels_on_category"
+  add_index "channels", ["person_id"], :name => "index_channels_on_person_id"
+  add_index "channels", ["priority"], :name => "index_channels_on_priority"
 
   create_table "courses", :force => true do |t|
     t.string   "name"
