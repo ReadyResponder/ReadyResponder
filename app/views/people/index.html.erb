@@ -24,7 +24,7 @@
 	<td><%= person.start_date %></td>
 	<td><%= person.division1 %></td>
 	<td><%= person.division2 %></td>
-	<td><%= link_to 'Edit', edit_person_path(person), :class => "btn btn-primary" unless cannot? :update, person %></td>
+	<td><%= link_to 'Edit', edit_person_path(person), :class => "btn btn-primary btn-mini" if can? :update, person %></td>
       </tr>
     <% end %>
   </tbody>
