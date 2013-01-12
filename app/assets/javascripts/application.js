@@ -19,10 +19,3 @@
 //= require jquery.ui.accordion
 //= require bootstrap
 //= require_tree .
-jQuery ->
-        $('.datepicker').datepicker
-          dateFormat: 'yy-mm-dd';
-        $('.datatable').dataTable
-          sPaginationType: "full_numbers"
-          bJQueryUI: true
-          iDisplayLength: 50

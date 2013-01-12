@@ -1,36 +1,34 @@
 <% content_for :sidebar do %>
   <h1>Listing repairs</h1>
-  <%= link_to 'Items List', items_path , :class => 'btn' %>
 <% end %>
 
-<table>
-  <tr>
-    <th>Item</th>
-    <th>User</th>
-    <th>Repairer</th>
-    <th>Category</th>
-    <th>Service date</th>
-    <th>Status</th>
-    <th>Description</th>
-    <th>Comments</th>
-    <th></th>
-  </tr>
-
-<% @repairs.each do |repair| %>
-  <tr>
-    <td><%= repair.item_id %></td>
-    <td><%= repair.user_id %></td>
-    <td><%= repair.person.fullname %></td>
-    <td><%= repair.category %></td>
-    <td><%= repair.service_date %></td>
-    <td><%= repair.status %></td>
-    <td><%= repair.description %></td>
-    <td><%= repair.comments %></td>
-    <td><%= link_to 'Edit', edit_repair_path(repair) %></td>
-  </tr>
-<% end %>
+<table id="repairs" class="datatable display table table-striped table-bordered" >
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>User</th>
+      <th>Repairer</th>
+      <th>Category</th>
+      <th>Service date</th>
+      <th>Status</th>
+      <th>Description</th>
+      <th>Comments</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @repairs.each do |repair| %>
+      <tr>
+	<td><%= repair.item_id %></td>
+	<td><%= repair.user_id %></td>
+	<td><%= repair.person.fullname unless repair.person.blank? %></td>
+	<td><%= repair.category %></td>
+	<td><%= repair.service_date %></td>
+	<td><%= repair.status %></td>
+	<td><%= repair.description %></td>
+	<td><%= repair.comments %></td>
+	<td><%= link_to 'Edit', edit_repair_path(repair) %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
-
-<br />
-
-<%= link_to 'New Repair', new_repair_path %>

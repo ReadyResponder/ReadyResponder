@@ -3,7 +3,7 @@
   <%= link_to 'New Item', new_item_path, :class => 'btn' unless cannot? :create, Item %></center>
 <% end %>
 
-<table id="items" class="display table table-striped table-bordered" >
+<table id="items" class="datatable display table table-striped table-bordered" >
   <thead>
     <tr>
       <th>Name</th>

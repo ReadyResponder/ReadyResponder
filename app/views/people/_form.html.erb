@@ -9,7 +9,7 @@
     <%= f.input :title, :as => :select, :collection => Person::TITLES %>
     <%= f.input :gender, :as => :select, :collection => ['Female', 'Male'] %>
     <%= f.input :date_of_birth, :as => :string, :input_html => { :size => 11 }  %>
-    <%= f.input :start_date, :as => :string, :input_html => { :size => 11 }  %>
+    <%= f.input :start_date, :as => :string, :input_html => { :class => 'datepicker', :size => 11 }  %>
     <%= f.association :titles %>
     <%= f.input :division1, :as => :radio_buttons, :label => 'Division', :collection => ['Command', 'Division 1', 'Division 2', 'CERT'] %>
     <%= f.input :division2, :as => :radio_buttons, :label => 'Squad', :collection => ['Command', 'Squad 1', 'Squad 2', 'CERT'] %>

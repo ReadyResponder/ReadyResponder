@@ -11,9 +11,9 @@
     <%= f.input :serial %>
     <%= f.input :serial %>
     <%= f.association :person, :label => 'Owner' %>
-    <%= f.input :purchase_date, :as => :string, :input_html => { :size => 11 }  %>
+    <%= f.input :purchase_date, :as => :string, :input_html => { :class => 'datepicker', :size => 11 }  %>
     <%= f.input :purchase_amt %>
-    <%= f.input :sell_date, :as => :string, :input_html => { :size => 11 }  %>
+    <%= f.input :sell_date, :as => :string, :input_html => { :class => 'datepicker', :size => 11 }  %>
     <%= f.input :sell_amt %>
     <%= f.input :status, :as => :select, :collection => Item::STATUS_CHOICES %>
   </div>

@@ -28,7 +28,7 @@
 	<td><%= cert.cert_number %></td>
 	<td><%= cert.issued_date %></td>
 	<td><%= cert.expiration_date %></td>
-	<td><%= link_to 'Edit', edit_cert_path(cert), :class => 'btn btn-mini btn-primary' unless cannot? :edit cert %></td>
+	<td><%= link_to 'Edit', edit_cert_path(cert), :class => 'btn btn-mini btn-primary' unless cannot? :edit, cert %></td>
       </tr>
     <% end %>
   </tbody>

@@ -3,7 +3,7 @@
   <%= link_to 'New Person', new_person_path, :class => 'btn' unless cannot? :create, Person %></center>
 <% end %>
 
-<table id="people" class="display table table-striped table-bordered" >
+<table id="xpeople" class="datatable display table table-striped table-bordered" >
   <thead>
     <tr>
       <th>Badge</th>
@@ -24,11 +24,7 @@
 	<td><%= person.start_date %></td>
 	<td><%= person.division1 %></td>
 	<td><%= person.division2 %></td>
-	<%# if can? :update, person %>
-	  <td><%= link_to 'Edit', edit_person_path(person), :class => "btn btn-primary" unless cannot? :update, person %></td>
-	<%# else %>
-	  <td></td>
-	<%# end %>
+	<td><%= link_to 'Edit', edit_person_path(person), :class => "btn btn-primary" unless cannot? :update, person %></td>
       </tr>
     <% end %>
   </tbody>
