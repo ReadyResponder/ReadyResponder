@@ -55,7 +55,7 @@ FactoryGirl.define do
   end
   
   factory :attendance do
-    category "MyString"
+    category "Training"
     est_start_time "2012-12-23 03:31:31"
     start_time "2012-12-23 03:31:31"
     est_end_time "2012-12-23 03:31:31"

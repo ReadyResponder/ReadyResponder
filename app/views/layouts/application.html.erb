@@ -72,7 +72,7 @@
         <%= content_tag :p, flash[alert], :class => "alert" if flash[alert] %>
         <%= yield %></br>
         </br>
-        Version 0.6
+        Version 0.7
         <%= current_user.email unless current_user.nil? %>
         <%= current_user.roles.map{ |role| role.name.to_s } unless current_user.nil? %>
       </div>

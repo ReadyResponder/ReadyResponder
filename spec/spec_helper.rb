@@ -5,6 +5,10 @@ require 'rspec/rails'
 require 'rspec/autorun'
 require 'capybara/rspec'
 
+#This is a library added by KGF 1/12/13
+#require 'helpers/authentication_helper'
+#require 'helpers/basic_view_helper'
+
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
@@ -39,5 +43,7 @@ RSpec.configure do |config|
   
   config.include Devise::TestHelpers, :type => :controller
   config.include(MailerMacros)
+#  config.include AuthorizationViewHelper, type: :feature  # This does not work !!
+  config.extend AuthorizationViewHelper, type: :feature
   #config.before(:each) {reset_email}
 end

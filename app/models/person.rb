@@ -1,4 +1,6 @@
 class Person < ActiveRecord::Base
+  #code to get next un-used id # in the 800 range
+  #((801...900).to_a - (array_from_db_of_taken_numbers))[0]
   before_save :title_order
   
   attr_accessible :firstname, :lastname, :status, :icsid, :city, :state, :zipcode, :start_date, :title, :gender, :date_of_birth,:division1, :division2, :channels_attributes, :title_ids, :title_order

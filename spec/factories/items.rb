@@ -9,7 +9,7 @@ FactoryGirl.define do
     category "MyString"
     model "MyString"
     serial "MyString"
-    owner_id 1
+    #owner_id 1
     purchase_date "2012-12-14"
     purchase_amt ""
     sell_date "2012-12-14"

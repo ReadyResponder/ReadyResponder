@@ -54,7 +54,7 @@ describe "a user" do
   end
   describe "in the editor role" do
     before (:each) do
-      person = FactoryGirl.create(:person, lastname: 'YesDoe')
+      @person = FactoryGirl.create(:person, lastname: 'YesDoe')
       somebody = FactoryGirl.create(:user)
       r = FactoryGirl.create(:role, name: 'Editor')
       somebody.roles << r
@@ -83,10 +83,9 @@ describe "a user" do
       page.should_not have_content("Access Denied")
     end
     it "can read a person" do
-      person = FactoryGirl.create(:person, lastname: 'YesDoe')
       visit people_path
-      click_on person.lastname
-      page.should have_content(person.lastname)
+      click_on @person.lastname
+      page.should have_content(@person.lastname)
     end
   end
 end
