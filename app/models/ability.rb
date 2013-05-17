@@ -17,11 +17,13 @@ class Ability
       can [:read, :update, :create, :edit], Location
       can [:read, :update, :create, :edit], Repair
       can [:signin], Person
+      can :orgchart, Person
       #can :update, People
       can :read, :all
     elsif current_user.roles.to_s.include? 'Reader'
       can :read, [Person, Channel, Cert, Item, Event, Course, Skill, Inspection, Repair]
       can [:signin], Person
+      can :orgchart, Person
 
     end
     #can :signin, :people

@@ -13,6 +13,9 @@ describe "Events" do
     fill_in 'user_password', :with => somebody.password
     click_on 'Sign in'
   end
+
+  get_basic_editor_views('event',['category', 'description', 'status'])
+
   describe "events" do
     it "displays a listing" do
       # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
@@ -27,12 +30,5 @@ describe "Events" do
       end
     end
     
-    it "displays a single event" do
-      visit event_path(@event)
-      page.should have_css('#sidebar')
-      page.should have_content(@event.description)
-      
-      #save_and_load_page
-    end
   end
 end

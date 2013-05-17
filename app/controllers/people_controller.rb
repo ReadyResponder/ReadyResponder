@@ -8,6 +8,11 @@ class PeopleController < ApplicationController
     @page_title = "Sign-in"
     render :layout => "print_signin"
   end
+  def orgchart
+    @people = Person.active.all
+    @page_title = "Org Chart"
+    render :layout => "orgchart"    
+  end
 
   def index
     @people = Person.active.all
@@ -38,6 +43,7 @@ class PeopleController < ApplicationController
 
   def edit
     @person = Person.find(params[:id])
+    @person.channels << Channel.new
   end
 
   def create
@@ -56,9 +62,10 @@ class PeopleController < ApplicationController
 
   def update
     @person = Person.find(params[:id])
-
+    
     respond_to do |format|
       if @person.update_attributes(params[:person])
+	CertMailer.cert_expiring(@person).deliver
         format.html { redirect_to people_url, notice: 'Person was successfully updated.' }
         format.json { head :no_content }
       else

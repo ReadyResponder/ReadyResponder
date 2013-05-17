@@ -1,9 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.11'
+gem 'rails', '3.2.13'
 
 gem 'thin', group: :development
-#gem 'quiet-assets', group: :development
 gem 'ransack'
 gem 'pg', group: :production
 gem 'carrierwave'
@@ -14,14 +13,19 @@ gem 'cancan'
 
 group :test, :development do
   gem "rspec-rails"
-  gem 'factory_girl_rails', "~> 4.0"
+  gem "factory_girl_rails", "~> 4.0"
   gem "capybara"
   gem "guard-rspec"
-  gem "launchy"
   gem 'guard-livereload'
   gem 'sqlite3'
-
+  #gem "mailcatcher"
+  gem "launchy"
+  gem "letter_opener"
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
 end
+
 #Handles authentication
 gem 'devise'
 
@@ -42,7 +46,6 @@ group :assets do
   gem 'bootstrap-sass', '~> 2.0.4.1'
   gem 'chosen-rails'
 end
-
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'

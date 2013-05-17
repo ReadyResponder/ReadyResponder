@@ -2,18 +2,16 @@
 
 FactoryGirl.define do
   factory :item do
-    location_id 1
-    name "MyString"
-    description "MyString"
-    source "MyString"
-    category "MyString"
-    model "MyString"
-    serial "MyString"
-    #owner_id 1
-    purchase_date "2012-12-14"
+    name "EMA-10"
+    description "Ford F-150"
+    source "Stoneham Ford"
+    category "Vehicle"
+    model "F-150"
+    serial "VIN123456789"
+    purchase_date "2010-12-14"
     purchase_amt ""
-    sell_date "2012-12-14"
-    sell_amt ""
-    status "MyString"
+    status "Available"
+    person
+    location
   end
 end

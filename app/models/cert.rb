@@ -6,7 +6,7 @@ class Cert < ActiveRecord::Base
   before_save :set_defaults
   validates_presence_of :status, :person_id, :course_id, :issued_date
   
-  scope :active, :conditions => {:status => "Active"}
+  scope :active, :conditions => {:expired => false}
   def expiring?
     #self.expiration_date <= 10.days.from_now #&& !(self.expiration_date <= Date.today)
     false

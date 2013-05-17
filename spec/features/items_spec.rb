@@ -11,5 +11,5 @@ describe Item do
     click_on 'Sign in'
   end
   
-  get_basic_editor_views('item',['name'])
+  get_basic_editor_views('item',['name', 'description', 'status'])
 end

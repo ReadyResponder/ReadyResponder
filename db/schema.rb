@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130106063046) do
+ActiveRecord::Schema.define(:version => 20130516195515) do
 
   create_table "attendances", :force => true do |t|
     t.integer  "person_id"
@@ -47,6 +47,8 @@ ActiveRecord::Schema.define(:version => 20130106063046) do
     t.integer  "event_id"
     t.string   "certification"
   end
+
+  add_index "certs", ["person_id"], :name => "index_certs_on_person_id"
 
   create_table "channels", :force => true do |t|
     t.integer  "person_id"
@@ -107,6 +109,8 @@ ActiveRecord::Schema.define(:version => 20130106063046) do
     t.string   "status"
   end
 
+  add_index "inspections", ["person_id"], :name => "index_inspections_on_person_id"
+
   create_table "items", :force => true do |t|
     t.integer  "location_id"
     t.string   "name"
@@ -121,9 +125,12 @@ ActiveRecord::Schema.define(:version => 20130106063046) do
     t.date     "sell_date"
     t.float    "sell_amt"
     t.string   "status"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.string   "local_serial"
+    t.string   "grant"
+    t.date     "grantstart"
+    t.date     "grantexpiration"
   end
 
   create_table "locations", :force => true do |t|

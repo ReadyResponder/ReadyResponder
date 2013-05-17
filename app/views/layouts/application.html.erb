@@ -38,6 +38,7 @@
 	      </a>
 	      <ul class="dropdown-menu">
 		<li><%= link_to "Attendance Sheet", signin_people_path %></li>
+		<li><%= link_to "Org Chart", orgchart_people_path %></li>
 	      </ul>
 	    </li>
 	    <li class="dropdown">
@@ -63,13 +64,13 @@
     <div class="row">
       <div id="sidebar" class="span2">
 	<%= yield :sidebar %>
-      </div>
-      <div class="span10">
         <% flash.each do |name,msg| %>
           <%= content_tag :div, msg, id: "flash_#{name}" %>
         <% end %>
         <%= content_tag :p, flash[notice], :class => "notice" if flash[notice] %>
         <%= content_tag :p, flash[alert], :class => "alert" if flash[alert] %>
+      </div>
+      <div class="span10">
         <%= yield %></br>
         </br>
         Version 0.7

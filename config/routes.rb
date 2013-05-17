@@ -45,9 +45,11 @@ Lims3::Application.routes.draw do
         get 'leave'
         get 'active'
         get 'signin'
+	get 'orgchart'
       end
     resources :certs, :controller => 'certs'
     resources :titles, :controller => 'titles'
+    resources :items, :controller => 'items'
     
    # people.resources :contacts, :controller => "person_contacts"
   end

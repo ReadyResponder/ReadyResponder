@@ -59,7 +59,7 @@ FactoryGirl.define do
     est_start_time "2012-12-23 03:31:31"
     start_time "2012-12-23 03:31:31"
     est_end_time "2012-12-23 03:31:31"
-    end_time "2012-12-23 03:31:31"
+    end_time "2012-12-23 04:31"
     duration "9.99"
     person
     event
