@@ -43,7 +43,6 @@ RSpec.configure do |config|
   
   config.include Devise::TestHelpers, :type => :controller
   config.include(MailerMacros)
-#  config.include AuthorizationViewHelper, type: :feature  # This does not work !!
   config.extend AuthorizationViewHelper, type: :feature
   #config.before(:each) {reset_email}
 end

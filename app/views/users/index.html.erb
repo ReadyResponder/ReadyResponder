@@ -1,0 +1,28 @@
+<% content_for :sidebar do %>
+  <center><h1>Listing Users</h1></br>
+  <%#= link_to 'New User', new_person_path, :class => 'btn' unless cannot? :create, Person %></center>
+<% end %>
+
+<table id="users" class="datatable display table table-striped table-bordered" >
+  <thead>
+    <tr>
+
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Username</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+	<td><%= user.firstname %></td>
+	<td><%= link_to user.lastname, user %></td>
+	<td><%= link_to user.username, user %></td>	
+	<td><%= link_to 'Edit', edit_user_path(user), :class => "btn btn-primary btn-mini" if can? :update, user %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br />

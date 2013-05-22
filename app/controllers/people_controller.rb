@@ -65,7 +65,7 @@ class PeopleController < ApplicationController
     
     respond_to do |format|
       if @person.update_attributes(params[:person])
-	CertMailer.cert_expiring(@person).deliver
+	#CertMailer.cert_expiring(@person).deliver
         format.html { redirect_to people_url, notice: 'Person was successfully updated.' }
         format.json { head :no_content }
       else

@@ -3,10 +3,11 @@ class Ability
   
   def initialize(current_user)
     current_user ||= User.new
-    if current_user.role? :Manager
+    if current_user.roles.to_s.include? "Manager"
       can :manage, :all
     elsif current_user.roles.to_s.include? "Editor"
       can [:read, :update, :create, :edit], Person
+      can [:read, :update, :create, :edit], Attendance
       can [:read, :update, :create, :edit], Channel
       can [:read, :update, :create, :edit], Cert
       can [:read, :update, :create, :edit], Item
@@ -17,16 +18,12 @@ class Ability
       can [:read, :update, :create, :edit], Location
       can [:read, :update, :create, :edit], Repair
       can [:signin], Person
-      can :orgchart, Person
-      #can :update, People
+      can [:orgchart], Person
       can :read, :all
     elsif current_user.roles.to_s.include? 'Reader'
-      can :read, [Person, Channel, Cert, Item, Event, Course, Skill, Inspection, Repair]
+      can [:read], [Person, Channel, Cert, Item, Event, Course, Skill, Inspection, Repair]
       can [:signin], Person
       can :orgchart, Person
-
     end
-    #can :signin, :people
- #   can :manage, :all
   end
 end

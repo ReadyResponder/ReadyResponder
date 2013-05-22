@@ -1,6 +1,7 @@
 class AttendancesController < ApplicationController
-  # GET /attendances
-  # GET /attendances.json
+  before_filter :authenticate_user!
+  load_and_authorize_resource
+  
   def index
     @attendances = Attendance.all
 
@@ -10,8 +11,6 @@ class AttendancesController < ApplicationController
     end
   end
 
-  # GET /attendances/1
-  # GET /attendances/1.json
   def show
     @attendance = Attendance.find(params[:id])
 
@@ -21,8 +20,6 @@ class AttendancesController < ApplicationController
     end
   end
 
-  # GET /attendances/new
-  # GET /attendances/new.json
   def new
     @attendance = Attendance.new
 
@@ -32,13 +29,10 @@ class AttendancesController < ApplicationController
     end
   end
 
-  # GET /attendances/1/edit
   def edit
     @attendance = Attendance.find(params[:id])
   end
 
-  # POST /attendances
-  # POST /attendances.json
   def create
     @attendance = Attendance.new(params[:attendance])
 
@@ -53,8 +47,6 @@ class AttendancesController < ApplicationController
     end
   end
 
-  # PUT /attendances/1
-  # PUT /attendances/1.json
   def update
     @attendance = Attendance.find(params[:id])
 
@@ -69,8 +61,6 @@ class AttendancesController < ApplicationController
     end
   end
 
-  # DELETE /attendances/1
-  # DELETE /attendances/1.json
   def destroy
     @attendance = Attendance.find(params[:id])
     @attendance.destroy

@@ -5,6 +5,8 @@ FactoryGirl.define do
     confirmed_at Time.now
     password 'secret'
     password_confirmation 'secret'
+    firstname "CJ"
+    lastname "Doe"
   end
   
   factory :role do

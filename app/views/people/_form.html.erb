@@ -5,7 +5,7 @@
       <%= fc.input :priority, :as => :select, :collection => Channel::PRIORITIES  %>
       <%= fc.input :category, :as => :select, :collection => Channel::CATEGORIES  %>
       <%= fc.input :carrier, :as => :select, :collection => Channel::CARRIERS %>
-      <%= fc.input :usage %>
+      <%= fc.input :usage, :as => :select, :collection => Channel::USAGES %>
     <% end %>
     <%= f.input :firstname, :label => 'First Name' %>
     <%= f.input :lastname %>

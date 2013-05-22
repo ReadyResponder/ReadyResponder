@@ -3,7 +3,8 @@ class Channel < ActiveRecord::Base
   
   belongs_to :person
   
-  PRIORITIES = ['1-All','2-Emergency Only','3-Info Only','4-Testing']
+  PRIORITIES = ['1-Call First','2','3','4-Call Last']
+  USAGES = ['1-All','2-Emergency Only','3-Info Only','4-Testing']
   CATEGORIES = ['Mobile', 'Personal Mobile', 'Business Mobile','E-Mail','Personal E-Mail','Business E-Mail','Home Phone','Work Phone']
   CARRIERS = ['Sprint','Verizon','AT&T','Metro PCS','T-Mobile','Comcast','Other (Specify in Name)']
 end

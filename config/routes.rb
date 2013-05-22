@@ -25,7 +25,7 @@ Lims3::Application.routes.draw do
   #end
 
   devise_for :users
-
+  resources :users
   resources :inspections
 
   resources :titles
