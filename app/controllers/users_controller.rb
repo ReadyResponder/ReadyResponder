@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
   
-  def index
+  def xindex
     @users = User.all
 
     respond_to do |format|

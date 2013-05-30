@@ -6,20 +6,23 @@
 <table id="users" class="datatable display table table-striped table-bordered" >
   <thead>
     <tr>
-
       <th>First Name</th>
       <th>Last Name</th>
       <th>Username</th>
+      <th>Roles</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
     <% @users.each do |user| %>
       <tr>
-	<td><%= user.firstname %></td>
-	<td><%= link_to user.lastname, user %></td>
-	<td><%= link_to user.username, user %></td>	
-	<td><%= link_to 'Edit', edit_user_path(user), :class => "btn btn-primary btn-mini" if can? :update, user %></td>
+      	<td><%= user.firstname %></td>
+      	<td><%= link_to user.lastname, user %></td>
+      	<td><%= link_to user.username, user %></td>	
+        <td>
+          <%= user.roles.pluck(:name).to_sentence %>
+        </td>
+      	<td><%= link_to 'Edit', edit_user_path(user), :class => "btn btn-primary btn-mini" if can? :update, user %></td>
       </tr>
     <% end %>
   </tbody>
