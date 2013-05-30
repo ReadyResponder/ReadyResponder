@@ -43,7 +43,7 @@ class PeopleController < ApplicationController
 
   def edit
     @person = Person.find(params[:id])
-    @person.channels << Channel.new
+    #@person.channels << Channel.new
   end
 
   def create

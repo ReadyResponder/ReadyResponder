@@ -26,7 +26,14 @@ describe "Person" do
       page.should have_content("First Name")
       fill_in('First Name', :with => 'John')
     end
-
+    it "an edit form with values filled in" do
+      person = FactoryGirl.create(:person, icsid: "509")
+      visit edit_person_path(person)
+      #save_and_open_page
+      page.should have_field("First Name", :with => "CJ")
+      page.should have_select("person_gender", :selected => "Female")
+      
+    end
     it "qualified only if all skills are present" do
       title = FactoryGirl.create(:title, name: "Police Officer")
       drivingskill = FactoryGirl.create(:skill, name: "Driving")

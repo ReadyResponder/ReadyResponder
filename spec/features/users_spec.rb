@@ -1,7 +1,7 @@
 require 'spec_helper'
 #save_and_open_page
 describe 'Access on user' do
-  it "gets denied" do
+  it "gets denied when not logged in" do
     visit users_path
     page.should have_content("need to sign in")
     @user = FactoryGirl.create(:user)

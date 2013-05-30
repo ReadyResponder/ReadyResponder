@@ -5,4 +5,5 @@ describe User do
     a_user = FactoryGirl.build(:user, username: nil)
     a_user.should_not be_valid
   end
+  
 end

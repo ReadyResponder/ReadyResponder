@@ -21,6 +21,7 @@ FactoryGirl.define do
     division1 'Command'
     division2 'Command'
     title 'Captain'
+    gender 'Female'
   end
   factory :cert do
     status "Active"

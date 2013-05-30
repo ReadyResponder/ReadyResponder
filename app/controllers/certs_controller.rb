@@ -42,7 +42,7 @@ class CertsController < ApplicationController
   # POST /certs.json
   def create
     @cert = Cert.new(params[:cert])
-    CertMailer.cert_expiring(@cert.person).deliver
+    #CertMailer.cert_expiring(@cert.person).deliver
     respond_to do |format|
       if @cert.save
         format.html { redirect_to person_path(@cert.person), notice: 'Cert was successfully created.' }
