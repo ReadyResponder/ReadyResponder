@@ -1,3 +1,0 @@
-<h1>Editing cert</h1>
-
-<%= render 'form' %>

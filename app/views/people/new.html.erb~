@@ -1,7 +1,0 @@
-<% content_for :sidebar do %>
-  <h1>New person</h1>
-  <%= link_to 'Cancel', people_path , :class => 'btn' %>
-<% end %>
-
-<%= render 'form' %>
-

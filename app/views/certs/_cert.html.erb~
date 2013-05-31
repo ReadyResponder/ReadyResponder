@@ -1,7 +1,0 @@
-<tr>
-  <td>
-    <%= 'EXPIRED' if cert.expired? %>
-    <%#= 'Expiring' if cert.expiring? %>
-    <%= link_to cert.course.name, cert %> - <%= cert.expiration_date.to_s %>
-  </td>
-</tr>
