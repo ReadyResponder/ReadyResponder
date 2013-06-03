@@ -1,7 +1,9 @@
 <%= simple_form_for @person do |f| %>
-    
-    
-    
+    <%= f.error_notification %>
+    <%= f.simple_fields_for :channels do |builder| %>
+        <%= render 'channel_fields', f: builder %>
+    <% end %>
+    <%= link_to_add_fields "Add Channel", f, :channels %>
     <%= f.input :firstname, :label => 'First Name' %>
     <%= f.input :lastname %>
     <%= f.input :city %>
