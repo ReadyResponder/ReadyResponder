@@ -6,5 +6,9 @@ jQuery ->
           dateFormat: 'yy-mm-dd';
         $('.datatable').dataTable
           sPaginationType: "full_numbers"
-          bJQueryUI: true
-          iDisplayLength: 50
+          'bJQueryUI': true
+          'bRetrieve': true
+          iDisplayLength: 50;
+        $('.accordion').accordion
+          collapsible: true
+          active: false;

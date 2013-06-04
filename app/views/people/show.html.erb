@@ -26,19 +26,15 @@
 <div class="accordion">
   <% @person.titles.each do |title| %>
     <% if @person.qualified?(title.name) then %>
-      <h3>
-	Qualified for <%= title.name %>
-      </h3>
+      <h3>Qualified for <%= title.name %></h3>
       <div>No missing certifications</div>
     <% else %>
-      <h3>
-	NOT qualified for <%= title.name %>
-      </h3>
+      <h3>NOT qualified for <%= title.name %></h3>
       <div>
-      Skills Missing:
-	<ul>
-	  <%= render(@person.missing_skills(title)) %>
-	</ul>
+        Skills Missing:
+        <ul>
+          <%= render(@person.missing_skills(title)) %>
+        </ul>
       </div>
     <% end %>
   <% end %>
@@ -47,7 +43,7 @@
 
 </br></br>
 <div class="accordion">
-  <h3>Skills</h3>
+  <h3>Skills (<%= @person.skills.uniq.count %>)</h3>
   <div>
     <ul>
       <%= render(@person.skills.uniq) || raw("No skills yet !") %>
