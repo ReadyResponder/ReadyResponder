@@ -1,23 +1,19 @@
 <%= simple_form_for @person do |f| %>
     <%= f.error_notification %>
-    <%= f.simple_fields_for :channels do |builder| %>
-        <%= render 'channel_fields', f: builder %>
-    <% end %>
-    <%= link_to_add_fields "Add New Channel", f, :channels %>
     <%= f.input :firstname, :label => 'First Name' %>
     <%= f.input :lastname %>
     <%= f.input :city %>
     <%= f.input :state %>
     <%= f.input :zipcode, :input_html => { :size => 10 }  %>
-    <%= f.input :status, :as => :select, :collection => ['Active', 'Inactive'] %>
+    <%= f.input :status, :as => :select, :collection => [Person::STATUS] %>
     <%= f.input :icsid, :input_html => { :size => 11 } %>
     <%= f.input :title, :as => :select, :collection => Person::TITLES %>
     <%= f.input :gender, :as => :select, :collection => ['Female', 'Male'] %>
     <%= f.input :date_of_birth, :as => :string, :input_html => { :size => 11 }  %>
     <%= f.input :start_date, :as => :string, :input_html => { :class => 'datepicker', :size => 11 }  %>
     <%= f.association :titles %>
-    <%= f.input :division1, :as => :radio_buttons, :label => 'Division', :collection => ['Command', 'Division 1', 'Division 2', 'CERT'] %>
-    <%= f.input :division2, :as => :radio_buttons, :label => 'Squad', :collection => ['Command', 'Squad 1', 'Squad 2', 'CERT'] %>
+    <%= f.input :division1, :as => :radio_buttons, :label => 'Division', :collection => [Person::DIVISION1] %>
+    <%= f.input :division2, :as => :radio_buttons, :label => 'Squad', :collection => [Person::DIVISION2] %>
     <%= f.button :submit %>
   
 <% end %>
