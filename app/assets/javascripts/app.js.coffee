@@ -3,12 +3,12 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 jQuery ->
         $('.datepicker').datepicker
-          dateFormat: 'yy-mm-dd';
+          dateFormat: 'yy-mm-dd'
         $('.datatable').dataTable
           sPaginationType: "full_numbers"
           'bJQueryUI': true
           'bRetrieve': true
-          iDisplayLength: 50;
+          iDisplayLength: 50
         $('.accordion').accordion
           collapsible: true
-          active: false;
+          active: false

@@ -13,9 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.core
-//= require dataTables/jquery.dataTables
 //= require jquery.ui.datepicker
 //= require jquery.ui.widget
 //= require jquery.ui.accordion
+//= require dataTables/jquery.dataTables
 //= require bootstrap
 //= require_tree .
