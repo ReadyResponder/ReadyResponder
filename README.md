@@ -1,7 +1,10 @@
 LIMS3
 ======
 
-Wondering about owners of items, because that's people and organizations
-Wondering about locations of items, because that is people and actual locations
+This application aids emergency management and other agencies in managing both thier personnel and their equipment.
 
-In spec_helper file, I needed to use config.extend, rather than config.include ??
+Features
+* Web-based user interface
+* Tracks complete data of personnel, including attendance, responsiveness and training
+* Tracks equipment, including serial numbers, sources, grants and service records
+* Will produce QR Codes of people to allow easier addition into a cell phone

@@ -5,15 +5,27 @@
     <%= f.input :city %>
     <%= f.input :state %>
     <%= f.input :zipcode, :input_html => { :size => 10 }  %>
-    <%= f.input :status, :as => :select, :collection => [Person::STATUS] %>
+    <%= f.input :status, :as => :select, :label => "Person's Status", :collection => Person::STATUS, :input_html => { :value => 'Prospect' } %>
+    <fieldset>
+      <div class="form-horizontal">
+      <%= f.simple_fields_for :channels do |c| %>
+        <%= c.input :category, :as => :select, :collection => Channel::CATEGORIES %>
+        <%= c.input :content, :placeholder => '9785551212 OR me@example.com'%>
+        <%= c.input :name %>
+        <%= c.input :status, :as => :select, :collection => Channel::STATUSES, :input_html => { :value => 'OK' } %>
+        <%= c.input :usage, :as => :select, :collection => Channel::USAGES %>
+        <%= c.input :carrier, :as => :select, :collection => Channel::CARRIERS %>
+      <% end %>
+      </div>
+    </fieldset>
     <%= f.input :icsid, :input_html => { :size => 11 } %>
     <%= f.input :title, :as => :select, :collection => Person::TITLES %>
     <%= f.input :gender, :as => :select, :collection => ['Female', 'Male'] %>
     <%= f.input :date_of_birth, :as => :string, :input_html => { :size => 11 }  %>
     <%= f.input :start_date, :as => :string, :input_html => { :class => 'datepicker', :size => 11 }  %>
-    <%= f.association :titles %>
-    <%= f.input :division1, :as => :radio_buttons, :label => 'Division', :collection => [Person::DIVISION1] %>
-    <%= f.input :division2, :as => :radio_buttons, :label => 'Squad', :collection => [Person::DIVISION2] %>
+    <%= f.input :division1, :as => :select, :label => 'Division', :collection => Person::DIVISION1 %>
+    <%= f.input :division2, :as => :select, :label => 'Squad', :collection => Person::DIVISION2 %>
     <%= f.button :submit %>
-  
 <% end %>
+
+
