@@ -56,6 +56,7 @@ class Person < ActiveRecord::Base
             "CERT Member" => "CERT", "Recruit" => "Rct" }
     ranks[self.title] || ''
   end
+  
   def title_order
     self.title_order = TITLE_ORDER[self.title] || 30
   end
@@ -77,6 +78,7 @@ class Person < ActiveRecord::Base
       find :all, :order => 'division1, division2,title_order, start_date ASC'
     end
   end
+
   def age
     if self.date_of_birth.present?
       now = Date.today
@@ -105,7 +107,7 @@ class Person < ActiveRecord::Base
   end
   
   def missing_skills(title)
-    #title = title || Title.find(title)
+    title = title || Title.find(title)
     if title
       (title.skills - self.skills)
     else
@@ -122,5 +124,4 @@ class Person < ActiveRecord::Base
       end
     end
   end
-  
 end

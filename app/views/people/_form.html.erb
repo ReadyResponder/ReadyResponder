@@ -8,14 +8,14 @@
     <%= f.input :status, :as => :select, :label => "Person's Status", :collection => Person::STATUS, :input_html => { :value => 'Prospect' } %>
     <fieldset>
       <div class="form-horizontal">
-      <%= f.simple_fields_for :channels do |c| %>
-        <%= c.input :category, :as => :select, :collection => Channel::CATEGORIES %>
-        <%= c.input :content, :placeholder => '9785551212 OR me@example.com'%>
-        <%= c.input :name %>
-        <%= c.input :status, :as => :select, :collection => Channel::STATUSES, :input_html => { :value => 'OK' } %>
-        <%= c.input :usage, :as => :select, :collection => Channel::USAGES %>
-        <%= c.input :carrier, :as => :select, :collection => Channel::CARRIERS %>
-      <% end %>
+        <%= f.simple_fields_for :channels do |c| %>
+          <%= c.input :category, :as => :select, :collection => Channel::CATEGORIES %>
+          <%= c.input :content, :placeholder => '9785551212 OR me@example.com'%>
+          <%= c.input :name %>
+          <%= c.input :status, :as => :select, :collection => Channel::STATUSES, :input_html => { :value => 'OK' } %>
+          <%= c.input :usage, :as => :select, :collection => Channel::USAGES %>
+          <%= c.input :carrier, :as => :select, :collection => Channel::CARRIERS %>
+        <% end %>
       </div>
     </fieldset>
     <%= f.input :icsid, :input_html => { :size => 11 } %>

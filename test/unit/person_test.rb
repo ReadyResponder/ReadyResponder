@@ -46,22 +46,17 @@ class PersonTest < ActiveSupport::TestCase
     assert_equal false, person.skilled?('Driving')
   end
 
-  test "driver is not skilled at leeching" do
+  test "driver is not skilled at barking" do
     #This tests that it is false for a skill that does exist
     skill = FactoryGirl.create(:skill, name: "Leeching")
     
     person = FactoryGirl.create(:person)    
     assert_equal false, person.skilled?('Leeching')
   end
-
-  test "driver is not skill at barking " do
-    #This skill doesn't even exist
-    person = FactoryGirl.create(:person, icsid: "509")
-    assert_equal false, person.skilled?('Barking')
-  end
   
   test "driver is qualified at policing" do
-    #From the top
+    #From the top, this sets up the model chain from title requiring a skill to a course 
+    #and then a person having a certification from that course.
     policetitle = FactoryGirl.create(:title, name: "Police Officer")
     drivingskill = FactoryGirl.create(:skill, name: "Driving")
     policetitle.skills << drivingskill
@@ -77,9 +72,9 @@ class PersonTest < ActiveSupport::TestCase
   
   test "driver is NOT qualified at SAR" do
     #From the top
-    policetitle = FactoryGirl.create(:title, name: "SAR Team")
+    title = FactoryGirl.create(:title, name: "SAR Team")
     landnavskill = FactoryGirl.create(:skill, name: "Land Navigation")
-    policetitle.skills << landnavskill
+    title.skills << landnavskill
 
     drivingskill = FactoryGirl.create(:skill, name: "Driving")
     evoc_course = FactoryGirl.create(:course)
