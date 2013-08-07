@@ -33,8 +33,11 @@ class PeopleController < ApplicationController
   end
 
   def new
-    @person = Person.new
-    @person.channels.build
+    cookies[:status] = "Applicant"
+    @person = Person.new(lastname: "Doe", status: cookies[:status])
+    @person.channels.build (attributes = {category: 'E-Mail', status: "OK"})
+    @mobile = @person.channels.build
+    @mobile.category = 'Mobile Phone'
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @person }

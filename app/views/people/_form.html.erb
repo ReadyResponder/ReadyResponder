@@ -1,27 +1,27 @@
 <%= simple_form_for @person do |f| %>
     <%= f.error_notification %>
     <%= f.input :firstname, :label => 'First Name' %>
-    <%= f.input :lastname %>
+    <%= f.input :lastname, :label => 'Last Name' %>
+    <%= f.input :gender, :as => :select, :collection => ['Female', 'Male'] %>
+    <%= f.input :date_of_birth, :as => :string, :placeholder => '12/31/1990', :input_html => { :size => 11 }  %>
+    <%= f.input :zipcode, :input_html => { :size => 10 }  %>
     <%= f.input :city %>
     <%= f.input :state %>
-    <%= f.input :zipcode, :input_html => { :size => 10 }  %>
-    <%= f.input :status, :as => :select, :label => "Person's Status", :collection => Person::STATUS, :input_html => { :value => 'Prospect' } %>
-    <fieldset>
-      <div class="form-horizontal">
+    <%= f.input :status, :as => :select, :label => "Person's Status", :collection => Person::STATUS %>
+    <div class="form-horizontal">
         <%= f.simple_fields_for :channels do |c| %>
-          <%= c.input :category, :as => :select, :collection => Channel::CATEGORIES %>
-          <%= c.input :content, :placeholder => '9785551212 OR me@example.com'%>
-          <%= c.input :name %>
-          <%= c.input :status, :as => :select, :collection => Channel::STATUSES, :input_html => { :value => 'OK' } %>
-          <%= c.input :usage, :as => :select, :collection => Channel::USAGES %>
-          <%= c.input :carrier, :as => :select, :collection => Channel::CARRIERS %>
+          <fieldset>
+            <%= c.input :category, :as => :select, :collection => Channel::CATEGORIES %>
+            <%= c.input :content, :placeholder => '9785551212 OR me@example.com' %>
+            <%= c.input :name %>
+            <%= c.input :status, :as => :select, :collection => Channel::STATUSES %>
+            <%= c.input :usage, :as => :select, :collection => Channel::USAGES %>
+            <%= c.input :carrier, :as => :select, :collection => Channel::CARRIERS %>
+          </fieldset>
         <% end %>
-      </div>
-    </fieldset>
+    </div>
     <%= f.input :icsid, :input_html => { :size => 11 } %>
     <%= f.input :title, :as => :select, :collection => Person::TITLES %>
-    <%= f.input :gender, :as => :select, :collection => ['Female', 'Male'] %>
-    <%= f.input :date_of_birth, :as => :string, :input_html => { :size => 11 }  %>
     <%= f.input :start_date, :as => :string, :input_html => { :class => 'datepicker', :size => 11 }  %>
     <%= f.input :division1, :as => :select, :label => 'Division', :collection => Person::DIVISION1 %>
     <%= f.input :division2, :as => :select, :label => 'Squad', :collection => Person::DIVISION2 %>
