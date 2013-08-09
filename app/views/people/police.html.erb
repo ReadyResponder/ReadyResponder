@@ -1,5 +1,5 @@
 <% content_for :sidebar do %>
-  <center><h1>Listing People</h1></br>
+  <center><h1>Listing Police</h1></br>
   <%= link_to 'New Person', new_person_path, :class => 'btn' unless cannot? :create, Person %></center>
 <% end %>
 
@@ -7,10 +7,9 @@
   <thead>
     <tr>
       <th>Badge</th>
-      <th>Title</th>
+      <th>Rank</th>
       <th>Name</th>
       <th>Start Date</th>
-      <th>Department</th>
       <th>Division</th>
       <th>Squad</th>
       <th></th>
@@ -23,7 +22,6 @@
 	<td><%= person.title %></td>
 	<td><%= link_to person.fullname, person %></td>	
 	<td><%= person.start_date %></td>
-	<td><%= person.department %></td>
 	<td><%= person.division1 %></td>
 	<td><%= person.division2 %></td>
 	<td><%= link_to 'Edit', edit_person_path(person), :class => "btn btn-primary btn-mini" if can? :update, person %></td>

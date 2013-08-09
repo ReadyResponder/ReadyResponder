@@ -31,10 +31,10 @@ class Person < ActiveRecord::Base
   scope :cert, :order => 'division1, division2, title_order, start_date ASC', :conditions => {:department => "CERT"}
   scope :police, :order => 'division1, division2, title_order, start_date ASC', :conditions => {:department => 'Police'}
   scope :leave, :conditions => {:status => "Leave of Absence"}
-  scope :inactive, :conditions => {:status => "Inactive"}
+  scope :inactive, :order => 'end_date ASC',:conditions => {:status => "Inactive"}
   scope :active, :order => 'division1, division2, title_order, start_date ASC', :conditions => {:status => "Active"}
-  scope :applicants, :order => 'division1, division2, title_order, start_date ASC', :conditions => {:status => "Applicant"}
-  scope :prospects, :order => 'division1, division2, title_order, start_date ASC', :conditions => {:status => "Prospect"}
+  scope :applicants, :order => 'created_at ASC', :conditions => {:status => "Applicant"}
+  scope :prospects, :order => 'created_at ASC', :conditions => {:status => "Prospect"}
   scope :divisionC, :order => 'title_order, start_date ASC', :conditions => {:division1 => "Command", :status => "Active"}
   scope :division1, :order => 'title_order, start_date ASC', :conditions => {:division1 => "Division 1", :status => "Active"}
   scope :division2, :order => 'title_order, start_date ASC', :conditions => {:division1 => "Division 2", :status => "Active"}

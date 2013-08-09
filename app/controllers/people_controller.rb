@@ -14,6 +14,14 @@ class PeopleController < ApplicationController
     render :layout => "orgchart"
   end
 
+  def police
+    @people = Person.police.active.all
+    @page_title = "Police"
+  end
+  def cert
+    @people = Person.cert.active.all
+    @page_title = "CERT"
+  end
   def applicants
     @people = Person.applicants.all
     @page_title = "Applicants"
@@ -22,6 +30,11 @@ class PeopleController < ApplicationController
   def prospects
     @people = Person.prospects.all
     @page_title = "Prospects"
+  end
+
+  def inactive
+    @people = Person.inactive.all
+    @page_title = "Inactive"
   end
 
   def index

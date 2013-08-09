@@ -6,7 +6,7 @@ class Ability
     if current_user.roles.to_s.include? "Manager"
       can :manage, :all
     elsif current_user.roles.to_s.include? "Editor"
-      can [:read, :update, :create, :edit, :applicants, :prospects], Person
+      can [:read, :update, :create, :edit, :police, :cert, :applicants, :prospects, :inactive], Person
       can [:read, :update, :create, :edit], Attendance
       can [:read, :update, :create, :edit], Channel
       can [:read, :update, :create, :edit], Cert

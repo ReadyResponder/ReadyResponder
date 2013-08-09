@@ -14,17 +14,42 @@ describe "Person" do
   describe "views" do
     before (:each) do
       FactoryGirl.create(:person, firstname: 'CJ',  department: 'Police' )
+      FactoryGirl.create(:person, firstname: 'Klaus', department: 'CERT' )
       FactoryGirl.create(:person, firstname: 'Adam', status: 'Applicant' )
       FactoryGirl.create(:person, firstname: 'Priscilla', status: 'Prospect' )
+      FactoryGirl.create(:person, firstname: 'Indy', status: 'Inactive' )
     end
 
     it "returns the index page" do
       visit people_path
-      page.should have_content('Listing Police')
+      page.should have_content('Listing People')
       page.should have_content('LIMS') # This is in the nav bar
       page.should have_content('CJ')
       page.should_not have_content('Adam')
       page.should_not have_content('Priscilla')
+      page.should_not have_content('Indy')
+    end
+
+    it "returns a page for Police" do
+      visit police_people_path
+      page.should have_content('Listing Police')
+      page.should have_content('LIMS') # This is in the nav bar
+      page.should have_content('CJ')
+      page.should_not have_content('Klaus')
+      page.should_not have_content('Adam')
+      page.should_not have_content('Priscilla')
+      page.should_not have_content('Indy')
+    end
+
+    it "returns a page for CERT" do
+      visit cert_people_path
+      page.should have_content('Listing CERT')
+      page.should have_content('LIMS') # This is in the nav bar
+      page.should_not have_content('CJ')
+      page.should have_content('Klaus')
+      page.should_not have_content('Adam')
+      page.should_not have_content('Priscilla')
+      page.should_not have_content('Indy')
     end
 
     it "returns a page for Applicants" do
@@ -32,8 +57,10 @@ describe "Person" do
       page.should have_content('Listing Applicants')
       page.should have_content('LIMS') # This is in the nav bar
       page.should_not have_content('CJ')
+      page.should_not have_content('Klaus')
       page.should have_content('Adam')
       page.should_not have_content('Priscilla')
+      page.should_not have_content('Indy')
     end
 
     it "returns a page for Prospects" do
@@ -41,9 +68,22 @@ describe "Person" do
       page.should have_content('Listing Prospects')
       page.should have_content('LIMS') # This is in the nav bar
       page.should_not have_content('CJ')
+      page.should_not have_content('Klaus')
       page.should_not have_content('Adam')
       page.should have_content('Priscilla')
+      page.should_not have_content('Indy')
     end
+    it "returns a page for Inactive" do
+      visit inactive_people_path
+      page.should have_content('Listing Inactive')
+      page.should have_content('LIMS') # This is in the nav bar
+      page.should_not have_content('CJ')
+      page.should_not have_content('Klaus')
+      page.should_not have_content('Adam')
+      page.should_not have_content('Priscilla')
+      page.should have_content('Indy')
+    end
+
   end
 
   describe "forms should display" do
