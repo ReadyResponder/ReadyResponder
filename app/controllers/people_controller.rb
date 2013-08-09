@@ -11,7 +11,17 @@ class PeopleController < ApplicationController
   def orgchart
     @people = Person.active.all
     @page_title = "Org Chart"
-    render :layout => "orgchart"    
+    render :layout => "orgchart"
+  end
+
+  def applicants
+    @people = Person.applicants.all
+    @page_title = "Applicants"
+  end
+
+  def prospects
+    @people = Person.prospects.all
+    @page_title = "Prospects"
   end
 
   def index
@@ -33,11 +43,9 @@ class PeopleController < ApplicationController
   end
 
   def new
-    cookies[:status] = "Applicant"
-    @person = Person.new(lastname: "Doe", status: cookies[:status])
+    @person = Person.new(status: cookies[:status])
     @person.channels.build (attributes = {category: 'E-Mail', status: "OK"})
-    @mobile = @person.channels.build
-    @mobile.category = 'Mobile Phone'
+    @mobile = @person.channels.build (attributes = {category: 'Mobile Phone', status: "OK"})
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @person }
@@ -46,12 +54,11 @@ class PeopleController < ApplicationController
 
   def edit
     @person = Person.find(params[:id])
-    #@person.channels << Channel.new
   end
 
   def create
     @person = Person.new(params[:person])
-
+    cookies[:status] = params[:person][:status]
     respond_to do |format|
       if @person.save
         format.html { redirect_to people_url, notice: 'Person was successfully created.' }
@@ -68,7 +75,6 @@ class PeopleController < ApplicationController
     
     respond_to do |format|
       if @person.update_attributes(params[:person])
-	#CertMailer.cert_expiring(@person).deliver
         format.html { redirect_to people_url, notice: 'Person was successfully updated.' }
         format.json { head :no_content }
       else

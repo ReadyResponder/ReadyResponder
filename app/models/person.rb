@@ -3,7 +3,7 @@ class Person < ActiveRecord::Base
   #((801...900).to_a - (array_from_db_of_taken_numbers))[0]
   before_save :title_order
   
-  attr_accessible :firstname, :lastname, :status, :icsid, :city, :state, :zipcode, :start_date, :title, :gender, :date_of_birth,:division1, :division2, :channels_attributes, :title_ids, :title_order
+  attr_accessible :firstname, :lastname, :status, :icsid, :department, :city, :state, :zipcode, :start_date, :title, :gender, :date_of_birth,:division1, :division2, :channels_attributes, :title_ids, :title_order
   has_many :channels
   accepts_nested_attributes_for :channels, allow_destroy: true
   
@@ -28,9 +28,13 @@ class Person < ActiveRecord::Base
   validates_presence_of :division1, :unless => "division2.blank?"
   
   
+  scope :cert, :order => 'division1, division2, title_order, start_date ASC', :conditions => {:department => "CERT"}
+  scope :police, :order => 'division1, division2, title_order, start_date ASC', :conditions => {:department => 'Police'}
   scope :leave, :conditions => {:status => "Leave of Absence"}
   scope :inactive, :conditions => {:status => "Inactive"}
   scope :active, :order => 'division1, division2, title_order, start_date ASC', :conditions => {:status => "Active"}
+  scope :applicants, :order => 'division1, division2, title_order, start_date ASC', :conditions => {:status => "Applicant"}
+  scope :prospects, :order => 'division1, division2, title_order, start_date ASC', :conditions => {:status => "Prospect"}
   scope :divisionC, :order => 'title_order, start_date ASC', :conditions => {:division1 => "Command", :status => "Active"}
   scope :division1, :order => 'title_order, start_date ASC', :conditions => {:division1 => "Division 1", :status => "Active"}
   scope :division2, :order => 'title_order, start_date ASC', :conditions => {:division1 => "Division 2", :status => "Active"}
@@ -44,6 +48,7 @@ class Person < ActiveRecord::Base
   DIVISION1 = ['Division 1', 'Division 2', 'Command']
   DIVISION2 = ['Command', 'Squad 1', 'Squad 2', 'CERT']
   STATUS = ['Leave of Absence', 'Inactive', 'Active', 'Applicant','Prospect']
+  DEPARTMENT = ['Police', 'CERT', 'Other']
   
   def fullname
     (self.firstname + " " + (self.middleinitial || "") + " " + self.lastname).squeeze(" ")

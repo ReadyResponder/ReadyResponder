@@ -37,21 +37,21 @@ Lims3::Application.routes.draw do
   resources :certs
 
   resources :people do
-     member do
-        get 'roster'
-      end
       collection do
-	get 'inactive'
+	      get 'inactive'
         get 'leave'
-        get 'active'
+        get 'applicants'
+        get 'prospects'
+        get 'cert'
+        get 'police'
         get 'signin'
-	get 'orgchart'
+	      get 'orgchart'
+        get 'roster'
       end
     resources :certs, :controller => 'certs'
     resources :titles, :controller => 'titles'
     resources :items, :controller => 'items'
-    
-   # people.resources :contacts, :controller => "person_contacts"
+    resources :channels, :controller => "channels"
   end
 
   # The priority is based upon order of creation:

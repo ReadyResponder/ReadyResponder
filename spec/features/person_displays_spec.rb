@@ -11,29 +11,56 @@ describe "Person" do
     click_on 'Sign in'
   end
 
-  describe "GET /people" do
-    it "returns a page" do
+  describe "views" do
+    before (:each) do
+      FactoryGirl.create(:person, firstname: 'CJ',  department: 'Police' )
+      FactoryGirl.create(:person, firstname: 'Adam', status: 'Applicant' )
+      FactoryGirl.create(:person, firstname: 'Priscilla', status: 'Prospect' )
+    end
+
+    it "returns the index page" do
       visit people_path
-      page.should have_content("Listing People")
-      page.should have_content("LIMS") # This is in the nav bar
+      page.should have_content('Listing Police')
+      page.should have_content('LIMS') # This is in the nav bar
+      page.should have_content('CJ')
+      page.should_not have_content('Adam')
+      page.should_not have_content('Priscilla')
+    end
+
+    it "returns a page for Applicants" do
+      visit applicants_people_path
+      page.should have_content('Listing Applicants')
+      page.should have_content('LIMS') # This is in the nav bar
+      page.should_not have_content('CJ')
+      page.should have_content('Adam')
+      page.should_not have_content('Priscilla')
+    end
+
+    it "returns a page for Prospects" do
+      visit prospects_people_path
+      page.should have_content('Listing Prospects')
+      page.should have_content('LIMS') # This is in the nav bar
+      page.should_not have_content('CJ')
+      page.should_not have_content('Adam')
+      page.should have_content('Priscilla')
     end
   end
 
-  describe " should display" do
-
-    it "a new person form with a first name field" do
+  describe "forms should display" do
+    it "a new person form with appropriate fields" do
       visit new_person_path
       page.should have_content("First Name")
       fill_in('First Name', :with => 'John')
+      page.should have_select("Gender")
     end
+
     it "an edit form with values filled in" do
       person = FactoryGirl.create(:person, icsid: "509")
       visit edit_person_path(person)
-      #save_and_open_page
       page.should have_field("First Name", :with => "CJ")
-      page.should have_select("person_gender", :selected => "Female")
-      
+      page.should have_select("person_gender", :selected => "Female")  
     end
+
     it "qualified only if all skills are present" do
       title = FactoryGirl.create(:title, name: "Police Officer")
       drivingskill = FactoryGirl.create(:skill, name: "Driving")
