@@ -32,6 +32,10 @@ class PeopleController < ApplicationController
     @page_title = "Prospects"
   end
 
+  def leave
+    @people = Person.leave.all
+    @page_title = "Leave"
+  end
   def inactive
     @people = Person.inactive.all
     @page_title = "Inactive"
