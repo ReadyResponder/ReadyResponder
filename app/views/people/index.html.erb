@@ -10,6 +10,7 @@
       <th>Title</th>
       <th>Name</th>
       <th>Start Date</th>
+      <th>Mobile</th>
       <th>Department</th>
       <th>Division</th>
       <th>Squad</th>
@@ -23,6 +24,7 @@
 	<td><%= person.title %></td>
 	<td><%= link_to person.fullname, person %></td>	
 	<td><%= person.start_date %></td>
+  <td><%= number_to_phone(person.channels.mobile.first.content) %></td>
 	<td><%= person.department %></td>
 	<td><%= person.division1 %></td>
 	<td><%= person.division2 %></td>

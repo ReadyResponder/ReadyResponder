@@ -22,7 +22,8 @@
         <% end %>
     </div>
     <%= f.input :icsid, :input_html => { :size => 5 } %>
-    <%= f.input :title, :as => :select, :collection => Person::TITLES %>
+    <%= f.input :title, :as => :select, label: 'Rank', :collection => Person::TITLES %>
+    <%= f.association :titles %>
     <%= f.input :start_date, :as => :string, :input_html => { :class => 'datepicker', :size => 11 }  %>
     <%= f.input :division1, :as => :select, :label => 'Division', :collection => Person::DIVISION1 %>
     <%= f.input :division2, :as => :select, :label => 'Squad', :collection => Person::DIVISION2 %>
