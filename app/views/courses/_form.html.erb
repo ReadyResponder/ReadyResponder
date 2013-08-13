@@ -3,7 +3,7 @@
     <%= f.input :name %>
     <%= f.input :status, :as => :select, :collection => ['Active', 'Inactive'] %>
     <%= f.input :description, :rows => '10' %>
-    <%= f.association :skills %>
+    <%= f.association :skills, hint: 'Multiple select - Use CTRL key' %>
     <%= f.input :category, :as => :select, :collection => Course::CATEGORY_CHOICES %>
     <%= f.input :duration, :hint => "in hours" %>
     <%= f.input :term, :hint => "in months" %>

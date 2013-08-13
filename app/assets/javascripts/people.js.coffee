@@ -3,8 +3,4 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 jQuery ->
-  $('form').on 'click', '.add_fields', (event) ->
-    time = new Date().getTime()
-    regexp = new RegExp($(this).data('id'), 'g')
-    $(this).before($(this).data('fields').replace(regexp, time))
-    event.preventDefault()
+  $("#person_firstname").focus();

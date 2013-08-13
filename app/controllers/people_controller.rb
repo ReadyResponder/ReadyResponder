@@ -1,5 +1,6 @@
 class PeopleController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :set_return_path
   load_and_authorize_resource
   
   def signin
@@ -8,6 +9,7 @@ class PeopleController < ApplicationController
     @page_title = "Sign-in"
     render :layout => "print_signin"
   end
+
   def orgchart
     @people = Person.active.all
     @page_title = "Org Chart"
@@ -41,6 +43,7 @@ class PeopleController < ApplicationController
     @people = Person.leave.all
     @page_title = "Leave"
   end
+
   def inactive
     @people = Person.inactive.all
     @page_title = "Inactive"
@@ -66,8 +69,8 @@ class PeopleController < ApplicationController
 
   def new
     @person = Person.new(status: cookies[:status], state: 'MA')
-    @person.channels.build (attributes = {category: 'E-Mail', status: "OK"})
-    @mobile = @person.channels.build (attributes = {category: 'Mobile Phone', status: "OK"})
+    @person.channels.build (attributes = {category: 'E-Mail', status: 'OK', usage: '1-All'})
+    @mobile = @person.channels.build (attributes = {category: 'Mobile Phone', status: 'OK', usage: '1-All'})
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @person }
@@ -77,7 +80,7 @@ class PeopleController < ApplicationController
   def edit
     @person = Person.find(params[:id])
     #This is a quick hack to allow people to enter e-mails and phone numbers for person records already created
-    @person.channels.build (attributes = { status: "OK"}) if @person.channels.count < 2
+    @person.channels.build (attributes = { status: "OK", usage: '1-All'}) if @person.channels.count < 2
   end
 
   def create
@@ -85,7 +88,7 @@ class PeopleController < ApplicationController
     cookies[:status] = params[:person][:status]
     respond_to do |format|
       if @person.save
-        format.html { redirect_to people_url, notice: 'Person was successfully created.' }
+        format.html { redirect_to session[:return_to], notice: 'Person was successfully created.' }
         format.json { render json: @person, status: :created, location: @person }
       else
         format.html { render action: "new" }
@@ -99,7 +102,7 @@ class PeopleController < ApplicationController
     
     respond_to do |format|
       if @person.update_attributes(params[:person])
-        format.html { redirect_to people_url, notice: 'Person was successfully updated.' }
+        format.html { redirect_to session[:return_to], notice: 'Person was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -116,5 +119,9 @@ class PeopleController < ApplicationController
       format.html { redirect_to people_url }
       format.json { head :no_content }
     end
+  end
+
+  def set_return_path
+    session[:return_to] ||= request.referer
   end
 end

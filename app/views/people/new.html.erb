@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
   <h1>New Person</h1>
-  <%= link_to 'Cancel', people_path, :class => 'btn' %></br>
+  <%= link_to 'Cancel', session[:return_to], :class => 'btn' %></br>
 <% end %>
 
 <%= render 'form' %>

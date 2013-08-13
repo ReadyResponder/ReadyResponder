@@ -3,7 +3,7 @@
     <%= f.input :firstname, :label => 'First Name' %>
     <%= f.input :lastname, :label => 'Last Name' %>
     <%= f.input :gender, :as => :select, :collection => ['Female', 'Male'] %>
-    <%= f.input :date_of_birth, :as => :string, :placeholder => '12/31/1990', :input_html => { :size => 11 }  %>
+    <%= f.input :date_of_birth, :as => :string, :placeholder => '12-31-1990', :input_html => { :size => 11 }  %>
     <%= f.input :zipcode, :input_html => { :size => 10 }  %>
     <%= f.input :city %>
     <%= f.input :state %>
@@ -21,7 +21,7 @@
           </fieldset>
         <% end %>
     </div>
-    <%= f.input :icsid, :input_html => { :size => 11 } %>
+    <%= f.input :icsid, :input_html => { :size => 5 } %>
     <%= f.input :title, :as => :select, :collection => Person::TITLES %>
     <%= f.input :start_date, :as => :string, :input_html => { :class => 'datepicker', :size => 11 }  %>
     <%= f.input :division1, :as => :select, :label => 'Division', :collection => Person::DIVISION1 %>
