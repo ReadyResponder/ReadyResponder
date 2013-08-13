@@ -35,6 +35,7 @@ class Person < ActiveRecord::Base
   scope :active, :order => 'division1, division2, title_order, start_date ASC', :conditions => {:status => "Active"}
   scope :applicants, :order => 'created_at ASC', :conditions => {:status => "Applicant"}
   scope :prospects, :order => 'created_at ASC', :conditions => {:status => "Prospect"}
+  scope :declined, :order => 'created_at ASC', :conditions => {:status => "Declined"}
   scope :divisionC, :order => 'title_order, start_date ASC', :conditions => {:division1 => "Command", :status => "Active"}
   scope :division1, :order => 'title_order, start_date ASC', :conditions => {:division1 => "Division 1", :status => "Active"}
   scope :division2, :order => 'title_order, start_date ASC', :conditions => {:division1 => "Division 2", :status => "Active"}
@@ -47,7 +48,7 @@ class Person < ActiveRecord::Base
   TITLE_ORDER = {'Director' => 1, 'Chief' => 3, 'Deputy Chief' => 5,'Captain' => 7, 'Lieutenant' => 9, 'Sargeant' => 11, 'Corporal' => 13, 'Senior Officer' => 15, 'Officer' => 17, 'CERT Member' => 19, 'Dispatcher' => 19, 'Student Officer' => 21, 'Recruit' => 23, 'Applicant' => 25}
   DIVISION1 = ['Division 1', 'Division 2', 'Command']
   DIVISION2 = ['Command', 'Squad 1', 'Squad 2', 'CERT']
-  STATUS = ['Leave of Absence', 'Inactive', 'Active', 'Applicant','Prospect']
+  STATUS = ['Leave of Absence', 'Inactive', 'Active', 'Applicant','Prospect','Declined']
   DEPARTMENT = ['Police', 'CERT', 'Other']
   
   def fullname

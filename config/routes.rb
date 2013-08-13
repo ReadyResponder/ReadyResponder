@@ -42,6 +42,7 @@ Lims3::Application.routes.draw do
         get 'leave'
         get 'applicants'
         get 'prospects'
+        get 'declined'
         get 'cert'
         get 'police'
         get 'signin'

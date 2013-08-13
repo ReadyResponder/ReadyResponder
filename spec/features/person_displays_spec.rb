@@ -91,6 +91,18 @@ describe "Person" do
       page.should have_content('Indy')
       page.should_not have_content('Leona')
     end
+    it "returns a page for Declined" do
+      visit declined_people_path
+      page.should have_content('Listing Declined')
+      page.should have_content('LIMS') # This is in the nav bar
+      page.should_not have_content('CJ')
+      page.should_not have_content('Klaus')
+      page.should_not have_content('Adam')
+      page.should_not have_content('Priscilla')
+      page.should_not have_content('Indy')
+      page.should_not have_content('Leona')
+      page.should have_content('Donna')
+    end
     it "returns a page for on leave" do
       visit leave_people_path
       page.should have_content('Listing On-Leave')
