@@ -60,7 +60,7 @@ class PeopleController < ApplicationController
   end
 
   def new
-    @person = Person.new(status: cookies[:status])
+    @person = Person.new(status: cookies[:status], state: 'MA')
     @person.channels.build (attributes = {category: 'E-Mail', status: "OK"})
     @mobile = @person.channels.build (attributes = {category: 'Mobile Phone', status: "OK"})
     respond_to do |format|

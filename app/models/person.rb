@@ -74,6 +74,11 @@ class Person < ActiveRecord::Base
     self.city + " " + self.state + " " + self.zipcode
   end
   
+  def state=(value)
+    # custom actions
+    write_attribute(:state, value.strip.upcase)
+  end
+
   def self.search(search)
     if search
       find :all, :conditions => ['firstname LIKE ? OR lastname LIKE ? OR city LIKE ? OR memberID like ?',

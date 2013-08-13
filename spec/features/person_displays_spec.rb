@@ -19,6 +19,7 @@ describe "Person" do
       FactoryGirl.create(:person, firstname: 'Priscilla', status: 'Prospect' )
       FactoryGirl.create(:person, firstname: 'Indy', status: 'Inactive' )
       FactoryGirl.create(:person, firstname: 'Leona', status: 'Leave of Absence' )
+      FactoryGirl.create(:person, firstname: 'Donna', status: 'Declined' )
     end
 
     it "returns the index page" do
@@ -110,6 +111,7 @@ describe "Person" do
       page.should have_content("First Name")
       fill_in('First Name', :with => 'John')
       page.should have_select("Gender")
+      find_field('person_state').value.should have_content('MA')
     end
 
     it "an edit form with values filled in" do
