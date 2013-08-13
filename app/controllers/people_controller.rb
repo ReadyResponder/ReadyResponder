@@ -76,6 +76,8 @@ class PeopleController < ApplicationController
 
   def edit
     @person = Person.find(params[:id])
+    #This is a quick hack to allow people to enter e-mails and phone numbers for person records already created
+    @person.channels.build (attributes = { status: "OK"}) if @person.channels.count < 2
   end
 
   def create
