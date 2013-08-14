@@ -5,6 +5,10 @@ class Channel < ActiveRecord::Base
 
   def self.mobile
    where("category LIKE ?", "%Mobile%")
+  end
+  
+  def self.email
+   where("category LIKE ?", "%Mail%")
   end	
   
   

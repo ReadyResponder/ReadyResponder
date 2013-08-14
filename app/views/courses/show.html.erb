@@ -38,7 +38,7 @@
 <table class="table table-striped table-bordered">
   <thead>
     <tr>
-	<th>People Who Took This Course</th>
+	<th>People Who Took This Course (<%= @course.people.active.uniq.count %>)</th>
     </tr>
   </thead>
   <tbody>
@@ -48,9 +48,7 @@
 
 <table class="table table-striped table-bordered">
   <thead>
-    <tr>
-	<th>Skills This Course Advances</th>
-    </tr>
+    <tr><th>Skills This Course Advances</th></tr>
   </thead>
   <tbody>
     <%= render @course.skills.uniq %>

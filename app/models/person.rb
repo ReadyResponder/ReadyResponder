@@ -22,6 +22,7 @@ class Person < ActiveRecord::Base
   
   validates_presence_of :firstname, :lastname, :status
   validates_uniqueness_of :icsid, :allow_nil => true, :allow_blank => true   # this needs to be scoped to active members, or more sophisticated rules
+  #validates_uniqueness_of :lastname
   validates_length_of :state, :is =>2, :allow_nil => true, :allow_blank => true
   validates_numericality_of  :height, :weight, :allow_nil => true, :allow_blank => true
   validates_presence_of :division2, :unless => "division1.blank?"

@@ -13,8 +13,10 @@ describe "Person" do
 
   describe "views" do
     before (:each) do
-      FactoryGirl.create(:person, firstname: 'CJ',  department: 'Police' )
-      FactoryGirl.create(:person, firstname: 'Klaus', department: 'CERT' )
+      cj = FactoryGirl.create(:person, firstname: 'CJ',  department: 'Police' )
+      cj.channels << FactoryGirl.create(:channel, content: '9785551212')
+      sierra = FactoryGirl.create(:person, firstname: 'Sierra', department: 'CERT' )
+      sierra.channels << FactoryGirl.create(:channel, category: 'E-Mail', content: 'sierra@example.com')
       FactoryGirl.create(:person, firstname: 'Adam', status: 'Applicant' )
       FactoryGirl.create(:person, firstname: 'Priscilla', status: 'Prospect' )
       FactoryGirl.create(:person, firstname: 'Indy', status: 'Inactive' )
@@ -27,6 +29,9 @@ describe "Person" do
       page.should have_content('Listing People')
       page.should have_content('LIMS') # This is in the nav bar
       page.should have_content('CJ')
+      page.should have_content('555-1212')
+      page.should have_content('Sierra')
+      page.should have_content('sierra@example.com')
       page.should_not have_content('Adam')
       page.should_not have_content('Priscilla')
       page.should_not have_content('Indy')
@@ -38,7 +43,7 @@ describe "Person" do
       page.should have_content('Listing Police')
       page.should have_content('LIMS') # This is in the nav bar
       page.should have_content('CJ')
-      page.should_not have_content('Klaus')
+      page.should_not have_content('Sierra')
       page.should_not have_content('Adam')
       page.should_not have_content('Priscilla')
       page.should_not have_content('Indy')
@@ -50,7 +55,7 @@ describe "Person" do
       page.should have_content('Listing CERT')
       page.should have_content('LIMS') # This is in the nav bar
       page.should_not have_content('CJ')
-      page.should have_content('Klaus')
+      page.should have_content('Sierra')
       page.should_not have_content('Adam')
       page.should_not have_content('Priscilla')
       page.should_not have_content('Indy')
@@ -62,7 +67,7 @@ describe "Person" do
       page.should have_content('Listing Applicants')
       page.should have_content('LIMS') # This is in the nav bar
       page.should_not have_content('CJ')
-      page.should_not have_content('Klaus')
+      page.should_not have_content('Sierra')
       page.should have_content('Adam')
       page.should_not have_content('Priscilla')
       page.should_not have_content('Indy')
@@ -74,7 +79,7 @@ describe "Person" do
       page.should have_content('Listing Prospects')
       page.should have_content('LIMS') # This is in the nav bar
       page.should_not have_content('CJ')
-      page.should_not have_content('Klaus')
+      page.should_not have_content('Sierra')
       page.should_not have_content('Adam')
       page.should have_content('Priscilla')
       page.should_not have_content('Indy')
@@ -85,7 +90,7 @@ describe "Person" do
       page.should have_content('Listing Inactive')
       page.should have_content('LIMS') # This is in the nav bar
       page.should_not have_content('CJ')
-      page.should_not have_content('Klaus')
+      page.should_not have_content('Sierra')
       page.should_not have_content('Adam')
       page.should_not have_content('Priscilla')
       page.should have_content('Indy')
@@ -96,7 +101,7 @@ describe "Person" do
       page.should have_content('Listing Declined')
       page.should have_content('LIMS') # This is in the nav bar
       page.should_not have_content('CJ')
-      page.should_not have_content('Klaus')
+      page.should_not have_content('Sierra')
       page.should_not have_content('Adam')
       page.should_not have_content('Priscilla')
       page.should_not have_content('Indy')
@@ -108,7 +113,7 @@ describe "Person" do
       page.should have_content('Listing On-Leave')
       page.should have_content('LIMS') # This is in the nav bar
       page.should_not have_content('CJ')
-      page.should_not have_content('Klaus')
+      page.should_not have_content('Sierra')
       page.should_not have_content('Adam')
       page.should_not have_content('Priscilla')
       page.should_not have_content('Indy')
