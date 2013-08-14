@@ -43,37 +43,32 @@
   </tbody>
 </table>
 
-<table class="table table-striped table-bordered">
-  <thead>
-    <tr>
-  <th>People Who Took This Course (<%= @course.people.active.uniq.count %>)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= render @course.people.active.uniq %>
-  </tbody>
-</table>
+<div class="accordion">
+  <h3>People Who Took This Course (<%= @course.people.active.uniq.count %>)</h3>
+  <div>
+    <table class="table table-striped table-bordered">
+      <tbody>
+        <%= render @course.people.active.uniq %>
+      </tbody>
+    </table>
+  </div>
 
-<table class="table table-striped table-bordered">
-  <thead>
-    <tr>
-  <th>Active Police Needing This Course ( <%= (Person.police.active - @course.people.active.uniq).count %> )</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= render Person.police.active - @course.people.active.uniq %>
-  </tbody>
-</table>
+  <h3>Active Police Members Needing This Course ( <%= (Person.police.active - @course.people.active.uniq).count %> )</h3>
+  <div>
+    <table class="table table-striped table-bordered">
+      <tbody>
+        <%= render Person.police.active - @course.people.active.uniq %>
+      </tbody>
+    </table>
+  </div>
 
-<table class="table table-striped table-bordered">
-  <thead>
-    <tr>
-  <th>Active CERT Needing This Course ( <%= (Person.cert.active - @course.people.active.uniq).count %> )</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= render Person.cert.active - @course.people.active.uniq %>
-  </tbody>
-</table>
-
+  <h3>Active CERT Members Needing This Course ( <%= (Person.cert.active - @course.people.active.uniq).count %> )</h3>
+  <div>
+    <table class="table table-striped table-bordered">
+      <tbody>
+        <%= render Person.cert.active - @course.people.active.uniq %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
