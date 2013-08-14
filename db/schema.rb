@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130520140658) do
+ActiveRecord::Schema.define(:version => 20130814214342) do
 
   create_table "attendances", :force => true do |t|
     t.integer  "person_id"
@@ -143,6 +143,12 @@ ActiveRecord::Schema.define(:version => 20130520140658) do
     t.float    "lon"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "floor"
+    t.string   "container"
+    t.string   "street"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zipcode"
   end
 
   create_table "moves", :force => true do |t|

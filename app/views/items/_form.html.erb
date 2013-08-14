@@ -2,11 +2,11 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :location_id %>
+    <%= f.association :location %>
     <%= f.input :name %>
     <%= f.input :description %>
     <%= f.input :source %>
-    <%= f.input :category %>
+    <%= f.input :category, :as => :select, :collection => Item::CATEGORY_CHOICES %>
     <%= f.input :model %>
     <%= f.input :serial %>
     <%= f.input :serial %>

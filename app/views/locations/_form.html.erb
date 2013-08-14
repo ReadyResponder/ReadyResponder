@@ -3,9 +3,11 @@
 
   <div class="form-inputs">
     <%= f.input :name %>
+    <%= f.input :floor %>
+    <%= f.input :container %>
     <%= f.input :description %>
     <%= f.input :category %>
-    <%= f.input :status %>
+    <%= f.input :status, :as => :select, :collection => ['Active', 'Inactive'] %>
     <%= f.input :comments %>
     <%= f.input :lat %>
     <%= f.input :lon %>
