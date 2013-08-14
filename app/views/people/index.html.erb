@@ -21,7 +21,7 @@
     <% @people.each do |person| %>
       <tr>
 	<td><%= person.icsid %></td>
-	<td><%= person.title %></td>
+	<td><%= person.shortrank %></td>
 	<td><%= link_to person.fullname, person %></td>	
 	<td><%= person.start_date %></td>
   <td><%= number_to_phone(person.channels.mobile.first.content) unless person.channels.mobile.blank? %></td>
