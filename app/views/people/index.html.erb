@@ -10,7 +10,7 @@
       <th>Badge</th>
       <th>Title</th>
       <th>Name</th>
-      <th>Start Date</th>
+      <th>Duration</th>
       <th>Mobile</th>
       <th>E-Mail</th>
       <th>Dept</th>
@@ -23,7 +23,7 @@
 	<td><%= person.icsid %></td>
 	<td><%= person.shortrank %></td>
 	<td><%= link_to person.fullname, person %></td>	
-	<td><%= person.start_date %></td>
+	<td><%= distance_of_time_in_words(((person.end_date) || Date.today), person.start_date) if person.start_date %></td>
   <td><%= number_to_phone(person.channels.mobile.first.content) unless person.channels.mobile.blank? %></td>
   <td><%= person.channels.email.first.content unless person.channels.email.blank? %></td>
   <td><%= person.department %></td>
