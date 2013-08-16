@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130814214342) do
+ActiveRecord::Schema.define(:version => 20130816001517) do
 
   create_table "attendances", :force => true do |t|
     t.integer  "person_id"
@@ -118,19 +118,23 @@ ActiveRecord::Schema.define(:version => 20130814214342) do
     t.string   "source"
     t.string   "category"
     t.string   "model"
-    t.string   "serial"
+    t.string   "serial1"
     t.integer  "person_id"
     t.date     "purchase_date"
     t.float    "purchase_amt"
     t.date     "sell_date"
     t.float    "sell_amt"
     t.string   "status"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-    t.string   "local_serial"
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
+    t.string   "serial2"
     t.string   "grant"
     t.date     "grantstart"
     t.date     "grantexpiration"
+    t.string   "icsid"
+    t.string   "po_number"
+    t.decimal  "value",           :precision => 8, :scale => 2
+    t.string   "serial3"
   end
 
   create_table "locations", :force => true do |t|

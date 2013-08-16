@@ -24,7 +24,7 @@ class ItemsController < ApplicationController
   # GET /items/new
   # GET /items/new.json
   def new
-    @item = Item.new(status: 'Active')
+    @item = Item.new(status: 'Available')
 
     respond_to do |format|
       format.html # new.html.erb

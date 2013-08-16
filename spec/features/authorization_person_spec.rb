@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "a user" do
   describe "without a role" do
     before (:each) do
-      @person = FactoryGirl.create(:person, lastname: 'YesDoe')
+      @person = FactoryGirl.create(:person)
       somebody = FactoryGirl.create(:user)
       visit new_user_session_path
       fill_in 'user_email', :with => somebody.email
@@ -26,7 +26,7 @@ describe "a user" do
   end
   describe "in the reader role" do
     before (:each) do
-      @person = FactoryGirl.create(:person, lastname: 'YesDoe')
+      @person = FactoryGirl.create(:person)
       somebody = FactoryGirl.create(:user)
       somebody.roles << FactoryGirl.create(:role, name: 'Reader')
       visit new_user_session_path
@@ -50,12 +50,12 @@ describe "a user" do
       page.should have_content(@person.lastname)
     end
     it "gets a signin sheet when requested" do
-      person1 = FactoryGirl.create(:person, lastname: 'YesDoe')
-      person2 = FactoryGirl.create(:person, lastname: 'NoDoe', status: 'Inactive')
+      @person_active = FactoryGirl.create(:person)
+      @person_inactive = FactoryGirl.create(:person, status: 'Inactive')
       visit signin_people_path
       page.should have_content("Command Staff") #This is in the first heading
-      page.should have_content("YesDoe")
-      page.should_not have_content("NoDoe")
+      page.should have_content(@person_active.lastname)
+      page.should_not have_content(@person_inactive.lastname)
     end
 end
   describe "in the editor role" do
@@ -92,12 +92,12 @@ end
       page.should have_content(@person.lastname)
     end
     it "a signin sheet when requested" do
-      person1 = FactoryGirl.create(:person, lastname: 'YesDoe')
-      person2 = FactoryGirl.create(:person, lastname: 'NoDoe', status: 'Inactive')
+      @person_active = FactoryGirl.create(:person)
+      @person_inactive = FactoryGirl.create(:person, status: 'Inactive')
       visit signin_people_path
       page.should have_content("Command Staff") #This is in the first heading
-      page.should have_content("YesDoe")
-      page.should_not have_content("NoDoe")
+      page.should have_content(@person_active.lastname)
+      page.should_not have_content(@person_inactive.lastname)
     end
   end
 end

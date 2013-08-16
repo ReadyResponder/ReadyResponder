@@ -9,8 +9,9 @@
       <th>Name</th>
       <th>Location</th>
       <th>Category</th>
-      <th>Serial</th>
-      <th>Local Serial</th>
+      <th>Serial 1</th>
+      <th>Serial 2</th>
+      <th>Serial 3</th>
       <th>Owner</th>
       <th>Status</th>
       <th></th>
@@ -22,9 +23,10 @@
 	<td><%= link_to item.model + " " + item.name, item_path(item) %></td>
 	<td><%= item.location_id %></td>
 	<td><%= item.category %></td>
-	<td><%= item.serial %></td>
-	<td><%= item.local_serial %></td>
-	<td><%= item.person.fullname unless item.person_id.blank? %></td>
+	<td><%= item.serial1 %></td>
+	<td><%= item.serial2 %></td>
+  <td><%= item.serial3 %></td>
+  <td><%= item.person.fullname unless item.person_id.blank? %></td>
 	<td><%= item.status %></td>
 	<td><%= link_to 'Edit', edit_item_path(item), :class => 'btn btn-mini btn-primary' unless cannot? :edit, item %></td>
       </tr>

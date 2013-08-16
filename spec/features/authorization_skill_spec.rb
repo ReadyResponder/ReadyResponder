@@ -54,7 +54,7 @@ describe "a user" do
   end
   describe "in the editor role" do
     before (:each) do
-      @person = FactoryGirl.create(:person, lastname: 'YesDoe')
+      @person = FactoryGirl.create(:person)
       somebody = FactoryGirl.create(:user)
       r = FactoryGirl.create(:role, name: 'Editor')
       somebody.roles << r
@@ -68,11 +68,10 @@ describe "a user" do
       page.should have_content('Edit') #Need to scope this, or it will fail on Edith
       page.should have_content('New')
       
-      person = FactoryGirl.create(:person, lastname: 'YesDoe')
-      visit person_path(person)
+      visit person_path(@person)
       page.should have_content('Edit') #Need to scope this, or it will fail on Edith
       click_on 'Edit'
-      current_path.should == edit_person_path(person)
+      current_path.should == edit_person_path(@person)
       page.should_not have_content("Access Denied")
     end
     it "can create a new person" do

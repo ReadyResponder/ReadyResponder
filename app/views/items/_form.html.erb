@@ -3,19 +3,23 @@
 
   <div class="form-inputs">
     <%= f.association :location %>
-    <%= f.input :name %>
-    <%= f.input :description %>
-    <%= f.input :source %>
+    <%= f.input :status, :as => :select, :collection => Item::STATUS_CHOICES %>
     <%= f.input :category, :as => :select, :collection => Item::CATEGORY_CHOICES %>
+    <%= f.input :name %>
     <%= f.input :model %>
-    <%= f.input :serial %>
-    <%= f.input :serial %>
+    <%= f.input :description %>
+    <%= f.input :serial1, :label => 'Serial Number 1' %>
+    <%= f.input :serial2, :label => 'Serial Number 2' %>
+    <%= f.input :serial3, :label => 'Serial Number 3' %>
     <%= f.association :person, :label => 'Owner' %>
+    <%= f.input :source %>
+    <%= f.input :po_number %>
+    <%= f.input :value, :placeholder => 'Replacement price' %>
     <%= f.input :purchase_date, :as => :string, :input_html => { :class => 'datepicker', :size => 11 }  %>
     <%= f.input :purchase_amt %>
     <%= f.input :sell_date, :as => :string, :input_html => { :class => 'datepicker', :size => 11 }  %>
     <%= f.input :sell_amt %>
-    <%= f.input :status, :as => :select, :collection => Item::STATUS_CHOICES %>
+    
   </div>
 
   <div class="form-actions">
