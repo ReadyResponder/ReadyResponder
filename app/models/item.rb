@@ -5,6 +5,6 @@ class Item < ActiveRecord::Base
   has_many :repairs
 
   STATUS_CHOICES = ['In Service','Out of Service','Available','Sold', 'Destroyed']
-  CATEGORY_CHOICES = ['Pump','Light','Generator','Shelter', 'Other']
+  CATEGORY_CHOICES = ['Pump','Light','Generator','Shelter', 'Radio', 'Other']
 
 end

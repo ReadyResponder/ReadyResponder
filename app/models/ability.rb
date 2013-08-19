@@ -17,10 +17,15 @@ class Ability
       can [:read, :update, :create, :edit], Inspection
       can [:read, :update, :create, :edit], Location
       can [:read, :update, :create, :edit], Repair
-      can [:signin], Person
-      can [:orgchart], Person
+      can [:signin, :orgchart], Person
       can :read, :all
-    elsif current_user.roles.to_s.include? 'Reader'
+    elsif current_user.roles.to_s.include? 'Trainer'
+      can [:read, :update, :create, :edit], Cert
+      can [:read, :update, :create, :edit], Event
+      can [:read, :update, :create, :edit], Course
+      can [:read], [Person, Channel, Item, Event, Course, Skill, Inspection, Repair]
+      can [:signin, :orgchart], Person
+   elsif current_user.roles.to_s.include? 'Reader'
       can [:read], [Person, Channel, Cert, Item, Event, Course, Skill, Inspection, Repair]
       can [:signin], Person
       can :orgchart, Person

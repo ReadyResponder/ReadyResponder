@@ -1,29 +1,6 @@
 require 'spec_helper'
       #save_and_open_page
 describe "a user" do
-  describe "without a role" do
-    before (:each) do
-      @person = FactoryGirl.create(:person)
-      somebody = FactoryGirl.create(:user)
-      visit new_user_session_path
-      fill_in 'user_email', :with => somebody.email
-      fill_in 'user_password', :with => somebody.password
-      click_on 'Sign in'
-    end
-    it "cannot view people" do
-      visit people_path
-      page.should_not have_content('Edit') #Need to scope this, or it will fail on Edith
-      page.should_not have_content('New')
-      page.should_not have_content(@person.lastname)
-      page.should have_content("Access Denied")
-      
-      visit person_path(@person)
-      page.should_not have_content('Edit') #Need to scope this, or it will fail on Edith
-      page.should_not have_content(@person.lastname)
-      visit edit_person_path(@person)
-      page.should have_content("Access Denied")
-    end
-  end
   describe "in the reader role" do
     before (:each) do
       @person = FactoryGirl.create(:person)
@@ -57,10 +34,10 @@ describe "a user" do
       page.should have_content(@person_active.lastname)
       page.should_not have_content(@person_inactive.lastname)
     end
-end
+  end
   describe "in the editor role" do
     before (:each) do
-      @person = FactoryGirl.create(:person, lastname: 'YesDoe')
+      @person = FactoryGirl.create(:person)
       somebody = FactoryGirl.create(:user)
       somebody.roles << FactoryGirl.create(:role, name: 'Editor')
       visit new_user_session_path

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130816001517) do
+ActiveRecord::Schema.define(:version => 20130818005326) do
 
   create_table "attendances", :force => true do |t|
     t.integer  "person_id"
@@ -135,6 +135,9 @@ ActiveRecord::Schema.define(:version => 20130816001517) do
     t.string   "po_number"
     t.decimal  "value",           :precision => 8, :scale => 2
     t.string   "serial3"
+    t.string   "brand"
+    t.string   "stock_number"
+    t.text     "comments"
   end
 
   create_table "locations", :force => true do |t|

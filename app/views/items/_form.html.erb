@@ -6,7 +6,9 @@
     <%= f.input :status, :as => :select, :collection => Item::STATUS_CHOICES %>
     <%= f.input :category, :as => :select, :collection => Item::CATEGORY_CHOICES %>
     <%= f.input :name %>
+    <%= f.input :brand %>
     <%= f.input :model %>
+    <%= f.input :stock_number %>
     <%= f.input :description %>
     <%= f.input :serial1, :label => 'Serial Number 1' %>
     <%= f.input :serial2, :label => 'Serial Number 2' %>
@@ -19,7 +21,7 @@
     <%= f.input :purchase_amt %>
     <%= f.input :sell_date, :as => :string, :input_html => { :class => 'datepicker', :size => 11 }  %>
     <%= f.input :sell_amt %>
-    
+    <%= f.input :comments %>
   </div>
 
   <div class="form-actions">
