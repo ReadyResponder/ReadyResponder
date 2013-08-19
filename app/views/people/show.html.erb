@@ -14,10 +14,10 @@
   </span>
 </p>
 
-<div class="channels">
+<div id="channels">
   <ul>
     <% @person.channels.each do |channel| %>
-      <li><%= "#{channel.name} is #{channel.content} on #{channel.carrier}"  %></li>
+      <li><%= number_to_phone(channel.content, area_code: true) if channel.category =~ /(P|p)hone/ %></li>
     <% end %>
   </ul>
 </div>
@@ -49,28 +49,27 @@
     </ul>
   </div>
 
-  <h3>Courses</h3>
+  <h3>Courses (<%= @person.courses.uniq.count %>)</h3>
   <div>
-    New Course
     <ul>
       <%= render(@person.courses.uniq) || raw("No courses yet !") %>
     </ul>
   </div>
   
-  <h3>Certifications</h3>
+  <h3>Certifications (<%= @person.certs.uniq.count %>)</h3>
   <div>
     <ul>
       <%= render(@person.certs) || raw("No certifications yet !") %>
     </ul>
-    <%= link_to 'New Cert', new_person_cert_path(@person), :class => 'btn' unless cannot? :create, Cert  %>
+    <%= link_to 'New Certification', new_person_cert_path(@person), :class => 'btn' if can? :create, Cert  %>
   </div>
   
-  <h3>Items</h3>
+  <h3>Items (<%= @person.items.uniq.count %>)</h3>
   <div>
     <ul>
       <%= render(@person.items) || raw("No Items Found !") %>
     </ul>
-    <%= link_to 'New Item', new_person_item_path(@person), :class => 'btn' unless cannot? :create, Item  %>
+    <%= link_to 'New Item', new_person_item_path(@person), :class => 'btn' if can? :create, Item  %>
  </div>
 </div>
 

@@ -40,6 +40,7 @@ Lims3::Application.routes.draw do
       collection do
 	      get 'inactive'
         get 'leave'
+        get 'other'
         get 'applicants'
         get 'prospects'
         get 'declined'

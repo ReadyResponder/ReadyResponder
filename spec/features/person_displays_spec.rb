@@ -22,6 +22,7 @@ describe "Person" do
       FactoryGirl.create(:person, firstname: 'Indy', status: 'Inactive' )
       FactoryGirl.create(:person, firstname: 'Leona', status: 'Leave of Absence' )
       FactoryGirl.create(:person, firstname: 'Donna', status: 'Declined' )
+      FactoryGirl.create(:person, firstname: 'Oscar', status: 'Active', department: 'Other' )
     end
 
     it "returns the index page" do
@@ -36,6 +37,7 @@ describe "Person" do
       page.should_not have_content('Priscilla')
       page.should_not have_content('Indy')
       page.should_not have_content('Leona')
+      page.should_not have_content('Oscar')
     end
 
     it "returns a page for Police" do
@@ -47,7 +49,8 @@ describe "Person" do
       page.should_not have_content('Adam')
       page.should_not have_content('Priscilla')
       page.should_not have_content('Indy')
-       page.should_not have_content('Leona')
+      page.should_not have_content('Leona')
+      page.should_not have_content('Oscar')
    end
 
     it "returns a page for CERT" do
@@ -59,6 +62,7 @@ describe "Person" do
       page.should_not have_content('Adam')
       page.should_not have_content('Priscilla')
       page.should_not have_content('Indy')
+      page.should_not have_content('Oscar')
       page.should_not have_content('Leona')
     end
 
@@ -72,6 +76,7 @@ describe "Person" do
       page.should_not have_content('Priscilla')
       page.should_not have_content('Indy')
       page.should_not have_content('Leona')
+      page.should_not have_content('Oscar')
     end
 
     it "returns a page for Prospects" do
@@ -84,7 +89,9 @@ describe "Person" do
       page.should have_content('Priscilla')
       page.should_not have_content('Indy')
       page.should_not have_content('Leona')
+      page.should_not have_content('Oscar')
     end
+
     it "returns a page for Inactive" do
       visit inactive_people_path
       page.should have_content('Listing Inactive')
@@ -95,9 +102,10 @@ describe "Person" do
       page.should_not have_content('Priscilla')
       page.should have_content('Indy')
       page.should_not have_content('Leona')
+      page.should_not have_content('Oscar')
     end
     it "returns a page for Declined" do
-      visit declined_people_path
+      find('#navbar').click_link('Declined')
       page.should have_content('Listing Declined')
       page.should have_content('LIMS') # This is in the nav bar
       page.should_not have_content('CJ')
@@ -107,9 +115,10 @@ describe "Person" do
       page.should_not have_content('Indy')
       page.should_not have_content('Leona')
       page.should have_content('Donna')
+      page.should_not have_content('Oscar')
     end
     it "returns a page for on leave" do
-      visit leave_people_path
+      find('#navbar').click_link('Leave')
       page.should have_content('Listing On-Leave')
       page.should have_content('LIMS') # This is in the nav bar
       page.should_not have_content('CJ')
@@ -118,6 +127,21 @@ describe "Person" do
       page.should_not have_content('Priscilla')
       page.should_not have_content('Indy')
       page.should have_content('Leona')
+      page.should_not have_content('Oscar')
+    end
+
+    it "returns a page for other" do
+      find('#navbar').click_link('Other')
+      #visit other_people_path
+      page.should have_content('Listing Others Active')
+      page.should have_content('LIMS') # This is in the nav bar
+      page.should_not have_content('CJ')
+      page.should_not have_content('Sierra')
+      page.should_not have_content('Adam')
+      page.should_not have_content('Priscilla')
+      page.should_not have_content('Indy')
+      page.should_not have_content('Leona')
+      page.should have_content('Oscar')
     end
 
   end

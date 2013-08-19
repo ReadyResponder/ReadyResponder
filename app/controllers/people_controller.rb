@@ -24,6 +24,12 @@ class PeopleController < ApplicationController
     @people = Person.cert.active.all
     @page_title = "CERT"
   end
+
+  def other
+    @people = Person.where(department: 'Other')
+    @page_title = "CERT"
+  end
+
   def applicants
     @people = Person.applicants.all
     @page_title = "Applicants"
@@ -50,7 +56,7 @@ class PeopleController < ApplicationController
   end
 
   def index
-    @people = Person.active.all
+    @people = Person.active.where(department: ['Police', 'CERT'])
 
     respond_to do |format|
       format.html # index.html.erb
