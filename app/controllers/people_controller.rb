@@ -27,7 +27,7 @@ class PeopleController < ApplicationController
 
   def other
     @people = Person.where(department: 'Other')
-    @page_title = "CERT"
+    @page_title = "Other People"
   end
 
   def applicants
@@ -47,17 +47,17 @@ class PeopleController < ApplicationController
 
   def leave
     @people = Person.leave.all
-    @page_title = "Leave"
+    @page_title = "People on Leave"
   end
 
   def inactive
     @people = Person.inactive.all
-    @page_title = "Inactive"
+    @page_title = "Inactive People"
   end
 
   def index
     @people = Person.active.where(department: ['Police', 'CERT'])
-
+    @page_title = "Active Police and CERT"
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @people }
@@ -66,7 +66,7 @@ class PeopleController < ApplicationController
 
   def show
     @person = Person.find(params[:id])
-
+    @page_title = @person.fullname
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @person }
@@ -74,6 +74,7 @@ class PeopleController < ApplicationController
   end
 
   def new
+    @page_title = "New Person"
     @person = Person.new(status: cookies[:status], state: 'MA')
     @person.channels.build (attributes = {category: 'E-Mail', status: 'OK', usage: '1-All'})
     @mobile = @person.channels.build (attributes = {category: 'Mobile Phone', status: 'OK', usage: '1-All'})

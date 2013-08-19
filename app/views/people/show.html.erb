@@ -17,7 +17,15 @@
 <div id="channels">
   <ul>
     <% @person.channels.each do |channel| %>
-      <li><%= number_to_phone(channel.content, area_code: true) if channel.category =~ /(P|p)hone/ %></li>
+      <li>
+        <%# This should be moved into a presenter %>
+        <% if channel.category =~ /(P|p)hone/ %>
+          <%= number_to_phone(channel.content, area_code: true) %> 
+          <%= "on #{channel.carrier}" if channel.carrier %>
+        <% else %>
+          <%= channel.content %>
+        <% end %>
+      </li>
     <% end %>
   </ul>
 </div>

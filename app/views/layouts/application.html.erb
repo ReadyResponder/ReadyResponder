@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>BEMA</title>
+    <title><%= @page_title ||= "BEMA" %></title>
     <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
@@ -22,7 +22,7 @@
         </div>
         <div class="span10">
           <%= yield %></br></br>
-          Version 0.74
+          Version 0.75
           <%= current_user.email unless current_user.nil? %>
           <%= current_user.roles.map{ |role| role.name.to_s } unless current_user.nil? %>
         </div>
