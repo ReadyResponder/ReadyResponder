@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe "Events" do
   before (:each)  do
-    @attendance = FactoryGirl.create(:attendance)
-    @event = @attendance.event
-    @person = @attendance.person
+    @timeslot = FactoryGirl.create(:timeslot)
+    @event = @timeslot.event
+    @person = @timeslot.person
     somebody = FactoryGirl.create(:user)
     r = FactoryGirl.create(:role, name: 'Editor')
     somebody.roles << r

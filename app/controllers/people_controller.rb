@@ -11,7 +11,7 @@ class PeopleController < ApplicationController
   end
 
   def orgchart
-    @people = Person.active.all
+    @people = Person.police.active.all
     @page_title = "Org Chart"
     render :layout => "orgchart"
   end

@@ -1,5 +1,7 @@
-<li>
-  <%= link_to cert.course.name, cert %> - <%= cert.expiration_date.to_s %>
-  <%= 'EXPIRED' if cert.expired? %>
-  <%= 'Expiring' if cert.expiring? %>
-</li>
+<tr>
+  <td>
+    <%= link_to cert.course.name, cert %> - <%= cert.expiration_date.to_s %>
+    <%= 'EXPIRED' if cert.expired? %>
+    <%= 'Expiring' if cert.expiring? %>
+  </td>
+</tr>

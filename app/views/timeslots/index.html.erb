@@ -1,0 +1,31 @@
+<% content_for :sidebar do %>
+    <h1>Listing Timeslots</h1>
+    <%= link_to 'New Timeslots', new_timeslot_path %>
+<% end %>
+
+<table id="timeslots" class="datatable display table table-striped table-bordered">
+  <tr>
+    <th>Person</th>
+    <th>Event</th>
+    <th>Category</th>
+    <th>Start time</th>
+    <th>End time</th>
+    <th>Duration</th>
+    <th></th>
+  </tr>
+
+<% @timeslots.each do |timeslot| %>
+  <tr>
+    <td><%= timeslot.person_id %></td>
+    <td><%= timeslot.event_id %></td>
+    <td><%= timeslot.category %></td>
+    <td><%= timeslot.start_time %></td>
+    <td><%= timeslot.end_time %></td>
+    <td><%= timeslot.duration %></td>
+    <td><%= link_to 'Edit', edit_timeslot_path(timeslot) if can? :edit, timeslot %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+

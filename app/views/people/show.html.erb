@@ -52,9 +52,11 @@
 <div class="accordion">
   <h3>Skills (<%= @person.skills.uniq.count %>)</h3>
   <div>
-    <ul>
-      <%= render(@person.skills.uniq) || raw("No skills yet !") %>
-    </ul>
+    <table class="table table-striped table-bordered">
+      <tbody>
+        <%= render (@person.skills.uniq) || raw("No skills yet !")%>
+      </tbody>
+    </table>
   </div>
 
   <h3>Courses (<%= @person.courses.uniq.count %>)</h3>
@@ -66,10 +68,11 @@
   
   <h3>Certifications (<%= @person.certs.uniq.count %>)</h3>
   <div>
-    <ul>
-      <%= render(@person.certs) || raw("No certifications yet !") %>
-    </ul>
-    <%= link_to 'New Certification', new_person_cert_path(@person), :class => 'btn' if can? :create, Cert  %>
+    <table class="table table-striped table-bordered">
+      <tbody>
+        <%= render(@person.certs) || raw("No certifications yet !") %>
+      </tbody>
+    </table>
   </div>
   
   <h3>Items (<%= @person.items.uniq.count %>)</h3>
@@ -78,7 +81,16 @@
       <%= render(@person.items) || raw("No Items Found !") %>
     </ul>
     <%= link_to 'New Item', new_person_item_path(@person), :class => 'btn' if can? :create, Item  %>
- </div>
+  </div>
+
+  <h3>Times (<%= @person.timeslots.uniq.count %>)</h3>
+  <div>
+    <ul>
+      <%= render(@person.timeslots.uniq) || raw("No timeslots yet !") %>
+    </ul>
+  </div>
+
+
 </div>
 
 <% content_for :parking do %>

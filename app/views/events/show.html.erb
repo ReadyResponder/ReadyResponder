@@ -24,13 +24,13 @@
 </p>
 
 <p>
-  <b>Start date:</b>
-  <%= @event.start_date %>
+  <b>Start time:</b>
+  <%= @event.start_time %>
 </p>
 
 <p>
-  <b>End date:</b>
-  <%= @event.end_date %>
+  <b>End time:</b>
+  <%= @event.end_time %>
 </p>
 
 <p>
@@ -47,3 +47,37 @@
   <b>Status:</b>
   <%= @event.status %>
 </p>
+
+<div class="accordion">
+  <h3>Attendees (<%= @event.people.uniq.count %>) <%= @event.manhours %> hours</h3>
+  <div>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Hours</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @event.timeslots.each do |timeslot| %>
+          <tr>
+            <td>
+              <%= link_to timeslot.person.fullname, timeslot %>
+            </td>
+            <td>
+              <%= timeslot.start_time.to_s %>
+            </td>
+            <td>
+              <%= timeslot.end_time.to_s %>
+            </td>
+            <td>
+              <%= timeslot.duration %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

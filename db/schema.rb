@@ -11,23 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130818005326) do
-
-  create_table "attendances", :force => true do |t|
-    t.integer  "person_id"
-    t.integer  "event_id"
-    t.string   "category"
-    t.datetime "est_start_time"
-    t.datetime "start_time"
-    t.datetime "est_end_time"
-    t.datetime "end_time"
-    t.decimal  "duration",       :precision => 7, :scale => 2
-    t.datetime "created_at",                                   :null => false
-    t.datetime "updated_at",                                   :null => false
-  end
-
-  add_index "attendances", ["event_id"], :name => "index_attendances_on_event_id"
-  add_index "attendances", ["person_id"], :name => "index_attendances_on_person_id"
+ActiveRecord::Schema.define(:version => 20130820214554) do
 
   create_table "certs", :force => true do |t|
     t.integer  "person_id"
@@ -92,8 +76,8 @@ ActiveRecord::Schema.define(:version => 20130818005326) do
     t.string   "instructor"
     t.string   "location"
     t.string   "description"
-    t.datetime "start_date"
-    t.datetime "end_date"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.integer  "duration"
     t.string   "category"
     t.string   "status"
@@ -103,7 +87,7 @@ ActiveRecord::Schema.define(:version => 20130818005326) do
 
   create_table "inspections", :force => true do |t|
     t.integer  "person_id"
-    t.datetime "inspection_date"
+    t.datetime "inspection_time"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.string   "status"
@@ -255,6 +239,18 @@ ActiveRecord::Schema.define(:version => 20130818005326) do
   end
 
   add_index "skills_titles", ["skill_id", "title_id"], :name => "index_skills_titles_on_skill_id_and_title_id"
+
+  create_table "timeslots", :force => true do |t|
+    t.integer  "person_id"
+    t.integer  "event_id"
+    t.string   "category"
+    t.string   "status"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.decimal  "duration",   :precision => 7, :scale => 2
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+  end
 
   create_table "titles", :force => true do |t|
     t.string   "name"

@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
   <center><h2>Listing People</h2></br>
-  <%= link_to 'New Person', new_person_path, :class => 'btn' unless cannot? :create, Person %></center>
+  <%= link_to 'New Person', new_person_path, :class => 'btn' if can? :create, Person %></center>
 <% end %>
   
 

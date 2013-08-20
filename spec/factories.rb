@@ -49,23 +49,19 @@ FactoryGirl.define do
   end
 
   factory :event do
-    instructor "MyString"
-    location "MyString"
-    description "MyString"
-    start_date "2012-12-14 05:50:18"
-    end_date "2012-12-14 05:50:18"
-    duration 1
+    instructor "CJ"
+    location "Barracks"
+    description "A Training Event"
+    start_time "2012-12-14 05:50:18"
+    end_time "2012-12-14 06:50:18"
     category "Training"
     status "Completed"
   end
   
-  factory :attendance do
+  factory :timeslot do
     category "Training"
-    est_start_time "2012-12-23 03:31:31"
     start_time "2012-12-23 03:31:31"
-    est_end_time "2012-12-23 03:31:31"
     end_time "2012-12-23 04:31"
-    duration "9.99"
     person
     event
   end

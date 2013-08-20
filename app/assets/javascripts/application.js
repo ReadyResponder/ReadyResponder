@@ -17,5 +17,7 @@
 //= require jquery.ui.widget
 //= require jquery.ui.accordion
 //= require dataTables/jquery.dataTables
+//= require jquery-ui-timepicker-addon
 //= require bootstrap
+
 //= require_tree .

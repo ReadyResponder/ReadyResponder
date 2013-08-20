@@ -14,9 +14,8 @@ class Person < ActiveRecord::Base
   has_many :courses, :through => :certs
   has_many :skills, :through => :courses
   has_and_belongs_to_many :titles
-  has_many :attendances
-  has_many :events, :through => :attendances
-  #accepts_nested_attributes_for :certs
+  has_many :timeslots
+  has_many :events, :through => :timeslots
   has_many :items
   has_many :inspections
   

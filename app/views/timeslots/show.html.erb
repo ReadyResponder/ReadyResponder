@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Person:</b>
+  <%= link_to @timeslot.person.fullname, @timeslot.person %>
+</p>
+
+<p>
+  <b>Event:</b>
+  <%= link_to @timeslot.event.description, @timeslot.event %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @timeslot.category %>
+</p>
+
+<p>
+  <b>Start time:</b>
+  <%= @timeslot.start_time %>
+</p>
+
+
+<p>
+  <b>End time:</b>
+  <%= @timeslot.end_time %>
+</p>
+
+<p>
+  <b>Duration:</b>
+  <%= @timeslot.duration %>
+</p>

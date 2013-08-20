@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
   <center><h1>Listing Skills</h1></br>
-  <%= link_to 'New Skill', new_skill_path, :class => 'btn' %></center>
+  <%= link_to 'New Skill', new_skill_path, :class => 'btn' if can? :create, Skill %></center>
 <% end %>
 
 
@@ -14,8 +14,8 @@
   <tbody>
     <% @skills.each do |skill| %>
       <tr>
-	<td><%= link_to skill.name, skill %></td>
-	<td><%= link_to 'Edit', edit_skill_path(skill), :class => 'btn btn-mini btn-primary' %></td>
+      	<td><%= link_to skill.name, skill %></td>
+      	<td><%= link_to 'Edit', edit_skill_path(skill), :class => 'btn btn-mini btn-primary' if can? :edit, skill %></td>
       </tr>
     <% end %>
   </tbody>
