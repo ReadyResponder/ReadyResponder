@@ -44,7 +44,8 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(params[:event])
-
+    @timeslots = @event.timeslots
+    
     respond_to do |format|
       if @event.save
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
@@ -60,6 +61,7 @@ class EventsController < ApplicationController
   # PUT /events/1.json
   def update
     @event = Event.find(params[:id])
+    @timeslots = @event.timeslots
 
     respond_to do |format|
       if @event.update_attributes(params[:event])

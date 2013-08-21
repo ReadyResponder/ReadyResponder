@@ -61,9 +61,11 @@
 
   <h3>Courses (<%= @person.courses.uniq.count %>)</h3>
   <div>
-    <ul>
-      <%= render(@person.courses.uniq) || raw("No courses yet !") %>
-    </ul>
+    <table class="table table-striped table-bordered">
+      <tbody>
+        <%= render(@person.courses.uniq) || raw("No courses yet !") %>
+      </tbody>
+    </table>
   </div>
   
   <h3>Certifications (<%= @person.certs.uniq.count %>)</h3>
@@ -85,9 +87,11 @@
 
   <h3>Times (<%= @person.timeslots.uniq.count %>)</h3>
   <div>
-    <ul>
-      <%= render(@person.timeslots.uniq) || raw("No timeslots yet !") %>
-    </ul>
+    <table class="table table-striped table-bordered">
+      <tbody>
+        <%= render(@person.timeslots.uniq) || raw("No timeslots yet !") %>
+      </tbody>
+    </table>
   </div>
 
 

@@ -1,4 +1,9 @@
-<p id="notice"><%= notice %></p>
+<% content_for :sidebar do %>
+  <%= link_to 'Return to Listing', timeslots_path, :class => 'btn' %></br></br>
+  <%= link_to 'Edit Timeslot', edit_timeslot_path(@timeslot), :class => 'btn btn-primary' if can? :edit, @timeslot  %>
+  </br></br>
+<% end %>
+
 
 <p>
   <b>Person:</b>

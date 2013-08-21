@@ -16,13 +16,13 @@
 
 <% @timeslots.each do |timeslot| %>
   <tr>
-    <td><%= timeslot.person_id %></td>
-    <td><%= timeslot.event_id %></td>
+    <td><%= timeslot.person.fullname %></td>
+    <td><%= timeslot.event.description %></td>
     <td><%= timeslot.category %></td>
     <td><%= timeslot.start_time %></td>
     <td><%= timeslot.end_time %></td>
     <td><%= timeslot.duration %></td>
-    <td><%= link_to 'Edit', edit_timeslot_path(timeslot) if can? :edit, timeslot %></td>
+    <td><%= link_to 'Edit', edit_timeslot_path(timeslot), :class => 'btn btn-mini btn-primary' if can? :edit, timeslot %></td>
   </tr>
 <% end %>
 </table>

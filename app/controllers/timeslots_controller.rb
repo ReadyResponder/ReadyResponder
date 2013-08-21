@@ -51,7 +51,7 @@ class TimeslotsController < ApplicationController
     @timeslot = Timeslot.find(params[:id])
 
     respond_to do |format|
-      if @timeslot.update_attributes(params[:Timeslot])
+      if @timeslot.update_attributes(params[:timeslot])
         format.html { redirect_to @timeslot, notice: 'Timeslot was successfully updated.' }
         format.json { head :no_content }
       else

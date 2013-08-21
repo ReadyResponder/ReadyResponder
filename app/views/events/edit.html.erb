@@ -1,6 +1,6 @@
-<h1>Editing event</h1>
-
+<% content_for :sidebar do %>
+  <h1>Editing Event</h1>
+  <%= link_to 'Cancel', events_path, :class => 'btn' %></br>
+<% end %>
+ 
 <%= render 'form' %>
-
-<%= link_to 'Show', @event %> |
-<%= link_to 'Back', events_path %>

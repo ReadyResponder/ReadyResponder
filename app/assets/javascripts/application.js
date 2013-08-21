@@ -12,12 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require jquery.ui.core
 //= require jquery.ui.datepicker
 //= require jquery.ui.widget
 //= require jquery.ui.accordion
+//= require jquery.ui.slider
 //= require dataTables/jquery.dataTables
 //= require jquery-ui-timepicker-addon
 //= require bootstrap
-
 //= require_tree .

@@ -7,6 +7,7 @@ class Event < ActiveRecord::Base
       errors.add(:end_time, "must be after the start, unless you are the Doctor")
     end
   end
+  
   validates_presence_of :category, :description
   validate :end_date_cannot_be_before_start
   
@@ -15,8 +16,9 @@ class Event < ActiveRecord::Base
   has_many :people, :through => :timeslots
   
   #CATEGORY_CHOICES = ['Class', 'Patrol', 'Admin', 'Call-out', 'SAR']
-  CATEGORY_CHOICES = ['Training', 'Patrol', 'Meeting', 'Admin']
+  CATEGORY_CHOICES = ['Training', 'Patrol', 'Meeting', 'Admin', 'Event']
   STATUS_CHOICES = ['Scheduled', 'In-session', 'Completed', 'Cancelled']
+
   def to_s
     description
   end

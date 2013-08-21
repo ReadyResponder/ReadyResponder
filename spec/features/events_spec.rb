@@ -23,12 +23,18 @@ describe "Events" do
       page.should have_content("Listing Events")
       page.should have_css('#sidebar')
       within_table("events") do
-	within("tbody") do
-	  page.should have_content(@event.description)
-	  #pending page.should have_css("td")  # this is only picking up the edit button at the end, not an event show link
-	end
+      	within("tbody") do
+      	  page.should have_content(@event.description)
+      	  #pending page.should have_css("td")  # this is only picking up the edit button at the end, not an event show link
+      	end
       end
     end
-    
+    it 'displays an edit form' do
+      visit edit_event_path(@event)
+      within("#sidebar") do
+        page.should have_content("Cancel")
+        #save_and_open_page
+      end
+    end
   end
 end

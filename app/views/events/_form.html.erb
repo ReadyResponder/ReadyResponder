@@ -8,11 +8,9 @@
     <%= f.input :instructor %>
     <%= f.input :location %>
     <%= f.input :description %>
-    <%#= f.datetime_picker 'start_date', :dateFormat => "yy-mm-dd" %>
-    <%= f.input :start_time, :as => :string, :input_html => {:class => "datepicker",  :size => 11 }  %>
-    <%= f.input :end_time, :as => :string, :input_html => {:class => "datepicker", :size => 11 }  %>
-    <%= f.input :duration %>
-    <%= f.association :people %>
+    <%= f.input :start_time, :as => :string, :input_html => {:class => "datetimepicker",  :size => 11 }  %>
+    <%= f.input :end_time, :as => :string, :input_html => {:class => "datetimepicker", :size => 11 }  %>
+    <%= f.association :people, :as => :check_boxes %>
   </div>
 
   <div class="form-actions">

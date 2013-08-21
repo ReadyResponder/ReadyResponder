@@ -4,11 +4,16 @@
 jQuery ->
         $('.datepicker').datepicker
           dateFormat: 'yy-mm-dd'
+        $('.datetimepicker').datetimepicker
+          dateFormat: 'yy-mm-dd'
+          timeFormat: 'HH:mm'
+          stepHour: 1
+          stepMinute: 15
         $('.datatable').dataTable
           sPaginationType: "full_numbers"
           'bJQueryUI': true
           'bRetrieve': true
-          iDisplayLength: 50
+          iDisplayLength: 100
         $('.accordion').accordion
           collapsible: true
           active: false

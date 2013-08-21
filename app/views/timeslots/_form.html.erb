@@ -5,9 +5,8 @@
     <%= f.association :person %>
     <%= f.association :event %>
     <%= f.input :category, :as => :select, :collection => Event::CATEGORY_CHOICES %>
-    <%= f.input :start_time, :as => :string %>
-    <%= f.input :end_time, :as => :string %>
-    <%= f.input :duration %>
+    <%= f.input :start_time, :as => :string, :input_html => {:class => "datetimepicker",  :size => 11 }  %>
+    <%= f.input :end_time, :as => :string, :input_html => {:class => "datetimepicker", :size => 11 }  %>
   </div>
 
   <div class="form-actions">
