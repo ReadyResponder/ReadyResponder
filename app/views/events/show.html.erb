@@ -49,15 +49,15 @@
 </p>
 
 <div class="accordion">
-  <h3>Attendees (<%= @event.people.uniq.count %>) <%#= @event.manhours %> hours</h3>
+  <h3>Attendees (<%= @event.people.uniq.count %>) <%= @event.manhours %> actual hours</h3>
   <div>
     <table class="table table-striped table-bordered">
       <thead>
         <tr>
           <th>Name</th>
-          <th>Status</th>
-          <th>Start</th>
-          <th>End</th>
+          <th>Intended Status</th>
+          <th>Intnd Start</th>
+          <th>Intnd End</th>
           <th>Hours</th>
         </tr>
       </thead>
@@ -68,16 +68,16 @@
               <%= link_to timeslot.person.fullname, timeslot %>
             </td>
             <td>
-              <%= timeslot.status %>
+              <%= timeslot.intention %>
             </td>
             <td>
-              <%= timeslot.start_time.to_s(:short) %>
+              <%= timeslot.intended_start_time.to_s(:short) %>
             </td>
             <td>
-              <%= timeslot.end_time.to_s(:short) %>
+              <%= timeslot.intended_end_time.to_s(:short) %>
             </td>
             <td>
-              <%= timeslot.duration %>
+              <%= timeslot.intended_duration %>
             </td>
           </tr>
         <% end %>
@@ -86,4 +86,4 @@
   </div>
 </div>
 
-<%= @event.updated_at.to_s(:long) %>
+Last Modified <%= @event.updated_at.to_s(:long) %>

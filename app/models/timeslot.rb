@@ -7,7 +7,7 @@ class Timeslot < ActiveRecord::Base
   belongs_to :event
 
   INTENTION_CHOICES = ['Scheduled', 'Volunteered', 'Unavailable']
-  OUTCOME_CHOICES = ['Actual', 'Excused', 'AWOL']
+  OUTCOME_CHOICES = ['Actual', "Not Needed", "Excused", 'AWOL']
 
   def intended_end_date_cannot_be_before_start
     if ((!intended_end_time.blank?) and (!intended_start_time.blank?)) and intended_end_time < intended_start_time
@@ -32,10 +32,14 @@ class Timeslot < ActiveRecord::Base
   end
   
   def calc_durations
-    if !(intended_start_time.blank?) and !(intended_end_time.blank?)
+    if intended_start_time.blank? or intended_end_time.blank?
+      self.intended_duration = 0
+    else
       self.intended_duration = ((intended_end_time - intended_start_time) / 1.hour).round(2) || 0
     end 
-    if !(actual_start_time.blank?) and !(actual_end_time.blank?)
+    if actual_start_time.blank? or actual_end_time.blank?
+      self.actual_duration = 0
+    else
       self.actual_duration = ((actual_end_time - actual_start_time) / 1.hour).round(2) || 0
     end 
   end

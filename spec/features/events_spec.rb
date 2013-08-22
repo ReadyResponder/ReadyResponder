@@ -36,5 +36,13 @@ describe "Events" do
         #save_and_open_page
       end
     end
+    it "an event page" do
+      @timeslot = FactoryGirl.create(:timeslot) #this creates a person as well
+      @event = @timeslot.event
+      @certification = FactoryGirl.create(:cert, person: @person)
+      visit event_path(@event)
+      page.should have_content(@event.description)
+    end
+
   end
 end

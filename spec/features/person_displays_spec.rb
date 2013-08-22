@@ -188,9 +188,11 @@ describe "Person" do
     end
 
     it "a person page" do
-      person = FactoryGirl.create(:person, icsid: "509")
-      visit person_path(person)
-      page.should have_content("(509)")
+      @timeslot = FactoryGirl.create(:timeslot) #this creates a person as well
+      @person = @timeslot.person
+      @certification = FactoryGirl.create(:cert, person: @person)
+      visit person_path(@person)
+      page.should have_content(@person.fullname)
     end
 
     it "a person without a start date" do

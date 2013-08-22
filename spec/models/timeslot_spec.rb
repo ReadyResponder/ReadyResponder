@@ -3,6 +3,11 @@ require 'spec_helper'
 describe Timeslot do
 
   describe "creation" do
+    it "has a valid factory" do
+      @timeslot = FactoryGirl.build(:timeslot)
+      @timeslot.should be_valid
+    end
+    
     it "requires an event" do
       @timeslot = FactoryGirl.build(:timeslot, event: nil)
       @timeslot.should_not be_valid

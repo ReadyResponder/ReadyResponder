@@ -28,5 +28,7 @@ class Event < ActiveRecord::Base
       self.duration = ((end_time - start_time) / 1.hour).round(2) || 0
     end 
   end
-
+  def manhours
+    self.timeslots.sum('actual_duration')
+  end
 end

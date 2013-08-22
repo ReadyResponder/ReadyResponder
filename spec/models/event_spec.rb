@@ -13,12 +13,14 @@ describe Event do
   end
 
   it "returns a correct manhours count" do
-    @timeslot1 = FactoryGirl.create(:timeslot)  #This factory creates a person and an event
+    #This factory creates a person and an event
+    @timeslot1 = FactoryGirl.create(:timeslot, actual_start_time: Time.current, actual_end_time: 75.minutes.from_now)
     @event = @timeslot1.event
     @person1 = @timeslot1.person
-    @timeslot2 = FactoryGirl.create(:timeslot, event: @event)
+    @timeslot2 = FactoryGirl.create(:timeslot, event: @event, actual_start_time: Time.current, actual_end_time: 60.minutes.from_now)
     @person2 = @timeslot2.person
     @event.timeslots.count.should equal(2)
+    @event.manhours.should eq(2.25)
     #1.should eq(2)
   end
 end

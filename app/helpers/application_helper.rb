@@ -1,4 +1,5 @@
 module ApplicationHelper
+=begin
   def link_to_add_fields(name, f, association)
     new_object = f.object.send(association).klass.new
     id = new_object.object_id
@@ -7,4 +8,16 @@ module ApplicationHelper
     end
     link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
   end
+=end
+=begin
+  #This is code to implement presenters, based on Ryan Bates Railcasts #287
+  #Sadly it had typos in the Asciicasts version
+  #Error on html_safe not available, the template is not getting set
+  def present(object, klass = nil)
+    klass ||= "#{object.class}Presenter".constantize
+    presenter = klass.new(object, self)
+    yield presenter if block_given?
+    presenter
+  end
+=end
 end
