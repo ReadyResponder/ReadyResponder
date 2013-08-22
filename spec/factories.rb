@@ -60,9 +60,12 @@ FactoryGirl.define do
   
   factory :timeslot do
     category "Training"
-    start_time "2012-12-23 03:31:31"
-    end_time "2012-12-23 04:31"
-    status "Actual"
+    intended_start_time "2012-12-23 03:31"
+    intended_end_time "2012-12-23 04:31"
+    intention "Volunteered"
+    actual_start_time "2012-12-23 03:31"
+    actual_end_time "2012-12-23 05:31"
+    outcome "Actual"
     person
     event
   end

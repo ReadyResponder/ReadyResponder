@@ -16,11 +16,9 @@ describe Event do
     @timeslot1 = FactoryGirl.create(:timeslot)  #This factory creates a person and an event
     @event = @timeslot1.event
     @person1 = @timeslot1.person
-    @person2 = FactoryGirl.create(:person)
-    @event.people << @person2
-    @timeslot2 = @person2.timeslots.first
+    @timeslot2 = FactoryGirl.create(:timeslot, event: @event)
+    @person2 = @timeslot2.person
     @event.timeslots.count.should equal(2)
-    @timeslot1.start_time
     #1.should eq(2)
   end
 end

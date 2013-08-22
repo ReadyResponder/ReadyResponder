@@ -8,9 +8,11 @@
     <th>Person</th>
     <th>Event</th>
     <th>Category</th>
-    <th>Start time</th>
-    <th>End time</th>
-    <th>Duration</th>
+    <th>Intended Start</th>
+    <th>Intended End</th>
+    <th>Actual Start</th>
+    <th>Actual End</th>
+    <th>Actual Duration</th>
     <th></th>
   </tr>
 
@@ -19,9 +21,11 @@
     <td><%= timeslot.person.fullname %></td>
     <td><%= timeslot.event.description %></td>
     <td><%= timeslot.category %></td>
-    <td><%= timeslot.start_time %></td>
-    <td><%= timeslot.end_time %></td>
-    <td><%= timeslot.duration %></td>
+    <td><%= timeslot.intended_start_time.to_s(:short) %></td>
+    <td><%= timeslot.intended_end_time.to_s(:short) %></td>
+    <td><%= timeslot.actual_start_time.to_s(:short) %></td>
+    <td><%= timeslot.actual_end_time.to_s(:short) %></td>
+    <td><%= timeslot.actual_duration %></td>
     <td><%= link_to 'Edit', edit_timeslot_path(timeslot), :class => 'btn btn-mini btn-primary' if can? :edit, timeslot %></td>
   </tr>
 <% end %>

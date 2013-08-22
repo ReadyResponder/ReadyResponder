@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130822010249) do
+ActiveRecord::Schema.define(:version => 20130822014629) do
 
   create_table "certs", :force => true do |t|
     t.integer  "person_id"
@@ -244,12 +244,17 @@ ActiveRecord::Schema.define(:version => 20130822010249) do
     t.integer  "person_id"
     t.integer  "event_id"
     t.string   "category"
-    t.string   "status"
-    t.datetime "start_time"
-    t.datetime "end_time"
-    t.decimal  "duration",   :precision => 7, :scale => 2
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.string   "intention"
+    t.datetime "intended_start_time"
+    t.datetime "intended_end_time"
+    t.decimal  "actual_duration",     :precision => 7, :scale => 2
+    t.datetime "created_at",                                        :null => false
+    t.datetime "updated_at",                                        :null => false
+    t.string   "outcome"
+    t.datetime "actual_start_time"
+    t.datetime "actual_end_time"
+    t.decimal  "intended_duration",   :precision => 7, :scale => 2
+    t.text     "comments"
   end
 
   create_table "titles", :force => true do |t|

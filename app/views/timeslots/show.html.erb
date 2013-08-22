@@ -22,20 +22,35 @@
 
 <p>
   <b>Status:</b>
-  <%= @timeslot.status %>
+  <%= @timeslot.intention %>
 </p>
 
 <p>
-  <b>Start time:</b>
-  <%= @timeslot.start_time.to_s(:short) %>
+  <b>Intended Start</b>
+  <%= @timeslot.intended_start_time.to_s(:short) %>
 </p>
 
 <p>
-  <b>End time:</b>
-  <%= @timeslot.end_time.to_s(:short) %>
+  <b>Intended End</b>
+  <%= @timeslot.intended_end_time.to_s(:short) %>
+</p>
+
+<p>
+  <b>Intended Duration:</b>
+  <%= @timeslot.intended_duration %>
+</p>
+
+<p>
+  <b>Actual Start</b>
+  <%= @timeslot.actual_start_time.to_s(:short) %>
+</p>
+
+<p>
+  <b>Actual End</b>
+  <%= @timeslot.actual_end_time.to_s(:short) %>
 </p>
 
 <p>
   <b>Duration:</b>
-  <%= @timeslot.duration %>
+  <%= @timeslot.actual_duration %>
 </p>
