@@ -25,12 +25,12 @@
 
 <p>
   <b>Start time:</b>
-  <%= @event.start_time %>
+  <%= @event.start_time.to_s(:short) %>
 </p>
 
 <p>
   <b>End time:</b>
-  <%= @event.end_time %>
+  <%= @event.end_time.to_s(:short) %>
 </p>
 
 <p>
@@ -55,6 +55,7 @@
       <thead>
         <tr>
           <th>Name</th>
+          <th>Status</th>
           <th>Start</th>
           <th>End</th>
           <th>Hours</th>
@@ -67,10 +68,13 @@
               <%= link_to timeslot.person.fullname, timeslot %>
             </td>
             <td>
-              <%= timeslot.start_time.to_s %>
+              <%= timeslot.status %>
             </td>
             <td>
-              <%= timeslot.end_time.to_s %>
+              <%= timeslot.start_time.to_s(:short) %>
+            </td>
+            <td>
+              <%= timeslot.end_time.to_s(:short) %>
             </td>
             <td>
               <%= timeslot.duration %>
@@ -81,3 +85,5 @@
     </table>
   </div>
 </div>
+
+<%= @event.updated_at.to_s(:long) %>

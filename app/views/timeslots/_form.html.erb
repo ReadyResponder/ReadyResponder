@@ -1,3 +1,4 @@
+
 <%= simple_form_for(@timeslot) do |f| %>
   <%= f.error_notification %>
 
@@ -5,6 +6,7 @@
     <%= f.association :person %>
     <%= f.association :event %>
     <%= f.input :category, :as => :select, :collection => Event::CATEGORY_CHOICES %>
+    <%= f.input :status, :as => :select, :collection => Timeslot::STATUS_CHOICES %>
     <%= f.input :start_time, :as => :string, :input_html => {:class => "datetimepicker",  :size => 11 }  %>
     <%= f.input :end_time, :as => :string, :input_html => {:class => "datetimepicker", :size => 11 }  %>
   </div>

@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
   before_save :calc_duration
-  attr_accessible :category, :course_id, :description, :duration, :end_time, :instructor, :location, :start_time, :status, :timeslot_ids, :person_ids
+  attr_accessible :category, :course_id, :description, :duration, :start_time, :end_time, :instructor, :location, :status, :timeslot_ids, :person_ids
  
   def end_date_cannot_be_before_start
     if ((!end_time.blank?) and (!start_time.blank?)) and end_time < start_time
@@ -23,9 +23,9 @@ class Event < ActiveRecord::Base
     description
   end
 
-  def calc_duration
-    unless start_time.blank? || end_time.blank?
-      self.duration = (end_time - start_time) / 3600 || 0
+  def calc_duration #This is also used in timeslots; it should be extracted out
+     if !(start_time.blank?) and !(end_time.blank?)
+      self.duration = ((end_time - start_time) / 1.hour).round(2) || 0
     end 
   end
 

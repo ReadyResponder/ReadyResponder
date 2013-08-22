@@ -62,6 +62,7 @@ FactoryGirl.define do
     category "Training"
     start_time "2012-12-23 03:31:31"
     end_time "2012-12-23 04:31"
+    status "Actual"
     person
     event
   end

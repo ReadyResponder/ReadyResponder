@@ -1,5 +1,5 @@
 <tr>
   <td>
-    <%= timeslot.start_time %> <%= link_to timeslot.event.description, timeslot %>
+    <%= "#{timeslot.status} for #{timeslot.start_time.to_s(:short)}" %> <%= link_to timeslot.event.description, timeslot %>
   </td>
 </tr>

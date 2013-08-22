@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130820214554) do
+ActiveRecord::Schema.define(:version => 20130822010249) do
 
   create_table "certs", :force => true do |t|
     t.integer  "person_id"
@@ -78,11 +78,11 @@ ActiveRecord::Schema.define(:version => 20130820214554) do
     t.string   "description"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.integer  "duration"
+    t.decimal  "duration",    :precision => 7, :scale => 2
     t.string   "category"
     t.string   "status"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
   end
 
   create_table "inspections", :force => true do |t|

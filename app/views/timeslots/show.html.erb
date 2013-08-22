@@ -21,14 +21,18 @@
 </p>
 
 <p>
-  <b>Start time:</b>
-  <%= @timeslot.start_time %>
+  <b>Status:</b>
+  <%= @timeslot.status %>
 </p>
 
+<p>
+  <b>Start time:</b>
+  <%= @timeslot.start_time.to_s(:short) %>
+</p>
 
 <p>
   <b>End time:</b>
-  <%= @timeslot.end_time %>
+  <%= @timeslot.end_time.to_s(:short) %>
 </p>
 
 <p>
