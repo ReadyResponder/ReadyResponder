@@ -39,8 +39,13 @@ describe "Events" do
     it "an event page" do
       @timeslot = FactoryGirl.create(:timeslot) #this creates a person as well
       @event = @timeslot.event
-      @certification = FactoryGirl.create(:cert, person: @person)
+      @event.start_time = nil
+      @event.end_time = nil
+      @event.save!
       visit event_path(@event)
+      within('#sidebar') do
+        page.should have_content "Return to"
+      end
       page.should have_content(@event.description)
     end
 

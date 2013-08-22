@@ -25,12 +25,12 @@
 
 <p>
   <b>Start time:</b>
-  <%= @event.start_time.to_s(:short) %>
+  <%= @event.start_time.strftime("%B %e, %Y %H:%M") if @event.start_time %>
 </p>
 
 <p>
   <b>End time:</b>
-  <%= @event.end_time.to_s(:short) %>
+  <%= @event.end_time.strftime("%B %e, %Y %H:%M") if @event.end_time %>
 </p>
 
 <p>
@@ -71,10 +71,10 @@
               <%= timeslot.intention %>
             </td>
             <td>
-              <%= timeslot.intended_start_time.to_s(:short) %>
+              <%= timeslot.intended_start_time.strftime("%B %e, %Y %H:%M") if timeslot.intended_start_time %>
             </td>
             <td>
-              <%= timeslot.intended_end_time.to_s(:short) %>
+              <%= timeslot.intended_end_time.strftime("%B %e, %Y %H:%M") if timeslot.intended_end_time %>
             </td>
             <td>
               <%= timeslot.intended_duration %>
