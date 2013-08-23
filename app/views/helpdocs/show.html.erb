@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @helpdoc.title %>
+</p>
+
+<p>
+  <b>Contents:</b>
+  <%= @helpdoc.contents %>
+</p>
+
+<p>
+  <b>Help for view:</b>
+  <%= @helpdoc.help_for_view %>
+</p>
+
+<p>
+  <b>Help for section:</b>
+  <%= @helpdoc.help_for_section %>
+</p>
+
+
+<%= link_to 'Edit', edit_helpdoc_path(@helpdoc) %> |
+<%= link_to 'Back', helpdocs_path %>

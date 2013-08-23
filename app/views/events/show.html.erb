@@ -1,18 +1,10 @@
 <% content_for :sidebar do %>
   <%= link_to 'Return to Events', events_path, :class => 'btn' %></br></br>
-  <%= link_to 'Edit Event', edit_event_path(@event), :class => 'btn btn-primary' unless cannot? :edit, @event  %></br></br>
+  <%= link_to 'Edit Event', edit_event_path(@event), :class => 'btn btn-primary' if can? :edit, @event  %></br></br>
   <%#= link_to 'New Cert', new_person_cert_path(@person), :class => 'btn' unless cannot? :create, Event  %>
 <% end %>
 
-<h3>
-  <%= @event.course.name unless @event.course.blank? %>
-</h3>
-
-<p>
-  <b>Instructor:</b>
-  <%= @event.instructor %>
-</p>
-
+<h3><%= @event.title %></h3>
 <p>
   <b>Location:</b>
   <%= @event.location %>
@@ -22,6 +14,11 @@
   <b>Description:</b>
   <%= @event.description %>
 </p>
+
+<% if @event.category == "Training" %><p>
+  <%= @event.course.name if @event.course %> by <%= @event.instructor %>
+</p>
+<% end %>
 
 <p>
   <b>Start time:</b>
@@ -85,5 +82,5 @@
     </table>
   </div>
 </div>
-
+<%= @event.comments %>
 Last Modified <%= @event.updated_at.to_s(:long) %>

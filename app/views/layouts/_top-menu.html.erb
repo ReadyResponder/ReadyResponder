@@ -23,6 +23,8 @@
               <li><%= link_to "Leave", leave_people_path %></li>
               <li><%= link_to "Inactive", inactive_people_path %></li>
               <li><%= link_to "Declined", declined_people_path %></li>
+              <li class="divider"></li>
+              <li><%= link_to "New Person", new_person_path if can? :create, @person %></li>
             </ul>
           </li>
           <li class="dropdown">
@@ -33,6 +35,8 @@
                 <li><%#= link_to "Past", people_path %></li>
                 <li><%#= link_to "Cancelled", other_people_path %></li>
                 <li><%= link_to "All Events", events_path %></li>
+                <li class="divider"></li>
+                <li><%= link_to "New Event", new_event_path if can? :create, @event %></li>
               </ul>
           </li>
           <li><%= link_to "Inventory", items_path %></li>

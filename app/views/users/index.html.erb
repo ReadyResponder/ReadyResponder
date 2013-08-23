@@ -1,5 +1,5 @@
 <% content_for :sidebar do %>
-  <center><h1>Listing Users</h1></br>
+  <center><h2>Listing Users</h2></br>
   <%#= link_to 'New User', new_person_path, :class => 'btn' unless cannot? :create, Person %></center>
 <% end %>
 
@@ -10,6 +10,9 @@
       <th>Last Name</th>
       <th>Username</th>
       <th>Roles</th>
+      <th>Last Sign-In</th>
+      <th>Current Sign-In</th>
+      <th>Sign-in Count</th>
       <th></th>
     </tr>
   </thead>
@@ -19,10 +22,11 @@
       	<td><%= user.firstname %></td>
       	<td><%= link_to user.lastname, user %></td>
       	<td><%= link_to user.username, user %></td>	
-        <td>
-          <%= user.roles.pluck(:name).to_sentence %>
-        </td>
-      	<td><%= link_to 'Edit', edit_user_path(user), :class => "btn btn-primary btn-mini" if can? :update, user %></td>
+        <td><%= user.roles.pluck(:name).to_sentence %></td>
+        <td><%= user.last_sign_in_at.to_s(:short) if user.last_sign_in_at %></td>
+        <td><%= user.current_sign_in_at.to_s(:short) if user.current_sign_in_at %></td>
+      	<td><%= user.sign_in_count if user.sign_in_count %></td>
+        <td><%= link_to 'Edit', edit_user_path(user), :class => "btn btn-primary btn-mini" if can? :update, user %></td>
       </tr>
     <% end %>
   </tbody>

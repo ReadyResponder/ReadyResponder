@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
   before_save :calc_duration
-  attr_accessible :category, :course_id, :description, :duration, :start_time, :end_time, :instructor, :location, :status, :timeslot_ids, :person_ids
+  attr_accessible :title, :description, :category, :course_id, :duration, :start_time, :end_time, :instructor, :location, :status, :timeslot_ids, :person_ids, :comments
  
   def end_date_cannot_be_before_start
     if ((!end_time.blank?) and (!start_time.blank?)) and end_time < start_time
@@ -8,7 +8,7 @@ class Event < ActiveRecord::Base
     end
   end
   
-  validates_presence_of :category, :description
+  validates_presence_of :category, :description, :status
   validate :end_date_cannot_be_before_start
   
   belongs_to :course

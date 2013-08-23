@@ -16,8 +16,8 @@ describe "Events" do
 
   get_basic_editor_views('event',['category', 'description', 'status'])
 
-  describe "events" do
-    it "displays a listing" do
+  describe "displays" do
+    it "a listing" do
       # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
       visit events_path
       page.should have_content("Listing Events")
@@ -29,7 +29,7 @@ describe "Events" do
       	end
       end
     end
-    it 'displays an edit form' do
+    it 'an edit form' do
       visit edit_event_path(@event)
       within("#sidebar") do
         page.should have_content("Cancel")

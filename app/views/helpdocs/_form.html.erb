@@ -1,0 +1,14 @@
+<%= simple_form_for(@helpdoc) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :title %>
+    <%= f.input :contents %>
+    <%= f.input :help_for_view %>
+    <%= f.input :help_for_section %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
