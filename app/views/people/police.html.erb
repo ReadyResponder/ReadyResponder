@@ -1,9 +1,9 @@
 <% content_for :sidebar do %>
-  <center><h1>Listing Police</h1></br>
+  <center><h3>Listing Police</h3></br>
   <%= link_to 'New Person', new_person_path, :class => 'btn' unless cannot? :create, Person %></center>
 <% end %>
 
-<table id="people" class="datatable display table table-striped table-bordered" >
+<table id="police" class="generic_datatable datatable display table table-striped table-bordered" >
   <thead>
     <tr>
       <th>Badge</th>

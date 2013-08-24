@@ -1,9 +1,9 @@
 <% content_for :sidebar do %>
-  <center><h1>Listing Items</h1></br>
+  <center><h3>Listing Items</h3></br>
   <%= link_to 'New Item', new_item_path, :class => 'btn' unless cannot? :create, Item %></center>
 <% end %>
 
-<table id="items" class="datatable display table table-striped table-bordered" >
+<table id="items" class="generic_datatable datatable display table table-striped table-bordered" >
   <thead>
     <tr>
       <th>ID</th>

@@ -3,7 +3,7 @@ class Person < ActiveRecord::Base
   #((801...900).to_a - (array_from_db_of_taken_numbers))[0]
   before_save :title_order
   
-  attr_accessible :firstname, :lastname, :status, :icsid, :department, :city, :state, :zipcode, :start_date, :title, :gender, :date_of_birth,:division1, :division2, :channels_attributes, :title_ids, :title_order
+  attr_accessible :firstname, :lastname, :status, :icsid, :department, :city, :state, :zipcode, :start_date, :end_date , :title, :gender, :date_of_birth,:division1, :division2, :channels_attributes, :title_ids, :title_order
   
   #Having a condition on this association allows all the chaining magic to happen. 
   #Could I use a named scope, and/or could I have another association for 'active_certs' ?

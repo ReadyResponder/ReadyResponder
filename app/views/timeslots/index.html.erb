@@ -1,9 +1,9 @@
 <% content_for :XXsidebar do %>
-    <h1>Listing Timeslots</h1>
+    <h3>Listing Timeslots</h3>
     <%= link_to 'New Timeslot', new_timeslot_path, :class => 'btn' if can? :create, Timeslot %>
 <% end %>
 
-<table id="timeslots" class="datatable display table table-striped table-bordered">
+<table id="timeslots" class="generic_datatable datatable display table table-striped table-bordered">
     <thead>
         <tr>
             <th colspan="10"><center><h3>Listing Timeslots</h3></center></th>

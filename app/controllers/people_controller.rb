@@ -19,15 +19,23 @@ class PeopleController < ApplicationController
   def police
     @people = Person.police.active.all
     @page_title = "Police"
+    render :template => "people/index"
+  end
+  def everybody
+    @people = Person.all
+    @page_title = "Everybody"
+    render :template => "people/index"
   end
   def cert
     @people = Person.cert.active.all
     @page_title = "CERT"
+    render :template => "people/index"
   end
 
   def other
     @people = Person.where(department: 'Other')
     @page_title = "Other People"
+    render :template => "people/index"
   end
 
   def applicants
@@ -43,16 +51,19 @@ class PeopleController < ApplicationController
   def declined
     @people = Person.declined.all
     @page_title = "Declined"
+    render :template => "people/index"
   end
 
   def leave
     @people = Person.leave.all
-    @page_title = "People on Leave"
+    @page_title = "People On-Leave"
+    render :template => "people/index"
   end
 
   def inactive
     @people = Person.inactive.all
     @page_title = "Inactive People"
+    render :template => "people/index"
   end
 
   def index

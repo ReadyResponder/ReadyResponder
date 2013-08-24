@@ -1,9 +1,9 @@
 <% content_for :sidebar do %>
-  <center><h1>Listing Locations</h1></br>
+  <center><h3>Listing Locations</h3></br>
   <%= link_to 'New Location', new_location_path, :class => 'btn' unless cannot? :create, Location %></center>
 <% end %>
 
-<table id="locations" class="datatable display table table-striped table-bordered" >
+<table id="locations" class="generic_datatable datatable display table table-striped table-bordered" >
   <thead>
     <tr>
       <th>Name</th>

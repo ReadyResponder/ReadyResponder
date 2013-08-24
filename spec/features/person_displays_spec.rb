@@ -27,7 +27,7 @@ describe "Person" do
 
     it "returns the index page" do
       visit people_path
-      page.should have_content('Listing People')
+      page.should have_content('People')
       page.should have_content('LIMS') # This is in the nav bar
       page.should have_content('CJ')
       page.should have_content('555-1212')
@@ -42,7 +42,7 @@ describe "Person" do
 
     it "returns a page for Police" do
       visit police_people_path
-      page.should have_content('Listing Police')
+      page.should have_content('Police')
       page.should have_content('LIMS') # This is in the nav bar
       page.should have_content('CJ')
       page.should_not have_content('Sierra')
@@ -55,7 +55,7 @@ describe "Person" do
 
     it "returns a page for CERT" do
       visit cert_people_path
-      page.should have_content('Listing CERT')
+      page.should have_content('CERT')
       page.should have_content('LIMS') # This is in the nav bar
       page.should_not have_content('CJ')
       page.should have_content('Sierra')
@@ -68,7 +68,7 @@ describe "Person" do
 
     it "returns a page for Applicants" do
       visit applicants_people_path
-      page.should have_content('Listing Applicants')
+      page.should have_content('Applicants')
       page.should have_content('LIMS') # This is in the nav bar
       page.should_not have_content('CJ')
       page.should_not have_content('Sierra')
@@ -81,7 +81,7 @@ describe "Person" do
 
     it "returns a page for Prospects" do
       visit prospects_people_path
-      page.should have_content('Listing Prospects')
+      page.should have_content('Prospects')
       page.should have_content('LIMS') # This is in the nav bar
       page.should_not have_content('CJ')
       page.should_not have_content('Sierra')
@@ -94,7 +94,7 @@ describe "Person" do
 
     it "returns a page for Inactive" do
       visit inactive_people_path
-      page.should have_content('Listing Inactive')
+      page.should have_content('Inactive')
       page.should have_content('LIMS') # This is in the nav bar
       page.should_not have_content('CJ')
       page.should_not have_content('Sierra')
@@ -106,7 +106,7 @@ describe "Person" do
     end
     it "returns a page for Declined" do
       find('#navbar').click_link('Declined')
-      page.should have_content('Listing Declined')
+      page.should have_content('Declined')
       page.should have_content('LIMS') # This is in the nav bar
       page.should_not have_content('CJ')
       page.should_not have_content('Sierra')
@@ -119,7 +119,7 @@ describe "Person" do
     end
     it "returns a page for on leave" do
       find('#navbar').click_link('Leave')
-      page.should have_content('Listing On-Leave')
+      page.should have_content('On-Leave')
       page.should have_content('LIMS') # This is in the nav bar
       page.should_not have_content('CJ')
       page.should_not have_content('Sierra')
@@ -133,7 +133,7 @@ describe "Person" do
     it "returns a page for other" do
       find('#navbar').click_link('Other')
       #visit other_people_path
-      page.should have_content('Listing Others Active')
+      page.should have_content('Others')
       page.should have_content('LIMS') # This is in the nav bar
       page.should_not have_content('CJ')
       page.should_not have_content('Sierra')

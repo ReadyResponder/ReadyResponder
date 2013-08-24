@@ -1,10 +1,10 @@
 <% content_for :sidebar do %>
-  <center><h1>Listing Courses</h1></br>
+  <center><h3>Listing Courses</h3></br>
   <%= link_to 'New Course', new_course_path, :class => 'btn' %></center>
 <% end %>
 
 
-<table id="courses" class="datatable display table table-striped table-bordered" >
+<table id="courses" class="generic_datatable datatable display table table-striped table-bordered" >
   <thead>
     <tr>
       <th>Title</th>

@@ -1,10 +1,10 @@
 <% content_for :sidebar do %>
-  <center><h1>Listing Skills</h1></br>
+  <center><h3>Listing Skills</h3></br>
   <%= link_to 'New Skill', new_skill_path, :class => 'btn' if can? :create, Skill %></center>
 <% end %>
 
 
-<table id="skills" class="datatable display table table-striped table-bordered">
+<table id="skills" class="generic_datatable datatable display table table-striped table-bordered">
   <thead>
     <tr>
       <th>Title</th>
