@@ -51,7 +51,7 @@ FactoryGirl.define do
   factory :event do
     instructor "CJ"
     location "Barracks"
-    description "A Training Event"
+    title "A Training Event"
     start_time "2012-12-14 05:50:18"
     end_time "2012-12-14 06:50:18"
     category "Training"

@@ -1,10 +1,5 @@
-<% content_for :sidebar do %>
-  <center><h3>Listing Courses</h3></br>
-  <%= link_to 'New Course', new_course_path, :class => 'btn' %></center>
-<% end %>
-
-
-<table id="courses" class="generic_datatable datatable display table table-striped table-bordered" >
+<table id="courses" class="datatable display table table-striped table-bordered" >
+  <caption><h3><%= @page_title %></h3></caption>
   <thead>
     <tr>
       <th>Title</th>
@@ -12,6 +7,7 @@
       <th>Category</th>
       <th>Duration</th>
       <th>Term</th>
+      <th>Status</th>
       <th></th>
     </tr>
   </thead>
@@ -23,20 +19,10 @@
 	<td><%= course.category %></td>
 	<td><%= course.duration %></td>
 	<td><%= course.term %></td>
-	<td><%= link_to 'Edit', edit_course_path(course), :class => 'btn btn-mini btn-primary' %></td>
+  <td><%= course.status %></td>
+	<td><%= link_to 'Edit', edit_course_path(course), :class => 'btn btn-mini' %></td>
     </tr>
     <% end %>
   </tbody>
-  <tfoot>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Category</th>
-      <th>Duration</th>
-      <th>Term</th>
-      <th></th>
-    </tr>
-  </tfoot>
-
 </table>
 

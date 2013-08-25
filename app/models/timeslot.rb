@@ -19,16 +19,17 @@ class Timeslot < ActiveRecord::Base
       errors.add(:actual_end_time, "must be after the start, unless you are the Doctor")
     end
   end
-  validates_presence_of :person_id, :event_id, :intention
+
+  validates_presence_of :person_id, :event_id
   validate :intended_end_date_cannot_be_before_start
   validate :actual_end_date_cannot_be_before_start
 
-
-  def pull_from_event
-      e = self.event || Event.new
-      self.start_time = e.start_time if self.start_time.nil?
-      self.end_time = e.end_time if self.end_time.nil?
-      self.category = e.category if self.category.nil?
+private
+  def pull_intention_from_event
+      event = self.event || Event.new
+      self.intended_start_time = event.start_time if self.intended_start_time.nil?
+      self.intended_end_time = event.end_time if self.intended_end_time.nil?
+      self.category = event.category if self.category.nil?
   end
   
   def calc_durations

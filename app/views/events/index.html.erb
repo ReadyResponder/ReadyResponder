@@ -1,9 +1,5 @@
-<% content_for :sidebar do %>
-  <h3>Listing Events</h3>
-  <%= link_to 'New Event', new_event_path, :class => 'btn' if can? :create, Event %>
-<% end %>
-
 <table id="events" class="generic_datatable datatable display table table-striped table-bordered">
+  <caption><h3><%= @page_title %></h3></caption>
   <thead>
     <tr>
       <th>Description</th>

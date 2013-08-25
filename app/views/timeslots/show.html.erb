@@ -1,7 +1,7 @@
 <%# present @timeslot do |timeslot_presenter| %>
 <% content_for :sidebar do %>
-  <%= link_to 'Return to Times', timeslots_path, :class => 'btn' %></br></br>
-  <%= link_to 'Edit Timeslot', edit_timeslot_path(@timeslot), :class => 'btn btn-primary' unless cannot? :edit, @timeslot  %></br></br>
+  <%= link_to 'Return to Timeslots', timeslots_path, :class => 'btn' %></br></br>
+  <%= link_to 'Edit Timeslot', edit_timeslot_path(@timeslot), :class => 'btn' if can? :edit, @timeslot  %></br></br>
 <% end %>
 
 <p>
@@ -31,7 +31,7 @@
 
 <p>
   <b>Intended End</b>
-  <%= @timeslot.intended_end_time.strftime("%B %e, %Y %H:%M") if @timeslot.intended_end_time %>
+  <%= l @timeslot.intended_end_time, :format => :long if @timeslot.intended_end_time %>
 </p>
 
 <p>
@@ -44,15 +44,14 @@
   <%= @timeslot.outcome %>
 </p>
 
-
 <p>
   <b>Actual Start</b>
-  <%= @timeslot.actual_start_time.strftime("%B %e, %Y %H:%M") if @timeslot.actual_start_time %>
+  <%= l @timeslot.actual_start_time, :format => :long if @timeslot.actual_start_time %>
 </p>
 
 <p>
   <b>Actual End</b>
-  <%= @timeslot.actual_end_time.to_s(:short) if @timeslot.actual_end_time %>
+  <%= l @timeslot.actual_end_time, :format => :long if @timeslot.actual_end_time %>
 </p>
 
 <p>

@@ -1,9 +1,5 @@
-<% content_for :sidebar do %>
-  <center><h3>Listing Titles</h3></br>
-  <%= link_to 'New Title', new_title_path, :class => 'btn' %></center>
-<% end %>
-
-<table id="titles" class="generic_datatable datatable display table table-striped table-bordered" >
+<table id="titles" class="datatable display table table-striped table-bordered" >
+  <caption><h3><%= @page_title %></h3></caption>
   <thead>
     <tr>
       <th>Name</th>
@@ -18,12 +14,8 @@
 	<td><%= link_to title.name, title_path(title) %></td>
 	<td><%= title.status %></td>
 	<td><%= title.description %></td>
-	<td><%= link_to 'Edit', edit_title_path(title), :class => 'btn btn-mini btn-primary' %></td>
+	<td><%= link_to 'Edit', edit_title_path(title), :class => 'btn btn-mini' %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br />
-
-

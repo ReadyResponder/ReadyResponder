@@ -1,13 +1,9 @@
-<% content_for :sidebar do %>
-  <center><h3>Listing Skills</h3></br>
-  <%= link_to 'New Skill', new_skill_path, :class => 'btn' if can? :create, Skill %></center>
-<% end %>
-
-
-<table id="skills" class="generic_datatable datatable display table table-striped table-bordered">
+<table id="skills" class="datatable display table table-striped table-bordered">
+  <caption><h3><%= @page_title %></h3></caption>
   <thead>
     <tr>
       <th>Title</th>
+      <th>Status</th>
       <th></th>
     </tr>
   </thead>
@@ -15,7 +11,8 @@
     <% @skills.each do |skill| %>
       <tr>
       	<td><%= link_to skill.name, skill %></td>
-      	<td><%= link_to 'Edit', edit_skill_path(skill), :class => 'btn btn-mini btn-primary' if can? :edit, skill %></td>
+        <td><%= link_to skill.status, skill %></td>
+      	<td><%= link_to 'Edit', edit_skill_path(skill), :class => 'btn btn-mini' if can? :edit, skill %></td>
       </tr>
     <% end %>
   </tbody>

@@ -48,8 +48,6 @@ describe "a user" do
     it "can edit people" do
       visit people_path
       page.should have_content('Edit') #Need to scope this, or it will fail on Edith
-      page.should have_content('New')
-      
       visit person_path(@person)
       page.should have_content('Edit') #Need to scope this, or it will fail on Edith
       click_on 'Edit'
@@ -58,7 +56,7 @@ describe "a user" do
     end
     it "can create a new person" do
       visit people_path
-      page.should have_content('New')
+      page.should have_content('LIMS')
       visit new_person_path
       current_path.should == new_person_path
       page.should_not have_content("Access Denied")

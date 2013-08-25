@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   
   def index
     @users = User.all
-
+    @page_title = "All Users"
     respond_to do |format|
       format.html
     end

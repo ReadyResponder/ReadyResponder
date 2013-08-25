@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "Events" do
   before (:each)  do
-    @timeslot = FactoryGirl.create(:timeslot)
+    @timeslot = FactoryGirl.create(:timeslot) #Which also creates an event and a person
     @event = @timeslot.event
     @person = @timeslot.person
     somebody = FactoryGirl.create(:user)
@@ -15,7 +15,18 @@ describe "Events" do
   end
 
   get_basic_editor_views('event',['category', 'description', 'status'])
+  describe "creates" do
+    it "timeslots" do
+      @person2 = FactoryGirl.create(:person)
+      @person2.timeslots.count.should eq(0)
+      visit edit_event_path(@event)
+      check(@person2.fullname)
+      click_on 'Update'
+      @person2.timeslots.count.should eq(1)
+      1.should eq(2)
+    end
 
+  end
   describe "displays" do
     it "a listing" do
       # Run the generator again with the --webrat flag if you want to use webrat methods/matchers

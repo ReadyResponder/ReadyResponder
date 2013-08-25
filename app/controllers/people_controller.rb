@@ -34,7 +34,7 @@ class PeopleController < ApplicationController
 
   def other
     @people = Person.where(department: 'Other')
-    @page_title = "Other People"
+    @page_title = "Other Active People"
     render :template => "people/index"
   end
 

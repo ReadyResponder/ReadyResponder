@@ -1,9 +1,5 @@
-<% content_for :sidebar do %>
-  <center><h3>Listing Users</h3></br>
-  <%#= link_to 'New User', new_person_path, :class => 'btn' unless cannot? :create, Person %></center>
-<% end %>
-
-<table id="users" class="generic_datatable datatable display table table-striped table-bordered" >
+<table id="users" class="datatable display table table-striped table-bordered" >
+  <caption><h3><%= @page_title %></h3></caption>
   <thead>
     <tr>
       <th>First Name</th>
@@ -26,7 +22,7 @@
         <td><%= user.last_sign_in_at.to_s(:short) if user.last_sign_in_at %></td>
         <td><%= user.current_sign_in_at.to_s(:short) if user.current_sign_in_at %></td>
       	<td><%= user.sign_in_count if user.sign_in_count %></td>
-        <td><%= link_to 'Edit', edit_user_path(user), :class => "btn btn-primary btn-mini" if can? :update, user %></td>
+        <td><%= link_to 'Edit', edit_user_path(user), :class => "btn btn-mini" if can? :update, user %></td>
       </tr>
     <% end %>
   </tbody>

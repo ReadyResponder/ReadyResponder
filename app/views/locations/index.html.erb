@@ -1,9 +1,5 @@
-<% content_for :sidebar do %>
-  <center><h3>Listing Locations</h3></br>
-  <%= link_to 'New Location', new_location_path, :class => 'btn' unless cannot? :create, Location %></center>
-<% end %>
-
-<table id="locations" class="generic_datatable datatable display table table-striped table-bordered" >
+<table id="locations" class="datatable display table table-striped table-bordered" >
+  <caption><h3><%= @page_title %></h3></caption>
   <thead>
     <tr>
       <th>Name</th>
@@ -16,11 +12,11 @@
   <tbody>
     <% @locations.each do |location| %>
       <tr>
-	<td><%= link_to location.name, location %></td>
-	<td><%= location.description %></td>
-	<td><%= location.category %></td>
-	<td><%= location.status %></td>
-	<td><%= link_to 'Edit', edit_location_path(location), :class => "btn btn-primary" unless cannot? :update, location %></td>
+        <td><%= link_to location.name, location %></td>
+        <td><%= location.description %></td>
+        <td><%= location.category %></td>
+        <td><%= location.status %></td>
+        <td><%= link_to 'Edit', edit_location_path(location), :class => "btn" if can? :update, location %></td>
       </tr>
     <% end %>
   </tbody>

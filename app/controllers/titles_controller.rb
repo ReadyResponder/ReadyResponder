@@ -5,7 +5,7 @@ class TitlesController < ApplicationController
   # GET /titles.json
   def index
     @titles = Title.all
-
+    @page_title = "All Titles"
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @titles }

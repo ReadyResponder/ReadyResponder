@@ -41,18 +41,22 @@ describe "timeslot" do
   end
   it "visits a display page" do
     @sample_object = FactoryGirl.create(:timeslot)
-    visit url_for(@sample_object)
+    visit timeslot_path(@sample_object)
     page.should have_content("LIMS")
     page.should have_css('#sidebar')
     page.should have_content(@sample_object.category)
     page.should have_content(@sample_object.intention)
   end
   it "visits a display page without actual times" do
-    @sample_object = FactoryGirl.create(:timeslot, actual_start_time: nil, actual_end_time: nil)
-    visit url_for(@sample_object)
+    @sample_object = FactoryGirl.create(:timeslot, intended_start_time: nil, intended_end_time: nil, actual_start_time: nil, actual_end_time: nil)
+    visit timeslot_path(@sample_object)
     page.should have_content("LIMS")
     page.should have_css('#sidebar')
     page.should have_content(@sample_object.category)
     page.should have_content(@sample_object.intention)
+    visit timeslots_path
+    page.should have_content("LIMS")
+    visit person_path(@sample_object.person)
+    page.should have_content("LIMS")
   end
 end

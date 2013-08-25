@@ -1,20 +1,11 @@
-<% content_for :XXsidebar do %>
-    <h3>Listing Timeslots</h3>
-    <%= link_to 'New Timeslot', new_timeslot_path, :class => 'btn' if can? :create, Timeslot %>
-<% end %>
-
-<table id="timeslots" class="generic_datatable datatable display table table-striped table-bordered">
-    <thead>
+<table id="timeslots" class="datatable display table table-striped table-bordered">
+    <caption><h3>Listing Timeslots</h3></caption>
+    <thead>        
         <tr>
-            <th colspan="10"><center><h3>Listing Timeslots</h3></center></th>
-        </tr>
-        <tr>
-            <th></th>
-            <th></th>
-            <th></th>
+            <th colspan="3"></th>
             <th colspan="3"><center>Intended</center></th>
             <th colspan="3"><center>Actual</center></th>
-            <th></th>
+            <th colspan="2"></th>
         </tr>
       <tr>
         <th>Person</th>
@@ -27,21 +18,23 @@
         <th>End</th>
         <th>Duration</th>
         <th></th>
+        <th></th>
       </tr>
-  </thead>
+    </thead>
     <tbody>
         <% @timeslots.each do |timeslot| %>
             <tr>
                 <td><%= link_to timeslot.person.fullname, person_path(timeslot.person) %></td>
-                <td><%= link_to timeslot.event.description, timeslot.event %></td>
+                <td><%= link_to timeslot.event.title, timeslot.event %></td>
                 <td><%= timeslot.category %></td>
-                <td><%= timeslot.intended_start_time.to_s(:short) %></td>
-                <td><%= timeslot.intended_end_time.to_s(:short) %></td>
+                <td><%= timeslot.intended_start_time.to_s(:short) if timeslot.intended_start_time %></td>
+                <td><%= timeslot.intended_end_time.to_s(:short) if timeslot.intended_end_time%></td>
                 <td><%= timeslot.intended_duration %></td>
-                <td><%= timeslot.actual_start_time.to_s(:short) unless timeslot.actual_start_time.blank? %></td>
-                <td><%= timeslot.actual_end_time.to_s(:short)  unless timeslot.actual_end_time.blank? %></td>
+                <td><%= timeslot.actual_start_time.to_s(:short) if timeslot.actual_start_time %></td>
+                <td><%= timeslot.actual_end_time.to_s(:short)  if timeslot.actual_end_time %></td>
                 <td><%= timeslot.actual_duration %></td>
-                <td><%= link_to 'Edit', edit_timeslot_path(timeslot), :class => 'btn btn-mini btn-primary' if can? :edit, timeslot %></td>
+                <td><%= link_to 'Edit', edit_timeslot_path(timeslot), :class => 'btn btn-mini' if can? :edit, timeslot %></td>
+                <td><%= link_to 'Worked', edit_timeslot_path(timeslot), :title => "Use times and values from the event", :class => 'btn btn-mini' if can? :edit, timeslot %></td>
             </tr>
         <% end %>
     </tbody>

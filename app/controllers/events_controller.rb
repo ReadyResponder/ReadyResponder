@@ -6,7 +6,7 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = Event.all
-
+    @page_title = "All Events"
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @events }
@@ -61,7 +61,6 @@ class EventsController < ApplicationController
   # PUT /events/1.json
   def update
     @event = Event.find(params[:id])
-    @timeslots = @event.timeslots
 
     respond_to do |format|
       if @event.update_attributes(params[:event])

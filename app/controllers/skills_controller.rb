@@ -6,7 +6,7 @@ class SkillsController < ApplicationController
   # GET /skills.json
   def index
     @skills = Skill.all
-
+    @page_title = "All Skills"
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @skills }

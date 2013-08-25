@@ -3,7 +3,7 @@ class LocationsController < ApplicationController
   # GET /locations.json
   def index
     @locations = Location.all
-
+    @page_title = "All Locations"
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @locations }
