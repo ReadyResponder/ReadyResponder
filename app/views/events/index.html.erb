@@ -2,7 +2,7 @@
   <caption><h3><%= @page_title %></h3></caption>
   <thead>
     <tr>
-      <th>Description</th>
+      <th>Title</th>
       <th>Location</th>
       <th>Start time</th>
       <th>End time</th>
@@ -16,7 +16,7 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
-	<td><%= link_to event.description, event, :id => "description_link" %></td>
+	<td><%= link_to event.title, event%></td>
 	<td><%= event.location %></td>
 	<td><%= event.start_time %></td>
 	<td><%= event.end_time %></td>

@@ -1,8 +1,7 @@
 <% content_for :sidebar do %>
   <%= link_to 'Return to Events', events_path, :class => 'btn' %></br></br>
   <%= link_to 'Edit Event', edit_event_path(@event), :class => 'btn btn-primary' if can? :edit, @event  %></br></br>
-  <%#= link_to 'New Cert', new_person_cert_path(@person), :class => 'btn' unless cannot? :create, Event  %>
-<% end %>
+ <% end %>
 
 <h3><%= @event.title %></h3>
 <p>
@@ -16,18 +15,18 @@
 </p>
 
 <% if @event.category == "Training" %><p>
-  <%= @event.course.name if @event.course %> by <%= @event.instructor %>
+  <%= @event.course.blank? ? "Training" : @event.course.name %> by <%= @event.instructor %>
 </p>
 <% end %>
 
 <p>
   <b>Start time:</b>
-  <%= @event.start_time.strftime("%B %e, %Y %H:%M") if @event.start_time %>
+  <%= @event.start_time %>
 </p>
 
 <p>
   <b>End time:</b>
-  <%= @event.end_time.strftime("%B %e, %Y %H:%M") if @event.end_time %>
+  <%= @event.end_time %>
 </p>
 
 <p>
@@ -45,37 +44,115 @@
   <%= @event.status %>
 </p>
 
-<div class="accordion">
-  <h3>Attendees (<%= @event.people.uniq.count %>) <%= @event.manhours %> actual hours</h3>
+<div id="event_timeslots" class="accordion">
+ <h3>Unknown (<%= @event.unknown_people.count %>) </h3>
   <div>
-    <table class="table table-striped table-bordered">
+    <table id="unknown" class="table table-striped table-bordered">
       <thead>
         <tr>
           <th>Name</th>
-          <th>Intended Status</th>
-          <th>Intnd Start</th>
-          <th>Intnd End</th>
+          <th>Phone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @event.unknown_people.each do |person| %>
+          <tr>
+            <td><%= link_to person.fullname, person %></td>
+            <td><%#= person.channels.phone  %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <h3>Available (<%= @event.timeslots.available.count %>) </h3>
+  <div>
+    <table id="available" class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Start</th>
+          <th>End</th>
           <th>Hours</th>
         </tr>
       </thead>
       <tbody>
-        <% @event.timeslots.each do |timeslot| %>
+        <% @event.timeslots.available.each do |timeslot| %>
           <tr>
-            <td>
-              <%= link_to timeslot.person.fullname, timeslot %>
-            </td>
-            <td>
-              <%= timeslot.intention %>
-            </td>
-            <td>
-              <%= timeslot.intended_start_time.strftime("%B %e, %Y %H:%M") if timeslot.intended_start_time %>
-            </td>
-            <td>
-              <%= timeslot.intended_end_time.strftime("%B %e, %Y %H:%M") if timeslot.intended_end_time %>
-            </td>
-            <td>
-              <%= timeslot.intended_duration %>
-            </td>
+            <td><%= link_to timeslot.person.fullname, timeslot %></td>
+            <td><%= l(timeslot.intended_start_time)  %></td>
+            <td><%= l(timeslot.intended_end_time) %></td>
+            <td><%= timeslot.intended_duration %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <h3>Unavailable (<%#= @event.people.uniq.count %>) <%#= @event.manhours %> </h3>
+  <div>
+    <table id="unavailable" class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Hours</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @event.timeslots.unavailable.each do |timeslot| %>
+          <tr>
+            <td><%= link_to timeslot.person.fullname, timeslot %></td>
+            <td><%= l(timeslot.actual_start_time)  %></td>
+            <td><%= l(timeslot.actual_end_time) %></td>
+            <td><%= timeslot.actual_duration %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div> 
+  <h3>Scheduled (<%#= @event.people.uniq.count %>) <%#= @event.manhours %> </h3>
+  <%#= render partial: "events/intended_timeslots", collection: @event.timeslots.available %>
+  <div>
+    <table id="scheduled" class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Hours</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @event.timeslots.scheduled.each do |timeslot| %>
+          <tr>
+            <td><%= link_to timeslot.person.fullname, timeslot %></td>
+            <td><%= l(timeslot.intended_start_time)  %></td>
+            <td><%= l(timeslot.intended_end_time) %></td>
+            <td><%= timeslot.intended_duration %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <h3>Actually Worked(<%#= @event.people.uniq.count %>) <%#= @event.manhours %> </h3>
+  <%#= render partial: "events/intended_timeslots", collection: @event.timeslots.available %>
+  <div>
+    <table id="actually_worked" class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Hours</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @event.timeslots.scheduled.each do |timeslot| %>
+          <tr>
+            <td><%= link_to timeslot.person.fullname, timeslot %></td>
+            <td><%= l(timeslot.intended_start_time)  %></td>
+            <td><%= l(timeslot.intended_end_time) %></td>
+            <td><%= timeslot.intended_duration %></td>
           </tr>
         <% end %>
       </tbody>

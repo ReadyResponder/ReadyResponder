@@ -34,7 +34,9 @@ describe "Course" do
    it "a list" do
       an_example = FactoryGirl.create(:course, name: 'Zombie Hunting')
       visit courses_path
-      page.should have_content("Listing Courses")
+      within_table("courses") do
+        page.should have_content("Courses")
+      end
       page.should have_content("LIMS") # This is in the nav bar
       page.should have_link(an_example.name)
       click_on an_example.name
@@ -42,8 +44,7 @@ describe "Course" do
     end
 
     it "a new course form that creates a course" do
-      visit courses_path
-      click_on "New Course"
+      visit new_course_path
       page.should have_content('New Course')
       fill_in 'course_name', :with => 'Basket Weaving'
       select('Active', :from => 'course_status')

@@ -11,9 +11,8 @@
       <%= f.input :instructor %>
     </div>
     <%= f.input :location %>
-    <%= f.input :start_time, :as => :string, :input_html => {:class => "datetimepicker",  :size => 11 }  %>
-    <%= f.input :end_time, :as => :string, :input_html => {:class => "datetimepicker", :size => 11 }  %>
-    <%= f.association :people, :as => :check_boxes %>
+    <%= f.input :start_time, :as => :string, :label => "Start Time", :input_html => {:class => "datetimepicker",  :size => 11 }  %>
+    <%= f.input :end_time, :as => :string, :label => "End Time", :input_html => {:class => "datetimepicker", :size => 11 }  %>
     <%= f.input :comments %>
   </div>
 

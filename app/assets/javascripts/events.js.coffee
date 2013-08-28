@@ -1,5 +1,5 @@
 jQuery ->
-  $("#event_description").focus();
+  $("#event_title").focus();
   $(".training-controls").hide();
   $("#event_category").change ->
     temp = $("#event_category option:selected").text();

@@ -6,7 +6,7 @@ class Timeslot < ActiveRecord::Base
   belongs_to :person
   belongs_to :event
 
-  INTENTION_CHOICES = ['Scheduled', 'Volunteered', 'Unavailable']
+  INTENTION_CHOICES = ['Available', 'Scheduled', 'Unavailable']
   OUTCOME_CHOICES = ['Actual', "Not Needed", "Excused", 'AWOL']
 
   def intended_end_date_cannot_be_before_start
@@ -23,6 +23,16 @@ class Timeslot < ActiveRecord::Base
   validates_presence_of :person_id, :event_id
   validate :intended_end_date_cannot_be_before_start
   validate :actual_end_date_cannot_be_before_start
+
+  def self.available
+    where(intention: "Available")
+  end
+  def self.scheduled
+    where(intention: "Scheduled")
+  end
+  def self.unavailable
+    where(outcome: "Unavailable")
+  end
 
 private
   def pull_intention_from_event

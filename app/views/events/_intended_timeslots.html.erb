@@ -1,0 +1,22 @@
+  <div>
+    <table id="scheduled" class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Hours</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @timeslots.each do |timeslot| %>
+          <tr>
+            <td><%= link_to timeslot.person.fullname, timeslot %></td>
+            <td><%= l(timeslot.intended_start_time)  %></td>
+            <td><%= l(timeslot.intended_end_time) %></td>
+            <td><%= timeslot.intended_duration %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>

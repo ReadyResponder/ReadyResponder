@@ -10,7 +10,7 @@ module AuthorizationViewHelper
 
       page.should have_css('#sidebar')
       page.should have_content(@sample_object.attributes[things_to_look_for[0]])
-      page.should have_content("Listing #{model_name.pluralize.capitalize}") # This is in the side bar
+      page.should have_content("#{model_name.pluralize.capitalize}") # This is in the side bar
   #    page.should have_content("XXX") # this is so the test does not pass and I can keep re-running it alone
     end
     it "visits a creation form" do

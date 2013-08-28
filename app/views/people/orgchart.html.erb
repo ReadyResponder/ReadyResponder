@@ -119,7 +119,7 @@ li.squads {
 <h1></h1>
 <h2>Department Roster (<%= Date::today().to_s %>)</h2>
 <ul class="senior_staff">
-  <% Person.active.divisionC.each do |p| %>
+  <% Person.active.police.divisionC.each do |p| %>
        <%= render :partial => 'coc_boxes', :locals => { :p => p} %>
   <% end %>
 </ul>

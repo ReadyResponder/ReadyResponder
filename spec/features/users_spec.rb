@@ -27,7 +27,9 @@ describe "user" do
     visit users_path
     page.should have_content("LIMS") # In the nav bar
     page.should have_css('#sidebar')
-    page.should have_content("Listing Users")
+    within_table("users") do
+      page.should have_content("Users")
+    end
     page.should have_content("Doe")
     end
   it "visits an edit form" do

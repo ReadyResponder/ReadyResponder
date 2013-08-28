@@ -28,6 +28,7 @@
     <%= f.input :start_date, :as => :string, :input_html => { :class => 'datepicker', :size => 11 }  %>
     <%= f.input :division1, :as => :select, :label => 'Division', :collection => Person::DIVISION1 %>
     <%= f.input :division2, :as => :select, :label => 'Squad', :collection => Person::DIVISION2 %>
+    <%= f.input :comments %>
     <%= f.button :submit %>
 <% end %>
 
