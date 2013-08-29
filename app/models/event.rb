@@ -38,6 +38,7 @@ class Event < ActiveRecord::Base
   def available_people
     self.timeslots.available
   end
+  
 private
   def calc_duration #This is also used in timeslots; it should be extracted out
      if !(start_time.blank?) and !(end_time.blank?)

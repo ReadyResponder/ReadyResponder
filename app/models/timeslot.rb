@@ -6,8 +6,8 @@ class Timeslot < ActiveRecord::Base
   belongs_to :person
   belongs_to :event
 
-  INTENTION_CHOICES = ['Available', 'Scheduled', 'Unavailable']
-  OUTCOME_CHOICES = ['Actual', "Not Needed", "Excused", 'AWOL']
+  INTENTION_CHOICES = ['Available', 'Scheduled', 'Unavailable', "Vacation"]
+  OUTCOME_CHOICES = ['Worked', "Not Needed", "Excused", "Unexcused", 'AWOL', "Vacation Approved", "Vacation Denied"]
 
   def intended_end_date_cannot_be_before_start
     if ((!intended_end_time.blank?) and (!intended_start_time.blank?)) and intended_end_time < intended_start_time
@@ -28,10 +28,13 @@ class Timeslot < ActiveRecord::Base
     where(intention: "Available")
   end
   def self.scheduled
-    where(intention: "Scheduled")
+    where(intention: "Scheduled", outcome: nil)
   end
   def self.unavailable
-    where(outcome: "Unavailable")
+    where(intention: "Unavailable")
+  end
+  def self.worked
+    where(outcome: "Worked")
   end
 
 private

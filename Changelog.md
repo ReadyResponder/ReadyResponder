@@ -1,5 +1,6 @@
 Changelog
 =========
+- 0.79 8/29/2013 Additional tests and tuning of the events model. Not done yet, that will be Version 0.80
 - 0.79 8/28/2013 Added remaining accordians to the event#show view. Not great code, long chains, but mostly tested and working
 - 0.79 8/28/2013 Added start date tooltip to people#index view
 - 0.79 8/24/2013 Major change of direction for events, no adding people to a new event until it's saved.

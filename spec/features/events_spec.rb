@@ -17,6 +17,8 @@ describe "Events" do
       @person1 = FactoryGirl.create(:person)
       @person2 = FactoryGirl.create(:person, firstname: "Jane")
       @person3 = FactoryGirl.create(:person)
+      @person4 = FactoryGirl.create(:person)
+      @person5 = FactoryGirl.create(:person)
       visit new_event_path
       fill_in "Title", with: "Standard Patrol"
       select 'Patrol', :from => 'event_category'
@@ -30,33 +32,46 @@ describe "Events" do
       @event = Event.last
       @event.timeslots.count.should eq(0)
       @timeslot_person2 = FactoryGirl.create(:timeslot, event: @event, person: @person2, intention: "Available")
-      @event.timeslots.count.should eq(1)
-      @event.timeslots.available.count.should eq(1)
-      @event.timeslots.available.first.person.should eq(@person2)
-      @event.unknown_people.count.should eq(2)
+      @timeslot_person3 = FactoryGirl.create(:timeslot, event: @event, person: @person3, intention: "Unavailable")
+      @timeslot_person4 = FactoryGirl.create(:timeslot, event: @event, person: @person4, intention: "Scheduled")
+      @timeslot_person5 = FactoryGirl.create(:timeslot, event: @event, person: @person5, intention: "Scheduled", outcome: "Worked", actual_start_time: "2013-10-31 18:30" )
+      @event.timeslots.count.should eq(4)
+      @event.available_people.count.should eq(1)
+      @event.available_people.first.person.should eq(@person2)
+      @event.timeslots.unavailable.count.should eq(1)
+      @event.timeslots.unavailable.first.person.should eq(@person3)
+      @event.timeslots.scheduled.count.should eq(1)
+      @event.timeslots.scheduled.first.person.should eq(@person4)
+      @event.unknown_people.count.should eq(1)
       visit event_path(@event)  #Need to reload it after the changes to the timeslots
       current_path.should == event_path(@event)
       within("#event_timeslots") do
         within("#unknown") do
           page.should have_content(@person1.fullname)
           page.should_not have_content(@person2.fullname)
-          page.should have_content(@person3.fullname)
+          page.should_not have_content(@person3.fullname)
         end
         within("#available") do
           page.should have_content(@person2.fullname)
-          #check(@person2.fullname)
+          page.should_not have_content(@person1.fullname)
+          page.should_not have_content(@person3.fullname)
+        #check(@person2.fullname)
         end
         within("#unavailable") do
-
+          page.should have_content(@person3.fullname)
+          page.should_not have_content(@person1.fullname)
+          page.should_not have_content(@person2.fullname)
+        
+          #save_and_open_page
         end
+        page.has_css?('#xxscheduled-headings') #Why doesn't this fail ?!?
         within("#scheduled") do
 
         end
-        within("#actually_worked") do
+        within("#worked") do
 
         end
       end
-      #1.should eq(2)
     end
   end
   describe "displays" do
@@ -76,7 +91,6 @@ describe "Events" do
       visit edit_event_path(@event)
       within("#sidebar") do
         page.should have_content("Cancel")
-        #save_and_open_page
       end
     end
 
@@ -88,6 +102,9 @@ describe "Events" do
       end
       page.should have_content(@event.title)
       current_path.should == event_path(@event)
+    end
+    it "always fails" do
+      #1.should eq(2)
     end
   end
 end
