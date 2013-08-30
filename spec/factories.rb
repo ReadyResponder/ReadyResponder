@@ -51,7 +51,7 @@ FactoryGirl.define do
   factory :event do
     title "A Training Event"
     category "Training"
-    status "Completed"
+    status "Scheduled"
   end
 
   factory :timeslot do

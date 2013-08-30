@@ -1,9 +1,4 @@
 module ApplicationHelper
-  def l(the_date, *args)
-    if the_date.acts_like?(:date) then
-      super
-    end
-  end
 =begin
   def link_to_add_fields(name, f, association)
     new_object = f.object.send(association).klass.new

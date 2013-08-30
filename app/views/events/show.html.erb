@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
   <%= link_to 'Return to Events', events_path, :class => 'btn' %></br></br>
-  <%= link_to 'Edit Event', edit_event_path(@event), :class => 'btn btn-primary' if can? :edit, @event  %></br></br>
+  <%= link_to 'Edit Event', edit_event_path(@event), :class => 'btn' if can? :edit, @event  %></br></br>
  <% end %>
 
 <h3><%= @event.title %></h3>
@@ -58,7 +58,7 @@
         <% @event.unknown_people.each do |person| %>
           <tr>
             <td><%= link_to person.fullname, person %></td>
-            <td><%#= person.channels.phone  %></td>
+            <td><%= person.channels.phone.map { |e| number_to_phone(e.content, area_code: true) }.join(',') %></td>
           </tr>
         <% end %>
       </tbody>
@@ -79,8 +79,8 @@
         <% @event.available_people.each do |timeslot| %>
           <tr>
             <td><%= link_to timeslot.person.fullname, timeslot %></td>
-            <td><%= l(timeslot.intended_start_time)  %></td>
-            <td><%= l(timeslot.intended_end_time) %></td>
+            <td><%= timeslot.intended_start_time %></td>
+            <td><%= timeslot.intended_end_time %></td>
             <td><%= timeslot.intended_duration %></td>
           </tr>
         <% end %>
@@ -93,18 +93,16 @@
       <thead>
         <tr>
           <th>Name</th>
-          <th>Start</th>
-          <th>End</th>
-          <th>Hours</th>
+          <th>Department</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <% @event.timeslots.unavailable.each do |timeslot| %>
           <tr>
             <td><%= link_to timeslot.person.fullname, timeslot %></td>
-            <td><%= l(timeslot.actual_start_time)  %></td>
-            <td><%= l(timeslot.actual_end_time) %></td>
-            <td><%= timeslot.actual_duration %></td>
+            <td><%= timeslot.person.department %></td>
+            <td><%= link_to 'Edit', edit_timeslot_path(timeslot), :class => "btn btn-mini" if can? :update, timeslot %></td>
           </tr>
         <% end %>
       </tbody>
@@ -126,8 +124,8 @@
         <% @event.timeslots.scheduled.each do |timeslot| %>
           <tr>
             <td><%= link_to timeslot.person.fullname, timeslot %></td>
-            <td><%= l(timeslot.intended_start_time)  %></td>
-            <td><%= l(timeslot.intended_end_time) %></td>
+            <td><%= timeslot.intended_start_time  %></td>
+            <td><%= timeslot.intended_end_time %></td>
             <td><%= timeslot.intended_duration %></td>
           </tr>
         <% end %>
@@ -144,15 +142,17 @@
           <th>Start</th>
           <th>End</th>
           <th>Hours</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <% @event.timeslots.worked.each do |timeslot| %>
           <tr>
             <td><%= link_to timeslot.person.fullname, timeslot %></td>
-            <td><%= l(timeslot.actual_start_time)  %></td>
-            <td><%= l(timeslot.actual_end_time) %></td>
+            <td><%= timeslot.actual_start_time  %></td>
+            <td><%= timeslot.actual_end_time %></td>
             <td><%= timeslot.actual_duration %></td>
+            <td><%= link_to 'Edit', edit_timeslot_path(timeslot), :class => "btn btn-mini" if can? :update, timeslot %></td>
           </tr>
         <% end %>
       </tbody>

@@ -9,7 +9,14 @@ describe Event do
   end
   
   it "is invalid if end date is before start date" do
-    FactoryGirl.build(:event, start_time: Date.today, end_time: Date.today - 10).should_not be_valid
+    FactoryGirl.build(:event, start_time: Time.current, end_time: 10.days.ago).should_not be_valid
+  end
+
+  it "is invalid if start_time is blank and status is completed" do
+    FactoryGirl.build(:event, status: "Completed", start_time: nil, end_time: 10.days.ago ).should_not be_valid
+  end
+  it "is invalid if end_time is blank and status is completed" do
+    FactoryGirl.build(:event, status: "Completed", start_time: Time.current, end_time: nil).should_not be_valid
   end
 
   it "returns a correct manhours count" do
@@ -22,5 +29,10 @@ describe Event do
     @event.timeslots.count.should equal(2)
     @event.manhours.should eq(2.25)
     #1.should eq(2)
+  end
+  it "creates a timeslot with actual times brought in from the event" do
+    @person = FactoryGirl.create(:person)
+    @event = FactoryGirl.create(:event, start_time: Time.current, end_time: 75.minutes.from_now)
+    
   end
 end

@@ -27,7 +27,7 @@
         <td title=<%= person.start_date %> >
           <%= distance_of_time_in_words(((person.end_date) || Date.today), person.start_date) if person.start_date %>
         </td>
-        <td><%= number_to_phone(person.channels.mobile.first.content) unless person.channels.mobile.blank? %></td>
+        <td><%= number_to_phone(person.channels.phone.first.content) unless person.channels.phone.blank? %></td>
         <td><%= person.channels.email.first.content unless person.channels.email.blank? %></td>
         <td><%= person.department %></td>
         <td><%= link_to 'Edit', edit_person_path(person), :class => "btn btn-mini" if can? :update, person %></td>

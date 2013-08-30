@@ -38,14 +38,13 @@ class EventsController < ApplicationController
   # GET /events/1/edit
   def edit
     @event = Event.find(params[:id])
-    @page_title = "New Event"
+    @page_title = "Event: #{@event.title}"
   end
 
   # POST /events
   # POST /events.json
   def create
     @event = Event.new(params[:event])
-    @timeslots = @event.timeslots
     
     respond_to do |format|
       if @event.save
@@ -62,7 +61,6 @@ class EventsController < ApplicationController
   # PUT /events/1.json
   def update
     @event = Event.find(params[:id])
-
     respond_to do |format|
       if @event.update_attributes(params[:event])
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }

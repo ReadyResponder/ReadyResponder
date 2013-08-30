@@ -4,11 +4,11 @@
 jQuery ->
         $('.datepicker').datepicker
           dateFormat: 'yy-mm-dd'
-        $('.datetimepicker').datetimepicker
-          dateFormat: 'yy-mm-dd'
-          timeFormat: 'HH:mm'
+        $('.datetimepicker').datetimepicker({
+          dateFormat: 'yy-mm-dd '
+          timeFormat: 'HH:mm '
           stepHour: 1
-          stepMinute: 15
+          stepMinute: 15});
         $('.generic_datatable').dataTable
           sPaginationType: "full_numbers"
           'bJQueryUI': true

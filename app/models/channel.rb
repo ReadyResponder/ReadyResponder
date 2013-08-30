@@ -3,8 +3,8 @@ class Channel < ActiveRecord::Base
   
   belongs_to :person
 
-  def self.mobile
-   where("category LIKE ?", "%Mobile%")
+  def self.phone
+   where("category LIKE ?", "%Phone%")
   end
   
   def self.email

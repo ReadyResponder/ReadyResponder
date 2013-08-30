@@ -1,5 +1,5 @@
 class Timeslot < ActiveRecord::Base
-  #before_save :pull_from_event
+  before_save :pull_defaults_from_event
   before_save :calc_durations
   attr_accessible :intention, :outcome, :category, :intended_start_time, :intended_end_time, :actual_start_time, :actual_end_time, :event_id, :person_id
   
@@ -38,12 +38,14 @@ class Timeslot < ActiveRecord::Base
   end
 
 private
-  def pull_intention_from_event
+  def pull_defaults_from_event
       event = self.event || Event.new
-      self.intended_start_time = event.start_time if self.intended_start_time.nil?
-      self.intended_end_time = event.end_time if self.intended_end_time.nil?
       self.category = event.category if self.category.nil?
-  end
+      if self.outcome == "Worked" 
+        self.actual_start_time = event.start_time if self.actual_start_time.nil?
+        self.actual_end_time = event.end_time if self.actual_end_time.nil? & event.status == "Complete"
+      end
+    end
   
   def calc_durations
     if intended_start_time.blank? or intended_end_time.blank?

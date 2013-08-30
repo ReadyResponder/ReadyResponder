@@ -14,7 +14,7 @@ describe "Person" do
   describe "views" do
     before (:each) do
       cj = FactoryGirl.create(:person, firstname: 'CJ',  department: 'Police' )
-      cj.channels << FactoryGirl.create(:channel, content: '9785551212')
+      cj.channels << FactoryGirl.create(:channel, content: '9785551212', category: "Mobile Phone")
       sierra = FactoryGirl.create(:person, firstname: 'Sierra', department: 'CERT' )
       sierra.channels << FactoryGirl.create(:channel, category: 'E-Mail', content: 'sierra@example.com')
       FactoryGirl.create(:person, firstname: 'Adam', status: 'Applicant' )

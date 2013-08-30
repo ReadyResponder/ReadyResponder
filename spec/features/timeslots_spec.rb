@@ -12,7 +12,7 @@ describe 'Access on timeslot' do
   end
 end
 
-describe "timeslot" do
+describe Timeslot do
   before (:each) do
     somebody = FactoryGirl.create(:user)
     r = FactoryGirl.create(:role, name: "Editor")

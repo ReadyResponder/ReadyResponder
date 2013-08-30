@@ -8,10 +8,17 @@ class Event < ActiveRecord::Base
       errors.add(:end_time, "must be after the start, unless you are the Doctor")
     end
   end
+  def end_date_cannot_be_before_start
+    if ((!end_time.blank?) and (!start_time.blank?)) and end_time < start_time
+      errors.add(:end_time, "must be after the start, unless you are the Doctor")
+    end
+  end
   
   validates_presence_of :category, :title, :status
   validate :end_date_cannot_be_before_start
-  
+  validates_presence_of :start_time, :if => :completed?
+  validates_presence_of :end_time, :if => :completed?
+
   has_many :certs
   belongs_to :course
   
@@ -38,11 +45,14 @@ class Event < ActiveRecord::Base
   def available_people
     self.timeslots.available
   end
-  
+  def completed?
+    status == "Completed"
+  end
 private
   def calc_duration #This is also used in timeslots; it should be extracted out
      if !(start_time.blank?) and !(end_time.blank?)
       self.duration = ((end_time - start_time) / 1.hour).round(2) || 0
     end 
   end
+
 end

@@ -104,7 +104,7 @@ describe "Events" do
       current_path.should == event_path(@event)
     end
     it "always fails" do
-      #1.should eq(2)
+     # 1.should eq(2)
     end
   end
 end
