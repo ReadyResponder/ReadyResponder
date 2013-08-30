@@ -1,7 +1,7 @@
 <% content_for :sidebar do %>
-  <%= link_to 'Return to Listing', session[:return_to], :class => 'btn' %></br></br>
-  <%= link_to 'Edit Person', edit_person_path(@person), :class => 'btn' if can? :edit, @person  %></br></br>
-  <%= link_to 'New Certification', new_person_cert_path(@person), :class => 'btn' if can? :create, Cert  %>
+  <%= link_to 'Return to Listing', session[:return_to], :class => 'btn btn-mini' %></br></br>
+  <%= link_to 'Edit Person', edit_person_path(@person), :class => 'btn btn-mini' if can? :edit, @person  %></br></br>
+  <%= link_to 'New Certification', new_person_cert_path(@person), :class => 'btn btn-mini' if can? :create, Cert  %>
 <% end %>
 
 <p><h2><%= @person.shortrank %> <%= @person.fullname %> (<%= @person.icsid %>)</h2></p>
