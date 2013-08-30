@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130830151002) do
+ActiveRecord::Schema.define(:version => 20130830152608) do
 
   create_table "certs", :force => true do |t|
     t.integer  "person_id"
@@ -85,6 +85,8 @@ ActiveRecord::Schema.define(:version => 20130830151002) do
     t.datetime "updated_at",                                :null => false
     t.string   "title"
     t.text     "comments"
+    t.string   "error_code"
+    t.string   "id_code"
   end
 
   create_table "helpdocs", :force => true do |t|
