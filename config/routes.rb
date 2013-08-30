@@ -1,10 +1,9 @@
 Lims3::Application.routes.draw do
   resources :helpdocs
 
-
   resources :channels
 
-  resources :timeslots
+  resources :timecards
 
   resources :events
 

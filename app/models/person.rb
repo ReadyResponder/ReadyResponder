@@ -14,8 +14,8 @@ class Person < ActiveRecord::Base
   has_many :courses, :through => :certs
   has_many :skills, :through => :courses
   has_and_belongs_to_many :titles
-  has_many :timeslots
-  has_many :events, :through => :timeslots
+  has_many :timecards
+  has_many :events, :through => :timecards
   has_many :items
   has_many :inspections
   

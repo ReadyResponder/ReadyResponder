@@ -7,7 +7,7 @@ class Ability
       can :manage, :all
     elsif current_user.roles.to_s.include? "Editor"
       can [:read, :update, :create, :edit, :police, :cert, :applicants, :prospects, :other, :inactive, :leave, :declined], Person
-      can [:read, :update, :create, :edit], Timeslot
+      can [:read, :update, :create, :edit], Timecard
       can [:read, :update, :create, :edit], Channel
       can [:read, :update, :create, :edit], Cert
       can [:read, :update, :create, :edit], Item
@@ -23,10 +23,10 @@ class Ability
       can [:read, :update, :create, :edit], Cert
       can [:read, :update, :create, :edit], Event
       can [:read, :update, :create, :edit], Course
-      can [:read], [Person, Channel, Timeslot, Item, Event, Course, Skill, Inspection, Repair]
+      can [:read], [Person, Channel, Timecard, Item, Event, Course, Skill, Inspection, Repair]
       can [:signin, :orgchart], Person
    elsif current_user.roles.to_s.include? 'Reader'
-      can [:read], [Person, Channel, Timeslot, Cert, Item, Event, Course, Skill, Inspection, Repair]
+      can [:read], [Person, Channel, Timecard, Cert, Item, Event, Course, Skill, Inspection, Repair]
       can [:signin], Person
       can :orgchart, Person
     end

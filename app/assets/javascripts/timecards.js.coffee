@@ -3,8 +3,8 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 jQuery ->
-  $("#timecard_person_id").focus();
-  $('#timecards').dataTable
+  $("#timeslot_person_id").focus();
+  $('#timeslots').dataTable
     sPaginationType: "full_numbers"
     "aoColumns": [null,
                   null,

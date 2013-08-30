@@ -1,4 +1,4 @@
-class Timeslot < ActiveRecord::Base
+class Timecard < ActiveRecord::Base
   before_save :pull_defaults_from_event
   before_save :calc_durations
   attr_accessible :intention, :outcome, :category, :intended_start_time, :intended_end_time, :actual_start_time, :actual_end_time, :event_id, :person_id

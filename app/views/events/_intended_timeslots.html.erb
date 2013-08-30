@@ -9,12 +9,12 @@
         </tr>
       </thead>
       <tbody>
-        <% @timeslots.each do |timeslot| %>
+        <% @timecards.each do |timecard| %>
           <tr>
-            <td><%= link_to timeslot.person.fullname, timeslot %></td>
-            <td><%= l(timeslot.intended_start_time)  %></td>
-            <td><%= l(timeslot.intended_end_time) %></td>
-            <td><%= timeslot.intended_duration %></td>
+            <td><%= link_to timecard.person.fullname, timecard %></td>
+            <td><%= l(timecard.intended_start_time)  %></td>
+            <td><%= l(timecard.intended_end_time) %></td>
+            <td><%= timecard.intended_duration %></td>
           </tr>
         <% end %>
       </tbody>

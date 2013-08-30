@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130823042257) do
+ActiveRecord::Schema.define(:version => 20130830142158) do
 
   create_table "certs", :force => true do |t|
     t.integer  "person_id"
@@ -251,7 +251,7 @@ ActiveRecord::Schema.define(:version => 20130823042257) do
 
   add_index "skills_titles", ["skill_id", "title_id"], :name => "index_skills_titles_on_skill_id_and_title_id"
 
-  create_table "timeslots", :force => true do |t|
+  create_table "timecards", :force => true do |t|
     t.integer  "person_id"
     t.integer  "event_id"
     t.string   "category"

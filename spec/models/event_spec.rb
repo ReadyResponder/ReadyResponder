@@ -21,16 +21,16 @@ describe Event do
 
   it "returns a correct manhours count" do
     #This factory creates a person and an event
-    @timeslot1 = FactoryGirl.create(:timeslot, actual_start_time: Time.current, actual_end_time: 75.minutes.from_now)
-    @event = @timeslot1.event
-    @person1 = @timeslot1.person
-    @timeslot2 = FactoryGirl.create(:timeslot, event: @event, actual_start_time: Time.current, actual_end_time: 60.minutes.from_now)
-    @person2 = @timeslot2.person
-    @event.timeslots.count.should equal(2)
+    @timecard1 = FactoryGirl.create(:timecard, actual_start_time: Time.current, actual_end_time: 75.minutes.from_now)
+    @event = @timecard1.event
+    @person1 = @timecard1.person
+    @timecard2 = FactoryGirl.create(:timecard, event: @event, actual_start_time: Time.current, actual_end_time: 60.minutes.from_now)
+    @person2 = @timecard2.person
+    @event.timecards.count.should equal(2)
     @event.manhours.should eq(2.25)
     #1.should eq(2)
   end
-  it "creates a timeslot with actual times brought in from the event" do
+  it "creates a timecard with actual times brought in from the event" do
     @person = FactoryGirl.create(:person)
     @event = FactoryGirl.create(:event, start_time: Time.current, end_time: 75.minutes.from_now)
     

@@ -1,18 +1,18 @@
 require 'spec_helper'
 #save_and_open_page
-describe 'Access on timeslot' do
+describe 'Access on timecard' do
   it "gets denied" do
-    visit timeslots_path
-    page.should have_content("need to sign in")
-    visit new_timeslot_path
-    page.should have_content("need to sign in")
-    @sample_object = FactoryGirl.create(:timeslot)
+    visit timecards_path
+    page.should have_content("Access Denied")
+    visit new_timecard_path
+    page.should have_content("Access Denied")
+    @sample_object = FactoryGirl.create(:timecard)
     visit url_for(@sample_object)
-    page.should have_content("need to sign in")
+    page.should have_content("Access Denied")
   end
 end
 
-describe Timeslot do
+describe Timecard do
   before (:each) do
     somebody = FactoryGirl.create(:user)
     r = FactoryGirl.create(:role, name: "Editor")
@@ -24,37 +24,37 @@ describe Timeslot do
   end
 
   it "gets the index" do
-    @sample_object = FactoryGirl.create(:timeslot)
-    visit timeslots_path
+    @sample_object = FactoryGirl.create(:timecard)
+    visit timecards_path
     page.should have_content("LIMS") # In the nav bar
     page.should have_css('#sidebar')
-    page.should have_content("Listing Timeslots")
+    page.should have_content("Listing Timecards")
     page.should have_content(@sample_object.category)
   end
   it "visits a creation form" do
-    @sample_object = FactoryGirl.create(:timeslot)
-    visit new_timeslot_path
+    @sample_object = FactoryGirl.create(:timecard)
+    visit new_timecard_path
     page.should have_content("LIMS")
     page.should have_css('#sidebar')
     page.should have_content('Category')
-    page.should have_content("New Timeslot")
+    page.should have_content("New Timecard")
   end
   it "visits a display page" do
-    @sample_object = FactoryGirl.create(:timeslot)
-    visit timeslot_path(@sample_object)
+    @sample_object = FactoryGirl.create(:timecard)
+    visit timecard_path(@sample_object)
     page.should have_content("LIMS")
     page.should have_css('#sidebar')
     page.should have_content(@sample_object.category)
     page.should have_content(@sample_object.intention)
   end
   it "visits a display page without actual times" do
-    @sample_object = FactoryGirl.create(:timeslot, intended_start_time: nil, intended_end_time: nil, actual_start_time: nil, actual_end_time: nil)
-    visit timeslot_path(@sample_object)
+    @sample_object = FactoryGirl.create(:timecard, intended_start_time: nil, intended_end_time: nil, actual_start_time: nil, actual_end_time: nil)
+    visit timecard_path(@sample_object)
     page.should have_content("LIMS")
     page.should have_css('#sidebar')
     page.should have_content(@sample_object.category)
     page.should have_content(@sample_object.intention)
-    visit timeslots_path
+    visit timecards_path
     page.should have_content("LIMS")
     visit person_path(@sample_object.person)
     page.should have_content("LIMS")

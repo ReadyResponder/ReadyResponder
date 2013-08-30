@@ -188,8 +188,8 @@ describe "Person" do
     end
 
     it "a person page" do
-      @timeslot = FactoryGirl.create(:timeslot) #this creates a person as well
-      @person = @timeslot.person
+      @timecard = FactoryGirl.create(:timecard) #this creates a person as well
+      @person = @timecard.person
       @certification = FactoryGirl.create(:cert, person: @person)
       visit person_path(@person)
       page.should have_content(@person.fullname)

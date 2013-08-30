@@ -1,12 +1,12 @@
-class TimeslotPresenter
+class TimecardPresenter
 
-  def initialize(timeslot, template)
-    @timeslot = timeslot
+  def initialize(timecard, template)
+    @timecard = timecard
     @template = template
   end
 
   def the_actual_start
-    @timeslot.actual_start_time.to_s(:short) if @timeslot.actual_start_time
+    @timecard.actual_start_time.to_s(:short) if @timecard.actual_start_time
   end
 end
 

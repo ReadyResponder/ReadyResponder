@@ -1,5 +1,5 @@
 
-<%= simple_form_for(@timeslot) do |f| %>
+<%= simple_form_for(@timecard) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
@@ -8,13 +8,13 @@
     <%= f.input :category, :as => :select, :collection => Event::CATEGORY_CHOICES %>
     <fieldset>
       <legend>Intention</legend>
-      <%= f.input :intention, :as => :select, :collection => Timeslot::INTENTION_CHOICES %>
+      <%= f.input :intention, :as => :select, :collection => Timecard::INTENTION_CHOICES %>
       <%= f.input :intended_start_time, :as => :string, :input_html => {:class => "datetimepicker",  :size => 11 }  %>
       <%= f.input :intended_end_time, :as => :string, :input_html => {:class => "datetimepicker", :size => 11 }  %>
     </fieldset>
     <fieldset>
       <legend>Outcome</legend>
-      <%= f.input :outcome, :as => :select, :collection => Timeslot::OUTCOME_CHOICES %>
+      <%= f.input :outcome, :as => :select, :collection => Timecard::OUTCOME_CHOICES %>
       <div>
         <%= f.input :actual_start_time, :as => :string, 
                     :input_html => {:class => "datetimepicker", :size => 11, :title => "When they actually started to work" }  %>
