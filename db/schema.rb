@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130830154503) do
+ActiveRecord::Schema.define(:version => 20130830162404) do
+
+  create_table "activities", :force => true do |t|
+    t.string   "content"
+    t.string   "author"
+    t.integer  "loggable_id"
+    t.string   "loggable_type"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
   create_table "certs", :force => true do |t|
     t.integer  "person_id"

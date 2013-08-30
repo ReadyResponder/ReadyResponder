@@ -1,0 +1,14 @@
+<%= simple_form_for(@activity) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :content %>
+    <%= f.input :author %>
+    <%= f.input :loggable_id %>
+    <%= f.input :loggable_type %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

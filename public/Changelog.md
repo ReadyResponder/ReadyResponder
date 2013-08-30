@@ -1,5 +1,6 @@
 Changelog
 =========
+- 0.79 8/30/2013 Added Activity model which is polymorphic capture of small events for person, event models (to start)
 - 0.79 8/30/2013 Added error_code, middlename prefix_name suffix_name and nickname to person model. 
 - 0.79 8/30/2013 Added error_code, id_code to Event model. The id_code will be used to directly access the event thru QRcodes or IVR applications
 - 0.79 8/30/2013 Added error_code, description to Timecard model
