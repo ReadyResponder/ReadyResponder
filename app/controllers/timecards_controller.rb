@@ -3,67 +3,77 @@ class TimecardsController < ApplicationController
   load_and_authorize_resource
   
   def index
-    @timeslots = Timecard.all
+    @timecards = Timecard.all
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @timeslots }
+      format.json { render json: @timecards }
     end
   end
 
   def show
-    @timeslot = Timecard.find(params[:id])
+    @timecard = Timecard.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @timeslot }
+      format.json { render json: @timecard }
     end
   end
 
   def new
-    @timeslot = Timecard.new
+    @timecard = Timecard.new
+    #Seems like I should be able to use Timecard.new(params[:timecard]), but they're not nested
+    if params[:event_id]  
+      @event = Event.find(params[:event_id])
+      @timecard.person_id = params[:person_id]
+      @timecard.event_id = params[:event_id]
+      @timecard.outcome = params[:outcome]
+      @timecard.actual_start_time = @event.start_time
+      @timecard.actual_end_time = @event.end_time
+      @timecard.category = @event.category
+    end
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @timeslot }
+      format.json { render json: @timecard }
     end
   end
 
   def edit
-    @timeslot = Timecard.find(params[:id])
+    @timecard = Timecard.find(params[:id])
   end
 
   def create
-    @timeslot = Timecard.new(params[:timeslot])
+    @timecard = Timecard.new(params[:timecard])
 
     respond_to do |format|
-      if @timeslot.save
-        format.html { redirect_to @timeslot, notice: 'Timecard was successfully created.' }
-        format.json { render json: @timeslot, status: :created, location: @timeslot }
+      if @timecard.save
+        format.html { redirect_to @timecard, notice: 'Timecard was successfully created.' }
+        format.json { render json: @timecard, status: :created, location: @timecard }
       else
         format.html { render action: "new" }
-        format.json { render json: @timeslot.errors, status: :unprocessable_entity }
+        format.json { render json: @timecard.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def update
-    @timeslot = Timecard.find(params[:id])
+    @timecard = Timecard.find(params[:id])
 
     respond_to do |format|
-      if @timeslot.update_attributes(params[:timeslot])
-        format.html { redirect_to @timeslot, notice: 'Timecard was successfully updated.' }
+      if @timecard.update_attributes(params[:timecard])
+        format.html { redirect_to @timecard, notice: 'Timecard was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @timeslot.errors, status: :unprocessable_entity }
+        format.json { render json: @timecard.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def destroy
-    @timeslot = Timecard.find(params[:id])
-    @timeslot.destroy
+    @timecard = Timecard.find(params[:id])
+    @timecard.destroy
 
     respond_to do |format|
       format.html { redirect_to Timecards_url }

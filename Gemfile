@@ -26,6 +26,7 @@ group :test, :development do
   gem 'binding_of_caller'
   gem 'meta_request'
   gem 'database_cleaner', '1.0.1'
+  gem 'poltergeist'
 end
 
 #Handles authentication

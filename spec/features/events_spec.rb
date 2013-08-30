@@ -103,8 +103,17 @@ describe "Events" do
       page.should have_content(@event.title)
       current_path.should == event_path(@event)
     end
+    it "hides the course if category isn't training" , js: true do
+      visit new_event_path
+      select 'Patrol', :from => 'event_category'
+      fill_in "Description", with: "Really Long Text..."  #This ensures the blur event happens
+      page.should_not have_content("Course")
+      select 'Training', :from => 'event_category'
+      fill_in "Description", with: "Really Long Text..."  #This ensures the blur event happens
+      page.should have_content("Course")
+    end
     it "always fails" do
-     # 1.should eq(2)
+     1.should eq(2)
     end
   end
 end

@@ -21,6 +21,7 @@ class Event < ActiveRecord::Base
 
   has_many :certs
   belongs_to :course
+  has_many :activities, as: :loggable
   
   has_many :timecards
   has_many :people, :through => :timecards

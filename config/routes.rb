@@ -1,7 +1,6 @@
 Lims3::Application.routes.draw do
   resources :activities
 
-
   resources :helpdocs
 
   resources :channels
@@ -19,7 +18,6 @@ Lims3::Application.routes.draw do
   resources :items do
     resources :repairs, :controller => 'repairs'
   end
-  
 
   resources :roles
 

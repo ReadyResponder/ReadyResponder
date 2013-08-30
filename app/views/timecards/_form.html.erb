@@ -1,4 +1,3 @@
-
 <%= simple_form_for(@timecard) do |f| %>
   <%= f.error_notification %>
 
@@ -15,11 +14,9 @@
     <fieldset>
       <legend>Outcome</legend>
       <%= f.input :outcome, :as => :select, :collection => Timecard::OUTCOME_CHOICES %>
-      <div>
-        <%= f.input :actual_start_time, :as => :string, 
-                    :input_html => {:class => "datetimepicker", :size => 11, :title => "When they actually started to work" }  %>
-        <%= f.input :actual_end_time, :as => :string, :input_html => {:class => "datetimepicker", :size => 11 }  %>
-      </div>
+      <%= f.input :actual_start_time, :as => :string, 
+                  :input_html => {:class => "datetimepicker", :size => 11, :title => "When they actually started to work" }  %>
+      <%= f.input :actual_end_time, :as => :string, :input_html => {:class => "datetimepicker", :size => 11 }  %>
     </fieldset>
   </div>
 

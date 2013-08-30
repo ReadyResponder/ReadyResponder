@@ -53,6 +53,11 @@
           <tr>
             <th>Name</th>
             <th>Phone</th>
+            <th>Division</th>
+            <th>Squad</th>
+            <th></th>
+            <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -60,6 +65,19 @@
             <tr>
               <td><%= link_to person.fullname, person %></td>
               <td><%= person.channels.phone.map { |e| number_to_phone(e.content, area_code: true) }.join(',') %></td>
+              <td><%= person.division1 %></td>
+              <td><%= person.division2 %></td>
+              <% if can? :create, Timecard and ["Scheduled", "In-session"].include? @event.status %>
+                <td><%= link_to 'Available', new_timecard_path(:person_id => person, :event_id => @event), :class => 'btn'  %></td>
+                <td><%= link_to 'Scheduled', new_timecard_path(:person_id => person, :event_id => @event), :class => 'btn'  %></td>
+              <% else %>
+                <td></td><td></td>
+              <% end %>
+              <% if can? :create, Timecard and ["In-session", "Completed"].include? @event.status %>
+                <td><%= link_to 'Worked', new_timecard_path(person_id: person, event_id: @event, outcome: "Worked"), :class => 'btn'  %></td>
+              <% else %>
+                <td></td>  
+              <% end %>
             </tr>
           <% end %>
         </tbody>

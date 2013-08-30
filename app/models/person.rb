@@ -18,6 +18,7 @@ class Person < ActiveRecord::Base
   has_many :events, :through => :timecards
   has_many :items
   has_many :inspections
+  has_many :activities, as: :loggable
   
   validates_presence_of :firstname, :lastname, :status
   validates_uniqueness_of :icsid, :allow_nil => true, :allow_blank => true   # this needs to be scoped to active members, or more sophisticated rules
