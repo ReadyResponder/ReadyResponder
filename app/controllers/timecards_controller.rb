@@ -27,9 +27,16 @@ class TimecardsController < ApplicationController
       @event = Event.find(params[:event_id])
       @timecard.person_id = params[:person_id]
       @timecard.event_id = params[:event_id]
-      @timecard.outcome = params[:outcome]
-      @timecard.actual_start_time = @event.start_time
-      @timecard.actual_end_time = @event.end_time
+      if params[:intention]
+        @timecard.intention = params[:intention]
+        @timecard.intended_start_time = @event.start_time
+        @timecard.intended_end_time = @event.end_time
+      end
+      if params[:outcome]
+        @timecard.outcome = params[:outcome]
+        @timecard.actual_start_time = @event.start_time
+        @timecard.actual_end_time = @event.end_time
+      end
       @timecard.category = @event.category
     end
 

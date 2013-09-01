@@ -43,7 +43,7 @@
   <b>Status:</b>
   <%= @event.status %>
 </p>
-
+<h3>Due to the current code, do not refresh (F5) this page</h3>
 <div id="event_timecards" >
   <div class="accordion">
     <h3>Unknown (<%= @event.unknown_people.count %>) </h3>
@@ -55,9 +55,7 @@
             <th>Phone</th>
             <th>Division</th>
             <th>Squad</th>
-            <th></th>
-            <th></th>
-            <th></th>
+            <th colspan=4></th>
           </tr>
         </thead>
         <tbody>
@@ -68,13 +66,20 @@
               <td><%= person.division1 %></td>
               <td><%= person.division2 %></td>
               <% if can? :create, Timecard and ["Scheduled", "In-session"].include? @event.status %>
-                <td><%= link_to 'Available', new_timecard_path(:person_id => person, :event_id => @event), :class => 'btn'  %></td>
-                <td><%= link_to 'Scheduled', new_timecard_path(:person_id => person, :event_id => @event), :class => 'btn'  %></td>
+                <td>
+                  <%= link_to "Available", schedule_path(@event, person.id, "Available"), method: :Post, :class => 'btn btn-mini' %>
+                </td>
+                <td>
+                  <%= link_to "Unavailable", schedule_path(@event, person.id, "Unavailable"), method: :Post, :class => 'btn btn-mini' %>
+                </td>
+                <td>
+                  <%= link_to "Scheduled", schedule_path(@event, person.id, "Scheduled"), method: :Post, :class => 'btn btn-mini' %>
+                </td>
               <% else %>
-                <td></td><td></td>
+                <td></td><td></td><td></td>
               <% end %>
               <% if can? :create, Timecard and ["In-session", "Completed"].include? @event.status %>
-                <td><%= link_to 'Worked', new_timecard_path(person_id: person, event_id: @event, outcome: "Worked"), :class => 'btn'  %></td>
+                <td><%= link_to "Worked", schedule_path(@event, person.id, "Worked"), method: :Post, :class => 'btn btn-mini' %></td>
               <% else %>
                 <td></td>  
               <% end %>
@@ -94,6 +99,7 @@
             <th>Start</th>
             <th>End</th>
             <th>Hours</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -103,6 +109,22 @@
               <td><%= timecard.intended_start_time %></td>
               <td><%= timecard.intended_end_time %></td>
               <td><%= timecard.intended_duration %></td>
+              <% if can? :create, Timecard and ["Scheduled", "In-session"].include? @event.status %>
+                <td>
+                  <%= link_to "Unavailable", schedule_path(@event, timecard.person.id, "Unavailable"), method: :Post, :class => 'btn btn-mini' %>
+                </td>
+                <td>
+                  <%= link_to "Scheduled", schedule_path(@event, timecard.person.id, "Scheduled"), method: :Post, :class => 'btn btn-mini' %>
+                </td>
+              <% else %>
+                <td colspan=2></td>
+              <% end %>
+              <% if can? :create, Timecard and ["In-session", "Completed"].include? @event.status %>
+                <td><%= link_to "Worked", schedule_path(@event, timecard.person.id, "Worked"), method: :Post, :class => 'btn btn-mini' %></td>
+              <% else %>
+                <td></td>  
+              <% end %>
+              <td><%= link_to 'Edit', edit_timecard_path(timecard), :class => "btn btn-mini" if can? :update, timecard %></td>
             </tr>
           <% end %>
         </tbody>
@@ -143,6 +165,7 @@
             <th>Start</th>
             <th>End</th>
             <th>Hours</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -152,6 +175,7 @@
               <td><%= timecard.intended_start_time  %></td>
               <td><%= timecard.intended_end_time %></td>
               <td><%= timecard.intended_duration %></td>
+              <td><%= link_to 'Edit', edit_timecard_path(timecard), :class => "btn btn-mini" if can? :update, timecard %></td>
             </tr>
           <% end %>
         </tbody>
@@ -168,7 +192,7 @@
             <th>Start</th>
             <th>End</th>
             <th>Hours</th>
-            <th></th>
+            <th colspan = 2></th>
           </tr>
         </thead>
         <tbody>
@@ -178,6 +202,11 @@
               <td><%= timecard.actual_start_time  %></td>
               <td><%= timecard.actual_end_time %></td>
               <td><%= timecard.actual_duration %></td>
+              <% if can? :create, Timecard and ["In-session", "Completed"].include? @event.status %>
+                <td><%= link_to "Worked", schedule_path(@event, timecard.person.id, "Worked"), method: :Post, :class => 'btn btn-mini' %></td>
+              <% else %>
+                <td></td>  
+              <% end %>
               <td><%= link_to 'Edit', edit_timecard_path(timecard), :class => "btn btn-mini" if can? :update, timecard %></td>
             </tr>
           <% end %>

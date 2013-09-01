@@ -3,12 +3,12 @@ require 'spec_helper'
 describe 'Access on timecard' do
   it "gets denied" do
     visit timecards_path
-    page.should have_content("Access Denied")
+    page.should have_content("You need to sign in")
     visit new_timecard_path
-    page.should have_content("Access Denied")
+    page.should have_content("You need to sign in")
     @sample_object = FactoryGirl.create(:timecard)
     visit url_for(@sample_object)
-    page.should have_content("Access Denied")
+    page.should have_content("You need to sign in")
   end
 end
 

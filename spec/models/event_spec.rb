@@ -30,9 +30,23 @@ describe Event do
     @event.manhours.should eq(2.25)
     #1.should eq(2)
   end
-  it "creates a timecard with actual times brought in from the event" do
+  it "creates an available timecard with actual times brought in from the event" do
     @person = FactoryGirl.create(:person)
-    @event = FactoryGirl.create(:event, start_time: Time.current, end_time: 75.minutes.from_now)
-    
+    @event = FactoryGirl.create(:event, start_time: Time.current, end_time: 75.minutes.from_now, status: "Scheduled")
+    @timecard = @event.schedule(@person, "Available")
+    @timecard.class.name.should eq("Timecard")
+    @timecard.intention.should eq("Available")
+  end
+  it "reports if it's ready to schedule" do
+    @event = FactoryGirl.build(:event, start_time: nil, end_time: 75.minutes.from_now, status: "Scheduled")
+    @event.ready_to_schedule?("Available").should eq(false)  #Need a start time
+    @event = FactoryGirl.build(:event, start_time: Time.current, end_time: nil, status: "Scheduled")
+    @event.ready_to_schedule?("Worked").should eq(false)  #Need an end time
+    @event = FactoryGirl.build(:event, start_time: Time.current, end_time: 75.minutes.from_now, status: "Closed")
+    @event.ready_to_schedule?("Scheduled").should eq(false)  #Never for a closed event
+  end
+
+  it "always fails" do
+    1.should eq(2)
   end
 end

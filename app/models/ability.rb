@@ -3,7 +3,10 @@ class Ability
   
   def initialize(current_user)
     current_user ||= User.new
-    if current_user.roles.to_s.include? "Manager"
+    if current_user.roles.blank?
+      cannot :update, :all
+      cannot :read, :all
+    elsif current_user.roles.to_s.include? "Manager"
       can :manage, :all
     elsif current_user.roles.to_s.include? "Editor"
       can [:read, :update, :create, :edit, :police, :cert, :applicants, :prospects, :other, :inactive, :leave, :declined], Person

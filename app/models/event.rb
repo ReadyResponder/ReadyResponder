@@ -48,6 +48,40 @@ class Event < ActiveRecord::Base
   def completed?
     status == "Completed"
   end
+
+  def schedule(schedulable, schedule_action)
+    @card = Timecard.new
+    @card.person = schedulable if schedulable.class.name == "Person"
+    @card.event = self
+    case schedule_action
+    when "Available", "Scheduled"
+      @card.intention = schedule_action
+      @card.intended_start_time = self.start_time
+      @card.intended_end_time = self.end_time
+    when "Worked", "Unavailable"
+      @card.outcome = schedule_action
+      @card.actual_start_time = self.start_time
+      @card.actual_end_time = self.end_time
+    end
+    @card.save
+    return @card
+  end 
+
+  def ready_to_schedule?(schedule_action)
+    return false if self.nil? 
+    return false if schedule_action.blank?
+    return false if self.status.blank?
+    return false if self.status == "Closed"
+
+    case schedule_action
+      when "Available", "Scheduled", "Unavailable"
+        return false if self.start_time.blank? 
+      when "Worked"
+        return false if self.start_time.blank? or self.end_time.blank?
+    end
+    return true
+  end
+
 private
   def calc_duration #This is also used in timecards; it should be extracted out
      if !(start_time.blank?) and !(end_time.blank?)

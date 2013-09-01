@@ -1,6 +1,15 @@
 class EventsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
+  
+  def schedule
+    @event = Event.find(params[:id])
+    @person = Person.find(params[:person_id])
+    if @person and @event.ready_to_schedule?(params[:card_action])
+      @tc = @event.schedule(@person, params[:card_action])
+    end
+    render :action => :show
+  end
 
   # GET /events
   # GET /events.json

@@ -8,6 +8,7 @@ Lims3::Application.routes.draw do
   resources :timecards
 
   resources :events
+  post 'events/:id/schedule/:person_id/:card_action', to: 'events#schedule', as: 'schedule'
 
   resources :moves
 
