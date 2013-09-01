@@ -8,7 +8,8 @@ class EventsController < ApplicationController
     if @person and @event.ready_to_schedule?(params[:card_action])
       @tc = @event.schedule(@person, params[:card_action])
     end
-    render :action => :show
+
+    redirect_to event_url(@event), status: :found, notice: @tc ? "Timecard created" : "Timecard not created"
   end
 
   # GET /events
