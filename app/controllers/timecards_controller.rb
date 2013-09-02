@@ -80,10 +80,11 @@ class TimecardsController < ApplicationController
 
   def destroy
     @timecard = Timecard.find(params[:id])
+    @event = @timecard.event
     @timecard.destroy
 
     respond_to do |format|
-      format.html { redirect_to Timecards_url }
+      format.html { redirect_to event_url(@event) }
       format.json { head :no_content }
     end
   end

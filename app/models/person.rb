@@ -53,7 +53,8 @@ class Person < ActiveRecord::Base
   DEPARTMENT = ['Police', 'CERT', 'Other']
   
   def fullname
-    (self.firstname + " " + (self.middleinitial || "") + " " + self.lastname).squeeze(" ")
+    fname = self.nickname ||= self.firstname
+    (fname + " " + (self.middleinitial || "") + " " + self.lastname).squeeze(" ")
   end
   
   def shortrank

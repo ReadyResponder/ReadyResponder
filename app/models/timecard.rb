@@ -9,20 +9,27 @@ class Timecard < ActiveRecord::Base
   INTENTION_CHOICES = ['Available', 'Scheduled', 'Unavailable', "Vacation"]
   OUTCOME_CHOICES = ['Worked', "Not Needed", "Excused", "Unexcused", 'AWOL', "Vacation Approved", "Vacation Denied"]
 
-  def intended_end_date_cannot_be_before_start
+  def intended_end_date_cannot_be_before_intended_start
     if ((!intended_end_time.blank?) and (!intended_start_time.blank?)) and intended_end_time < intended_start_time
       errors.add(:intended_end_time, "must be after the start, unless you are the Doctor")
     end
   end
-  def actual_end_date_cannot_be_before_start
+
+  def actual_end_date_cannot_be_before_actual_start
     if ((!actual_end_time.blank?) and (!actual_start_time.blank?)) and actual_end_time < actual_start_time
-      errors.add(:actual_end_time, "must be after the start, unless you are the Doctor")
+      errors.add :actual_end_time, "must be after the start, unless you are the Doctor"
+    end
+  end
+  def has_a_duplicate_timecard
+    if find_duplicate_timecards.count > 0 
+      errors.add :base, "Duplicate timecard found, please edit that one instead"
     end
   end
 
   validates_presence_of :person_id, :event_id
-  validate :intended_end_date_cannot_be_before_start
-  validate :actual_end_date_cannot_be_before_start
+  validate :intended_end_date_cannot_be_before_intended_start
+  validate :actual_end_date_cannot_be_before_actual_start
+  validate :has_a_duplicate_timecard
 
   def self.available
     where(intention: "Available")
@@ -36,6 +43,26 @@ class Timecard < ActiveRecord::Base
   def self.worked
     where(outcome: "Worked")
   end
+
+def find_duplicate_timecards
+  margin = 30
+  unless self.intended_start_time.blank?
+    intended_edge1 = (self.intended_start_time - margin.minutes)
+    intended_edge2 = (self.intended_start_time + margin.minutes)
+  end
+  unless self.actual_start_time.blank?
+    actual_edge1 = (self.actual_start_time - margin.minutes)
+    actual_edge2 = (self.actual_start_time + margin.minutes)
+  end
+  query = Timecard.where(event_id: self.event_id, person_id: self.person_id)
+  query = query.where('(intended_start_time BETWEEN ? AND ?) OR (actual_start_time BETWEEN ? AND ?)',
+                                                intended_edge1,intended_edge2, actual_edge1, actual_edge2) 
+  if self.new_record? #then self.id will be nil
+    query
+  else #if it's not a new record, I need to filter out itself
+    query.where("id != ?", self.id)
+  end
+end
 
 private
   def pull_defaults_from_event

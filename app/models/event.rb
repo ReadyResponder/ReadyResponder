@@ -16,7 +16,7 @@ class Event < ActiveRecord::Base
   
   validates_presence_of :category, :title, :status
   validate :end_date_cannot_be_before_start
-  validates_presence_of :start_time, :if => :completed?
+  validates_presence_of :start_time
   validates_presence_of :end_time, :if => :completed?
 
   has_many :certs

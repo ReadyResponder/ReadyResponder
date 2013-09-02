@@ -52,9 +52,12 @@ FactoryGirl.define do
     title "A Training Event"
     category "Training"
     status "Scheduled"
+    start_time Time.now
   end
 
   factory :timecard do
+    person
+    event
     category "Training"
     intended_start_time "2013-12-23 03:31"
     intended_end_time "2013-12-23 04:31"
@@ -63,7 +66,5 @@ FactoryGirl.define do
     #actual_start_time "2012-12-23 03:31"
     #actual_end_time "2012-12-23 05:31"
     #outcome "Actual"
-    person
-    event
   end
 end

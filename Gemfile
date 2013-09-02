@@ -4,7 +4,7 @@ gem 'rails', '3.2.13'
 
 gem 'thin', group: :development
 gem 'ransack'
-gem 'pg', group: :production
+gem 'pg'
 gem 'carrierwave'
 gem 'rmagick'
 gem 'simple_form'
@@ -18,7 +18,7 @@ group :test, :development do
   gem "capybara"
   gem "guard-rspec"
   gem 'guard-livereload'
-  gem 'sqlite3'
+  #gem 'sqlite3'
   #gem "mailcatcher"
   gem "launchy"
   gem "letter_opener"

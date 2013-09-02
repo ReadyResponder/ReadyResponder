@@ -31,7 +31,20 @@ describe Timecard do
       @timecard.intended_duration.should eq(0)
       @timecard = FactoryGirl.create(:timecard, intended_start_time: Time.current, intended_end_time: 75.minutes.from_now)
       @timecard.intended_duration.should eq(1.25)
-      #1.should eq(2)
+    end
+
+    it "finds the existing timecard if it's a duplicate" do
+      @event = FactoryGirl.create(:event)
+      @person = FactoryGirl.create(:person)
+      @original_timecard = FactoryGirl.create(:timecard, event: @event, person: @person, intended_start_time: Time.current, intention: "Available")
+      @duplicate_timecard = FactoryGirl.build(:timecard, event: @event, person: @person, intended_start_time: Time.current, intention: "Available")
+      @duplicate_timecard.find_duplicate_timecards.count.should eq(1)
+      @duplicate_timecard = FactoryGirl.build(:timecard, event: @event, person: @person, actual_start_time: Time.current, outcome: "Worked")
+      @duplicate_timecard.find_duplicate_timecards.count.should eq(1)
+    end
+
+    it "always fails" do
+      1.should eq(2)
     end
   end
 end
