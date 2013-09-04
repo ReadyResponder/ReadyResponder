@@ -10,6 +10,7 @@ gem 'rmagick'
 gem 'simple_form'
 gem 'geocoder'
 gem 'cancan'
+gem "taps"
 #gem 'validates_timeliness', '~> 3.0'
 
 group :test, :development do
@@ -18,7 +19,7 @@ group :test, :development do
   gem "capybara"
   gem "guard-rspec"
   gem 'guard-livereload'
-  #gem 'sqlite3'
+  gem 'sqlite3'
   #gem "mailcatcher"
   gem "launchy"
   gem "letter_opener"
