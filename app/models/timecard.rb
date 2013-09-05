@@ -1,7 +1,8 @@
 class Timecard < ActiveRecord::Base
   before_save :pull_defaults_from_event
   before_save :calc_durations
-  attr_accessible :intention, :outcome, :category, :intended_start_time, :intended_end_time, :actual_start_time, :actual_end_time, :event_id, :person_id
+  attr_accessible :intention, :intended_start_time, :intended_end_time, 
+                  :outcome, :actual_start_time, :actual_end_time, :event_id, :person_id, :category, :description
   
   belongs_to :person
   belongs_to :event
@@ -35,7 +36,7 @@ class Timecard < ActiveRecord::Base
     where(intention: "Available")
   end
   def self.scheduled
-    where(intention: "Scheduled", outcome: nil)
+    where(intention: "Scheduled", outcome:['', nil])
   end
   def self.unavailable
     where(outcome: "Unavailable")
@@ -46,17 +47,23 @@ class Timecard < ActiveRecord::Base
 
 def find_duplicate_timecards
   margin = 30
-  unless self.intended_start_time.blank?
-    intended_edge1 = (self.intended_start_time - margin.minutes)
-    intended_edge2 = (self.intended_start_time + margin.minutes)
+  query = Timecard.where(person_id: self.person_id)
+  if self.intended_start_time.is_a?(Time) && self.intended_end_time.is_a?(Time)
+    true_start = self.intended_start_time
+    fuzzy_start = (self.intended_start_time - margin.minutes)
+    fuzzy_end = (self.intended_end_time + margin.minutes)
+    query = query.where('(? > intended_start_time AND ? < intended_end_time) OR (intended_start_time BETWEEN ? AND ?)',
+                                                true_start,fuzzy_start, fuzzy_start, fuzzy_end)
   end
-  unless self.actual_start_time.blank?
-    actual_edge1 = (self.actual_start_time - margin.minutes)
-    actual_edge2 = (self.actual_start_time + margin.minutes)
+  
+  if self.actual_start_time.is_a?(Time) && self.actual_end_time.is_a?(Time)
+    true_start = self.actual_start_time
+    fuzzy_start = (self.actual_start_time - margin.minutes)
+    fuzzy_end = (self.actual_end_time + margin.minutes)
+    query = query.where('(? > actual_start_time AND ? < actual_end_time) OR (actual_start_time BETWEEN ? AND ?)',
+                                                true_start,fuzzy_start, fuzzy_start, fuzzy_end)
   end
-  query = Timecard.where(event_id: self.event_id, person_id: self.person_id)
-  query = query.where('(intended_start_time BETWEEN ? AND ?) OR (actual_start_time BETWEEN ? AND ?)',
-                                                intended_edge1,intended_edge2, actual_edge1, actual_edge2) 
+
   if self.new_record? #then self.id will be nil
     query
   else #if it's not a new record, I need to filter out itself

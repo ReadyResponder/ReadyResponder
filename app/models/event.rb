@@ -45,12 +45,13 @@ class Event < ActiveRecord::Base
   def available_people
     self.timecards.available
   end
+
   def completed?
     status == "Completed"
   end
 
-  def schedule(schedulable, schedule_action)
-    @card = Timecard.new
+  def schedule(schedulable, schedule_action, timecard = Timecard.new )
+    @card = timecard
     @card.person = schedulable if schedulable.class.name == "Person"
     @card.event = self
     case schedule_action

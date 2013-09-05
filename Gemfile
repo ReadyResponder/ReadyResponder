@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
-
+gem 'rack'
 gem 'thin', group: :development
 gem 'ransack'
 gem 'pg'
@@ -10,7 +10,7 @@ gem 'rmagick'
 gem 'simple_form'
 gem 'geocoder'
 gem 'cancan'
-gem "taps"
+#gem "taps"
 #gem 'validates_timeliness', '~> 3.0'
 
 group :test, :development do

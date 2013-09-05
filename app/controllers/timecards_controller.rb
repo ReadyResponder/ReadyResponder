@@ -67,9 +67,15 @@ class TimecardsController < ApplicationController
   def update
     @timecard = Timecard.find(params[:id])
 
+    @timecard.intention = (params[:intention]) if params[:intention]
+    @timecard.outcome = (params[:outcome]) if params[:outcome]
     respond_to do |format|
       if @timecard.update_attributes(params[:timecard])
-        format.html { redirect_to @timecard, notice: 'Timecard was successfully updated.' }
+        @event = @timecard.event
+        format.html { render "events/show" }
+        #redirect_to event_url(@event), status: :found, notice: "Timecard created"
+        #redirect_to event_url(@event), status: :found, notice: "Timecard updated"
+        #format.html { redirect_to @timecard, notice: 'Timecard was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

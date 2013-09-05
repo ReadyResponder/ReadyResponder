@@ -65,7 +65,7 @@
               <td><%= person.channels.phone.map { |e| number_to_phone(e.content, area_code: true) }.join(',') %></td>
               <td><%= person.division1 %></td>
               <td><%= person.division2 %></td>
-              <% if can? :create, Timecard and ["Scheduled", "In-session"].include? @event.status %>
+              <% if can? :create, Timecard and @event.status.in? ["Scheduled", "In-session"] %>
                 <td>
                   <%= link_to "Available", schedule_path(@event, person.id, "Available"), method: :Post, :class => 'btn btn-mini' %>
                 </td>
@@ -78,7 +78,7 @@
               <% else %>
                 <td></td><td></td><td></td>
               <% end %>
-              <% if can? :create, Timecard and ["In-session", "Completed"].include? @event.status %>
+              <% if can? :create, Timecard and @event.status.in? ["In-session", "Completed"] %>
                 <td><%= link_to "Worked", schedule_path(@event, person.id, "Worked"), method: :Post, :class => 'btn btn-mini' %></td>
               <% else %>
                 <td></td>  
@@ -114,7 +114,7 @@
                   <%= link_to "Unavailable", schedule_path(@event, timecard.person.id, "Unavailable"), method: :Post, :class => 'btn btn-mini' %>
                 </td>
                 <td>
-                  <%= link_to "Scheduled", schedule_path(@event, timecard.person.id, "Scheduled"), method: :Post, :class => 'btn btn-mini' %>
+                  <%= link_to "Scheduled", timecard_path(timecard, intention: "Scheduled"), method: :Put, :class => 'btn btn-mini' %>
                 </td>
               <% else %>
                 <td colspan=2></td>
@@ -147,6 +147,7 @@
             <tr>
               <td><%= link_to timecard.person.fullname, timecard %></td>
               <td><%= timecard.person.department %></td>
+              <td><%= timecard.description %></td>
               <td><%= link_to 'Edit', edit_timecard_path(timecard), :class => "btn btn-mini" if can? :update, timecard %></td>
             </tr>
           <% end %>

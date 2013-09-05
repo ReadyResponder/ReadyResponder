@@ -5,6 +5,8 @@
     <%= f.association :person, :collection => Person.active %>
     <%= f.association :event %>
     <%= f.input :category, :as => :select, :collection => Event::CATEGORY_CHOICES %>
+    <%= f.input :description %>
+
     <fieldset>
       <legend>Intention</legend>
       <%= f.input :intention, :as => :select, :collection => Timecard::INTENTION_CHOICES %>

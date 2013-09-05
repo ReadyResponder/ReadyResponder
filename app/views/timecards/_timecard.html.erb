@@ -1,5 +1,5 @@
 <tr>
   <td>
-    <%= "#{timecard.intention} for #{timecard.intended_start_time.to_s(:short)}" if timecard.intended_start_time %> <%= link_to timecard.event.description, timecard %>
+    <%= "#{timecard.intention} #{timecard.intended_start_time.to_s(:short)}" if timecard.intended_start_time %> <%= link_to timecard.event.title, timecard %>
   </td>
 </tr>
