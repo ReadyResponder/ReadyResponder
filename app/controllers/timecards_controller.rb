@@ -72,7 +72,7 @@ class TimecardsController < ApplicationController
     respond_to do |format|
       if @timecard.update_attributes(params[:timecard])
         @event = @timecard.event
-        format.html { render "events/show" }
+        format.html { redirect_to event_url(@event) }
         #redirect_to event_url(@event), status: :found, notice: "Timecard created"
         #redirect_to event_url(@event), status: :found, notice: "Timecard updated"
         #format.html { redirect_to @timecard, notice: 'Timecard was successfully updated.' }

@@ -55,11 +55,11 @@ class Event < ActiveRecord::Base
     @card.person = schedulable if schedulable.class.name == "Person"
     @card.event = self
     case schedule_action
-    when "Available", "Scheduled"
+    when "Available", "Scheduled", "Unavailable"
       @card.intention = schedule_action
       @card.intended_start_time = self.start_time
       @card.intended_end_time = self.end_time
-    when "Worked", "Unavailable"
+    when "Worked"
       @card.outcome = schedule_action
       @card.actual_start_time = self.start_time
       @card.actual_end_time = self.end_time

@@ -7,8 +7,8 @@ class Timecard < ActiveRecord::Base
   belongs_to :person
   belongs_to :event
 
-  INTENTION_CHOICES = ['Available', 'Scheduled', 'Unavailable', "Vacation"]
-  OUTCOME_CHOICES = ['Worked', "Not Needed", "Excused", "Unexcused", 'AWOL', "Vacation Approved", "Vacation Denied"]
+  INTENTION_CHOICES = ['Available', 'Scheduled']
+  OUTCOME_CHOICES = ["Not Needed", 'Worked', 'Unavailable', 'AWOL', "Vacation" ]
 
   def intended_end_date_cannot_be_before_intended_start
     if ((!intended_end_time.blank?) and (!intended_start_time.blank?)) and intended_end_time < intended_start_time
@@ -36,13 +36,17 @@ class Timecard < ActiveRecord::Base
     where(intention: "Available")
   end
   def self.scheduled
+    #Postgres distinguishes between null and an empty string, others do not
     where(intention: "Scheduled", outcome:['', nil])
   end
   def self.unavailable
-    where(outcome: "Unavailable")
+    where(intention: "Unavailable")
+  end
+  def self.working
+    where(outcome: "Worked", actual_end_time: nil)
   end
   def self.worked
-    where(outcome: "Worked")
+    where(outcome: "Worked").where(Timecard.arel_table['actual_end_time'].not_eq(nil))
   end
 
 def find_duplicate_timecards
@@ -55,7 +59,7 @@ def find_duplicate_timecards
     query = query.where('(? > intended_start_time AND ? < intended_end_time) OR (intended_start_time BETWEEN ? AND ?)',
                                                 true_start,fuzzy_start, fuzzy_start, fuzzy_end)
   end
-  
+
   if self.actual_start_time.is_a?(Time) && self.actual_end_time.is_a?(Time)
     true_start = self.actual_start_time
     fuzzy_start = (self.actual_start_time - margin.minutes)
@@ -73,13 +77,18 @@ end
 
 private
   def pull_defaults_from_event
-      event = self.event || Event.new
-      self.category = event.category if self.category.nil?
-      if self.outcome == "Worked" 
-        self.actual_start_time = event.start_time if self.actual_start_time.nil?
-        self.actual_end_time = event.end_time if self.actual_end_time.nil? & event.status == "Complete"
-      end
+    event = self.event || Event.new
+    self.category = event.category if self.category.nil?
+    if ["Unavailable", "Available", "Scheduled"].include? intention
+      self.intended_start_time = event.start_time if self.intended_start_time.nil?
+      self.intended_end_time = event.end_time if self.intended_end_time.nil?
     end
+
+    if self.outcome == "Worked" 
+      self.actual_start_time = event.start_time if self.actual_start_time.nil?
+      self.actual_end_time = event.end_time if self.actual_end_time.nil? & event.status == "Complete"
+    end
+  end
   
   def calc_durations
     if intended_start_time.blank? or intended_end_time.blank?

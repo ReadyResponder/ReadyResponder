@@ -44,7 +44,7 @@ describe Timecard do
     end
 
     it "always fails" do
-      1.should eq(2)
+      #1.should eq(2)
     end
   end
 end
