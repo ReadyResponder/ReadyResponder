@@ -86,7 +86,7 @@ private
 
     if self.outcome == "Worked" 
       self.actual_start_time = event.start_time if self.actual_start_time.nil?
-      self.actual_end_time = event.end_time if self.actual_end_time.nil? & event.status == "Complete"
+      self.actual_end_time = event.end_time if self.actual_end_time.nil?
     end
   end
   

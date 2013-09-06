@@ -1,0 +1,30 @@
+<div class="accordion">
+  <h3 id="scheduled-heading" >Scheduled (<%= @event.timecards.scheduled.count %>) <%#= @event.manhours %> </h3>
+  <div>
+    <table id="scheduled" class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Hours</th>
+          <th colspan=4 ></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @event.timecards.scheduled.each do |timecard| %>
+          <tr>
+            <td><%= link_to timecard.person.fullname, timecard %></td>
+            <td><%= timecard.intended_start_time  %></td>
+            <td><%= timecard.intended_end_time %></td>
+            <td><%= timecard.intended_duration %></td>
+            <td><%= unavailable_button(timecard) %></td>
+            <td><%= available_button(timecard) %></td>
+            <td><%= worked_button(timecard) %></td>
+            <td><%= edit_button(timecard) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
