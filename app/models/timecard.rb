@@ -40,7 +40,7 @@ class Timecard < ActiveRecord::Base
     where(intention: "Scheduled", outcome:['', nil])
   end
   def self.unavailable
-    where(intention: "Unavailable")
+    where(outcome: "Unavailable")
   end
   def self.working
     where(outcome: "Worked", actual_end_time: nil)
