@@ -32,7 +32,7 @@ describe "Events" do
       @event = Event.last
       @event.timecards.count.should eq(0)
       @timecard_person2 = FactoryGirl.create(:timecard, event: @event, person: @person2, intention: "Available")
-      @timecard_person3 = FactoryGirl.create(:timecard, event: @event, person: @person3, intention: "Unavailable")
+      @timecard_person3 = FactoryGirl.create(:timecard, event: @event, person: @person3, outcome: "Unavailable")
       @timecard_person4 = FactoryGirl.create(:timecard, event: @event, person: @person4, intention: "Scheduled")
       @timecard_person5 = FactoryGirl.create(:timecard, event: @event, person: @person5, intention: "Scheduled", outcome: "Worked", actual_start_time: "2013-10-31 18:30" )
       @event.timecards.count.should eq(4)

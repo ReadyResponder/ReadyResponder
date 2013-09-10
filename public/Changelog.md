@@ -1,5 +1,6 @@
 Changelog
 =========
+- 0.81 09/10/2013 Fixed bug in Schedule action for events
 - 0.81 09/10/2013 Better section for timecards on the person#show view
 - 0.80 09/10/2013 Now showing description of timecards on events, turned off duplicate timecard validation for now
 - 0.80 09/08/2013 Updates to events and timecards, pulled sections into partials

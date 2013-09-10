@@ -33,7 +33,7 @@ class Timecard < ActiveRecord::Base
   #validate :has_no_duplicate_timecard
 
   def self.available
-    where(intention: "Available")
+    where(intention: "Available", outcome:['', nil])
   end
   def self.scheduled
     #Postgres distinguishes between null and an empty string, others do not
