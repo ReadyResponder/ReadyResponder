@@ -5,6 +5,7 @@
       <thead>
         <tr>
           <th>Name</th>
+          <th>Description</th>
           <th>Intention</th>
           <th>Intented Start</th>
           <th>Intented End</th>
@@ -21,6 +22,7 @@
         <% @event.timecards.each do |timecard| %>
           <tr>
             <td><%= link_to timecard.person.fullname, timecard %></td>
+            <td><%= timecard.description %></td>
             <td><%= timecard.intention  %></td>
             <td><%= timecard.intended_start_time  %></td>
             <td><%= timecard.intended_end_time %></td>

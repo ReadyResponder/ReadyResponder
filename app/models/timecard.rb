@@ -21,7 +21,7 @@ class Timecard < ActiveRecord::Base
       errors.add :actual_end_time, "must be after the start, unless you are the Doctor"
     end
   end
-  def has_a_duplicate_timecard
+  def has_no_duplicate_timecard
     if find_duplicate_timecards.count > 0 
       errors.add :base, "Duplicate timecard found, please edit that one instead"
     end
@@ -30,7 +30,7 @@ class Timecard < ActiveRecord::Base
   validates_presence_of :person_id, :event_id
   validate :intended_end_date_cannot_be_before_intended_start
   validate :actual_end_date_cannot_be_before_actual_start
-  validate :has_a_duplicate_timecard
+  #validate :has_no_duplicate_timecard
 
   def self.available
     where(intention: "Available")

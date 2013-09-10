@@ -1,5 +1,13 @@
 <tr>
-  <td>
-    <%= "#{timecard.intention} #{timecard.intended_start_time.to_s(:short)}" if timecard.intended_start_time %> <%= link_to timecard.event.title, timecard %>
-  </td>
+  <td><%= link_to timecard.event.title, timecard %></td>
+  <td><%= timecard.description %></td>
+  <td><%= timecard.intention  %></td>
+  <td><%= timecard.intended_start_time  %></td>
+  <td><%= timecard.intended_end_time %></td>
+  <td><%= timecard.intended_duration %></td>
+  <td><%= timecard.outcome  %></td>
+  <td><%= timecard.actual_start_time  %></td>
+  <td><%= timecard.actual_end_time %></td>
+  <td><%= timecard.actual_duration %></td>
+  <td><%= link_to 'Edit', edit_timecard_path(timecard), :class => "btn btn-mini" if can? :update, timecard %></td>
 </tr>

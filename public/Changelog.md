@@ -1,8 +1,11 @@
 Changelog
 =========
+- 0.81 09/10/2013 Better section for timecards on the person#show view
+- 0.80 09/10/2013 Now showing description of timecards on events, turned off duplicate timecard validation for now
+- 0.80 09/08/2013 Updates to events and timecards, pulled sections into partials
 - 0.79 09/02/2013 Upgraded server to ruby 2.0.0-p247
 - 0.79 09/01/2013 Upgraded database from SQLite to Postgresql
-- 0.79 08/31/2013 Did a re-direct rather than a render, now no problem with refresh
+- 0.79 08/31/2013 Did a re-direct rather than a render, now no problem with refresh on events
 - 0.79 08/31/2013 Added lots to events and event model to support scheduling. Currently cannot reload the page, or it duplicates timecards
 - 0.79 08/30/2013 Added Activity model which is polymorphic capture of small events for person, event models (to start)
 - 0.79 08/30/2013 Added error_code, middlename prefix_name suffix_name and nickname to person model. 
