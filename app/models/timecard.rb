@@ -7,7 +7,7 @@ class Timecard < ActiveRecord::Base
   belongs_to :person
   belongs_to :event
 
-  INTENTION_CHOICES = ['Available', 'Scheduled']
+  INTENTION_CHOICES = ['Available', 'Scheduled', 'Unavailable']
   OUTCOME_CHOICES = ["Not Needed", 'Worked', 'Unavailable', 'AWOL', "Vacation" ]
 
   def intended_end_date_cannot_be_before_intended_start
