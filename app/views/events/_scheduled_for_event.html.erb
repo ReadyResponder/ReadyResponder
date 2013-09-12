@@ -13,7 +13,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @event.timecards.scheduled.each do |timecard| %>
+        <% @event.scheduled_people.each do |timecard| %>
           <tr>
             <td><%= link_to timecard.person.fullname, timecard %></td>
             <td><%= timecard.description %></td>

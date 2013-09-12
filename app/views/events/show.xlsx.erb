@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="<%= @event.title %>">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Department</Data></Cell>
+        <Cell><Data ss:Type="String">Name</Data></Cell>
+        <Cell><Data ss:Type="String">Intention</Data></Cell>
+        <Cell><Data ss:Type="String">Assignment</Data></Cell>
+        <Cell><Data ss:Type="String">Intended Start</Data></Cell>
+        <Cell><Data ss:Type="String">Intended End</Data></Cell>
+        <Cell><Data ss:Type="String">Intended Duration</Data></Cell>
+      </Row>
+    <% @event.timecards.order(:intention).each do |t| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= t.person.department %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= t.person.fullname %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= t.intention %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= t.description %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= t.intended_start_time %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= t.intended_end_time %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= t.intended_duration %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
+

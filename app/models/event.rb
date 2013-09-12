@@ -40,10 +40,13 @@ class Event < ActiveRecord::Base
     self.timecards.sum('actual_duration')
   end
   def unknown_people 
-    (Person.order('title_order').active - self.people)
+    Person.order('title_order').active - self.people
   end
   def available_people
     self.timecards.available
+  end
+  def scheduled_people
+    self.timecards.scheduled
   end
 
   def completed?
@@ -55,14 +58,14 @@ class Event < ActiveRecord::Base
     @card.person = schedulable if schedulable.class.name == "Person"
     @card.event = self
     case schedule_action
-    when "Available", "Scheduled", "Unavailable"
-      @card.intention = schedule_action
-      @card.intended_start_time = self.start_time
-      @card.intended_end_time = self.end_time
-    when "Worked"
-      @card.outcome = schedule_action
-      @card.actual_start_time = self.start_time
-      @card.actual_end_time = self.end_time
+      when "Available", "Scheduled", "Unavailable"
+        @card.intention = schedule_action
+        @card.intended_start_time = self.start_time
+        @card.intended_end_time = self.end_time
+      when "Worked"
+        @card.outcome = schedule_action
+        @card.actual_start_time = self.start_time
+        @card.actual_end_time = self.end_time
     end
     @card.save
     return @card
