@@ -6,7 +6,7 @@ module EventsHelper
 
   def unavailable_button(timecard)
     if can? :update, timecard and ["Scheduled", "In-session"].include? @event.status
-      button = link_to("Unavailable", timecard_path(timecard, outcome: "Unavailable"), method: :Put, :class => 'btn btn-mini')
+      button = link_to("Unavailable", timecard_path(timecard, intention: "Unavailable"), method: :Put, :class => 'btn btn-mini')
     end
     return raw button
   end
