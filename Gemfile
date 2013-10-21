@@ -4,8 +4,8 @@ gem 'rails', '3.2.13'
 gem 'rack'
 gem 'thin', group: :development
 gem 'ransack'
-gem 'pg'
 gem 'carrierwave'
+gem "pg", "~> 0.17.0"
 gem 'rmagick'
 gem 'simple_form'
 gem 'geocoder'

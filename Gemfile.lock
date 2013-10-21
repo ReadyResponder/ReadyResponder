@@ -153,7 +153,7 @@ GEM
       net-ssh (>= 1.99.1)
     nokogiri (1.5.6)
     orm_adapter (0.4.0)
-    pg (0.14.1)
+    pg (0.17.0)
     poltergeist (1.1.2)
       capybara (~> 2.0.1)
       faye-websocket (~> 0.4.4)
@@ -283,7 +283,7 @@ DEPENDENCIES
   launchy
   letter_opener
   meta_request
-  pg
+  pg (~> 0.17.0)
   poltergeist
   rack
   rails (= 3.2.13)

@@ -1,4 +1,7 @@
 Lims3::Application.routes.draw do
+  resources :messages
+
+
   resources :activities
 
   resources :helpdocs
