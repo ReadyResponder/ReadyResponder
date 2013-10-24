@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
 gem 'rack'
-gem 'thin', group: :development
 gem 'ransack'
 gem 'carrierwave'
 gem "pg", "~> 0.17.0"
@@ -14,13 +13,14 @@ gem 'cancan'
 #gem 'validates_timeliness', '~> 3.0'
 
 group :test, :development do
+  gem 'thin'
   gem "rspec-rails"
   gem "factory_girl_rails", "~> 4.0"
   gem "capybara"
   gem "guard-rspec"
   gem 'guard-livereload'
   gem 'sqlite3'
-  #gem "mailcatcher"
+  gem "mailcatcher"
   gem "launchy"
   gem "letter_opener"
   gem 'better_errors'
