@@ -13,7 +13,7 @@ module EventsHelper
 
   def available_button(timecard)
     if can? :update, timecard and ["Scheduled", "In-session"].include? @event.status
-      button = link_to("Available", timecard_path(timecard, intention: "Available"), method: :Put, :class => 'btn btn-mini')
+      button = link_to("Available", timecard_path(timecard, intention: "Available"), method: :Put, remote: true, :class => 'btn btn-mini')
     end
     return raw button
   end

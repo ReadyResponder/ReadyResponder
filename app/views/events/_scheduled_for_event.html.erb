@@ -14,17 +14,17 @@
       </thead>
       <tbody>
         <% @event.scheduled_people.each do |timecard| %>
-          <tr>
-            <td><%= link_to timecard.person.fullname, timecard %></td>
-            <td><%= timecard.description %></td>
-            <td><%= timecard.intended_start_time  %></td>
-            <td><%= timecard.intended_end_time %></td>
-            <td><%= timecard.intended_duration %></td>
-            <td><%= unavailable_button(timecard) %></td>
-            <td><%= available_button(timecard) %></td>
-            <td><%= worked_button(timecard) %></td>
-            <td><%= edit_button(timecard) %></td>
-          </tr>
+        <tr id = <%= "timecard_#{timecard.id}" %>>
+          <td><%= link_to timecard.person.fullname, timecard %></td>
+          <td><%= timecard.description %></td>
+          <td><%= timecard.intended_start_time  %></td>
+          <td><%= timecard.intended_end_time %></td>
+          <td><%= timecard.intended_duration %></td>
+          <td><%= unavailable_button(timecard) %></td>
+          <td><%= available_button(timecard) %></td>
+          <td><%= worked_button(timecard) %></td>
+          <td><%= edit_button(timecard) %></td>
+        </tr>
         <% end %>
       </tbody>
     </table>

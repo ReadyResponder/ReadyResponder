@@ -77,6 +77,7 @@ class TimecardsController < ApplicationController
         #redirect_to event_url(@event), status: :found, notice: "Timecard updated"
         #format.html { redirect_to @timecard, notice: 'Timecard was successfully updated.' }
         format.json { head :no_content }
+        format.js 
       else
         format.html { render action: "edit" }
         format.json { render json: @timecard.errors, status: :unprocessable_entity }

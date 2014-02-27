@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
-  
+
   def schedule
     @event = Event.find(params[:id])
     @person = Person.find(params[:person_id])
@@ -56,7 +56,7 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(params[:event])
-    
+
     respond_to do |format|
       if @event.save
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
