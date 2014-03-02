@@ -1,5 +1,6 @@
 Changelog
 =========
+- 0.81 09/12/2013 Fixed small bug related to Unavailable being an intention, not an outcome, until EVent is closed
 - 0.81 09/12/2013 Added basic ability to export Event as a spreadsheet
 - 0.81 09/10/2013 Fixed bug in Schedule action for events
 - 0.81 09/10/2013 Better section for timecards on the person#show view
