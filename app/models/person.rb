@@ -19,7 +19,7 @@ class Person < ActiveRecord::Base
   has_many :items
   has_many :inspections
   has_many :activities, as: :loggable
-  
+
   validates_presence_of :firstname, :lastname, :status
   validates_uniqueness_of :icsid, :allow_nil => true, :allow_blank => true   # this needs to be scoped to active members, or more sophisticated rules
   validates :firstname, :uniqueness => { :scope => :lastname }
@@ -27,8 +27,7 @@ class Person < ActiveRecord::Base
   validates_numericality_of  :height, :weight, :allow_nil => true, :allow_blank => true
   validates_presence_of :division2, :unless => "division1.blank?"
   validates_presence_of :division1, :unless => "division2.blank?"
-  
-  
+
   scope :cert, :order => 'division1, division2, title_order, start_date ASC', :conditions => {:department => "CERT"}
   scope :police, :order => 'division1, division2, title_order, start_date ASC', :conditions => {:department => 'Police'}
   scope :leave, :conditions => {:status => "Leave of Absence"}
@@ -51,7 +50,7 @@ class Person < ActiveRecord::Base
   DIVISION2 = ['Command', 'Squad 1', 'Squad 2', 'CERT']
   STATUS = ['Leave of Absence', 'Inactive', 'Active', 'Applicant','Prospect','Declined']
   DEPARTMENT = ['Police', 'CERT', 'Other']
-  
+
   def fullname
     fname = self.nickname ||= self.firstname
     (fname + " " + (self.middleinitial || "") + " " + self.lastname).squeeze(" ")
@@ -64,19 +63,26 @@ class Person < ActiveRecord::Base
             "CERT Member" => "TM", "Recruit" => "Rct" }
     ranks[self.title] || ''
   end
-  
+
   def title_order
     self.title_order = TITLE_ORDER[self.title] || 30
   end
-  
+
   def name
     (self.firstname + " " + self.lastname)
   end
-  
+
+  def sar_level
+    return 1 if self.skilled?("SAR Tech 1")
+    return 2 if self.skilled?("SAR Tech 2")
+    return 3 if self.skilled?("SAR Tech 3")
+  end
+
+
   def csz
     self.city + " " + self.state + " " + self.zipcode
   end
-  
+
   def state=(value)
     # custom actions
     write_attribute(:state, value.strip.upcase)
@@ -100,7 +106,7 @@ class Person < ActiveRecord::Base
     end
       age
   end
-  
+
   def skilled?(skill_name)
     skill = Skill.find_by_name(skill_name)
     if skill.blank?
@@ -109,7 +115,7 @@ class Person < ActiveRecord::Base
       self.skills.include?(skill)
     end
   end
-  
+
   def qualified?(title_name)
     title = Title.find_by_name(title_name)
     if title
@@ -118,7 +124,7 @@ class Person < ActiveRecord::Base
       false
     end
   end
-  
+
   def missing_skills(title)
     title = title || Title.find(title)
     if title

@@ -2,27 +2,28 @@
   <caption><h3><%= @page_title %></h3></caption>
   <thead>
     <tr>
-      <th>Badge</th>
       <th>(S)Rank Order</th>
       <th>Title</th>
       <th>(S)Last Name</th>
       <th>Name</th>
+      <th>Badge</th>
       <th>(S) Start Date</th>
       <th>Duration</th>
       <th>Phone</th>
       <th>E-Mail</th>
       <th>Dept</th>
+      <th>SAR</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
     <% @people.each do |person| %>
       <tr>
-      	<td><%= person.icsid %></td>
         <td><%= Person::TITLE_ORDER[person.title] %></td>
         <td><%= person.shortrank %></td>
       	<td><%= person.lastname %></td>
         <td><%= link_to person.fullname, person %></td>	
+      	<td><%= person.icsid %></td>
         <td><%= person.start_date %></td>
         <td title=<%= person.start_date %> >
           <%= distance_of_time_in_words(((person.end_date) || Date.today), person.start_date) if person.start_date %>
@@ -30,6 +31,7 @@
         <td><%= number_to_phone(person.channels.phone.first.content) unless person.channels.phone.blank? %></td>
         <td><%= person.channels.email.first.content unless person.channels.email.blank? %></td>
         <td><%= person.department %></td>
+        <td><%= person.sar_level %></td>
         <td><%= link_to 'Edit', edit_person_path(person), :class => "btn btn-mini" if can? :update, person %></td>
       </tr>
     <% end %>

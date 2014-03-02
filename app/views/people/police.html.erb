@@ -6,9 +6,9 @@
 <table id="police" class="generic_datatable datatable display table table-striped table-bordered" >
   <thead>
     <tr>
-      <th>Badge</th>
       <th>Rank</th>
       <th>Name</th>
+      <th>Badge</th>
       <th>Duration</th>
       <th>Division</th>
       <th>Squad</th>
@@ -18,10 +18,10 @@
   <tbody>
     <% @people.each do |person| %>
       <tr>
-	<td><%= person.icsid %></td>
 	<td><%= person.shortrank %></td>
 	<td><%= link_to person.fullname, person %></td>	
-	<td><%= distance_of_time_in_words(((person.end_date) || Date.today), person.start_date) if person.start_date %></td>
+	<td><%= person.icsid %></td>
+  <td><%= distance_of_time_in_words(((person.end_date) || Date.today), person.start_date) if person.start_date %></td>
 	<td><%= person.division1 %></td>
 	<td><%= person.division2 %></td>
 	<td><%= link_to 'Edit', edit_person_path(person), :class => "btn btn-primary btn-mini" if can? :update, person %></td>

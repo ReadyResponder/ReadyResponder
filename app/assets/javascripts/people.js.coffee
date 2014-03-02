@@ -6,16 +6,18 @@ jQuery ->
   $("#person_firstname").focus();
   $('#people').dataTable
     sPaginationType: "full_numbers"
-    "aoColumns": [null, 
-                  { "bVisible": false }, 
-                  { "iDataSort": 1 }, 
-                  { "bVisible": false }, 
-                  { "iDataSort": 3 }, 
-                  {"bVisible": false }, 
-                  { "iDataSort": 5 }, 
-                  null, 
-                  null, 
-                  null, 
+    "aoColumns": [
+                  { "bVisible": false },
+                  { "iDataSort": 1 },
+                  { "bVisible": false },
+                  { "iDataSort": 3 },
+                   null,
+                  {"bVisible": false },
+                  { "iDataSort": 5 },
+                  null,
+                  null,
+                  null,
+                  null,
                   {"bSortable" : false}]
     'bJQueryUI': true
     'bRetrieve': true
