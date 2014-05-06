@@ -1,7 +1,7 @@
 require "bundler/capistrano"
 
-#server "75.144.141.93", :web, :app, :db, primary: true
-server "10.101.2.101", :web, :app, :db, primary: true
+server "75.144.141.93", :web, :app, :db, primary: true
+#server "10.101.2.101", :web, :app, :db, primary: true
 
 set :application, "lims"
 set :user, "deployer"
@@ -10,7 +10,7 @@ set :deploy_via, :remote_cache
 set :use_sudo, false
 
 set :scm, "git"
-set :repository, "git@10.101.2.1:/opt/git/lims3.git"
+set :repository, "git@github.com:kgf/lims.git"
 set :branch, "master"
 
 default_run_options[:pty] = true
