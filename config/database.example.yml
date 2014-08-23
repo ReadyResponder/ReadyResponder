@@ -4,22 +4,32 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
 development:
-  adapter: sqlite3
-  database: db/development.sqlite3
+  adapter: postgresql
+  encoding: unicode
+  database: lims_development
   pool: 5
-  timeout: 5000
+  username: kfallon
+  password: 
+  min_messages: WARNING
+  template: template0  #template0 resolves an issue with SQL_ASCII vs UTF-8 encoding
 
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
+
 test:
-  adapter: sqlite3
-  database: db/test.sqlite3
+  adapter: postgresql
+  encoding: unicode
+  database: lims_test
+  template: template0
   pool: 5
-  timeout: 5000
+  username: <%= ENV['LIMS_USERNAME'] %>
+  password: <%= ENV['LIMS_PASSWORD'] %>
+  min_messages: WARNING
 
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
+  adapter: postgresql
+  encoding: unicode
+  database: lims_production
   pool: 5
-  timeout: 5000
+  username: deployer
+  password:
+  min_messages: WARNING
+  template: template0
