@@ -10,6 +10,8 @@ class Person < ActiveRecord::Base
   has_many :certs, :conditions => {:status =>'Active' }
 
   has_many :channels
+  has_many :phones
+  has_many :emails
   accepts_nested_attributes_for :channels, allow_destroy: true
   has_many :courses, :through => :certs
   has_many :skills, :through => :courses
