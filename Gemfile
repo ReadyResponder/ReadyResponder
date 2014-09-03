@@ -14,7 +14,7 @@ gem 'cancan'
 
 group :test, :development do
   gem 'thin'
-  gem "rspec-rails"
+  gem "rspec-rails", '2.99'
   gem "factory_girl_rails", "~> 4.0"
   gem "capybara"
   gem "guard-rspec"
