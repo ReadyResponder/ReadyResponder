@@ -7,19 +7,33 @@
     <%= f.input :zipcode, :input_html => { :size => 10 }  %>
     <%= f.input :city %>
     <%= f.input :state %>
-    <%= f.input :status, :as => :select, :label => "Person's Status", :collection => Person::STATUS %>
+    <%= f.input :status, :as => :select, :collection => Person::STATUS %>
     <%= f.input :end_date, :as => :string, :input_html => { :class => 'datepicker', :size => 11 }  %>
     <%= f.input :department, :as => :select, :collection => Person::DEPARTMENT %>
     <div class="form-horizontal">
-        <%= f.simple_fields_for :channels do |c| %>
+        <h2> Phone information </h2>
+        <%= f.simple_fields_for :phones do |c| %>
           <fieldset>
             <%= c.input :category, :as => :select, :collection => Channel::CATEGORIES %>
-            <%= c.input :content, :placeholder => '9785551212 OR me@example.com' %>
-            <%= c.input :name %>
+            <%= c.input :content, :placeholder => '9785551212' %>
+            <%= c.input :name, :label => 'Description' %>
             <%= c.input :status, :as => :select, :collection => Channel::STATUSES %>
             <%= c.input :usage, :as => :select, :collection => Channel::USAGES %>
-            <%= c.input :carrier, :as => :select, :collection => Channel::CARRIERS %>
+            <%= c.input :carrier, :as => :select, :collection => Phone::CARRIERS %>
+            <%= c.input :sms_available %>
+            <%= c.input :priority, :as => :select, :collection => Phone::PRIORITIES %>         
           </fieldset>
+        <% end %>
+    </div>
+    <div class="form-horizontal">
+        <h2> Email information </h2>  
+        <%= f.simple_fields_for :emails do |c| %>
+          <fieldset>
+            <%= c.input :category, :as => :select, :collection => Channel::CATEGORIES %>
+            <%= c.input :content, :placeholder => 'me@example.com' %>
+            <%= c.input :name, :label => 'Description' %>
+            <%= c.input :status, :as => :select, :collection => Channel::STATUSES %>
+            <%= c.input :usage, :as => :select, :collection => Channel::USAGES %>
         <% end %>
     </div>
     <%= f.input :icsid, :input_html => { :size => 5 } %>
@@ -28,7 +42,7 @@
     <%= f.input :start_date, :as => :string, :input_html => { :class => 'datepicker', :size => 11 }  %>
     <%= f.input :division1, :as => :select, :label => 'Division', :collection => Person::DIVISION1 %>
     <%= f.input :division2, :as => :select, :label => 'Squad', :collection => Person::DIVISION2 %>
-    <%= f.input :comments %>
+    <%= f.input :comments, :input_html => { :size => 40}  %>
     <%= f.button :submit %>
 <% end %>
 

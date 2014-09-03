@@ -9,7 +9,10 @@ class Person < ActiveRecord::Base
   #Could I use a named scope, and/or could I have another association for 'active_certs' ?
   has_many :certs, :conditions => {:status =>'Active' }
 
+  # Since phones and emails derive off of channels, is "has_many :channels" below redundant?
   has_many :channels
+  has_many :phones
+  has_many :emails
   accepts_nested_attributes_for :channels, allow_destroy: true
   has_many :courses, :through => :certs
   has_many :skills, :through => :courses
