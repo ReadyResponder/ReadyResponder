@@ -27,17 +27,17 @@ describe "Person" do
 
     it "returns the index page" do
       visit people_path
-      page.should have_content('People')
-      page.should have_content('LIMS') # This is in the nav bar
-      page.should have_content('CJ')
-      page.should have_content('555-1212')
-      page.should have_content('Sierra')
-      page.should have_content('sierra@example.com')
-      page.should_not have_content('Adam')
-      page.should_not have_content('Priscilla')
-      page.should_not have_content('Indy')
-      page.should_not have_content('Leona')
-      page.should_not have_content('Oscar')
+      expect(page).to have_content('People')
+      expect(page).to have_content('LIMS') # This is in the nav bar
+      expect(page).to have_content('CJ')
+      expect(page).to have_content('555-1212')
+      expect(page).to have_content('Sierra')
+      expect(page).to have_content('sierra@example.com')
+      expect(page).to_not have_content('Adam') # Should not show applicant
+      expect(page).to_not have_content('Priscilla')
+      expect(page).to_not have_content('Indy')
+      expect(page).to_not have_content('Leona')
+      expect(page).to_not have_content('Oscar')
     end
 
     it "returns a page for Police" do
@@ -168,12 +168,12 @@ describe "Person" do
       firstaidskill = FactoryGirl.create(:skill, name: "FRFA")
       title.skills << drivingskill
       title.skills << firstaidskill
-      
+
       frfacourse = FactoryGirl.create(:course, name: "FRFA")
       firstaidskill.courses << frfacourse
       drivingcourse = FactoryGirl.create(:course, name: "Mass DL")
       drivingskill.courses << drivingcourse
-      
+
       person = FactoryGirl.create(:person)
       person.titles << title
       cert = FactoryGirl.create(:cert, person: person, course: frfacourse)
@@ -200,13 +200,12 @@ describe "Person" do
       visit person_path(person)
       page.should have_content("Status")
     end
-    
-    pending "all certs, even expired" do
+
+    skip "all certs, even expired" do
       person = FactoryGirl.create(:person)
       course = FactoryGirl.create(:course, name: "Basket Weaving")
       expiredcert = FactoryGirl.create(:cert, person: person, course: course, status: "Expired")
       visit person_path(person)
-      save_and_open_page
       page.should have_content("Basket Weaving")
     end
   end
