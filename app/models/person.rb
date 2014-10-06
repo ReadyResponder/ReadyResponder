@@ -126,7 +126,7 @@ class Person < ActiveRecord::Base
   end
 
   def missing_skills(title)
-    return "Invalid title" if !(title.kind_of?(Title))
+    return "Invalid title" unless title.kind_of?(Title)
     title.skills - self.skills
   end
 
