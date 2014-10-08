@@ -126,14 +126,10 @@ class Person < ActiveRecord::Base
   end
 
   def missing_skills(title)
-    title = title || Title.find(title)
-    if title
-      (title.skills - self.skills)
-    else
-      "Invalid title"
-    end
+    return "Invalid title" unless title.kind_of?(Title)
+    title.skills - self.skills
   end
-  
+
   def service_duration
     if self.start_date.present?
       if self.end_date.present?
