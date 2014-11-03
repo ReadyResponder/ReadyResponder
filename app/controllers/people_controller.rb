@@ -87,8 +87,8 @@ class PeopleController < ApplicationController
   def new
     @page_title = "New Person"
     @person = Person.new(status: cookies[:status], state: 'MA')
-    @person.channels.build (attributes = {category: 'E-Mail', status: 'OK', usage: '1-All'})
-    @mobile = @person.channels.build (attributes = {category: 'Mobile Phone', status: 'OK', usage: '1-All'})
+    @person.channels.build({ category: 'E-Mail', status: 'OK', usage: '1-All' })
+    @mobile = @person.channels.build({ category: 'Mobile Phone', status: 'OK', usage: '1-All' })
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @person }
@@ -98,7 +98,7 @@ class PeopleController < ApplicationController
   def edit
     @person = Person.find(params[:id])
     #This is a quick hack to allow people to enter e-mails and phone numbers for person records already created
-    @person.channels.build (attributes = { status: "OK", usage: '1-All'}) if @person.channels.count < 2
+    @person.channels.build({ status: "OK", usage: '1-All' }) if @person.channels.count < 2
   end
 
   def create
