@@ -24,7 +24,7 @@ class CertsController < ApplicationController
     end
   end
 
- def new
+  def new
     @cert = Cert.new(:status => 'Active')
     @cert.person_id = (params[:person_id]) if (params[:person_id]).present?  
     respond_to do |format|
