@@ -14,9 +14,9 @@ describe "Person" do
   describe "views" do
     before (:each) do
       cj = FactoryGirl.create(:person, firstname: 'CJ',  department: 'Police' )
-      cj.channels << FactoryGirl.create(:channel, content: '9785551212', category: "Mobile Phone")
+      cj.channels << FactoryGirl.create(:channel, channel_type: 'Phone', content: '9785551212', category: "Mobile Phone")
       sierra = FactoryGirl.create(:person, firstname: 'Sierra', department: 'CERT' )
-      sierra.channels << FactoryGirl.create(:channel, category: 'E-Mail', content: 'sierra@example.com')
+      sierra.channels << FactoryGirl.create(:channel, channel_type: 'email', category: 'E-Mail', content: 'sierra@example.com')
       FactoryGirl.create(:person, firstname: 'Adam', status: 'Applicant' )
       FactoryGirl.create(:person, firstname: 'Priscilla', status: 'Prospect' )
       FactoryGirl.create(:person, firstname: 'Indy', status: 'Inactive' )
@@ -159,7 +159,7 @@ describe "Person" do
       person = FactoryGirl.create(:person, icsid: "509")
       visit edit_person_path(person)
       page.should have_field("First Name", :with => "CJ")
-      page.should have_select("person_gender", :selected => "Female")  
+      page.should have_select("person_gender", :selected => "Female")
     end
 
     it "qualified only if all skills are present" do

@@ -5,13 +5,12 @@ class Person < ActiveRecord::Base
 
   attr_accessible :firstname, :lastname, :status, :icsid, :department, :city, :state, :zipcode, :start_date, :end_date , :title, :gender, :date_of_birth,:division1, :division2, :channels_attributes, :title_ids, :title_order, :comments
 
-  #Having a condition on this association allows all the chaining magic to happen. 
+  #Having a condition on this association allows all the chaining magic to happen.
   #Could I use a named scope, and/or could I have another association for 'active_certs' ?
   has_many :certs, :conditions => {:status =>'Active' }
 
   # Since phones and emails derive off of channels, is "has_many :channels" below redundant?
   has_many :channels
-  has_many :phones
   has_many :emails
   accepts_nested_attributes_for :channels, allow_destroy: true
   has_many :courses, :through => :certs
@@ -81,6 +80,21 @@ class Person < ActiveRecord::Base
     return 3 if self.skilled?("SAR Tech 3")
   end
 
+  def phones
+    channels.where(:channel_type => ["Cell", "Landline", "Phone"]).order(:priority)
+  end
+
+  def phone
+    phones.first.content if phones.present?
+  end
+
+  def emails
+    channels.where(:channel_type => "email").order(:priority)
+  end
+
+  def email
+    emails.first.content if emails.present?
+  end
 
   def csz
     self.city + " " + self.state + " " + self.zipcode
