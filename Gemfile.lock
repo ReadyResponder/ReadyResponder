@@ -358,7 +358,7 @@ DEPENDENCIES
   rack
   rails (= 3.2.13)
   ransack
-  rmagick
+  rmagick (~> 2.13.3)
   rspec-rails (= 2.99)
   sass-rails (~> 3.2.3)
   simple_form
