@@ -18,8 +18,8 @@
   <ul>
     <% @person.channels.each do |channel| %>
       <li>
-        <%# This should be moved into a presenter %>
-        <% if channel.channel_type = "Phone" %>
+        <%# This should be moved into a presenter to just return the right content %>
+        <% if channel.phone? %>
           <%= number_to_phone(channel.content, area_code: true) %>
           <%= "on #{channel.carrier}" if channel.carrier %>
         <% else %>

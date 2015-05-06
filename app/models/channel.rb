@@ -8,4 +8,7 @@ class Channel < ActiveRecord::Base
   CATEGORIES = ['Home','Business']
   CHANNEL_TYPES = ["Email", "Cell", "Landline", "Phone", "Twitter"]
 
+  def phone?
+    ["Phone", 'Cell', 'Landline'].include?(self.channel_type)
+  end
 end
