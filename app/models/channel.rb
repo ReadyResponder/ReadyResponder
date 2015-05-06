@@ -6,6 +6,6 @@ class Channel < ActiveRecord::Base
   USAGES = ['1-All','2-Emergency Only','3-Info Only','4-Testing']
   STATUSES = ['OK','Invalid']
   CATEGORIES = ['Home','Business']
-  TYPES = ["Email", "Cell", "Landline"]
-  
+  CHANNEL_TYPES = ["Email", "Cell", "Landline", "Phone", "Twitter"]
+
 end

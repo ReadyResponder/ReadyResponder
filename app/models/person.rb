@@ -11,7 +11,6 @@ class Person < ActiveRecord::Base
 
   # Since phones and emails derive off of channels, is "has_many :channels" below redundant?
   has_many :channels
-  has_many :emails
   accepts_nested_attributes_for :channels, allow_destroy: true
   has_many :courses, :through => :certs
   has_many :skills, :through => :courses
@@ -89,7 +88,7 @@ class Person < ActiveRecord::Base
   end
 
   def emails
-    channels.where(:channel_type => "email").order(:priority)
+    channels.where(:channel_type => "Email").order(:priority)
   end
 
   def email
