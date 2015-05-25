@@ -150,10 +150,11 @@ GEM
     http_parser.rb (0.6.0)
     i18n (0.6.1)
     journey (1.0.4)
-    jquery-rails (3.1.2)
+    jquery-rails (2.1.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
-    jquery-ui-rails (4.1.2)
+    jquery-ui-rails (3.0.1)
+      jquery-rails
       railties (>= 3.1.0)
     json (1.8.2)
     kgio (2.9.3)
@@ -253,7 +254,7 @@ GEM
       ffi (>= 0.5.0)
     rdoc (3.12.2)
       json (~> 1.4)
-    rmagick (2.15.0)
+    rmagick (2.13.4)
     rspec (2.99.0)
       rspec-core (~> 2.99.0)
       rspec-expectations (~> 2.99.0)
@@ -346,8 +347,8 @@ DEPENDENCIES
   guard-livereload
   guard-rspec
   jquery-datatables-rails!
-  jquery-rails
-  jquery-ui-rails
+  jquery-rails (~> 2.1.4)
+  jquery-ui-rails (~> 3.0.1)
   launchy
   letter_opener
   mailcatcher
