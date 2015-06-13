@@ -15,7 +15,7 @@
           <% @event.unknown_people.each do |person| %>
             <tr>
               <td><%= link_to person.fullname, person %></td>
-              <td><%= person.channels.phone.map { |e| number_to_phone(e.content, area_code: true) }.join(',') %></td>
+              <td><%= person.phones.map { |e| number_to_phone(e.content, area_code: true) }.join(',') %></td>
               <td><%= person.division1 %></td>
               <td><%= person.division2 %></td>
               <% if can? :create, Timecard and @event.status.in? ["Scheduled", "In-session"] %>
@@ -34,7 +34,7 @@
               <% if can? :create, Timecard and @event.status.in? ["In-session", "Completed"] %>
                 <td><%= link_to "Worked", schedule_path(@event, person.id, "Worked"), method: :Post, :class => 'btn btn-mini' %></td>
               <% else %>
-                <td></td>  
+                <td></td>
               <% end %>
             </tr>
           <% end %>
