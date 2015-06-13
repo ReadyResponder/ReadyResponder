@@ -34,7 +34,7 @@ describe Timecard do
     end
 
     it "finds the existing timecard if it's a duplicate" do
-      pending "Find duplicate timecards is too simple, but not needed until people are scanning in"
+      skip "Find duplicate timecards is too simple, but not needed until people are scanning in"
       @event = FactoryGirl.create(:event)
       @person = FactoryGirl.create(:person)
       @original_timecard = FactoryGirl.create(:timecard, event: @event, person: @person,

@@ -18,9 +18,9 @@
   <ul>
     <% @person.channels.each do |channel| %>
       <li>
-        <%# This should be moved into a presenter %>
-        <% if channel.category =~ /(P|p)hone/ %>
-          <%= number_to_phone(channel.content, area_code: true) %> 
+        <%# This should be moved into a presenter to just return the right content %>
+        <% if channel.phone? %>
+          <%= number_to_phone(channel.content, area_code: true) %>
           <%= "on #{channel.carrier}" if channel.carrier %>
         <% else %>
           <%= channel.content %>
@@ -67,7 +67,7 @@
       </tbody>
     </table>
   </div>
-  
+
   <h3>Certifications (<%= @person.certs.uniq.count %>)</h3>
   <div>
     <table class="table table-striped table-bordered">
@@ -76,7 +76,7 @@
       </tbody>
     </table>
   </div>
-  
+
   <h3>Items (<%= @person.items.uniq.count %>)</h3>
   <div>
     <ul>
