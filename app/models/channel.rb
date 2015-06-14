@@ -1,4 +1,7 @@
 class Channel < ActiveRecord::Base
+# this is the parent class of phones,emails,etc....
+
+ set_inheritance_column :channel_type	
   attr_accessible :category, :content, :last_verified, :name, :person_id, :usage, :status
 
   belongs_to :person
