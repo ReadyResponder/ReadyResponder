@@ -5,3 +5,24 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+roles = ["Manager", "Editor", "Trainer", "Reader"].each do |role|
+  Role.find_or_create_by_name({ name: role }, without_protection: true)
+end
+
+kgf = User.find_or_create_by_email({email: "kgf@example.com"}) do |k|
+  k.password = "kgflims"
+  k.password_confirmation = "kgflims"
+  k.username = "kgf"
+  k.firstname = "Kgf"
+  k.lastname = "Lims"
+end
+
+kgf.roles << Role.first
+kgf.save!(:validate => false)
+
+p1 = Person.find_or_create_by_firstname({firstname: "Houhoulis"}) do |p|
+  p.firstname = "Houhoulis"
+  p.lastname = "Williams"
+  p.status = "Active"
+end
