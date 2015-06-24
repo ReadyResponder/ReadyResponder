@@ -32,3 +32,5 @@ p2 = Person.find_or_create_by_firstname({firstname: "Thomas"}) do |p|
   p.lastname = "Carlson"
   p.status = "Applicant"
 end
+
+#seed user with admin privileges, a few other models
