@@ -26,3 +26,9 @@ p1 = Person.find_or_create_by_firstname({firstname: "Houhoulis"}) do |p|
   p.lastname = "Williams"
   p.status = "Active"
 end
+
+p2 = Person.find_or_create_by_firstname({firstname: "Thomas"}) do |p|
+  p.firstname = "Thomas"
+  p.lastname = "Carlson"
+  p.status = "Applicant"
+end
