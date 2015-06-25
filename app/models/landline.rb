@@ -1,0 +1,2 @@
+class Landline < Channel
+end

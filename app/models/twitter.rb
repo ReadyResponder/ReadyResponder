@@ -1,0 +1,2 @@
+class Twitter < Channel
+end
