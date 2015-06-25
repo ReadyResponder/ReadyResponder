@@ -115,11 +115,14 @@ class PeopleController < ApplicationController
 
   def update
     @person = Person.find(params[:id])
-    if @person.update_attributes(params[:person])
-      flash.notice = 'Person was successfully updated.'
-      redirect_to person_path(@person)
-    else
-      render :action => 'edit'
+    respond_to do |format|
+      if @person.update_attributes(params[:person])
+        format.html { redirect_to session[:return_to], notice: 'Person was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @person.errors, status: :unprocessable_entity }
+      end
     end
   end
 
