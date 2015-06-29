@@ -1,3 +1,2 @@
 class Cell < Channel
-
 end

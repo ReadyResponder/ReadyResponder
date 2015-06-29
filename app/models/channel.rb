@@ -1,6 +1,5 @@
 class Channel < ActiveRecord::Base
 
-
   attr_accessible :category, :content, :name, :status, :usage
   attr_accessible :carrier, :sms_available, :priority, :type, :_destroy, :person_id
 

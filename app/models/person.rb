@@ -1,8 +1,6 @@
 class Person < ActiveRecord::Base
   #code to get next un-used id # in the 800 range
   #((801...900).to_a - (array_from_db_of_taken_numbers))[0]
-
-
   attr_accessible :firstname, :lastname, :gender, :date_of_birth, :zipcode, :city, :state, :status, :end_date, :department, :icsid, :title, :title_ids, :start_date, :division1, :division2, :comments
   attr_accessible :channels_attributes
 
@@ -98,7 +96,6 @@ class Person < ActiveRecord::Base
   def email
     emails.first.content if emails.present?
   end
-
 
   def csz
     self.city + " " + self.state + " " + self.zipcode

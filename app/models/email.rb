@@ -1,3 +1,2 @@
 class Email < Channel
-
 end
