@@ -6,7 +6,7 @@ class Person < ActiveRecord::Base
   attr_accessible :firstname, :lastname, :gender, :date_of_birth, :zipcode, :city, :state, :status, :end_date, :department, :icsid, :title, :title_ids, :start_date, :division1, :division2, :comments
   attr_accessible :channels_attributes
 
-  has_many :channels, :autosave => true
+  has_many :channels, :autosave => true, :inverse_of => :person, :dependent => :destroy
   accepts_nested_attributes_for :channels, :reject_if => :all_blank, :allow_destroy => true
   before_save :title_order
 

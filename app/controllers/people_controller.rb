@@ -115,8 +115,28 @@ class PeopleController < ApplicationController
 
   def update
     @person = Person.find(params[:id])
+    channel_params = params[:person][:channels_attributes].values
+
+    unless channel_params.empty?
+        channel_params.each do |hash|
+           if (hash["_destroy"] == "1")
+              Channel.find(hash["id"]).destroy
+           elsif (hash.has_key?("id"))
+              hash.reject! {|k,v| k=="_destroy"}
+              @person.channels.detect {|channel| channel.id == hash["id"].to_i }.update_attributes(hash)
+           else
+              hash.reject! {|k,v| k=="_destroy"}
+              @channel = Channel.new(hash)
+              @channel.person_id = @person.id
+              @channel.save
+           end
+        end
+    end
+
+    person_params = params[:person].reject {|k,v| k == "channels_attributes"}
+
     respond_to do |format|
-      if @person.update_attributes(params[:person])
+      if @person.update_attributes(person_params)
         format.html { redirect_to session[:return_to], notice: 'Person was successfully updated.' }
         format.json { head :no_content }
       else

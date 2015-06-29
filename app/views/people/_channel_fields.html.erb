@@ -10,6 +10,9 @@
             <%= f.input :carrier, :as => :select, :collection => Channel::CARRIERS %>
             <%= f.input :sms_available %>
             <%= f.input :priority, :as => :select, :collection => Channel::PRIORITIES %>
+            <%= link_to_remove_association "Remove contact information", f %>
+
+
 
 </fieldset>
 </div>
