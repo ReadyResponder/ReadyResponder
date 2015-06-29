@@ -1,7 +1,8 @@
 class Channel < ActiveRecord::Base
 
 
-  attr_accessible :category, :content, :name, :status, :usage, :carrier, :sms_available, :priority, :type, :_destroy, :person_id
+  attr_accessible :category, :content, :name, :status, :usage
+  attr_accessible :carrier, :sms_available, :priority, :type, :_destroy, :person_id
 
   validates_presence_of :type, :content, :status, :usage, :priority
 
