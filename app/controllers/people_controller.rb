@@ -118,15 +118,15 @@ class PeopleController < ApplicationController
     channel_params = params[:person][:channels_attributes].values
 
     unless channel_params.empty?
-        channel_params.each do |hash|
-           if (hash["_destroy"] == "1")
-              Channel.find(hash["id"]).destroy
-           elsif (hash.has_key?("id"))
-              hash.reject! {|k,v| k=="_destroy"}
-              @person.channels.detect {|channel| channel.id == hash["id"].to_i }.update_attributes(hash)
+        channel_params.each do |params|
+           if (params["_destroy"] == "1")
+              Channel.find(params["id"]).destroy
+           elsif (params.has_key?("id"))
+              params.reject! {|k,v| k=="_destroy"}
+              @person.channels.detect {|channel| channel.id == params["id"].to_i }.update_attributes(params)
            else
-              hash.reject! {|k,v| k=="_destroy"}
-              @channel = Channel.new(hash)
+              params.reject! {|k,v| k=="_destroy"}
+              @channel = Channel.new(params)
               @channel.person_id = @person.id
               @channel.save
            end

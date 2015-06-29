@@ -1,3 +1,2 @@
 module PeopleHelper
-
 end
