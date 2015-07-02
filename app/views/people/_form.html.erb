@@ -16,7 +16,7 @@
     <h2> Contact information </h2>
         <%= f.simple_fields_for :channels do |channel| %>
             <%= render "channel_fields", :f => channel %>
-          <br>
+        <br>
         <% end %>
     </div>
 
@@ -33,5 +33,6 @@
     <%= f.input :comments, :input_html => { :size => 40}  %>
     <%= f.button :submit %>
 <% end %>
+
 
 

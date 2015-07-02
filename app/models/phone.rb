@@ -1,2 +1,3 @@
 class Phone < Channel
 end
+

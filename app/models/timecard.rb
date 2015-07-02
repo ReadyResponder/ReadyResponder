@@ -1,7 +1,7 @@
 class Timecard < ActiveRecord::Base
   before_save :pull_defaults_from_event
   before_save :calc_durations
-  attr_accessible :intention, :intended_start_time, :intended_end_time, 
+  attr_accessible :intention, :intended_start_time, :intended_end_time,
                   :outcome, :actual_start_time, :actual_end_time, :event_id, :person_id, :category, :description
 
   belongs_to :person
@@ -89,7 +89,7 @@ private
       self.intended_end_time = event.end_time if self.intended_end_time.nil?
     end
 
-    if self.outcome == "Worked" 
+    if self.outcome == "Worked"
       self.actual_start_time = event.start_time if self.actual_start_time.nil?
       self.actual_end_time = event.end_time if self.actual_end_time.nil?
     end
@@ -109,3 +109,4 @@ private
     end
   end
 end
+

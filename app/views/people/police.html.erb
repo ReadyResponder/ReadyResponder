@@ -19,7 +19,7 @@
     <% @people.each do |person| %>
       <tr>
 	<td><%= person.shortrank %></td>
-	<td><%= link_to person.fullname, person %></td>	
+	<td><%= link_to person.fullname, person %></td>
 	<td><%= person.icsid %></td>
   <td><%= distance_of_time_in_words(((person.end_date) || Date.today), person.start_date) if person.start_date %></td>
 	<td><%= person.division1 %></td>
@@ -31,3 +31,4 @@
 </table>
 
 <br />
+

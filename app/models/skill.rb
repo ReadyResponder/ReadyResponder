@@ -10,3 +10,4 @@ class Skill < ActiveRecord::Base
     self.name
   end
 end
+

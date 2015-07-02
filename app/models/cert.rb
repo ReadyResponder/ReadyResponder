@@ -27,5 +27,5 @@ class Cert < ActiveRecord::Base
       self.expiration_date = self.issued_date + course.term.to_i.months unless course.nil?
     end
   end
-
 end
+

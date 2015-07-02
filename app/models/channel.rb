@@ -17,5 +17,5 @@ class Channel < ActiveRecord::Base
   def phone?
     ["Phone", 'Cell', 'Landline'].include?(self.type)
   end
-
 end
+

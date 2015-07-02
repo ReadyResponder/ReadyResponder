@@ -6,3 +6,4 @@ class Role < ActiveRecord::Base
     self.name.to_s
   end
 end
+
