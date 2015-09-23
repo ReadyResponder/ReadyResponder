@@ -28,6 +28,7 @@
               <li><%= link_to "New Person", new_person_path if can? :create, Person %></li>
             </ul>
           </li>
+          
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Events<b class="caret"></b></a>
               <ul class="dropdown-menu">
@@ -40,7 +41,16 @@
                 <li><%= link_to "New Event", new_event_path if can? :create, Event %></li>
               </ul>
           </li>
-          <li><%= link_to "Inventory", items_path %></li>
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Inventory<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Inventory", items_path %></li> 
+              <li><%= link_to "Maintenance", items_path %></li> 
+              <li><%= link_to "New Item", new_item_path if can? :create, Item  %></li> 
+            </ul>
+          </li>
+          
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
             <ul class="dropdown-menu">
@@ -51,6 +61,7 @@
               <li><%= link_to "Users", users_path %></li>
             </ul>
           </li>
+          
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reports<b class="caret"></b></a>
             <ul class="dropdown-menu">
@@ -58,6 +69,7 @@
               <li><%= link_to "Org Chart", orgchart_people_path %></li>
             </ul>
           </li>
+          
           <li class="dropdown">
             <a href="#" class="dropdown-toggle pull-right" data-toggle="dropdown">Access<b class="caret"></b></a>
             <ul class="dropdown-menu" >
@@ -69,6 +81,7 @@
               <% end %>
             </ul>
           </li>
+          
           <li class="dropdown">
             <a href="#" class="dropdown-toggle pull-right" data-toggle="dropdown">Help<b class="caret"></b></a>
             <ul class="dropdown-menu" >
