@@ -5,7 +5,7 @@ gem 'rack'
 gem 'ransack'
 gem 'carrierwave'
 gem "pg", "~> 0.17.0"
-gem 'rmagick'
+gem 'rmagick', '~> 2.13.3'
 gem 'simple_form'
 gem 'geocoder'
 gem 'cancan'
@@ -37,12 +37,12 @@ gem 'devise', '~> 2.2.1'
 group :assets do
   # Gems used only for assets and not required
   # in production environments by default.
-  gem 'jquery-rails'
+  gem 'jquery-rails', '~> 2.1.4'
 
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   #The following provides the stylinmg for the datatables, among other things
-  gem 'jquery-ui-rails'
+  gem 'jquery-ui-rails', '~> 3.0.1'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
 

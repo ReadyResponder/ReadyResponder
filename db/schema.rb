@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20140823214155) do
     t.string   "usage"
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
+    t.string   "type"
     t.string   "channel_type"
     t.boolean  "sms_available", :default => false
   end
@@ -167,16 +168,14 @@ ActiveRecord::Schema.define(:version => 20140823214155) do
   end
 
   create_table "messages", :force => true do |t|
-    t.integer  "recipient_id"
-    t.string   "status"
-    t.string   "channel"
-    t.datetime "processed_at"
-    t.string   "processed_by"
-    t.string   "slug"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.text     "body"
     t.string   "subject"
+    t.string   "status"
+    t.string   "body"
+    t.string   "channels"
+    t.datetime "sent_at"
+    t.integer  "created_by"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "moves", :force => true do |t|
@@ -187,23 +186,6 @@ ActiveRecord::Schema.define(:version => 20140823214155) do
     t.string   "reason"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
-  end
-
-  create_table "notifications", :force => true do |t|
-    t.integer  "event_id"
-    t.integer  "author_id"
-    t.string   "status"
-    t.string   "channels"
-    t.string   "subject"
-    t.string   "body"
-    t.datetime "sent_at"
-    t.text     "comments"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.string   "priority"
-    t.string   "event_group"
-    t.string   "send_trigger"
-    t.integer  "ttl"
   end
 
   create_table "people", :force => true do |t|
@@ -257,15 +239,6 @@ ActiveRecord::Schema.define(:version => 20140823214155) do
 
   add_index "people_titles", ["person_id", "title_id"], :name => "index_people_titles_on_person_id_and_title_id"
 
-  create_table "recipients", :force => true do |t|
-    t.integer  "person_id"
-    t.integer  "notification_id"
-    t.string   "uuid"
-    t.string   "status"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
-
   create_table "repairs", :force => true do |t|
     t.integer  "item_id"
     t.integer  "user_id"
@@ -277,17 +250,6 @@ ActiveRecord::Schema.define(:version => 20140823214155) do
     t.string   "comments"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
-  end
-
-  create_table "responses", :force => true do |t|
-    t.integer  "recipient_id"
-    t.string   "intention"
-    t.datetime "eta"
-    t.datetime "etd"
-    t.decimal  "duration",     :precision => 5, :scale => 2
-    t.string   "channel"
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
   end
 
   create_table "roles", :force => true do |t|

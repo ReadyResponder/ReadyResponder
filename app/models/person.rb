@@ -3,7 +3,9 @@ class Person < ActiveRecord::Base
   #((801...900).to_a - (array_from_db_of_taken_numbers))[0]
   before_save :title_order
 
-  attr_accessible :firstname, :lastname, :status, :icsid, :department, :city, :state, :zipcode, :start_date, :end_date , :title, :gender, :date_of_birth,:division1, :division2, :channels_attributes, :title_ids, :title_order, :comments
+  attr_accessible :firstname, :lastname, :status, :icsid, :department, :city, :state, :zipcode,
+                  :start_date, :end_date , :title, :gender, :date_of_birth,:division1, :division2, 
+                  :channels_attributes, :title_ids, :title_order, :comments, :phones, :emails
 
   #Having a condition on this association allows all the chaining magic to happen.
   #Could I use a named scope, and/or could I have another association for 'active_certs' ?
@@ -11,7 +13,10 @@ class Person < ActiveRecord::Base
 
   # Since phones and emails derive off of channels, is "has_many :channels" below redundant?
   has_many :channels
-  accepts_nested_attributes_for :channels, allow_destroy: true
+  has_many :phones,:class_name => 'Phone'
+  has_many :emails,:class_name => 'Email'
+  accepts_nested_attributes_for :phones, allow_destroy: true
+  accepts_nested_attributes_for :emails, allow_destroy: true
   has_many :courses, :through => :certs
   has_many :skills, :through => :courses
   has_and_belongs_to_many :titles
