@@ -6,5 +6,5 @@ class Item < ActiveRecord::Base
 
   STATUS_CHOICES = ['In Service', 'In Service - Degraded', 'Out of Service','Available','Sold', 'Destroyed']
   CATEGORY_CHOICES = ['Pump','Light','Generator','Shelter', 'Radio', 'Vehicle', 'Other']
-
 end
+

@@ -1,12 +1,8 @@
 <%= simple_form_for @user do |f| %>
-    
     <%= f.input :firstname, :label => 'First Name' %>
     <%= f.input :lastname, :label => 'Last Name'  %>
     <%= f.input :username %>
     <%= f.input :email %>
-
     <%= f.association :roles %>
-
     <%= f.button :submit %>
-  
 <% end %>

@@ -5,9 +5,9 @@ class Skill < ActiveRecord::Base
   validates_presence_of :name, :status
 
   scope :active, :conditions => {:status => "Active"}
-  
+
   def to_s
     self.name
   end
-
 end
+

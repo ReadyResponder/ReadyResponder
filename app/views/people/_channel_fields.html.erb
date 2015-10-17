@@ -1,10 +1,15 @@
-      <fieldset>
-        <legend>Channel information</legend>
-        <%= f.input :name, placeholder: 'Work Cellphone or Home EMail' %>
-        <%= f.input :content, placeholder: 'user@domain.com or 9786670900'  %>
-        <%= f.input :priority, :as => :select, :collection => Channel::PRIORITIES  %>
-        <%= f.input :category, :as => :select, :collection => Channel::CATEGORIES  %>
-        <%= f.input :carrier, :as => :select, :collection => Channel::CARRIERS %>
-        <%= f.input :usage, :as => :select, :collection => Channel::USAGES %>
-        <%= f.check_box :_destroy %><%= f.label :_destroy, "Remove Channel" %>
-      </fieldset>
+<div class = "nested-fields">
+  <fieldset>
+    <p>New Contact Method</p>
+      <%= f.input :type, :as => :select, :collection => Channel::CHANNEL_TYPES %>
+      <%= f.input :category, :as => :select, :collection => Channel::CATEGORIES %>
+      <%= f.input :content, :placeholder => "9785551212 or user@example.com" %>
+      <%= f.input :name, :label => 'Description' %>
+      <%= f.input :status, :as => :select, :collection => Channel::STATUSES %>
+      <%= f.input :usage, :as => :select, :collection => Channel::USAGES %>
+      <%= f.input :carrier, :as => :select, :collection => Channel::CARRIERS %>
+      <%= f.input :sms_available %>
+      <%= f.input :priority, :as => :select, :collection => Channel::PRIORITIES %>
+      <%= link_to_remove_association "Remove contact information", f %>
+  </fieldset>
+</div>

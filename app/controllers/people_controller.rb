@@ -2,7 +2,7 @@ class PeopleController < ApplicationController
   before_filter :authenticate_user!
   before_filter :set_return_path
   load_and_authorize_resource
-  
+
   def signin
     #This is the sign-in sheet, not anything about authentication
     @people = Person.active.all
@@ -87,8 +87,7 @@ class PeopleController < ApplicationController
   def new
     @page_title = "New Person"
     @person = Person.new(status: cookies[:status], state: 'MA')
-    @person.channels.build (attributes = {category: 'E-Mail', status: 'OK', usage: '1-All'})
-    @mobile = @person.channels.build (attributes = {category: 'Mobile Phone', status: 'OK', usage: '1-All'})
+    @person.channels.build
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @person }
@@ -97,8 +96,7 @@ class PeopleController < ApplicationController
 
   def edit
     @person = Person.find(params[:id])
-    #This is a quick hack to allow people to enter e-mails and phone numbers for person records already created
-    @person.channels.build (attributes = { status: "OK", usage: '1-All'}) if @person.channels.count < 2
+    @person.channels.build if @person.channels(true).empty?
   end
 
   def create
@@ -117,9 +115,28 @@ class PeopleController < ApplicationController
 
   def update
     @person = Person.find(params[:id])
-    
+    channel_params = params[:person][:channels_attributes].values
+
+    unless channel_params.empty?
+        channel_params.each do |params|
+           if (params["_destroy"] == "1")
+              Channel.find(params["id"]).destroy
+           elsif (params.has_key?("id"))
+              params.reject! {|k,v| k=="_destroy"}
+              @person.channels.detect {|channel| channel.id == params["id"].to_i }.update_attributes(params)
+           else
+              params.reject! {|k,v| k=="_destroy"}
+              @channel = Channel.new(params)
+              @channel.person_id = @person.id
+              @channel.save
+           end
+        end
+    end
+
+    person_params = params[:person].reject {|k,v| k == "channels_attributes"}
+
     respond_to do |format|
-      if @person.update_attributes(params[:person])
+      if @person.update_attributes(person_params)
         format.html { redirect_to session[:return_to], notice: 'Person was successfully updated.' }
         format.json { head :no_content }
       else

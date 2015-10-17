@@ -1,0 +1,2 @@
+class Cell < Channel
+end

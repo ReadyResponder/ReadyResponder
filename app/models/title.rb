@@ -8,3 +8,4 @@ class Title < ActiveRecord::Base
     self.name
   end
 end
+

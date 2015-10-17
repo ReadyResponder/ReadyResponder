@@ -9,6 +9,7 @@ gem 'rmagick'
 gem 'simple_form'
 gem 'geocoder'
 gem 'cancan'
+gem 'cocoon'
 #gem "taps"
 #gem 'validates_timeliness', '~> 3.0'
 
@@ -34,15 +35,18 @@ end
 #Handles authentication
 gem 'devise', '~> 2.2.1'
 
+gem 'jquery-rails'
+#The following provides the stylinmg for the datatables, among other things
+gem 'jquery-ui-rails'
+
 group :assets do
   # Gems used only for assets and not required
   # in production environments by default.
-  gem 'jquery-rails'
+
 
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-  #The following provides the stylinmg for the datatables, among other things
-  gem 'jquery-ui-rails'
+
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
 

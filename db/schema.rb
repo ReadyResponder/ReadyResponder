@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140823214155) do
+ActiveRecord::Schema.define(:version => 20150624230958) do
 
   create_table "activities", :force => true do |t|
     t.string   "content"
@@ -55,8 +55,8 @@ ActiveRecord::Schema.define(:version => 20140823214155) do
     t.string   "usage"
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
-    t.string   "channel_type"
     t.boolean  "sms_available", :default => false
+    t.string   "type"
   end
 
   add_index "channels", ["category"], :name => "index_channels_on_category"
