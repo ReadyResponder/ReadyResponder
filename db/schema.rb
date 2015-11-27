@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140823214155) do
+ActiveRecord::Schema.define(:version => 20151126084411) do
 
   create_table "activities", :force => true do |t|
     t.string   "content"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20140823214155) do
     t.string   "usage"
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
+    t.string   "type"
     t.string   "channel_type"
     t.boolean  "sms_available", :default => false
   end
@@ -146,6 +147,7 @@ ActiveRecord::Schema.define(:version => 20140823214155) do
     t.string   "brand"
     t.string   "stock_number"
     t.text     "comments"
+    t.string   "itemview"
   end
 
   create_table "locations", :force => true do |t|
@@ -167,16 +169,14 @@ ActiveRecord::Schema.define(:version => 20140823214155) do
   end
 
   create_table "messages", :force => true do |t|
-    t.integer  "recipient_id"
-    t.string   "status"
-    t.string   "channel"
-    t.datetime "processed_at"
-    t.string   "processed_by"
-    t.string   "slug"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.text     "body"
     t.string   "subject"
+    t.string   "status"
+    t.string   "body"
+    t.string   "channels"
+    t.datetime "sent_at"
+    t.integer  "created_by"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "moves", :force => true do |t|
@@ -187,23 +187,6 @@ ActiveRecord::Schema.define(:version => 20140823214155) do
     t.string   "reason"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
-  end
-
-  create_table "notifications", :force => true do |t|
-    t.integer  "event_id"
-    t.integer  "author_id"
-    t.string   "status"
-    t.string   "channels"
-    t.string   "subject"
-    t.string   "body"
-    t.datetime "sent_at"
-    t.text     "comments"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.string   "priority"
-    t.string   "event_group"
-    t.string   "send_trigger"
-    t.integer  "ttl"
   end
 
   create_table "people", :force => true do |t|
@@ -248,6 +231,7 @@ ActiveRecord::Schema.define(:version => 20140823214155) do
     t.string   "middlename"
     t.string   "suffix_name"
     t.string   "nickname"
+    t.string   "mugshot"
   end
 
   create_table "people_titles", :id => false, :force => true do |t|
@@ -256,15 +240,6 @@ ActiveRecord::Schema.define(:version => 20140823214155) do
   end
 
   add_index "people_titles", ["person_id", "title_id"], :name => "index_people_titles_on_person_id_and_title_id"
-
-  create_table "recipients", :force => true do |t|
-    t.integer  "person_id"
-    t.integer  "notification_id"
-    t.string   "uuid"
-    t.string   "status"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
 
   create_table "repairs", :force => true do |t|
     t.integer  "item_id"
@@ -277,17 +252,6 @@ ActiveRecord::Schema.define(:version => 20140823214155) do
     t.string   "comments"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
-  end
-
-  create_table "responses", :force => true do |t|
-    t.integer  "recipient_id"
-    t.string   "intention"
-    t.datetime "eta"
-    t.datetime "etd"
-    t.decimal  "duration",     :precision => 5, :scale => 2
-    t.string   "channel"
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
   end
 
   create_table "roles", :force => true do |t|
