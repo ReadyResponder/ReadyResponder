@@ -1,7 +1,7 @@
 LIMS3
 ======
 
-This application aids emergency management and other agencies in managing both thier personnel and their equipment.
+This application aids emergency management and other agencies in managing both their personnel and their equipment.
 
 Features
 * Web-based user interface
