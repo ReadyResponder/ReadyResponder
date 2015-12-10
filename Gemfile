@@ -12,6 +12,9 @@ gem 'cancan'
 #gem "taps"
 #gem 'validates_timeliness', '~> 3.0'
 
+#Handles authentication
+gem 'devise', '~> 2.2.1'
+
 group :test, :development do
   gem 'thin'
   gem "rspec-rails", '2.99'
@@ -31,8 +34,9 @@ group :test, :development do
   gem 'poltergeist'
 end
 
-#Handles authentication
-gem 'devise', '~> 2.2.1'
+group :test do
+  gem 'shoulda-matchers'
+end
 
 group :assets do
   # Gems used only for assets and not required
