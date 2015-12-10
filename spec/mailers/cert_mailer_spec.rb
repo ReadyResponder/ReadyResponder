@@ -6,13 +6,13 @@ describe CertMailer do
     let(:mail) { CertMailer.cert_expiring(person) }
 
    skip "renders the headers" do
-      mail.subject.should eq("Cert expiring")
-      mail.to.should eq(["to@example.org"])
-      mail.from.should eq(["from@example.com"])
+      expect(mail.subject).to eq("Cert expiring")
+      expect(mail.to).to eq(["to@example.org"])
+      expect(mail.from).to eq(["from@example.com"])
     end
 
     skip"renders the body" do
-      mail.body.encoded.should match("expiring")
+      expect(mail.body.encoded).to match("expiring")
     end
   end
 

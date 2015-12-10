@@ -13,26 +13,26 @@ describe "a user" do
     end
     it "cannot edit people" do
       visit edit_person_path(@person)
-      page.should have_content("Access Denied")
+      expect(page).to have_content("Access Denied")
     end
     it "cannot create a new person" do
       visit people_path
-      page.should_not have_content('Create')
+      expect(page).not_to have_content('Create')
       visit new_person_path
-      page.should have_content("Access Denied")
+      expect(page).to have_content("Access Denied")
     end
     it "can view a person" do
       visit people_path
       click_on @person.lastname
-      page.should have_content(@person.lastname)
+      expect(page).to have_content(@person.lastname)
     end
     it "gets a signin sheet when requested" do
       @person_active = FactoryGirl.create(:person)
       @person_inactive = FactoryGirl.create(:person, status: 'Inactive')
       visit signin_people_path
-      page.should have_content("Command Staff") #This is in the first heading
-      page.should have_content(@person_active.lastname)
-      page.should_not have_content(@person_inactive.lastname)
+      expect(page).to have_content("Command Staff") #This is in the first heading
+      expect(page).to have_content(@person_active.lastname)
+      expect(page).not_to have_content(@person_inactive.lastname)
     end
   end
 end

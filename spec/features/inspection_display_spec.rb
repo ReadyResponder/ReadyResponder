@@ -16,11 +16,11 @@ describe "Inspection" do
     it "should not display a listing" do
       click_on 'Sign Out'
       visit inspections_path
-      page.should_not have_css("div.navbar")
-      page.should_not have_content("Listing")
-      page.should have_content('You need to sign in')
+      expect(page).not_to have_css("div.navbar")
+      expect(page).not_to have_content("Listing")
+      expect(page).to have_content('You need to sign in')
       visit new_inspection_path
-      page.should have_content('You need to sign in')
+      expect(page).to have_content('You need to sign in')
   #    an_inspection = FactoryGirl.create(:inspection)
   #    visit edit_inspection_path(an_inspection)
   #    page.should have_content('You need to sign in')
@@ -31,7 +31,7 @@ describe "Inspection" do
       a_person = FactoryGirl.create(:person)
       visit new_inspection_path
      # save_and_open_page
-      page.should have_content(a_person.lastname.to_s)
+      expect(page).to have_content(a_person.lastname.to_s)
     end
   end
   describe "should display" do

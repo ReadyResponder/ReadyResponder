@@ -3,12 +3,12 @@ require 'spec_helper'
 describe 'Access on timecard' do
   it "gets denied" do
     visit timecards_path
-    page.should have_content("You need to sign in")
+    expect(page).to have_content("You need to sign in")
     visit new_timecard_path
-    page.should have_content("You need to sign in")
+    expect(page).to have_content("You need to sign in")
     @sample_object = FactoryGirl.create(:timecard)
     visit url_for(@sample_object)
-    page.should have_content("You need to sign in")
+    expect(page).to have_content("You need to sign in")
   end
 end
 
@@ -26,37 +26,37 @@ describe Timecard do
   it "gets the index" do
     @sample_object = FactoryGirl.create(:timecard)
     visit timecards_path
-    page.should have_content("LIMS") # In the nav bar
-    page.should have_css('#sidebar')
-    page.should have_content("Listing Timecards")
-    page.should have_content(@sample_object.category)
+    expect(page).to have_content("LIMS") # In the nav bar
+    expect(page).to have_css('#sidebar')
+    expect(page).to have_content("Listing Timecards")
+    expect(page).to have_content(@sample_object.category)
   end
   it "visits a creation form" do
     @sample_object = FactoryGirl.create(:timecard)
     visit new_timecard_path
-    page.should have_content("LIMS")
-    page.should have_css('#sidebar')
-    page.should have_content('Category')
-    page.should have_content("New Timecard")
+    expect(page).to have_content("LIMS")
+    expect(page).to have_css('#sidebar')
+    expect(page).to have_content('Category')
+    expect(page).to have_content("New Timecard")
   end
   it "visits a display page" do
     @sample_object = FactoryGirl.create(:timecard)
     visit timecard_path(@sample_object)
-    page.should have_content("LIMS")
-    page.should have_css('#sidebar')
-    page.should have_content(@sample_object.category)
-    page.should have_content(@sample_object.intention)
+    expect(page).to have_content("LIMS")
+    expect(page).to have_css('#sidebar')
+    expect(page).to have_content(@sample_object.category)
+    expect(page).to have_content(@sample_object.intention)
   end
   it "visits a display page without actual times" do
     @sample_object = FactoryGirl.create(:timecard, intended_start_time: nil, intended_end_time: nil, actual_start_time: nil, actual_end_time: nil)
     visit timecard_path(@sample_object)
-    page.should have_content("LIMS")
-    page.should have_css('#sidebar')
-    page.should have_content(@sample_object.category)
-    page.should have_content(@sample_object.intention)
+    expect(page).to have_content("LIMS")
+    expect(page).to have_css('#sidebar')
+    expect(page).to have_content(@sample_object.category)
+    expect(page).to have_content(@sample_object.intention)
     visit timecards_path
-    page.should have_content("LIMS")
+    expect(page).to have_content("LIMS")
     visit person_path(@sample_object.person)
-    page.should have_content("LIMS")
+    expect(page).to have_content("LIMS")
   end
 end

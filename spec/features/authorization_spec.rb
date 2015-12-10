@@ -14,20 +14,20 @@ describe "a user" do
     end
     it "cannot edit people" do
       visit people_path
-      page.should_not have_content('Edit') #Need to scope this, or it will fail on Edith
+      expect(page).not_to have_content('Edit') #Need to scope this, or it will fail on Edith
       visit edit_person_path(@person)
-      page.should have_content("Access Denied")
+      expect(page).to have_content("Access Denied")
     end
     it "cannot create a new person" do
       visit people_path
-      page.should_not have_content('Create')
+      expect(page).not_to have_content('Create')
       visit new_person_path
-      page.should have_content("Access Denied")
+      expect(page).to have_content("Access Denied")
     end
     it "can read a person" do
       visit people_path
       click_on @person.lastname
-      page.should have_content(@person.lastname)
+      expect(page).to have_content(@person.lastname)
     end
 end
 =begin
