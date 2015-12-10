@@ -17,7 +17,7 @@ group :test, :development do
   gem "rspec-rails", '2.99'
   gem "factory_girl_rails", "~> 4.0"
   gem "capybara"
-  gem "guard-rspec"
+  gem "guard-rspec", require: false
   gem 'guard-livereload'
   gem 'sqlite3'
   gem "mailcatcher"
