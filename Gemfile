@@ -15,10 +15,6 @@ gem 'cancan'
 #Handles authentication
 gem 'devise', '~> 2.2.1'
 
-group :development do
-  gem 'transpec'
-end
-
 group :test, :development do
   gem 'thin'
   gem "rspec-rails", '~> 3.4.0'
