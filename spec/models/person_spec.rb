@@ -38,7 +38,7 @@ describe Person do
         end
       end
 
-      context 'cert is expired' do
+      context 'expired' do
         let(:cert_options) { {status: 'Expired'} }
 
         it 'does not have the skill' do
@@ -47,7 +47,7 @@ describe Person do
         end
       end
 
-      context 'cert is not expired' do
+      context 'not expired' do
         it 'has the skill' do
           expect(cert.course.skills).to include skill
           expect(subject).to be_skilled skill.name
