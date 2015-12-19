@@ -12,12 +12,16 @@ gem 'cancan'
 #gem "taps"
 #gem 'validates_timeliness', '~> 3.0'
 
+#Handles authentication
+gem 'devise', '~> 2.2.1'
+
 group :test, :development do
   gem 'thin'
-  gem "rspec-rails", '2.99'
+  gem "rspec-rails", '~> 3.4.0'
+  gem 'rspec-activemodel-mocks' # TODO: remove if we no longer need mock_model or stub_model
   gem "factory_girl_rails", "~> 4.0"
   gem "capybara"
-  gem "guard-rspec"
+  gem "guard-rspec", require: false
   gem 'guard-livereload'
   gem 'sqlite3'
   gem "mailcatcher"
@@ -31,8 +35,9 @@ group :test, :development do
   gem 'poltergeist'
 end
 
-#Handles authentication
-gem 'devise', '~> 2.2.1'
+group :test do
+  gem 'shoulda-matchers'
+end
 
 group :assets do
   # Gems used only for assets and not required

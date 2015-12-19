@@ -15,7 +15,7 @@ describe "Roles" do
     it "works!" do
       # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
       visit roles_path
-      page.should have_content("Listing Roles")
+      expect(page).to have_content("Listing Roles")
       
     end
   end

@@ -13,9 +13,9 @@ describe "helpdocs/show" do
   it "renders attributes in <p>" do
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/Title/)
-    rendered.should match(/MyText/)
-    rendered.should match(/Help For View/)
-    rendered.should match(/Help For Section/)
+    expect(rendered).to match(/Title/)
+    expect(rendered).to match(/MyText/)
+    expect(rendered).to match(/Help For View/)
+    expect(rendered).to match(/Help For Section/)
   end
 end

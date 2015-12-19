@@ -14,8 +14,8 @@ describe "Repairs" do
   describe "GET /reapirs" do
     it "returns a page" do
       visit repairs_path
-      page.should have_content("Listing Repairs")
-      page.should have_content("LIMS") # This is in the nav bar
+      expect(page).to have_content("Listing Repairs")
+      expect(page).to have_content("LIMS") # This is in the nav bar
     end
   end
 end

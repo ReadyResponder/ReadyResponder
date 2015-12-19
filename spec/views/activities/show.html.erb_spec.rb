@@ -13,9 +13,9 @@ describe "activities/show" do
   it "renders attributes in <p>" do
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/Content/)
-    rendered.should match(/Author/)
-    rendered.should match(/1/)
-    rendered.should match(/Loggable Type/)
+    expect(rendered).to match(/Content/)
+    expect(rendered).to match(/Author/)
+    expect(rendered).to match(/1/)
+    expect(rendered).to match(/Loggable Type/)
   end
 end

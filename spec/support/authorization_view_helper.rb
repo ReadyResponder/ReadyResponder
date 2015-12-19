@@ -6,20 +6,20 @@ module AuthorizationViewHelper
       @sample_object = FactoryGirl.create(model_name.to_sym)
       model_path = url_for(:action => 'index', :controller => model_name.pluralize)
       visit model_path
-      page.should have_content("LIMS") # This is in the nav bar
+      expect(page).to have_content("LIMS") # This is in the nav bar
 
-      page.should have_css('#sidebar')
-      page.should have_content(@sample_object.attributes[things_to_look_for[0]])
-      page.should have_content("#{model_name.pluralize.capitalize}") # This is in the side bar
+      expect(page).to have_css('#sidebar')
+      expect(page).to have_content(@sample_object.attributes[things_to_look_for[0]])
+      expect(page).to have_content("#{model_name.pluralize.capitalize}") # This is in the side bar
   #    page.should have_content("XXX") # this is so the test does not pass and I can keep re-running it alone
     end
     it "visits a creation form" do
       @sample_object = FactoryGirl.create(model_name.to_sym)
       model_path = url_for(:action => 'new', :controller => model_name.pluralize)
       visit model_path
-      page.should have_content("LIMS")
-      page.should have_content(things_to_look_for[0].titlecase)
-      page.should have_content("New #{model_name.capitalize}")
+      expect(page).to have_content("LIMS")
+      expect(page).to have_content(things_to_look_for[0].titlecase)
+      expect(page).to have_content("New #{model_name.capitalize}")
     end
     it "visits a display page" do
       #@sample_object = model_name.singularize.classify.constantize.create!

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Inspection do
   it "has a valid factory" do
-    FactoryGirl.create(:inspection).should be_valid
+    expect(FactoryGirl.create(:inspection)).to be_valid
   end
 
   #mail.subject.should eq("Cert expiring")
