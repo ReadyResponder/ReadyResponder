@@ -1,0 +1,9 @@
+<h2> Email information </h2>  
+        <%= f.simple_fields_for :emails do |c| %>
+          <fieldset>
+            <%= c.input :category, :as => :select, :collection => Channel::CATEGORIES %>
+            <%= c.input :content, :placeholder => 'me@example.com' %>
+            <%= c.input :name, :label => 'Description' %>
+            <%= c.input :status, :as => :select, :collection => Channel::STATUSES %>
+            <%= c.input :usage, :as => :select, :collection => Channel::USAGES %>
+        <% end %>
