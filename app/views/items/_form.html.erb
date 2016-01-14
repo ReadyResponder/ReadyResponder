@@ -5,6 +5,7 @@
     <%= f.association :location %>
     <%= f.input :status, :as => :select, :collection => Item::STATUS_CHOICES %>
     <%= f.input :category, :as => :select, :collection => Item::CATEGORY_CHOICES %>
+    <%= @item.itemview %>
     <%= f.file_field :itemview %>
     <%= f.input :name %>
     <%= f.input :brand %>

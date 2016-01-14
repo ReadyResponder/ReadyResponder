@@ -5,7 +5,7 @@ class Item < ActiveRecord::Base
   belongs_to :person
   belongs_to :location
   has_many :repairs
-  mount_uploader :itemview, Imageuploader 
+  mount_uploader :itemview, ItemviewUploader 
 
   STATUS_CHOICES = ['In Service', 'In Service - Degraded', 'Out of Service','Available','Sold', 'Destroyed']
   CATEGORY_CHOICES = ['Pump','Light','Generator','Shelter', 'Radio', 'Vehicle', 'Other']
