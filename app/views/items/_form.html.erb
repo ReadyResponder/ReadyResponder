@@ -1,10 +1,12 @@
-<%= simple_form_for(@item) do |f| %>
+<%= simple_form_for (@item), :html => {:multipart => true} do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
     <%= f.association :location %>
     <%= f.input :status, :as => :select, :collection => Item::STATUS_CHOICES %>
     <%= f.input :category, :as => :select, :collection => Item::CATEGORY_CHOICES %>
+    <%= @item.itemview %>
+    <%= f.file_field :itemview %>
     <%= f.input :name %>
     <%= f.input :brand %>
     <%= f.input :model %>
