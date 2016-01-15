@@ -2,14 +2,14 @@
   <caption><h3><%= @page_title %></h3></caption>
   <thead>
     <tr>
-      <th>ID</th>
       <th>Name</th>
+      <th>Model</th>
       <th>Location</th>
       <th>Category</th>
       <th>Serial 1</th>
       <th>Serial 2</th>
       <th>Serial 3</th>
-      <th>Owner</th>
+      <th>Costs</th>
       <th>Status</th>
       <th></th>
     </tr>
@@ -17,18 +17,21 @@
   <tbody>
     <% @items.each do |item| %>
       <tr>
-        <td><%= item.icsid %></td>
-        <td><%= link_to item.model + " " + item.name, item_path(item) %></td>
-      	<td><%= item.location.name if item.location %></td>
+        <td><%= link_to item.name, item_path(item) %></td>
+        <td><%= item.model %></td>
+      	<td><%= item.location %></td>
       	<td><%= item.category %></td>
       	<td><%= item.serial1 %></td>
       	<td><%= item.serial2 %></td>
         <td><%= item.serial3 %></td>
-        <td><%= item.person.fullname unless item.person_id.blank? %></td>
-      	<td><%= item.status %></td>
+        <td><%= number_to_currency item.recent_costs %></td>
+      	<td>
+          <span class="label <%= 'label-warning' if item.status == 'Out of Service' %><%= 'label-success' if item.status == 'Available' %>">
+            <%= item.status %>
+          </span>
+        </td>
       	<td><%= link_to 'Edit', edit_item_path(item), :class => 'btn btn-mini btn-primary' unless cannot? :edit, item %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-

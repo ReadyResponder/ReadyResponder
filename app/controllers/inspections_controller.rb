@@ -1,7 +1,6 @@
 class InspectionsController < ApplicationController
-   before_filter :authenticate_user!
-   load_and_authorize_resource
- 
+  # GET /inspections
+  # GET /inspections.json
   def index
     @inspections = Inspection.all
 
@@ -45,7 +44,7 @@ class InspectionsController < ApplicationController
 
     respond_to do |format|
       if @inspection.save
-        format.html { redirect_to @inspection, notice: 'Inspection was successfully created.' }
+        format.html { redirect_to @inspection.item, notice: 'Inspection was successfully created.' }
         format.json { render json: @inspection, status: :created, location: @inspection }
       else
         format.html { render action: "new" }
@@ -61,7 +60,7 @@ class InspectionsController < ApplicationController
 
     respond_to do |format|
       if @inspection.update_attributes(params[:inspection])
-        format.html { redirect_to @inspection, notice: 'Inspection was successfully updated.' }
+        format.html { redirect_to @inspection.item, notice: 'Inspection was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

@@ -14,7 +14,8 @@ class ItemsController < ApplicationController
   # GET /items/1.json
   def show
     @item = Item.find(params[:id])
-
+    @inspections = @item.inspections
+    @repairs = @item.repairs
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @item }

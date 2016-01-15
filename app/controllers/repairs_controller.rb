@@ -25,6 +25,7 @@ class RepairsController < ApplicationController
   # GET /repairs/new.json
   def new
     @repair = Repair.new
+    @repair.item_id = (params[:item_id]) if (params[:item_id]).present?
 
     respond_to do |format|
       format.html # new.html.erb
@@ -60,7 +61,7 @@ class RepairsController < ApplicationController
 
     respond_to do |format|
       if @repair.update_attributes(params[:repair])
-        format.html { redirect_to @repair, notice: 'Repair was successfully updated.' }
+        format.html { redirect_to @repair.item, notice: 'Repair was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

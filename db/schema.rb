@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160107191139) do
+ActiveRecord::Schema.define(:version => 20160115155221) do
 
   create_table "activities", :force => true do |t|
     t.string   "content"
@@ -110,18 +110,35 @@ ActiveRecord::Schema.define(:version => 20160107191139) do
     t.datetime "updated_at",       :null => false
   end
 
-  create_table "inspections", :force => true do |t|
-    t.integer  "person_id"
-    t.datetime "inspection_time"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-    t.string   "status"
+  create_table "inspectionquestions", :force => true do |t|
+    t.integer  "inspection_id"
+    t.integer  "question_id"
+    t.string   "question"
+    t.string   "response"
+    t.text     "comments"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
-  add_index "inspections", ["person_id"], :name => "index_inspections_on_person_id"
+  add_index "inspectionquestions", ["inspection_id"], :name => "index_inspectionquestions_on_inspection_id"
+
+  create_table "inspections", :force => true do |t|
+    t.integer  "item_id"
+    t.integer  "person_id"
+    t.datetime "inspection_date"
+    t.integer  "mileage"
+    t.string   "repair_needed"
+    t.string   "status"
+    t.text     "comments"
+    t.string   "category"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "inspections", ["item_id"], :name => "index_inspections_on_item_id"
 
   create_table "items", :force => true do |t|
-    t.integer  "location_id"
+    t.string   "location"
     t.string   "name"
     t.string   "description"
     t.string   "source"
@@ -258,6 +275,16 @@ ActiveRecord::Schema.define(:version => 20160107191139) do
 
   add_index "people_titles", ["person_id", "title_id"], :name => "index_people_titles_on_person_id_and_title_id"
 
+  create_table "questions", :force => true do |t|
+    t.string   "question"
+    t.string   "responsechoices"
+    t.string   "category"
+    t.string   "status"
+    t.text     "comments"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
   create_table "recipients", :force => true do |t|
     t.integer  "person_id"
     t.integer  "notification_id"
@@ -276,8 +303,9 @@ ActiveRecord::Schema.define(:version => 20160107191139) do
     t.string   "status"
     t.string   "description"
     t.string   "comments"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
+    t.decimal  "cost",         :precision => 8, :scale => 2
   end
 
   create_table "responses", :force => true do |t|
