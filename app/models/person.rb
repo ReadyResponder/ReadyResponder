@@ -1,17 +1,14 @@
 class Person < ActiveRecord::Base
-  #code to get next un-used id # in the 800 range
-  #((801...900).to_a - (array_from_db_of_taken_numbers))[0]
+  include ActiveModel::ForbiddenAttributesProtection
   before_save :title_order
 
-  attr_accessible :firstname, :lastname, :status, :icsid, :department, :city, :state, :zipcode, :start_date, :end_date , :title, :gender, :date_of_birth,:division1, :division2, :channels_attributes, :title_ids, :title_order, :comments
-
-  #Having a condition on this association allows all the chaining magic to happen.
-  #Could I use a named scope, and/or could I have another association for 'active_certs' ?
   has_many :certs, :conditions => {:status =>'Active' }
-
-  # Since phones and emails derive off of channels, is "has_many :channels" below redundant?
   has_many :channels
+  has_many :phones, order: :priority
+  has_many :emails, order: :priority
   accepts_nested_attributes_for :channels, allow_destroy: true
+  accepts_nested_attributes_for :phones, allow_destroy: true
+  accepts_nested_attributes_for :emails, allow_destroy: true
   has_many :courses, :through => :certs
   has_many :skills, :through => :courses
   has_and_belongs_to_many :titles
@@ -23,7 +20,6 @@ class Person < ActiveRecord::Base
 
   validates_presence_of :firstname, :lastname, :status
   validates_uniqueness_of :icsid, :allow_nil => true, :allow_blank => true   # this needs to be scoped to active members, or more sophisticated rules
-  validates :firstname, :uniqueness => { :scope => :lastname }
   validates_length_of :state, :is =>2, :allow_nil => true, :allow_blank => true
   validates_numericality_of  :height, :weight, :allow_nil => true, :allow_blank => true
   validates_presence_of :division2, :unless => "division1.blank?"
@@ -79,20 +75,12 @@ class Person < ActiveRecord::Base
     return 3 if self.skilled?("SAR Tech 3")
   end
 
-  def phones
-    channels.where(:channel_type => ["Cell", "Landline", "Phone"]).order(:priority)
-  end
-
   def phone
-    phones.first.content if phones.present?
-  end
-
-  def emails
-    channels.where(:channel_type => "Email").order(:priority)
+    phones.first.try(:content)
   end
 
   def email
-    emails.first.content if emails.present?
+    emails.first.try(:content)
   end
 
   def csz

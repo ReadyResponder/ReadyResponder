@@ -12,22 +12,26 @@
     <%= f.input :department, :as => :select, :collection => Person::DEPARTMENT %>
     <div class="form-horizontal">
         <h2> Phone information </h2>
-        <%= f.simple_fields_for :phones do |c| %>
-          <fieldset>
-            <%= c.input :category, :as => :select, :collection => Channel::CATEGORIES %>
-            <%= c.input :content, :placeholder => '9785551212' %>
-            <%= c.input :name, :label => 'Description' %>
-            <%= c.input :status, :as => :select, :collection => Channel::STATUSES %>
-            <%= c.input :usage, :as => :select, :collection => Channel::USAGES %>
-            <%= c.input :carrier, :as => :select, :collection => Phone::CARRIERS %>
-            <%= c.input :sms_available %>
-            <%= c.input :priority, :as => :select, :collection => Phone::PRIORITIES %>         
-          </fieldset>
+        <% @phones.each do |phone| %>
+          <%= f.simple_fields_for phone do |c| %>
+            <fieldset>
+              <%= c.input :category, :as => :select, :collection => Channel::CATEGORIES %>
+              <%= c.input :content, :placeholder => '9785551212' %>
+              <%= c.input :name, :label => 'Description' %>
+              <%= c.input :status, :as => :select, :collection => Channel::STATUSES %>
+              <%= c.input :usage, :as => :select, :collection => Channel::USAGES %>
+              <%= c.input :carrier, :as => :select, :collection => Phone::CARRIERS %>
+              <%= c.input :sms_available, as: :boolean %>
+              <%= c.input :priority, :as => :select, :collection => Phone::PRIORITIES %>
+              <%= c.input :channel_type, as: :select, collection: Phone::TYPES %>
+            </fieldset>
+          <% end %>
         <% end %>
     </div>
     <div class="form-horizontal">
-        <h2> Email information </h2>  
-        <%= f.simple_fields_for :emails do |c| %>
+      <h2> Email information </h2>
+      <% @emails.each do |email| %>
+        <%= f.simple_fields_for email do |c| %>
           <fieldset>
             <%= c.input :category, :as => :select, :collection => Channel::CATEGORIES %>
             <%= c.input :content, :placeholder => 'me@example.com' %>
@@ -35,6 +39,7 @@
             <%= c.input :status, :as => :select, :collection => Channel::STATUSES %>
             <%= c.input :usage, :as => :select, :collection => Channel::USAGES %>
         <% end %>
+      <% end %>
     </div>
     <%= f.input :icsid, :input_html => { :size => 5 } %>
     <%= f.input :title, :as => :select, label: 'Rank', :collection => Person::TITLES %>
@@ -45,5 +50,3 @@
     <%= f.input :comments, :input_html => { :size => 40}  %>
     <%= f.button :submit %>
 <% end %>
-
-
