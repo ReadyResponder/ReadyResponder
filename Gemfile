@@ -9,6 +9,7 @@ gem 'rmagick'
 gem 'simple_form'
 gem 'geocoder'
 gem 'cancan'
+gem 'strong_parameters'
 #gem "taps"
 #gem 'validates_timeliness', '~> 3.0'
 
