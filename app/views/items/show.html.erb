@@ -1,8 +1,8 @@
 <% content_for :sidebar do %>
   <%= link_to 'Return to Listing', items_path, :class => 'btn' %></br></br>
-  <%= link_to 'Edit Item', edit_item_path(@item), :class => 'btn btn-primary' unless cannot? :edit, @item  %></br></br>
-  <%= link_to 'Add Repair', new_item_repair_path(@item), :class => 'btn btn-primary' unless cannot? :edit, @item  %></br></br>
-  <%= link_to 'Add Inspection', new_item_inspection_path(@item), :class => 'btn btn-primary' unless cannot? :edit, @item  %></br></br>
+  <%= edit_item_button %></br></br>
+  <%= add_repair_button %></br></br>
+  <%= add_inspection_button %></br></br>
 <% end %>
 <p>
   <h3>
@@ -68,3 +68,4 @@
 <%= render(:partial => "repairs/repairs_table", :repairs => @item.repairs) || "No Repairs yet !" %>
 <hr>
 <%= render(:partial => "inspections/inspections_table", :inpections => @item.inspections) || "No Inspections yet !" %>
+<%= image_tag @item.itemimage.to_s if @item.itemimage.present? %>

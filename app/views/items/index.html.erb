@@ -26,7 +26,7 @@
         <td><%= item.serial3 %></td>
         <td><%= number_to_currency item.recent_costs %></td>
       	<td>
-          <span class="label <%= 'label-warning' if item.status == 'Out of Service' %><%= 'label-success' if item.status == 'Available' %>">
+          <span class="label <%= item_label(item) %>">
             <%= item.status %>
           </span>
         </td>

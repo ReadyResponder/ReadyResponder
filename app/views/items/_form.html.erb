@@ -1,4 +1,4 @@
-<%= simple_form_for(@item) do |f| %>
+<%= simple_form_for @item, :html => {:multipart => true}  do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
@@ -22,6 +22,7 @@
     <%= f.input :purchase_amt %>
     <%= f.input :sell_date, :as => :string, :input_html => { :class => 'datepicker', :size => 11 }  %>
     <%= f.input :sell_amt %>
+     <%= f.file_field :itemimage %>
     <%= f.input :comments %>
   </div>
 
