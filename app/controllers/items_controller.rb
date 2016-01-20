@@ -1,4 +1,7 @@
 class ItemsController < ApplicationController
+  before_filter :authenticate_user!
+  load_and_authorize_resource
+
   # GET /items
   # GET /items.json
   def index
@@ -14,7 +17,8 @@ class ItemsController < ApplicationController
   # GET /items/1.json
   def show
     @item = Item.find(params[:id])
-
+    @inspections = @item.inspections
+    @repairs = @item.repairs
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @item }

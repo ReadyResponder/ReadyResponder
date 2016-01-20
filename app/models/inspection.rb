@@ -1,6 +1,9 @@
 class Inspection < ActiveRecord::Base
-  attr_accessible :inspection_date, :person_id, :status
-  
-  belongs_to :person
+
+  # attr_accessible :title, :body
+  belongs_to :item
+  has_many :inspectionquestions
+
+  STATUS_CHOICES = ['Complete - Passed', 'Complete - Failed', 'Incomplete']
 
 end
