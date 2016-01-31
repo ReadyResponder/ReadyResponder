@@ -17,9 +17,9 @@
   <tbody>
     <% @items.each do |item| %>
       <tr>
-        <td><%= item.location.name if item.location %></td>
         <td><%= link_to item.name, item_path(item) %></td>
         <td><%= item.model %></td>
+        <td><%= item.location %></td>
         <td><%= item.category %></td>
         <td><%= item.serial1 %></td>
         <td><%= item.serial2 %></td>

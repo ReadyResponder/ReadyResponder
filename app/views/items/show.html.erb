@@ -5,8 +5,6 @@
   <%= add_inspection_button %></br></br>
 <% end %>
 <p>
-  <b>Location:</b>
-  <%= @item.location_id %>
   <h3>
     <%= @item.name + " ( " + @item.brand + " " + @item.model + " )" %></br>
     <span class="badge <%= 'badge-success' if @item.status == 'Available' %>">
@@ -16,8 +14,8 @@
 </p>
 
 <p>
-  <b>Name:</b>
-  <%= @item.name %>
+  <b>Location:</b>
+  <%= @item.location %>
 </p>
 
 <p>

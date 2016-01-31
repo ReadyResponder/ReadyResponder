@@ -11,8 +11,7 @@ FactoryGirl.define do
     purchase_date "2010-12-14"
     purchase_amt ""
     status "Available"
-    value 655.32
-    person
-    location
+    value 11655.32
+    person  #owner
   end
 end
