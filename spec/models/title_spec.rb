@@ -4,7 +4,7 @@ describe "Title" do
 
   describe "creation" do
     it "requires a name" do
-      sampletitle = FactoryGirl.build(:title, name: nil)
+      sampletitle = build(:title, name: nil)
       expect(sampletitle).not_to be_valid
     end
   end

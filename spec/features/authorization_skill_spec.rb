@@ -3,14 +3,14 @@ require 'spec_helper'
 describe "a user" do
   describe "without a role" do
     before (:each) do
-      somebody = FactoryGirl.create(:user)
+      somebody = create(:user)
       visit new_user_session_path
       fill_in 'user_email', :with => somebody.email
       fill_in 'user_password', :with => somebody.password
       click_on 'Sign in'
     end
     it "cannot view skills" do
-      skill = FactoryGirl.create(:skill)
+      skill = create(:skill)
       visit people_path
       expect(page).not_to have_content('Edit') #Need to scope this, or it will fail on Edith
       expect(page).not_to have_content(skill.name)
@@ -25,8 +25,8 @@ describe "a user" do
   end
   describe "in the reader role" do
     before (:each) do
-      somebody = FactoryGirl.create(:user)
-      r = FactoryGirl.create(:role, name: 'Reader')
+      somebody = create(:user)
+      r = create(:role, name: 'Reader')
       somebody.roles << r
       visit new_user_session_path
       fill_in 'user_email', :with => somebody.email
@@ -34,7 +34,7 @@ describe "a user" do
       click_on 'Sign in'
     end
     it "cannot edit skills" do
-      skill = FactoryGirl.create(:skill)
+      skill = create(:skill)
       visit edit_skill_path(skill)
       expect(page).to have_content("Access Denied")
     end
@@ -45,7 +45,7 @@ describe "a user" do
       expect(page).to have_content("Access Denied")
     end
     it "can read a skill" do
-      skill = FactoryGirl.create(:skill)
+      skill = create(:skill)
       visit skills_path
       click_on skill.name
       expect(page).to have_content(skill.name)
@@ -53,9 +53,9 @@ describe "a user" do
   end
   describe "in the editor role" do
     before (:each) do
-      @person = FactoryGirl.create(:person)
-      somebody = FactoryGirl.create(:user)
-      r = FactoryGirl.create(:role, name: 'Editor')
+      @person = create(:person)
+      somebody = create(:user)
+      r = create(:role, name: 'Editor')
       somebody.roles << r
       visit new_user_session_path
       fill_in 'user_email', :with => somebody.email

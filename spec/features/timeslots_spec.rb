@@ -6,7 +6,7 @@ describe 'Access on timecard' do
     expect(page).to have_content("You need to sign in")
     visit new_timecard_path
     expect(page).to have_content("You need to sign in")
-    @sample_object = FactoryGirl.create(:timecard)
+    @sample_object = create(:timecard)
     visit url_for(@sample_object)
     expect(page).to have_content("You need to sign in")
   end
@@ -14,8 +14,8 @@ end
 
 describe Timecard do
   before (:each) do
-    somebody = FactoryGirl.create(:user)
-    r = FactoryGirl.create(:role, name: "Editor")
+    somebody = create(:user)
+    r = create(:role, name: "Editor")
     somebody.roles << r
     visit new_user_session_path
     fill_in 'user_email', :with => somebody.email
@@ -24,7 +24,7 @@ describe Timecard do
   end
 
   it "gets the index" do
-    @sample_object = FactoryGirl.create(:timecard)
+    @sample_object = create(:timecard)
     visit timecards_path
     expect(page).to have_content("LIMS") # In the nav bar
     expect(page).to have_css('#sidebar')
@@ -32,7 +32,7 @@ describe Timecard do
     expect(page).to have_content(@sample_object.category)
   end
   it "visits a creation form" do
-    @sample_object = FactoryGirl.create(:timecard)
+    @sample_object = create(:timecard)
     visit new_timecard_path
     expect(page).to have_content("LIMS")
     expect(page).to have_css('#sidebar')
@@ -40,7 +40,7 @@ describe Timecard do
     expect(page).to have_content("New Timecard")
   end
   it "visits a display page" do
-    @sample_object = FactoryGirl.create(:timecard)
+    @sample_object = create(:timecard)
     visit timecard_path(@sample_object)
     expect(page).to have_content("LIMS")
     expect(page).to have_css('#sidebar')
@@ -48,7 +48,7 @@ describe Timecard do
     expect(page).to have_content(@sample_object.intention)
   end
   it "visits a display page without actual times" do
-    @sample_object = FactoryGirl.create(:timecard, intended_start_time: nil, intended_end_time: nil, actual_start_time: nil, actual_end_time: nil)
+    @sample_object = create(:timecard, intended_start_time: nil, intended_end_time: nil, actual_start_time: nil, actual_end_time: nil)
     visit timecard_path(@sample_object)
     expect(page).to have_content("LIMS")
     expect(page).to have_css('#sidebar')

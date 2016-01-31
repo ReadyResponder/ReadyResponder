@@ -78,6 +78,7 @@ class PeopleController < ApplicationController
   def show
     @person = Person.find(params[:id])
     @page_title = @person.fullname
+    @phones = @person.phones
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @person }
@@ -87,8 +88,8 @@ class PeopleController < ApplicationController
   def new
     @page_title = "New Person"
     @person = Person.new(status: cookies[:status], state: 'MA')
-    @emails = Array(@person.emails.build(category: 'E-Mail', status: 'OK', usage: '1-All'))
-    @phones = Array(@person.phones.build(category: "Mobile Phone", status: "OK", usage: "1-All"))
+    @person.emails.build(category: 'E-Mail', status: 'OK', usage: '1-All')
+    @person.phones.build(category: "Mobile Phone", status: "OK", usage: "1-All")
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @person }
@@ -97,9 +98,6 @@ class PeopleController < ApplicationController
 
   def edit
     @person = Person.includes(:phones, :emails).find(params[:id])
-    #This is a quick hack to allow people to enter e-mails and phone numbers for person records already created
-    @emails = @person.emails
-    @phones = @person.phones
   end
 
   def create
@@ -110,7 +108,7 @@ class PeopleController < ApplicationController
         format.html { redirect_to session[:return_to], notice: 'Person was successfully created.' }
         format.json { render json: @person, status: :created, location: @person }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to new_person_path, alert: @person.errors.full_messages }
         format.json { render json: @person.errors, status: :unprocessable_entity }
       end
     end
@@ -124,7 +122,7 @@ class PeopleController < ApplicationController
         format.html { redirect_to session[:return_to], notice: 'Person was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { redirect_to edit_person_path(@person), notice: @person.errors.full_messages }
         format.json { render json: @person.errors, status: :unprocessable_entity }
       end
     end
@@ -140,20 +138,21 @@ class PeopleController < ApplicationController
     end
   end
 
+  private
+
   def set_return_path
     session[:return_to] ||= request.referer
   end
 
   def person_params
-    person_params = params.require(:person).permit(:firstname, :lastname, :status, :icsid, :department,
+    params.require(:person).permit(
+      :firstname, :lastname, :status, :icsid, :department,
       :city, :state, :zipcode, :start_date, :end_date,
       :title, :gender, :date_of_birth, :division1,
       :division2, :channels_attributes, :title_ids,
       :title_order, :comments,
-      phone: [:category, :content, :description, :status, :usage, :carrier, :sms_available, :priority, :channel_type],
-      email: [:category, :content, :description, :status, :usage])
-    person_params[:phones_attributes] = [person_params.delete(:phone)]
-    person_params[:emails_attributes] = [person_params.delete(:email)]
-     person_params
+      phones_attributes: [:category, :content, :name, :status, :usage, :carrier, :sms_available, :priority, :channel_type],
+      emails_attributes: [:category, :content, :name, :status, :usage]
+    )
   end
 end

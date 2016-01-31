@@ -368,6 +368,7 @@ DEPENDENCIES
   net-ssh (~> 2.7.0)
   pg (~> 0.17.0)
   poltergeist
+  pry
   rack
   rails (= 3.2.13)
   ransack

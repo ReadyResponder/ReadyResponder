@@ -3,8 +3,8 @@ require 'spec_helper'
 describe "a user" do
   describe "without a role" do
     before (:each) do
-      @person = FactoryGirl.create(:person)
-      somebody = FactoryGirl.create(:user)
+      @person = create(:person)
+      somebody = create(:user)
       visit new_user_session_path
       fill_in 'user_email', :with => somebody.email
       fill_in 'user_password', :with => somebody.password

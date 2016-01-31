@@ -5,6 +5,8 @@ Lims3::Application.routes.draw do
   resources :channels
   resources :timecards
   resources :events
+  resources :roles
+
   post 'events/:id/schedule/:person_id/:card_action', to: 'events#schedule', as: 'schedule'
 
   resources :moves
@@ -15,12 +17,10 @@ Lims3::Application.routes.draw do
     resources :inspections, :controller => 'inspections'
   end
 
-  resources :roles
-
   get "landing/index"
 
   #authenticated :user do
-  #  root :to => "people#index" 
+  #  root :to => "people#index"
   #end
 
   devise_for :users

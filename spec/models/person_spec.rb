@@ -8,14 +8,14 @@ describe Person do
     describe 'divisions' do
       context 'division 1 present' do
         it 'is invalid if division 2 is blank' do
-          person = FactoryGirl.build :person, division2: ''
+          person = build :person, division2: ''
           expect(person).not_to be_valid
         end
       end
 
       context 'division 2 present' do
         it 'is invalid if division 1 is blank' do
-          person = FactoryGirl.build :person, division1: ''
+          person = build :person, division1: ''
           expect(person).not_to be_valid
         end
       end
@@ -23,10 +23,10 @@ describe Person do
   end
 
   describe 'skills' do
-    subject { FactoryGirl.create :person }
-    let(:evoc_course) { FactoryGirl.create :course, skills: [skill] }
-    let(:skill) { FactoryGirl.create :skill }
-    let(:cert) { FactoryGirl.create(:cert, {person: subject, course: evoc_course}.merge(cert_options)) }
+    subject { create :person }
+    let(:evoc_course) { create :course, skills: [skill] }
+    let(:skill) { create :skill }
+    let(:cert) { create(:cert, {person: subject, course: evoc_course}.merge(cert_options)) }
     let(:cert_options) { {} }
 
     context 'cert' do
@@ -56,7 +56,7 @@ describe Person do
     end
 
     describe 'qualification' do
-      let(:title) { FactoryGirl.create :title, skills: [skill] }
+      let(:title) { create :title, skills: [skill] }
 
       before(:each) { cert }
 
@@ -68,8 +68,8 @@ describe Person do
       end
 
       context 'does not have skill required by title' do
-        let(:irrelevant_skill) { FactoryGirl.create :skill }
-        let(:irrelevant_course) { FactoryGirl.create :course, skills: [irrelevant_skill] }
+        let(:irrelevant_skill) { create :skill }
+        let(:irrelevant_course) { create :course, skills: [irrelevant_skill] }
         let(:cert_options) { {course: irrelevant_course} }
 
         it 'is not qualified for the title' do

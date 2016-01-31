@@ -2,8 +2,8 @@ require 'spec_helper'
       #save_and_open_page
 describe "Person" do
   before (:each)  do
-    somebody = FactoryGirl.create(:user)
-    r = FactoryGirl.create(:role, name: 'Editor')
+    somebody = create(:user)
+    r = create(:role, name: 'Editor')
     somebody.roles << r
     visit new_user_session_path
     fill_in 'user_email', :with => somebody.email
@@ -13,16 +13,16 @@ describe "Person" do
 
   describe "views" do
     before (:each) do
-      cj = FactoryGirl.create(:person, firstname: 'CJ',  department: 'Police' )
-      cj.channels << FactoryGirl.create(:channel, channel_type: 'Phone', content: '9785551212', category: "Mobile Phone")
-      sierra = FactoryGirl.create(:person, firstname: 'Sierra', department: 'CERT' )
-      sierra.channels << FactoryGirl.create(:channel, channel_type: 'Email', category: 'E-Mail', content: 'sierra@example.com')
-      FactoryGirl.create(:person, firstname: 'Adam', status: 'Applicant' )
-      FactoryGirl.create(:person, firstname: 'Priscilla', status: 'Prospect' )
-      FactoryGirl.create(:person, firstname: 'Indy', status: 'Inactive' )
-      FactoryGirl.create(:person, firstname: 'Leona', status: 'Leave of Absence' )
-      FactoryGirl.create(:person, firstname: 'Donna', status: 'Declined' )
-      FactoryGirl.create(:person, firstname: 'Oscar', status: 'Active', department: 'Other' )
+      cj = create(:person, firstname: 'CJ',  department: 'Police' )
+      cj.channels << create(:phone, channel_type: 'Phone', content: '9785551212', category: "Mobile Phone")
+      sierra = create(:person, firstname: 'Sierra', department: 'CERT' )
+      sierra.channels << create(:email, channel_type: 'Email', category: 'E-Mail', content: 'sierra@example.com')
+      create(:person, firstname: 'Adam', status: 'Applicant' )
+      create(:person, firstname: 'Priscilla', status: 'Prospect' )
+      create(:person, firstname: 'Indy', status: 'Inactive' )
+      create(:person, firstname: 'Leona', status: 'Leave of Absence' )
+      create(:person, firstname: 'Donna', status: 'Declined' )
+      create(:person, firstname: 'Oscar', status: 'Active', department: 'Other' )
     end
 
     it "returns the index page" do
@@ -156,55 +156,55 @@ describe "Person" do
     end
 
     it "an edit form with values filled in" do
-      person = FactoryGirl.create(:person, icsid: "509")
+      person = create(:person, icsid: "509")
       visit edit_person_path(person)
       expect(page).to have_field("First Name", :with => "CJ")
       expect(page).to have_select("person_gender", :selected => "Female")
     end
 
     it "qualified only if all skills are present" do
-      title = FactoryGirl.create(:title, name: "Police Officer")
-      drivingskill = FactoryGirl.create(:skill, name: "Driving")
-      firstaidskill = FactoryGirl.create(:skill, name: "FRFA")
+      title = create(:title, name: "Police Officer")
+      drivingskill = create(:skill, name: "Driving")
+      firstaidskill = create(:skill, name: "FRFA")
       title.skills << drivingskill
       title.skills << firstaidskill
 
-      frfacourse = FactoryGirl.create(:course, name: "FRFA")
+      frfacourse = create(:course, name: "FRFA")
       firstaidskill.courses << frfacourse
-      drivingcourse = FactoryGirl.create(:course, name: "Mass DL")
+      drivingcourse = create(:course, name: "Mass DL")
       drivingskill.courses << drivingcourse
 
-      person = FactoryGirl.create(:person)
+      person = create(:person)
       person.titles << title
-      cert = FactoryGirl.create(:cert, person: person, course: frfacourse)
+      cert = create(:cert, person: person, course: frfacourse)
       visit person_path(person)
       #save_and_open_page
       expect(page).to have_content("NOT qualified for Police Officer")
       expect(page).to have_content("Driving") #This test is vague. Need to ensure Driving is in the missing skills section
-      cert = FactoryGirl.create(:cert, person: person, course: drivingcourse)
+      cert = create(:cert, person: person, course: drivingcourse)
       visit person_path(person)
       expect(page).to have_content("Qualified for Police Officer")
       expect(page).not_to have_content("NOT Qualified")
     end
 
     it "a person page" do
-      @timecard = FactoryGirl.create(:timecard) #this creates a person as well
+      @timecard = create(:timecard) #this creates a person as well
       @person = @timecard.person
-      @certification = FactoryGirl.create(:cert, person: @person)
+      @certification = create(:cert, person: @person)
       visit person_path(@person)
       expect(page).to have_content(@person.fullname)
     end
 
     it "a person without a start date" do
-      person = FactoryGirl.create(:person, start_date: nil)
+      person = create(:person, start_date: nil)
       visit person_path(person)
       expect(page).to have_content("Status")
     end
 
     skip "all certs, even expired" do
-      person = FactoryGirl.create(:person)
-      course = FactoryGirl.create(:course, name: "Basket Weaving")
-      expiredcert = FactoryGirl.create(:cert, person: person, course: course, status: "Expired")
+      person = create(:person)
+      course = create(:course, name: "Basket Weaving")
+      expiredcert = create(:cert, person: person, course: course, status: "Expired")
       visit person_path(person)
       expect(page).to have_content("Basket Weaving")
     end

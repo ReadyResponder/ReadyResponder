@@ -3,9 +3,9 @@ require 'spec_helper'
 describe "a user" do
   describe "in the reader role" do
     before (:each) do
-      @person = FactoryGirl.create(:person)
-      somebody = FactoryGirl.create(:user)
-      somebody.roles << FactoryGirl.create(:role, name: 'Reader')
+      @person = create(:person)
+      somebody = create(:user)
+      somebody.roles << create(:role, name: 'Reader')
       visit new_user_session_path
       fill_in 'user_email', :with => somebody.email
       fill_in 'user_password', :with => somebody.password
@@ -27,8 +27,8 @@ describe "a user" do
       expect(page).to have_content(@person.lastname)
     end
     it "gets a signin sheet when requested" do
-      @person_active = FactoryGirl.create(:person)
-      @person_inactive = FactoryGirl.create(:person, status: 'Inactive')
+      @person_active = create(:person)
+      @person_inactive = create(:person, status: 'Inactive')
       visit signin_people_path
       expect(page).to have_content("Command Staff") #This is in the first heading
       expect(page).to have_content(@person_active.lastname)
@@ -37,9 +37,9 @@ describe "a user" do
   end
   describe "in the editor role" do
     before (:each) do
-      @person = FactoryGirl.create(:person)
-      somebody = FactoryGirl.create(:user)
-      somebody.roles << FactoryGirl.create(:role, name: 'Editor')
+      @person = create(:person)
+      somebody = create(:user)
+      somebody.roles << create(:role, name: 'Editor')
       visit new_user_session_path
       fill_in 'user_email', :with => somebody.email
       fill_in 'user_password', :with => somebody.password
@@ -67,8 +67,8 @@ describe "a user" do
       expect(page).to have_content(@person.lastname)
     end
     it "a signin sheet when requested" do
-      @person_active = FactoryGirl.create(:person)
-      @person_inactive = FactoryGirl.create(:person, status: 'Inactive')
+      @person_active = create(:person)
+      @person_inactive = create(:person, status: 'Inactive')
       visit signin_people_path
       expect(page).to have_content("Command Staff") #This is in the first heading
       expect(page).to have_content(@person_active.lastname)

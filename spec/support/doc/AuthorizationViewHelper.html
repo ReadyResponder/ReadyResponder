@@ -146,7 +146,7 @@
 <span class="ruby-comment">#    page.should have_content(&quot;XXX&quot;) # this is so the test does not pass and I can keep re-running it alone</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">it</span> <span class="ruby-string">&quot;visits a creation form&quot;</span> <span class="ruby-keyword">do</span>
-    <span class="ruby-comment">#@sample_object = FactoryGirl.create(model_name.to_sym)</span>
+    <span class="ruby-comment">#@sample_object = create(model_name.to_sym)</span>
     <span class="ruby-identifier">model_path</span> = <span class="ruby-identifier">url_for</span>(<span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'new'</span>, <span class="ruby-value">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">model_name</span>.<span class="ruby-identifier">pluralize</span>)
     <span class="ruby-identifier">visit</span> <span class="ruby-identifier">model_path</span>
     <span class="ruby-identifier">page</span>.<span class="ruby-identifier">should</span> <span class="ruby-identifier">have_content</span>(<span class="ruby-string">&quot;LIMS&quot;</span>)
@@ -154,7 +154,7 @@
     <span class="ruby-identifier">page</span>.<span class="ruby-identifier">should</span> <span class="ruby-identifier">have_content</span>(<span class="ruby-node">&quot;New #{model_name.capitalize}&quot;</span>)
   <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">it</span> <span class="ruby-string">&quot;visits a display page&quot;</span> <span class="ruby-keyword">do</span>
-    <span class="ruby-comment">#@sample_object = FactoryGirl.create(model_name.to_sym)</span>
+    <span class="ruby-comment">#@sample_object = create(model_name.to_sym)</span>
     <span class="ruby-identifier">model_path</span> = <span class="ruby-identifier">url_for</span>(<span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'show'</span>, <span class="ruby-value">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">model_name</span>.<span class="ruby-identifier">pluralize</span>)
     <span class="ruby-identifier">visit</span> <span class="ruby-identifier">model_path</span>
     <span class="ruby-identifier">page</span>.<span class="ruby-identifier">should</span> <span class="ruby-identifier">have_content</span>(<span class="ruby-string">&quot;LIMS&quot;</span>)

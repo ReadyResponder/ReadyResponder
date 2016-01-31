@@ -1,7 +1,5 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
-  factory :channel do
+  factory :phone do
     name "Main Phone"
     content "(978) 555-1212"
     priority 1

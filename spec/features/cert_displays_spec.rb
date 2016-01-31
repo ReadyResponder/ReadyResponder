@@ -3,8 +3,8 @@ require 'spec_helper'
 
 describe "Cert" do
   before  do
-    somebody = FactoryGirl.create(:user)
-    r = FactoryGirl.create(:role, name: 'Editor')
+    somebody = create(:user)
+    r = create(:role, name: 'Editor')
     somebody.roles << r
    
     visit new_user_session_path
@@ -22,7 +22,7 @@ describe "Cert" do
       expect(page).to have_content('You need to sign in')
       visit new_cert_path
       expect(page).to have_content('You need to sign in')
-      acert = FactoryGirl.create(:cert)
+      acert = create(:cert)
       visit edit_cert_path(acert)
       expect(page).to have_content('You need to sign in')
     end
@@ -30,7 +30,7 @@ describe "Cert" do
       
   describe "should display" do
    it "a list" do
-      cert = FactoryGirl.create(:cert)
+      cert = create(:cert)
       person = cert.person
       
       visit certs_path
@@ -44,8 +44,8 @@ describe "Cert" do
     end
 
     it "a new cert form with an issued date field" do
-      a_person = FactoryGirl.create(:person)
-      a_course = FactoryGirl.create(:course)
+      a_person = create(:person)
+      a_course = create(:course)
       visit new_cert_path
       expect(page).to have_content("Issued Date")
       select(a_person.fullname, :from => 'cert_person_id')
@@ -56,7 +56,7 @@ describe "Cert" do
       
     end
     it "should show a cert page" do
-      cert = FactoryGirl.create(:cert)
+      cert = create(:cert)
       visit cert_path(cert)
       expect(page).to have_content("Status: Active")
       cert.status = 'Expired'
