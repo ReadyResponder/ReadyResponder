@@ -4,8 +4,9 @@ class Item < ActiveRecord::Base
                   :value, :grant, :purchase_amt, :purchase_date,
                   :sell_amt, :sell_date, :stock_number,
                   :serial1, :serial2, :serial3,
-                  :source, :status, :comments, :itemimage
+                  :source, :status, :comments, :item_image
 
+  mount_uploader :item_image, ItemImageUploader
   belongs_to :person
   belongs_to :location
   has_many :repairs
