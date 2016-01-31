@@ -3,7 +3,7 @@ module AuthorizationViewHelper
   def get_basic_editor_views(model_name, things_to_look_for)
     it "gets the index" do
       # I was unable to get the later attributes call to work unless factorygirl call was within the test
-      @sample_object = FactoryGirl.create(model_name.to_sym)
+      @sample_object = create(model_name.to_sym)
       model_path = url_for(:action => 'index', :controller => model_name.pluralize)
       visit model_path
       expect(page).to have_content("LIMS") # This is in the nav bar
@@ -14,7 +14,7 @@ module AuthorizationViewHelper
   #    page.should have_content("XXX") # this is so the test does not pass and I can keep re-running it alone
     end
     it "visits a creation form" do
-      @sample_object = FactoryGirl.create(model_name.to_sym)
+      @sample_object = create(model_name.to_sym)
       model_path = url_for(:action => 'new', :controller => model_name.pluralize)
       visit model_path
       expect(page).to have_content("LIMS")
@@ -23,7 +23,7 @@ module AuthorizationViewHelper
     end
     it "visits a display page" do
       #@sample_object = model_name.singularize.classify.constantize.create!
-      @sample_object = FactoryGirl.create(model_name.to_sym)
+      @sample_object = create(model_name.to_sym)
       #@sample_object2 = Object.const_get(model_name.titlecase).new
       #@sample_object2.save.
       #visit url_for(:id => @sample_object2.id, :action => 'show', :controller => model_name.pluralize)

@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe Item do
   before (:each) do
-    somebody = FactoryGirl.create(:user)
-    r = FactoryGirl.create(:role, name: 'Editor')
+    somebody = create(:user)
+    r = create(:role, name: 'Editor')
     somebody.roles << r
     visit new_user_session_path
     fill_in 'user_email', :with => somebody.email
@@ -18,7 +18,7 @@ describe Item do
   end
 
   it "an edit form with values filled in" do
-    @item = FactoryGirl.create(:item)
+    @item = create(:item)
     visit edit_item_path(@item)
     expect(page).to have_field("Model", :with => @item.model)
   end

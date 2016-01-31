@@ -3,8 +3,8 @@ require 'spec_helper'
 
 describe "Inspection" do
   before (:each)  do
-    somebody = FactoryGirl.create(:user)
-    r = FactoryGirl.create(:role, name: 'Editor')
+    somebody = create(:user)
+    r = create(:role, name: 'Editor')
     somebody.roles << r
 
     visit new_user_session_path
@@ -21,7 +21,7 @@ describe "Inspection" do
       expect(page).to have_content('You need to sign in')
       visit new_inspection_path
       expect(page).to have_content('You need to sign in')
-      an_inspection = FactoryGirl.create(:inspection)
+      an_inspection = create(:inspection)
       visit edit_inspection_path(an_inspection)
       page.should have_content('You need to sign in')
     end
@@ -32,8 +32,8 @@ describe "Inspection" do
 
   context "on an item" do
     it "should show an inspection" do
-      an_inspection = FactoryGirl.create(:inspection,
-                                         :item => FactoryGirl.create(:item))
+      an_inspection = create(:inspection,
+                                         :item => create(:item))
       visit inspection_path(an_inspection)
       expect(page).to have_content(an_inspection.status)
     end

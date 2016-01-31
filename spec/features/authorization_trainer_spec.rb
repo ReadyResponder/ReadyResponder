@@ -2,9 +2,9 @@ require 'spec_helper'
       #save_and_open_page
 describe "a user in the trainer role" do
   before (:each) do
-    @person = FactoryGirl.create(:person)
-    somebody = FactoryGirl.create(:user)
-    somebody.roles << FactoryGirl.create(:role, name: 'Trainer')
+    @person = create(:person)
+    somebody = create(:user)
+    somebody.roles << create(:role, name: 'Trainer')
     visit new_user_session_path
     fill_in 'user_email', :with => somebody.email
     fill_in 'user_password', :with => somebody.password
@@ -26,8 +26,8 @@ describe "a user in the trainer role" do
     expect(page).to have_content(@person.lastname)
   end
   it "get a signin sheet when requested" do
-    @person_active = FactoryGirl.create(:person)
-    @person_inactive = FactoryGirl.create(:person, status: 'Inactive')
+    @person_active = create(:person)
+    @person_inactive = create(:person, status: 'Inactive')
     visit signin_people_path
     expect(page).to have_content("Command Staff") #This is in the first heading
     expect(page).to have_content(@person_active.lastname)

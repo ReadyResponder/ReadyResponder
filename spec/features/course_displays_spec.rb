@@ -9,7 +9,7 @@ describe "Course" do
       expect(page).to have_content('You need to sign in')
       visit new_course_path
       expect(page).to have_content('You need to sign in')
-      an_example = FactoryGirl.create(:course, name: 'Pottery')
+      an_example = create(:course, name: 'Pottery')
       visit edit_course_path(an_example)
       expect(page).to have_content('You need to sign in')
       expect(page).not_to have_content('Pottery')
@@ -21,8 +21,8 @@ describe "Course" do
       
   describe "should display" do
     before  do
-      somebody = FactoryGirl.create(:user)
-      r = FactoryGirl.create(:role, name: 'Editor')
+      somebody = create(:user)
+      r = create(:role, name: 'Editor')
       somebody.roles << r
       visit new_user_session_path
       fill_in('user_email', :with => somebody.email)
@@ -32,7 +32,7 @@ describe "Course" do
 
   
    it "a list" do
-      an_example = FactoryGirl.create(:course, name: 'Zombie Hunting')
+      an_example = create(:course, name: 'Zombie Hunting')
       visit courses_path
       within_table("courses") do
         expect(page).to have_content("Courses")
@@ -60,7 +60,7 @@ describe "Course" do
     end
     
     it 'should update a course' do
-      an_example = FactoryGirl.create(:course, name: 'Zombie Hunting')
+      an_example = create(:course, name: 'Zombie Hunting')
       visit edit_course_path(an_example)
       fill_in 'course_name', :with => 'Skydiving'
       click_on 'Update Course'

@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe "Events" do
   before (:each)  do
-    somebody = FactoryGirl.create(:user)
-    r = FactoryGirl.create(:role, name: 'Editor')
+    somebody = create(:user)
+    r = create(:role, name: 'Editor')
     somebody.roles << r
     visit new_user_session_path
     fill_in 'user_email', :with => somebody.email
@@ -14,11 +14,11 @@ describe "Events" do
   get_basic_editor_views('event',['category', 'description', 'status'])
   describe "creates" do
     it "events" do
-      @person1 = FactoryGirl.create(:person)
-      @person2 = FactoryGirl.create(:person, firstname: "Jane")
-      @person3 = FactoryGirl.create(:person)
-      @person4 = FactoryGirl.create(:person)
-      @person5 = FactoryGirl.create(:person)
+      @person1 = create(:person)
+      @person2 = create(:person, firstname: "Jane")
+      @person3 = create(:person)
+      @person4 = create(:person)
+      @person5 = create(:person)
       visit new_event_path
       fill_in "Title", with: "Standard Patrol"
       select 'Patrol', :from => 'event_category'
@@ -31,10 +31,10 @@ describe "Events" do
 
       @event = Event.last
       expect(@event.timecards.count).to eq(0)
-      @timecard_person2 = FactoryGirl.create(:timecard, event: @event, person: @person2, intention: "Available")
-      @timecard_person3 = FactoryGirl.create(:timecard, event: @event, person: @person3, intention: "Unavailable")
-      @timecard_person4 = FactoryGirl.create(:timecard, event: @event, person: @person4, intention: "Scheduled")
-      @timecard_person5 = FactoryGirl.create(:timecard, event: @event, person: @person5, intention: "Scheduled", outcome: "Worked", actual_start_time: "2013-10-31 18:30" )
+      @timecard_person2 = create(:timecard, event: @event, person: @person2, intention: "Available")
+      @timecard_person3 = create(:timecard, event: @event, person: @person3, intention: "Unavailable")
+      @timecard_person4 = create(:timecard, event: @event, person: @person4, intention: "Scheduled")
+      @timecard_person5 = create(:timecard, event: @event, person: @person5, intention: "Scheduled", outcome: "Worked", actual_start_time: "2013-10-31 18:30" )
       expect(@event.timecards.count).to eq(4)
       expect(@event.available_people.count).to eq(1)
       expect(@event.available_people.first.person).to eq(@person2)
@@ -76,7 +76,7 @@ describe "Events" do
   end
   describe "displays" do
     it "a listing" do
-      @event = FactoryGirl.create(:event, end_time: nil, title: "Something divine")
+      @event = create(:event, end_time: nil, title: "Something divine")
       visit events_path
       within_table("events") do
         expect(page).to have_content("Events")
@@ -87,7 +87,7 @@ describe "Events" do
     end
 
     it 'an edit form' do
-      @event = FactoryGirl.create(:event, end_time: nil, title: "Something divine")
+      @event = create(:event, end_time: nil, title: "Something divine")
       visit edit_event_path(@event)
       within("#sidebar") do
         expect(page).to have_content("Cancel")
@@ -95,7 +95,7 @@ describe "Events" do
     end
 
     it "an event page" do
-      @event = FactoryGirl.create(:event, end_time: nil)
+      @event = create(:event, end_time: nil)
       visit event_path(@event)
       within('#sidebar') do
         expect(page).to have_content "Return to"

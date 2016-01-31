@@ -4,9 +4,9 @@ require 'spec_helper'
 describe "a user" do
   describe "in the reader role" do
     before (:each) do
-      @person = FactoryGirl.create(:person)
-      somebody = FactoryGirl.create(:user)
-      somebody.roles << FactoryGirl.create(:role, name: 'Reader')
+      @person = create(:person)
+      somebody = create(:user)
+      somebody.roles << create(:role, name: 'Reader')
       visit new_user_session_path
       fill_in 'user_email', :with => somebody.email
       fill_in 'user_password', :with => somebody.password
@@ -38,24 +38,24 @@ end
     end
 
     it "qualified only if all skills are present" do
-      title = FactoryGirl.create(:title, name: "Police Officer")
-      drivingskill = FactoryGirl.create(:skill, name: "Driving")
-      firstaidskill = FactoryGirl.create(:skill, name: "FRFA")
+      title = create(:title, name: "Police Officer")
+      drivingskill = create(:skill, name: "Driving")
+      firstaidskill = create(:skill, name: "FRFA")
       title.skills << drivingskill
       title.skills << firstaidskill
       
-      frfacourse = FactoryGirl.create(:course, name: "FRFA")
+      frfacourse = create(:course, name: "FRFA")
       firstaidskill.courses << frfacourse
-      drivingcourse = FactoryGirl.create(:course, name: "Mass DL")
+      drivingcourse = create(:course, name: "Mass DL")
       drivingskill.courses << drivingcourse
       
-      person = FactoryGirl.create(:person)
+      person = create(:person)
       person.titles << title
-      cert = FactoryGirl.create(:cert, person: person, course: frfacourse)
+      cert = create(:cert, person: person, course: frfacourse)
       visit person_path(person)
       page.should have_content("NOT qualified for Police Officer")
       page.should have_content("Driving skill needed")
-      cert = FactoryGirl.create(:cert, person: person, course: drivingcourse)
+      cert = create(:cert, person: person, course: drivingcourse)
       visit person_path(person)
       page.should have_content("Qualified for Police Officer")
       page.should_not have_content("NOT Qualified")

@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Cert do
-  let(:evoc_course) { FactoryGirl.create(:course, term: 100) }
-  subject { FactoryGirl.create :cert, course: evoc_course }
+  let(:evoc_course) { create(:course, term: 100) }
+  subject { create :cert, course: evoc_course }
 
   it 'sets the issued date to today' do
     expect(subject.issued_date).to be == Date.today
