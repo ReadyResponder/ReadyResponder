@@ -15,6 +15,7 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
 
+    @inspections = @item.inspections
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @item }

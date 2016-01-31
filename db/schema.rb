@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160107191139) do
+ActiveRecord::Schema.define(:version => 20160115041152) do
 
   create_table "activities", :force => true do |t|
     t.string   "content"
@@ -111,14 +111,19 @@ ActiveRecord::Schema.define(:version => 20160107191139) do
   end
 
   create_table "inspections", :force => true do |t|
+    t.integer  "item_id"
     t.integer  "person_id"
-    t.datetime "inspection_time"
+    t.datetime "inspection_date"
+    t.integer  "mileage"
+    t.string   "repair_needed"
+    t.string   "status"
+    t.text     "comments"
+    t.string   "category"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
-    t.string   "status"
   end
 
-  add_index "inspections", ["person_id"], :name => "index_inspections_on_person_id"
+  add_index "inspections", ["item_id"], :name => "index_inspections_on_item_id"
 
   create_table "items", :force => true do |t|
     t.integer  "location_id"

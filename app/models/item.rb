@@ -3,6 +3,7 @@ class Item < ActiveRecord::Base
   belongs_to :person
   belongs_to :location
   has_many :repairs
+  has_many :inspections
 
   STATUS_CHOICES = ['In Service', 'In Service - Degraded', 'Out of Service','Available','Sold', 'Destroyed']
   CATEGORY_CHOICES = ['Pump','Light','Generator','Shelter', 'Radio', 'Vehicle', 'Other']

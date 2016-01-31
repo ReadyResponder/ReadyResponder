@@ -1,15 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Person:</b>
-  <%= @inspection.person_id %>
-</p>
-
-<p>
-  <b>Inspection time:</b>
-  <%= @inspection.inspection_time %>
-</p>
-
+Inspection on <%= link_to @inspection.item, item_path(@inspection.item) %>
+<p>Status: <%= @inspection.status %></p>
 
 <%= link_to 'Edit', edit_inspection_path(@inspection) %> |
-<%= link_to 'Back', inspections_path %>
