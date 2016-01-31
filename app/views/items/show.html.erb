@@ -70,3 +70,4 @@
 <%= render(:partial => "repairs/repairs_table", :repairs => @item.repairs) || "No Repairs yet !" %>
 <hr>
 <%= render(:partial => "inspections/inspections_table", :inpections => @item.inspections) || "No Inspections yet !" %>
+<%= image_tag @item.item_image.to_s if @item.item_image.present? %>
