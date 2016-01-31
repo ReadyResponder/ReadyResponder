@@ -34,6 +34,7 @@ group :test, :development do
   gem 'database_cleaner', '1.0.1'
   gem 'test-unit'
   gem 'poltergeist'
+  gem 'pry'
 end
 
 group :test do
