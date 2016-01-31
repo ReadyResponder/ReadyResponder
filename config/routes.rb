@@ -1,26 +1,18 @@
 Lims3::Application.routes.draw do
   resources :messages
-
-
   resources :activities
-
   resources :helpdocs
-
   resources :channels
-
   resources :timecards
-
   resources :events
   post 'events/:id/schedule/:person_id/:card_action', to: 'events#schedule', as: 'schedule'
 
   resources :moves
-
   resources :repairs
-
   resources :locations
-
   resources :items do
     resources :repairs, :controller => 'repairs'
+    resources :inspections, :controller => 'inspections'
   end
 
   resources :roles

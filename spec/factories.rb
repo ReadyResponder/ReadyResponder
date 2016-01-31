@@ -1,4 +1,5 @@
 FactoryGirl.define do
+
   factory :user do
     sequence (:username) {|n| "test#{n}" }
     sequence (:email) {|n| "test#{n}@example.com" }
@@ -8,7 +9,7 @@ FactoryGirl.define do
     firstname "CJ"
     lastname "Doe"
   end
-  
+
   factory :role do
     sequence (:name) {|n| "testrole#{n}" }
   end
@@ -45,7 +46,7 @@ FactoryGirl.define do
   end
   factory :inspection do
     status "Passed"
-    person
+    item
   end
 
   factory :event do

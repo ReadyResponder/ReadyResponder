@@ -2,8 +2,6 @@
 
 <table>
   <tr>
-    <th>Person</th>
-    <th>Inspection date</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,8 +9,6 @@
 
 <% @inspections.each do |inspection| %>
   <tr>
-    <td><%= inspection.person_id %></td>
-    <td><%= inspection.inspection_date %></td>
     <td><%= link_to 'Show', inspection %></td>
     <td><%= link_to 'Edit', edit_inspection_path(inspection) %></td>
     <td><%= link_to 'Destroy', inspection, method: :delete, data: { confirm: 'Are you sure?' } %></td>
