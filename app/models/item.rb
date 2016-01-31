@@ -14,7 +14,9 @@ class Item < ActiveRecord::Base
 
   STATUS_CHOICES = ['In Service', 'In Service - Degraded', 'Out of Service','Available','Sold', 'Destroyed']
   CATEGORY_CHOICES = ['Pump','Light','Generator','Shelter', 'Radio', 'Vehicle', 'Other']
- def recent_costs
-   repairs.where("service_date > ?", 6.months.ago).pluck(:cost).compact.inject(:+)
- end
+
+  def recent_costs
+    repairs.where("service_date > ?", 6.months.ago).pluck(:cost).compact.inject(:+)
+  end
+
 end

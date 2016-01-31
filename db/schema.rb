@@ -139,7 +139,6 @@ ActiveRecord::Schema.define(:version => 20160115231033) do
   add_index "inspections", ["item_id"], :name => "index_inspections_on_item_id"
 
   create_table "items", :force => true do |t|
-    t.integer  "location_id"
     t.string   "name"
     t.string   "description"
     t.string   "source"
@@ -166,6 +165,7 @@ ActiveRecord::Schema.define(:version => 20160115231033) do
     t.string   "stock_number"
     t.text     "comments"
     t.string   "item_image"
+    t.integer  "location_id"
   end
 
   create_table "locations", :force => true do |t|

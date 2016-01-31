@@ -78,6 +78,7 @@ class PeopleController < ApplicationController
   def show
     @person = Person.find(params[:id])
     @page_title = @person.fullname
+    @phones = @person.phones
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @person }
