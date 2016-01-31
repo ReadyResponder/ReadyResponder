@@ -1,11 +1,18 @@
 <% content_for :sidebar do %>
   <%= link_to 'Return to Listing', items_path, :class => 'btn' %></br></br>
-  <%= link_to 'Edit Item', edit_item_path(@item), :class => 'btn btn-primary' unless cannot? :edit, @item  %></br></br>
+  <%= edit_item_button %></br></br>
+  <%= add_repair_button %></br></br>
+  <%= add_inspection_button %></br></br>
 <% end %>
-
 <p>
   <b>Location:</b>
   <%= @item.location_id %>
+  <h3>
+    <%= @item.name + " ( " + @item.brand + " " + @item.model + " )" %></br>
+    <span class="badge <%= 'badge-success' if @item.status == 'Available' %>">
+      <%= @item.status %>
+    </span>
+  </h3>
 </p>
 
 <p>
@@ -29,60 +36,37 @@
 </p>
 
 <p>
-  <b>Model:</b>
-  <%= @item.model %>
-</p>
-
-<p>
   <b>Serial 1:</b>
   <%= @item.serial1 %>
 </p>
-<p>
-  <b>Serial 2:</b>
-  <%= @item.serial2 %>
-</p>
-<p>
-  <b>Serial 3</b>
-  <%= @item.serial3 %>
-</p>
 
-<p>
-  <b>Owner:</b>
-  <%= @item.person.fullname unless @item.person_id.blank? %>
-</p>
+<% if @item.serial2.present? %>
+  <p><b>Serial 2:</b> <%= @item.serial2 %> </p>
+<% end %>
 
-<p>
-  <b>Purchase date:</b>
-  <%= @item.purchase_date %>
-</p>
+<% if @item.serial3.present? %>
+  <p><b>Serial 3</b><%= @item.serial3 %></p>
+<% end %>
 
-<p>
-  <b>Purchase amt:</b>
-  <%= @item.purchase_amt %>
-</p>
+<% if @item.person.present? %>
+  <p><b>Owner:</b><%= @item.person.fullname %></p>
+<% end %>
 
-<p>
-  <b>Sell date:</b>
-  <%= @item.sell_date %>
-</p>
+<p><b>Purchase date:</b><%= @item.purchase_date %></p>
+<p><b>Expenses in last 6 months </b>
+  <%= number_to_currency @item.recent_costs %></p>
 
-<p>
-  <b>Sell amt:</b>
-  <%= @item.sell_amt %>
-</p>
+<p><b>Purchase amt:</b>  <%= @item.purchase_amt %></p>
+<% if @item.grant.present? %>
+  <p><b>Grant</b> <%= @item.grant %></p>
+<% end %>
 
-<p>
-  <b>Status:</b>
-  <%= @item.status %>
-</p>
+<% if @item.sell_date.present? %>
+  <p><b>Sell date:</b> <%= @item.sell_date %></p>
+  <p> <b>Sell amt:</b> <%= @item.sell_amt %></p>
+<% end %>
 
-<table class="table table-striped table-bordered">
-  <thead>
-    <tr>
-	<th>Repairs <%= link_to 'New Repair or Service', new_item_repair_path(@item) %></th>
-    </tr>
-  </thead>
-  <tbody>
-      <%= render(:partial => "repairs/repair", :collection => @item.repairs) || raw("<tr><td>No repairs yet !</td></tr>") %>
-  </tbody>
-</table>
+
+<%= render(:partial => "repairs/repairs_table", :repairs => @item.repairs) || "No Repairs yet !" %>
+<hr>
+<%= render(:partial => "inspections/inspections_table", :inpections => @item.inspections) || "No Inspections yet !" %>
