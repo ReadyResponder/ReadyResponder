@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160115041152) do
+ActiveRecord::Schema.define(:version => 20160115061152) do
 
   create_table "activities", :force => true do |t|
     t.string   "content"
@@ -109,6 +109,19 @@ ActiveRecord::Schema.define(:version => 20160115041152) do
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
   end
+
+  create_table "inspection_questions", :force => true do |t|
+    t.integer  "inspection_id"
+    t.integer  "question_id"
+    t.string   "prompt"
+    t.string   "response"
+    t.text     "comments"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "inspection_questions", ["inspection_id"], :name => "index_inspection_questions_on_inspection_id"
+  add_index "inspection_questions", ["question_id"], :name => "index_inspection_questions_on_question_id"
 
   create_table "inspections", :force => true do |t|
     t.integer  "item_id"
@@ -262,6 +275,16 @@ ActiveRecord::Schema.define(:version => 20160115041152) do
   end
 
   add_index "people_titles", ["person_id", "title_id"], :name => "index_people_titles_on_person_id_and_title_id"
+
+  create_table "questions", :force => true do |t|
+    t.string   "prompt"
+    t.string   "response_choices"
+    t.string   "category"
+    t.string   "status"
+    t.text     "comments"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
 
   create_table "recipients", :force => true do |t|
     t.integer  "person_id"
