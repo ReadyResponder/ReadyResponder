@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @resourcetype.name %>
+</p>
+
+<p>
+  <b>Femakind:</b>
+  <%= @resourcetype.femakind %>
+</p>
+
+<p>
+  <b>Femacode:</b>
+  <%= @resourcetype.femacode %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @resourcetype.status %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @resourcetype.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_resourcetype_path(@resourcetype) %> |
+<%= link_to 'Back', resourcetypes_path %>
