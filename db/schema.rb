@@ -139,6 +139,7 @@ ActiveRecord::Schema.define(:version => 20160115231033) do
   add_index "inspections", ["item_id"], :name => "index_inspections_on_item_id"
 
   create_table "items", :force => true do |t|
+    t.integer  "location_id"
     t.string   "name"
     t.string   "description"
     t.string   "source"
@@ -165,7 +166,6 @@ ActiveRecord::Schema.define(:version => 20160115231033) do
     t.string   "stock_number"
     t.text     "comments"
     t.string   "item_image"
-    t.integer  "location_id"
   end
 
   create_table "locations", :force => true do |t|
@@ -187,16 +187,14 @@ ActiveRecord::Schema.define(:version => 20160115231033) do
   end
 
   create_table "messages", :force => true do |t|
-    t.integer  "recipient_id"
-    t.string   "status"
-    t.string   "channel"
-    t.datetime "processed_at"
-    t.string   "processed_by"
-    t.string   "slug"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.text     "body"
     t.string   "subject"
+    t.string   "status"
+    t.string   "body"
+    t.string   "channels"
+    t.datetime "sent_at"
+    t.integer  "created_by"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "moves", :force => true do |t|
@@ -207,23 +205,6 @@ ActiveRecord::Schema.define(:version => 20160115231033) do
     t.string   "reason"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
-  end
-
-  create_table "notifications", :force => true do |t|
-    t.integer  "event_id"
-    t.integer  "author_id"
-    t.string   "status"
-    t.string   "channels"
-    t.string   "subject"
-    t.string   "body"
-    t.datetime "sent_at"
-    t.text     "comments"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.string   "priority"
-    t.string   "event_group"
-    t.string   "send_trigger"
-    t.integer  "ttl"
   end
 
   create_table "people", :force => true do |t|
@@ -287,15 +268,6 @@ ActiveRecord::Schema.define(:version => 20160115231033) do
     t.datetime "updated_at",       :null => false
   end
 
-  create_table "recipients", :force => true do |t|
-    t.integer  "person_id"
-    t.integer  "notification_id"
-    t.string   "uuid"
-    t.string   "status"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
-
   create_table "repairs", :force => true do |t|
     t.integer  "item_id"
     t.integer  "user_id"
@@ -308,17 +280,6 @@ ActiveRecord::Schema.define(:version => 20160115231033) do
     t.datetime "created_at",                                 :null => false
     t.datetime "updated_at",                                 :null => false
     t.decimal  "cost",         :precision => 8, :scale => 2
-  end
-
-  create_table "responses", :force => true do |t|
-    t.integer  "recipient_id"
-    t.string   "intention"
-    t.datetime "eta"
-    t.datetime "etd"
-    t.decimal  "duration",     :precision => 5, :scale => 2
-    t.string   "channel"
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
   end
 
   create_table "roles", :force => true do |t|
