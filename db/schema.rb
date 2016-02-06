@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160203020537) do
+ActiveRecord::Schema.define(:version => 20160205223024) do
 
   create_table "activities", :force => true do |t|
     t.string   "content"
@@ -139,7 +139,6 @@ ActiveRecord::Schema.define(:version => 20160203020537) do
   add_index "inspections", ["item_id"], :name => "index_inspections_on_item_id"
 
   create_table "items", :force => true do |t|
-    t.string   "location"
     t.string   "name"
     t.string   "description"
     t.string   "source"
@@ -166,6 +165,8 @@ ActiveRecord::Schema.define(:version => 20160203020537) do
     t.string   "stock_number"
     t.text     "comments"
     t.string   "item_image"
+    t.integer  "location_id"
+    t.integer  "resourcetype_id"
   end
 
   create_table "locations", :force => true do |t|

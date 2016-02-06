@@ -3,9 +3,9 @@
 
   <div class="form-inputs">
     <%= f.input :name %>
-    <%= f.input :femakind %>
-    <%= f.input :femacode %>
-    <%= f.input :status %>
+    <%= f.input :femakind, :label => 'Fema Resource Kind' %>
+    <%= f.input :femacode, :label => 'Fema Resource Code'  %>
+    <%= f.input :status, :as => :select, :collection => ["Active", "Inactive"] %>
     <%= f.input :description %>
   </div>
 

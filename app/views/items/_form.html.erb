@@ -5,18 +5,20 @@
     <%= f.association :location %>
     <%= f.input :status, :as => :select, :collection => Item::STATUS_CHOICES %>
     <%= f.input :category, :as => :select, :collection => Item::CATEGORY_CHOICES %>
+    <%= f.association :resourcetype, :label => 'FEMA Resource Type' %>
     <%= f.input :name %>
-    <%= f.input :brand %>
-    <%= f.input :model %>
+    <%= f.input :brand, :placeholder => 'Brand, such as Ford' %>
+    <%= f.input :model, :placeholder => 'Model, such as F-350' %>
     <%= f.input :stock_number %>
     <%= f.input :description %>
     <%= f.input :serial1, :label => 'Serial Number 1' %>
     <%= f.input :serial2, :label => 'Serial Number 2' %>
-    <%= f.input :serial3, :label => 'Serial Number 3' %>
-    <%= f.input :source %>
-    <%= f.input :po_number %>
-    <%= f.input :value, :placeholder => 'Replacement price' %>
+    <%= f.input :serial3, :label => 'Serial Number 3',
+                          :placeholder => 'Enter NERAC # here, if applicable'  %>
+    <%= f.input :source, :placeholder => 'Where did we get it ?'  %>
+    <%= f.input :po_number, :label => 'Purchase Order Number' %>
     <%= f.input :grant, :placeholder => 'Grant name, if applicable' %>
+    <%= f.input :value, :placeholder => 'Replacement price' %>
     <%= f.input :purchase_date, :as => :string, :input_html => { :class => 'datepicker', :size => 11 }  %>
     <%= f.input :purchase_amt %>
     <%= f.input :sell_date, :as => :string, :input_html => { :class => 'datepicker', :size => 11 }  %>
