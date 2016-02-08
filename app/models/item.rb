@@ -8,6 +8,7 @@ class Item < ActiveRecord::Base
 
   mount_uploader :item_image, ItemImageUploader
   belongs_to :person
+  belongs_to :resourcetype
   belongs_to :location
   has_many :repairs
   has_many :inspections
@@ -16,7 +17,7 @@ class Item < ActiveRecord::Base
   CATEGORY_CHOICES = ['Pump','Light','Generator','Shelter', 'Radio', 'Vehicle', 'Other']
 
   def recent_costs
-    repairs.where("service_date > ?", 6.months.ago).pluck(:cost).compact.inject(:+)
+    repairs.where("service_date > ?", 12.months.ago).pluck(:cost).compact.inject(:+)
   end
 
 end

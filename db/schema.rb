@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160115231033) do
+ActiveRecord::Schema.define(:version => 20160205223024) do
 
   create_table "activities", :force => true do |t|
     t.string   "content"
@@ -166,6 +166,7 @@ ActiveRecord::Schema.define(:version => 20160115231033) do
     t.text     "comments"
     t.string   "item_image"
     t.integer  "location_id"
+    t.integer  "resourcetype_id"
   end
 
   create_table "locations", :force => true do |t|
@@ -308,6 +309,16 @@ ActiveRecord::Schema.define(:version => 20160115231033) do
     t.datetime "created_at",                                 :null => false
     t.datetime "updated_at",                                 :null => false
     t.decimal  "cost",         :precision => 8, :scale => 2
+  end
+
+  create_table "resourcetypes", :force => true do |t|
+    t.string   "name"
+    t.string   "femakind"
+    t.string   "femacode"
+    t.string   "status"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "responses", :force => true do |t|

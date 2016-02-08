@@ -1,0 +1,2 @@
+module ResourcetypesHelper
+end
