@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160214021906) do
+ActiveRecord::Schema.define(:version => 20160214032514) do
 
   create_table "activities", :force => true do |t|
     t.string   "content"
@@ -160,24 +160,24 @@ ActiveRecord::Schema.define(:version => 20160214021906) do
     t.date     "sell_date"
     t.float    "sell_amt"
     t.string   "status"
-    t.datetime "created_at",                                    :null => false
-    t.datetime "updated_at",                                    :null => false
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
     t.string   "serial2"
     t.string   "grant"
     t.date     "grantstart"
     t.date     "grantexpiration"
     t.string   "icsid"
     t.string   "po_number"
-    t.decimal  "value",           :precision => 8, :scale => 2
+    t.decimal  "value",            :precision => 8, :scale => 2
     t.string   "serial3"
     t.string   "brand"
     t.string   "stock_number"
     t.text     "comments"
     t.string   "item_image"
     t.integer  "location_id"
-    t.integer  "resourcetype_id"
     t.integer  "owner_id"
     t.integer  "department_id"
+    t.integer  "resource_type_id"
   end
 
   create_table "locations", :force => true do |t|

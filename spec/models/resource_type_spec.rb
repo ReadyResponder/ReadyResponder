@@ -1,5 +1,9 @@
-require 'rails_helper'
+#require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe ResourceType, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { is_expected.to validate_presence_of(:name) }
+  it { is_expected.to validate_presence_of(:status) }
+  it { is_expected.to validate_uniqueness_of(:fema_code) }
+  it { is_expected.to validate_uniqueness_of(:name) }
 end
