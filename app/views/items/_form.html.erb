@@ -5,6 +5,7 @@
     <%= f.association :location %>
     <%= f.input :status, :as => :select, :collection => Item::STATUS_CHOICES %>
     <%= f.input :category, :as => :select, :collection => Item::CATEGORY_CHOICES %>
+    <%= f.association :resource_type, :label => 'FEMA Resource Type' %>
     <%= f.input :name %>
     <%= f.input :brand %>
     <%= f.input :model %>

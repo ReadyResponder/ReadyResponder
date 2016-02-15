@@ -8,6 +8,7 @@ class Item < ActiveRecord::Base
 
   mount_uploader :item_image, ItemImageUploader
   belongs_to :person
+  belongs_to :resource_type
   belongs_to :location
   has_many :repairs
   has_many :inspections
