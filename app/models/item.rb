@@ -10,6 +10,7 @@ class Item < ActiveRecord::Base
   belongs_to :person
   belongs_to :resource_type
   belongs_to :location
+  belongs_to :department
   has_many :repairs
   has_many :inspections
 

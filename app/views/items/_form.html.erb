@@ -2,6 +2,7 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
+    <%= f.association :department %>
     <%= f.association :location %>
     <%= f.input :status, :as => :select, :collection => Item::STATUS_CHOICES %>
     <%= f.input :category, :as => :select, :collection => Item::CATEGORY_CHOICES %>

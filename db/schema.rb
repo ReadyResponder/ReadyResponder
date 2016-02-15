@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160214032514) do
+ActiveRecord::Schema.define(:version => 20160215165833) do
 
   create_table "activities", :force => true do |t|
     t.string   "content"
@@ -149,6 +149,7 @@ ActiveRecord::Schema.define(:version => 20160214032514) do
   add_index "inspections", ["item_id"], :name => "index_inspections_on_item_id"
 
   create_table "items", :force => true do |t|
+    t.integer  "location_id"
     t.string   "name"
     t.string   "description"
     t.string   "source"
@@ -174,10 +175,9 @@ ActiveRecord::Schema.define(:version => 20160214032514) do
     t.string   "stock_number"
     t.text     "comments"
     t.string   "item_image"
-    t.integer  "location_id"
+    t.integer  "resource_type_id"
     t.integer  "owner_id"
     t.integer  "department_id"
-    t.integer  "resource_type_id"
   end
 
   create_table "locations", :force => true do |t|
@@ -188,27 +188,26 @@ ActiveRecord::Schema.define(:version => 20160214032514) do
     t.string   "comments"
     t.float    "lat"
     t.float    "lon"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.string   "floor"
     t.string   "container"
     t.string   "street"
     t.string   "city"
     t.string   "state"
     t.string   "zipcode"
+    t.integer  "department_id"
   end
 
   create_table "messages", :force => true do |t|
-    t.integer  "recipient_id"
-    t.string   "status"
-    t.string   "channel"
-    t.datetime "processed_at"
-    t.string   "processed_by"
-    t.string   "slug"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.text     "body"
     t.string   "subject"
+    t.string   "status"
+    t.string   "body"
+    t.string   "channels"
+    t.datetime "sent_at"
+    t.integer  "created_by"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "moves", :force => true do |t|
@@ -219,23 +218,6 @@ ActiveRecord::Schema.define(:version => 20160214032514) do
     t.string   "reason"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
-  end
-
-  create_table "notifications", :force => true do |t|
-    t.integer  "event_id"
-    t.integer  "author_id"
-    t.string   "status"
-    t.string   "channels"
-    t.string   "subject"
-    t.string   "body"
-    t.datetime "sent_at"
-    t.text     "comments"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.string   "priority"
-    t.string   "event_group"
-    t.string   "send_trigger"
-    t.integer  "ttl"
   end
 
   create_table "people", :force => true do |t|
@@ -299,15 +281,6 @@ ActiveRecord::Schema.define(:version => 20160214032514) do
     t.datetime "updated_at",       :null => false
   end
 
-  create_table "recipients", :force => true do |t|
-    t.integer  "person_id"
-    t.integer  "notification_id"
-    t.string   "uuid"
-    t.string   "status"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
-
   create_table "repairs", :force => true do |t|
     t.integer  "item_id"
     t.integer  "user_id"
@@ -330,27 +303,6 @@ ActiveRecord::Schema.define(:version => 20160214032514) do
     t.string   "fema_kind"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-  end
-
-  create_table "resourcetypes", :force => true do |t|
-    t.string   "name"
-    t.string   "femakind"
-    t.string   "femacode"
-    t.string   "status"
-    t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  create_table "responses", :force => true do |t|
-    t.integer  "recipient_id"
-    t.string   "intention"
-    t.datetime "eta"
-    t.datetime "etd"
-    t.decimal  "duration",     :precision => 5, :scale => 2
-    t.string   "channel"
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
   end
 
   create_table "roles", :force => true do |t|
