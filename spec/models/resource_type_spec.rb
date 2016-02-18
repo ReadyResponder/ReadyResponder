@@ -1,4 +1,3 @@
-#require 'rails_helper'
 require 'spec_helper'
 
 RSpec.describe ResourceType, :type => :model do
