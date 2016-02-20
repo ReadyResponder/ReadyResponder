@@ -23,7 +23,7 @@ describe "Inspection" do
       expect(page).to have_content('You need to sign in')
       an_inspection = create(:inspection)
       visit edit_inspection_path(an_inspection)
-      page.should have_content('You need to sign in')
+      expect(page).to have_content('You need to sign in')
     end
   end
   describe "should have a form" do

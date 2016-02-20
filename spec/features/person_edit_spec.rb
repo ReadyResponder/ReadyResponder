@@ -32,19 +32,19 @@ describe "Person" do
       visit new_person_path
       fill_in('First Name', :with => 'John')
       fill_in('Last Name', :with => 'Jacobie')
-      page.should have_select("Gender")
-      find_field('person_state').value.should have_content('MA')
+      expect(page).to have_select("Gender")
+      expect(find_field('person_state').value).to eq 'MA'
       click_button "Create Person"
-      page.should_not have_content("Error")
+      expect(page).not_to have_content("Error")
     end
 
     it "an edit form with values filled in" do
       person = create(:person, icsid: "509")
       visit edit_person_path(person)
-      page.should have_field("First Name", :with => "CJ")
-      page.should have_select("person_gender", :selected => "Female")
+      expect(page).to have_field("First Name", :with => "CJ")
+      expect(page).to have_select("person_gender", :selected => "Female")
       click_button "Update Person"
-      page.should_not have_content("Error")
+      expect(page).not_to have_content("Error")
     end
 
     it "qualified only if all skills are present" do
@@ -64,12 +64,12 @@ describe "Person" do
       cert = create(:cert, person: person, course: frfacourse)
       visit person_path(person)
       #save_and_open_page
-      page.should have_content("NOT qualified for Police Officer")
-      page.should have_content("Driving") #This test is vague. Need to ensure Driving is in the missing skills section
+      expect(page).to have_content("NOT qualified for Police Officer")
+      expect(page).to have_content("Driving") #This test is vague. Need to ensure Driving is in the missing skills section
       cert = create(:cert, person: person, course: drivingcourse)
       visit person_path(person)
-      page.should have_content("Qualified for Police Officer")
-      page.should_not have_content("NOT Qualified")
+      expect(page).to have_content("Qualified for Police Officer")
+      expect(page).not_to have_content("NOT Qualified")
     end
 
     it "a person page" do
@@ -77,13 +77,13 @@ describe "Person" do
       @person = @timecard.person
       @certification = create(:cert, person: @person)
       visit person_path(@person)
-      page.should have_content(@person.fullname)
+      expect(page).to have_content(@person.fullname)
     end
 
     it "a person without a start date" do
       person = create(:person, start_date: nil)
       visit person_path(person)
-      page.should have_content("Status")
+      expect(page).to have_content("Status")
     end
 
     skip "all certs, even expired" do
@@ -91,7 +91,7 @@ describe "Person" do
       course = create(:course, name: "Basket Weaving")
       expiredcert = create(:cert, person: person, course: course, status: "Expired")
       visit person_path(person)
-      page.should have_content("Basket Weaving")
+      expect(page).to have_content("Basket Weaving")
     end
   end
 end
