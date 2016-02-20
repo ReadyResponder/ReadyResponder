@@ -12,7 +12,7 @@ FactoryGirl.define do
     purchase_amt ""
     status "Available"
     value 655.32
-    person
+    association :owner, factory: :person
     location
   end
 end
