@@ -2,7 +2,7 @@ class Person < ActiveRecord::Base
   include ActiveModel::ForbiddenAttributesProtection
   before_save :title_order
 
-  has_many :certs, :conditions => {:status =>'Active' }
+  has_many :certs, conditions: ->(_) { { "certs.status" => "Active" } }
   has_many :channels
   has_many :phones, order: :priority
   has_many :emails, order: :priority
