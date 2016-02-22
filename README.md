@@ -41,6 +41,8 @@ At this point you should be able to run the rails server via `bundle exec rails 
 
 Note: You can use the UI to create a user and sign in, but the UI doesn't allow creation of an admin user.  To use all the features of LIMS in the browser, you will need to enable admin privileges for your local user in the rails console after signing up via the UI.
 
+#### Project Build Status: &nbsp; [![Build Status](https://travis-ci.org/kgf/lims.svg?branch=development)](https://travis-ci.org/kgf/lims)
+
 ## More information
 
 See [the wiki](https://github.com/kgf/lims/wiki)!

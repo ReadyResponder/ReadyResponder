@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe "ResourceTypes", :type => :request do
   describe "GET /resource_types" do

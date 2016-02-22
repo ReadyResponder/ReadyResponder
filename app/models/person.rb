@@ -2,7 +2,7 @@ class Person < ActiveRecord::Base
   include ActiveModel::ForbiddenAttributesProtection
   before_save :title_order
 
-  has_many :certs, :conditions => {:status =>'Active' }
+  has_many :certs, conditions: ->(_) { { "certs.status" => "Active" } }
   has_many :channels
   has_many :phones, order: :priority
   has_many :emails, order: :priority
@@ -14,7 +14,7 @@ class Person < ActiveRecord::Base
   has_and_belongs_to_many :titles
   has_many :timecards
   has_many :events, :through => :timecards
-  has_many :items
+  has_many :items, inverse_of: :owner, foreign_key: :owner_id
   has_many :inspections
   has_many :activities, as: :loggable
 

@@ -215,7 +215,7 @@ GEM
       method_source (~> 0.8.1)
       slop (~> 3.4)
     rack (1.4.7)
-    rack-cache (1.6.0)
+    rack-cache (1.6.1)
       rack (>= 0.4)
     rack-contrib (1.2.0)
       rack (>= 0.9.1)
@@ -384,3 +384,6 @@ DEPENDENCIES
   thin
   uglifier (>= 1.0.3)
   unicorn
+
+BUNDLED WITH
+   1.11.2
