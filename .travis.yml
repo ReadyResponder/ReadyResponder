@@ -11,3 +11,6 @@ before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
 # uncomment this line if your project needs to run something other than `rake`:
 script: bundle exec rake db:schema:load && bundle exec rspec spec
+branches:
+  only:
+    - development
