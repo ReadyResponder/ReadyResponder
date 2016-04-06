@@ -1,0 +1,35 @@
+<h1>Listing Item Types</h1>
+
+<table id="item_types" class="datatable display table table-striped table-bordered" >
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Is groupable</th>
+      <th>Is a group</th>
+      <th>Parent</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @item_types.each do |item_type| %>
+      <tr>
+        <td><%= item_type.name %></td>
+        <td><%= item_type.status %></td>
+        <td><%= item_type.is_groupable %></td>
+        <td><%= item_type.is_a_group %></td>
+        <td><%= item_type.parent_id %></td>
+        <td><%= link_to 'Show', item_type %></td>
+        <td><%= link_to 'Edit', edit_item_type_path(item_type) %></td>
+        <td><%= link_to 'Destroy', item_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br />
+
+<%= link_to 'New Item type', new_item_type_path %>

@@ -1,4 +1,7 @@
 Lims3::Application.routes.draw do
+  resources :item_types
+
+
   resources :resource_types
   resources :messages
   resources :activities
