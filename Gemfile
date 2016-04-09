@@ -20,7 +20,7 @@ group :test, :development do
   gem 'thin'
   gem "rspec-rails", '~> 3.4.0'
   gem 'rspec-activemodel-mocks' # TODO: remove if we no longer need mock_model or stub_model
-  gem "factory_girl_rails", "~> 4.0"
+  gem "factory_girl_rails", "~> 4.6"
   gem "capybara"
   gem "guard-rspec", require: false
   gem 'guard-livereload'
