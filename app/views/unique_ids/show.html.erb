@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Item:</b>
+  <%= @unique_id.item %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @unique_id.status %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @unique_id.category %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%= @unique_id.value %>
+</p>
+
+
+<%= link_to 'Edit', edit_unique_id_path(@unique_id) %> |
+<%= link_to 'Back', unique_ids_path %>

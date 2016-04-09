@@ -4,6 +4,7 @@
   <div class="form-inputs">
     <%= f.association :department %>
     <%= f.association :location %>
+    <%= f.association :owner %>
     <%= f.input :status, :as => :select, :collection => Item::STATUS_CHOICES %>
     <%= f.association :resource_type, :label => 'FEMA Resource Type' %>
     <%= f.association :item_type, :label => 'Item Type' %>
@@ -26,6 +27,11 @@
     <%= f.file_field :item_image %>
     <%= f.input :comments %>
   </div>
+
+  <%= f.fields_for :unique_ids do |builder| %>
+    <%= render 'unique_id_fields', f: builder %>
+  <% end %>
+  <%= link_to_add_fields "Add Unique ID", f, :unique_ids %>
 
   <div class="form-actions">
     <%= f.button :submit %>

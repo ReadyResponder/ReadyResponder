@@ -48,8 +48,8 @@
   <p><b>Serial 3</b><%= @item.serial3 %></p>
 <% end %>
 
-<% if @item.person.present? %>
-  <p><b>Owner:</b><%= @item.person.fullname %></p>
+<% if @item.owner.present? %>
+  <p><b>Owner:</b><%= @item.owner.fullname %></p>
 <% end %>
 
 <p><b>Purchase date:</b><%= @item.purchase_date %></p>
@@ -66,6 +66,9 @@
   <p> <b>Sell amt:</b> <%= @item.sell_amt %></p>
 <% end %>
 
+<% @item.unique_ids.each do |id| %>
+  Unique ID <%= id.value %>
+<% end %>
 
 <%= render(:partial => "repairs/repairs_table", :repairs => @item.repairs) || "No Repairs yet !" %>
 <hr>
