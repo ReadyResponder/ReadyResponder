@@ -253,7 +253,7 @@ GEM
       ffi (>= 0.5.0)
     rdoc (3.12.2)
       json (~> 1.4)
-    rmagick (2.15.0)
+    rmagick (2.15.4)
     rspec (3.4.0)
       rspec-core (~> 3.4.0)
       rspec-expectations (~> 3.4.0)
@@ -372,7 +372,7 @@ DEPENDENCIES
   rack
   rails (~> 3.2.22)
   ransack
-  rmagick
+  rmagick (~> 2.15.4)
   rspec-activemodel-mocks
   rspec-rails (~> 3.4.0)
   sass-rails (~> 3.2.3)
