@@ -5,7 +5,7 @@ gem 'rack'
 gem 'ransack'
 gem 'carrierwave'
 gem "pg", "~> 0.17.0"
-gem 'rmagick'
+gem 'rmagick', '~> 2.15.4'
 gem 'simple_form'
 gem 'geocoder'
 gem 'cancan'
