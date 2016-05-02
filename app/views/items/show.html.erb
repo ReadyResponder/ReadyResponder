@@ -5,58 +5,53 @@
   <%= add_inspection_button %></br></br>
 <% end %>
 <p>
-  <b>Location:</b>
-  <%= @item.location_id %>
   <h3>
-    <%= @item.name + " ( " + @item.brand + " " + @item.model + " )" %></br>
     <span class="badge <%= 'badge-success' if @item.status == 'Available' %>">
       <%= @item.status %>
-    </span>
+    </span>&nbsp;
+    <%= @item.name + " ( " + @item.brand + " " + @item.model + " )" %></br>
   </h3>
 </p>
 
-<p>
-  <b>Name:</b>
-  <%= @item.name %>
-</p>
+<% if @item.description.present? %>
+  <p><b>Description:</b> <%= @item.description %></p>
+<% end %>
 
-<p>
-  <b>Description:</b>
-  <%= @item.description %>
-</p>
+<p><b>Location:</b> <%= @item.location %></p>
 
-<p>
-  <b>Source:</b>
-  <%= @item.source %>
-</p>
+<% if @item.source.present? %>
+  <p>Source:<b><%= @item.source %></b></p>
+<% end %>
 
-<p>
-  <b>Category:</b>
-  <%= @item.category %>
-</p>
+<% if @item.item_type.present? %>
+  <p><b>Item Type:</b> <%= @item.item_type %></p>
+<% end %>
 
-<p>
-  <b>Serial 1:</b>
-  <%= @item.serial1 %>
-</p>
+<% if @item.serial1.present? %>
+  <p><b>Serial 1:</b> <%= @item.serial1 %> </p>
+<% end %>
 
 <% if @item.serial2.present? %>
   <p><b>Serial 2:</b> <%= @item.serial2 %> </p>
 <% end %>
 
 <% if @item.serial3.present? %>
-  <p><b>Serial 3</b><%= @item.serial3 %></p>
+  <p><b>Serial 3</b> <%= @item.serial3 %></p>
 <% end %>
 
 <% if @item.owner.present? %>
-  <p><b>Owner:</b><%= @item.owner.fullname %></p>
+  <p><b>Owner:</b> <%= @item.owner.fullname %></p>
 <% end %>
 
-<p><b>Purchase date:</b><%= @item.purchase_date %></p>
-<p><b>Expenses in last 6 months </b>
-  <%= number_to_currency @item.recent_costs %></p>
+<% if @item.purchase_date.present? %>
+  <p><b>Purchase date:</b> <%= @item.purchase_date %></p>
+<% end %>
+<p><b>Expenses in last 6 months </b><%= number_to_currency @item.recent_costs %></p>
 
-<p><b>Purchase amt:</b>  <%= @item.purchase_amt %></p>
+<% if @item.purchase_amt.present? %>
+  <p><b>Purchase amt:</b> <%= @item.purchase_amt %></p>
+<% end %>
+
 <% if @item.grant.present? %>
   <p><b>Grant</b> <%= @item.grant %></p>
 <% end %>
@@ -67,7 +62,7 @@
 <% end %>
 
 <% @item.unique_ids.each do |id| %>
-  Unique ID <%= id.value %>
+  Unique ID <b><%= id.value %> <%= id.category %></b></br>
 <% end %>
 
 <%= render(:partial => "repairs/repairs_table", :repairs => @item.repairs) || "No Repairs yet !" %>

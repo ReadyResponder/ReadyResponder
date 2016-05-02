@@ -1,3 +1,4 @@
 <fieldset>
-  <%= f.label :value, "Unique ID " %>  <%= f.input :value %><br/>
+  <%= f.input :value, :label => 'Unique ID' %><br/>
+  <%= f.input :category, :collection => UniqueId::CATEGORY_CHOICES %><br/>
 </fieldset>

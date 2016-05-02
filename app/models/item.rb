@@ -18,13 +18,15 @@ class Item < ActiveRecord::Base
   has_many :repairs
   has_many :inspections
   has_many :unique_ids
-  accepts_nested_attributes_for :unique_ids
+  accepts_nested_attributes_for :unique_ids,
+           allow_destroy: true,
+           reject_if: :all_blank
 
   STATUS_CHOICES = ['In Service', 'In Service - Degraded', 'Out of Service','Available','Sold', 'Destroyed']
   CATEGORY_CHOICES = ['Pump','Light','Generator','Shelter', 'Radio', 'Vehicle', 'Other']
 
   def recent_costs
-    repairs.where("service_date > ?", 6.months.ago).pluck(:cost).compact.inject(:+)
+    repairs.where("service_date > ?", 6.months.ago).pluck(:cost).compact.inject(:+) || 0
   end
 
 end
