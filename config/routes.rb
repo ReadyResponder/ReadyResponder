@@ -1,4 +1,7 @@
 Lims3::Application.routes.draw do
+  resources :unique_ids
+
+
   resources :item_types
 
 

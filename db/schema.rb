@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160318202643) do
+ActiveRecord::Schema.define(:version => 20160408234900) do
 
   create_table "activities", :force => true do |t|
     t.string   "content"
@@ -372,6 +372,17 @@ ActiveRecord::Schema.define(:version => 20160318202643) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  create_table "unique_ids", :force => true do |t|
+    t.integer  "item_id"
+    t.string   "status"
+    t.string   "category"
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "unique_ids", ["item_id"], :name => "index_unique_ids_on_item_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
