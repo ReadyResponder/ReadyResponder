@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 3.2.22'
+gem 'rails', '~> 4.0'
 gem 'rack'
 gem 'ransack'
 gem 'carrierwave'
@@ -9,12 +9,12 @@ gem 'rmagick', '~> 2.15.4'
 gem 'simple_form'
 gem 'geocoder'
 gem 'cancan'
-gem 'strong_parameters'
-#gem "taps"
-#gem 'validates_timeliness', '~> 3.0'
+# gem 'strong_parameters'
+# gem "taps"
+# gem 'validates_timeliness', '~> 3.0'
 
 #Handles authentication
-gem 'devise', '~> 2.2.1'
+gem 'devise', '~> 3.0'
 
 group :test, :development do
   gem 'thin'
@@ -41,13 +41,10 @@ group :test do
   gem 'shoulda-matchers'
 end
 
-group :assets do
-  # Gems used only for assets and not required
-  # in production environments by default.
   gem 'jquery-rails'
 
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'sass-rails',   '~> 4.0.0'
+  gem 'coffee-rails', '~> 4.0.1'
   #The following provides the stylinmg for the datatables, among other things
   gem 'jquery-ui-rails'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -57,7 +54,6 @@ group :assets do
   gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
   gem 'bootstrap-sass', '~> 2.0.4.1'
   gem 'chosen-rails'
-end
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
