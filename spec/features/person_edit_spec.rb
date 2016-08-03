@@ -47,6 +47,18 @@ describe "Person" do
       expect(page).not_to have_content("Error")
     end
 
+    it "does not duplicate channels on update" do
+      cj = create(:person, firstname: 'CJ',  department: 'Police' )
+      cj.channels << create(:channel, type: "Phone", channel_type: 'Phone', content: '9785551212', category: "Mobile Phone")
+      expect {
+        visit edit_person_path(cj)
+        fill_in('Zipcode', :with => '02108')
+        click_button "Update Person"
+        expect(page).not_to have_content("Error")
+        expect(cj.reload.zipcode).to eq("02108")
+      }.not_to change(Channel, :count)
+    end
+
     it "qualified only if all skills are present" do
       title = create(:title, name: "Police Officer")
       drivingskill = create(:skill, name: "Driving")
