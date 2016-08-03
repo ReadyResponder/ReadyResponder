@@ -49,6 +49,6 @@ See [the wiki](https://github.com/kgf/lims/wiki)!
 
 #### Contributing to LIMS: Community Expectations :raised_hands:
 
-We have a [Code of Conduct](https://github.com/kgf/CODE_OF_CONDUCT.md) to set clear expectations for community participation. We want participating in LIMS to be safe, fun, and respectful. We've adopted the ["Contributor Covenant"](http://contributor-covenant.org/) model for our code of conduct, which is the same model that [the Rails project itself](http://rubyonrails.org/conduct/) uses. (Other projects that use a Code of Conduct of this type include [RSpec](https://github.com/rspec/rspec/blob/master/code_of_conduct.md), [Jenkins](https://jenkins-ci.org/conduct/), and [RubyGems](https://github.com/rubygems/rubygems/blob/master/CODE_OF_CONDUCT.md).)
+We have a [Code of Conduct](https://github.com/kgf/lims/blob/development/CODE_OF_CONDUCT.md) to set clear expectations for community participation. We want participating in LIMS to be safe, fun, and respectful. We've adopted the ["Contributor Covenant"](http://contributor-covenant.org/) model for our code of conduct, which is the same model that [the Rails project itself](http://rubyonrails.org/conduct/) uses. (Other projects that use a Code of Conduct of this type include [RSpec](https://github.com/rspec/rspec/blob/master/code_of_conduct.md), [Jenkins](https://jenkins-ci.org/conduct/), and [RubyGems](https://github.com/rubygems/rubygems/blob/master/CODE_OF_CONDUCT.md).)
 
-Please read the [Code of Conduct](https://github.com/kgf/CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+Please read the [Code of Conduct](https://github.com/kgf/lims/blob/development/CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
