@@ -39,7 +39,22 @@ Then get the project code locally and set it up:
 
 At this point you should be able to run the rails server via `bundle exec rails s`, the rails console via `bundle exec rails c`, and the tests via `bundle exec rspec spec/`
 
-Note: You can use the UI to create a user and sign in, but the UI doesn't allow creation of an admin user.  To use all the features of LIMS in the browser, you will need to enable admin privileges for your local user in the rails console after signing up via the UI.
+Note: You can use the UI to create a user and sign in, but the UI doesn't allow creation of an admin user.  To use all the features of LIMS in the browser, you will need to enable admin privileges for your local user in the rails console after signing up via the UI:
+
+`User.first.roles << Role.where(name: "Manager").first_or_create`
+
+#### One-time setup for tests:
+```shell
+rake db:test:prepare
+
+# install phantomjs...
+# via npm:
+sudo npm install -g phantomjs-prebuilt
+# via homebrew:
+brew install phantomjs
+# on ubuntu: 
+sudo apt-get install phantomjs
+```
 
 #### Project Build Status: &nbsp; [![Build Status](https://travis-ci.org/kgf/lims.svg?branch=development)](https://travis-ci.org/kgf/lims)
 
