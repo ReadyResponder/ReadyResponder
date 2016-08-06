@@ -98,6 +98,7 @@ class PeopleController < ApplicationController
 
   def edit
     @person = Person.includes(:phones, :emails).find(params[:id])
+    @page_title = @person.fullname
   end
 
   def create
@@ -151,8 +152,8 @@ class PeopleController < ApplicationController
       :title, :gender, :date_of_birth, :division1,
       :division2, :channels_attributes, :title_ids,
       :title_order, :comments,
-      phones_attributes: [:category, :content, :name, :status, :usage, :carrier, :sms_available, :priority, :channel_type],
-      emails_attributes: [:category, :content, :name, :status, :usage]
+      phones_attributes: [:id, :category, :content, :name, :status, :usage, :carrier, :sms_available, :priority, :channel_type],
+      emails_attributes: [:id, :category, :content, :name, :status, :usage]
     )
   end
 end
