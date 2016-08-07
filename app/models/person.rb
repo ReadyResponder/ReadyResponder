@@ -1,5 +1,7 @@
 class Person < ActiveRecord::Base
   include ActiveModel::ForbiddenAttributesProtection
+  mount_uploader :portrait, PortraitUploader
+
   before_save :title_order
 
   has_many :certs, conditions: ->(_) { { "certs.status" => "Active" } }
