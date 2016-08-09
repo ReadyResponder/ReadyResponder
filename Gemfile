@@ -9,7 +9,6 @@ gem 'rmagick', '~> 2.15.4'
 gem 'simple_form'
 gem 'geocoder'
 gem 'cancancan'
-#gem 'strong_parameters' #doesn't work with Rails 4
 #gem "taps"
 #gem 'validates_timeliness', '~> 3.0'
 
@@ -44,9 +43,6 @@ end
 gem 'jquery-rails'
 
 gem 'sass-rails'
-#gem 'sass-rails', '~> 4.0.4'
-# http://stackoverflow.com/questions/26416065/which-gem-is-breaking-rails-application-css-scss-wrong-number-of-arguments-3-for
-# gem 'sass-rails', github: 'rails/sass-rails', branch: '4-0-stable'
 
 gem 'coffee-rails'
 #The following provides the stylinmg for the datatables, among other things
@@ -58,13 +54,6 @@ gem 'uglifier', '>= 1.0.3'
 gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'chosen-rails'
-
-# before switching to strong params:
-# /Users/david/.gems/gems/activemodel-4.0.13/lib/active_model/deprecated_mass_assignment_security.rb:14:in
-# `attr_accessible': `attr_accessible` is extracted out of Rails into
-# a gem. Please use new recommended protection model for
-# params(strong_parameters) or add `protected_attributes` to your
-# Gemfile to use old one. (RuntimeError)
 
 gem 'protected_attributes'
 
