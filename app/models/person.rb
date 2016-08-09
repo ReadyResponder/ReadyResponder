@@ -102,6 +102,13 @@ class Person < ActiveRecord::Base
     end
   end
 
+  def self.each(&block)
+    # FIXME: because all is deprecated in Active Record 4
+    # http://guides.rubyonrails.org/active_record_querying.html#retrieving-multiple-objects
+    # this class method will let us continue without changing every call site
+    Person.find_each { |x| block.call(x) }
+  end
+
   def age
     if self.date_of_birth.present?
       now = Date.today
