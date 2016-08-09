@@ -11,9 +11,6 @@ Lims3::Application.configure do
   config.serve_static_assets = true
   config.static_cache_control = "public, max-age=3600"
 
-  # Log error messages when you accidentally call methods on nil
-  config.whiny_nils = true
-
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
@@ -35,5 +32,10 @@ Lims3::Application.configure do
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
   
-    config.action_mailer.default_url_options = { :host => 'localhost:3000' } # this is used by Devise for confirmation e-mails
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' } # this is used by Devise for confirmation e-mails
+
+  config.eager_load = false
+
+  config.action_controller.action_on_unpermitted_parameters = :raise
+
 end
