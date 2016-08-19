@@ -5,29 +5,29 @@ class PeopleController < ApplicationController
 
   def signin
     #This is the sign-in sheet, not anything about authentication
-    @people = Person.active.all
+    @people = Person.active
     @page_title = "Sign-in"
     render :layout => "print_signin"
   end
 
   def orgchart
-    @people = Person.police.active.all
+    @people = Person.police.active
     @page_title = "Org Chart"
     render :layout => "orgchart"
   end
 
   def police
-    @people = Person.police.active.all
+    @people = Person.police.active
     @page_title = "Police"
     render :template => "people/index"
   end
   def everybody
-    @people = Person.all
+    @people = Person
     @page_title = "Everybody"
     render :template => "people/index"
   end
   def cert
-    @people = Person.cert.active.all
+    @people = Person.cert.active
     @page_title = "CERT"
     render :template => "people/index"
   end
@@ -39,29 +39,29 @@ class PeopleController < ApplicationController
   end
 
   def applicants
-    @people = Person.applicants.all
+    @people = Person.applicants
     @page_title = "Applicants"
   end
 
   def prospects
-    @people = Person.prospects.all
+    @people = Person.prospects
     @page_title = "Prospects"
   end
 
   def declined
-    @people = Person.declined.all
+    @people = Person.declined
     @page_title = "Declined"
     render :template => "people/index"
   end
 
   def leave
-    @people = Person.leave.all
+    @people = Person.leave
     @page_title = "People On-Leave"
     render :template => "people/index"
   end
 
   def inactive
-    @people = Person.inactive.all
+    @people = Person.inactive
     @page_title = "Inactive People"
     render :template => "people/index"
   end
@@ -150,8 +150,10 @@ class PeopleController < ApplicationController
       :firstname, :lastname, :status, :icsid, :department,
       :city, :state, :zipcode, :start_date, :end_date,
       :title, :gender, :date_of_birth, :division1,
-      :division2, :channels_attributes, :title_ids,
+      :division2,
       :title_order, :comments,
+      :channels_attributes => [],
+      :title_ids => [],
       phones_attributes: [:id, :category, :content, :name, :status, :usage, :carrier, :sms_available, :priority, :channel_type],
       emails_attributes: [:id, :category, :content, :name, :status, :usage]
     )

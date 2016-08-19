@@ -2,18 +2,18 @@ class Person < ActiveRecord::Base
   include ActiveModel::ForbiddenAttributesProtection
   before_save :title_order
 
-  has_many :certs, conditions: ->(_) { { "certs.status" => "Active" } }
+  has_many :certs, -> { where("certs.status = 'Active'" ) }
   has_many :channels
-  has_many :phones, order: :priority
-  has_many :emails, order: :priority
+  has_many :phones, -> { order(:priority) }
+  has_many :emails, -> { order(:priority) }
   accepts_nested_attributes_for :channels, allow_destroy: true
   accepts_nested_attributes_for :phones, allow_destroy: true
   accepts_nested_attributes_for :emails, allow_destroy: true
-  has_many :courses, :through => :certs
-  has_many :skills, :through => :courses
+  has_many :courses, through: :certs
+  has_many :skills, through: :courses
   has_and_belongs_to_many :titles
   has_many :timecards
-  has_many :events, :through => :timecards
+  has_many :events, through: :timecards
   has_many :items, inverse_of: :owner, foreign_key: :owner_id
   has_many :inspections
   has_many :activities, as: :loggable
@@ -25,21 +25,21 @@ class Person < ActiveRecord::Base
   validates_presence_of :division2, :unless => "division1.blank?"
   validates_presence_of :division1, :unless => "division2.blank?"
 
-  scope :cert, :order => 'division1, division2, title_order, start_date ASC', :conditions => {:department => "CERT"}
-  scope :police, :order => 'division1, division2, title_order, start_date ASC', :conditions => {:department => 'Police'}
-  scope :leave, :conditions => {:status => "Leave of Absence"}
-  scope :inactive, :order => 'end_date ASC',:conditions => {:status => "Inactive"}
-  scope :active, :order => 'division1, division2, title_order, start_date ASC', :conditions => {:status => "Active"}
-  scope :applicants, :order => 'created_at ASC', :conditions => {:status => "Applicant"}
-  scope :prospects, :order => 'created_at ASC', :conditions => {:status => "Prospect"}
-  scope :declined, :order => 'created_at ASC', :conditions => {:status => "Declined"}
-  scope :divisionC, :order => 'title_order, start_date ASC', :conditions => {:division1 => "Command", :status => "Active"}
-  scope :division1, :order => 'title_order, start_date ASC', :conditions => {:division1 => "Division 1", :status => "Active"}
-  scope :division2, :order => 'title_order, start_date ASC', :conditions => {:division1 => "Division 2", :status => "Active"}
-  scope :squadC, :order => 'title_order, start_date ASC', :conditions => {:division2 => "Command", :status => "Active"}
-  scope :unassigned, :order => 'title_order, start_date ASC', :conditions => {:division1 => "Unassigned", :status => "Active"}
-  scope :squad1, :order => 'title_order, start_date ASC', :conditions => {:division2 => "Squad 1",:status => "Active"}
-  scope :squad2, :order => 'title_order, start_date ASC', :conditions => {:division2 => "Squad 2",:status => "Active"}
+  scope :cert, -> { order("division1, division2, title_order, start_date ASC").where( department: "CERT" ) }
+  scope :police, -> { order("division1, division2, title_order, start_date ASC").where( department: "Police" ) }
+  scope :leave, -> { where( status: "Leave of Absence" ) }
+  scope :inactive, -> { order("end_date ASC").where( status: "Inactive" ) }
+  scope :active, -> { order("division1, division2, title_order, start_date ASC").where( status: "Active" ) }
+  scope :applicants, -> { order("created_at ASC").where( status: "Applicant" ) }
+  scope :prospects, -> { order("created_at ASC").where( status: "Prospect" ) }
+  scope :declined, -> { order("created_at ASC").where( status: "Declined" ) }
+  scope :divisionC, -> { order("title_order, start_date ASC").where( division1: "Command", status: "Active" ) }
+  scope :division1, -> { order("title_order, start_date ASC").where( division1: "Division 1", status: "Active" ) }
+  scope :division2, -> { order("title_order, start_date ASC").where( division1: "Division 2", status: "Active" ) }
+  scope :squadC, -> { order("title_order, start_date ASC").where( division2: "Command", status: "Active" ) }
+  scope :unassigned, -> { order("title_order, start_date ASC").where( division1: "Unassigned", status: "Active" ) }
+  scope :squad1, -> { order("title_order, start_date ASC").where( division2: "Squad 1", status: "Active" ) }
+  scope :squad2, -> { order("title_order, start_date ASC").where( division2: "Squad 2", status: "Active" ) }
 
   TITLES = ['Director','Chief','Deputy','Captain', 'Lieutenant','Sargeant', 'Corporal', 'Senior Officer', 'Officer', 'CERT Member', 'Dispatcher', 'Recruit']
   TITLE_ORDER = {'Director' => 1, 'Chief' => 3, 'Deputy Chief' => 5,'Captain' => 7, 'Lieutenant' => 9, 'Sargeant' => 11, 'Corporal' => 13, 'Senior Officer' => 15, 'Officer' => 17, 'CERT Member' => 19, 'Dispatcher' => 19, 'Student Officer' => 21, 'Recruit' => 23, 'Applicant' => 25}
@@ -100,6 +100,13 @@ class Person < ActiveRecord::Base
     else
       find :all, :order => 'division1, division2,title_order, start_date ASC'
     end
+  end
+
+  def self.each(&block)
+    # FIXME: because all is deprecated in Active Record 4
+    # http://guides.rubyonrails.org/active_record_querying.html#retrieving-multiple-objects
+    # this class method will let us continue without changing every call site
+    Person.find_each { |x| block.call(x) }
   end
 
   def age

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 3.2.22'
+gem 'rails', '~> 4.0.0'
 gem 'rack'
 gem 'ransack'
 gem 'carrierwave'
@@ -8,19 +8,18 @@ gem "pg", "~> 0.17.0"
 gem 'rmagick', '~> 2.15.4'
 gem 'simple_form'
 gem 'geocoder'
-gem 'cancan'
-gem 'strong_parameters'
+gem 'cancancan'
 #gem "taps"
 #gem 'validates_timeliness', '~> 3.0'
 
 #Handles authentication
-gem 'devise', '~> 2.2.1'
+gem 'devise', '~> 3.0'
 
 group :test, :development do
   gem 'thin'
-  gem "rspec-rails", '~> 3.4.0'
+  gem "rspec-rails"
   gem 'rspec-activemodel-mocks' # TODO: remove if we no longer need mock_model or stub_model
-  gem "factory_girl_rails", "~> 4.6"
+  gem "factory_girl_rails"
   gem "capybara"
   gem "guard-rspec", require: false
   gem 'guard-livereload'
@@ -41,23 +40,22 @@ group :test do
   gem 'shoulda-matchers'
 end
 
-group :assets do
-  # Gems used only for assets and not required
-  # in production environments by default.
-  gem 'jquery-rails'
+gem 'jquery-rails'
 
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  #The following provides the stylinmg for the datatables, among other things
-  gem 'jquery-ui-rails'
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
+gem 'sass-rails'
 
-  gem 'uglifier', '>= 1.0.3'
-  gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
-  gem 'bootstrap-sass', '~> 2.0.4.1'
-  gem 'chosen-rails'
-end
+gem 'coffee-rails'
+#The following provides the stylinmg for the datatables, among other things
+gem 'jquery-ui-rails'
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+# gem 'therubyracer', :platforms => :ruby
+
+gem 'uglifier', '>= 1.0.3'
+gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
+gem 'bootstrap-sass', '2.3.2.0'
+gem 'chosen-rails'
+
+gem 'protected_attributes'
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
@@ -75,3 +73,6 @@ gem "net-ssh", "~> 2.7.0"
 
 # To use debugger
 # gem 'debugger'
+
+gem 'sprockets', '~> 2.12.4'
+gem 'sprockets-rails', '~> 2.3.2'

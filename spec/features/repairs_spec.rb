@@ -11,7 +11,7 @@ describe "Repairs" do
     click_on 'Sign in'
   end
 
-  describe "GET /reapirs" do
+  describe "GET /repairs" do
     it "returns a page" do
       visit repairs_path
       expect(page).to have_content("Listing Repairs")

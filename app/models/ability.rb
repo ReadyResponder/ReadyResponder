@@ -3,12 +3,13 @@ class Ability
 
   def initialize(current_user)
     current_user ||= User.new
-    if current_user.roles.blank?
+    roles = current_user.roles.map {|x| x.to_s}
+    if roles.blank?
       cannot :update, :all
       cannot :read, :all
-    elsif current_user.roles.to_s.include? "Manager"
+    elsif roles.include? "Manager"
       can :manage, :all
-    elsif current_user.roles.to_s.include? "Editor"
+    elsif roles.include? "Editor"
       can [:read, :update, :create, :edit, :police, :cert, :applicants, :prospects, :other, :inactive, :leave, :declined], Person
       can [:read, :update, :create, :edit], Timecard
       can [:read, :update, :create, :edit], Channel
@@ -23,14 +24,14 @@ class Ability
       can [:read, :create], Activity
       can [:signin, :orgchart], Person
       can :read, :all
-    elsif current_user.roles.to_s.include? 'Trainer'
+    elsif roles.include? 'Trainer'
       can [:read, :update, :create, :edit], Cert
       can [:read, :update, :create, :edit], Event
       can [:read, :update, :create, :edit], Course
       can [:read], [Person, Channel, Timecard, Item, Event, Course, Skill, Inspection, Repair]
       can [:signin, :orgchart], Person
       can [:read, :create], Activity
-   elsif current_user.roles.to_s.include? 'Reader'
+   elsif roles.include? 'Reader'
       can [:read], [Person, Channel, Timecard, Cert, Item, Event, Course, Skill, Inspection, Repair, Activity]
       can [:signin], Person
       can :orgchart, Person
