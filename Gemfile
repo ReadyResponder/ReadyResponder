@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.0.0'
+gem 'rails', '4.1.16'
 gem 'rack'
 gem 'ransack'
 gem 'carrierwave'
