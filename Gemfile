@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.16'
+gem 'rails', '4.2.7'
+
 gem 'rack'
 gem 'ransack'
 gem 'carrierwave'
@@ -16,6 +17,8 @@ gem 'cancancan'
 gem 'devise', '~> 3.0'
 
 group :test, :development do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug'
   gem 'thin'
   gem "rspec-rails"
   gem 'rspec-activemodel-mocks' # TODO: remove if we no longer need mock_model or stub_model
@@ -23,7 +26,7 @@ group :test, :development do
   gem "capybara"
   gem "guard-rspec", require: false
   gem 'guard-livereload'
-  gem 'sqlite3'
+  # gem 'sqlite3'
   gem "mailcatcher"
   gem "launchy"
   gem "letter_opener"
@@ -36,43 +39,55 @@ group :test, :development do
   gem 'pry'
 end
 
+group :development do
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 2.0'
+
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+end
+
 group :test do
   gem 'shoulda-matchers'
 end
 
-gem 'jquery-rails'
-
 gem 'sass-rails'
-
-gem 'coffee-rails'
-#The following provides the stylinmg for the datatables, among other things
-gem 'jquery-ui-rails'
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', :platforms => :ruby
-
 gem 'uglifier', '>= 1.0.3'
+# Use CoffeeScript for .coffee assets and views
+gem 'coffee-rails'
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+# gem 'therubyracer', platforms: :ruby
+
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+# gem 'turbolinks'
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+# gem 'jbuilder', '~> 2.0'
+# bundle exec rake doc:rails generates the API under doc/api.
+gem 'sdoc', '~> 0.4.0', group: :doc
+
+# Use ActiveModel has_secure_password
+gem 'bcrypt-ruby', '~> 3.0.0'
+
+# Use Unicorn as the app server
+gem 'unicorn'
+
+# Use Capistrano for deployment
+gem 'capistrano-rails', group: :development
+
+# # Deploy with Capistrano
+# gem 'capistrano', '~> 2.15'
+# # This is used by Capistrano, but 2.8 has issues
+# gem "net-ssh", "~> 2.7.0"
+
+# The following provides the styling for the datatables, among other things
+gem 'jquery-ui-rails'
 gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'chosen-rails'
 
 gem 'protected_attributes'
-
-# To use ActiveModel has_secure_password
-gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
- gem 'unicorn'
-
-# Deploy with Capistrano
-gem 'capistrano', '~> 2.15'
-# This is used by Capistrano, but 2.8 has issues
-gem "net-ssh", "~> 2.7.0"
-
-# To use debugger
-# gem 'debugger'
 
 gem 'sprockets', '~> 2.12.4'
 gem 'sprockets-rails', '~> 2.3.2'
