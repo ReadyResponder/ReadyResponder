@@ -21,7 +21,7 @@ group :test, :development do
   gem 'byebug'
   gem 'thin'
   gem "rspec-rails"
-  gem 'rspec-activemodel-mocks' # TODO: remove if we no longer need mock_model or stub_model
+  # gem 'rspec-activemodel-mocks' # TODO: remove if we no longer need mock_model or stub_model
   gem "factory_girl_rails"
   gem "capybara"
   gem "guard-rspec", require: false
@@ -85,9 +85,6 @@ gem 'capistrano-rails', group: :development
 gem 'jquery-ui-rails'
 gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 gem 'bootstrap-sass', '2.3.2.0'
-gem 'chosen-rails'
+# gem 'chosen-rails'
 
 gem 'protected_attributes'
-
-gem 'sprockets', '~> 2.12.4'
-gem 'sprockets-rails', '~> 2.3.2'
