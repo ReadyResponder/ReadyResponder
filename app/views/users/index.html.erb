@@ -16,7 +16,7 @@
     <% @users.each do |user| %>
       <tr>
       	<td><%= user.firstname %></td>
-      	<td><%= link_to user.lastname, user %></td>
+      	<td><%= link_to user.lastname, user if user.lastname %></td>
       	<td><%= link_to user.username, user %></td>	
         <td><%= user.roles.pluck(:name).to_sentence %></td>
         <td><%= user.last_sign_in_at.to_s(:short) if user.last_sign_in_at %></td>
