@@ -14,3 +14,19 @@
 .ui-timepicker-rtl dl { text-align: right; padding: 0 5px 0 0; }
 .ui-timepicker-rtl dl dt{ float: right; clear: right; }
 .ui-timepicker-rtl dl dd { margin: 0 45% 10px 10px; }
+
+#event_timecards {
+  border: 1px solid #e1e1e8;
+  padding: 9px 14px;
+  border-radius: 4px;
+  // background-color: #f7f7f9;
+
+  h3 {
+    padding-bottom: 8px;
+    font-size: 16px;
+  }
+
+  th{
+    color: #666;
+  }
+}
