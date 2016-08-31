@@ -52,6 +52,7 @@ group :test do
 end
 
 gem 'sass-rails'
+gem 'autoprefixer-rails'
 gem 'uglifier', '>= 1.0.3'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails'
@@ -85,7 +86,7 @@ gem 'capistrano-rails', group: :development
 gem 'jquery-ui-rails'
 gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 gem 'jquery-turbolinks'
-gem 'bootstrap-sass', '2.3.2.0'
+gem 'bootstrap-sass', '3.3.7'
 # gem 'chosen-rails'
 
 gem 'protected_attributes'
