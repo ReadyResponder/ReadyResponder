@@ -13,9 +13,6 @@
  * 
  *= require_tree .
  *= require_self
- *= require jquery-ui/core
- *= require jquery-ui/theme
- *= require jquery-ui/datepicker
  *= require jquery-ui/accordion
  *= require dataTables/src/demo_table_jui
  */

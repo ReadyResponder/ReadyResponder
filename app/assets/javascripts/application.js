@@ -16,12 +16,8 @@
 //= require jquery.turbolinks
 //= require turbolinks
 //= require turbolinks-compatibility
-//= require jquery-ui/core
 //= require jquery-ui/datepicker
-//= require jquery-ui/widget
 //= require jquery-ui/accordion
-//= require jquery-ui/slider
-//= require dataTables/jquery.dataTables
 //= require jquery-ui-timepicker-addon
-//= require jquery-ui
+//= require dataTables/jquery.dataTables
 //= require_tree .
