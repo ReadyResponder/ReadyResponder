@@ -10,10 +10,10 @@ jQuery ->
           stepHour: 1
           stepMinute: 15});
         $('.generic_datatable').dataTable
-          sPaginationType: "full_numbers"
-          'bJQueryUI': true
-          'bRetrieve': true
-          iDisplayLength: 50
+          pagingType: "full_numbers"
+          'jQueryUI': true
+          'retrieve': true
+          pageLength: 50
         $('.accordion').accordion
           collapsible: true
           active: false

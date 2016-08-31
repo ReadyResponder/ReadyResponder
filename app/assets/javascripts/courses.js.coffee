@@ -4,14 +4,14 @@
 
 jQuery ->
   $('#courses').dataTable
-    sPaginationType: "full_numbers"
-    "aoColumns": [null,
+    pagingType: "full_numbers"
+    "columns": [null,
                   null,
                   null,
                   null,
                   null,
                   null,
-                  {"bSortable" : false}],
-    'bJQueryUI': true
-    'bRetrieve': true
-    'iDisplayLength': 100
+                  {"orderable" : false}],
+    'jQueryUI': true
+    'retrieve': true
+    'pageLength': 100
