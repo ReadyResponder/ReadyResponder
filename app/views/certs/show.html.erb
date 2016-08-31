@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
-  <%= link_to 'Return to List', certs_path, :class => 'btn' %></br></br>
-  <%= link_to 'Edit Cert', edit_cert_path(@cert), :class => 'btn btn-primary' unless cannot? :edit, @cert %></br></br>
+  <%= link_to 'Return to List', certs_path, class: 'btn btn-default' %></br></br>
+  <%= link_to 'Edit Cert', edit_cert_path(@cert), class: 'btn btn-primary' unless cannot? :edit, @cert %></br></br>
 <% end %>
 
 <p>

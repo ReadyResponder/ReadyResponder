@@ -3,9 +3,9 @@
 
   <p><h2>Skill</br><%= @skill.name %></h2></p>
 
-  <%= link_to 'Edit', edit_skill_path(@skill), :class => 'btn btn-primary' %>
-  <%#= link_to 'Destroy', @skill, method: :delete, :class => 'btn btn-danger', data: { confirm: 'Are you sure?' } %></br></br>
-  <%= link_to 'Skills Listing', skills_path, :class => 'btn' %>
+  <%= link_to 'Edit', edit_skill_path(@skill), class: 'btn btn-primary' %>
+  <%#= link_to 'Destroy', @skill, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %></br></br>
+  <%= link_to 'Skills Listing', skills_path, class: 'btn btn-default' %>
 <% end %>
 <p>
   <b>Status:</b>

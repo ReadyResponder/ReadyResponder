@@ -1,7 +1,7 @@
 <% content_for :sidebar do %>
-  <%= link_to 'Return to Listing', session[:return_to], :class => 'btn btn-mini' %></br></br>
-  <%= link_to 'Edit Person', edit_person_path(@person), :class => 'btn btn-mini' if can? :edit, @person  %></br></br>
-  <%= link_to 'New Certification', new_person_cert_path(@person), :class => 'btn btn-mini' if can? :create, Cert  %>
+  <%= link_to 'Return to Listing', session[:return_to], class: 'btn btn-xs btn-default' %></br></br>
+  <%= link_to 'Edit Person', edit_person_path(@person), class: 'btn btn-xs btn-default' if can? :edit, @person  %></br></br>
+  <%= link_to 'New Certification', new_person_cert_path(@person), class: 'btn btn-xs btn-default' if can? :create, Cert  %>
 <% end %>
 
 <p><h2><%= @person.shortrank %> <%= @person.fullname %> (<%= @person.icsid %>)</h2></p>
@@ -82,7 +82,7 @@
     <ul>
       <%= render(@person.items) || raw("No Items Found !") %>
     </ul>
-    <%= link_to 'New Item', new_person_item_path(@person), :class => 'btn' if can? :create, Item  %>
+    <%= link_to 'New Item', new_person_item_path(@person), class: 'btn btn-default' if can? :create, Item  %>
   </div>
 
   <h3>Times (<%= @person.timecards.uniq.count %>)</h3>

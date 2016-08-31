@@ -33,8 +33,8 @@
                 <td><%= timecard.actual_start_time.to_s(:short) if timecard.actual_start_time %></td>
                 <td><%= timecard.actual_end_time.to_s(:short)  if timecard.actual_end_time %></td>
                 <td><%= timecard.actual_duration %></td>
-                <td><%= link_to 'Edit', edit_timecard_path(timecard), :class => 'btn btn-mini' if can? :edit, timecard %></td>
-                <td><%= link_to 'Worked', edit_timecard_path(timecard), :title => "Use times and values from the event", :class => 'btn btn-mini' if can? :edit, timecard %></td>
+                <td><%= link_to 'Edit', edit_timecard_path(timecard), class: 'btn btn-xs btn-default' if can? :edit, timecard %></td>
+                <td><%= link_to 'Worked', edit_timecard_path(timecard), :title => "Use times and values from the event", class: 'btn btn-xs btn-default' if can? :edit, timecard %></td>
             </tr>
         <% end %>
     </tbody>

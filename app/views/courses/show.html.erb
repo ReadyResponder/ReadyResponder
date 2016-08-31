@@ -2,9 +2,9 @@
 <% content_for :sidebar do %>
   <p><h2><%= @course.name %></h2></p>
   </br>
-  <%= link_to 'Edit', edit_course_path(@course), :class => 'btn btn-primary' %>
-  <%#= link_to 'Destroy', @course, method: :delete, :class => 'btn btn-danger', data: { confirm: 'Are you sure?' } %></br></br>
-  <%= link_to 'Course Listings', courses_path, :class => 'btn' %>
+  <%= link_to 'Edit', edit_course_path(@course), class: 'btn btn-primary' %>
+  <%#= link_to 'Destroy', @course, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %></br></br>
+  <%= link_to 'Course Listings', courses_path, class: 'btn btn-default' %>
 <% end %>
 <p>
   <b>Status:</b>

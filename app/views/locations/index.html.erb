@@ -16,7 +16,7 @@
         <td><%= location.description %></td>
         <td><%= location.category %></td>
         <td><%= location.status %></td>
-        <td><%= link_to 'Edit', edit_location_path(location), :class => "btn" if can? :update, location %></td>
+        <td><%= link_to 'Edit', edit_location_path(location), class: 'btn btn-default' if can? :update, location %></td>
       </tr>
     <% end %>
   </tbody>

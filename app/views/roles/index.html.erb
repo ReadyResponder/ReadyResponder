@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
   <center><h1>Listing Roles</h1></br>
-  <%= link_to 'New Role', new_role_path, :class => 'btn' unless cannot? :create, Role %></center>
+  <%= link_to 'New Role', new_role_path, class: 'btn btn-default' unless cannot? :create, Role %></center>
 <% end %>
 
 <table id="roles" class="display table table-striped table-bordered" >
@@ -14,7 +14,7 @@
     <% @roles.each do |role| %>
       <tr>
 	<td><%= link_to role.name, role %></td>
-	<td><%= link_to 'Edit', edit_role_path(role), :class => "btn btn-primary" unless cannot? :update, role %></td>
+	<td><%= link_to 'Edit', edit_role_path(role), class: 'btn btn-primary' unless cannot? :update, role %></td>
      </tr>
     <% end %>
   </tbody>

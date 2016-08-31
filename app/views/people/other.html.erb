@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
   <center><h1>Listing Others Active</h1></br>
-  <%= link_to 'New Person', new_person_path, :class => 'btn' unless cannot? :create, Person %></center>
+  <%= link_to 'New Person', new_person_path, class: 'btn btn-default' unless cannot? :create, Person %></center>
 <% end %>
 
 <table id="people" class="generic_datatable datatable display table table-striped table-bordered" >
@@ -24,7 +24,7 @@
 	<td><%= person.department %></td>
   <td><%= person.start_date %></td>
 	<td><%= person.end_date %></td>
-	<td><%= link_to 'Edit', edit_person_path(person), :class => "btn btn-primary btn-mini" if can? :update, person %></td>
+	<td><%= link_to 'Edit', edit_person_path(person), class: 'btn btn-xs btn-primary' if can? :update, person %></td>
       </tr>
     <% end %>
   </tbody>

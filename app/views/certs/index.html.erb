@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
   <center><h1>Listing Certs</h1></br>
-  <%= link_to 'New Cert', new_cert_path, :class => 'btn' unless cannot? :create, Cert %></center>
+  <%= link_to 'New Cert', new_cert_path, class: 'btn btn-default' unless cannot? :create, Cert %></center>
 <% end %>
 
 <table id="certs" class="datatable display table table-striped table-bordered" >
@@ -28,7 +28,7 @@
 	<td><%= cert.cert_number %></td>
 	<td><%= cert.issued_date %></td>
 	<td><%= cert.expiration_date %></td>
-	<td><%= link_to 'Edit', edit_cert_path(cert), :class => 'btn btn-mini btn-primary' unless cannot? :edit, cert %></td>
+	<td><%= link_to 'Edit', edit_cert_path(cert), class: 'btn btn-xs btn-primary' unless cannot? :edit, cert %></td>
       </tr>
     <% end %>
   </tbody>

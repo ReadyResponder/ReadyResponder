@@ -17,7 +17,7 @@
           </span>
         </td>
         <td><%= link_to 'Edit', edit_inspection_path(inspection),
-                :class => 'btn btn-mini btn-primary' unless cannot? :edit, inspection %></td>
+                class: 'btn btn-xs btn-primary' unless cannot? :edit, inspection %></td>
       </tr>
     <% end %>
   </tbody>

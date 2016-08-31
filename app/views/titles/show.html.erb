@@ -2,9 +2,9 @@
 
   <p><h2>Title</br><%= @title.name %></h2></p>
 
-  <%= link_to 'Edit', edit_title_path(@title), :class => 'btn btn-primary' %>
-  <%#= link_to 'Destroy', @skill, method: :delete, :class => 'btn btn-danger', data: { confirm: 'Are you sure?' } %></br></br>
-  <%= link_to 'Titles Listing', titles_path, :class => 'btn' %>
+  <%= link_to 'Edit', edit_title_path(@title), class: 'btn btn-primary' %>
+  <%#= link_to 'Destroy', @skill, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %></br></br>
+  <%= link_to 'Titles Listing', titles_path, class: 'btn btn-default' %>
 <% end %>
 <p id="notice"><%= notice %></p>
 
