@@ -12,6 +12,11 @@
  * file per style scope.
  * 
  *= require_tree .
+ *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+ *= require dataTables/extras/dataTables.responsive
+ *= require jquery-ui/core
+ *= require jquery-ui/theme
+ *= require jquery-ui/datepicker
  *= require_self
  *= require jquery-ui/accordion
  *= require dataTables/src/demo_table_jui

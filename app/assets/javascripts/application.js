@@ -13,11 +13,13 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require jquery_ujs
+//= require dataTables/jquery.dataTables
+//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+//= require dataTables/extras/dataTables.responsive
 //= require jquery.turbolinks
 //= require turbolinks
 //= require turbolinks-compatibility
 //= require jquery-ui/datepicker
 //= require jquery-ui/accordion
 //= require jquery-ui-timepicker-addon
-//= require dataTables/jquery.dataTables
 //= require_tree .
