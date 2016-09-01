@@ -58,7 +58,7 @@ brew install phantomjs
 sudo apt-get install phantomjs
 ```
 
-#### Project Build Status: &nbsp; [![Build Status](https://travis-ci.org/kgf/lims.svg?branch=development)](https://travis-ci.org/kgf/lims)
+#### Project Build Status: &nbsp; [![Build Status](https://api.travis-ci.org/ReadyResponder/ReadyResponder.svg?branch=development)](https://travis-ci.org/ReadyResponder/ReadyResponder)
 
 ## More information
 

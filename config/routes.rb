@@ -25,7 +25,7 @@ Rails.application.routes.draw do
     resources :inspections, :controller => 'inspections'
   end
 
-  get "landing/index"
+  get 'landing/help', as: 'help', path: '/help'
 
   #authenticated :user do
   #  root :to => "people#index"
@@ -45,7 +45,7 @@ Rails.application.routes.draw do
 
   resources :people do
       collection do
-	      get 'inactive'
+        get 'inactive'
         get 'leave'
         get 'other'
         get 'everybody'
@@ -55,7 +55,7 @@ Rails.application.routes.draw do
         get 'cert'
         get 'police'
         get 'signin'
-	      get 'orgchart'
+        get 'orgchart'
         get 'roster'
       end
     resources :certs, :controller => 'certs'
