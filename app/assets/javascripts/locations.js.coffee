@@ -10,6 +10,5 @@ jQuery ->
                   null,
                   null,
                   {"orderable" : false}],
-    'jQueryUI': true
     'retrieve': true
     'pageLength': 100

@@ -11,7 +11,6 @@ jQuery ->
           stepMinute: 15});
         $('.generic_datatable').dataTable
           pagingType: "full_numbers"
-          'jQueryUI': true
           'retrieve': true
           pageLength: 50
         $('.accordion').accordion
