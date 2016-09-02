@@ -1,27 +1,30 @@
 <h1>Listing unique_ids</h1>
 
-<table>
-  <tr>
-    <th>Item</th>
-    <th>Status</th>
-    <th>Category</th>
-    <th>Value</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @unique_ids.each do |unique_id| %>
-  <tr>
-    <td><%= unique_id.item %></td>
-    <td><%= unique_id.status %></td>
-    <td><%= unique_id.category %></td>
-    <td><%= unique_id.value %></td>
-    <td><%= link_to 'Show', unique_id %></td>
-    <td><%= link_to 'Edit', edit_unique_id_path(unique_id) %></td>
-    <td><%= link_to 'Destroy', unique_id, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+<table id="unique_ids" class="generic_datatable display table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Status</th>
+      <th>Category</th>
+      <th>Value</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @unique_ids.each do |unique_id| %>
+      <tr>
+        <td><%= unique_id.item %></td>
+        <td><%= unique_id.status %></td>
+        <td><%= unique_id.category %></td>
+        <td><%= unique_id.value %></td>
+        <td><%= link_to 'Show', unique_id %></td>
+        <td><%= link_to 'Edit', edit_unique_id_path(unique_id) %></td>
+        <td><%= link_to 'Destroy', unique_id, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
 <br />

@@ -1,19 +1,22 @@
 <h1>Listing inspections</h1>
 
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @inspections.each do |inspection| %>
-  <tr>
-    <td><%= link_to 'Show', inspection %></td>
-    <td><%= link_to 'Edit', edit_inspection_path(inspection) %></td>
-    <td><%= link_to 'Destroy', inspection, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+<table id="resource_types" class="generic_datatable display table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @inspections.each do |inspection| %>
+      <tr>
+        <td><%= link_to 'Show', inspection %></td>
+        <td><%= link_to 'Edit', edit_inspection_path(inspection) %></td>
+        <td><%= link_to 'Destroy', inspection, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
 <br />

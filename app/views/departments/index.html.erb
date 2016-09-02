@@ -1,27 +1,30 @@
 <h1>Listing departments</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Status</th>
-    <th>Contact</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @departments.each do |department| %>
-  <tr>
-    <td><%= department.name %></td>
-    <td><%= department.status %></td>
-    <td><%= department.contact_id %></td>
-    <td><%= department.description %></td>
-    <td><%= link_to 'Show', department %></td>
-    <td><%= link_to 'Edit', edit_department_path(department) %></td>
-    <td><%= link_to 'Destroy', department, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+<table id="departments" class="generic_datatable display table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Contact</th>
+      <th>Description</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @departments.each do |department| %>
+      <tr>
+        <td><%= department.name %></td>
+        <td><%= department.status %></td>
+        <td><%= department.contact_id %></td>
+        <td><%= department.description %></td>
+        <td><%= link_to 'Show', department %></td>
+        <td><%= link_to 'Edit', edit_department_path(department) %></td>
+        <td><%= link_to 'Destroy', department, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
 <br />

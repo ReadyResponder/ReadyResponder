@@ -1,29 +1,32 @@
 <h1>Listing Moves</h1>
 
-<table>
-  <tr>
-    <th>Item</th>
-    <th>Locatable</th>
-    <th>Locatable type</th>
-    <th>Comments</th>
-    <th>Reason</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @moves.each do |move| %>
-  <tr>
-    <td><%= move.item_id %></td>
-    <td><%= move.locatable_id %></td>
-    <td><%= move.locatable_type %></td>
-    <td><%= move.comments %></td>
-    <td><%= move.reason %></td>
-    <td><%= link_to 'Show', move %></td>
-    <td><%= link_to 'Edit', edit_move_path(move) %></td>
-    <td><%= link_to 'Destroy', move, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+<table id="moves" class="generic_datatable display table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Locatable</th>
+      <th>Locatable type</th>
+      <th>Comments</th>
+      <th>Reason</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @moves.each do |move| %>
+      <tr>
+        <td><%= move.item_id %></td>
+        <td><%= move.locatable_id %></td>
+        <td><%= move.locatable_type %></td>
+        <td><%= move.comments %></td>
+        <td><%= move.reason %></td>
+        <td><%= link_to 'Show', move %></td>
+        <td><%= link_to 'Edit', edit_move_path(move) %></td>
+        <td><%= link_to 'Destroy', move, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
 <br />
