@@ -17,6 +17,7 @@
 /tmp
 *~
 *.kate-swp
+/public/uploads
 
 #Ignore database settings
 /config/database.yml
