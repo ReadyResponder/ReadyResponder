@@ -149,8 +149,8 @@ class PeopleController < ApplicationController
     params.require(:person).permit(
       :firstname, :lastname, :status, :icsid, :department,
       :city, :state, :zipcode, :start_date, :end_date,
-      :title, :gender, :date_of_birth, :division1,
-      :division2,
+      :title, :gender, :portrait, :date_of_birth,
+      :division1, :division2, :channels_attributes, :title_ids,
       :title_order, :comments,
       :channels_attributes => [],
       :title_ids => [],
