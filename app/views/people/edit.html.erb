@@ -1,6 +1,7 @@
 <% content_for :sidebar do %>
   <h1>Editing Person</h1>
-  <%= link_to 'Cancel', session[:return_to], class: 'btn btn-default' %></br>
+  <%= link_to 'Cancel', session[:return_to], class: 'btn btn-xs btn-default' %><br/><br/>
+  <%= image_tag @person.portrait_url if @person.portrait.file.present? %>
 <% end %>
 
 <%= render 'form' %>

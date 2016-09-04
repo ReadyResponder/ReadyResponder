@@ -1,7 +1,7 @@
 <% content_for :sidebar do %>
-  <%= link_to 'Return to Listing', session[:return_to], class: 'btn btn-xs btn-default' %></br></br>
-  <%= link_to 'Edit Person', edit_person_path(@person), class: 'btn btn-xs btn-default' if can? :edit, @person  %></br></br>
-  <%= link_to 'New Certification', new_person_cert_path(@person), class: 'btn btn-xs btn-default' if can? :create, Cert  %>
+  <%= link_to 'Return to Listing', session[:return_to], class: 'btn btn-xs btn-default' %><br/><br/>
+  <%= link_to 'Edit Person', edit_person_path(@person), class: 'btn btn-xs btn-default' if can? :edit, @person  %><br/><br/>
+  <%= link_to 'New Certification', new_person_cert_path(@person), class: 'btn btn-xs btn-default' if can? :create, Cert  %><br/><br/>
   <%= image_tag @person.portrait_url if @person.portrait.file.present? %>
 <% end %>
 
@@ -18,15 +18,17 @@
 <div id="channels">
   <ul>
     <% @person.channels.each do |channel| %>
-      <li>
-        <%# This should be moved into a presenter to just return the right content %>
-        <% if channel.phone? %>
-          <%= number_to_phone(channel.content, area_code: true) %>
-          <%= "on #{channel.carrier}" if channel.carrier %>
-        <% else %>
-          <%= channel.content %>
-        <% end %>
-      </li>
+      <% if channel.content.present? %>
+        <li>
+          <%# This should be moved into a presenter to just return the right content %>
+          <% if channel.phone? %>
+            <%= number_to_phone(channel.content, area_code: true) %>
+            <%= "on #{channel.carrier}" if channel.carrier.present? %>
+          <% else %>
+            <%= channel.content %>
+          <% end %>
+        </li>
+      <% end %>
     <% end %>
   </ul>
 </div>
