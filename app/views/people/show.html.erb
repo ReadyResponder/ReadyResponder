@@ -5,7 +5,7 @@
   <%= image_tag @person.portrait_url if @person.portrait.file.present? %>
 <% end %>
 
-<p><h2><%= @person.shortrank %> <%= @person.fullname %> (<%= @person.icsid %>)</h2></p>
+<h2><%= @person.shortrank %> <%= @person.fullname %> (<%= @person.icsid %>)</h2>
 
 <p>Start Date <%= @person.start_date %> (<%= distance_of_time_in_words(((@person.end_date) || Date.today), @person.start_date) if @person.start_date %>)</p>
 <p>
