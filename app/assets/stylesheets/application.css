@@ -10,13 +10,12 @@
  * compiled file so the styles you add here take precedence over styles defined in any styles
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
- * 
+ *
  *= require_tree .
- *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
- *= require dataTables/extras/dataTables.responsive
+ *= require datatables
  *= require jquery-ui/core
  *= require jquery-ui/theme
  *= require jquery-ui/datepicker
- *= require_self
  *= require jquery-ui/accordion
+ *= require_self
  */

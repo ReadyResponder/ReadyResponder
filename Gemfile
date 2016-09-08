@@ -84,7 +84,6 @@ gem 'capistrano-rails', group: :development
 
 # The following provides the styling for the datatables, among other things
 gem 'jquery-ui-rails'
-gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 gem 'jquery-turbolinks'
 gem 'bootstrap-sass', '3.3.7'
 # gem 'chosen-rails'
