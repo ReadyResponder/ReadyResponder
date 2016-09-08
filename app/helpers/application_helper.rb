@@ -20,3 +20,14 @@ module ApplicationHelper
     link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
   end
 end
+
+# This is a general helper to provide a simple success or warning
+# label.  For anything more precise, a custom helper should be
+# used (as in items_helper.rb)
+def success_or_warning_label(expected, str)
+  if expected == str
+    return 'label-success'
+  else
+    return 'label-warning'
+  end
+end

@@ -8,7 +8,7 @@
 <% end %>
 <p>
   <b>Status:</b>
-  <span class="badge <%= 'badge-success' if @course.status == 'Active' %>">
+  <span class="label <%= success_or_warning_label(@course.status, 'Active') %>">
     <%= @course.status %>
   </span>
 </p>

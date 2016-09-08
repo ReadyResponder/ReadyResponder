@@ -4,14 +4,13 @@
   <%= add_repair_button %></br></br>
   <%= add_inspection_button %></br></br>
 <% end %>
-<p>
-  <h3>
-    <span class="badge <%= 'badge-success' if @item.status == 'Available' %>">
-      <%= @item.status %>
-    </span>&nbsp;
-    <%= @item.name + " ( " + @item.brand + " " + @item.model + " )" %></br>
-  </h3>
-</p>
+
+<h3>
+  <span class="label <%= item_label(@item) %>">
+    <%= @item.status %>
+  </span> &nbsp;
+  <%= @item.name + " ( " + @item.brand + " " + @item.model + " )" %>
+</h3>
 
 <% if @item.description.present? %>
   <p><b>Description:</b> <%= @item.description %></p>
