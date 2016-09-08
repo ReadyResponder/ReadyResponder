@@ -5,19 +5,16 @@
 jQuery ->
   $("#person_firstname").focus();
   $('#people').dataTable
-    pagingType: "full_numbers"
     "columns": [
                   { "visible": false },
                   { "orderData": 1 },
                   { "visible": false },
                   { "orderData": 3 },
                    null,
-                  {"visible": false },
+                  { "visible": false },
                   { "orderData": 5 },
                   null,
                   null,
                   null,
                   null,
                   {"orderable" : false}]
-    'retrieve': true
-    'pageLength': 100

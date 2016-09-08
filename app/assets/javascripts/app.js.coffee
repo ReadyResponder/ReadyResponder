@@ -9,10 +9,6 @@ jQuery ->
           timeFormat: 'HH:mm '
           stepHour: 1
           stepMinute: 15});
-        $('.generic_datatable').dataTable
-          pagingType: "full_numbers"
-          'retrieve': true
-          pageLength: 50
         $('.accordion').accordion
           collapsible: true
           active: false

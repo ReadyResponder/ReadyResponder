@@ -4,7 +4,6 @@
 
 jQuery ->
   $('#users').dataTable
-    pagingType: "full_numbers"
     "columns": [null,
                   null,
                   null,
@@ -13,5 +12,3 @@ jQuery ->
                   null,
                   null,
                   {"orderable" : false}],
-    'retrieve': true
-    'pageLength': 100

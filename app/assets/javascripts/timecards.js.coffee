@@ -5,7 +5,6 @@
 jQuery ->
   $("#timeslot_person_id").focus();
   $('#timeslots').dataTable
-    pagingType: "full_numbers"
     "columns": [null,
                   null,
                   null,
@@ -17,5 +16,3 @@ jQuery ->
                   null,
                   {"orderable" : false},
                   {"orderable" : false}]
-    'retrieve': true
-    'pageLength': 100

@@ -4,9 +4,6 @@
 
 jQuery ->
   $('#prospects').dataTable
-    pagingType: "full_numbers"
     "columns": [null,
                   null,
                   {"orderable" : false}],
-    'retrieve': true
-    'pageLength': 100

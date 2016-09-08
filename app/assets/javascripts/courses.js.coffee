@@ -4,7 +4,6 @@
 
 jQuery ->
   $('#courses').dataTable
-    pagingType: "full_numbers"
     "columns": [null,
                   null,
                   null,
@@ -12,6 +11,3 @@ jQuery ->
                   null,
                   null,
                   {"orderable" : false}],
-    'jQueryUI': true
-    'retrieve': true
-    'pageLength': 100

@@ -4,11 +4,8 @@
 
 jQuery ->
   $('#locations').dataTable
-    pagingType: "full_numbers"
     "columns": [null,
                   null,
                   null,
                   null,
                   {"orderable" : false}],
-    'retrieve': true
-    'pageLength': 100
