@@ -1,7 +1,7 @@
 <% content_for :sidebar do %>
-  <%= link_to 'Return to Listing', session[:return_to], class: 'btn btn-xs btn-default' %><br/><br/>
-  <%= link_to 'Edit Person', edit_person_path(@person), class: 'btn btn-xs btn-default' if can? :edit, @person  %><br/><br/>
-  <%= link_to 'New Certification', new_person_cert_path(@person), class: 'btn btn-xs btn-default' if can? :create, Cert  %><br/><br/>
+  <%= link_to 'Return to Listing', session[:return_to], class: 'btn btn-default', style: 'width: 100%' %><br/><br/>
+  <%= link_to 'Edit Person', edit_person_path(@person), class: 'btn btn-default', style: 'width: 100%' if can? :edit, @person %><br/><br/>
+  <%= link_to 'New Certification', new_person_cert_path(@person), class: 'btn btn-default', style: 'width: 100%' if can? :create, Cert %><br/><br/>
   <%= image_tag @person.portrait_url if @person.portrait.file.present? %>
 <% end %>
 
@@ -57,7 +57,7 @@
   <div>
     <table class="table table-striped table-bordered">
       <tbody>
-        <%= render (@person.skills.uniq) || raw("No skills yet !")%>
+        <%= render(@person.skills.uniq) || raw("No skills yet !") %>
       </tbody>
     </table>
   </div>
@@ -85,7 +85,7 @@
     <ul>
       <%= render(@person.items) || raw("No Items Found !") %>
     </ul>
-    <%= link_to 'New Item', new_person_item_path(@person), class: 'btn btn-default' if can? :create, Item  %>
+    <%= link_to 'New Item', new_person_item_path(@person), class: 'btn btn-default' if can? :create, Item %>
   </div>
 
   <h3>Times (<%= @person.timecards.uniq.count %>)</h3>
@@ -123,7 +123,7 @@
       </tr>
     </thead>
     <tbody>
-      <%#= render (Title.find(1).skills - @person.skills) %>
+      <%#= render(Title.find(1).skills - @person.skills) %>
     </tbody>
   </table>
   <span class="label label-danger">This comes out red
