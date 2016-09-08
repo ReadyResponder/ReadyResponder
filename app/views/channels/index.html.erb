@@ -1,9 +1,9 @@
 <% content_for :sidebar do %>
   <h1>Listing Channels</h1>
-  <%= link_to 'New Channel', new_channel_path, class: 'btn btn-default' unless cannot? :create, Channel  %>
+  <%= link_to 'New Channel', new_channel_path, class: 'btn btn-default', style: 'width: 100%' unless cannot? :create, Channel %>
 <% end %>
 
-<table id="channels" class="datatable display table table-striped table-bordered" >
+<table id="channels" class="generic_datatable table table-striped table-bordered" >
   <thead>
     <tr>
       <th>Person</th>
