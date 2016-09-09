@@ -1,5 +1,5 @@
 <% content_for :sidebar do %>
-  <%= link_to 'Return to Listing', session[:return_to], class: 'btn btn-default', style: 'width: 100%' %><br/><br/>
+  <%= link_to 'Return to Listing', :back, class: 'btn btn-default', style: 'width: 100%' %><br/><br/>
   <%= link_to 'Edit Person', edit_person_path(@person), class: 'btn btn-default', style: 'width: 100%' if can? :edit, @person %><br/><br/>
   <%= link_to 'New Certification', new_person_cert_path(@person), class: 'btn btn-default', style: 'width: 100%' if can? :create, Cert %><br/><br/>
   <%= image_tag @person.portrait_url if @person.portrait.file.present? %>
@@ -7,7 +7,10 @@
 
 <h2><%= @person.shortrank %> <%= @person.fullname %> (<%= @person.icsid %>)</h2>
 
-<p>Start Date <%= @person.start_date %> (<%= distance_of_time_in_words(((@person.end_date) || Date.today), @person.start_date) if @person.start_date %>)</p>
+<% if @person.start_date %>
+  <p><b>Start Date:</b> <%= @person.start_date %> (<%= distance_of_time_in_words(((@person.end_date) || Date.today), @person.start_date) if @person.start_date %>)</p>
+<% end %>
+
 <p>
   <b>Status:</b>
   <span class="label <%= success_or_warning_label(@person.status, 'Active') %>">
@@ -49,9 +52,8 @@
     <% end %>
   <% end %>
 </div>
+<br/><br/>
 
-
-</br></br>
 <div class="accordion">
   <h3>Skills (<%= @person.skills.uniq.count %>)</h3>
   <div>
@@ -129,5 +131,5 @@
   <span class="label label-danger">This comes out red
     <span class="label label-warning">
       Person qualified, but some certification is expiring soon
-    </span></br>
+    </span><br/>
 <% end %>
