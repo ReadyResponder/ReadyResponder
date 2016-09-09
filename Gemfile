@@ -82,9 +82,7 @@ gem 'capistrano-rails', group: :development
 # # This is used by Capistrano, but 2.8 has issues
 # gem "net-ssh", "~> 2.7.0"
 
-# The following provides the styling for the datatables, among other things
 gem 'jquery-ui-rails'
-gem 'jquery-turbolinks'
 gem 'bootstrap-sass', '3.3.7'
 # gem 'chosen-rails'
 
