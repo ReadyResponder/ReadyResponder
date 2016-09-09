@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
   <h1>Listing Roles</h1>
-  <%= link_to 'New Role', new_role_path, class: 'btn btn-default', style: 'width: 100%' unless cannot? :create, Role %>
+  <%= link_to 'New Role', new_role_path, class: 'btn btn-primary', style: 'width: 100%' unless cannot? :create, Role %>
 <% end %>
 
 <table id="roles" class="generic_datatable table table-striped table-bordered" >

@@ -10,9 +10,9 @@
   <tbody>
     <% @skills.each do |skill| %>
       <tr>
-      	<td><%= link_to skill.name, skill %></td>
+        <td><%= link_to skill.name, skill %></td>
         <td><%= link_to skill.status, skill %></td>
-        <td><%= link_to 'Edit', edit_skill_path(skill), class: 'btn btn-xs btn-default' if can? :edit, skill %></td>
+        <td><%= link_to 'Edit', edit_skill_path(skill), class: 'btn btn-xs btn-primary' if can? :edit, skill %></td>
       </tr>
     <% end %>
   </tbody>

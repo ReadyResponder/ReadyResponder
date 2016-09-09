@@ -11,10 +11,10 @@
   <tbody>
     <% @titles.each do |title| %>
       <tr>
-	<td><%= link_to title.name, title_path(title) %></td>
-	<td><%= title.status %></td>
-	<td><%= title.description %></td>
-	<td><%= link_to 'Edit', edit_title_path(title), class: 'btn btn-xs btn-default' %></td>
+        <td><%= link_to title.name, title_path(title) %></td>
+        <td><%= title.status %></td>
+        <td><%= title.description %></td>
+        <td><%= link_to 'Edit', edit_title_path(title), class: 'btn btn-xs btn-primary' %></td>
       </tr>
     <% end %>
   </tbody>

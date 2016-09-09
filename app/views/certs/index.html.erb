@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
   <h1>Listing Certs</h1>
-  <%= link_to 'New Cert', new_cert_path, class: 'btn btn-default', style: 'width: 100%' unless cannot? :create, Cert %>
+  <%= link_to 'New Cert', new_cert_path, class: 'btn btn-primary', style: 'width: 100%' unless cannot? :create, Cert %>
 <% end %>
 
 <table id="certs" class="generic_datatable table table-striped table-bordered" >

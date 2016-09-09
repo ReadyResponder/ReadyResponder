@@ -1,5 +1,5 @@
 <% content_for :sidebar do %>
-  <%= link_to 'Return to Listing', users_path, class: 'btn btn-default', style: 'width: 100%' %><br/><br/>
+  <%= link_to 'Return to Listing', users_path, class: 'btn btn-primary', style: 'width: 100%' %><br/><br/>
   <%= link_to 'Edit User', edit_user_path(@user), class: 'btn btn-primary', style: 'width: 100%' unless cannot? :edit, @user  %><br/><br/>
 <% end %>
 

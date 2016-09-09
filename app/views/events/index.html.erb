@@ -23,7 +23,7 @@
 	<td><%= event.duration %></td>
 	<td><%= event.category %></td>
 	<td><%= event.status %></td>
-	<td><%= link_to 'Edit', edit_event_path(event), class: 'btn btn-xs btn-default' unless cannot? :update, event %></td>
+	<td><%= link_to 'Edit', edit_event_path(event), class: 'btn btn-xs btn-primary' unless cannot? :update, event %></td>
       </tr>
     <% end %>
   </tbody>

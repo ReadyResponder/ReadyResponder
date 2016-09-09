@@ -1,5 +1,5 @@
 <% content_for :sidebar do %>
-  <%= link_to 'Return to List', certs_path, class: 'btn btn-default', style: 'width: 100%' %><br/><br/>
+  <%= link_to 'Return to List', certs_path, class: 'btn btn-primary', style: 'width: 100%' %><br/><br/>
   <%= link_to 'Edit Cert', edit_cert_path(@cert), class: 'btn btn-primary', style: 'width: 100%' unless cannot? :edit, @cert %><br/><br/>
 <% end %>
 
