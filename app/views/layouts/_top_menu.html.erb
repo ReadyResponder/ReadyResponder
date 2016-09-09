@@ -15,62 +15,62 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">People<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><%= nav_link "Police", police_people_path %></li>
-              <li><%= nav_link "CERT", cert_people_path %></li>
-              <li><%= nav_link "Active", people_path %></li>
-              <li><%= nav_link "Others Active", other_people_path %></li>
-              <li><%= nav_link "Everybody", everybody_people_path %></li>
+              <%= nav_link "Police", police_people_path %>
+              <%= nav_link "CERT", cert_people_path %>
+              <%= nav_link "Active", people_path %>
+              <%= nav_link "Others Active", other_people_path %>
+              <%= nav_link "Everybody", everybody_people_path %>
               <li role="separator" class="divider"></li>
-              <li><%= nav_link "Applicants", applicants_people_path %></li>
-              <li><%= nav_link "Prospects", prospects_people_path %></li>
+              <%= nav_link "Applicants", applicants_people_path %>
+              <%= nav_link "Prospects", prospects_people_path %>
               <li role="separator" class="divider"></li>
-              <li><%= nav_link "Leave", leave_people_path %></li>
-              <li><%= nav_link "Inactive", inactive_people_path %></li>
-              <li><%= nav_link "Declined", declined_people_path %></li>
+              <%= nav_link "Leave", leave_people_path %>
+              <%= nav_link "Inactive", inactive_people_path %>
+              <%= nav_link "Declined", declined_people_path %>
               <li role="separator" class="divider"></li>
-              <li><%= nav_link "New Person", new_person_path if can? :create, Person %></li>
+              <%= nav_link "New Person", new_person_path if can? :create, Person %>
             </ul>
           </li>
 
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Events<span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><%#= nav_link "Scheduled", police_people_path %></li>
-                <li><%#= nav_link "Current", cert_people_path %></li>
-                <li><%#= nav_link "Past", people_path %></li>
-                <li><%#= nav_link "Cancelled", other_people_path %></li>
-                <li><%= nav_link "All Events", events_path %></li>
+                <%#= nav_link "Scheduled", police_people_path %>
+                <%#= nav_link "Current", cert_people_path %>
+                <%#= nav_link "Past", people_path %>
+                <%#= nav_link "Cancelled", other_people_path %>
+                <%= nav_link "All Events", events_path %>
                 <li role="separator" class="divider"></li>
-                <li><%= nav_link "New Event", new_event_path if can? :create, Event %></li>
+                <%= nav_link "New Event", new_event_path if can? :create, Event %>
               </ul>
           </li>
 
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Inventory<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><%= nav_link "Inventory", items_path %></li>
-              <li><%= nav_link "New Item", new_item_path if can? :create, Item  %></li>
+              <%= nav_link "Inventory", items_path %>
+              <%= nav_link "New Item", new_item_path if can? :create, Item  %>
             </ul>
           </li>
 
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Admin<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><%= nav_link "Courses", courses_path %></li>
-              <li><%= nav_link "Skills", skills_path %></li>
-              <li><%= nav_link "Titles", titles_path %></li>
-              <li><%= nav_link "Locations", locations_path %></li>
-              <li><%= nav_link "Resource Types", resource_types_path %></li>
-              <li><%= nav_link "Item Types", item_types_path %></li>
-              <li><%= nav_link "Users", users_path %></li>
+              <%= nav_link "Courses", courses_path %>
+              <%= nav_link "Skills", skills_path %>
+              <%= nav_link "Titles", titles_path %>
+              <%= nav_link "Locations", locations_path %>
+              <%= nav_link "Resource Types", resource_types_path %>
+              <%= nav_link "Item Types", item_types_path %>
+              <%= nav_link "Users", users_path %>
             </ul>
           </li>
 
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Reports<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><%= nav_link "Attendance Sheet", signin_people_path %></li>
-              <li><%= nav_link "Org Chart", orgchart_people_path %></li>
+              <%= nav_link "Attendance Sheet", signin_people_path %>
+              <%= nav_link "Org Chart", orgchart_people_path %>
             </ul>
           </li>
         </ul>
@@ -79,10 +79,10 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Access<span class="caret"></span></a>
             <ul class="dropdown-menu" >
               <% if user_signed_in? %>
-                <li><%= nav_link "#{current_user.email} Profile", edit_user_registration_path %></li>
-                <li><%= nav_link "Sign Out", destroy_user_session_path, :delete %></li>
+                <%= nav_link "#{current_user.email} Profile", edit_user_registration_path %>
+                <%= nav_link "Sign Out", destroy_user_session_path, :delete %>
               <% else %>
-                <li><%= nav_link "Sign In", new_user_session_path %></li>
+                <%= nav_link "Sign In", new_user_session_path %>
               <% end %>
             </ul>
           </li>
@@ -90,8 +90,8 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Help<span class="caret"></span></a>
             <ul class="dropdown-menu" >
-              <li><%= nav_link "Help", help_path %></li>
-              <li><%#= nav_link "Changelog", "/Changelog.md" %></li>
+              <%= nav_link "Help", help_path %>
+              <%#= nav_link "Changelog", "/Changelog.md" %>
             </ul>
           </li>
         </ul>
