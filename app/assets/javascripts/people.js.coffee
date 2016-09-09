@@ -5,16 +5,12 @@
 jQuery ->
   $("#person_firstname").focus();
   $('#people').dataTable
-    "columns": [
-                  { "visible": false },
-                  { "orderData": 1 },
-                  { "visible": false },
-                  { "orderData": 3 },
-                   null,
-                  { "visible": false },
-                  { "orderData": 5 },
-                  null,
-                  null,
-                  null,
-                  null,
-                  {"orderable" : false}]
+    columnDefs: [
+                  ## https://datatables.net/extensions/responsive/priority
+                  { responsivePriority: 1, targets: [0, 1, 3, 6, 11] },
+                  { visible: false, targets: [0, 2, 5]  },
+                  { orderData: 1, targets: 1 }
+                  { orderData: 3, targets: 1 }
+                  { orderData: 5, targets: 6 }
+                  { orderable: false, targets: 11 }
+                ]
