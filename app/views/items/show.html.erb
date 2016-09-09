@@ -1,8 +1,8 @@
 <% content_for :sidebar do %>
-  <%= link_to 'Return to Listing', items_path, class: 'btn btn-primary', style: 'width: 100%' %></br></br>
-  <%= edit_item_button %></br></br>
-  <%= add_repair_button %></br></br>
-  <%= add_inspection_button %></br></br>
+  <%= link_to 'Return to Listing', items_path, class: 'btn btn-primary', style: 'width: 100%' %><br/><br/>
+  <%= edit_item_button %><br/><br/>
+  <%= add_repair_button %><br/><br/>
+  <%= add_inspection_button %><br/><br/>
 <% end %>
 
 <h3>
@@ -64,7 +64,7 @@
 <% end %>
 
 <% @item.unique_ids.each do |id| %>
-  Unique ID <b><%= id.value %> <%= id.category %></b></br>
+  Unique ID <b><%= id.value %> <%= id.category %></b><br/>
 <% end %>
 
 <%= render(:partial => "repairs/repairs_table", :repairs => @item.repairs) || "No Repairs yet !" %>

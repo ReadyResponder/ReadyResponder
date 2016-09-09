@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
-  <%= link_to 'Return to Events', events_path, class: 'btn btn-default', style: 'width: 100%' %></br></br>
-  <%= link_to 'Edit Event', edit_event_path(@event), class: 'btn btn-default', style: 'width: 100%' if can? :edit, @event  %></br></br>
+  <%= link_to 'Return to Events', events_path, class: 'btn btn-default', style: 'width: 100%' %><br/><br/>
+  <%= link_to 'Edit Event', edit_event_path(@event), class: 'btn btn-default', style: 'width: 100%' if can? :edit, @event  %><br/><br/>
   <%= link_to "Excel", event_path(@event, format: "xlsx"), class: 'btn btn-default', style: 'width: 100%' %>
 <% end %>
 
@@ -56,5 +56,5 @@
 </div>
 
 <%= @event.comments %>
-Created <%= @event.created_at %></br>
+Created <%= @event.created_at %><br/>
 Last Modified <%= @event.updated_at %>

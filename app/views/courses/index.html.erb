@@ -14,15 +14,14 @@
   <tbody>
     <% @courses.each do |course| %>
       <tr>
-	<td><%= link_to course.name, course %></td>
-	<td><%= course.description %></td>
-	<td><%= course.category %></td>
-	<td><%= course.duration %></td>
-	<td><%= course.term %></td>
-  <td><%= course.status %></td>
-	<td><%= link_to 'Edit', edit_course_path(course), class: 'btn btn-xs btn-default' %></td>
-    </tr>
+        <td><%= link_to course.name, course %></td>
+        <td><%= course.description %></td>
+        <td><%= course.category %></td>
+        <td><%= course.duration %></td>
+        <td><%= course.term %></td>
+        <td><%= course.status %></td>
+        <td><%= link_to 'Edit', edit_course_path(course), class: 'btn btn-xs btn-default' %></td>
+      </tr>
     <% end %>
   </tbody>
 </table>
-

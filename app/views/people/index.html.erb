@@ -21,9 +21,9 @@
       <tr>
         <td><%= Person::TITLE_ORDER[person.title] %></td>
         <td><%= person.shortrank %></td>
-      	<td><%= person.lastname %></td>
+        <td><%= person.lastname %></td>
         <td><%= link_to person.fullname, person %></td>
-      	<td><%= person.icsid %></td>
+        <td><%= person.icsid %></td>
         <td><%= person.start_date %></td>
         <td title=<%= person.start_date %> >
           <%= distance_of_time_in_words(((person.end_date) || Date.today), person.start_date) if person.start_date %>
@@ -37,5 +37,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br />

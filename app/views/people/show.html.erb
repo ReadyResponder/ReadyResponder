@@ -36,23 +36,25 @@
   </ul>
 </div>
 
-<div class="accordion">
-  <% @person.titles.each do |title| %>
-    <% if @person.qualified?(title.name) then %>
-      <h3>Qualified for <%= title.name %></h3>
-      <div>No missing certifications</div>
-    <% else %>
-      <h3>NOT qualified for <%= title.name %></h3>
-      <div>
-        Skills Missing:
-        <ul>
-          <%= render(@person.missing_skills(title)) %>
-        </ul>
-      </div>
+<% if @person.titles.any? %>
+  <div class="accordion">
+    <% @person.titles.each do |title| %>
+      <% if @person.qualified?(title.name) then %>
+        <h3>Qualified for <%= title.name %></h3>
+        <div>No missing certifications</div>
+      <% else %>
+        <h3>NOT qualified for <%= title.name %></h3>
+        <div>
+          Skills Missing:
+          <ul>
+            <%= render(@person.missing_skills(title)) %>
+          </ul>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
-<br/><br/>
+  </div>
+  <br/><br/>
+<% end %>
 
 <div class="accordion">
   <h3>Skills (<%= @person.skills.uniq.count %>)</h3>
@@ -93,28 +95,28 @@
   <h3>Times (<%= @person.timecards.uniq.count %>)</h3>
   <div>
     <table class="table table-striped table-bordered">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Description</th>
-          <th>Intention</th>
-          <th>Intended Start</th>
-          <th>Intended End</th>
-          <th>Intended Hours</th>
-          <th>Outcome</th>
-          <th>Actual Start</th>
-          <th>Actual End</th>
-          <th>Actual Hours</th>
-          <th></th>
-        </tr>
-      </thead>
+      <% if @person.timecards.any? %>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Intention</th>
+            <th>Intended Start</th>
+            <th>Intended End</th>
+            <th>Intended Hours</th>
+            <th>Outcome</th>
+            <th>Actual Start</th>
+            <th>Actual End</th>
+            <th>Actual Hours</th>
+            <th></th>
+          </tr>
+        </thead>
+      <% end %>
       <tbody>
         <%= render(@person.timecards.uniq) || raw("No timecards yet !") %>
       </tbody>
     </table>
   </div>
-
-
 </div>
 
 <% content_for :parking do %>

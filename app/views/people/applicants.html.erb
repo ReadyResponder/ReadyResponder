@@ -10,12 +10,10 @@
   <tbody>
     <% @people.each do |person| %>
       <tr>
-      	<td><%= link_to person.fullname, person %></td>	
-      	<td><%= person.department %></td>
+        <td><%= link_to person.fullname, person %></td>
+        <td><%= person.department %></td>
         <td><%= link_to 'Edit', edit_person_path(person), class: 'btn btn-xs btn-default' if can? :update, person %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br />
