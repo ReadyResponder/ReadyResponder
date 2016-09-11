@@ -14,7 +14,6 @@
 //= require bootstrap-sprockets
 //= require jquery_ujs
 //= require datatables
-//  require turbolinks
 //= require jquery-ui/datepicker
 //= require jquery-ui/accordion
 //= require jquery-ui-timepicker-addon

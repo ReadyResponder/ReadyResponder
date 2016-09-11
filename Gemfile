@@ -52,7 +52,6 @@ group :test do
 end
 
 gem 'sass-rails'
-gem 'autoprefixer-rails'
 gem 'uglifier', '>= 1.0.3'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails'
