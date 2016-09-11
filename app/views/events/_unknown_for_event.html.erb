@@ -17,20 +17,14 @@
         <td><%= person.division1 %></td>
         <td><%= person.division2 %></td>
         <% if can? :create, Timecard and @event.status.in? ["Scheduled", "In-session"] %>
-          <td>
-            <%= link_to "Unavailable", schedule_path(@event, person.id, "Unavailable"), method: :Post, :class => 'btn btn-mini' %>
-          </td>
-          <td>
-            <%= link_to "Available", schedule_path(@event, person.id, "Available"), method: :Post, :class => 'btn btn-mini' %>
-          </td>
-          <td>
-            <%= link_to "Scheduled", schedule_path(@event, person.id, "Scheduled"), method: :Post, :class => 'btn btn-mini' %>
-          </td>
+          <td><%= link_to "Unavailable", schedule_path(@event, person.id, "Unavailable"), method: :Post, class: 'btn btn-xs btn-primary' %></td>
+          <td><%= link_to "Available", schedule_path(@event, person.id, "Available"), method: :Post, class: 'btn btn-xs btn-primary' %></td>
+          <td><%= link_to "Scheduled", schedule_path(@event, person.id, "Scheduled"), method: :Post, class: 'btn btn-xs btn-primary' %></td>
         <% else %>
           <td></td><td></td><td></td>
         <% end %>
         <% if can? :create, Timecard and @event.status.in? ["In-session", "Completed"] %>
-          <td><%= link_to "Worked", schedule_path(@event, person.id, "Worked"), method: :Post, :class => 'btn btn-mini' %></td>
+          <td><%= link_to "Worked", schedule_path(@event, person.id, "Worked"), method: :Post, class: 'btn btn-xs btn-primary' %></td>
         <% else %>
           <td></td>
         <% end %>

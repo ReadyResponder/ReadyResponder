@@ -5,9 +5,9 @@
       <th>Name</th>
       <th>Description</th>
       <th>Intention</th>
-      <th>Intented Start</th>
-      <th>Intented End</th>
-      <th>Intented Hours</th>
+      <th>Intended Start</th>
+      <th>Intended End</th>
+      <th>Intended Hours</th>
       <th>Outcome</th>
       <th>Actual Start</th>
       <th>Actual End</th>
@@ -29,8 +29,8 @@
         <td><%= timecard.actual_start_time  %></td>
         <td><%= timecard.actual_end_time %></td>
         <td><%= timecard.actual_duration %></td>
-        <td><%= link_to 'Edit', edit_timecard_path(timecard), :class => "btn btn-mini" if can? :update, timecard %></td>
-        <td><%= link_to 'Delete', timecard_path(timecard), :method => :delete, :class => "btn btn-mini" if can? :destroy, timecard %></td>
+        <td><%= link_to 'Edit', edit_timecard_path(timecard), class: 'btn btn-xs btn-primary' if can? :update, timecard %></td>
+        <td><%= link_to 'Delete', timecard_path(timecard), :method => :delete, class: 'btn btn-xs btn-danger' if can? :destroy, timecard %></td>
       </tr>
     <% end %>
   </tbody>

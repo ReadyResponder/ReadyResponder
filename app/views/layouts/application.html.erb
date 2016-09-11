@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= @page_title ||= "BEMA" %></title>
-    <%= favicon_link_tag '/favicon.png', :type => 'image/png' %>
+    <%= favicon_link_tag '/favicon.png', type: 'image/png' %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
@@ -11,18 +13,18 @@
     <% if current_user then %>
       <%= render "layouts/top_menu" %>
     <% end %>
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
-        <div id="sidebar" class="span1">
+        <div id="sidebar" class="col-md-2">
           <%= yield :sidebar %>
           <% flash.each do |name,msg| %>
             <%= content_tag :div, msg, id: "flash_#{name}" %>
           <% end %>
-          <%= content_tag :p, flash[notice], :class => "notice" if flash[notice] %>
-          <%= content_tag :p, flash[alert], :class => "alert" if flash[alert] %>
+          <%= content_tag :p, flash[notice], class: "notice" if flash[notice] %>
+          <%= content_tag :p, flash[alert], class: "alert" if flash[alert] %>
         </div>
-        <div class="span11">
-          <%= yield %></br></br>
+        <div class="col-md-10">
+          <%= yield %><br/><br/>
           <div>
             <%= render "layouts/footer" %>
           </div>

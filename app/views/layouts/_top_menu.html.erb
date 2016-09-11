@@ -1,97 +1,100 @@
-<div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+<nav class="navbar navbar-inverse navbar-fixed-top fh-fixedHeader" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-      </a>
-      <a class="brand" href="#">LIMS</a>
-      <div class="nav-collapse">
-        <ul class="nav">
+      </button>
+      <a class="navbar-brand" href="#">LIMS</a>
+    </div>
+
+    <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">People<b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">People<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><%= link_to "Police", police_people_path %></li>
-              <li><%= link_to "CERT", cert_people_path %></li>
-              <li><%= link_to "Active", people_path %></li>
-              <li><%= link_to "Others Active", other_people_path %></li>
-              <li><%= link_to "Everybody", everybody_people_path %></li>
-              <li class="divider"></li>
-              <li><%= link_to "Applicants", applicants_people_path %></li>
-              <li><%= link_to "Prospects", prospects_people_path %></li>
-              <li class="divider"></li>
-              <li><%= link_to "Leave", leave_people_path %></li>
-              <li><%= link_to "Inactive", inactive_people_path %></li>
-              <li><%= link_to "Declined", declined_people_path %></li>
-              <li class="divider"></li>
-              <li><%= link_to "New Person", new_person_path if can? :create, Person %></li>
+              <%= nav_link "Police", police_people_path %>
+              <%= nav_link "CERT", cert_people_path %>
+              <%= nav_link "Active", people_path %>
+              <%= nav_link "Others Active", other_people_path %>
+              <%= nav_link "Everybody", everybody_people_path %>
+              <li role="separator" class="divider"></li>
+              <%= nav_link "Applicants", applicants_people_path %>
+              <%= nav_link "Prospects", prospects_people_path %>
+              <li role="separator" class="divider"></li>
+              <%= nav_link "Leave", leave_people_path %>
+              <%= nav_link "Inactive", inactive_people_path %>
+              <%= nav_link "Declined", declined_people_path %>
+              <li role="separator" class="divider"></li>
+              <%= nav_link "New Person", new_person_path if can? :create, Person %>
             </ul>
           </li>
 
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Events<b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Events<span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><%#= link_to "Scheduled", police_people_path %></li>
-                <li><%#= link_to "Current", cert_people_path %></li>
-                <li><%#= link_to "Past", people_path %></li>
-                <li><%#= link_to "Cancelled", other_people_path %></li>
-                <li><%= link_to "All Events", events_path %></li>
-                <li class="divider"></li>
-                <li><%= link_to "New Event", new_event_path if can? :create, Event %></li>
+                <%#= nav_link "Scheduled", police_people_path %>
+                <%#= nav_link "Current", cert_people_path %>
+                <%#= nav_link "Past", people_path %>
+                <%#= nav_link "Cancelled", other_people_path %>
+                <%= nav_link "All Events", events_path %>
+                <li role="separator" class="divider"></li>
+                <%= nav_link "New Event", new_event_path if can? :create, Event %>
               </ul>
           </li>
 
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Inventory<b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Inventory<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><%= link_to "Inventory", items_path %></li>
-              <li><%= link_to "New Item", new_item_path if can? :create, Item  %></li>
+              <%= nav_link "Inventory", items_path %>
+              <%= nav_link "New Item", new_item_path if can? :create, Item  %>
             </ul>
           </li>
 
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Admin<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><%= link_to "Courses", courses_path %></li>
-              <li><%= link_to "Skills", skills_path %></li>
-              <li><%= link_to "Titles", titles_path %></li>
-              <li><%= link_to "Locations", locations_path %></li>
-              <li><%= link_to "Resource Types", resource_types_path %></li>
-              <li><%= link_to "Item Types", item_types_path %></li>
-              <li><%= link_to "Users", users_path %></li>
+              <%= nav_link "Courses", courses_path %>
+              <%= nav_link "Skills", skills_path %>
+              <%= nav_link "Titles", titles_path %>
+              <%= nav_link "Locations", locations_path %>
+              <%= nav_link "Resource Types", resource_types_path %>
+              <%= nav_link "Item Types", item_types_path %>
+              <%= nav_link "Users", users_path %>
             </ul>
           </li>
 
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reports<b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Reports<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><%= link_to "Attendance Sheet", signin_people_path %></li>
-              <li><%= link_to "Org Chart", orgchart_people_path %></li>
+              <%= nav_link "Attendance Sheet", signin_people_path %>
+              <%= nav_link "Org Chart", orgchart_people_path %>
             </ul>
           </li>
-
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle pull-right" data-toggle="dropdown">Access<b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Access<span class="caret"></span></a>
             <ul class="dropdown-menu" >
               <% if user_signed_in? %>
-                <li><%= link_to "#{current_user.email} Profile", edit_user_registration_path %></li>
-                <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></li>
+                <%= nav_link "#{current_user.email} Profile", edit_user_registration_path %>
+                <%= nav_link "Sign Out", destroy_user_session_path, :delete %>
               <% else %>
-                <li><%= link_to "Sign In", new_user_session_path %></li>
+                <%= nav_link "Sign In", new_user_session_path %>
               <% end %>
             </ul>
           </li>
 
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle pull-right" data-toggle="dropdown">Help<b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Help<span class="caret"></span></a>
             <ul class="dropdown-menu" >
-              <li><%= link_to "Help", help_path %></li>
-              <li><%#= link_to "Changelog", "/Changelog.md" %></li>
+              <%= nav_link "Help", help_path %>
+              <%#= nav_link "Changelog", "/Changelog.md" %>
             </ul>
           </li>
         </ul>
       </div>
     </div>
-  </div>
-</div>
+</nav>

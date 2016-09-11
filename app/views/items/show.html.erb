@@ -1,26 +1,27 @@
 <% content_for :sidebar do %>
-  <%= link_to 'Return to Listing', items_path, :class => 'btn' %></br></br>
-  <%= edit_item_button %></br></br>
-  <%= add_repair_button %></br></br>
-  <%= add_inspection_button %></br></br>
+  <%= link_to 'Return to Listing', items_path, class: 'btn btn-primary', style: 'width: 100%' %><br/><br/>
+  <%= edit_item_button %><br/><br/>
+  <%= add_repair_button %><br/><br/>
+  <%= add_inspection_button %><br/><br/>
 <% end %>
-<p>
-  <h3>
-    <span class="badge <%= 'badge-success' if @item.status == 'Available' %>">
-      <%= @item.status %>
-    </span>&nbsp;
-    <%= @item.name + " ( " + @item.brand + " " + @item.model + " )" %></br>
-  </h3>
-</p>
+
+<h3>
+  <span class="label <%= item_label(@item) %>">
+    <%= @item.status %>
+  </span> &nbsp;
+  <%= @item.name + " ( " + @item.brand + " " + @item.model + " )" %>
+</h3>
 
 <% if @item.description.present? %>
   <p><b>Description:</b> <%= @item.description %></p>
 <% end %>
 
-<p><b>Location:</b> <%= @item.location %></p>
+<% if @item.location.present? %>
+  <p><b>Location:</b> <%= @item.location %></p>
+<% end %>
 
 <% if @item.source.present? %>
-  <p>Source:<b><%= @item.source %></b></p>
+  <p><b>Source:</b> <%= @item.source %></p>
 <% end %>
 
 <% if @item.item_type.present? %>
@@ -46,6 +47,7 @@
 <% if @item.purchase_date.present? %>
   <p><b>Purchase date:</b> <%= @item.purchase_date %></p>
 <% end %>
+
 <p><b>Expenses in last 6 months </b><%= number_to_currency @item.recent_costs %></p>
 
 <% if @item.purchase_amt.present? %>
@@ -62,7 +64,7 @@
 <% end %>
 
 <% @item.unique_ids.each do |id| %>
-  Unique ID <b><%= id.value %> <%= id.category %></b></br>
+  Unique ID <b><%= id.value %> <%= id.category %></b><br/>
 <% end %>
 
 <%= render(:partial => "repairs/repairs_table", :repairs => @item.repairs) || "No Repairs yet !" %>

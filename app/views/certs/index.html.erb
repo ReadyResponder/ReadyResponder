@@ -1,9 +1,9 @@
 <% content_for :sidebar do %>
-  <center><h1>Listing Certs</h1></br>
-  <%= link_to 'New Cert', new_cert_path, :class => 'btn' unless cannot? :create, Cert %></center>
+  <h1>Listing Certs</h1>
+  <%= link_to 'New Cert', new_cert_path, class: 'btn btn-primary', style: 'width: 100%' unless cannot? :create, Cert %>
 <% end %>
 
-<table id="certs" class="datatable display table table-striped table-bordered" >
+<table id="certs" class="generic_datatable table table-striped table-bordered" >
   <thead>
     <tr>
       <th>Person</th>
@@ -28,10 +28,8 @@
 	<td><%= cert.cert_number %></td>
 	<td><%= cert.issued_date %></td>
 	<td><%= cert.expiration_date %></td>
-	<td><%= link_to 'Edit', edit_cert_path(cert), :class => 'btn btn-mini btn-primary' unless cannot? :edit, cert %></td>
+	<td><%= link_to 'Edit', edit_cert_path(cert), class: 'btn btn-xs btn-primary' unless cannot? :edit, cert %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br />

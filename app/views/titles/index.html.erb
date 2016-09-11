@@ -1,4 +1,4 @@
-<table id="titles" class="datatable display table table-striped table-bordered" >
+<table id="titles" class="datatable table table-striped table-bordered" >
   <caption><h3><%= @page_title %></h3></caption>
   <thead>
     <tr>
@@ -11,10 +11,10 @@
   <tbody>
     <% @titles.each do |title| %>
       <tr>
-	<td><%= link_to title.name, title_path(title) %></td>
-	<td><%= title.status %></td>
-	<td><%= title.description %></td>
-	<td><%= link_to 'Edit', edit_title_path(title), :class => 'btn btn-mini' %></td>
+        <td><%= link_to title.name, title_path(title) %></td>
+        <td><%= title.status %></td>
+        <td><%= title.description %></td>
+        <td><%= link_to 'Edit', edit_title_path(title), class: 'btn btn-xs btn-primary' %></td>
       </tr>
     <% end %>
   </tbody>

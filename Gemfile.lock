@@ -1,13 +1,3 @@
-GIT
-  remote: git://github.com/rweng/jquery-datatables-rails.git
-  revision: b8e6b6fa51e0074ea44b4771a68b1817a14023fc
-  specs:
-    jquery-datatables-rails (3.4.0)
-      actionpack (>= 3.1)
-      jquery-rails
-      railties (>= 3.1)
-      sass-rails
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -47,9 +37,11 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.4.0)
-    airbrussh (1.1.0)
+    airbrussh (1.1.1)
       sshkit (>= 1.6.1, != 1.7.0)
     arel (6.0.3)
+    autoprefixer-rails (6.4.1)
+      execjs
     bcrypt (3.1.11)
     bcrypt-ruby (3.0.1)
     better_errors (2.1.1)
@@ -58,13 +50,14 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-sass (2.3.2.0)
-      sass (~> 3.2)
+    bootstrap-sass (3.3.7)
+      autoprefixer-rails (>= 5.2.1)
+      sass (>= 3.3.4)
     builder (3.2.2)
     byebug (9.0.5)
     callsite (0.0.11)
     cancancan (1.15.0)
-    capistrano (3.6.0)
+    capistrano (3.6.1)
       airbrussh (>= 1.0.0)
       capistrano-harrow
       i18n
@@ -77,7 +70,7 @@ GEM
     capistrano-rails (1.1.7)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
-    capybara (2.8.0)
+    capybara (2.8.1)
       addressable
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -124,7 +117,7 @@ GEM
       railties (>= 3.0.0)
     ffi (1.9.14)
     formatador (0.2.5)
-    geocoder (1.3.7)
+    geocoder (1.4.0)
     git-version-bump (0.15.1)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
@@ -153,9 +146,6 @@ GEM
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
-    jquery-turbolinks (2.1.0)
-      railties (>= 3.1.0)
-      turbolinks
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
     json (1.8.3)
@@ -212,7 +202,7 @@ GEM
       websocket-driver (>= 0.2.0)
     polyamorous (1.3.1)
       activerecord (>= 3.0)
-    power_assert (0.3.0)
+    power_assert (0.3.1)
     protected_attributes (1.1.3)
       activemodel (>= 4.0.1, < 5.0)
     pry (0.10.4)
@@ -271,7 +261,7 @@ GEM
       rspec-core (~> 3.5.0)
       rspec-expectations (~> 3.5.0)
       rspec-mocks (~> 3.5.0)
-    rspec-core (3.5.2)
+    rspec-core (3.5.3)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
       diff-lcs (>= 1.2.0, < 2.0)
@@ -279,7 +269,7 @@ GEM
     rspec-mocks (3.5.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.5.0)
-    rspec-rails (3.5.1)
+    rspec-rails (3.5.2)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
@@ -302,7 +292,7 @@ GEM
     shellany (0.0.1)
     shoulda-matchers (3.1.1)
       activesupport (>= 4.0.0)
-    simple_form (3.2.1)
+    simple_form (3.3.1)
       actionpack (> 4, < 5.1)
       activemodel (> 4, < 5.1)
     sinatra (1.4.7)
@@ -317,7 +307,7 @@ GEM
     sprockets (3.7.0)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
-    sprockets-rails (3.1.1)
+    sprockets-rails (3.2.0)
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
@@ -346,11 +336,10 @@ GEM
       raindrops (~> 0.7)
     warden (1.2.6)
       rack (>= 1.0)
-    web-console (2.3.0)
-      activemodel (>= 4.0)
-      binding_of_caller (>= 0.7.2)
-      railties (>= 4.0)
-      sprockets-rails (>= 2.0, < 4.0)
+    web-console (3.3.0)
+      activemodel (>= 4.2)
+      debug_inspector
+      railties (>= 4.2)
     websocket-driver (0.6.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
@@ -364,7 +353,7 @@ DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
   better_errors
   binding_of_caller
-  bootstrap-sass (= 2.3.2.0)
+  bootstrap-sass (= 3.3.7)
   byebug
   cancancan
   capistrano-rails
@@ -377,9 +366,7 @@ DEPENDENCIES
   geocoder
   guard-livereload
   guard-rspec
-  jquery-datatables-rails!
   jquery-rails
-  jquery-turbolinks
   jquery-ui-rails
   launchy
   letter_opener
@@ -404,7 +391,7 @@ DEPENDENCIES
   turbolinks
   uglifier (>= 1.0.3)
   unicorn
-  web-console (~> 2.0)
+  web-console (~> 3.0)
 
 BUNDLED WITH
-   1.12.5
+   1.13.0

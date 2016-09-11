@@ -1,4 +1,4 @@
-<table id="repairs" class="generic_datatable datatable display table table-striped table-bordered">
+<table id="repairs" class="generic_datatable table table-striped table-bordered">
   <caption><h3><%= "Repairs" %></h3></caption>
   <thead>
     <tr>
@@ -19,7 +19,7 @@
         <td><%= number_to_currency(repair.cost) %></td>
         <td><%= repair.service_date %></td>
         <td><%= link_to 'Edit', edit_repair_path(repair),
-                :class => 'btn btn-mini btn-primary' unless cannot? :edit, repair %></td>
+                class: 'btn btn-xs btn-primary' unless cannot? :edit, repair %></td>
       </tr>
     <% end %>
   </tbody>

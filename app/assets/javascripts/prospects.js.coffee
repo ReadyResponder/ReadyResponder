@@ -4,10 +4,6 @@
 
 jQuery ->
   $('#prospects').dataTable
-    sPaginationType: "full_numbers"
-    "aoColumns": [null,
+    "columns": [null,
                   null,
-                  {"bSortable" : false}],
-    'bJQueryUI': true
-    'bRetrieve': true
-    'iDisplayLength': 100
+                  {"orderable" : false}],

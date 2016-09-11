@@ -1,9 +1,9 @@
 <% content_for :sidebar do %>
   <h1>Listing Channels</h1>
-  <%= link_to 'New Channel', new_channel_path, :class => 'btn' unless cannot? :create, Channel  %>
+  <%= link_to 'New Channel', new_channel_path, class: 'btn btn-primary', style: 'width: 100%' unless cannot? :create, Channel %>
 <% end %>
 
-<table id="channels" class="datatable display table table-striped table-bordered" >
+<table id="channels" class="generic_datatable table table-striped table-bordered" >
   <thead>
     <tr>
       <th>Person</th>
@@ -28,11 +28,11 @@
     <td><%= channel.carrier %></td>
     <td><%= channel.last_verified %></td>
     <td><%= channel.usage %></td>
-    <td><%= link_to 'Edit', edit_channel_path(channel), :class => 'btn btn-mini btn-primary' unless cannot? :edit, channel %></td>
+    <td><%= link_to 'Edit', edit_channel_path(channel), class: 'btn btn-xs btn-primary' unless cannot? :edit, channel %></td>
   </tr>
 <% end %>
 </table>
 
-<br />
+<br/>
 
 <%= link_to 'New Channel', new_channel_path %>

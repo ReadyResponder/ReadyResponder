@@ -1,4 +1,4 @@
-<table id="inspections" class="generic_datatable datatable display table table-striped table-bordered" >
+<table id="inspections" class="generic_datatable table table-striped table-bordered" >
   <caption><h3><%= "Inspections" %></h3></caption>
   <thead>
     <tr>
@@ -12,12 +12,12 @@
       <tr>
         <td><%= link_to inspection.inspection_date, inspection_path(inspection) %></td>
         <td>
-          <span class="badge <%= 'badge-success' if inspection.status == 'Complete - Passed' %>">
+          <span class="label <%= success_or_warning_label(inspection.status, 'Complete - Passed') %>">
             <%= inspection.status %>
           </span>
         </td>
         <td><%= link_to 'Edit', edit_inspection_path(inspection),
-                :class => 'btn btn-mini btn-primary' unless cannot? :edit, inspection %></td>
+                class: 'btn btn-xs btn-primary' unless cannot? :edit, inspection %></td>
       </tr>
     <% end %>
   </tbody>

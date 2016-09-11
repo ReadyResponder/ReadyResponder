@@ -41,7 +41,7 @@ end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+  gem 'web-console', '~> 3.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
@@ -81,11 +81,8 @@ gem 'capistrano-rails', group: :development
 # # This is used by Capistrano, but 2.8 has issues
 # gem "net-ssh", "~> 2.7.0"
 
-# The following provides the styling for the datatables, among other things
 gem 'jquery-ui-rails'
-gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
-gem 'jquery-turbolinks'
-gem 'bootstrap-sass', '2.3.2.0'
+gem 'bootstrap-sass', '3.3.7'
 # gem 'chosen-rails'
 
 gem 'protected_attributes'

@@ -1,4 +1,4 @@
-<table id="courses" class="datatable display table table-striped table-bordered" >
+<table id="courses" class="datatable table table-striped table-bordered" >
   <caption><h3><%= @page_title %></h3></caption>
   <thead>
     <tr>
@@ -14,15 +14,14 @@
   <tbody>
     <% @courses.each do |course| %>
       <tr>
-	<td><%= link_to course.name, course %></td>
-	<td><%= course.description %></td>
-	<td><%= course.category %></td>
-	<td><%= course.duration %></td>
-	<td><%= course.term %></td>
-  <td><%= course.status %></td>
-	<td><%= link_to 'Edit', edit_course_path(course), :class => 'btn btn-mini' %></td>
-    </tr>
+        <td><%= link_to course.name, course %></td>
+        <td><%= course.description %></td>
+        <td><%= course.category %></td>
+        <td><%= course.duration %></td>
+        <td><%= course.term %></td>
+        <td><%= course.status %></td>
+        <td><%= link_to 'Edit', edit_course_path(course), class: 'btn btn-xs btn-primary' %></td>
+      </tr>
     <% end %>
   </tbody>
 </table>
-

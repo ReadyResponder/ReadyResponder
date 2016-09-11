@@ -1,9 +1,9 @@
 <% content_for :sidebar do %>
-  <center><h1>Listing Roles</h1></br>
-  <%= link_to 'New Role', new_role_path, :class => 'btn' unless cannot? :create, Role %></center>
+  <h1>Listing Roles</h1>
+  <%= link_to 'New Role', new_role_path, class: 'btn btn-primary', style: 'width: 100%' unless cannot? :create, Role %>
 <% end %>
 
-<table id="roles" class="display table table-striped table-bordered" >
+<table id="roles" class="generic_datatable table table-striped table-bordered" >
   <thead>
     <tr>
       <th>Name</th>
@@ -13,8 +13,8 @@
   <tbody>
     <% @roles.each do |role| %>
       <tr>
-	<td><%= link_to role.name, role %></td>
-	<td><%= link_to 'Edit', edit_role_path(role), :class => "btn btn-primary" unless cannot? :update, role %></td>
+        <td><%= link_to role.name, role %></td>
+        <td><%= link_to 'Edit', edit_role_path(role), class: 'btn btn-xs btn-primary' unless cannot? :update, role %></td>
      </tr>
     <% end %>
   </tbody>

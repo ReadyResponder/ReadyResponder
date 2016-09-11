@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
-  <h2>New Certification</h2></br>
-    <%= link_to 'Cancel', certs_path, :class => 'btn'  %>
+  <h2>New Certification</h2>
+  <%= link_to 'Cancel', certs_path, class: 'btn btn-primary', style: 'width: 100%' %>
 <% end %>
 
 <%= render 'form' %>
