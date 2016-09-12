@@ -1,7 +1,7 @@
 <% content_for :sidebar do %>
-  <%= link_to 'Return to Events', events_path, class: 'btn btn-primary', style: 'width: 100%' %><br/><br/>
-  <%= link_to 'Edit Event', edit_event_path(@event), class: 'btn btn-primary', style: 'width: 100%' if can? :edit, @event  %><br/><br/>
-  <%= link_to "Excel", event_path(@event, format: "xlsx"), class: 'btn btn-primary', style: 'width: 100%' %>
+  <%= sidebar_button_link 'Return to Events', events_path %>
+  <%= sidebar_button_link 'Edit Event', edit_event_path(@event) if can? :edit, @event %>
+  <%= sidebar_button_link "Excel", event_path(@event, format: "xlsx") %>
 <% end %>
 
 <h3><%= @event.title %></h3>

@@ -1,4 +1,7 @@
-<p id="notice"><%= notice %></p>
+<% content_for :sidebar do %>
+  <%= sidebar_button_link 'Edit', edit_department_path(@department) %>
+  <%= sidebar_button_link 'Back', departments_path %>
+<% end %>
 
 <p>
   <b>Name:</b>
@@ -19,7 +22,3 @@
   <b>Description:</b>
   <%= @department.description %>
 </p>
-
-
-<%= link_to 'Edit', edit_department_path(@department) %> |
-<%= link_to 'Back', departments_path %>

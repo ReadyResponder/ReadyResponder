@@ -22,9 +22,9 @@
         <td><%= item_type.is_groupable %></td>
         <td><%= item_type.is_a_group %></td>
         <td><%= item_type.parent_id %></td>
-        <td><%= link_to 'Show', item_type %></td>
-        <td><%= link_to 'Edit', edit_item_type_path(item_type) %></td>
-        <td><%= link_to 'Destroy', item_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= table_button_link 'Show', item_type %></td>
+        <td><%= table_button_link 'Edit', edit_item_type_path(item_type) %></td>
+        <td><%= table_button_link 'Destroy', item_type, method: :delete %></td>
       </tr>
     <% end %>
   </tbody>
@@ -32,4 +32,4 @@
 
 <br/>
 
-<%= link_to 'New Item type', new_item_type_path %>
+<%= independent_button_link 'New Item type', new_item_type_path %>

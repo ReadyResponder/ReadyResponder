@@ -12,7 +12,6 @@
       <th>Actual Start</th>
       <th>Actual End</th>
       <th>Actual Hours</th>
-
       <th colspan = 2></th>
     </tr>
   </thead>
@@ -29,8 +28,8 @@
         <td><%= timecard.actual_start_time  %></td>
         <td><%= timecard.actual_end_time %></td>
         <td><%= timecard.actual_duration %></td>
-        <td><%= link_to 'Edit', edit_timecard_path(timecard), class: 'btn btn-xs btn-primary' if can? :update, timecard %></td>
-        <td><%= link_to 'Delete', timecard_path(timecard), :method => :delete, class: 'btn btn-xs btn-danger' if can? :destroy, timecard %></td>
+        <td><%= table_button_link 'Edit', edit_timecard_path(timecard) if can? :update, timecard %></td>
+        <td><%= table_button_link 'Delete', timecard_path(timecard), method: :delete if can? :destroy, timecard %></td>
       </tr>
     <% end %>
   </tbody>

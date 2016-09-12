@@ -19,9 +19,9 @@
         <td><%= department.status %></td>
         <td><%= department.contact_id %></td>
         <td><%= department.description %></td>
-        <td><%= link_to 'Show', department %></td>
-        <td><%= link_to 'Edit', edit_department_path(department) %></td>
-        <td><%= link_to 'Destroy', department, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= table_button_link 'Show', department %></td>
+        <td><%= table_button_link 'Edit', edit_department_path(department) %></td>
+        <td><%= table_button_link 'Destroy', department, method: :delete %></td>
       </tr>
     <% end %>
   </tbody>
@@ -29,4 +29,4 @@
 
 <br/>
 
-<%= link_to 'New Department', new_department_path %>
+<%= independent_button_link 'New Department', new_department_path %>

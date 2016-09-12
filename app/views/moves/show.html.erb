@@ -1,4 +1,7 @@
-<p id="notice"><%= notice %></p>
+<% content_for :sidebar do %>
+  <%= sidebar_button_link 'Edit', edit_move_path(@move) %>
+  <%= sidebar_button_link 'Back', moves_path %>
+<% end %>
 
 <p>
   <b>Item:</b>
@@ -24,7 +27,3 @@
   <b>Reason:</b>
   <%= @move.reason %>
 </p>
-
-
-<%= link_to 'Edit', edit_move_path(@move) %> |
-<%= link_to 'Back', moves_path %>

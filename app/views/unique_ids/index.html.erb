@@ -19,9 +19,9 @@
         <td><%= unique_id.status %></td>
         <td><%= unique_id.category %></td>
         <td><%= unique_id.value %></td>
-        <td><%= link_to 'Show', unique_id %></td>
-        <td><%= link_to 'Edit', edit_unique_id_path(unique_id) %></td>
-        <td><%= link_to 'Destroy', unique_id, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= table_button_link 'Show', unique_id %></td>
+        <td><%= table_button_link 'Edit', edit_unique_id_path(unique_id) %></td>
+        <td><%= table_button_link 'Destroy', unique_id, method: :delete %></td>
       </tr>
     <% end %>
   </tbody>
@@ -29,4 +29,4 @@
 
 <br/>
 
-<%= link_to 'New Unique', new_unique_id_path %>
+<%= independent_button_link 'New Unique', new_unique_id_path %>

@@ -1,8 +1,8 @@
 <% content_for :sidebar do %>
-  <%= link_to 'Return to Listing', items_path, class: 'btn btn-primary', style: 'width: 100%' %><br/><br/>
-  <%= edit_item_button %><br/><br/>
-  <%= add_repair_button %><br/><br/>
-  <%= add_inspection_button %><br/><br/>
+  <%= sidebar_button_link 'Return to Listing', items_path %>
+  <%= edit_item_button %>
+  <%= add_repair_button %>
+  <%= add_inspection_button %>
 <% end %>
 
 <h3>

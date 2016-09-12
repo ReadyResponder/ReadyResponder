@@ -19,21 +19,18 @@ module ItemsHelper
     return nil if cannot? :edit, @item
     return link_to 'Edit Item',
                    edit_item_path(@item),
-                   class: 'btn btn-primary',
-                   style: 'width: 100%'
+                   class: 'btn btn-block btn-primary'
   end
   def add_repair_button
     return nil if cannot? :create, Repair
     return link_to 'Add Repair',
                    new_item_repair_path(@item),
-                   class: 'btn btn-primary',
-                   style: 'width: 100%'
+                   class: 'btn btn-block btn-primary'
   end
   def add_inspection_button
     return nil if cannot? :create, Inspection
     return link_to 'Add Inspection',
                    new_item_inspection_path(@item),
-                   class: 'btn btn-primary',
-                   style: 'width: 100%'
+                   class: 'btn btn-block btn-primary'
   end
 end

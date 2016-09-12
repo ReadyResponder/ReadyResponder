@@ -9,5 +9,5 @@
   <td><%= timecard.actual_start_time  %></td>
   <td><%= timecard.actual_end_time %></td>
   <td><%= timecard.actual_duration %></td>
-  <td><%= link_to 'Edit', edit_timecard_path(timecard), class: 'btn btn-xs btn-primary' if can? :update, timecard %></td>
+  <td><%= table_button_link 'Edit', edit_timecard_path(timecard) if can? :update, timecard %></td>
 </tr>

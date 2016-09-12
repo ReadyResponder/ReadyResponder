@@ -1,8 +1,11 @@
-<p id="notice"><%= notice %></p>
+<% content_for :sidebar do %>
+  <%= sidebar_button_link 'Edit', edit_location_path(@location) %>
+  <%= sidebar_button_link 'Back', locations_path %>
+<% end %>
 
 <p>
   <b>Department:</b>
-  <%= @location.department.name %>
+  <%= @location.department&.name %>
 </p>
 
 <p>
@@ -39,7 +42,3 @@
   <b>Lon:</b>
   <%= @location.lon %>
 </p>
-
-
-<%= link_to 'Edit', edit_location_path(@location) %> |
-<%= link_to 'Back', locations_path %>

@@ -1,7 +1,7 @@
 <% content_for :sidebar do %>
-  <%= link_to 'Return to Listing', channels_path, class: 'btn btn-primary', style: 'width: 100%' %><br/><br/>
-  <%#= link_to 'Edit Channel', edit_channel_path(@channel), class: 'btn btn-primary', style: 'width: 100%' unless cannot? :edit, @channel %><br/><br/>
-  <%#= link_to 'New Channel', new_person_channel_path(@channel.person), class: 'btn btn-primary', style: 'width: 100%' unless cannot? :create, Channel %>
+  <%= sidebar_button_link 'Return to Listing', channels_path %>
+  <%#= sidebar_button_link 'Edit Channel', edit_channel_path(@channel) unless cannot? :edit, @channel %>
+  <%#= sidebar_button_link 'New Channel', new_person_channel_path(@channel.person) unless cannot? :create, Channel %>
 <% end %>
 
 <p>

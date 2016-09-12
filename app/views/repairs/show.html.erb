@@ -1,7 +1,7 @@
 <% content_for :sidebar do %>
   <h1>Repair</h1>
-  <%= link_to 'Repairs List', repairs_path , class: 'btn btn-primary', style: 'width: 100%' %><br/><br/>
-  <%= link_to 'Items List', items_path , class: 'btn btn-primary', style: 'width: 100%' %>
+  <%= sidebar_button_link 'Repairs List', repairs_path %>
+  <%= sidebar_button_link 'Items List', items_path %>
 <% end %>
 
 <p>
@@ -39,4 +39,3 @@
   <b>Comments:</b>
   <%= @repair.comments %>
 </p>
-

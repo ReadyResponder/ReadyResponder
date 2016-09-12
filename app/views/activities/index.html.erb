@@ -19,9 +19,9 @@
         <td><%= activity.author %></td>
         <td><%= activity.loggable_id %></td>
         <td><%= activity.loggable_type %></td>
-        <td><%= link_to 'Show', activity %></td>
-        <td><%= link_to 'Edit', edit_activity_path(activity) %></td>
-        <td><%= link_to 'Destroy', activity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= table_button_link 'Show', activity %></td>
+        <td><%= table_button_link 'Edit', edit_activity_path(activity) %></td>
+        <td><%= table_button_link 'Destroy', activity, method: :delete %></td>
       </tr>
     <% end %>
   </tbody>
@@ -29,4 +29,4 @@
 
 <br/>
 
-<%= link_to 'New Activity', new_activity_path %>
+<%= independent_button_link 'New Activity', new_activity_path %>

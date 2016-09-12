@@ -1,4 +1,7 @@
-<p id="notice"><%= notice %></p>
+<% content_for :sidebar do %>
+  <%= sidebar_button_link 'Edit', edit_resource_type_path(@resource_type) %>
+  <%= sidebar_button_link 'Back', resource_types_path %>
+<% end %>
 
 <p>
   <b>Name:</b>
@@ -24,7 +27,3 @@
   <b>Fema kind:</b>
   <%= @resource_type.fema_kind %>
 </p>
-
-
-<%= link_to 'Edit', edit_resource_type_path(@resource_type) %> |
-<%= link_to 'Back', resource_types_path %>

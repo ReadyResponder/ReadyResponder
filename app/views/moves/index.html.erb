@@ -21,9 +21,9 @@
         <td><%= move.locatable_type %></td>
         <td><%= move.comments %></td>
         <td><%= move.reason %></td>
-        <td><%= link_to 'Show', move %></td>
-        <td><%= link_to 'Edit', edit_move_path(move) %></td>
-        <td><%= link_to 'Destroy', move, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= table_button_link 'Show', move %></td>
+        <td><%= table_button_link 'Edit', edit_move_path(move) %></td>
+        <td><%= table_button_link 'Destroy', move, method: :delete %></td>
       </tr>
     <% end %>
   </tbody>
@@ -31,4 +31,4 @@
 
 <br/>
 
-<%= link_to 'New Move', new_move_path %>
+<%= independent_button_link 'New Move', new_move_path %>

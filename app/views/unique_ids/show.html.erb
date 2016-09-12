@@ -1,4 +1,7 @@
-<p id="notice"><%= notice %></p>
+<% content_for :sidebar do %>
+  <%= sidebar_button_link 'Edit', edit_unique_id_path(@unique_id) %>
+  <%= sidebar_button_link 'Back', unique_ids_path %>
+<% end %>
 
 <p>
   <b>Item:</b>
@@ -19,7 +22,3 @@
   <b>Value:</b>
   <%= @unique_id.value %>
 </p>
-
-
-<%= link_to 'Edit', edit_unique_id_path(@unique_id) %> |
-<%= link_to 'Back', unique_ids_path %>

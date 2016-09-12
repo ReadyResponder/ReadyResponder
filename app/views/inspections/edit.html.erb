@@ -1,6 +1,7 @@
-<h1>Editing inspection</h1>
+<% content_for :sidebar do %>
+  <h1>Editing inspection</h1>
+  <%= sidebar_button_link 'Show', @inspection %>
+  <%= sidebar_button_link 'Back', inspections_path %>
+<% end %>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @inspection %> |
-<%= link_to 'Back', inspections_path %>

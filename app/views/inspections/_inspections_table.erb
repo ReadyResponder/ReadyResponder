@@ -16,8 +16,7 @@
             <%= inspection.status %>
           </span>
         </td>
-        <td><%= link_to 'Edit', edit_inspection_path(inspection),
-                class: 'btn btn-xs btn-primary' unless cannot? :edit, inspection %></td>
+        <td><%= table_button_link 'Edit', edit_inspection_path(inspection) unless cannot? :edit, inspection %></td>
       </tr>
     <% end %>
   </tbody>

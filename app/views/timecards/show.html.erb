@@ -1,7 +1,7 @@
 <%# present @timecard do |timecard_presenter| %>
 <% content_for :sidebar do %>
-  <%= link_to 'Return to Timecards', timecards_path, class: 'btn btn-primary', style: 'width: 100%'  %><br/><br/>
-  <%= link_to 'Edit Timecard', edit_timecard_path(@timecard), class: 'btn btn-primary', style: 'width: 100%' if can? :edit, @timecard %><br/><br/>
+  <%= sidebar_button_link 'Return to Timecards', timecards_path %>
+  <%= sidebar_button_link 'Edit Timecard', edit_timecard_path(@timecard) if can? :edit, @timecard %>
 <% end %>
 
 <p>

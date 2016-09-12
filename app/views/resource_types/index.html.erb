@@ -21,9 +21,9 @@
         <td><%= resource_type.description %></td>
         <td><%= resource_type.fema_code %></td>
         <td><%= resource_type.fema_kind %></td>
-        <td><%= link_to 'Show', resource_type %></td>
-        <td><%= link_to 'Edit', edit_resource_type_path(resource_type) %></td>
-        <td><%= link_to 'Destroy', resource_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= table_button_link 'Show', resource_type %></td>
+        <td><%= table_button_link 'Edit', edit_resource_type_path(resource_type) %></td>
+        <td><%= table_button_link 'Destroy', resource_type, method: :delete %></td>
       </tr>
     <% end %>
   </tbody>
@@ -31,4 +31,4 @@
 
 <br/>
 
-<%= link_to 'New Resource type', new_resource_type_path %>
+<%= independent_button_link 'New Resource type', new_resource_type_path %>

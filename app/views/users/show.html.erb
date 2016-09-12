@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
-  <%= link_to 'Return to Listing', users_path, class: 'btn btn-primary', style: 'width: 100%' %><br/><br/>
-  <%= link_to 'Edit User', edit_user_path(@user), class: 'btn btn-primary', style: 'width: 100%' unless cannot? :edit, @user  %><br/><br/>
+  <%= sidebar_button_link 'Return to Listing', users_path %>
+  <%= sidebar_button_link 'Edit User', edit_user_path(@user) unless cannot? :edit, @user  %>
 <% end %>
 
 <h2><%= @user.firstname %> <%= @user.lastname %></h2>

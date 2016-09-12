@@ -1,6 +1,7 @@
-<h1>Editing channel</h1>
+<% content_for :sidebar do %>
+  <h1>Editing channel</h1>
+  <%= sidebar_button_link 'Show', @channel %>
+  <%= sidebar_button_link 'Back', channels_path %>
+<% end %>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @channel %> |
-<%= link_to 'Back', channels_path %>

@@ -20,7 +20,7 @@
         <td><%= course.duration %></td>
         <td><%= course.term %></td>
         <td><%= course.status %></td>
-        <td><%= link_to 'Edit', edit_course_path(course), class: 'btn btn-xs btn-primary' %></td>
+        <td><%= table_button_link 'Edit', edit_course_path(course) %></td>
       </tr>
     <% end %>
   </tbody>
