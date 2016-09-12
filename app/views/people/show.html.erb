@@ -2,6 +2,7 @@
   <%= link_to 'Return to Listing', :back, class: 'btn btn-primary', style: 'width: 100%' %><br/><br/>
   <%= link_to 'Edit Person', edit_person_path(@person), class: 'btn btn-primary', style: 'width: 100%' if can? :edit, @person %><br/><br/>
   <%= link_to 'New Certification', new_person_cert_path(@person), class: 'btn btn-primary', style: 'width: 100%' if can? :create, Cert %><br/><br/>
+  <%= link_to 'New Availability', new_person_availability_path(@person), :class => 'btn btn-primary', style: 'width: 100%' if can? :create, Availability  %>
   <%= image_tag @person.portrait_url if @person.portrait.file.present? %>
 <% end %>
 

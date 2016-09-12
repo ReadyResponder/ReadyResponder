@@ -1,0 +1,27 @@
+<table id="availabilities" class="generic_datatable datatable display table table-striped table-bordered">
+  <caption><h3><%= "Availability" %></h3></caption>
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Start time</th>
+      <th>End Time</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% availabilities.each do |availability| %>
+      <tr>
+        <td><%= availability.status %></td>
+        <td><%= availability.person.icsid %></td>
+        <td><%= link_to availability.person.fullname, availability_path(availability) %></td>
+        <td><%= number_to_phone(availability.person.phone) %></td>
+        <td><time><%= availability.start_time %></time></td>
+        <td><%= availability.end_time %></td>
+        <td><%= truncate(availability.description, length: 24) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

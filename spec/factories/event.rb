@@ -4,5 +4,6 @@ FactoryGirl.define do
     category "Training"
     status "Scheduled"
     start_time Time.now
+    end_time 23.hours.from_now
   end
 end

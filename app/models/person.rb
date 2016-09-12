@@ -6,6 +6,7 @@ class Person < ActiveRecord::Base
 
   has_many :certs, -> { where("certs.status = 'Active'" ) }
   has_many :channels
+  has_many :availabilities
   has_many :phones, -> { order(:priority) }
   has_many :emails, -> { order(:priority) }
   accepts_nested_attributes_for :channels, allow_destroy: true
