@@ -7,12 +7,6 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # I have added some objects whose status is Inactive to ensure they don't appear.
-# Need to create
-# A user for login
-# A manager role, and assign it to the admin user
-# Other roles
-# Departments
-# People
 
 manager_role = Role.find_or_create_by(name: "Manager")
 if User.count == 0
@@ -35,28 +29,12 @@ Role.find_or_create_by(name: "Trainer")
 Role.find_or_create_by(name: "Admin")
 
 # Departments are where people call home.
-# I need another status to determine visbility on the various drop downs.
 Department.create([
   {name: "Community Emergency Response Team", status: "Active"},
   {name: "Medical Reserve Corp", status: "Active"},
   {name: "Department Public Works", status: "Active"},
   {name: "Inactive Department", status: "Inactive"}
   ])
-
-# There does seem to be the correct link between skills and courses
-# As I create a person, I wonder what
-
-# position ? vs title_order ?
-# duration should be computed
-# middlename and middleinitial
-# title should be a relation
-# department should be a relation
-# license_number should be a certification
-# passwordhash is probably good, so we don't have to have users too,
-# although we do right now
-# MemberID and icsid and org_id (org_id probably OK, it's the link)?
-# orgcode ?
-# Rename eligibility to rehire_eligibility
 
 Skill.create([
   {name: "EMT-B", status: "Active"},
