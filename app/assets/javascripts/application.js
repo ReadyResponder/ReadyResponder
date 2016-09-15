@@ -19,5 +19,4 @@
 //= require jquery-ui-timepicker-addon
 //= require datetimepicker
 //= require jquery-ui
-//= require bootstrap
 //= require_tree .
