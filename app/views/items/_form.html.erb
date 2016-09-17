@@ -3,7 +3,7 @@
 
   <div class="form-inputs">
     <%= f.association :department %>
-    <%= f.association :location %>
+    <%= f.association :location, :collection => Department.all, :as => :grouped_select, :group_method => :locations %>
     <%= f.association :owner %>
     <%= f.input :status, :as => :select, :collection => Item::STATUS_CHOICES %>
     <%= f.association :resource_type, :label => 'FEMA Resource Type' %>

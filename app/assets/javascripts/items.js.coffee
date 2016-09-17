@@ -16,3 +16,13 @@ jQuery ->
                   { responsivePriority: 5, targets: 6 },
                   { orderable: false, targets: 9 },
                 ]
+
+  locations = $('#item_location_id').html()
+  $('#item_department_id').change ->
+    department = $('#item_department_id :selected').text()
+    espaced_department = department.replace(/([ #;&,.+*~\':"!^$[\]()=>|\/@])/g, '\\$1')
+    options = $(locations).filter("optgroup[label='#{espaced_department}']").html()
+    if options
+      $('#item_location_id').html(options)
+    else
+      $('#item_location_id').parent().empty()
