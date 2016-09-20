@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :availabilities
   resources :unique_ids
 
 
@@ -12,7 +13,6 @@ Rails.application.routes.draw do
   resources :channels
   resources :departments
   resources :timecards
-  resources :events
   resources :roles
 
   post 'events/:id/schedule/:person_id/:card_action', to: 'events#schedule', as: 'schedule'
@@ -36,29 +36,31 @@ Rails.application.routes.draw do
   resources :inspections
 
   resources :titles
-
   resources :skills
-
   resources :courses
-
   resources :certs
 
+  resources :events do
+    resources :availabilities, :controller => 'availabilities'
+  end
+
   resources :people do
-      collection do
-        get 'inactive'
-        get 'leave'
-        get 'other'
-        get 'everybody'
-        get 'applicants'
-        get 'prospects'
-        get 'declined'
-        get 'cert'
-        get 'police'
-        get 'signin'
-        get 'orgchart'
-        get 'roster'
-      end
+    collection do
+      get 'inactive'
+      get 'leave'
+      get 'other'
+      get 'everybody'
+      get 'applicants'
+      get 'prospects'
+      get 'declined'
+      get 'cert'
+      get 'police'
+      get 'signin'
+      get 'orgchart'
+      get 'roster'
+    end
     resources :certs, :controller => 'certs'
+    resources :availabilities, :controller => 'availabilities'
     resources :titles, :controller => 'titles'
     resources :items, :controller => 'items'
     resources :channels, :controller => "channels"

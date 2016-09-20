@@ -1,6 +1,7 @@
 <% content_for :sidebar do %>
   <%= link_to 'Return to Events', events_path, class: 'btn btn-primary', style: 'width: 100%' %><br/><br/>
   <%= link_to 'Edit Event', edit_event_path(@event), class: 'btn btn-primary', style: 'width: 100%' if can? :edit, @event  %><br/><br/>
+  <%= link_to 'Create Availability', new_event_availability_path(@event), :class => 'btn btn-primary', style: 'width: 100%' if can? :create, Availability  %></br></br>
   <%= link_to "Excel", event_path(@event, format: "xlsx"), class: 'btn btn-primary', style: 'width: 100%' %>
 <% end %>
 
@@ -44,15 +45,17 @@
   <b>Status:</b>
   <%= @event.status %>
 </p>
+<p>Available: <b><%= @event.availabilities.count %></b></p>
+<p>Unavailable: <b><%= @event.unavailabilities.count %></b></p>
+<hr>
 
-<div id="event_timecards" >
-  <%= render "unknown_for_event" %>
-  <%= render "unavailable_for_event" %>
-  <%= render "available_for_event" %>
-  <%= render "scheduled_for_event" %>
-  <%= render "working_for_event" %>
-  <%= render "worked_for_event" %>
-  <%= render "all_for_event" %>
+<%#= 1/0 %>
+<div id="event_availabilities" >
+  <%= render(:partial => "availabilities/availabilities_table",
+             :locals => { :availabilities => ( @event.responses)} ) || "No Availabilities yet !" %>
+  <hr>
+  <%= render(:partial => "people/people_table",
+             :locals => { :people => @event.unresponsive_people, :title => "No Response" }) || "Everyone Responded !" %>
 </div>
 
 <%= @event.comments %>
