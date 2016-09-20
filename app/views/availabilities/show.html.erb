@@ -1,4 +1,6 @@
-<p id="notice"><%= notice %></p>
+<% content_for :sidebar do %>
+  <%= sidebar_button_link 'Edit Availability', edit_availability_path(@availability) %>
+<% end %>
 
 <p>
   <b>Person:</b>
@@ -24,5 +26,3 @@
   <strong>Description:</strong>
   <%= @availability.description %>
 </p>
-
-<%= link_to 'Edit', edit_availability_path(@availability) %> |

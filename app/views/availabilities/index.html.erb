@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Listing Availabilities</h1>
 
 <table id="availabilities" class="datatable display table table-striped table-bordered" >
@@ -22,7 +20,7 @@
         <td><%= availability.end_time.to_s(:short) %></td>
         <td><%= availability.status %></td>
         <td><%= availability.description %></td>
-        <td><%= link_to 'Edit', edit_availability_path(availability) %></td>
+        <td><%= table_button_link 'Edit', edit_availability_path(availability) %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Availability', new_availability_path %>
+<%= independent_button_link 'New Availability', new_availability_path %>

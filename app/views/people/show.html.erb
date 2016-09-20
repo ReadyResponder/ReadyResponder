@@ -100,8 +100,7 @@
       <%= render(:partial => "availabilities/availabilities_table_for_people",
                  :locals => { :availabilities => @person.availabilities }) || raw("No Availabilities Found !") %>
     </ul>
-    <%= link_to 'New Availability', new_person_availability_path(@person),
-                  class: 'btn btn-default' if can? :create, Availability %>
+    <%= independent_button_link 'New Availability', new_person_availability_path(@person) if can? :create, Availability %>
   </div>
 
 
