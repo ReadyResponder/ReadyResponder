@@ -9,6 +9,5 @@ class CreateAvailabilities < ActiveRecord::Migration
       t.timestamps null: false
     end
     add_reference :availabilities, :person, index: true
-    add_reference :availabilities, :event, index: true
   end
 end

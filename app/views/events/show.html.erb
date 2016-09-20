@@ -50,9 +50,9 @@
 <hr>
 
 <%#= 1/0 %>
-<div id="event_timecards" >
+<div id="event_availabilities" >
   <%= render(:partial => "availabilities/availabilities_table",
-             :locals => { :availabilities => ( @event.responses)} ) || "No availabilities yet !" %>
+             :locals => { :availabilities => ( @event.responses)} ) || "No Availabilities yet !" %>
   <hr>
   <%= render(:partial => "people/people_table",
              :locals => { :people => @event.unresponsive_people, :title => "No Response" }) || "Everyone Responded !" %>

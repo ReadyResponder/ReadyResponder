@@ -3,14 +3,8 @@ class Event < ActiveRecord::Base
 
   attr_accessible :title, :description, :category, :course_id, :duration, :start_time, :end_time, :instructor, :location, :status, :timecard_ids, :person_ids, :comments
 
-  def end_date_cannot_be_before_start
-    if ((!end_time.blank?) and (!start_time.blank?)) and end_time < start_time
-      errors.add(:end_time, "must be after the start, unless you are the Doctor")
-    end
-  end
-
   validates_presence_of :category, :title, :status
-  validate :end_date_cannot_be_before_start
+  validate :end_time_cannot_be_before_start
   validates_presence_of :start_time
 
   # Currently we need an end time to provide proper ranges to the scopes.
@@ -38,14 +32,17 @@ class Event < ActiveRecord::Base
   end
 
   def unavailabilities
-    Availability.for_time_span(self.start_time..self.end_time).unavailable
+    responses.unavailable
   end
+
   def availabilities
-    Availability.for_time_span(self.start_time..self.end_time).available
+    responses.available
   end
+
   def responses
     Availability.for_time_span(self.start_time..self.end_time)
   end
+
   def respondents
     self.responses.map { |a| a.person }
   end
@@ -66,24 +63,19 @@ class Event < ActiveRecord::Base
   def manhours
     self.timecards.sum('actual_duration')
   end
-  def unknown_people
-    Person.order('title_order').active - self.people
-  end
-
-  def available_people
-    self.timecards.available
-  end
 
   def scheduled_people
+    # TODO In the pr that add Assignments, this will need to changes
+    # Something like assignments.people.unique
     self.timecards.scheduled
   end
-
 
   def completed?
     status == "Completed"
   end
 
   def schedule(schedulable, schedule_action, timecard = Timecard.new )
+    # TODO This is probably now deprecated. PR for assignments should remove this
     @card = timecard
     @card.person = schedulable if schedulable.class.name == "Person"
     @card.event = self
@@ -122,5 +114,12 @@ private
       self.duration = ((end_time - start_time) / 1.hour).round(2) || 0
     end
   end
+
+  def end_time_cannot_be_before_start
+    if ((!end_time.blank?) and (!start_time.blank?)) and end_time < start_time
+      errors.add(:end_time, "must be after the start, unless you are the Doctor")
+    end
+  end
+
 
 end

@@ -93,6 +93,17 @@
     <%= link_to 'New Item', new_person_item_path(@person), class: 'btn btn-default' if can? :create, Item %>
   </div>
 
+  <h3>Availabilities (<%= @person.availabilities.uniq.count %>)</h3>
+  <div>
+    <ul>
+      <%= render(:partial => "availabilities/availabilities_table_for_people",
+                 :locals => { :availabilities => @person.availabilities }) || raw("No Availabilities Found !") %>
+    </ul>
+    <%= link_to 'New Availability', new_person_availability_path(@person),
+                  class: 'btn btn-default' if can? :create, Availability %>
+  </div>
+
+
   <h3>Times (<%= @person.timecards.uniq.count %>)</h3>
   <div>
     <table class="table table-striped table-bordered">
