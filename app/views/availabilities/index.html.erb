@@ -6,7 +6,6 @@
   <thead>
     <tr>
       <th>Person</th>
-      <th>Event</th>
       <th>Start time</th>
       <th>End time</th>
       <th>Status</th>
@@ -19,7 +18,6 @@
     <% @availabilities.each do |availability| %>
       <tr>
         <td><%= link_to availability.person.fullname, availability_path(availability) %></td>
-        <td><%= link_to availability.event.title, event_path(availability.event) if availability.event.present? %></td>
         <td><%= availability.start_time.to_s(:short) %></td>
         <td><%= availability.end_time.to_s(:short) %></td>
         <td><%= availability.status %></td>

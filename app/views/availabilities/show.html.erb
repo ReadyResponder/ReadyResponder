@@ -5,10 +5,6 @@
   <%= link_to @availability.person.fullname, @availability.person %>
 </p>
 
-<% if @availability.event.present? %>
-  <p><b>Event:</b> <%= link_to @availability.event.title, @availability.event %></p>
-<% end %>
-
 <p>
   <strong>Start time:</strong>
   <%= @availability.start_time %>

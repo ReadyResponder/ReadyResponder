@@ -13,10 +13,8 @@ class AvailabilitiesController < ApplicationController
   # GET /availabilities/new
   def new
     @person = Person.find(params[:person_id]) if params.include? "person_id"
-    @event = Event.find(params[:event_id]) if params.include? "event_id"
     @availability = Availability.new
     @availability.person = @person if @person
-    @availability.event = @event if @event
   end
 
   # GET /availabilities/1/edit
@@ -26,13 +24,6 @@ class AvailabilitiesController < ApplicationController
   # POST /availabilities
   def create
     @availability = Availability.new(availability_params)
-    @event = @availability.event
-    if @availability.start_time.blank? && @event.present?
-      @availability.start_time = @event.start_time
-    end
-    if @availability.end_time.blank? && @event.present?
-      @availability.end_time = @event.end_time
-    end
     if @availability.save
       redirect_to @availability, notice: 'Availability was successfully created.'
     else
@@ -63,6 +54,6 @@ class AvailabilitiesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def availability_params
-      params.require(:availability).permit(:person_id, :event_id, :start_time, :end_time, :status, :description)
+      params.require(:availability).permit(:person_id, :start_time, :end_time, :status, :description)
     end
 end
