@@ -3,7 +3,6 @@
 
   <div class="form-inputs">
     <%= f.association :person, collection: Person.active %>
-    <%= f.association :event, collection: Event.upcoming %>
     <%= f.input :status, :as => :select,
                 :collection => (Availability::STATUS - ["Cancelled"]) %>
     <%= f.input :description %>

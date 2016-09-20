@@ -11,7 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20160901210947) do
 
   # These are extensions that must be enabled in order to support this database
@@ -34,10 +33,8 @@ ActiveRecord::Schema.define(version: 20160901210947) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "person_id"
-    t.integer  "event_id"
   end
 
-  add_index "availabilities", ["event_id"], name: "index_availabilities_on_event_id", using: :btree
   add_index "availabilities", ["person_id"], name: "index_availabilities_on_person_id", using: :btree
 
   create_table "certs", force: :cascade do |t|
@@ -286,13 +283,12 @@ ActiveRecord::Schema.define(version: 20160901210947) do
     t.datetime "updated_at",                                                      null: false
     t.integer  "duration"
     t.integer  "title_order"
-
     t.string   "error_code",     limit: 255
     t.string   "prefix_name",    limit: 255
     t.string   "middlename",     limit: 255
     t.string   "suffix_name",    limit: 255
     t.string   "nickname",       limit: 255
-    t.string   "portrait"
+    t.string   "portrait",       limit: 255
   end
 
   create_table "people_titles", id: false, force: :cascade do |t|
