@@ -1,4 +1,4 @@
-<h3>Unavailable (<%= @event.timecards.unavailable.count %>) </h3>
+<h3>Unavailable (<%= @unavailable.count %>) </h3>
 <table id="unavailable" class="table table-striped table-bordered">
   <thead>
     <tr>
@@ -9,7 +9,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @event.timecards.unavailable.each do |timecard| %>
+    <% @unavailable.each do |timecard| %>
       <tr>
         <td><%= link_to timecard.person.fullname, timecard %></td>
         <td><%= timecard.description %></td>

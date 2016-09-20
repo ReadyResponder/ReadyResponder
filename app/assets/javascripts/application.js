@@ -17,4 +17,6 @@
 //= require jquery-ui/datepicker
 //= require jquery-ui/accordion
 //= require jquery-ui-timepicker-addon
+//= require datetimepicker
+//= require jquery-ui
 //= require_tree .

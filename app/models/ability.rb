@@ -13,6 +13,7 @@ class Ability
       can [:read, :update, :create, :edit, :police, :cert, :applicants, :prospects, :other, :inactive, :leave, :declined], Person
       can [:read, :update, :create, :edit], Timecard
       can [:read, :update, :create, :edit], Channel
+      can [:read, :update, :create, :edit], Availability
       can [:read, :update, :create, :edit], Cert
       can [:read, :update, :create, :edit], Item
       can [:read, :update, :create, :edit], Event

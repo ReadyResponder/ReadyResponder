@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Person:</b>
+  <%= link_to @availability.person.fullname, @availability.person %>
+</p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @availability.start_time %>
+</p>
+
+<p>
+  <strong>End time:</strong>
+  <%= @availability.end_time %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @availability.status %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @availability.description %>
+</p>
+
+<%= link_to 'Edit', edit_availability_path(@availability) %> |
