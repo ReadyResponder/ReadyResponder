@@ -16,7 +16,6 @@ class Event < ActiveRecord::Base
   has_many :activities, as: :loggable
 
   has_many :timecards
-  has_many :availabilities
   has_many :people, :through => :timecards
 
   accepts_nested_attributes_for :timecards
