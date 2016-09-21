@@ -1,5 +1,6 @@
-<h1>New unique_id</h1>
+<% content_for :sidebar do %>
+  <h1>New unique_id</h1>
+  <%= sidebar_button_link 'Back', unique_ids_path %>
+<% end %>
 
 <%= render 'form' %>
-
-<%= link_to 'Back', unique_ids_path %>

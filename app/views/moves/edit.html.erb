@@ -1,6 +1,7 @@
-<h1>Editing move</h1>
+<% content_for :sidebar do %>
+  <h1>Editing move</h1>
+  <%= sidebar_button_link 'Show', @move %>
+  <%= sidebar_button_link 'Back', moves_path %>
+<% end %>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @move %> |
-<%= link_to 'Back', moves_path %>

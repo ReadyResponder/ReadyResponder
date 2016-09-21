@@ -14,7 +14,7 @@
         <td><%= link_to title.name, title_path(title) %></td>
         <td><%= title.status %></td>
         <td><%= title.description %></td>
-        <td><%= link_to 'Edit', edit_title_path(title), class: 'btn btn-xs btn-primary' %></td>
+        <td><%= table_button_link 'Edit', edit_title_path(title) %></td>
       </tr>
     <% end %>
   </tbody>

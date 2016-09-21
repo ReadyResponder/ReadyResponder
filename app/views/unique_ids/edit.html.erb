@@ -1,6 +1,7 @@
-<h1>Editing unique_id</h1>
+<% content_for :sidebar do %>
+  <h1>Editing unique_id</h1>
+  <%= sidebar_button_link 'Show', @unique_id %>
+  <%= sidebar_button_link 'Back', unique_ids_path %>
+<% end %>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @unique_id %> |
-<%= link_to 'Back', unique_ids_path %>
+  <%= render 'form' %>

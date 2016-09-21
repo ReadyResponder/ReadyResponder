@@ -1,12 +1,10 @@
-<p id="notice"><%= notice %></p>
 <% content_for :sidebar do %>
-
   <h2>Skill<br/><%= @skill.name %></h2>
-
-  <%= link_to 'Edit', edit_skill_path(@skill), class: 'btn btn-primary', style: 'width: 100%' %>
-  <%#= link_to 'Destroy', @skill, method: :delete, class: 'btn btn-danger', style: 'width: 100%', data: { confirm: 'Are you sure?' } %><br/><br/>
-  <%= link_to 'Skills Listing', skills_path, class: 'btn btn-primary', style: 'width: 100%' %>
+  <%= sidebar_button_link 'Edit', edit_skill_path(@skill) %>
+  <%#= sidebar_button_link 'Destroy', @skill, method: :delete %>
+  <%= sidebar_button_link 'Skills Listing', skills_path %>
 <% end %>
+
 <p>
   <b>Status:</b>
   <%= @skill.status %>
@@ -33,4 +31,3 @@
     <%= render @skill.titles %>
   </tbody>
 </table>
-

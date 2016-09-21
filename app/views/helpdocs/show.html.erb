@@ -1,4 +1,7 @@
-<p id="notice"><%= notice %></p>
+<% content_for :sidebar do %>
+  <%= sidebar_button_link 'Edit', edit_helpdoc_path(@helpdoc) %>
+  <%= sidebar_button_link 'Back', helpdocs_path %>
+<% end %>
 
 <p>
   <b>Title:</b>
@@ -19,7 +22,3 @@
   <b>Help for section:</b>
   <%= @helpdoc.help_for_section %>
 </p>
-
-
-<%= link_to 'Edit', edit_helpdoc_path(@helpdoc) %> |
-<%= link_to 'Back', helpdocs_path %>

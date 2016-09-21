@@ -11,9 +11,9 @@
   <tbody>
     <% @inspections.each do |inspection| %>
       <tr>
-        <td><%= link_to 'Show', inspection %></td>
-        <td><%= link_to 'Edit', edit_inspection_path(inspection) %></td>
-        <td><%= link_to 'Destroy', inspection, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= table_button_link 'Show', inspection %></td>
+        <td><%= table_button_link 'Edit', edit_inspection_path(inspection) %></td>
+        <td><%= table_button_link 'Destroy', inspection, method: :delete %></td>
       </tr>
     <% end %>
   </tbody>
@@ -21,4 +21,4 @@
 
 <br/>
 
-<%= link_to 'New Inspection', new_inspection_path %>
+<%= independent_button_link 'New Inspection', new_inspection_path %>

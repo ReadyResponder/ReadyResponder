@@ -18,8 +18,7 @@
         <td><%= repair.repairer_name %></td>
         <td><%= number_to_currency(repair.cost) %></td>
         <td><%= repair.service_date %></td>
-        <td><%= link_to 'Edit', edit_repair_path(repair),
-                class: 'btn btn-xs btn-primary' unless cannot? :edit, repair %></td>
+        <td><%= table_button_link 'Edit', edit_repair_path(repair) unless cannot? :edit, repair %></td>
       </tr>
     <% end %>
   </tbody>

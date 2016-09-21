@@ -1,6 +1,7 @@
-<h1>Editing Item Type</h1>
+<% content_for :sidebar do %>
+  <h1>Editing Item Type</h1>
+  <%= sidebar_button_link 'Show', @item_type %>
+  <%= sidebar_button_link 'Back', item_types_path %>
+<% end %>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @item_type %> |
-<%= link_to 'Back', item_types_path %>

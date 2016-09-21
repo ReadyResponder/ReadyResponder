@@ -30,7 +30,7 @@
             <%= item.status %>
           </span>
         </td>
-        <td><%= link_to 'Edit', edit_item_path(item), class: 'btn btn-xs btn-primary' unless cannot? :edit, item %></td>
+        <td><%= table_button_link 'Edit', edit_item_path(item) unless cannot? :edit, item %></td>
       </tr>
     <% end %>
   </tbody>

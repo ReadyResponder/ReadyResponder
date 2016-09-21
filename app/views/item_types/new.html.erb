@@ -1,5 +1,6 @@
-<h1>New Item Type</h1>
+<% content_for :sidebar do %>
+  <h1>New Item Type</h1>
+  <%= sidebar_button_link 'Back', item_types_path %>
+<% end %>
 
 <%= render 'form' %>
-
-<%= link_to 'Back', item_types_path %>

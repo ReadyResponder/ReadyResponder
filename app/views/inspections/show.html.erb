@@ -1,6 +1,7 @@
-<p id="notice"><%= notice %></p>
+<% content_for :sidebar do %>
+  <%= sidebar_button_link 'Return to List', inspections_path %>
+  <%= sidebar_button_link 'Edit Inspection', edit_inspection_path(@inspection) unless cannot? :edit, @inspection %>
+<% end %>
 
 Inspection on <%= link_to @inspection.item, item_path(@inspection.item) %>
 <p>Status: <%= @inspection.status %></p>
-
-<%= link_to 'Edit', edit_inspection_path(@inspection) %> |

@@ -32,7 +32,7 @@
         <td><%= person.email %></td>
         <td><%= person.department %></td>
         <td><%= person.sar_level %></td>
-        <td><%= link_to 'Edit', edit_person_path(person), class: 'btn btn-xs btn-primary' if can? :update, person %></td>
+        <td><%= table_button_link 'Edit', edit_person_path(person) if can? :update, person %></td>
       </tr>
     <% end %>
   </tbody>

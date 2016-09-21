@@ -1,8 +1,9 @@
 <% content_for :sidebar do %>
-  <%= link_to 'Return to Listing', :back, class: 'btn btn-primary', style: 'width: 100%' %><br/><br/>
-  <%= link_to 'Edit Person', edit_person_path(@person), class: 'btn btn-primary', style: 'width: 100%' if can? :edit, @person %><br/><br/>
-  <%= link_to 'New Certification', new_person_cert_path(@person), class: 'btn btn-primary', style: 'width: 100%' if can? :create, Cert %><br/><br/>
-  <%= link_to 'New Availability', new_person_availability_path(@person), :class => 'btn btn-primary', style: 'width: 100%' if can? :create, Availability  %>
+  <%= sidebar_button_link 'Return to Listing', :back %>
+  <%= sidebar_button_link 'Edit Person', edit_person_path(@person) if can? :edit, @person %>
+  <%= sidebar_button_link 'New Certification', new_person_cert_path(@person) if can? :create, Cert %>
+  <%= sidebar_button_link 'New Availability', new_person_availability_path(@person) if can? :create, Availability %>
+  <br>
   <%= image_tag @person.portrait_url if @person.portrait.file.present? %>
 <% end %>
 
@@ -90,7 +91,7 @@
     <ul>
       <%= render(@person.items) || raw("No Items Found !") %>
     </ul>
-    <%= link_to 'New Item', new_person_item_path(@person), class: 'btn btn-default' if can? :create, Item %>
+    <%= independent_button_link 'New Item', new_person_item_path(@person) if can? :create, Item %>
   </div>
 
   <h3>Availabilities (<%= @person.availabilities.uniq.count %>)</h3>
@@ -99,8 +100,7 @@
       <%= render(:partial => "availabilities/availabilities_table_for_people",
                  :locals => { :availabilities => @person.availabilities }) || raw("No Availabilities Found !") %>
     </ul>
-    <%= link_to 'New Availability', new_person_availability_path(@person),
-                  class: 'btn btn-default' if can? :create, Availability %>
+    <%= independent_button_link 'New Availability', new_person_availability_path(@person) if can? :create, Availability %>
   </div>
 
 

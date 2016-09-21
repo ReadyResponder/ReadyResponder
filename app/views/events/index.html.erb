@@ -16,14 +16,14 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
-	<td><%= link_to event.title, event%></td>
-	<td><%= event.location %></td>
-	<td><%= event.start_time %></td>
-	<td><%= event.end_time %></td>
-	<td><%= event.duration %></td>
-	<td><%= event.category %></td>
-	<td><%= event.status %></td>
-	<td><%= link_to 'Edit', edit_event_path(event), class: 'btn btn-xs btn-primary' unless cannot? :update, event %></td>
+        <td><%= link_to event.title, event%></td>
+        <td><%= event.location %></td>
+        <td><%= event.start_time %></td>
+        <td><%= event.end_time %></td>
+        <td><%= event.duration %></td>
+        <td><%= event.category %></td>
+        <td><%= event.status %></td>
+        <td><%= table_button_link 'Edit', edit_event_path(event) unless cannot? :update, event %></td>
       </tr>
     <% end %>
   </tbody>

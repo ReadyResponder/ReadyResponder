@@ -12,7 +12,7 @@
       <tr>
         <td><%= link_to skill.name, skill %></td>
         <td><%= link_to skill.status, skill %></td>
-        <td><%= link_to 'Edit', edit_skill_path(skill), class: 'btn btn-xs btn-primary' if can? :edit, skill %></td>
+        <td><%= table_button_link 'Edit', edit_skill_path(skill) if can? :edit, skill %></td>
       </tr>
     <% end %>
   </tbody>

@@ -1,6 +1,7 @@
-<h1>Editing location</h1>
+<% content_for :sidebar do %>
+  <h1>Editing location</h1>
+  <%= sidebar_button_link 'Show', @location %>
+  <%= sidebar_button_link 'Back', locations_path %>
+<% end %>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @location %> |
-<%= link_to 'Back', locations_path %>

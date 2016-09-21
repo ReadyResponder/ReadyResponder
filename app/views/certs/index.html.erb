@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
   <h1>Listing Certs</h1>
-  <%= link_to 'New Cert', new_cert_path, class: 'btn btn-primary', style: 'width: 100%' unless cannot? :create, Cert %>
+  <%= sidebar_button_link 'New Cert', new_cert_path unless cannot? :create, Cert %>
 <% end %>
 
 <table id="certs" class="generic_datatable table table-striped table-bordered" >
@@ -20,15 +20,15 @@
   <tbody>
     <% @certs.each do |cert| %>
       <tr>
-	<td><%= link_to cert.person.fullname, cert.person %></td>
-	<td><%= link_to cert.course.name, cert %></td>
-	<td><%= cert.status %></td>
-	<td><%= cert.category %></td>
-	<td><%= cert.level %></td>
-	<td><%= cert.cert_number %></td>
-	<td><%= cert.issued_date %></td>
-	<td><%= cert.expiration_date %></td>
-	<td><%= link_to 'Edit', edit_cert_path(cert), class: 'btn btn-xs btn-primary' unless cannot? :edit, cert %></td>
+        <td><%= link_to cert.person.fullname, cert.person %></td>
+        <td><%= link_to cert.course.name, cert %></td>
+        <td><%= cert.status %></td>
+        <td><%= cert.category %></td>
+        <td><%= cert.level %></td>
+        <td><%= cert.cert_number %></td>
+        <td><%= cert.issued_date %></td>
+        <td><%= cert.expiration_date %></td>
+        <td><%= table_button_link 'Edit', edit_cert_path(cert) unless cannot? :edit, cert %></td>
       </tr>
     <% end %>
   </tbody>

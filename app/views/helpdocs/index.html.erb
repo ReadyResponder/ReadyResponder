@@ -19,9 +19,9 @@
         <td><%= helpdoc.contents %></td>
         <td><%= helpdoc.help_for_view %></td>
         <td><%= helpdoc.help_for_section %></td>
-        <td><%= link_to 'Show', helpdoc %></td>
-        <td><%= link_to 'Edit', edit_helpdoc_path(helpdoc) %></td>
-        <td><%= link_to 'Destroy', helpdoc, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= table_button_link 'Show', helpdoc %></td>
+        <td><%= table_button_link 'Edit', edit_helpdoc_path(helpdoc) %></td>
+        <td><%= table_button_link 'Destroy', helpdoc, method: :delete %></td>
       </tr>
     <% end %>
   </tbody>
@@ -29,4 +29,4 @@
 
 <br/>
 
-<%= link_to 'New Helpdoc', new_helpdoc_path %>
+<%= independent_button_link 'New Helpdoc', new_helpdoc_path %>
