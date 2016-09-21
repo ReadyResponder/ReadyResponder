@@ -15,7 +15,6 @@
  *= require datatables
  *= require jquery-ui/core
  *= require jquery-ui/theme
- *= require jquery-ui/datepicker
  *= require datetimepicker
  *= require jquery-ui/accordion
  *= require_self

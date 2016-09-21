@@ -1,8 +1,13 @@
-<h1>Listing inspections</h1>
+<% content_for :sidebar do %>
+  <h1>Listing inspections</h1>
+<% end %>
 
-<table id="resource_types" class="generic_datatable table table-striped table-bordered">
+<table id="inspections" class="datatable table table-striped table-bordered">
   <thead>
     <tr>
+      <th>Item</th>
+      <th>Date</th>
+      <th>Inspection Status</th>
       <th></th>
       <th></th>
       <th></th>
@@ -11,6 +16,13 @@
   <tbody>
     <% @inspections.each do |inspection| %>
       <tr>
+        <td><%= inspection.item&.name %></td>
+        <td><%= format_datetime_value(inspection.inspection_date) %></td>
+        <td>
+          <span class="label <%= inspection_label(inspection) %>">
+            <%= inspection.status %>
+          </span>
+        </td>
         <td><%= table_button_link 'Show', inspection %></td>
         <td><%= table_button_link 'Edit', edit_inspection_path(inspection) %></td>
         <td><%= table_button_link 'Destroy', inspection, method: :delete %></td>
@@ -18,7 +30,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br/>
-
-<%= independent_button_link 'New Inspection', new_inspection_path %>

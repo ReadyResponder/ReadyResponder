@@ -6,10 +6,15 @@
 <% end %>
 
 <h3>
+  <% if @item.status.present? %>
   <span class="label <%= item_label(@item) %>">
     <%= @item.status %>
   </span> &nbsp;
-  <%= @item.name + " ( " + @item.brand + " " + @item.model + " )" %>
+  <% end %>
+  <%= @item.name %>
+  <% if @item.brand.present? || @item.model.present? %>
+    ( <%=@item.brand.to_s %> <%= @item.model.to_s %> )
+  <% end %>
 </h3>
 
 <% if @item.description.present? %>

@@ -1,7 +1,19 @@
 <% content_for :sidebar do %>
-  <%= sidebar_button_link 'Return to List', inspections_path %>
+  <h2>Inspection</h2>
+  <h3>for <%= @inspection.item.name %></h3>
+  <%= sidebar_button_link 'Return to Item', @inspection.item %>
+  <%= sidebar_button_link 'Return to Inspections List', inspections_path %>
   <%= sidebar_button_link 'Edit Inspection', edit_inspection_path(@inspection) unless cannot? :edit, @inspection %>
 <% end %>
 
-Inspection on <%= link_to @inspection.item, item_path(@inspection.item) %>
-<p>Status: <%= @inspection.status %></p>
+Inspection of <%= link_to @inspection.item.name, item_path(@inspection.item) %>
+on <%= format_date_value(@inspection.inspection_date) %>.
+<p>Status:
+  <span class="label <%= inspection_label(@inspection) %>">
+    <%= @inspection.status %>
+  </span>
+</p>
+
+<% if @inspection.comments.present? %>
+  <p>Comments: <%= @inspection.comments %></p>
+<% end %>

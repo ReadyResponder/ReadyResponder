@@ -1,6 +1,6 @@
 module ItemsHelper
   def item_label(item)
-    # The options are found in app/models/items.rb: STATUS_CHOICES
+    # The options are found in app/models/item.rb: STATUS_CHOICES
     return nil if item.status.blank?
     case item.status
     when 'Available'
@@ -10,7 +10,7 @@ module ItemsHelper
     when 'Out of Service', 'Sold', 'Destroyed'
       return 'label-danger'
     else
-      # This should only happen if another label is added.
+      # This should only happen if another status is added.
       return 'label-default'
     end
   end

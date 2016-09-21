@@ -1,4 +1,4 @@
-<table id="inspections" class="generic_datatable table table-striped table-bordered" >
+<table id="item_inspections" class="datatable table table-striped table-bordered" >
   <caption><h3><%= "Inspections" %></h3></caption>
   <thead>
     <tr>
@@ -12,7 +12,7 @@
       <tr>
         <td><%= link_to inspection.inspection_date, inspection_path(inspection) %></td>
         <td>
-          <span class="label <%= success_or_warning_label(inspection.status, 'Complete - Passed') %>">
+          <span class="label <%= inspection_label(inspection) %>">
             <%= inspection.status %>
           </span>
         </td>
