@@ -18,11 +18,13 @@ Rails.application.routes.draw do
   post 'events/:id/schedule/:person_id/:card_action', to: 'events#schedule', as: 'schedule'
 
   resources :moves
-  resources :repairs
   resources :locations
+
+  resources :repairs
+  resources :inspections, except: [:new, :create]
   resources :items do
-    resources :repairs, :controller => 'repairs'
-    resources :inspections, :controller => 'inspections'
+    resources :repairs
+    resources :inspections, only: [:new, :create]
   end
 
   get 'landing/help', as: 'help', path: '/help'
@@ -33,7 +35,6 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :users
-  resources :inspections
 
   resources :titles
   resources :skills

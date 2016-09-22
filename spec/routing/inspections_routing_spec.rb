@@ -8,7 +8,7 @@ describe InspectionsController do
     end
 
     it "routes to #new" do
-      expect(get("/inspections/new")).to route_to("inspections#new")
+      expect(get("/items/3/inspections/new")).to route_to("inspections#new", item_id: "3")
     end
 
     it "routes to #show" do
@@ -20,7 +20,8 @@ describe InspectionsController do
     end
 
     it "routes to #create" do
-      expect(post("/inspections")).to route_to("inspections#create")
+      expect(post("/items/3/inspections")).to route_to("inspections#create", item_id: "3")
+      expect(post("/inspections")).to_not be_routable
     end
 
     it "routes to #update" do

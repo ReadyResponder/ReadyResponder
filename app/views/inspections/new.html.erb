@@ -1,6 +1,8 @@
 <% content_for :sidebar do %>
-  <h1>New inspection</h1>
-  <%= sidebar_button_link 'Back', inspections_path %>
+  <h2>New inspection</h2>
+  <h3>(for <%= @inspection.item.name %>)</h3>
+  <%= sidebar_button_link 'Return to Item', @inspection.item %>
+  <%= sidebar_button_link 'Return to Inspections List', inspections_path %>
 <% end %>
 
 <%= render 'form' %>

@@ -99,3 +99,15 @@ def success_or_warning_label(str, success_str)
     return 'label-warning'
   end
 end
+
+# This is for providing a date for a form in an order that Rails can understand.
+# It should match the format used by the datepicker/datetimepicker widget.
+# See app.js.coffee.
+def format_date_value(date)
+  date.strftime("%Y-%m-%d") if date
+end
+
+# As above, but for datetime.
+def format_datetime_value(datetime)
+  datetime.strftime("%Y-%m-%d %H:%M") if datetime
+end

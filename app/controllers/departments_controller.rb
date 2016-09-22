@@ -87,6 +87,6 @@ class DepartmentsController < ApplicationController
     # params.require(:person).permit(:name, :age)
     # Also, you can specialize this method with per-user checking of permissible attributes.
     def department_params
-      params.require(:department).permit(:contact_id, :description, :name, :status)
+      params.require(:department).permit(:name, :shortname, :status, :contact_id, :description)
     end
 end

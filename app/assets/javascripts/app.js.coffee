@@ -2,13 +2,16 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 jQuery ->
-        $('.datepicker').datepicker
-          dateFormat: 'yy-mm-dd'
+        #See application_helper.rb: format_date_value
+        $('.datepicker').datetimepicker({
+          timepicker: false,
+          format:'Y-m-d',
+        });
+        #See application_helper.rb: format_datetime_value
         $('.datetimepicker').datetimepicker({
-          dateFormat: 'yy-mm-dd '
-          timeFormat: 'HH:mm '
-          stepHour: 1
-          stepMinute: 15});
+          format:'Y-m-d H:i',
+          step: 15,
+          });
         $('.accordion').accordion
           collapsible: true
           active: false
