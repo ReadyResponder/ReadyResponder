@@ -3,12 +3,13 @@
 <% end %>
 
 <table id="inspections" class="datatable table table-striped table-bordered">
+  <caption><h3><%= "Inspections" %></h3></caption>
   <thead>
     <tr>
       <th>Item</th>
-      <th>Date</th>
+      <th>Inspection Date</th>
       <th>Inspection Status</th>
-      <th></th>
+      <th>Comments</th>
       <th></th>
       <th></th>
     </tr>
@@ -16,16 +17,12 @@
   <tbody>
     <% @inspections.each do |inspection| %>
       <tr>
-        <td><%= inspection.item&.name %></td>
-        <td><%= format_datetime_value(inspection.inspection_date) %></td>
-        <td>
-          <span class="label <%= inspection_label(inspection) %>">
-            <%= inspection.status %>
-          </span>
-        </td>
-        <td><%= table_button_link 'Show', inspection %></td>
-        <td><%= table_button_link 'Edit', edit_inspection_path(inspection) %></td>
-        <td><%= table_button_link 'Destroy', inspection, method: :delete %></td>
+        <td><%= link_to inspection.item&.name, inspection.item %></td>
+        <td><%= link_to format_datetime_value(inspection.inspection_date), inspection %></td>
+        <td><span class="label <%= inspection_label(inspection) %>"><%= inspection.status %></span></td>
+        <td><%= truncate(inspection.comments) %></td>
+        <td><%= table_button_link 'Edit', edit_inspection_path(inspection) if can? :edit, inspection %></td>
+        <td><%= table_button_link 'Destroy', inspection, method: :delete if can? :destroy, inspection %></td>
       </tr>
     <% end %>
   </tbody>

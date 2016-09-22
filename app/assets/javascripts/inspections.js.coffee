@@ -2,7 +2,7 @@ jQuery ->
   $('#inspections').dataTable
     columnDefs: [
                   ## https://datatables.net/extensions/responsive/priority
-                  { orderable: false, targets: [3, 4, 5] },
+                  { orderable: false, targets: [4, 5] },
                 ]
 
 jQuery ->

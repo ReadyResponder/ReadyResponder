@@ -4,19 +4,17 @@
     <tr>
       <th>Date</th>
       <th>Status</th>
+      <th>Comments</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
     <% @inspections.each do |inspection| %>
       <tr>
-        <td><%= link_to inspection.inspection_date, inspection_path(inspection) %></td>
-        <td>
-          <span class="label <%= inspection_label(inspection) %>">
-            <%= inspection.status %>
-          </span>
-        </td>
-        <td><%= table_button_link 'Edit', edit_inspection_path(inspection) unless cannot? :edit, inspection %></td>
+        <td><%= link_to format_datetime_value(inspection.inspection_date), inspection %></td>
+        <td><span class="label <%= inspection_label(inspection) %>"><%= inspection.status %></span></td>
+        <td><%= truncate(inspection.comments) %></td>
+        <td><%= table_button_link 'Edit', edit_inspection_path(inspection) if can? :edit, inspection %></td>
       </tr>
     <% end %>
   </tbody>
