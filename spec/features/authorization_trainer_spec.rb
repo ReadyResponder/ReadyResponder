@@ -29,7 +29,7 @@ describe "a user in the trainer role" do
     @person_active = create(:person)
     @person_inactive = create(:person, status: 'Inactive')
     visit signin_people_path
-    expect(page).to have_content("Command Staff") #This is in the first heading
+    expect(page).to have_content("Command") #This is in the first heading
     expect(page).to have_content(@person_active.lastname)
     expect(page).not_to have_content(@person_inactive.lastname)
   end

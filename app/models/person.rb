@@ -46,8 +46,8 @@ class Person < ActiveRecord::Base
 
   TITLES = ['Director','Chief','Deputy','Captain', 'Lieutenant','Sargeant', 'Corporal', 'Senior Officer', 'Officer', 'CERT Member', 'Dispatcher', 'Recruit']
   TITLE_ORDER = {'Director' => 1, 'Chief' => 3, 'Deputy Chief' => 5,'Captain' => 7, 'Lieutenant' => 9, 'Sargeant' => 11, 'Corporal' => 13, 'Senior Officer' => 15, 'Officer' => 17, 'CERT Member' => 19, 'Dispatcher' => 19, 'Student Officer' => 21, 'Recruit' => 23, 'Applicant' => 25}
-  DIVISION1 = ['Division 1', 'Division 2', 'Command']
-  DIVISION2 = ['Command', 'Squad 1', 'Squad 2', 'CERT']
+  DIVISION1 = ['Division 1', 'Division 2', "Division 3", "Recruit", 'Command']
+  DIVISION2 = ['Command', 'Squad 1', 'Squad 2']
   STATUS = ['Leave of Absence', 'Inactive', 'Active', 'Applicant','Prospect','Declined']
   DEPARTMENT = ['Police', 'CERT', 'Other']
 
