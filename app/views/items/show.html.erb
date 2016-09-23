@@ -33,18 +33,6 @@
   <p><b>Item Type:</b> <%= @item.item_type %></p>
 <% end %>
 
-<% if @item.serial1.present? %>
-  <p><b>Serial 1:</b> <%= @item.serial1 %> </p>
-<% end %>
-
-<% if @item.serial2.present? %>
-  <p><b>Serial 2:</b> <%= @item.serial2 %> </p>
-<% end %>
-
-<% if @item.serial3.present? %>
-  <p><b>Serial 3</b> <%= @item.serial3 %></p>
-<% end %>
-
 <% if @item.owner.present? %>
   <p><b>Owner:</b> <%= @item.owner.fullname %></p>
 <% end %>

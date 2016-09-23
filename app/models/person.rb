@@ -27,6 +27,7 @@ class Person < ActiveRecord::Base
   validates_numericality_of  :height, :weight, :allow_nil => true, :allow_blank => true
   validates_presence_of :division2, :unless => "division1.blank?"
   validates_presence_of :division1, :unless => "division2.blank?"
+  validates_chronology :start_date, :end_date
 
   scope :cert, -> { order("division1, division2, title_order, start_date ASC").where( department: "CERT" ) }
   scope :police, -> { order("division1, division2, title_order, start_date ASC").where( department: "Police" ) }

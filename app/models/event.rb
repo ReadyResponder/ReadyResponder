@@ -4,12 +4,12 @@ class Event < ActiveRecord::Base
   attr_accessible :title, :description, :category, :course_id, :duration, :start_time, :end_time, :instructor, :location, :status, :timecard_ids, :person_ids, :comments
 
   validates_presence_of :category, :title, :status
-  validate :end_time_cannot_be_before_start
-  validates_presence_of :start_time
 
+  validates_presence_of :start_time
   # Currently we need an end time to provide proper ranges to the scopes.
   # This will need to be revisited
   validates_presence_of :end_time  #, :if => :completed?
+  validates_chronology :start_time, :end_time
 
   has_many :certs
   belongs_to :course
@@ -113,12 +113,4 @@ private
       self.duration = ((end_time - start_time) / 1.hour).round(2) || 0
     end
   end
-
-  def end_time_cannot_be_before_start
-    if ((!end_time.blank?) and (!start_time.blank?)) and end_time < start_time
-      errors.add(:end_time, "must be after the start, unless you are the Doctor")
-    end
-  end
-
-
 end

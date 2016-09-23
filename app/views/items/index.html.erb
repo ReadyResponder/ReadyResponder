@@ -6,9 +6,6 @@
       <th>Name</th>
       <th>Model</th>
       <th>Category</th>
-      <th>Serial 1</th>
-      <th>Serial 2</th>
-      <th>Serial 3</th>
       <th>Costs</th>
       <th>Status</th>
       <th></th>
@@ -21,9 +18,6 @@
         <td><%= link_to item.name, item_path(item) %></td>
         <td><%= item.model %></td>
         <td><%= item.category %></td>
-        <td><%= item.serial1 %></td>
-        <td><%= item.serial2 %></td>
-        <td><%= item.serial3 %></td>
         <td><%= number_to_currency item.recent_costs %></td>
         <td>
           <span class="label <%= item_label(item) %>">

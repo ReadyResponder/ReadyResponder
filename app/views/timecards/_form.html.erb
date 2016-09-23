@@ -10,15 +10,23 @@
     <fieldset>
       <legend>Intention</legend>
       <%= f.input :intention, :as => :select, :collection => Timecard::INTENTION_CHOICES %>
-      <%= f.input :intended_start_time, :as => :string, :input_html => {:class => "datetimepicker",  :size => 11 }  %>
-      <%= f.input :intended_end_time, :as => :string, :input_html => {:class => "datetimepicker", :size => 11 }  %>
+      <%= f.input :intended_start_time, as: :string,
+                  input_html: { class: "datetimepicker", size: 11,
+                                value: format_datetime_value(f.object.intended_start_time) } %>
+      <%= f.input :intended_end_time, as: :string,
+                  input_html: { class: "datetimepicker", size: 11,
+                                value: format_datetime_value(f.object.intended_end_time) } %>
     </fieldset>
     <fieldset>
       <legend>Outcome</legend>
       <%= f.input :outcome, :as => :select, :collection => Timecard::OUTCOME_CHOICES %>
-      <%= f.input :actual_start_time, :as => :string, 
-                  :input_html => {:class => "datetimepicker", :size => 11, :title => "When they actually started to work" }  %>
-      <%= f.input :actual_end_time, :as => :string, :input_html => {:class => "datetimepicker", :size => 11 }  %>
+      <%= f.input :actual_start_time, as: :string,
+                  input_html: { class: "datetimepicker", size: 11,
+                                value: format_datetime_value(f.object.actual_start_time),
+                                title: "When they actually started to work" } %>
+      <%= f.input :actual_end_time, as: :string,
+      input_html: { class: "datetimepicker", size: 11,
+                    value: format_datetime_value(f.object.actual_end_time) } %>
     </fieldset>
   </div>
 

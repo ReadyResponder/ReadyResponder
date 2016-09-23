@@ -4,15 +4,19 @@
   <div class="form-inputs">
     <%= f.input :title %>
     <%= f.input :description %>
-    <%= f.input :status, :as => :select, :collection => Event::STATUS_CHOICES  %>
+    <%= f.input :status, :as => :select, :collection => Event::STATUS_CHOICES %>
     <%= f.input :category, :as => :select, :collection => Event::CATEGORY_CHOICES %>
     <div class="training-controls">
       <%= f.association :course, :hint => "If the training is not for certification, do not choose a course" %>
       <%= f.input :instructor %>
     </div>
     <%= f.input :location %>
-    <%= f.input :start_time, :as => :string, :label => "Start Time", :input_html => {:class => "datetimepicker",  :size => 11 }  %>
-    <%= f.input :end_time, :as => :string, :label => "End Time", :input_html => {:class => "datetimepicker", :size => 11 }  %>
+    <%= f.input :start_time, as: :string, label: "Start Time",
+                input_html: { class: "datetimepicker", size: 11,
+                              value: format_datetime_value(f.object.start_time) } %>
+    <%= f.input :end_time, as: :string, label: "End Time",
+                input_html: { class: "datetimepicker", size: 11,
+                              value: format_datetime_value(f.object.end_time) } %>
     <%= f.input :comments %>
   </div>
 

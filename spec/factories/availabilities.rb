@@ -3,6 +3,6 @@ FactoryGirl.define do
     start_time Time.now
     end_time 15.hours.from_now
     status "Unavailable"
-    comments "Vacation"
+    description "Vacation"
   end
 end

@@ -7,8 +7,8 @@ describe Event do
   it "is invalid without a title" do
     expect(build(:event, title: nil)).not_to be_valid
   end
-  
-  it "is invalid if end date is before start date" do
+
+  it "is invalid if end_time is before start_time" do #chronology
     expect(build(:event, start_time: Time.current, end_time: 10.days.ago)).not_to be_valid
   end
 

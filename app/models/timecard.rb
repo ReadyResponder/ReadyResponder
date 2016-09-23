@@ -1,7 +1,7 @@
 class Timecard < ActiveRecord::Base
   before_save :pull_defaults_from_event
   before_save :calc_durations
-  attr_accessible :intention, :intended_start_time, :intended_end_time, 
+  attr_accessible :intention, :intended_start_time, :intended_end_time,
                   :outcome, :actual_start_time, :actual_end_time, :event_id, :person_id, :category, :description
 
   belongs_to :person
@@ -10,27 +10,11 @@ class Timecard < ActiveRecord::Base
   INTENTION_CHOICES = ['Unknown', 'Available', 'Scheduled','Not Needed']
   OUTCOME_CHOICES = ["Not Needed", 'Worked', 'Unavailable', 'AWOL', 'Vacation']
 
-  def intended_end_date_cannot_be_before_intended_start
-    if ((!intended_end_time.blank?) and (!intended_start_time.blank?)) and intended_end_time < intended_start_time
-      errors.add(:intended_end_time, "must be after the start, unless you are the Doctor")
-    end
-  end
-
-  def actual_end_date_cannot_be_before_actual_start
-    if ((!actual_end_time.blank?) and (!actual_start_time.blank?)) and actual_end_time < actual_start_time
-      errors.add :actual_end_time, "must be after the start, unless you are the Doctor"
-    end
-  end
-
-  def has_no_duplicate_timecard
-    if find_duplicate_timecards.count > 0
-      errors.add :base, "Duplicate timecard found, please edit that one instead"
-    end
-  end
-
   validates_presence_of :person_id, :event_id
-  validate :intended_end_date_cannot_be_before_intended_start
-  validate :actual_end_date_cannot_be_before_actual_start
+
+  validates_chronology :intended_start_time, :intended_end_time
+  validates_chronology :actual_start_time, :actual_end_time
+
   #validate :has_no_duplicate_timecard
 
   def self.available
@@ -81,6 +65,12 @@ def find_duplicate_timecards
 end
 
 private
+  def has_no_duplicate_timecard
+    if find_duplicate_timecards.count > 0
+      errors.add :base, "Duplicate timecard found, please edit that one instead"
+    end
+  end
+
   def pull_defaults_from_event
     event = self.event || Event.new
     self.category = event.category if self.category.nil?

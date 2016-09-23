@@ -5,8 +5,9 @@
     <%= f.association :item %>
     <%= f.association :person, :label => "Repairer" %>
     <%= f.input :status, :as => :select, :collection => Repair::STATUS_CHOICES %>
-    <%= f.input :service_date, as: :string, input_html: { class: 'datepicker', size: 11,
-                                                          value: format_date_value(f.object.service_date) } %>
+    <%= f.input :service_date, as: :string,
+                input_html: { class: 'datepicker', size: 11,
+                              value: format_date_value(f.object.service_date) } %>
     <%= f.input :description %>
     <%= f.input :cost %>
     <%= f.input :comments %>
