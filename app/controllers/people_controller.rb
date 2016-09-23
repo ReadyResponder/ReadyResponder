@@ -6,6 +6,7 @@ class PeopleController < ApplicationController
   def signin
     #This is the sign-in sheet, not anything about authentication
     @people = Person.active
+    @department = "Police"
     @page_title = "Sign-in"
     render :layout => "print_signin"
   end
