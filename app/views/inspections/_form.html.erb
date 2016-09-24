@@ -2,8 +2,9 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :inspection_date, as: :string, input_html: { class: 'datetimepicker', size: 11,
-                                                             value: format_datetime_value(f.object.inspection_date) } %>
+    <%= f.input :inspection_date, as: :string,
+                input_html: { class: 'datetimepicker', size: 11,
+                              value: format_datetime_value(f.object.inspection_date) } %>
     <%= f.input :status, as: :select, collection: Inspection::STATUS_CHOICES, selected: "Incomplete" %>
     <%= f.input :comments %>
   </div>

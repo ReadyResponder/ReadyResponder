@@ -1,13 +1,13 @@
 jQuery ->
   $('#repairs').dataTable
     columnDefs: [
-                  ## https://datatables.net/extensions/responsive/priority
                   { orderable: false, targets: [-1] },
                 ]
 
 jQuery ->
   $('#item_repairs').dataTable
+    ## https://datatables.net/examples/basic_init/scroll_y_dynamic.html
+    scrollY: '20vh',
     columnDefs: [
-                  ## https://datatables.net/extensions/responsive/priority
                   { orderable: false, targets: [-1] },
                 ]

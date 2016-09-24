@@ -104,7 +104,7 @@ describe "Events" do
       expect(current_path).to eq(event_path(@event))
     end
     it "hides the course if category isn't training" , js: true,
-        :skip => 'Errors in Javascript ibrary' do
+        :skip => 'Errors in Javascript library' do
       visit new_event_path
       select 'Patrol', :from => 'event_category'
       fill_in "Description", with: "Really Long Text..."  #This ensures the blur event happens

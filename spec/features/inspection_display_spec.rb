@@ -13,8 +13,8 @@ describe "Inspection" do
     click_on 'Sign in'
   end
   describe "when not logged in" do
-    let(:an_item)  { FactoryGirl.create(:item) }
-    let(:an_inspection) { FactoryGirl.create(:inspection, item: an_item) }
+    let(:an_item)  { create(:item) }
+    let(:an_inspection) { create(:inspection, item: an_item) }
     it "should not display a listing" do
       click_on 'Sign Out'
       visit inspections_path
@@ -30,8 +30,8 @@ describe "Inspection" do
   end
 
   context "on an item" do
-    let(:an_item)  { FactoryGirl.create(:item) }
-    let(:an_inspection) { FactoryGirl.create(:inspection, item: an_item) }
+    let(:an_item)  { create(:item) }
+    let(:an_inspection) { create(:inspection, item: an_item) }
     it "should show an inspection" do
       visit inspection_path(an_inspection)
       expect(page).to have_content(an_inspection.status)
@@ -39,7 +39,7 @@ describe "Inspection" do
   end
 
   context "from an item" do
-    let!(:item)  { FactoryGirl.create(:item) }
+    let!(:item)  { create(:item) }
     it "should create an inspection for that item" do
       visit item_path(item)
       expect(page).to have_content('Description:')

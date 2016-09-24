@@ -5,6 +5,7 @@ class Cert < ActiveRecord::Base
   mount_uploader :certification, CertificationUploader
   before_save :set_defaults
   validates_presence_of :status, :person_id, :course_id, :issued_date
+  validates_chronology :issued_date, :expiration_date
 
   scope :active, -> { where( expired: false ) }
 

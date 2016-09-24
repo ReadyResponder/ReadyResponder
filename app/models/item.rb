@@ -8,6 +8,9 @@ class Item < ActiveRecord::Base
                   :department_id, :resource_type_id, :item_type_id,
                   :unique_ids_attributes
 
+  # validates_chronology :purchase_date, :sell_date     # ? - if so, needs a test
+  # validates_chronology :grantstart, :grantexpiration  # ? - if so, needs a test
+
   mount_uploader :item_image, ItemImageUploader
   validates_numericality_of :value
   belongs_to :owner, class_name: 'Person', inverse_of: :items

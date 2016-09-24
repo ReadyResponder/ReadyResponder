@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Inspection do
-  let(:an_item)  { FactoryGirl.create(:item) }
+  let(:an_item)  { create(:item) }
   it "has a valid factory" do
     expect(create(:inspection, item: an_item)).to be_valid
   end

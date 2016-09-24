@@ -17,9 +17,13 @@
     <%= f.input :po_number %>
     <%= f.input :value, :placeholder => 'Replacement price' %>
     <%= f.input :grant, :placeholder => 'Grant name, if applicable' %>
-    <%= f.input :purchase_date, :as => :string, :input_html => { :class => 'datepicker', :size => 11 }  %>
+    <%= f.input :purchase_date, as: :string,
+                input_html: { class: 'datepicker', size: 11,
+                              value: format_date_value(f.object.purchase_date) } %>
     <%= f.input :purchase_amt %>
-    <%= f.input :sell_date, :as => :string, :input_html => { :class => 'datepicker', :size => 11 }  %>
+    <%= f.input :sell_date, as: :string,
+                input_html: { class: 'datepicker', size: 11,
+                              value: format_date_value(f.object.sell_date) } %>
     <%= f.input :sell_amt %>
     <%= f.file_field :item_image %>
     <%= f.input :comments %>
