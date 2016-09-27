@@ -14,10 +14,7 @@
 <% end %>
 
 <p>
-  <b>Status:</b>
-  <span class="label <%= success_or_warning_label(@person.status, 'Active') %>">
-    <%= @person.status %>
-  </span>
+  <b>Status:</b> <%= success_or_warning_label(@person.status, 'Active') %>
 </p>
 
 <div id="channels">

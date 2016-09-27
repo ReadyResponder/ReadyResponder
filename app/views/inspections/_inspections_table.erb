@@ -12,7 +12,7 @@
     <% @inspections.each do |inspection| %>
       <tr>
         <td><%= link_to format_datetime_value(inspection.inspection_date), inspection %></td>
-        <td><span class="label <%= inspection_label(inspection) %>"><%= inspection.status %></span></td>
+        <td><%= inspection_status_label(inspection) %></td>
         <td><%= truncate(inspection.comments) %></td>
         <td><%= table_button_link 'Edit', edit_inspection_path(inspection) if can? :edit, inspection %></td>
       </tr>

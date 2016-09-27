@@ -4,7 +4,7 @@ SimpleForm.setup do |config|
   config.button_class = 'btn btn-primary'
   config.boolean_label_class = nil
 
-  config.wrappers :vertical_form, tag: 'div', class: 'form-group ', error_class: 'has-error' do |b|
+  config.wrappers :vertical_form, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
     b.use :html5
     b.use :placeholder
     b.optional :maxlength
@@ -132,6 +132,39 @@ SimpleForm.setup do |config|
       ba.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
     end
   end
+
+  # from: https://github.com/plataformatec/simple_form/wiki/How-to-use-Bootstrap-3-input-group-in-Simple-Form
+  # File here config/initializers/simple_form_bootstrap.rb
+  SimpleForm.setup do |config|
+    config.wrappers :vertical_input_group, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+      b.use :html5
+      b.use :placeholder
+      b.use :label, class: 'control-label'
+
+      b.wrapper tag: 'div' do |ba|
+        ba.wrapper tag: 'div', class: 'input-group col-sm-12' do |append|
+          append.use :input, class: 'form-control'
+        end
+        ba.use :error, wrap_with: { tag: 'span', class: 'help-block' }
+        ba.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+      end
+    end
+
+    config.wrappers :horizontal_input_group, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+      b.use :html5
+      b.use :placeholder
+      b.use :label, class: 'col-sm-3 control-label'
+
+      b.wrapper tag: 'div', class: 'col-sm-9' do |ba|
+        ba.wrapper tag: 'div', class: 'input-group col-sm-12' do |append|
+          append.use :input, class: 'form-control'
+        end
+        ba.use :error, wrap_with: { tag: 'span', class: 'help-block' }
+        ba.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+      end
+    end
+  end
+
   # Wrappers for forms and inputs using the Bootstrap toolkit.
   # Check the Bootstrap docs (http://getbootstrap.com)
   # to learn about the different styles for forms and inputs,
@@ -140,8 +173,8 @@ SimpleForm.setup do |config|
   config.wrapper_mappings = {
     check_boxes: :vertical_radio_and_checkboxes,
     radio_buttons: :vertical_radio_and_checkboxes,
-    file: :vertical_file_input,
-    boolean: :vertical_boolean,
+    file: :horizontal_file_input,
+    boolean: :horizontal_boolean,
     datetime: :multi_select,
     date: :multi_select,
     time: :multi_select

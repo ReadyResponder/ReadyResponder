@@ -8,11 +8,7 @@
 
 Inspection of <%= link_to @inspection.item.name, item_path(@inspection.item) %>
 on <%= format_date_value(@inspection.inspection_date) %>.
-<p>Status:
-  <span class="label <%= inspection_label(@inspection) %>">
-    <%= @inspection.status %>
-  </span>
-</p>
+<p>Status: <%= inspection_status_label(@inspection) %></p>
 
 <% if @inspection.comments.present? %>
   <p>Comments: <%= @inspection.comments %></p>

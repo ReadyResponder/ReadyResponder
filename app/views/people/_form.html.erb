@@ -1,5 +1,6 @@
 <%= simple_form_for @person, :html => {:multipart => true} do |f| %>
     <%= f.error_notification %>
+
     <%= f.input :firstname, :label => 'First Name' %>
     <%= f.input :lastname, :label => 'Last Name' %>
     <%= f.input :gender, :as => :select, :collection => ['Female', 'Male'] %>
@@ -12,9 +13,9 @@
                 input_html: { class: 'datepicker', size: 11,
                               value: format_date_value(f.object.end_date) } %>
     <%= f.input :department, :as => :select, :collection => Person::DEPARTMENT %>
-    <div class="form-horizontal">
+
       <h2> Phone information </h2>
-      <%= f.simple_fields_for :phones do |c| %>
+      <%= f.simple_fields_for :phones, wrapper: :horizontal_input_group do |c| %>
         <fieldset>
           <%= c.input :id, :as => :hidden %>
           <%= c.input :category, :as => :select, :collection => Channel::CATEGORIES %>
@@ -23,16 +24,15 @@
           <%= c.input :status, :as => :select, :collection => Channel::STATUSES %>
           <%= c.input :usage, :as => :select, :collection => Channel::USAGES %>
           <%= c.input :carrier, :as => :select, :collection => Phone::CARRIERS %>
-          <%= c.input :sms_available, as: :boolean %>
           <%= c.input :priority, :as => :select, :collection => Phone::PRIORITIES %>
           <%= c.input :channel_type, as: :select, collection: Phone::TYPES %>
+          <%= c.input :sms_available, as: :boolean %>
         </fieldset>
         <hr />
       <% end %>
-    </div>
-    <div class="form-horizontal">
+
       <h2> Email information </h2>
-      <%= f.simple_fields_for :emails do |c| %>
+      <%= f.simple_fields_for :emails, wrapper: :horizontal_input_group do |c| %>
         <fieldset>
           <%= c.input :id, :as => :hidden %>
           <%= c.input :category, :as => :select, :collection => Channel::CATEGORIES %>
@@ -43,7 +43,7 @@
         </fieldset>
         <hr />
       <% end %>
-    </div>
+
     <%= f.input :icsid, :input_html => { :size => 5 } %>
     <%= f.input :title, :as => :select, label: 'Rank', :collection => Person::TITLES %>
     <%= f.association :titles %>

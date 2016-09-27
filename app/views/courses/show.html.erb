@@ -6,10 +6,7 @@
 <% end %>
 
 <p>
-  <b>Status:</b>
-  <span class="label <%= success_or_warning_label(@course.status, 'Active') %>">
-    <%= @course.status %>
-  </span>
+  <b>Status:</b> <%= success_or_warning_label(@course.status, 'Active') %>
 </p>
 
 <p><b>Description:</b> <%= @course.description %></p>

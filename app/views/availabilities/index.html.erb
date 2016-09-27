@@ -1,6 +1,6 @@
 <h1>Listing Availabilities</h1>
 
-<table id="availabilities" class="datatable display table table-striped table-bordered" >
+<table id="availabilities" class="generic_datatable table table-striped table-bordered">
   <thead>
     <tr>
       <th>Person</th>
@@ -14,7 +14,7 @@
 
   <tbody>
     <% @availabilities.each do |availability| %>
-      <tr>
+      <tr <%== success_class_if_match(availability.status, 'Available') %>>
         <td><%= link_to availability.person.fullname, availability_path(availability) %></td>
         <td><%= availability.start_time.to_s(:short) %></td>
         <td><%= availability.end_time.to_s(:short) %></td>

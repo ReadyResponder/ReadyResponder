@@ -92,11 +92,13 @@ module ApplicationHelper
   # label.  For anything more precise, a custom helper should be
   # used (as in items_helper.rb)
   def success_or_warning_label(str, success_str)
-    if str == success_str
-      return 'label-success'
-    else
-      return 'label-warning'
-    end
+    content_tag(:span, str, class: success_or_warning_label_class(str, success_str))
+  end
+
+  # This is a general helper to provide a simple success tag when appropriate.
+  # This should be called with raw or with <%==
+  def success_class_if_match(str, success_str)
+    return 'class="success"' if str == success_str
   end
 
   # This is for providing a date for a form in an order that Rails can understand.
@@ -110,5 +112,14 @@ module ApplicationHelper
   def format_datetime_value(datetime)
     datetime.strftime("%Y-%m-%d %H:%M") if datetime
   end
+
+  private
+    def success_or_warning_label_class(str, success_str)
+      if str == success_str
+        return 'label label-success'
+      else
+        return 'label label-warning'
+      end
+    end
 
 end
