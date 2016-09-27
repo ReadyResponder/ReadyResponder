@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Notifications</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th>Status</th>
+      <th>Subject</th>
+      <th>Body</th>
+      <th>Sent at</th>
+      <th>Channels</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @notifications.each do |notification| %>
+      <tr>
+        <td><%= notification.event %></td>
+        <td><%= notification.status %></td>
+        <td><%= notification.subject %></td>
+        <td><%= notification.body %></td>
+        <td><%= notification.sent_at %></td>
+        <td><%= notification.channels %></td>
+        <td><%= link_to 'Show', notification %></td>
+        <td><%= link_to 'Edit', edit_notification_path(notification) %></td>
+        <td><%= link_to 'Destroy', notification, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Notification', new_notification_path %>
