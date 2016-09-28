@@ -1,0 +1,24 @@
+<%= simple_form_for([@event, @task]) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :title %>
+    <%= f.input :description %>
+    <%= f.input :street %>
+    <%= f.input :city %>
+    <%= f.input :state %>
+    <%= f.input :zipcode %>
+    <%= f.input :latitude %>
+    <%= f.input :longitude %>
+    <%= f.input :start_time, as: :string,
+                             input_html: { class: 'datetimepicker', size: 11,
+                               value: format_datetime_value(f.object.start_time ? f.object.start_time : @event.start_time) } %>
+    <%= f.input :end_time, as: :string,
+                             input_html: { class: 'datetimepicker', size: 11,
+                               value: format_datetime_value(f.object.end_time ? f.object.end_time : @event.end_time) } %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

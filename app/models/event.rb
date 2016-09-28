@@ -17,6 +17,7 @@ class Event < ActiveRecord::Base
 
   has_many :timecards
   has_many :people, :through => :timecards
+  has_many :tasks
 
   accepts_nested_attributes_for :timecards
   accepts_nested_attributes_for :certs

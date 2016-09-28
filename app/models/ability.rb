@@ -17,6 +17,7 @@ class Ability
       can [:read, :update, :create, :edit], Cert
       can [:read, :update, :create, :edit], Item
       can [:read, :update, :create, :edit], Event
+      can [:read, :update, :create, :edit], Task
       can [:read, :update, :create, :edit], Course
       can [:read, :update, :create, :edit], Skill
       can [:read, :update, :create, :edit], Inspection
@@ -28,12 +29,13 @@ class Ability
     elsif roles.include? 'Trainer'
       can [:read, :update, :create, :edit], Cert
       can [:read, :update, :create, :edit], Event
+      can [:read, :update, :create, :edit], Task
       can [:read, :update, :create, :edit], Course
-      can [:read], [Person, Channel, Timecard, Item, Event, Course, Skill, Inspection, Repair]
+      can [:read], [Person, Channel, Timecard, Item, Skill, Inspection, Repair]
       can [:signin, :orgchart], Person
       can [:read, :create], Activity
    elsif roles.include? 'Reader'
-      can [:read], [Person, Channel, Timecard, Cert, Item, Event, Course, Skill, Inspection, Repair, Activity]
+      can [:read], [Person, Channel, Timecard, Cert, Item, Event, Task, Course, Skill, Inspection, Repair, Activity]
       can [:signin], Person
       can :orgchart, Person
     end

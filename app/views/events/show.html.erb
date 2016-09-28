@@ -1,52 +1,41 @@
 <% content_for :sidebar do %>
   <%= sidebar_button_link 'Return to Events', events_path %>
   <%= sidebar_button_link 'Edit Event', edit_event_path(@event) if can? :edit, @event %>
+  <%= sidebar_button_link 'New Task', new_event_task_path(@event) if can? :create, Task %>
   <%= sidebar_button_link 'New Availability', new_event_availability_path(@event) if can? :create, Availability %>
   <%= sidebar_button_link "Excel", event_path(@event, format: "xlsx") %>
 <% end %>
 
-<h3><%= @event.title %></h3>
-<p>
-  <b>Location:</b>
-  <%= @event.location %>
-</p>
+<div class="row">
+  <div class="col-md-2">
+    <h3><%= @event.title %></h3>
+    <% if @event.location.present? %>
+      <p><b>Location:</b> <%= @event.location %></p>
+    <% end %>
+    <% if @event.description.present? %>
+      <p><b>Description:</b> <%= @event.description %></p>
+    <% end %>
+    <% if @event.category == "Training" %>
+      <p><%= @event.course.blank? ? "Training" : @event.course.name %> by <%= @event.instructor %></p>
+    <% end %>
+    <p><b>Start time:</b> <%= @event.start_time %></p>
+    <p><b>End time:</b> <%= @event.end_time %></p>
+    <p><b>Duration:</b> <%= @event.duration %> hours</p>
+    <p><b>Category:</b> <%= @event.category %> </p>
+    <p><b>Status:</b> <%= @event.status %></p>
+    <p>Available: <b><%= @event.availabilities.count %></b></p>
+    <p>Unavailable: <b><%= @event.unavailabilities.count %></b></p>
+    <% if @event.comments.present? %>
+      <p><b>Comments:</b> <%= @event.comments %></p>
+    <% end %>
+    <p>Created <%= @event.created_at %><br/>
+      Last Modified <%= @event.updated_at %></p>
+  </div>
 
-<p>
-  <b>Description:</b>
-  <%= @event.description %>
-</p>
-
-<% if @event.category == "Training" %><p>
-  <%= @event.course.blank? ? "Training" : @event.course.name %> by <%= @event.instructor %>
-</p>
-<% end %>
-
-<p>
-  <b>Start time:</b>
-  <%= @event.start_time %>
-</p>
-
-<p>
-  <b>End time:</b>
-  <%= @event.end_time %>
-</p>
-
-<p>
-  <b>Duration:</b>
-  <%= @event.duration %> hours
-</p>
-
-<p>
-  <b>Category:</b>
-  <%= @event.category %>
-</p>
-
-<p>
-  <b>Status:</b>
-  <%= @event.status %>
-</p>
-<p>Available: <b><%= @event.availabilities.count %></b></p>
-<p>Unavailable: <b><%= @event.unavailabilities.count %></b></p>
+  <div class="col-md-10">
+    <%= render(partial: 'tasks/tasks_table', locals: { tasks: @event.tasks}) %>
+  </div>
+</div>
 <hr>
 
 <%#= 1/0 %>
@@ -57,7 +46,3 @@
   <%= render(:partial => "people/people_table",
              :locals => { :people => @event.unresponsive_people, :title => "No Response" }) || "Everyone Responded !" %>
 </div>
-
-<%= @event.comments %>
-Created <%= @event.created_at %><br/>
-Last Modified <%= @event.updated_at %>

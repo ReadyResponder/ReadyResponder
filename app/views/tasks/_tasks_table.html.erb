@@ -1,0 +1,27 @@
+<table id="event_tasks" class="datatable table table-striped table-bordered">
+  <caption><h3><%= "Tasks" %></h3></caption>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th>Requirements Met</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% tasks.each do |task| %>
+      <tr <%== success_class_if_match(task.status, 'Full') %>>
+        <td><%= link_to task.title, task %></td>
+        <td><%= truncate(task.description) %></td>
+        <td <%== sorting_order(task.status_value) %>><%= task_status_label(task) %></td>
+        <td><%= task.requirements_met %>/<%= task.requirements %></td>
+        <td><%= task.start_time %></td>
+        <td><%= task.end_time %></td>
+        <td><%= table_button_link 'Edit', edit_task_path(task) if can? :edit, task %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160901210947) do
+ActiveRecord::Schema.define(version: 20160919220122) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -288,7 +288,7 @@ ActiveRecord::Schema.define(version: 20160901210947) do
     t.string   "middlename",     limit: 255
     t.string   "suffix_name",    limit: 255
     t.string   "nickname",       limit: 255
-    t.string   "portrait",       limit: 255
+    t.string   "portrait"
   end
 
   create_table "people_titles", id: false, force: :cascade do |t|
@@ -361,6 +361,24 @@ ActiveRecord::Schema.define(version: 20160901210947) do
 
   add_index "skills_titles", ["skill_id", "title_id"], name: "index_skills_titles_on_skill_id_and_title_id", using: :btree
 
+  create_table "tasks", force: :cascade do |t|
+    t.integer  "event_id"
+    t.string   "title"
+    t.text     "description"
+    t.string   "street"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zipcode"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "tasks", ["event_id"], name: "index_tasks_on_event_id", using: :btree
+
   create_table "timecards", force: :cascade do |t|
     t.integer  "person_id"
     t.integer  "event_id"
@@ -432,4 +450,5 @@ ActiveRecord::Schema.define(version: 20160901210947) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
+  add_foreign_key "tasks", "events"
 end
