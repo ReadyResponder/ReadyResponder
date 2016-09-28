@@ -6,11 +6,15 @@ jQuery ->
         $('.datepicker').datetimepicker({
           timepicker: false,
           format:'Y-m-d',
+          scrollMonth: false,
+          scrollInput: false,
         });
         #See application_helper.rb: format_datetime_value
         $('.datetimepicker').datetimepicker({
           format:'Y-m-d H:i',
           step: 15,
+          scrollMonth: false,
+          scrollInput: false,
           });
         $('.accordion').accordion
           collapsible: true
