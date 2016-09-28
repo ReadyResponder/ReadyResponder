@@ -9,8 +9,8 @@ ActiveRecord::Base.class_eval do
       first_time = value
       second_time = record.send(second_attr_name)
       if first_time.present? and second_time.present? and second_time < first_time
-        record.errors.add(first_attr_name, "must be before '#{second_attr_name}', unless you are the Doctor")
-        record.errors.add(second_attr_name, "must be after '#{first_attr_name}', unless you are the Doctor")
+        record.errors.add(first_attr_name, "must be before '#{human_attribute_name(second_attr_name)}', unless you are the Doctor")
+        record.errors.add(second_attr_name, "must be after '#{human_attribute_name(first_attr_name)}', unless you are the Doctor")
       end
     end
   end

@@ -9,10 +9,9 @@ jQuery ->
   $('#items').dataTable
     columnDefs: [
                   ## https://datatables.net/extensions/responsive/priority
-                  { responsivePriority: 1, targets: [0, 1, 2, 3, 8, 9 ] },
-                  { responsivePriority: 2, targets: 7 },
-                  { responsivePriority: 3, targets: 4 },
-                  { responsivePriority: 4, targets: 5 },
-                  { responsivePriority: 5, targets: 6 },
-                  { orderable: false, targets: 9 },
+                  { responsivePriority: 1, targets: [0, 1, 5, 6 ] },
+                  { responsivePriority: 2, targets: 4 },
+                  { responsivePriority: 3, targets: 2 },
+                  { responsivePriority: 4, targets: 3 },
+                  { orderable: false, targets: -1 },
                 ]

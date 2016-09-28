@@ -1,4 +1,4 @@
-<table id="availabilities" class="generic_datatable datatable display table table-striped table-bordered">
+<table id="availabilities" class="generic_datatable table table-striped table-bordered">
   <caption><h3><%= "Availability" %></h3></caption>
   <thead>
     <tr>
@@ -13,7 +13,7 @@
   </thead>
   <tbody>
     <% availabilities.each do |availability| %>
-      <tr>
+      <tr <%== success_class_if_match(availability.status, 'Available') %>>
         <td><%= availability.status %></td>
         <td><%= availability.person.icsid %></td>
         <td><%= link_to availability.person.fullname, availability_path(availability) %></td>

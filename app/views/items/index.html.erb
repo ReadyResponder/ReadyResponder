@@ -19,11 +19,7 @@
         <td><%= item.model %></td>
         <td><%= item.category %></td>
         <td><%= number_to_currency item.recent_costs %></td>
-        <td>
-          <span class="label <%= item_label(item) %>">
-            <%= item.status %>
-          </span>
-        </td>
+        <td><%= item_status_label(item) %></td>
         <td><%= table_button_link 'Edit', edit_item_path(item) unless cannot? :edit, item %></td>
       </tr>
     <% end %>
