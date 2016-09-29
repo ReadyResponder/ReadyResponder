@@ -13,7 +13,7 @@
   </thead>
   <tbody>
     <% tasks.each do |task| %>
-      <tr <%== success_class_if_match(task.status, 'Full') %>>
+      <tr <%== task_status_class(task) %>>
         <td><%= link_to task.title, task %></td>
         <td><%= truncate(task.description) %></td>
         <td <%== sorting_order(task.status_value) %>><%= task_status_label(task) %></td>

@@ -24,7 +24,7 @@ class Task < ActiveRecord::Base
 
   def status_value
     # return a value for sorting
-    STATUS_CHOICES[status]
+    return STATUS_CHOICES[status]
   end
 
   def requirements
@@ -40,7 +40,7 @@ class Task < ActiveRecord::Base
   end
 
   def requirements_unmet
-    requirements - requirements_met
+    return requirements - requirements_met
   end
 
   private

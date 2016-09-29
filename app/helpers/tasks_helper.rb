@@ -1,4 +1,18 @@
 module TasksHelper
+  def task_status_class(task)
+    case task.status
+    when 'Full'
+      return 'class="success"'
+    when 'Partially Filled'
+      return 'class="warning"'
+    when 'Empty'
+      return 'class="danger"'
+    else
+      # Including Cancelled
+      return nil
+    end
+  end
+
   def task_status_label(task)
     content_tag(:span, task.status, class: task_label_class(task))
   end
@@ -21,5 +35,4 @@ module TasksHelper
         return 'label label-default'
       end
     end
-
 end

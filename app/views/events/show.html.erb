@@ -6,43 +6,42 @@
   <%= sidebar_button_link "Excel", event_path(@event, format: "xlsx") %>
 <% end %>
 
-<div class="row">
-  <div class="col-md-2">
-    <h3><%= @event.title %></h3>
-    <% if @event.location.present? %>
-      <p><b>Location:</b> <%= @event.location %></p>
+<p>
+  <span class="h3">
+    <% if @event.category.present? %>
+      <b><%= @event.category %>:</b>
     <% end %>
-    <% if @event.description.present? %>
-      <p><b>Description:</b> <%= @event.description %></p>
-    <% end %>
-    <% if @event.category == "Training" %>
-      <p><%= @event.course.blank? ? "Training" : @event.course.name %> by <%= @event.instructor %></p>
-    <% end %>
-    <p><b>Start time:</b> <%= @event.start_time %></p>
-    <p><b>End time:</b> <%= @event.end_time %></p>
-    <p><b>Duration:</b> <%= @event.duration %> hours</p>
-    <p><b>Category:</b> <%= @event.category %> </p>
-    <p><b>Status:</b> <%= @event.status %></p>
-    <p>Available: <b><%= @event.availabilities.count %></b></p>
-    <p>Unavailable: <b><%= @event.unavailabilities.count %></b></p>
-    <% if @event.comments.present? %>
-      <p><b>Comments:</b> <%= @event.comments %></p>
-    <% end %>
-    <p>Created <%= @event.created_at %><br/>
-      Last Modified <%= @event.updated_at %></p>
-  </div>
+    <%= @event.title %>
+  </span>
+  <% if @event.location.present? %>
+    at <%= @event.location %>
+  <% end %>
+  (<%= format_time_span(@event.start_time, @event.end_time, @event.duration) %>)
+</p>
+<% if @event.description.present? %>
+  <p><b>Description:</b> <%= @event.description %></p>
+<% end %>
+<% if @event.category == "Training" %>
+  <p><%= @event.course.blank? ? "Training" : @event.course.name %> by <%= @event.instructor %></p>
+<% end %>
+<%= display_event_status(@event) %>
 
-  <div class="col-md-10">
-    <%= render(partial: 'tasks/tasks_table', locals: { tasks: @event.tasks}) %>
-  </div>
-</div>
-<hr>
+<%= render(partial: 'tasks/tasks_table', locals: { tasks: @event.tasks}) %>
 
-<%#= 1/0 %>
 <div id="event_availabilities" >
   <%= render(:partial => "availabilities/availabilities_table",
              :locals => { :availabilities => ( @event.responses)} ) || "No Availabilities yet !" %>
-  <hr>
-  <%= render(:partial => "people/people_table",
-             :locals => { :people => @event.unresponsive_people, :title => "No Response" }) || "Everyone Responded !" %>
+
+  <%= render(partial: "people/people_table",
+             locals: { people: @event.unresponsive_people,
+                       title: "No Response",
+                       row_class: 'class="warning"'}) || "Everyone Responded !" %>
 </div>
+
+<% if @event.comments.present? %>
+  <p><b>Comments:</b> <%= @event.comments %></p>
+<% end %>
+<p>
+  Created <%= @event.created_at %><br/>
+  Last Modified <%= @event.updated_at %>
+</p>

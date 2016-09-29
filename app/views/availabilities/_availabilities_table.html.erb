@@ -13,8 +13,8 @@
   </thead>
   <tbody>
     <% availabilities.each do |availability| %>
-      <tr <%== success_class_if_match(availability.status, 'Available') %>>
-        <td><%= availability.status %></td>
+      <tr <%== availability_status_class(availability) %>>
+        <td><%= availability_status_label(availability) %></td>
         <td><%= availability.person.icsid %></td>
         <td><%= link_to availability.person.fullname, availability_path(availability) %></td>
         <td><%= number_to_phone(availability.person.phone) %></td>

@@ -2,7 +2,7 @@
   <h2>New Task</h2>
   <h3>(for <%= @task.event.title %>)</h3>
   <%= sidebar_button_link 'Return to Event', @task.event %>
-  <%= sidebar_button_link 'Return to Tasks List', tasks_path %> (probably remove this)
+  <%= sidebar_button_link 'Return to Tasks List', tasks_path %>
 <% end %>
 
 <%= render 'form' %>

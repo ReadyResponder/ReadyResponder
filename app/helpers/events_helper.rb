@@ -1,5 +1,27 @@
 module EventsHelper
 
+  def event_status_label(event)
+    make_label(event.status, event_label_class(event))
+  end
+
+  def display_event_status(event)
+    available    = event.availabilities.count.to_s
+    unavailable  = event.unavailabilities.count.to_s
+    no_response  = event.unresponsive_people.count.to_s
+    content_tag(:div) {
+      capture do
+        concat event_status_label(event)
+        concat " (Personnel: "
+        concat make_label(available, 'label label-success', tooltip: 'available')
+        concat "/"
+        concat make_label(unavailable, 'label label-danger', tooltip: 'unavailable')
+        concat "/"
+        concat make_label(no_response, 'label label-warning', tooltip: 'no response')
+        concat ")"
+      end
+    }
+  end
+
   def elapsed_time(timecard)
     distance_of_time_in_words((Time.current), timecard.actual_start_time) if timecard.actual_start_time
   end
@@ -38,5 +60,30 @@ module EventsHelper
     end
     return raw button
   end
+
+  private
+    def make_label(text, class_str, tooltip: nil)
+      if tooltip
+        content_tag(:span, text, class: class_str,
+                    title: tooltip,
+                    data: {toggle: 'tooltip', placement: 'bottom'})
+      else
+        content_tag(:span, text, class: class_str)
+      end
+    end
+
+    def event_label_class(event)
+      # The options are found in app/models/event.rb: STATUS_CHOICES
+      return nil if event.status.blank?
+      case event.status
+      when 'Scheduled', 'In-session', 'Completed'
+        return 'label label-success'
+      when 'Cancelled', 'closed'
+        return 'label label-warning'
+      else
+        # This should only happen if another status is added.
+        return 'label label-default'
+      end
+    end
 
 end

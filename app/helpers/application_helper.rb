@@ -119,6 +119,14 @@ module ApplicationHelper
     datetime.strftime("%Y-%m-%d %H:%M") if datetime
   end
 
+  def format_time_span(start_time, end_time, duration = nil)
+    if duration
+      "#{start_time} to #{end_time}, #{duration}h"
+    else
+      "#{start_time} to #{end_time}"
+    end
+  end
+
   private
     def success_or_warning_label_class(str, success_str)
       if str == success_str
