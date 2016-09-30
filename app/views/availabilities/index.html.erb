@@ -8,17 +8,17 @@
       <th>End time</th>
       <th>Status</th>
       <th>Description</th>
-      <th colspan="3"></th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @availabilities.each do |availability| %>
-      <tr <%== success_class_if_match(availability.status, 'Available') %>>
+      <tr <%== availability_status_class(availability) %>>
         <td><%= link_to availability.person.fullname, availability_path(availability) %></td>
         <td><%= availability.start_time.to_s(:short) %></td>
         <td><%= availability.end_time.to_s(:short) %></td>
-        <td><%= availability.status %></td>
+        <td><%= availability_status_label(availability) %></td>
         <td><%= availability.description %></td>
         <td><%= table_button_link 'Edit', edit_availability_path(availability) %></td>
       </tr>

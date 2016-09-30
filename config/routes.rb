@@ -41,7 +41,9 @@ Rails.application.routes.draw do
   resources :courses
   resources :certs
 
+  resources :tasks, except: [:new, :create], constraints: { id: /\d+/ }
   resources :events do
+    resources :tasks, only: [:new, :create]
     resources :availabilities, :controller => 'availabilities'
   end
 

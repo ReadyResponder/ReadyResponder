@@ -1,0 +1,9 @@
+<% content_for :sidebar do %>
+  <h2>Edit Task</h2>
+  <h3>(for <%= @task.event.title %>)</h3>
+  <%= sidebar_button_link 'Return to Event', @task.event %>
+  <%= sidebar_button_link 'Return to Tasks List', tasks_path %>
+  <%= sidebar_button_link 'Show Task', @task %>
+<% end %>
+
+<%= render 'form' %>
