@@ -9,10 +9,13 @@ describe InspectionsController do
 
     it "routes to #new" do
       expect(get("/items/3/inspections/new")).to route_to("inspections#new", item_id: "3")
+      expect(get("/inspections/new")).to_not be_routable
     end
 
     it "routes to #show" do
       expect(get("/inspections/1")).to route_to("inspections#show", :id => "1")
+      expect(get("/inspections/123new")).to_not be_routable
+      expect(get("/inspections/new123")).to_not be_routable
     end
 
     it "routes to #edit" do
