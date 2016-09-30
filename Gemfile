@@ -17,6 +17,9 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-datetimepicker'
 end
 
+# Handles text messages and voice calls
+gem 'twilio-ruby'
+
 #Handles authentication
 gem 'devise', '~> 3.0'
 
