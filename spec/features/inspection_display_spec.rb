@@ -12,6 +12,9 @@ describe "Inspection" do
     fill_in('user_password', :with => somebody.password)
     click_on 'Sign in'
   end
+
+  get_nested_editor_views('item', 'inspection', ['status', 'comments'])
+
   describe "when not logged in" do
     let(:an_item)  { create(:item) }
     let(:an_inspection) { create(:inspection, item: an_item) }

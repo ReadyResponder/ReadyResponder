@@ -11,7 +11,7 @@ describe "Availabilities" do
     click_on 'Sign in'
   end
 
-  # get_basic_editor_views('availability',['person', 'description', 'status'])
+  get_nested_editor_views('person', 'availability', ['description', 'status'])
 
   describe "creates" do
     it "availabilities" do
