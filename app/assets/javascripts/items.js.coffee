@@ -25,4 +25,4 @@ jQuery ->
     if options
       $('#item_location_id').html(options)
     else
-      $('#item_location_id').parent().empty()
+      $('#item_location_id').empty()
