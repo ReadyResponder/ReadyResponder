@@ -28,7 +28,7 @@ describe "Person" do
     it "returns the index page" do
       visit people_path
       expect(page).to have_content('People')
-      expect(page).to have_content('LIMS') # This is in the nav bar
+      expect(page).to have_content('Home') # This is in the nav bar
       expect(page).to have_content('CJ')
       expect(page).to have_content('555-1212')
       expect(page).to have_content('Sierra')
@@ -43,7 +43,7 @@ describe "Person" do
     it "returns a page for Police" do
       visit police_people_path
       expect(page).to have_content('Police')
-      expect(page).to have_content('LIMS') # This is in the nav bar
+      expect(page).to have_content('Home') # This is in the nav bar
       expect(page).to have_content('CJ')
       expect(page).not_to have_content('Sierra')
       expect(page).not_to have_content('Adam')
@@ -56,7 +56,7 @@ describe "Person" do
     it "returns a page for CERT" do
       visit cert_people_path
       expect(page).to have_content('CERT')
-      expect(page).to have_content('LIMS') # This is in the nav bar
+      expect(page).to have_content('Home') # This is in the nav bar
       expect(page).not_to have_content('CJ')
       expect(page).to have_content('Sierra')
       expect(page).not_to have_content('Adam')
@@ -69,7 +69,7 @@ describe "Person" do
     it "returns a page for Applicants" do
       visit applicants_people_path
       expect(page).to have_content('Applicants')
-      expect(page).to have_content('LIMS') # This is in the nav bar
+      expect(page).to have_content('Home') # This is in the nav bar
       expect(page).not_to have_content('CJ')
       expect(page).not_to have_content('Sierra')
       expect(page).to have_content('Adam')
@@ -82,7 +82,7 @@ describe "Person" do
     it "returns a page for Prospects" do
       visit prospects_people_path
       expect(page).to have_content('Prospects')
-      expect(page).to have_content('LIMS') # This is in the nav bar
+      expect(page).to have_content('Home') # This is in the nav bar
       expect(page).not_to have_content('CJ')
       expect(page).not_to have_content('Sierra')
       expect(page).not_to have_content('Adam')
@@ -95,7 +95,7 @@ describe "Person" do
     it "returns a page for Inactive" do
       visit inactive_people_path
       expect(page).to have_content('Inactive')
-      expect(page).to have_content('LIMS') # This is in the nav bar
+      expect(page).to have_content('Home') # This is in the nav bar
       expect(page).not_to have_content('CJ')
       expect(page).not_to have_content('Sierra')
       expect(page).not_to have_content('Adam')
@@ -107,7 +107,7 @@ describe "Person" do
     it "returns a page for Declined" do
       find('#navbar').click_link('Declined')
       expect(page).to have_content('Declined')
-      expect(page).to have_content('LIMS') # This is in the nav bar
+      expect(page).to have_content('Home') # This is in the nav bar
       expect(page).not_to have_content('CJ')
       expect(page).not_to have_content('Sierra')
       expect(page).not_to have_content('Adam')
@@ -120,7 +120,7 @@ describe "Person" do
     it "returns a page for on leave" do
       find('#navbar').click_link('Leave')
       expect(page).to have_content('On-Leave')
-      expect(page).to have_content('LIMS') # This is in the nav bar
+      expect(page).to have_content('Home') # This is in the nav bar
       expect(page).not_to have_content('CJ')
       expect(page).not_to have_content('Sierra')
       expect(page).not_to have_content('Adam')
@@ -134,7 +134,7 @@ describe "Person" do
       find('#navbar').click_link('Other')
       #visit other_people_path
       expect(page).to have_content('Others')
-      expect(page).to have_content('LIMS') # This is in the nav bar
+      expect(page).to have_content('Home') # This is in the nav bar
       expect(page).not_to have_content('CJ')
       expect(page).not_to have_content('Sierra')
       expect(page).not_to have_content('Adam')
