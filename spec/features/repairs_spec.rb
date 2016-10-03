@@ -15,7 +15,7 @@ describe "Repairs" do
     it "returns a page" do
       visit repairs_path
       expect(page).to have_content("Listing Repairs")
-      expect(page).to have_content("LIMS") # This is in the nav bar
+      expect(page).to have_content("Home") # This is in the nav bar
     end
   end
 end

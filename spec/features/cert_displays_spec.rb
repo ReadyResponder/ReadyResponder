@@ -35,7 +35,7 @@ describe "Cert" do
       
       visit certs_path
       expect(page).to have_content("Listing Certs")
-      expect(page).to have_content("LIMS") # This is in the nav bar
+      expect(page).to have_content("Home") # This is in the nav bar
       expect(page).to have_content("Active") # This is in the cert
       expect(page).to have_link(person.fullname)
       expect(page).to have_link(cert.course.name)
