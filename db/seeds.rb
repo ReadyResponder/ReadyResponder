@@ -30,10 +30,10 @@ Role.find_or_create_by(name: "Admin")
 
 # Departments are where people call home.
 Department.create([
-  {name: "Community Emergency Response Team", status: "Active"},
-  {name: "Medical Reserve Corp", status: "Active"},
-  {name: "Department Public Works", status: "Active"},
-  {name: "Inactive Department", status: "Inactive"}
+  {name: "Community Emergency Response Team", status: "Active", division1: ["Team 1", "Team 2"], division2: ["Squad 1", "Squad 2"]},
+  {name: "Medical Reserve Corp", status: "Active", division1: ["Team 1", "Team 2"], division2: ["Squad 1", "Squad 2"]},
+  {name: "Department Public Works", status: "Active", division1: ["Team 1", "Team 2"], division2: ["Squad 1", "Squad 2"]},
+  {name: "Inactive Department", status: "Inactive", division1: ["Team 1", "Team 2"], division2: ["Squad 1", "Squad 2"]}
   ])
 
 Skill.create([
