@@ -1,7 +1,7 @@
-Contributing to LIMS
+Contributing to ReadyResponder
 ======================
 
-First of all: thank you! We appreciate any help you can give LIMS.
+First of all: thank you! We appreciate any help you can give ReadyResponder.
 
 You can contribue in several ways:
 
@@ -11,9 +11,9 @@ You can contribue in several ways:
 * Make a feature request
 * Share a success story
 
-Many people contribute to Lims by writing some code! Here's how:
+Many people contribute to ReadyResponder by writing some code! Here's how:
 
-1. [Fork](https://help.github.com/articles/fork-a-repo) LIMS
+1. [Fork](https://help.github.com/articles/fork-a-repo) ReadyResponder
 2. Create a topic branch - `git checkout -b my_branch`
 3. Make your changes
 4. Commit your changes to your branch
@@ -45,7 +45,7 @@ Please include docs in your pull requests.
 Bugs & Feature Requests
 -----------------------
 
-You can file bugs on the [issues tracker](https://github.com/kgf/lims/issues), and tag them with 'bug'.
+You can file bugs on the [issues tracker](https://github.com/ReadyResponder/ReadyResponder/issues), and tag them with 'bug'.
 
 When filing a bug, please follow these tips to help us help you:
 
@@ -56,7 +56,7 @@ Please include the following four things in your report:
 1. What you did.
 2. What you expected to happen.
 3. What happened instead.
-4. What version of LIMS you're using. You can find this in the footer on
+4. What version of ReadyResponder you're using. You can find this in the footer on
    every page
 
 The more information the better.
