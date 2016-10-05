@@ -95,8 +95,14 @@ module ApplicationHelper
     content_tag(:span, str, class: success_or_warning_label_class(str, success_str))
   end
 
-  # This is a general helper to provide a simple success tag when appropriate.
-  # This should be called with raw or with <%==
+  # Returns a 'data-order="value"' string to be used in a <td> tag, which can be used for sorting
+  # This helper should be called with raw or with <%==
+  def sorting_order(value)
+    return "data-order=\"#{value}\""
+  end
+
+  # This is a general helper to provide a simple success class label when appropriate.
+  # This helper should be called with raw or with <%==
   def success_class_if_match(str, success_str)
     return 'class="success"' if str == success_str
   end
@@ -111,6 +117,14 @@ module ApplicationHelper
   # As above, but for datetime.
   def format_datetime_value(datetime)
     datetime.strftime("%Y-%m-%d %H:%M") if datetime
+  end
+
+  def format_time_span(start_time, end_time, duration = nil)
+    if duration
+      "#{start_time} to #{end_time}, #{duration}h"
+    else
+      "#{start_time} to #{end_time}"
+    end
   end
 
   private

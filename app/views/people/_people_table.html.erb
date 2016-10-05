@@ -9,7 +9,7 @@
   </thead>
   <tbody>
     <% people.each do |person| %>
-      <tr>
+      <tr <%== row_class if local_assigns[:row_class] %>>
         <td><%= person.icsid %></td>
         <td><%= link_to person.fullname, person_path(person) %></td>
         <td><%= number_to_phone(person.phone) %></td>

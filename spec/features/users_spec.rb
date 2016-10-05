@@ -25,7 +25,7 @@ describe "user" do
   it "gets the index" do
     @user = create(:user, lastname: "Doe")
     visit users_path
-    expect(page).to have_content("LIMS") # In the nav bar
+    expect(page).to have_content("Home") # In the nav bar
     expect(page).to have_css('#sidebar')
     within_table("users") do
       expect(page).to have_content("Users")
@@ -35,7 +35,7 @@ describe "user" do
   it "visits an edit form" do
     @user = create(:user, lastname: "Doe")
     visit edit_user_path(@user)
-    expect(page).to have_content("LIMS")
+    expect(page).to have_content("Home")
     expect(page).to have_css('#sidebar')
     expect(page).to have_field('user_lastname', :with => "Doe")
     fill_in 'user_lastname', :with => "Ford"
@@ -46,7 +46,7 @@ describe "user" do
   it "visits a display page" do
     @user = create(:user, lastname: "Doe")
     visit url_for(@user)
-    expect(page).to have_content("LIMS")
+    expect(page).to have_content("Home")
     expect(page).to have_css('#sidebar')
     expect(page).to have_content('Doe')
   end

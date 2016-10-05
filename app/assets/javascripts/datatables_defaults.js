@@ -6,6 +6,8 @@ $.extend( true, $.fn.dataTable.defaults, {
   scrollCollapse: true,         // https://datatables.net/reference/option/scrollCollapse
   scrollY: '50vh',              // https://datatables.net/examples/basic_init/scroll_y_dynamic.html
   responsive: true,             // https://datatables.net/extensions/responsive/priority
+  paging: false,                // paging
+  info: false,                  // showing X of Y entries
   pagingType: "full_numbers",
   retrieve: true,
   pageLength: 100,

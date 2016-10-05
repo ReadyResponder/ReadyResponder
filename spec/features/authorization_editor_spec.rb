@@ -56,7 +56,7 @@ describe "a user" do
     end
     it "can create a new person" do
       visit people_path
-      expect(page).to have_content('LIMS')
+      expect(page).to have_content('Home')
       visit new_person_path
       expect(current_path).to eq(new_person_path)
       expect(page).not_to have_content("Access Denied")

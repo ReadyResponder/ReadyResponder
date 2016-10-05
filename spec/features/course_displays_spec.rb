@@ -37,7 +37,7 @@ describe "Course" do
       within_table("courses") do
         expect(page).to have_content("Courses")
       end
-      expect(page).to have_content("LIMS") # This is in the nav bar
+      expect(page).to have_content("Home") # This is in the nav bar
       expect(page).to have_link(an_example.name)
       click_on an_example.name
       expect(page).to have_content(an_example.name)
