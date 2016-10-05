@@ -23,6 +23,6 @@ jQuery ->
     espaced_department = department.replace(/([ #;&,.+*~\':"!^$[\]()=>|\/@])/g, '\\$1')
     options = $(locations).filter("optgroup[label='#{espaced_department}']").html()
     if options
-      $('#item_location_id').html(options)
+      $('#item_location_id').html(options).prepend("<option value='' selected='selected'></option>")
     else
       $('#item_location_id').empty()
