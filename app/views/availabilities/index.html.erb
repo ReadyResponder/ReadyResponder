@@ -1,0 +1,31 @@
+<h1>Listing Availabilities</h1>
+
+<table id="availabilities" class="generic_datatable table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Person</th>
+      <th>Start time</th>
+      <th>End time</th>
+      <th>Status</th>
+      <th>Description</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @availabilities.each do |availability| %>
+      <tr <%== availability_status_class(availability) %>>
+        <td><%= link_to availability.person.fullname, availability_path(availability) %></td>
+        <td><%= availability.start_time.to_s(:short) %></td>
+        <td><%= availability.end_time.to_s(:short) %></td>
+        <td><%= availability_status_label(availability) %></td>
+        <td><%= availability.description %></td>
+        <td><%= table_button_link 'Edit', edit_availability_path(availability) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= independent_button_link 'New Availability', new_availability_path %>

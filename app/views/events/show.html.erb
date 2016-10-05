@@ -1,60 +1,47 @@
 <% content_for :sidebar do %>
-  <%= link_to 'Return to Events', events_path, :class => 'btn' %></br></br>
-  <%= link_to 'Edit Event', edit_event_path(@event), :class => 'btn' if can? :edit, @event  %></br></br>
-  <%= link_to "Excel", event_path(@event, format: "xlsx"), :class => 'btn btn-mini' %>
- <% end %>
-
-<h3><%= @event.title %></h3>
-<p>
-  <b>Location:</b>
-  <%= @event.location %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @event.description %>
-</p>
-
-<% if @event.category == "Training" %><p>
-  <%= @event.course.blank? ? "Training" : @event.course.name %> by <%= @event.instructor %>
-</p>
+  <%= sidebar_button_link 'Return to Events', events_path %>
+  <%= sidebar_button_link 'Edit Event', edit_event_path(@event) if can? :edit, @event %>
+  <%= sidebar_button_link 'New Task', new_event_task_path(@event) if can? :create, Task %>
+  <%= sidebar_button_link 'New Availability', new_event_availability_path(@event) if can? :create, Availability %>
+  <%= sidebar_button_link "Excel", event_path(@event, format: "xlsx") %>
 <% end %>
 
 <p>
-  <b>Start time:</b>
-  <%= @event.start_time %>
+  <span class="h3">
+    <% if @event.category.present? %>
+      <b><%= @event.category %>:</b>
+    <% end %>
+    <%= @event.title %>
+  </span>
+  <% if @event.location.present? %>
+    at <%= @event.location %>
+  <% end %>
+  (<%= format_time_span(@event.start_time, @event.end_time, @event.duration) %>)
 </p>
+<% if @event.description.present? %>
+  <p><b>Description:</b> <%= @event.description %></p>
+<% end %>
+<% if @event.category == "Training" %>
+  <p><%= @event.course.blank? ? "Training" : @event.course.name %> by <%= @event.instructor %></p>
+<% end %>
+<%= display_event_status(@event) %>
 
-<p>
-  <b>End time:</b>
-  <%= @event.end_time %>
-</p>
+<%= render(partial: 'tasks/tasks_table', locals: { tasks: @event.tasks}) %>
 
-<p>
-  <b>Duration:</b>
-  <%= @event.duration %> hours
-</p>
+<div id="event_availabilities" >
+  <%= render(:partial => "availabilities/availabilities_table",
+             :locals => { :availabilities => ( @event.responses)} ) || "No Availabilities yet !" %>
 
-<p>
-  <b>Category:</b>
-  <%= @event.category %>
-</p>
-
-<p>
-  <b>Status:</b>
-  <%= @event.status %>
-</p>
-
-<div id="event_timecards" >
-  <%= render "unknown_for_event" %>
-  <%= render "unavailable_for_event" %>
-  <%= render "available_for_event" %>
-  <%= render "scheduled_for_event" %>
-  <%= render "working_for_event" %>
-  <%= render "worked_for_event" %>
-  <%= render "all_for_event" %>
+  <%= render(partial: "people/people_table",
+             locals: { people: @event.unresponsive_people,
+                       title: "No Response",
+                       row_class: 'class="warning"'}) || "Everyone Responded !" %>
 </div>
 
-<%= @event.comments %>
-Created <%= @event.created_at %></br>
-Last Modified <%= @event.updated_at %>
+<% if @event.comments.present? %>
+  <p><b>Comments:</b> <%= @event.comments %></p>
+<% end %>
+<p>
+  Created <%= @event.created_at %><br/>
+  Last Modified <%= @event.updated_at %>
+</p>

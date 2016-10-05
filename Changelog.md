@@ -1,5 +1,6 @@
 Changelog
 =========
+- Unreleased: Upgrade to RSpec 3; convert unit tests to RSpec.
 - 0.79 8/30/2013 Broke up accordian div in events to allow it to better adjust the height
 - 0.79 8/29/2013 Additional tests and tuning of the events model. More validations around times and statuses
 - 0.79 8/29/2013 Additional tests and tuning of the events model. Not done yet, that will be Version 0.80

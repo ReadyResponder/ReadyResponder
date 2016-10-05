@@ -4,12 +4,8 @@
 
 jQuery ->
   $('#locations').dataTable
-    sPaginationType: "full_numbers"
-    "aoColumns": [null,
+    "columns": [null,
                   null,
                   null,
                   null,
-                  {"bSortable" : false}],
-    'bJQueryUI': true
-    'bRetrieve': true
-    'iDisplayLength': 100
+                  {"orderable" : false}],

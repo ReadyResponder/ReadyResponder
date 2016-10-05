@@ -1,0 +1,100 @@
+<nav class="navbar navbar-inverse navbar-fixed-top fh-fixedHeader" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Home</a>
+    </div>
+
+    <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">People<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <%= nav_link "Police", police_people_path %>
+              <%= nav_link "CERT", cert_people_path %>
+              <%= nav_link "Active", people_path %>
+              <%= nav_link "Others Active", other_people_path %>
+              <%= nav_link "Everybody", everybody_people_path %>
+              <li role="separator" class="divider"></li>
+              <%= nav_link "Applicants", applicants_people_path %>
+              <%= nav_link "Prospects", prospects_people_path %>
+              <li role="separator" class="divider"></li>
+              <%= nav_link "Leave", leave_people_path %>
+              <%= nav_link "Inactive", inactive_people_path %>
+              <%= nav_link "Declined", declined_people_path %>
+              <li role="separator" class="divider"></li>
+              <%= nav_link "New Person", new_person_path if can? :create, Person %>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Events<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <%#= nav_link "Scheduled", police_people_path %>
+                <%#= nav_link "Current", cert_people_path %>
+                <%#= nav_link "Past", people_path %>
+                <%#= nav_link "Cancelled", other_people_path %>
+                <%= nav_link "All Events", events_path %>
+                <li role="separator" class="divider"></li>
+                <%= nav_link "New Event", new_event_path if can? :create, Event %>
+              </ul>
+          </li>
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Inventory<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <%= nav_link "Inventory", items_path %>
+              <%= nav_link "New Item", new_item_path if can? :create, Item  %>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Admin<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <%= nav_link "Courses", courses_path %>
+              <%= nav_link "Skills", skills_path %>
+              <%= nav_link "Titles", titles_path %>
+              <%= nav_link "Locations", locations_path %>
+              <%= nav_link "Resource Types", resource_types_path %>
+              <%= nav_link "Item Types", item_types_path %>
+              <%= nav_link "Users", users_path %>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Reports<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <%= nav_link "Attendance Sheet", signin_people_path %>
+              <%= nav_link "Org Chart", orgchart_people_path %>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Access<span class="caret"></span></a>
+            <ul class="dropdown-menu" >
+              <% if user_signed_in? %>
+                <%= nav_link "#{current_user.email} Profile", edit_user_registration_path %>
+                <%= nav_link "Sign Out", destroy_user_session_path, :delete %>
+              <% else %>
+                <%= nav_link "Sign In", new_user_session_path %>
+              <% end %>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Help<span class="caret"></span></a>
+            <ul class="dropdown-menu" >
+              <%= nav_link "Help", help_path %>
+              <%#= nav_link "Changelog", "/Changelog.md" %>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+</nav>

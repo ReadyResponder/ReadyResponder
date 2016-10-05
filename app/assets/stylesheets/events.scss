@@ -1,0 +1,19 @@
+// Place all the styles related to the Events controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#event_timecards {
+  border: 1px solid #e1e1e8;
+  padding: 9px 14px;
+  border-radius: 4px;
+  // background-color: #f7f7f9;
+
+  h3 {
+    padding-bottom: 8px;
+    font-size: 16px;
+  }
+
+  th{
+    color: #666;
+  }
+}

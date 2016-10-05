@@ -1,0 +1,29 @@
+<% content_for :sidebar do %>
+  <%= sidebar_button_link 'Edit', edit_item_type_path(@item_type) %>
+  <%= sidebar_button_link 'Back', item_types_path %>
+<% end %>
+
+<p>
+  <b>Name:</b>
+  <%= @item_type.name %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @item_type.status %>
+</p>
+
+<p>
+  <b>Is groupable:</b>
+  <%= @item_type.is_groupable %>
+</p>
+
+<p>
+  <b>Is a group:</b>
+  <%= @item_type.is_a_group %>
+</p>
+
+<p>
+  <b>Parent:</b>
+  <%= @item_type.parent_id %>
+</p>

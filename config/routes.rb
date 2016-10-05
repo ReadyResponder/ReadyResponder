@@ -1,124 +1,68 @@
-Lims3::Application.routes.draw do
+Rails.application.routes.draw do
+  resources :availabilities
+  resources :unique_ids
+
+  resources :item_types
+
+  resources :resource_types
   resources :messages
-
-
   resources :activities
-
   resources :helpdocs
-
   resources :channels
-
+  resources :departments
   resources :timecards
+  resources :roles
 
-  resources :events
   post 'events/:id/schedule/:person_id/:card_action', to: 'events#schedule', as: 'schedule'
 
   resources :moves
-
-  resources :repairs
-
   resources :locations
 
+  resources :repairs
+  resources :inspections, except: [:new, :create], constraints: { id: /\d+/ }
   resources :items do
-    resources :repairs, :controller => 'repairs'
+    resources :repairs
+    resources :inspections, only: [:new, :create]
   end
 
-  resources :roles
-
-  get "landing/index"
-
-  #authenticated :user do
-  #  root :to => "people#index" 
-  #end
+  get 'landing/help', as: 'help', path: '/help'
 
   devise_for :users
   resources :users
-  resources :inspections
 
   resources :titles
-
   resources :skills
-
   resources :courses
-
   resources :certs
 
-  resources :people do
-      collection do
-	      get 'inactive'
-        get 'leave'
-        get 'other'
-        get 'everybody'
-        get 'applicants'
-        get 'prospects'
-        get 'declined'
-        get 'cert'
-        get 'police'
-        get 'signin'
-	      get 'orgchart'
-        get 'roster'
-      end
-    resources :certs, :controller => 'certs'
-    resources :titles, :controller => 'titles'
-    resources :items, :controller => 'items'
-    resources :channels, :controller => "channels"
+  resources :tasks, except: [:new, :create], constraints: { id: /\d+/ }
+  resources :events do
+    resources :tasks, only: [:new, :create]
+    resources :availabilities
   end
 
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
+  resources :people do
+    collection do
+      get 'inactive'
+      get 'leave'
+      get 'other'
+      get 'everybody'
+      get 'applicants'
+      get 'prospects'
+      get 'declined'
+      get 'cert'
+      get 'police'
+      get 'signin'
+      get 'orgchart'
+      get 'roster'
+    end
+    resources :certs
+    resources :availabilities
+    resources :titles
+    resources :items
+    resources :channels
+  end
 
-  # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
-  # Keep in mind you can assign values other than :controller and :action
+  root "landing#index"
 
-  # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
-  # This route can be invoked with purchase_url(:id => product.id)
-
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Sample resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Sample resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Sample resource route with more complex sub-resources
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', :on => :collection
-  #     end
-  #   end
-
-  # Sample resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
-
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
-#root :to => 'people/index'
-  # See how all your routes lay out with "rake routes"
-  root :to => "landing#index"
-
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id))(.:format)'
 end

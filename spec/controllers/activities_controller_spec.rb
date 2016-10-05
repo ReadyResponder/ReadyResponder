@@ -38,7 +38,7 @@ describe ActivitiesController do
     it "assigns all activities as @activities" do
       activity = Activity.create! valid_attributes
       get :index, {}, valid_session
-      assigns(:activities).should eq([activity])
+      expect(assigns(:activities)).to eq([activity])
     end
   end
 
@@ -46,14 +46,14 @@ describe ActivitiesController do
     it "assigns the requested activity as @activity" do
       activity = Activity.create! valid_attributes
       get :show, {:id => activity.to_param}, valid_session
-      assigns(:activity).should eq(activity)
+      expect(assigns(:activity)).to eq(activity)
     end
   end
 
   describe "GET new" do
     it "assigns a new activity as @activity" do
       get :new, {}, valid_session
-      assigns(:activity).should be_a_new(Activity)
+      expect(assigns(:activity)).to be_a_new(Activity)
     end
   end
 
@@ -61,7 +61,7 @@ describe ActivitiesController do
     it "assigns the requested activity as @activity" do
       activity = Activity.create! valid_attributes
       get :edit, {:id => activity.to_param}, valid_session
-      assigns(:activity).should eq(activity)
+      expect(assigns(:activity)).to eq(activity)
     end
   end
 
@@ -75,29 +75,29 @@ describe ActivitiesController do
 
       it "assigns a newly created activity as @activity" do
         post :create, {:activity => valid_attributes}, valid_session
-        assigns(:activity).should be_a(Activity)
-        assigns(:activity).should be_persisted
+        expect(assigns(:activity)).to be_a(Activity)
+        expect(assigns(:activity)).to be_persisted
       end
 
       it "redirects to the created activity" do
         post :create, {:activity => valid_attributes}, valid_session
-        response.should redirect_to(Activity.last)
+        expect(response).to redirect_to(Activity.last)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved activity as @activity" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Activity.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Activity).to receive(:save).and_return(false)
         post :create, {:activity => { "content" => "invalid value" }}, valid_session
-        assigns(:activity).should be_a_new(Activity)
+        expect(assigns(:activity)).to be_a_new(Activity)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Activity.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Activity).to receive(:save).and_return(false)
         post :create, {:activity => { "content" => "invalid value" }}, valid_session
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -110,20 +110,20 @@ describe ActivitiesController do
         # specifies that the Activity created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Activity.any_instance.should_receive(:update_attributes).with({ "content" => "MyString" })
+        expect_any_instance_of(Activity).to receive(:update_attributes).with({ "content" => "MyString" })
         put :update, {:id => activity.to_param, :activity => { "content" => "MyString" }}, valid_session
       end
 
       it "assigns the requested activity as @activity" do
         activity = Activity.create! valid_attributes
         put :update, {:id => activity.to_param, :activity => valid_attributes}, valid_session
-        assigns(:activity).should eq(activity)
+        expect(assigns(:activity)).to eq(activity)
       end
 
       it "redirects to the activity" do
         activity = Activity.create! valid_attributes
         put :update, {:id => activity.to_param, :activity => valid_attributes}, valid_session
-        response.should redirect_to(activity)
+        expect(response).to redirect_to(activity)
       end
     end
 
@@ -131,17 +131,17 @@ describe ActivitiesController do
       it "assigns the activity as @activity" do
         activity = Activity.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Activity.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Activity).to receive(:save).and_return(false)
         put :update, {:id => activity.to_param, :activity => { "content" => "invalid value" }}, valid_session
-        assigns(:activity).should eq(activity)
+        expect(assigns(:activity)).to eq(activity)
       end
 
       it "re-renders the 'edit' template" do
         activity = Activity.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Activity.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Activity).to receive(:save).and_return(false)
         put :update, {:id => activity.to_param, :activity => { "content" => "invalid value" }}, valid_session
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -157,7 +157,7 @@ describe ActivitiesController do
     it "redirects to the activities list" do
       activity = Activity.create! valid_attributes
       delete :destroy, {:id => activity.to_param}, valid_session
-      response.should redirect_to(activities_url)
+      expect(response).to redirect_to(activities_url)
     end
   end
 

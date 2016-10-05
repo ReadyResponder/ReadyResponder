@@ -3,18 +3,18 @@ require 'spec_helper'
 describe 'Access on user' do
   it "gets denied when not logged in" do
     visit users_path
-    page.should have_content("need to sign in")
-    @user = FactoryGirl.create(:user)
+    expect(page).to have_content("need to sign in")
+    @user = create(:user)
     visit url_for(@user)
-    page.should have_content("need to sign in")
+    expect(page).to have_content("need to sign in")
     visit edit_user_path(@user)
-    page.should have_content("need to sign in")
+    expect(page).to have_content("need to sign in")
   end
 end
 describe "user" do
   before (:each) do
-    somebody = FactoryGirl.create(:user)
-    r = FactoryGirl.create(:role, name: "Manager")
+    somebody = create(:user)
+    r = create(:role, name: "Manager")
     somebody.roles << r
     visit new_user_session_path
     fill_in 'user_email', :with => somebody.email
@@ -23,31 +23,31 @@ describe "user" do
   end
 
   it "gets the index" do
-    @user = FactoryGirl.create(:user, lastname: "Doe")
+    @user = create(:user, lastname: "Doe")
     visit users_path
-    page.should have_content("LIMS") # In the nav bar
-    page.should have_css('#sidebar')
+    expect(page).to have_content("Home") # In the nav bar
+    expect(page).to have_css('#sidebar')
     within_table("users") do
-      page.should have_content("Users")
+      expect(page).to have_content("Users")
     end
-    page.should have_content("Doe")
+    expect(page).to have_content("Doe")
     end
   it "visits an edit form" do
-    @user = FactoryGirl.create(:user, lastname: "Doe")
+    @user = create(:user, lastname: "Doe")
     visit edit_user_path(@user)
-    page.should have_content("LIMS")
-    page.should have_css('#sidebar')
-    page.should have_field('user_lastname', :with => "Doe")
+    expect(page).to have_content("Home")
+    expect(page).to have_css('#sidebar')
+    expect(page).to have_field('user_lastname', :with => "Doe")
     fill_in 'user_lastname', :with => "Ford"
     click_on 'Update'
-    page.should have_content("Ford")
-    page.should_not have_content("Doe")
+    expect(page).to have_content("Ford")
+    expect(page).not_to have_content("Doe")
   end
   it "visits a display page" do
-    @user = FactoryGirl.create(:user, lastname: "Doe")
+    @user = create(:user, lastname: "Doe")
     visit url_for(@user)
-    page.should have_content("LIMS")
-    page.should have_css('#sidebar')
-    page.should have_content('Doe')
+    expect(page).to have_content("Home")
+    expect(page).to have_css('#sidebar')
+    expect(page).to have_content('Doe')
   end
 end

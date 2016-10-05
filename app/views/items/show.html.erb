@@ -1,88 +1,64 @@
 <% content_for :sidebar do %>
-  <%= link_to 'Return to Listing', items_path, :class => 'btn' %></br></br>
-  <%= link_to 'Edit Item', edit_item_path(@item), :class => 'btn btn-primary' unless cannot? :edit, @item  %></br></br>
+  <%= sidebar_button_link 'Return to Listing', items_path %>
+  <%= edit_item_button %>
+  <%= add_repair_button %>
+  <%= add_inspection_button %>
 <% end %>
 
-<p>
-  <b>Location:</b>
-  <%= @item.location_id %>
-</p>
-
-<p>
-  <b>Name:</b>
+<h3>
+  <% if @item.status.present? %>
+    <%= item_status_label(@item) %> &nbsp;
+  <% end %>
   <%= @item.name %>
-</p>
+  <% if @item.brand.present? || @item.model.present? %>
+    ( <%=@item.brand.to_s %> <%= @item.model.to_s %> )
+  <% end %>
+</h3>
 
-<p>
-  <b>Description:</b>
-  <%= @item.description %>
-</p>
+<% if @item.description.present? %>
+  <p><b>Description:</b> <%= @item.description %></p>
+<% end %>
 
-<p>
-  <b>Source:</b>
-  <%= @item.source %>
-</p>
+<% if @item.location.present? %>
+  <p><b>Location:</b> <%= @item.location %></p>
+<% end %>
 
-<p>
-  <b>Category:</b>
-  <%= @item.category %>
-</p>
+<% if @item.source.present? %>
+  <p><b>Source:</b> <%= @item.source %></p>
+<% end %>
 
-<p>
-  <b>Model:</b>
-  <%= @item.model %>
-</p>
+<% if @item.item_type.present? %>
+  <p><b>Item Type:</b> <%= @item.item_type %></p>
+<% end %>
 
-<p>
-  <b>Serial 1:</b>
-  <%= @item.serial1 %>
-</p>
-<p>
-  <b>Serial 2:</b>
-  <%= @item.serial2 %>
-</p>
-<p>
-  <b>Serial 3</b>
-  <%= @item.serial3 %>
-</p>
+<% if @item.owner.present? %>
+  <p><b>Owner:</b> <%= @item.owner.fullname %></p>
+<% end %>
 
-<p>
-  <b>Owner:</b>
-  <%= @item.person.fullname unless @item.person_id.blank? %>
-</p>
+<% if @item.purchase_date.present? %>
+  <p><b>Purchase date:</b> <%= @item.purchase_date %></p>
+<% end %>
 
-<p>
-  <b>Purchase date:</b>
-  <%= @item.purchase_date %>
-</p>
+<p><b>Expenses in last 6 months </b><%= number_to_currency @item.recent_costs %></p>
 
-<p>
-  <b>Purchase amt:</b>
-  <%= @item.purchase_amt %>
-</p>
+<% if @item.purchase_amt.present? %>
+  <p><b>Purchase amt:</b> <%= @item.purchase_amt %></p>
+<% end %>
 
-<p>
-  <b>Sell date:</b>
-  <%= @item.sell_date %>
-</p>
+<% if @item.grant.present? %>
+  <p><b>Grant</b> <%= @item.grant %></p>
+<% end %>
 
-<p>
-  <b>Sell amt:</b>
-  <%= @item.sell_amt %>
-</p>
+<% if @item.sell_date.present? %>
+  <p><b>Sell date:</b> <%= @item.sell_date %></p>
+  <p> <b>Sell amt:</b> <%= @item.sell_amt %></p>
+<% end %>
 
-<p>
-  <b>Status:</b>
-  <%= @item.status %>
-</p>
+<% @item.unique_ids.each do |id| %>
+  Unique ID <b><%= id.value %> <%= id.category %></b><br/>
+<% end %>
 
-<table class="table table-striped table-bordered">
-  <thead>
-    <tr>
-	<th>Repairs <%= link_to 'New Repair or Service', new_item_repair_path(@item) %></th>
-    </tr>
-  </thead>
-  <tbody>
-      <%= render(:partial => "repairs/repair", :collection => @item.repairs) || raw("<tr><td>No repairs yet !</td></tr>") %>
-  </tbody>
-</table>
+<%= render(:partial => "repairs/repairs_table", :repairs => @item.repairs) || "No Repairs yet !" %>
+<hr>
+<%= render(:partial => "inspections/inspections_table", :inpections => @item.inspections) || "No Inspections yet !" %>
+<%= image_tag @item.item_image.to_s if @item.item_image.present? %>

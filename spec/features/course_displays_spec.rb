@@ -5,24 +5,24 @@ describe "Course" do
   describe " when not logged in" do
     it "should not allow much of anything" do
       visit courses_path
-      page.should_not have_content("Listing")
-      page.should have_content('You need to sign in')
+      expect(page).not_to have_content("Listing")
+      expect(page).to have_content('You need to sign in')
       visit new_course_path
-      page.should have_content('You need to sign in')
-      an_example = FactoryGirl.create(:course, name: 'Pottery')
+      expect(page).to have_content('You need to sign in')
+      an_example = create(:course, name: 'Pottery')
       visit edit_course_path(an_example)
-      page.should have_content('You need to sign in')
-      page.should_not have_content('Pottery')
+      expect(page).to have_content('You need to sign in')
+      expect(page).not_to have_content('Pottery')
       visit course_path(an_example)
-      page.should have_content('You need to sign in')
-      page.should_not have_content('Pottery')
+      expect(page).to have_content('You need to sign in')
+      expect(page).not_to have_content('Pottery')
     end
   end
       
   describe "should display" do
     before  do
-      somebody = FactoryGirl.create(:user)
-      r = FactoryGirl.create(:role, name: 'Editor')
+      somebody = create(:user)
+      r = create(:role, name: 'Editor')
       somebody.roles << r
       visit new_user_session_path
       fill_in('user_email', :with => somebody.email)
@@ -32,20 +32,20 @@ describe "Course" do
 
   
    it "a list" do
-      an_example = FactoryGirl.create(:course, name: 'Zombie Hunting')
+      an_example = create(:course, name: 'Zombie Hunting')
       visit courses_path
       within_table("courses") do
-        page.should have_content("Courses")
+        expect(page).to have_content("Courses")
       end
-      page.should have_content("LIMS") # This is in the nav bar
-      page.should have_link(an_example.name)
+      expect(page).to have_content("Home") # This is in the nav bar
+      expect(page).to have_link(an_example.name)
       click_on an_example.name
-      page.should have_content(an_example.name)
+      expect(page).to have_content(an_example.name)
     end
 
     it "a new course form that creates a course" do
       visit new_course_path
-      page.should have_content('New Course')
+      expect(page).to have_content('New Course')
       fill_in 'course_name', :with => 'Basket Weaving'
       select('Active', :from => 'course_status')
       fill_in 'course_description', :with => 'A creative and fulfilling pastime'
@@ -56,17 +56,17 @@ describe "Course" do
       fill_in 'course_comments', :with => 'Not for the faint of heart'
       click_on 'Create Course'
       visit courses_path
-      page.should have_content('Basket Weaving')
+      expect(page).to have_content('Basket Weaving')
     end
     
     it 'should update a course' do
-      an_example = FactoryGirl.create(:course, name: 'Zombie Hunting')
+      an_example = create(:course, name: 'Zombie Hunting')
       visit edit_course_path(an_example)
       fill_in 'course_name', :with => 'Skydiving'
       click_on 'Update Course'
       visit courses_path
-      page.should_not have_content('Zombie Hunting')
-      page.should have_content('Skydiving')
+      expect(page).not_to have_content('Zombie Hunting')
+      expect(page).to have_content('Skydiving')
     end
   end
 end

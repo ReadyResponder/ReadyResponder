@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
   <h1>New Repair</h1>
-  <%= link_to 'Cancel', items_path , :class => 'btn' %>
+  <%= sidebar_button_link 'Cancel', items_path %>
 <% end %>
 
 <%= render 'form' %>

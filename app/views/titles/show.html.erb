@@ -1,12 +1,9 @@
 <% content_for :sidebar do %>
-
-  <p><h2>Title</br><%= @title.name %></h2></p>
-
-  <%= link_to 'Edit', edit_title_path(@title), :class => 'btn btn-primary' %>
-  <%#= link_to 'Destroy', @skill, method: :delete, :class => 'btn btn-danger', data: { confirm: 'Are you sure?' } %></br></br>
-  <%= link_to 'Titles Listing', titles_path, :class => 'btn' %>
+  <h2>Title<br/><%= @title.name %></h2>
+  <%= sidebar_button_link 'Edit', edit_title_path(@title) %>
+  <%#= sidebar_button_link 'Destroy', @skill, method: :delete %>
+  <%= sidebar_button_link 'Titles Listing', titles_path %>
 <% end %>
-<p id="notice"><%= notice %></p>
 
 <p>
   <b>Title:</b>
@@ -27,10 +24,11 @@
   <b>Comments:</b>
   <%= @title.comments %>
 </p>
-<table class="table table-striped table-bordered">
+
+<table class="generic_datatable table table-striped table-bordered">
   <thead>
     <tr>
-	<th>People Who Seek This Title (<%= @title.people.active.uniq.count %>)</th>
+      <th>People Who Seek This Title (<%= @title.people.active.uniq.count %>)</th>
     </tr>
   </thead>
   <tbody>

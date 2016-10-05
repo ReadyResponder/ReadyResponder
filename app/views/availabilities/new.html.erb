@@ -1,0 +1,6 @@
+<% content_for :sidebar do %>
+  <h1>New Availability</h1>
+  <%= sidebar_button_link "Return to #{@person.fullname}", @person if @person.present? %>
+<% end %>
+
+<%= render 'form' %>

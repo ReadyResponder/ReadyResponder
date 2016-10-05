@@ -1,0 +1,25 @@
+<table id="item_repairs" class="datatable table table-striped table-bordered">
+  <caption><h3><%= "Repairs" %></h3></caption>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Status</th>
+      <th>Repairer</th>
+      <th>Cost</th>
+      <th>Date</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @repairs.each do |repair| %>
+      <tr>
+        <td><%= link_to repair.description, repair_path(repair) %></td>
+        <td><%= repair.status %></td>
+        <td><%= repair.repairer_name %></td>
+        <td><%= number_to_currency(repair.cost) %></td>
+        <td><%= repair.service_date %></td>
+        <td><%= table_button_link 'Edit', edit_repair_path(repair) unless cannot? :edit, repair %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

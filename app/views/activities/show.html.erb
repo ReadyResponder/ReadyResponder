@@ -1,4 +1,7 @@
-<p id="notice"><%= notice %></p>
+<% content_for :sidebar do %>
+  <%= sidebar_button_link 'Edit', edit_activity_path(@activity) %>
+  <%= sidebar_button_link 'Back', activities_path %>
+<% end %>
 
 <p>
   <b>Content:</b>
@@ -19,7 +22,3 @@
   <b>Loggable type:</b>
   <%= @activity.loggable_type %>
 </p>
-
-
-<%= link_to 'Edit', edit_activity_path(@activity) %> |
-<%= link_to 'Back', activities_path %>

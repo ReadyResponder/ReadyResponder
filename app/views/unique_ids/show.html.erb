@@ -1,0 +1,24 @@
+<% content_for :sidebar do %>
+  <%= sidebar_button_link 'Edit', edit_unique_id_path(@unique_id) %>
+  <%= sidebar_button_link 'Back', unique_ids_path %>
+<% end %>
+
+<p>
+  <b>Item:</b>
+  <%= @unique_id.item %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @unique_id.status %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @unique_id.category %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%= @unique_id.value %>
+</p>

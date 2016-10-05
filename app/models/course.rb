@@ -8,5 +8,5 @@ class Course < ActiveRecord::Base
   CATEGORY_CHOICES = ['General', 'Police', 'Admin', 'CERT', 'SAR']
 
   validates_presence_of :name, :status
-  scope :active,  :conditions => {:status => "Active"}
+  scope :active, -> { where( status: "Active" ) }
 end

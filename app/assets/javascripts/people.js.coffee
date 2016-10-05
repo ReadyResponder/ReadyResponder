@@ -5,20 +5,12 @@
 jQuery ->
   $("#person_firstname").focus();
   $('#people').dataTable
-    sPaginationType: "full_numbers"
-    "aoColumns": [
-                  { "bVisible": false },
-                  { "iDataSort": 1 },
-                  { "bVisible": false },
-                  { "iDataSort": 3 },
-                   null,
-                  {"bVisible": false },
-                  { "iDataSort": 5 },
-                  null,
-                  null,
-                  null,
-                  null,
-                  {"bSortable" : false}]
-    'bJQueryUI': true
-    'bRetrieve': true
-    'iDisplayLength': 100
+    columnDefs: [
+                  ## https://datatables.net/extensions/responsive/priority
+                  { responsivePriority: 1, targets: [0, 1, 3, 6, 11] },
+                  { visible: false, targets: [0, 2, 5]  },
+                  { orderData: 1, targets: 1 }
+                  { orderData: 3, targets: 1 }
+                  { orderData: 5, targets: 6 }
+                  { orderable: false, targets: 11 }
+                ]

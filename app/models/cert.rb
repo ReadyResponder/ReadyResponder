@@ -5,8 +5,9 @@ class Cert < ActiveRecord::Base
   mount_uploader :certification, CertificationUploader
   before_save :set_defaults
   validates_presence_of :status, :person_id, :course_id, :issued_date
+  validates_chronology :issued_date, :expiration_date
 
-  scope :active, :conditions => {:expired => false}
+  scope :active, -> { where( expired: false ) }
 
   def expiring?
     #self.expiration_date <= 10.days.from_now #&& !(self.expiration_date <= Date.today)

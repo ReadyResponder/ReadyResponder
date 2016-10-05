@@ -1,7 +1,6 @@
-
 <% content_for :sidebar do %>
-  <h1>Editing course</h1></br>
-  <%= link_to 'Cancel', people_path, :class => 'btn'  %>
+  <h1>Editing course</h1>
+  <%= sidebar_button_link 'Cancel', people_path %>
 <% end %>
 
 <%= render 'form' %>

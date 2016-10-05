@@ -1,0 +1,17 @@
+<% content_for :sidebar do %>
+  <h2>Task</h2>
+  <%= sidebar_button_link 'Return to Event', @task.event %>
+  <%= sidebar_button_link 'Return to Tasks List', tasks_path %>
+  <%= sidebar_button_link 'Edit Task', edit_task_path(@task) if can? :edit, @task %>
+<% end %>
+
+<h3>Task for <%= link_to @task.event.title, event_path(@task.event) %>
+  on <%= format_date_value(@task.event.start_time) %></h3>
+<p><b>Title:</b> <%= @task.title %></p>
+<p><b>Status:</b> <%= task_status_label(@task) %></p>
+<p><b>Requirements Met:</b> <%= @task.requirements_met %>/<%= @task.requirements %></p>
+<% if @task.description.present? %>
+  <p><b>Description:</b> <%= @task.description %></p>
+<% end %>
+<p><b>Start Time:</b> <%= @task.start_time %></p>
+<p><b>End Time:</b> <%= @task.end_time %></p>

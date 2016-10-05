@@ -1,60 +1,66 @@
 <% content_for :sidebar do %>
-  <%= link_to 'Return to Listing', session[:return_to], :class => 'btn btn-mini' %></br></br>
-  <%= link_to 'Edit Person', edit_person_path(@person), :class => 'btn btn-mini' if can? :edit, @person  %></br></br>
-  <%= link_to 'New Certification', new_person_cert_path(@person), :class => 'btn btn-mini' if can? :create, Cert  %>
+  <%= sidebar_button_link 'Return to Listing', :back %>
+  <%= sidebar_button_link 'Edit Person', edit_person_path(@person) if can? :edit, @person %>
+  <%= sidebar_button_link 'New Certification', new_person_cert_path(@person) if can? :create, Cert %>
+  <%= sidebar_button_link 'New Availability', new_person_availability_path(@person) if can? :create, Availability %>
+  <br>
+  <%= image_tag @person.portrait_url if @person.portrait.file.present? %>
 <% end %>
 
-<p><h2><%= @person.shortrank %> <%= @person.fullname %> (<%= @person.icsid %>)</h2></p>
+<h2><%= @person.shortrank %> <%= @person.fullname %> (<%= @person.icsid %>)</h2>
 
-<p>Start Date <%= @person.start_date %> (<%= distance_of_time_in_words(((@person.end_date) || Date.today), @person.start_date) if @person.start_date %>)</p>
+<% if @person.start_date %>
+  <p><b>Start Date:</b> <%= @person.start_date %> (<%= distance_of_time_in_words(((@person.end_date) || Date.today), @person.start_date) if @person.start_date %>)</p>
+<% end %>
+
 <p>
-  <b>Status:</b>
-  <span class="badge <%= 'badge-success' if @person.status == 'Active' %>">
-    <%= @person.status %>
-  </span>
+  <b>Status:</b> <%= success_or_warning_label(@person.status, 'Active') %>
 </p>
 
 <div id="channels">
   <ul>
     <% @person.channels.each do |channel| %>
-      <li>
-        <%# This should be moved into a presenter %>
-        <% if channel.category =~ /(P|p)hone/ %>
-          <%= number_to_phone(channel.content, area_code: true) %> 
-          <%= "on #{channel.carrier}" if channel.carrier %>
-        <% else %>
-          <%= channel.content %>
-        <% end %>
-      </li>
+      <% if channel.content.present? %>
+        <li>
+          <%# This should be moved into a presenter to just return the right content %>
+          <% if channel.phone? %>
+            <%= number_to_phone(channel.content, area_code: true) %>
+            <%= "on #{channel.carrier}" if channel.carrier.present? %>
+          <% else %>
+            <%= channel.content %>
+          <% end %>
+        </li>
+      <% end %>
     <% end %>
   </ul>
 </div>
 
-<div class="accordion">
-  <% @person.titles.each do |title| %>
-    <% if @person.qualified?(title.name) then %>
-      <h3>Qualified for <%= title.name %></h3>
-      <div>No missing certifications</div>
-    <% else %>
-      <h3>NOT qualified for <%= title.name %></h3>
-      <div>
-        Skills Missing:
-        <ul>
-          <%= render(@person.missing_skills(title)) %>
-        </ul>
-      </div>
+<% if @person.titles.any? %>
+  <div class="accordion">
+    <% @person.titles.each do |title| %>
+      <% if @person.qualified?(title.name) then %>
+        <h3>Qualified for <%= title.name %></h3>
+        <div>No missing certifications</div>
+      <% else %>
+        <h3>NOT qualified for <%= title.name %></h3>
+        <div>
+          Skills Missing:
+          <ul>
+            <%= render(@person.missing_skills(title)) %>
+          </ul>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
+  <br/><br/>
+<% end %>
 
-
-</br></br>
 <div class="accordion">
   <h3>Skills (<%= @person.skills.uniq.count %>)</h3>
   <div>
     <table class="table table-striped table-bordered">
       <tbody>
-        <%= render (@person.skills.uniq) || raw("No skills yet !")%>
+        <%= render(@person.skills.uniq) || raw("No skills yet !") %>
       </tbody>
     </table>
   </div>
@@ -67,7 +73,7 @@
       </tbody>
     </table>
   </div>
-  
+
   <h3>Certifications (<%= @person.certs.uniq.count %>)</h3>
   <div>
     <table class="table table-striped table-bordered">
@@ -76,55 +82,65 @@
       </tbody>
     </table>
   </div>
-  
+
   <h3>Items (<%= @person.items.uniq.count %>)</h3>
   <div>
     <ul>
       <%= render(@person.items) || raw("No Items Found !") %>
     </ul>
-    <%= link_to 'New Item', new_person_item_path(@person), :class => 'btn' if can? :create, Item  %>
+    <%= independent_button_link 'New Item', new_person_item_path(@person) if can? :create, Item %>
   </div>
+
+  <h3>Availabilities (<%= @person.availabilities.uniq.count %>)</h3>
+  <div>
+    <ul>
+      <%= render(:partial => "availabilities/availabilities_table_for_people",
+                 :locals => { :availabilities => @person.availabilities }) || raw("No Availabilities Found !") %>
+    </ul>
+    <%= independent_button_link 'New Availability', new_person_availability_path(@person) if can? :create, Availability %>
+  </div>
+
 
   <h3>Times (<%= @person.timecards.uniq.count %>)</h3>
   <div>
     <table class="table table-striped table-bordered">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Description</th>
-          <th>Intention</th>
-          <th>Intented Start</th>
-          <th>Intented End</th>
-          <th>Intented Hours</th>
-          <th>Outcome</th>
-          <th>Actual Start</th>
-          <th>Actual End</th>
-          <th>Actual Hours</th>
-          <th></th>
-        </tr>
-      </thead>
+      <% if @person.timecards.any? %>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Intention</th>
+            <th>Intended Start</th>
+            <th>Intended End</th>
+            <th>Intended Hours</th>
+            <th>Outcome</th>
+            <th>Actual Start</th>
+            <th>Actual End</th>
+            <th>Actual Hours</th>
+            <th></th>
+          </tr>
+        </thead>
+      <% end %>
       <tbody>
         <%= render(@person.timecards.uniq) || raw("No timecards yet !") %>
       </tbody>
     </table>
   </div>
-
-
 </div>
 
 <% content_for :parking do %>
-    <table class="table table-striped">
-      <thead>
-	<tr>
-	    <th>Skills Missing for Police</th>
-	</tr>
-      </thead>
-      <tbody>
-	<%#= render (Title.find(1).skills - @person.skills) %>
-      </tbody>
-    </table>
-    <span class="badge badge-important">This comes out red
-    <span class="badge badge-warning">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Skills Missing for Police</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%#= render(Title.find(1).skills - @person.skills) %>
+    </tbody>
+  </table>
+  <span class="label label-danger">This comes out red
+    <span class="label label-warning">
       Person qualified, but some certification is expiring soon
-    </span></br>
+    </span><br/>
 <% end %>

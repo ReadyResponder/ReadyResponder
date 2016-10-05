@@ -2,7 +2,7 @@
   <h1>Listing Repairs</h1>
 <% end %>
 
-<table id="repairs" class="datatable display table table-striped table-bordered" >
+<table id="repairs" class="datatable table table-striped table-bordered" >
   <thead>
     <tr>
       <th>Item</th>
@@ -19,15 +19,15 @@
   <tbody>
     <% @repairs.each do |repair| %>
       <tr>
-	<td><%= repair.item_id %></td>
-	<td><%= repair.user_id %></td>
-	<td><%= repair.person.fullname unless repair.person.blank? %></td>
-	<td><%= repair.category %></td>
-	<td><%= repair.service_date %></td>
-	<td><%= repair.status %></td>
-	<td><%= repair.description %></td>
-	<td><%= repair.comments %></td>
-	<td><%= link_to 'Edit', edit_repair_path(repair) %></td>
+        <td><%= repair.item_id %></td>
+        <td><%= repair.user_id %></td>
+        <td><%= repair.person.fullname unless repair.person.blank? %></td>
+        <td><%= repair.category %></td>
+        <td><%= repair.service_date %></td>
+        <td><%= repair.status %></td>
+        <td><%= repair.description %></td>
+        <td><%= repair.comments %></td>
+        <td><%= table_button_link 'Edit', edit_repair_path(repair) %></td>
       </tr>
     <% end %>
   </tbody>

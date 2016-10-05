@@ -1,41 +1,36 @@
-<div class="accordion">
-  <h3>All timecards (Debugging) <%= @event.timecards.count %></h3>
-  <div>
-    <table id="all-timecards" class="table table-striped table-bordered">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Intention</th>
-          <th>Intented Start</th>
-          <th>Intented End</th>
-          <th>Intented Hours</th>
-          <th>Outcome</th>
-          <th>Actual Start</th>
-          <th>Actual End</th>
-          <th>Actual Hours</th>
-
-          <th colspan = 2></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @event.timecards.each do |timecard| %>
-          <tr>
-            <td><%= link_to timecard.person.fullname, timecard %></td>
-            <td><%= timecard.description %></td>
-            <td><%= timecard.intention  %></td>
-            <td><%= timecard.intended_start_time  %></td>
-            <td><%= timecard.intended_end_time %></td>
-            <td><%= timecard.intended_duration %></td>
-            <td><%= timecard.outcome  %></td>
-            <td><%= timecard.actual_start_time  %></td>
-            <td><%= timecard.actual_end_time %></td>
-            <td><%= timecard.actual_duration %></td>
-            <td><%= link_to 'Edit', edit_timecard_path(timecard), :class => "btn btn-mini" if can? :update, timecard %></td>
-            <td><%= link_to 'Delete', timecard_path(timecard), :method => :delete, :class => "btn btn-mini" if can? :destroy, timecard %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-</div>
+<h3>All timecards (Debugging) <%= @event.timecards.count %></h3>
+<table id="all-timecards" class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Intention</th>
+      <th>Intended Start</th>
+      <th>Intended End</th>
+      <th>Intended Hours</th>
+      <th>Outcome</th>
+      <th>Actual Start</th>
+      <th>Actual End</th>
+      <th>Actual Hours</th>
+      <th colspan = 2></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @event.timecards.each do |timecard| %>
+      <tr>
+        <td><%= link_to timecard.person.fullname, timecard %></td>
+        <td><%= timecard.description %></td>
+        <td><%= timecard.intention  %></td>
+        <td><%= timecard.intended_start_time  %></td>
+        <td><%= timecard.intended_end_time %></td>
+        <td><%= timecard.intended_duration %></td>
+        <td><%= timecard.outcome  %></td>
+        <td><%= timecard.actual_start_time  %></td>
+        <td><%= timecard.actual_end_time %></td>
+        <td><%= timecard.actual_duration %></td>
+        <td><%= table_button_link 'Edit', edit_timecard_path(timecard) if can? :update, timecard %></td>
+        <td><%= table_button_link 'Delete', timecard_path(timecard), method: :delete if can? :destroy, timecard %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -3,8 +3,8 @@ require 'spec_helper'
 describe "Locations" do
   describe " visit locations" do
     before (:each) do
-      somebody = FactoryGirl.create(:user)
-      r = FactoryGirl.create(:role, name: 'Editor')
+      somebody = create(:user)
+      r = create(:role, name: 'Editor')
       somebody.roles << r
       visit new_user_session_path
       fill_in 'user_email', :with => somebody.email

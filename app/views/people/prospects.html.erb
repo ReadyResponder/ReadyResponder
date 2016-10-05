@@ -1,4 +1,4 @@
-<table id="prospects" class="datatable display table table-striped table-bordered" >
+<table id="prospects" class="datatable table table-striped table-bordered" >
   <caption><h3><%= @page_title %></h3></caption>
   <thead>
     <tr>
@@ -10,12 +10,10 @@
   <tbody>
     <% @people.each do |person| %>
       <tr>
-      	<td><%= link_to person.fullname, person %></td>	
-      	<td><%= person.department %></td>
-      	<td><%= link_to 'Edit', edit_person_path(person), :class => "btn btn-mini" if can? :update, person %></td>
+        <td><%= link_to person.fullname, person %></td>
+        <td><%= person.department %></td>
+        <td><%= table_button_link 'Edit', edit_person_path(person) if can? :update, person %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br />

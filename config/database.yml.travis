@@ -1,0 +1,7 @@
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: travis_ci_test
+  template: template0
+  pool: 5
+  username: 'postgres'

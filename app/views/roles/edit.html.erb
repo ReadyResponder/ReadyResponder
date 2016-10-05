@@ -1,6 +1,7 @@
-<h1>Editing role</h1>
+<% content_for :sidebar do %>
+  <h1>Editing role</h1>
+  <%= sidebar_button_link 'Show', @role %>
+  <%= sidebar_button_link 'Back', roles_path %>
+<% end %>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @role %> |
-<%= link_to 'Back', roles_path %>

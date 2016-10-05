@@ -1,10 +1,9 @@
-<p id="notice"><%= notice %></p>
+<% content_for :sidebar do %>
+  <%= sidebar_button_link 'Edit', edit_role_path(@role) %>
+  <%= sidebar_button_link 'Back', roles_path %>
+<% end %>
 
 <p>
   <b>Name:</b>
   <%= @role.name %>
 </p>
-
-
-<%= link_to 'Edit', edit_role_path(@role) %> |
-<%= link_to 'Back', roles_path %>

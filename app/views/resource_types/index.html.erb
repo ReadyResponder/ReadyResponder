@@ -1,0 +1,34 @@
+<h1>Listing Resource Types</h1>
+
+<table id="resource_types" class="generic_datatable table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Description</th>
+      <th>Fema code</th>
+      <th>Fema kind</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @resource_types.each do |resource_type| %>
+      <tr>
+        <td><%= resource_type.name %></td>
+        <td><%= resource_type.status %></td>
+        <td><%= resource_type.description %></td>
+        <td><%= resource_type.fema_code %></td>
+        <td><%= resource_type.fema_kind %></td>
+        <td><%= table_button_link 'Show', resource_type %></td>
+        <td><%= table_button_link 'Edit', edit_resource_type_path(resource_type) %></td>
+        <td><%= table_button_link 'Destroy', resource_type, method: :delete %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br/>
+
+<%= independent_button_link 'New Resource type', new_resource_type_path %>

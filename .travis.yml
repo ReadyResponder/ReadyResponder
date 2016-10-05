@@ -1,0 +1,15 @@
+addons:
+  postgresql: "9.4"
+services:
+  - postgresql
+language: ruby
+rvm:
+  - 2.3.1
+before_script:
+  - cp config/database.yml.travis config/database.yml
+  - psql -c 'create database travis_ci_test;' -U postgres
+# uncomment this line if your project needs to run something other than `rake`:
+script: bundle exec rake db:schema:load && bundle exec rspec spec
+branches:
+  only:
+    - development

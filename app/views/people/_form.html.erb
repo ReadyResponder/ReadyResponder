@@ -1,35 +1,60 @@
-<%= simple_form_for @person do |f| %>
+<%= simple_form_for @person, :html => {:multipart => true} do |f| %>
     <%= f.error_notification %>
+
     <%= f.input :firstname, :label => 'First Name' %>
     <%= f.input :lastname, :label => 'Last Name' %>
     <%= f.input :gender, :as => :select, :collection => ['Female', 'Male'] %>
-    <%= f.input :date_of_birth, :as => :string, :placeholder => '12-31-1990', :input_html => { :size => 11 }  %>
-    <%= f.input :zipcode, :input_html => { :size => 10 }  %>
+    <%= f.input :date_of_birth, as: :string, placeholder: '1990-12-31', input_html: { size: 11, value: format_date_value(f.object.date_of_birth) } %>
+    <%= f.input :zipcode, :input_html => { :size => 10 } %>
     <%= f.input :city %>
     <%= f.input :state %>
-    <%= f.input :status, :as => :select, :label => "Person's Status", :collection => Person::STATUS %>
-    <%= f.input :end_date, :as => :string, :input_html => { :class => 'datepicker', :size => 11 }  %>
+    <%= f.input :status, :as => :select, :collection => Person::STATUS %>
+    <%= f.input :end_date, as: :string,
+                input_html: { class: 'datepicker', size: 11,
+                              value: format_date_value(f.object.end_date) } %>
     <%= f.input :department, :as => :select, :collection => Person::DEPARTMENT %>
-    <div class="form-horizontal">
-        <%= f.simple_fields_for :channels do |c| %>
-          <fieldset>
-            <%= c.input :category, :as => :select, :collection => Channel::CATEGORIES %>
-            <%= c.input :content, :placeholder => '9785551212 OR me@example.com' %>
-            <%= c.input :name %>
-            <%= c.input :status, :as => :select, :collection => Channel::STATUSES %>
-            <%= c.input :usage, :as => :select, :collection => Channel::USAGES %>
-            <%= c.input :carrier, :as => :select, :collection => Channel::CARRIERS %>
-          </fieldset>
-        <% end %>
-    </div>
+
+      <h2> Phone information </h2>
+      <%= f.simple_fields_for :phones, wrapper: :horizontal_input_group do |c| %>
+        <fieldset>
+          <%= c.input :id, :as => :hidden %>
+          <%= c.input :category, :as => :select, :collection => Channel::CATEGORIES %>
+          <%= c.input :content, :placeholder => '9785551212' %>
+          <%= c.input :name, :label => 'Description' %>
+          <%= c.input :status, :as => :select, :collection => Channel::STATUSES %>
+          <%= c.input :usage, :as => :select, :collection => Channel::USAGES %>
+          <%= c.input :carrier, :as => :select, :collection => Phone::CARRIERS %>
+          <%= c.input :priority, :as => :select, :collection => Phone::PRIORITIES %>
+          <%= c.input :channel_type, as: :select, collection: Phone::TYPES %>
+          <%= c.input :sms_available, as: :boolean %>
+        </fieldset>
+        <hr />
+      <% end %>
+
+      <h2> Email information </h2>
+      <%= f.simple_fields_for :emails, wrapper: :horizontal_input_group do |c| %>
+        <fieldset>
+          <%= c.input :id, :as => :hidden %>
+          <%= c.input :category, :as => :select, :collection => Channel::CATEGORIES %>
+          <%= c.input :content, :placeholder => 'me@example.com' %>
+          <%= c.input :name, :label => 'Description' %>
+          <%= c.input :status, :as => :select, :collection => Channel::STATUSES %>
+          <%= c.input :usage, :as => :select, :collection => Channel::USAGES %>
+        </fieldset>
+        <hr />
+      <% end %>
+
     <%= f.input :icsid, :input_html => { :size => 5 } %>
     <%= f.input :title, :as => :select, label: 'Rank', :collection => Person::TITLES %>
     <%= f.association :titles %>
-    <%= f.input :start_date, :as => :string, :input_html => { :class => 'datepicker', :size => 11 }  %>
+    <%= f.input :start_date, as: :string,
+                input_html: { class: 'datepicker', size: 11,
+                              value: format_date_value(f.object.start_date) } %>
     <%= f.input :division1, :as => :select, :label => 'Division', :collection => Person::DIVISION1 %>
     <%= f.input :division2, :as => :select, :label => 'Squad', :collection => Person::DIVISION2 %>
-    <%= f.input :comments %>
+    <h4> Personnel Image </h4>
+    <%= @person.portrait %>
+    <%= f.file_field :portrait %>
+    <%= f.input :comments, :input_html => { :size => 40} %>
     <%= f.button :submit %>
 <% end %>
-
-

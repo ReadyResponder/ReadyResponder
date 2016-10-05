@@ -151,32 +151,17 @@ thead td.left {
   <thead>
    <tr><td colspan = 2 class="left">Date:</td><td class="left">Event:</td>
    <td >Time In</td><td>Time Out</td></tr>
-   <tr><td colspan = 5>Command Staff</td></tr>
   </thead>
-   <tbody>
-   <% Person.active.divisionC.each do |p| %>
-           <%= render :partial => 'signin_boxes', :locals => { :p => p} %>
+  <% Person.active.where(department: @department).pluck(:division1).uniq.each do |d1| %>
+    <thead>
+     <tr><td colspan = 5><%= d1 %></td></tr>
+    </thead>
+    <tbody>
+     <% Person.active.where(division1: d1).order(:title_order).each do |p| %>
+             <%= render :partial => 'signin_boxes', :locals => { :p => p} %>
+    <% end %>
+    </tbody>
   <% end %>
-  </tbody>
-  <thead>
-   <tr><td colspan = 5>Division 1</td></tr>
-  </thead>
-  <tbody>
-   <% Person.active.division1.each do |p| %>
-           <%= render :partial => 'signin_boxes', :locals => { :p => p} %>
-  <% end %>
-  </tbody>
-  <thead>
-   <tr><td colspan = 5>Division 2</td></tr>
-  </thead>
-  <tbody>
-   <% Person.active.division2.each do |p| %>
-           <%= render :partial => 'signin_boxes', :locals => { :p => p} %>
-  <% end %>
-  </tbody>
-  <thead>
-   <tr><td colspan = 5>Recruits</td></tr>
-  </thead>
   <tbody>
    <% 3.times do %>
            <%= render :partial => 'signin_blank_boxes' %>

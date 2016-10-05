@@ -1,0 +1,7 @@
+<% content_for :sidebar do %>
+  <h1>Editing department</h1>
+  <%= sidebar_button_link 'Show', @department %>
+  <%= sidebar_button_link 'Back', departments_path %>
+<% end %>
+
+<%= render 'form' %>

@@ -1,4 +1,4 @@
-<table id="locations" class="datatable display table table-striped table-bordered" >
+<table id="locations" class="datatable table table-striped table-bordered" >
   <caption><h3><%= @page_title %></h3></caption>
   <thead>
     <tr>
@@ -16,7 +16,7 @@
         <td><%= location.description %></td>
         <td><%= location.category %></td>
         <td><%= location.status %></td>
-        <td><%= link_to 'Edit', edit_location_path(location), :class => "btn" if can? :update, location %></td>
+        <td><%= table_button_link 'Edit', edit_location_path(location) if can? :update, location %></td>
       </tr>
     <% end %>
   </tbody>

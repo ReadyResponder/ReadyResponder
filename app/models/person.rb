@@ -1,53 +1,54 @@
 class Person < ActiveRecord::Base
-  #code to get next un-used id # in the 800 range
-  #((801...900).to_a - (array_from_db_of_taken_numbers))[0]
+  include ActiveModel::ForbiddenAttributesProtection
+  mount_uploader :portrait, PortraitUploader
+
   before_save :title_order
 
-  attr_accessible :firstname, :lastname, :status, :icsid, :department, :city, :state, :zipcode, :start_date, :end_date , :title, :gender, :date_of_birth,:division1, :division2, :channels_attributes, :title_ids, :title_order, :comments
-
-  #Having a condition on this association allows all the chaining magic to happen.
-  #Could I use a named scope, and/or could I have another association for 'active_certs' ?
-  has_many :certs, :conditions => {:status =>'Active' }
-
+  has_many :certs, -> { where("certs.status = 'Active'" ) }
   has_many :channels
+  has_many :availabilities
+  has_many :phones, -> { order(:priority) }
+  has_many :emails, -> { order(:priority) }
   accepts_nested_attributes_for :channels, allow_destroy: true
-  has_many :courses, :through => :certs
-  has_many :skills, :through => :courses
+  accepts_nested_attributes_for :phones, allow_destroy: true
+  accepts_nested_attributes_for :emails, allow_destroy: true
+  has_many :courses, through: :certs
+  has_many :skills, through: :courses
   has_and_belongs_to_many :titles
   has_many :timecards
-  has_many :events, :through => :timecards
-  has_many :items
+  has_many :events, through: :timecards
+  has_many :items, inverse_of: :owner, foreign_key: :owner_id
   has_many :inspectors, :foreign_key => "person_id", :class_name => "Inspection"
   has_many :activities, as: :loggable
 
   validates_presence_of :firstname, :lastname, :status
   validates_uniqueness_of :icsid, :allow_nil => true, :allow_blank => true   # this needs to be scoped to active members, or more sophisticated rules
-  validates :firstname, :uniqueness => { :scope => :lastname }
   validates_length_of :state, :is =>2, :allow_nil => true, :allow_blank => true
   validates_numericality_of  :height, :weight, :allow_nil => true, :allow_blank => true
   validates_presence_of :division2, :unless => "division1.blank?"
   validates_presence_of :division1, :unless => "division2.blank?"
+  validates_chronology :start_date, :end_date
 
-  scope :cert, :order => 'division1, division2, title_order, start_date ASC', :conditions => {:department => "CERT"}
-  scope :police, :order => 'division1, division2, title_order, start_date ASC', :conditions => {:department => 'Police'}
-  scope :leave, :conditions => {:status => "Leave of Absence"}
-  scope :inactive, :order => 'end_date ASC',:conditions => {:status => "Inactive"}
-  scope :active, :order => 'division1, division2, title_order, start_date ASC', :conditions => {:status => "Active"}
-  scope :applicants, :order => 'created_at ASC', :conditions => {:status => "Applicant"}
-  scope :prospects, :order => 'created_at ASC', :conditions => {:status => "Prospect"}
-  scope :declined, :order => 'created_at ASC', :conditions => {:status => "Declined"}
-  scope :divisionC, :order => 'title_order, start_date ASC', :conditions => {:division1 => "Command", :status => "Active"}
-  scope :division1, :order => 'title_order, start_date ASC', :conditions => {:division1 => "Division 1", :status => "Active"}
-  scope :division2, :order => 'title_order, start_date ASC', :conditions => {:division1 => "Division 2", :status => "Active"}
-  scope :squadC, :order => 'title_order, start_date ASC', :conditions => {:division2 => "Command", :status => "Active"}
-  scope :unassigned, :order => 'title_order, start_date ASC', :conditions => {:division1 => "Unassigned", :status => "Active"}
-  scope :squad1, :order => 'title_order, start_date ASC', :conditions => {:division2 => "Squad 1",:status => "Active"}
-  scope :squad2, :order => 'title_order, start_date ASC', :conditions => {:division2 => "Squad 2",:status => "Active"}
+  scope :cert, -> { order("division1, division2, title_order, start_date ASC").where( department: "CERT" ) }
+  scope :police, -> { order("division1, division2, title_order, start_date ASC").where( department: "Police" ) }
+  scope :leave, -> { where( status: "Leave of Absence" ) }
+  scope :inactive, -> { order("end_date ASC").where( status: "Inactive" ) }
+  scope :active, -> { order("division1, division2, title_order, start_date ASC").where( status: "Active" ) }
+  scope :applicants, -> { order("created_at ASC").where( status: "Applicant" ) }
+  scope :prospects, -> { order("created_at ASC").where( status: "Prospect" ) }
+  scope :declined, -> { order("created_at ASC").where( status: "Declined" ) }
+  scope :divisionC, -> { order("title_order, start_date ASC").where( division1: "Command", status: "Active" ) }
+  scope :division1, -> { order("title_order, start_date ASC").where( division1: "Division 1", status: "Active" ) }
+  scope :division2, -> { order("title_order, start_date ASC").where( division1: "Division 2", status: "Active" ) }
+  scope :squadC, -> { order("title_order, start_date ASC").where( division2: "Command", status: "Active" ) }
+  scope :unassigned, -> { order("title_order, start_date ASC").where( division1: "Unassigned", status: "Active" ) }
+  scope :squad1, -> { order("title_order, start_date ASC").where( division2: "Squad 1", status: "Active" ) }
+  scope :squad2, -> { order("title_order, start_date ASC").where( division2: "Squad 2", status: "Active" ) }
 
   TITLES = ['Director','Chief','Deputy','Captain', 'Lieutenant','Sargeant', 'Corporal', 'Senior Officer', 'Officer', 'CERT Member', 'Dispatcher', 'Recruit']
   TITLE_ORDER = {'Director' => 1, 'Chief' => 3, 'Deputy Chief' => 5,'Captain' => 7, 'Lieutenant' => 9, 'Sargeant' => 11, 'Corporal' => 13, 'Senior Officer' => 15, 'Officer' => 17, 'CERT Member' => 19, 'Dispatcher' => 19, 'Student Officer' => 21, 'Recruit' => 23, 'Applicant' => 25}
-  DIVISION1 = ['Division 1', 'Division 2', 'Command']
-  DIVISION2 = ['Command', 'Squad 1', 'Squad 2', 'CERT']
+  DIVISION1 = ['Division 1', 'Division 2', "Division 3", "Recruit", 'Command']
+  DIVISION2 = ['Command', 'Squad 1', 'Squad 2']
   STATUS = ['Leave of Absence', 'Inactive', 'Active', 'Applicant','Prospect','Declined']
   DEPARTMENT = ['Police', 'CERT', 'Other']
 
@@ -78,6 +79,13 @@ class Person < ActiveRecord::Base
     return 3 if self.skilled?("SAR Tech 3")
   end
 
+  def phone
+    phones.first.try(:content)
+  end
+
+  def email
+    emails.first.try(:content)
+  end
 
   def csz
     self.city + " " + self.state + " " + self.zipcode
@@ -96,6 +104,13 @@ class Person < ActiveRecord::Base
     else
       find :all, :order => 'division1, division2,title_order, start_date ASC'
     end
+  end
+
+  def self.each(&block)
+    # FIXME: because all is deprecated in Active Record 4
+    # http://guides.rubyonrails.org/active_record_querying.html#retrieving-multiple-objects
+    # this class method will let us continue without changing every call site
+    Person.find_each { |x| block.call(x) }
   end
 
   def age

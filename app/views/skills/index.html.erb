@@ -1,4 +1,4 @@
-<table id="skills" class="datatable display table table-striped table-bordered">
+<table id="skills" class="datatable table table-striped table-bordered">
   <caption><h3><%= @page_title %></h3></caption>
   <thead>
     <tr>
@@ -10,9 +10,9 @@
   <tbody>
     <% @skills.each do |skill| %>
       <tr>
-      	<td><%= link_to skill.name, skill %></td>
+        <td><%= link_to skill.name, skill %></td>
         <td><%= link_to skill.status, skill %></td>
-      	<td><%= link_to 'Edit', edit_skill_path(skill), :class => 'btn btn-mini' if can? :edit, skill %></td>
+        <td><%= table_button_link 'Edit', edit_skill_path(skill) if can? :edit, skill %></td>
       </tr>
     <% end %>
   </tbody>

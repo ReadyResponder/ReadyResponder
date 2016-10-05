@@ -38,7 +38,7 @@ describe HelpdocsController do
     it "assigns all helpdocs as @helpdocs" do
       helpdoc = Helpdoc.create! valid_attributes
       get :index, {}, valid_session
-      assigns(:helpdocs).should eq([helpdoc])
+      expect(assigns(:helpdocs)).to eq([helpdoc])
     end
   end
 
@@ -46,14 +46,14 @@ describe HelpdocsController do
     it "assigns the requested helpdoc as @helpdoc" do
       helpdoc = Helpdoc.create! valid_attributes
       get :show, {:id => helpdoc.to_param}, valid_session
-      assigns(:helpdoc).should eq(helpdoc)
+      expect(assigns(:helpdoc)).to eq(helpdoc)
     end
   end
 
   describe "GET new" do
     it "assigns a new helpdoc as @helpdoc" do
       get :new, {}, valid_session
-      assigns(:helpdoc).should be_a_new(Helpdoc)
+      expect(assigns(:helpdoc)).to be_a_new(Helpdoc)
     end
   end
 
@@ -61,7 +61,7 @@ describe HelpdocsController do
     it "assigns the requested helpdoc as @helpdoc" do
       helpdoc = Helpdoc.create! valid_attributes
       get :edit, {:id => helpdoc.to_param}, valid_session
-      assigns(:helpdoc).should eq(helpdoc)
+      expect(assigns(:helpdoc)).to eq(helpdoc)
     end
   end
 
@@ -75,29 +75,29 @@ describe HelpdocsController do
 
       it "assigns a newly created helpdoc as @helpdoc" do
         post :create, {:helpdoc => valid_attributes}, valid_session
-        assigns(:helpdoc).should be_a(Helpdoc)
-        assigns(:helpdoc).should be_persisted
+        expect(assigns(:helpdoc)).to be_a(Helpdoc)
+        expect(assigns(:helpdoc)).to be_persisted
       end
 
       it "redirects to the created helpdoc" do
         post :create, {:helpdoc => valid_attributes}, valid_session
-        response.should redirect_to(Helpdoc.last)
+        expect(response).to redirect_to(Helpdoc.last)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved helpdoc as @helpdoc" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Helpdoc.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Helpdoc).to receive(:save).and_return(false)
         post :create, {:helpdoc => { "title" => "invalid value" }}, valid_session
-        assigns(:helpdoc).should be_a_new(Helpdoc)
+        expect(assigns(:helpdoc)).to be_a_new(Helpdoc)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Helpdoc.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Helpdoc).to receive(:save).and_return(false)
         post :create, {:helpdoc => { "title" => "invalid value" }}, valid_session
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -110,20 +110,20 @@ describe HelpdocsController do
         # specifies that the Helpdoc created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Helpdoc.any_instance.should_receive(:update_attributes).with({ "title" => "MyString" })
+        expect_any_instance_of(Helpdoc).to receive(:update_attributes).with({ "title" => "MyString" })
         put :update, {:id => helpdoc.to_param, :helpdoc => { "title" => "MyString" }}, valid_session
       end
 
       it "assigns the requested helpdoc as @helpdoc" do
         helpdoc = Helpdoc.create! valid_attributes
         put :update, {:id => helpdoc.to_param, :helpdoc => valid_attributes}, valid_session
-        assigns(:helpdoc).should eq(helpdoc)
+        expect(assigns(:helpdoc)).to eq(helpdoc)
       end
 
       it "redirects to the helpdoc" do
         helpdoc = Helpdoc.create! valid_attributes
         put :update, {:id => helpdoc.to_param, :helpdoc => valid_attributes}, valid_session
-        response.should redirect_to(helpdoc)
+        expect(response).to redirect_to(helpdoc)
       end
     end
 
@@ -131,17 +131,17 @@ describe HelpdocsController do
       it "assigns the helpdoc as @helpdoc" do
         helpdoc = Helpdoc.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Helpdoc.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Helpdoc).to receive(:save).and_return(false)
         put :update, {:id => helpdoc.to_param, :helpdoc => { "title" => "invalid value" }}, valid_session
-        assigns(:helpdoc).should eq(helpdoc)
+        expect(assigns(:helpdoc)).to eq(helpdoc)
       end
 
       it "re-renders the 'edit' template" do
         helpdoc = Helpdoc.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Helpdoc.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Helpdoc).to receive(:save).and_return(false)
         put :update, {:id => helpdoc.to_param, :helpdoc => { "title" => "invalid value" }}, valid_session
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -157,7 +157,7 @@ describe HelpdocsController do
     it "redirects to the helpdocs list" do
       helpdoc = Helpdoc.create! valid_attributes
       delete :destroy, {:id => helpdoc.to_param}, valid_session
-      response.should redirect_to(helpdocs_url)
+      expect(response).to redirect_to(helpdocs_url)
     end
   end
 

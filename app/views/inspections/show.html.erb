@@ -1,15 +1,15 @@
-<p id="notice"><%= notice %></p>
+<% content_for :sidebar do %>
+  <h2>Inspection</h2>
+  <h3>for <%= @inspection.item.name %></h3>
+  <%= sidebar_button_link 'Return to Item', @inspection.item %>
+  <%= sidebar_button_link 'Return to Inspections List', inspections_path %>
+  <%= sidebar_button_link 'Edit Inspection', edit_inspection_path(@inspection) if can? :edit, @inspection %>
+<% end %>
 
-<p>
-  <b>Person:</b>
-  <%= @inspection.person_id %>
-</p>
+Inspection of <%= link_to @inspection.item.name, item_path(@inspection.item) %>
+on <%= format_date_value(@inspection.inspection_date) %>.
+<p>Status: <%= inspection_status_label(@inspection) %></p>
 
-<p>
-  <b>Inspection time:</b>
-  <%= @inspection.inspection_time %>
-</p>
-
-
-<%= link_to 'Edit', edit_inspection_path(@inspection) %> |
-<%= link_to 'Back', inspections_path %>
+<% if @inspection.comments.present? %>
+  <p>Comments: <%= @inspection.comments %></p>
+<% end %>

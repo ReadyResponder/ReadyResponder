@@ -1,0 +1,20 @@
+<table id="availabilities" class="generic_datatable table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Start time</th>
+      <th>End Time</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% availabilities.each do |availability| %>
+      <tr <%== success_class_if_match(availability.status, 'Available') %>>
+        <td><%= availability.status %></td>
+        <td><time><%= availability.start_time %></time></td>
+        <td><%= availability.end_time %></td>
+        <td><%= truncate(availability.description, length: 24) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

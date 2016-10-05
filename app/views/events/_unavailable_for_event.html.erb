@@ -1,28 +1,24 @@
-<div class="accordion">
-  <h3>Unavailable (<%= @event.timecards.unavailable.count %>) </h3>
-  <div>
-    <table id="unavailable" class="table table-striped table-bordered">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Reason</th>
-          <th>Department</th>
-          <th colspan=4 ></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @event.timecards.unavailable.each do |timecard| %>
-          <tr>
-            <td><%= link_to timecard.person.fullname, timecard %></td>
-            <td><%= timecard.description %></td>
-            <td><%= timecard.person.department %></td>
-            <td><%= available_button(timecard) %></td>
-            <td><%= scheduled_button(timecard) %></td>
-            <td><%= worked_button(timecard) %></td>
-            <td><%= edit_button(timecard) %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-</div>
+<h3>Unavailable (<%= @unavailable.count %>) </h3>
+<table id="unavailable" class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Reason</th>
+      <th>Department</th>
+      <th colspan=4 ></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @unavailable.each do |timecard| %>
+      <tr>
+        <td><%= link_to timecard.person.fullname, timecard %></td>
+        <td><%= timecard.description %></td>
+        <td><%= timecard.person.department %></td>
+        <td><%= available_button(timecard) %></td>
+        <td><%= scheduled_button(timecard) %></td>
+        <td><%= worked_button(timecard) %></td>
+        <td><%= edit_button(timecard) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

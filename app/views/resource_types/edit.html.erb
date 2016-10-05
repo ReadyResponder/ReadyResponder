@@ -1,0 +1,7 @@
+<% content_for :sidebar do %>
+  <h1>Editing Resource Type</h1>
+  <%= sidebar_button_link 'Show', @resource_type %>
+  <%= sidebar_button_link 'Back', resource_types_path %>
+<% end %>
+
+<%= render 'form' %>

@@ -1,0 +1,19 @@
+<table id="people" class="generic_datatable table table-striped table-bordered">
+  <caption><h3><%= title %></h3></caption>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Phone</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% people.each do |person| %>
+      <tr <%== row_class if local_assigns[:row_class] %>>
+        <td><%= person.icsid %></td>
+        <td><%= link_to person.fullname, person_path(person) %></td>
+        <td><%= number_to_phone(person.phone) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

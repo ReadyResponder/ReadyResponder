@@ -1,6 +1,7 @@
-<h1>Editing activity</h1>
+<% content_for :sidebar do %>
+  <h1>Editing activity</h1>
+  <%= sidebar_button_link 'Show', @activity %>
+  <%= sidebar_button_link 'Back', activities_path %>
+<% end %>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @activity %> |
-<%= link_to 'Back', activities_path %>

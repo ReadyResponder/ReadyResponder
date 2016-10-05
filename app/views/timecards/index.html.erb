@@ -1,6 +1,6 @@
-<table id="timecards" class="datatable display table table-striped table-bordered">
+<table id="timecards" class="datatable table table-striped table-bordered">
     <caption><h3>Listing Timecards</h3></caption>
-    <thead>        
+    <thead>
         <tr>
             <th colspan="3"></th>
             <th colspan="3"><center>Intended</center></th>
@@ -33,12 +33,9 @@
                 <td><%= timecard.actual_start_time.to_s(:short) if timecard.actual_start_time %></td>
                 <td><%= timecard.actual_end_time.to_s(:short)  if timecard.actual_end_time %></td>
                 <td><%= timecard.actual_duration %></td>
-                <td><%= link_to 'Edit', edit_timecard_path(timecard), :class => 'btn btn-mini' if can? :edit, timecard %></td>
-                <td><%= link_to 'Worked', edit_timecard_path(timecard), :title => "Use times and values from the event", :class => 'btn btn-mini' if can? :edit, timecard %></td>
+                <td><%= table_button_link 'Edit', edit_timecard_path(timecard) if can? :edit, timecard %></td>
+                <td><%= table_button_link 'Worked', edit_timecard_path(timecard), title: "Use times and values from the event" if can? :edit, timecard %></td>
             </tr>
         <% end %>
     </tbody>
 </table>
-
-<br />
-
