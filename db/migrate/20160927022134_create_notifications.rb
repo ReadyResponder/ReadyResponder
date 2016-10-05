@@ -5,7 +5,11 @@ class CreateNotifications < ActiveRecord::Migration
       t.string :status
       t.string :subject
       t.string :body
-      t.datetime :sent_at
+      t.integer :hours_to_try
+      t.integer :minutes_interval
+      t.integer :attempts_before_escalation
+      t.datetime :start_at
+      t.datetime :started_at
       t.string :channels
 
       t.timestamps null: false

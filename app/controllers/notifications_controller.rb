@@ -4,6 +4,7 @@ class NotificationsController < ApplicationController
   # GET /notifications
   def index
     @notifications = Notification.all
+    @page_title = "All Notifications"
   end
 
   # GET /notifications/1
@@ -53,6 +54,8 @@ class NotificationsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def notification_params
-      params.require(:notification).permit(:event_id, :status, :subject, :body, :sent_at, :channels)
+      params.require(:notification).permit(:event_id, :status, :subject, :body,
+         :hours_to_try, :minutes_interval, :attempts_before_escalation,
+          :start_at, :started_at, :channels)
     end
 end
