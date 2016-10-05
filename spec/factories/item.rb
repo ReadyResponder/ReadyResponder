@@ -7,7 +7,6 @@ FactoryGirl.define do
     source "Stoneham Ford"
     category "Vehicle"
     model "F-150"
-    serial1 "VIN123456789"
     purchase_date "2010-12-14"
     purchase_amt ""
     status "Available"
