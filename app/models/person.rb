@@ -5,7 +5,7 @@ class Person < ActiveRecord::Base
 
   attr_accessible :firstname, :lastname, :status, :icsid, :department, :city, :state, :zipcode, :start_date, :end_date , :title, :gender, :date_of_birth,:division1, :division2, :channels_attributes, :title_ids, :title_order, :comments
 
-  #Having a condition on this association allows all the chaining magic to happen. 
+  #Having a condition on this association allows all the chaining magic to happen.
   #Could I use a named scope, and/or could I have another association for 'active_certs' ?
   has_many :certs, :conditions => {:status =>'Active' }
 
@@ -17,7 +17,7 @@ class Person < ActiveRecord::Base
   has_many :timecards
   has_many :events, :through => :timecards
   has_many :items
-  has_many :inspections
+  has_many :inspectors, :foreign_key => "person_id", :class_name => "Inspection"
   has_many :activities, as: :loggable
 
   validates_presence_of :firstname, :lastname, :status
