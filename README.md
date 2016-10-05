@@ -1,4 +1,4 @@
-# LIMS3
+# ReadyResponder
 
 This application aids emergency management and other agencies in managing both their personnel and their equipment.
 
@@ -28,7 +28,7 @@ This is a Rails project that is configured to run on Ruby 2, and on a Postgres d
 
 #### Contributing to LIMS: Coding :smiley:
 
-One more thing to install: The testing framework requires the [PhantomJS](http://phantomjs.org) library.  In order to code in LIMS, you'll need to install PhantomJS separately (see below).
+One more thing to install: The testing framework requires the [PhantomJS](http://phantomjs.org) library.  In order to code in ReadyResponder, you'll need to install PhantomJS separately (see below).
 
 Then get the project code locally and set it up:
 
@@ -41,7 +41,7 @@ Then get the project code locally and set it up:
 
 At this point you should be able to run the rails server via `bundle exec rails s`, the rails console via `bundle exec rails c`, and the tests via `bundle exec rspec spec/`
 
-Note: You can use the UI to create a user and sign in, but the UI doesn't allow creation of an admin user.  To use all the features of LIMS in the browser, you will need to enable admin privileges for your local user in the rails console after signing up via the UI:
+Note: You can use the UI to create a user and sign in, but the UI doesn't allow creation of an admin user.  To use all the features of ReadyResponder in the browser, you will need to enable admin privileges for your local user in the rails console after signing up via the UI:
 
 `User.first.roles << Role.where(name: "Manager").first_or_create`
 
