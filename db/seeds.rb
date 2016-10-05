@@ -64,7 +64,7 @@ Location.create([
 location1 = Location.first
 department1 = Department.where(name: "Community Emergency Response Team").first
 location1.department = department1
-location.save
+location1.save
 
 department2 = Department.where(name: "Department Public Works").first
 other_location = Location.last(2)
