@@ -3,7 +3,6 @@ class Item < ActiveRecord::Base
                   :model, :brand, :name, :owner_id, :po_number,
                   :value, :grant, :purchase_amt, :purchase_date,
                   :sell_amt, :sell_date, :stock_number,
-                  :serial1, :serial2, :serial3,
                   :source, :status, :comments, :item_image,
                   :department_id, :resource_type_id, :item_type_id,
                   :unique_ids_attributes
