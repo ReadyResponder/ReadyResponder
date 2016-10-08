@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Cert do
   let(:evoc_course) { create(:course, term: 100) }

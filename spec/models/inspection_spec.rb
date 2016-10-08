@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Inspection do
   let(:an_item)  { create(:item) }

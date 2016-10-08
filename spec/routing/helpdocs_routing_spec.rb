@@ -1,4 +1,4 @@
-require "spec_helper"
+require "rails_helper"
 
 describe HelpdocsController do
   describe "routing" do

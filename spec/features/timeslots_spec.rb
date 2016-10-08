@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 #save_and_open_page
 describe 'Access on timecard' do
   it "gets denied" do

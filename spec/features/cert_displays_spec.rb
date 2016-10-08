@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 #Don't use capybara (ie visit/have_content) and rspec matchers together  {response.status.should be(200)}
 
 describe "Cert" do

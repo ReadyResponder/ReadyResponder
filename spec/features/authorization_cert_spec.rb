@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
       #save_and_open_page
 describe "a user" do
   describe "in the reader role" do

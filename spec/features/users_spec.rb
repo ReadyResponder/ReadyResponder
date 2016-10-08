@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 #save_and_open_page
 describe 'Access on user' do
   it "gets denied when not logged in" do

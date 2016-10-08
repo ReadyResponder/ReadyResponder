@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
       #save_and_open_page
 describe "Person" do
   before (:each)  do
