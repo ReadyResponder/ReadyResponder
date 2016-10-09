@@ -1,6 +1,6 @@
 <tr>
-  <td class="<%= h p.title.downcase.split(" ")[0] %> id"><%= p.icsid %></td>
-  <td class="<%= h p.title.downcase.split(" ")[0] %> name">
+  <td class="<%= h p.title.try(:downcase).try(:split, " ").try(:first) %> id"><%= p.icsid %></td>
+  <td class="<%= h p.title.try(:downcase).try(:split, " ").try(:first) %> name">
   <%= p.shortrank + " " + p.firstname[0] + " " + p.lastname %></td>
   <td class= "signature">&nbsp</td>
   <td class= "time">&nbsp</td>
