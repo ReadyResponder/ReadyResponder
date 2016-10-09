@@ -33,7 +33,8 @@ Department.create([
   {name: "Community Emergency Response Team", status: "Active", division1: ["Team 1", "Team 2"], division2: ["Squad 1", "Squad 2"]},
   {name: "Medical Reserve Corp", status: "Active", division1: ["Team 1", "Team 2"], division2: ["Squad 1", "Squad 2"]},
   {name: "Department Public Works", status: "Active", division1: ["Team 1", "Team 2"], division2: ["Squad 1", "Squad 2"]},
-  {name: "Inactive Department", status: "Inactive", division1: ["Team 1", "Team 2"], division2: ["Squad 1", "Squad 2"]}
+  {name: "Inactive Department", status: "Inactive", division1: ["Team 1", "Team 2"], division2: ["Squad 1", "Squad 2"]},
+  {name: "Police", status: "Active", division1: ["Team 1", "Team 2"], division2: ["Squad 1", "Squad 2"]}
   ])
 
 Skill.create([
@@ -45,12 +46,18 @@ Skill.create([
 
 jane = Person.create(
    firstname: "Jane", lastname: "Doe", status: "Active", gender: "Female",
-   start_date: 3.years.ago,
+   start_date: 3.years.ago, department: "Medical Reserve Corp",
    nickname: "Janey", division1: "Division 1", division2: "Task Force 2",
    icsid: "321", deployable: true
   )
-jane.department = Department.where(shortname: "MRC").first
-jane.save
+
+jake = Person.create(
+   firstname: "Jake", lastname: "D", status: "Active", gender: "Male",
+   start_date: 1.years.ago, department: "Police",
+   division1: "Division 1", division2: "Task Force 2",
+   icsid: "323", deployable: true
+  )
+
 
 # This should be updated when we can assign the department.
 # Add department: Department.where(shortname: "DPW")
