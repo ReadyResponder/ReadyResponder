@@ -7,8 +7,8 @@ RSpec.describe Availability, type: :model do
 
   describe "creation" do
     it "has a valid factory" do
-      @availability = build(:availability, person: a_person)
-      expect(@availability).to be_valid
+      expect(build(:availability)).to be_valid
+      expect(build(:availability, person: a_person)).to be_valid
     end
   end
 
