@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161005171954) do
+ActiveRecord::Schema.define(version: 20161008061337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -267,17 +267,17 @@ ActiveRecord::Schema.define(version: 20161005171954) do
     t.integer  "weight"
     t.integer  "height"
     t.string   "eyes"
-    t.string   "blood_type",     limit: 12
+    t.string   "blood_type",       limit: 12
     t.string   "allergies"
     t.string   "passwordhash"
     t.text     "comments"
-    t.decimal  "total_hours",               precision: 7, scale: 2
+    t.decimal  "total_hours",                 precision: 7, scale: 2
     t.date     "start_date"
     t.date     "end_date"
     t.string   "title"
     t.string   "division1"
     t.string   "division2"
-    t.integer  "position",                                          default: 30
+    t.integer  "position",                                            default: 30
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "duration"
@@ -288,6 +288,7 @@ ActiveRecord::Schema.define(version: 20161005171954) do
     t.string   "suffix_name"
     t.string   "nickname"
     t.string   "portrait"
+    t.date     "application_date"
   end
 
   create_table "people_titles", id: false, force: :cascade do |t|
