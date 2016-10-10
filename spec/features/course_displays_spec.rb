@@ -1,7 +1,7 @@
 require 'rails_helper'
 #Don't use capybara (ie visit/have_content) and rspec matchers together  {response.status.should be(200)}
 
-describe "Course" do  
+RSpec.describe "Course" do  
   describe " when not logged in" do
     it "should not allow much of anything" do
       visit courses_path

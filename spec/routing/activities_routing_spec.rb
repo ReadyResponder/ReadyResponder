@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe ActivitiesController do
+RSpec.describe ActivitiesController do
   describe "routing" do
 
     it "routes to #index" do

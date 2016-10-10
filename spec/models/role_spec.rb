@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-describe Role do
+RSpec.describe Role do
 
 end

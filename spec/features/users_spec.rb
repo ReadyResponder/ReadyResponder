@@ -1,6 +1,6 @@
 require 'rails_helper'
 #save_and_open_page
-describe 'Access on user' do
+RSpec.describe 'Access on user' do
   it "gets denied when not logged in" do
     visit users_path
     expect(page).to have_content("need to sign in")
@@ -11,7 +11,7 @@ describe 'Access on user' do
     expect(page).to have_content("need to sign in")
   end
 end
-describe "user" do
+RSpec.describe "user" do
   before (:each) do
     somebody = create(:user)
     r = create(:role, name: "Manager")

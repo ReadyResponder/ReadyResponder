@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Channels" do
+RSpec.describe "Channels" do
   before (:each) do
     somebody = create(:user)
     r = create(:role, name: 'Editor')

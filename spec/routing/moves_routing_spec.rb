@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe MovesController do
+RSpec.describe MovesController do
   describe "routing" do
 
     it "routes to #index" do

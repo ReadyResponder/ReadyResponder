@@ -1,6 +1,6 @@
 require 'rails_helper'
       #save_and_open_page
-describe "a user" do
+RSpec.describe "a user" do
   describe "without a role" do
     before (:each) do
       @person = create(:person)

@@ -1,4 +1,4 @@
-describe "Title" do
+RSpec.describe "Title" do
   before(:each) do
   end
 

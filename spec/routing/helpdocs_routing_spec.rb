@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe HelpdocsController do
+RSpec.describe HelpdocsController do
   describe "routing" do
 
     it "routes to #index" do

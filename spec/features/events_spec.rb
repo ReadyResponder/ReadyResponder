@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Events" do
+RSpec.describe "Events" do
   before (:each)  do
     somebody = create(:user)
     r = create(:role, name: 'Editor')

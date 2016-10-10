@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Roles" do
+RSpec.describe "Roles" do
   before (:each)  do
     somebody = create(:user)
     r = create(:role, name: 'Editor')

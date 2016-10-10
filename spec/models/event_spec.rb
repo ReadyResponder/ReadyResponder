@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Event do
+RSpec.describe Event do
   it "has a valid factory" do
     expect(create(:event)).to be_valid
   end

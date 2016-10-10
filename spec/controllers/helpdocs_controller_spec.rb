@@ -18,7 +18,7 @@ require 'rails_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-describe HelpdocsController do
+RSpec.describe HelpdocsController do
 
   # This should return the minimal set of attributes required to create a valid
   # Helpdoc. As you add validations to Helpdoc, be sure to

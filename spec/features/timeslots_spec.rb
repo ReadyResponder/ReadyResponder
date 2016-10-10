@@ -1,6 +1,6 @@
 require 'rails_helper'
 #save_and_open_page
-describe 'Access on timecard' do
+RSpec.describe 'Access on timecard' do
   it "gets denied" do
     visit timecards_path
     expect(page).to have_content("You need to sign in")
@@ -12,7 +12,7 @@ describe 'Access on timecard' do
   end
 end
 
-describe Timecard do
+RSpec.describe Timecard do
   before (:each) do
     somebody = create(:user)
     r = create(:role, name: "Editor")

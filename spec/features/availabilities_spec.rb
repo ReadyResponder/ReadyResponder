@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Availabilities" do
+RSpec.describe "Availabilities" do
   before (:each)  do
     somebody = create(:user)
     r = create(:role, name: 'Editor')

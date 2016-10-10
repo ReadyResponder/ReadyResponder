@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Timecard do
+RSpec.describe Timecard do
 
   describe "creation" do
     it "has a valid factory" do
