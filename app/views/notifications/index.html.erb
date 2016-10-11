@@ -4,8 +4,6 @@
     <tr>
       <th>Status</th>
       <th>Event</th>
-      <th>Subject</th>
-      <th>Body</th>
       <th>Start at</th>
       <th>Channels</th>
       <th colspan="1"></th>
@@ -17,8 +15,6 @@ I need to allow info only Notifications
       <tr>
         <td><%= notification.status %></td>
         <td><%= link_to notification.event.title, notification.event %></td>
-        <td><%= link_to notification.subject, notification %></td>
-        <td><%= notification.body %></td>
         <td><%= notification.start_at %></td>
         <td><%= notification.channels %></td>
         <td><%= link_to 'Edit', edit_notification_path(notification) %></td>

@@ -4,9 +4,7 @@ RSpec.describe "notifications/edit", type: :view do
   before(:each) do
     @notification = assign(:notification, Notification.create!(
       :event => nil,
-      :status => "MyString",
-      :subject => "MyString",
-      :body => "MyString",
+      :status => "active",
       :channels => "MyString"
     ))
   end
@@ -19,10 +17,6 @@ RSpec.describe "notifications/edit", type: :view do
       assert_select "input#notification_event_id[name=?]", "notification[event_id]"
 
       assert_select "input#notification_status[name=?]", "notification[status]"
-
-      assert_select "input#notification_subject[name=?]", "notification[subject]"
-
-      assert_select "input#notification_body[name=?]", "notification[body]"
 
       assert_select "input#notification_channels[name=?]", "notification[channels]"
     end
