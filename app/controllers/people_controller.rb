@@ -1,7 +1,7 @@
 class PeopleController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :set_return_path
   authorize_resource
+  before_action :set_referrer_path, only: [:new, :edit]
 
   def signin
     #This is the sign-in sheet, not anything about authentication
@@ -107,7 +107,15 @@ class PeopleController < ApplicationController
     cookies[:status] = person_params[:status]
     respond_to do |format|
       if @person.save
-        format.html { redirect_to session[:return_to], notice: 'Person was successfully created.' }
+        format.html {
+          redirect_to referrer_or(everybody_people_path), notice: 'Person was successfully created.'
+          ## Redirects to the previously-saved referrer, with a fallback destination.
+          ## (This assumes that the user who can create a person
+          ## is authorized to access everybody_people_path.)
+          ## Other reasonable redirect possibilities: @person, or the
+          ## display list for @person.department.
+          ## See also below in 'update'.
+        }
         format.json { render json: @person, status: :created, location: @person }
       else
         format.html { redirect_to new_person_path, alert: @person.errors.full_messages }
@@ -121,7 +129,7 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       if @person.update_attributes(person_params)
-        format.html { redirect_to session[:return_to], notice: 'Person was successfully updated.' }
+        format.html { redirect_to referrer_or(everybody_people_path), notice: 'Person was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { redirect_to edit_person_path(@person), notice: @person.errors.full_messages }
@@ -142,8 +150,12 @@ class PeopleController < ApplicationController
 
   private
 
-  def set_return_path
-    session[:return_to] ||= request.referer
+  def set_referrer_path
+    session[:referrer] = request.referer
+  end
+
+  def referrer_or(fallback_destination)
+    session.delete(:referrer) || fallback_destination
   end
 
   def person_params
