@@ -12,15 +12,7 @@ RSpec.describe 'Access on user' do
   end
 end
 RSpec.describe "user" do
-  before (:each) do
-    somebody = create(:user)
-    r = create(:role, name: "Manager")
-    somebody.roles << r
-    visit new_user_session_path
-    fill_in 'user_email', :with => somebody.email
-    fill_in 'user_password', :with => somebody.password
-    click_on 'Sign in'
-  end
+  before (:each) { sign_in_as('Manager') }
 
   it "gets the index" do
     @user = create(:user, lastname: "Doe")

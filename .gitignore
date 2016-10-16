@@ -19,7 +19,8 @@
 *.kate-swp
 /public/uploads
 
-#Ignore database settings
+# Ignore database settings
 /config/database.yml
 
-spec/examples.txt
+# Ignore rspec profiling data
+/spec/examples.txt
