@@ -1,5 +1,5 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Move do
+RSpec.describe Move do
 
 end

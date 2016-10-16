@@ -1,6 +1,6 @@
-require "spec_helper"
+require "rails_helper"
 
-describe ItemsController do
+RSpec.describe ItemsController do
   describe "routing" do
 
     it "routes to #index" do

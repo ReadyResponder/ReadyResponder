@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Helpdoc do
+RSpec.describe Helpdoc do
   it "has a valid factory" do
     expect(create(:helpdoc)).to be_valid
   end

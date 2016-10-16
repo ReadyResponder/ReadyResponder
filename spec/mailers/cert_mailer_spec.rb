@@ -1,6 +1,6 @@
-require "spec_helper"
+require "rails_helper"
 
-describe CertMailer do
+RSpec.describe CertMailer do
   describe "cert_expiring" do
     let(:person) { create(:person) }
     let(:mail) { CertMailer.cert_expiring(person) }

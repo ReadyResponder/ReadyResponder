@@ -21,3 +21,5 @@
 
 #Ignore database settings
 /config/database.yml
+
+spec/examples.txt

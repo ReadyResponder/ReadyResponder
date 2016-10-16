@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Person do
+RSpec.describe Person do
   describe 'validations' do
     it { is_expected.to validate_length_of(:state).is_equal_to 2 }
     it { is_expected.to validate_uniqueness_of(:icsid) }

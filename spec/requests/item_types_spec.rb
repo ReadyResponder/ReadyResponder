@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 RSpec.describe "ItemTypes", :type => :request do
   describe "GET /item_types" do

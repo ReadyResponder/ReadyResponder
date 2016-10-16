@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Cert do
+RSpec.describe Cert do
   let(:evoc_course) { create(:course, term: 100) }
   subject { create :cert, course: evoc_course }
 

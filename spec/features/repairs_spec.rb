@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe "Repairs" do
+RSpec.describe "Repairs" do
   before (:each)  do
     somebody = create(:user)
     r = create(:role, name: 'Editor')
