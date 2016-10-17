@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
       #save_and_open_page
-describe "a user in the trainer role" do
+RSpec.describe "a user in the trainer role" do
   before (:each) do
     @person = create(:person)
     somebody = create(:user)

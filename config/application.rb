@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Lims3
+module ReadyResponder
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -21,7 +21,7 @@ module Lims3
     # config.i18n.default_locale = :de
 
     # config.filter_parameters += [:password, :password_confirmation] #moved to config/initializers/filter_parameter_logging.rb
-    
+
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true # no longer needed in Rails 4?
 

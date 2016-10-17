@@ -1,6 +1,6 @@
-require "spec_helper"
+require "rails_helper"
 
-describe ChannelsController do
+RSpec.describe ChannelsController do
   describe "routing" do
 
     it "routes to #index" do

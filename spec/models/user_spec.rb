@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe User do
+RSpec.describe User do
   it "requires a username" do
     a_user = build(:user, username: nil)
     expect(a_user).not_to be_valid

@@ -106,6 +106,8 @@ ActiveRecord::Schema.define(version: 20161009235659) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "division1"
+    t.string   "division2"
   end
 
   create_table "events", force: :cascade do |t|
@@ -180,7 +182,6 @@ ActiveRecord::Schema.define(version: 20161009235659) do
     t.string   "source"
     t.string   "category"
     t.string   "model"
-    t.string   "serial1"
     t.date     "purchase_date"
     t.float    "purchase_amt"
     t.date     "sell_date"
@@ -188,14 +189,12 @@ ActiveRecord::Schema.define(version: 20161009235659) do
     t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "serial2"
     t.string   "grant"
     t.date     "grantstart"
     t.date     "grantexpiration"
     t.string   "icsid"
     t.string   "po_number"
     t.decimal  "value",            precision: 8, scale: 2
-    t.string   "serial3"
     t.string   "brand"
     t.string   "stock_number"
     t.text     "comments"
@@ -295,7 +294,7 @@ ActiveRecord::Schema.define(version: 20161009235659) do
     t.string   "title"
     t.string   "division1"
     t.string   "division2"
-    t.integer  "position",                                          default: 30
+    t.integer  "position",                                            default: 30
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "duration"
@@ -306,6 +305,7 @@ ActiveRecord::Schema.define(version: 20161009235659) do
     t.string   "suffix_name"
     t.string   "nickname"
     t.string   "portrait"
+    t.date     "application_date"
   end
 
   create_table "people_titles", id: false, force: :cascade do |t|

@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Inspection do
+RSpec.describe Inspection do
   let(:an_item)  { create(:item) }
   it "has a valid factory" do
     expect(create(:inspection, item: an_item)).to be_valid

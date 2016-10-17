@@ -1,7 +1,7 @@
-require 'spec_helper'
+require 'rails_helper'
 #Don't use capybara (ie visit/have_content) and rspec matchers together  {response.status.should be(200)}
 
-describe "Course" do  
+RSpec.describe "Course" do  
   describe " when not logged in" do
     it "should not allow much of anything" do
       visit courses_path
@@ -37,7 +37,7 @@ describe "Course" do
       within_table("courses") do
         expect(page).to have_content("Courses")
       end
-      expect(page).to have_content("LIMS") # This is in the nav bar
+      expect(page).to have_content("Home") # This is in the nav bar
       expect(page).to have_link(an_example.name)
       click_on an_example.name
       expect(page).to have_content(an_example.name)

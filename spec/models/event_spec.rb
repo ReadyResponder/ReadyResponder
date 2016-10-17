@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Event do
+RSpec.describe Event do
   describe 'associations' do
     it 'has many notifications' do
       expect(subject).to have_many(:notifications)

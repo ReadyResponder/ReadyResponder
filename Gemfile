@@ -33,7 +33,6 @@ group :test, :development do
   gem "capybara"
   gem "guard-rspec", require: false
   gem 'guard-livereload'
-  # gem 'sqlite3'
   gem "mailcatcher"
   gem "launchy"
   gem "letter_opener"

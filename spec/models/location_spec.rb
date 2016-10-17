@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Location do
+RSpec.describe Location do
   it "has a valid factory" do
     expect(create(:location)).to be_valid
   end

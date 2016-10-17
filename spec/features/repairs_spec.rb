@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe "Repairs" do
+RSpec.describe "Repairs" do
   before (:each)  do
     somebody = create(:user)
     r = create(:role, name: 'Editor')
@@ -15,7 +15,7 @@ describe "Repairs" do
     it "returns a page" do
       visit repairs_path
       expect(page).to have_content("Listing Repairs")
-      expect(page).to have_content("LIMS") # This is in the nav bar
+      expect(page).to have_content("Home") # This is in the nav bar
     end
   end
 end

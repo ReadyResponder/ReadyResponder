@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Item do
+RSpec.describe Item do
   before (:each) do
     somebody = create(:user)
     r = create(:role, name: 'Editor')

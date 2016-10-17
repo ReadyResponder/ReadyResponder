@@ -13,6 +13,9 @@
                 input_html: { class: 'datepicker', size: 11,
                               value: format_date_value(f.object.end_date) } %>
     <%= f.input :department, :as => :select, :collection => Person::DEPARTMENT %>
+    <%= f.input :application_date, as: :string,
+              input_html: { class: 'datepicker', size: 11,
+                              value: format_date_value(f.object.application_date) } %>
 
       <h2> Phone information </h2>
       <%= f.simple_fields_for :phones, wrapper: :horizontal_input_group do |c| %>

@@ -1,6 +1,6 @@
-require "spec_helper"
+require "rails_helper"
 
-describe TimecardsController do
+RSpec.describe TimecardsController do
   describe "routing" do
 
     it "routes to #index" do

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Tasks" do
+RSpec.describe "Tasks" do
   before (:each)  do
     somebody = create(:user)
     r = create(:role, name: 'Editor')

@@ -1,7 +1,7 @@
-require 'spec_helper'
+require 'rails_helper'
 #Don't use capybara (ie visit/have_content) and rspec matchers together  {response.status.should be(200)}
 
-describe "Cert" do
+RSpec.describe "Cert" do
   before  do
     somebody = create(:user)
     r = create(:role, name: 'Editor')
@@ -35,7 +35,7 @@ describe "Cert" do
       
       visit certs_path
       expect(page).to have_content("Listing Certs")
-      expect(page).to have_content("LIMS") # This is in the nav bar
+      expect(page).to have_content("Home") # This is in the nav bar
       expect(page).to have_content("Active") # This is in the cert
       expect(page).to have_link(person.fullname)
       expect(page).to have_link(cert.course.name)

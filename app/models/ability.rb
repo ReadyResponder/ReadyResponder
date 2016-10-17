@@ -10,7 +10,7 @@ class Ability
     elsif roles.include? "Manager"
       can :manage, :all
     elsif roles.include? "Editor"
-      can [:read, :update, :create, :edit, :police, :cert, :applicants, :prospects, :other, :inactive, :leave, :declined], Person
+      can [:read, :update, :create, :edit, :police, :cert, :applicants, :prospects, :other, :inactive, :leave, :declined, :everybody], Person
       can [:read, :update, :create, :edit], Timecard
       can [:read, :update, :create, :edit], Channel
       can [:read, :update, :create, :edit], Availability
