@@ -9,6 +9,7 @@ class NotificationsController < ApplicationController
 
   # GET /notifications/1
   def show
+    @event_title = @notification.event ? @notification.event.title : 'None'
   end
 
   # GET /notifications/new

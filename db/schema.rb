@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160927022134) do
+ActiveRecord::Schema.define(version: 20161009235659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -257,8 +257,8 @@ ActiveRecord::Schema.define(version: 20160927022134) do
     t.string   "channels"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
-    t.string   "body"
-    t.string   "subject"
+    t.string   "groups"
+    t.integer  "author_id"
   end
 
   add_index "notifications", ["event_id"], name: "index_notifications_on_event_id", using: :btree
@@ -468,5 +468,6 @@ ActiveRecord::Schema.define(version: 20160927022134) do
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
   add_foreign_key "notifications", "events"
+  add_foreign_key "notifications", "users", column: "author_id"
   add_foreign_key "tasks", "events"
 end

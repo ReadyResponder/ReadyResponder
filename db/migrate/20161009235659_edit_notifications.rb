@@ -1,6 +1,5 @@
 class EditNotifications < ActiveRecord::Migration
   def change
-    change_column :notifications, :event, :null => true
     remove_column :notifications, :subject, :string
     remove_column :notifications, :body, :string
     add_column :notifications, :groups, :string

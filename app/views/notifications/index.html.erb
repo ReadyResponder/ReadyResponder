@@ -14,7 +14,7 @@ I need to allow info only Notifications
     <% @notifications.each do |notification| %>
       <tr>
         <td><%= notification.status %></td>
-        <td><%= link_to notification.event.title, notification.event %></td>
+        <td><%= notification.event ? (link_to notification.event.title, notification.event) : 'None' %></td>
         <td><%= notification.start_at %></td>
         <td><%= notification.channels %></td>
         <td><%= link_to 'Edit', edit_notification_path(notification) %></td>
