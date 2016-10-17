@@ -31,6 +31,7 @@ group :test, :development do
   gem "mailcatcher"
   gem "launchy"
   gem "letter_opener"
+  gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
   gem 'database_cleaner', '1.0.1'
@@ -49,7 +50,6 @@ group :development do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
-  gem 'better_errors'
   # Use Capistrano for deployment
   gem 'capistrano-rails'
 end
