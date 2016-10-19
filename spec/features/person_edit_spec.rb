@@ -1,18 +1,11 @@
 require 'rails_helper'
-      #save_and_open_page
+
 RSpec.describe "Person" do
-  before (:each)  do
-    somebody = create(:user)
-    r = create(:role, name: 'Editor')
-    somebody.roles << r
-    visit new_user_session_path
-    fill_in 'user_email', :with => somebody.email
-    fill_in 'user_password', :with => somebody.password
-    click_on 'Sign in'
-  end
+  before(:each) { sign_in_as('Editor') }
 
   describe "views" do
     before (:each) do
+      # FIXME: This is never used
       cj = create(:person, firstname: 'CJ',  department: 'Police' )
       cj.channels << create(:channel, channel_type: 'Phone', content: '9785551212', category: "Mobile Phone")
       sierra = create(:person, firstname: 'Sierra', department: 'CERT' )
@@ -24,7 +17,6 @@ RSpec.describe "Person" do
       create(:person, firstname: 'Donna', status: 'Declined' )
       create(:person, firstname: 'Oscar', status: 'Active', department: 'Other' )
     end
-
   end
 
   describe "forms should display" do
@@ -74,11 +66,12 @@ RSpec.describe "Person" do
       person = create(:person)
       person.titles << title
       cert = create(:cert, person: person, course: frfacourse)
+
       visit person_path(person)
-      #save_and_open_page
       expect(page).to have_content("NOT qualified for Police Officer")
       expect(page).to have_content("Driving") #This test is vague. Need to ensure Driving is in the missing skills section
       cert = create(:cert, person: person, course: drivingcourse)
+
       visit person_path(person)
       expect(page).to have_content("Qualified for Police Officer")
       expect(page).not_to have_content("NOT Qualified")

@@ -1,7 +1,7 @@
 require 'rails_helper'
 #Don't use capybara (ie visit/have_content) and rspec matchers together  {response.status.should be(200)}
 
-RSpec.describe "Course" do  
+RSpec.describe "Course" do
   describe " when not logged in" do
     it "should not allow much of anything" do
       visit courses_path
@@ -18,19 +18,10 @@ RSpec.describe "Course" do
       expect(page).not_to have_content('Pottery')
     end
   end
-      
-  describe "should display" do
-    before  do
-      somebody = create(:user)
-      r = create(:role, name: 'Editor')
-      somebody.roles << r
-      visit new_user_session_path
-      fill_in('user_email', :with => somebody.email)
-      fill_in('user_password', :with => somebody.password)
-      click_on 'Sign in'
-    end
 
-  
+  describe "should display" do
+    before(:each) { sign_in_as('Editor') }
+
    it "a list" do
       an_example = create(:course, name: 'Zombie Hunting')
       visit courses_path
@@ -58,7 +49,7 @@ RSpec.describe "Course" do
       visit courses_path
       expect(page).to have_content('Basket Weaving')
     end
-    
+
     it 'should update a course' do
       an_example = create(:course, name: 'Zombie Hunting')
       visit edit_course_path(an_example)

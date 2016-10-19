@@ -1,26 +1,21 @@
 require 'rails_helper'
-#save_and_open_page
+
 RSpec.describe 'Access on user' do
   it "gets denied when not logged in" do
     visit users_path
     expect(page).to have_content("need to sign in")
     @user = create(:user)
+
     visit url_for(@user)
     expect(page).to have_content("need to sign in")
+
     visit edit_user_path(@user)
     expect(page).to have_content("need to sign in")
   end
 end
+
 RSpec.describe "user" do
-  before (:each) do
-    somebody = create(:user)
-    r = create(:role, name: "Manager")
-    somebody.roles << r
-    visit new_user_session_path
-    fill_in 'user_email', :with => somebody.email
-    fill_in 'user_password', :with => somebody.password
-    click_on 'Sign in'
-  end
+  before (:each) { sign_in_as('Manager') }
 
   it "gets the index" do
     @user = create(:user, lastname: "Doe")
