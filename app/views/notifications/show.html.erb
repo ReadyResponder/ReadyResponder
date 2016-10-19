@@ -1,3 +1,9 @@
+<% content_for :sidebar do %>
+  <h1>Showing Notification</h1>
+  <%= sidebar_button_link 'Edit', edit_notification_path(@notification) %>
+  <%= sidebar_button_link 'Cancel', notifications_path %>
+<% end %>
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -20,6 +26,3 @@
   <strong>Channels:</strong>
   <%= @notification.channels %>
 </p>
-
-<%= link_to 'Edit', edit_notification_path(@notification) %> |
-<%= link_to 'Back', notifications_path %>

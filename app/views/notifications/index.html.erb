@@ -1,3 +1,8 @@
+<% content_for :sidebar do %>
+  <h1>New Notification</h1>
+  <%= sidebar_button_link 'New', new_notification_path %>
+<% end %>
+
 <table id="notifications" class="generic_datatable table table-striped table-bordered">
   <caption><h3><%= @page_title %></h3></caption>
   <thead>
@@ -24,5 +29,3 @@ I need to allow info only Notifications
 </table>
 
 <br>
-
-<%= link_to 'New Notification', new_notification_path %>
