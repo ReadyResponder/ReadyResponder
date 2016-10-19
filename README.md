@@ -1,20 +1,29 @@
-# ReadyResponder
+## ReadyResponder
 
 #### Project Build Status: &nbsp; [![Build Status](https://api.travis-ci.org/ReadyResponder/ReadyResponder.svg?branch=development)](https://travis-ci.org/ReadyResponder/ReadyResponder)
 
-This application aids emergency management and other agencies in managing both their personnel and their equipment.
+### This application aids volunteer organizations to manage personnel, equipment and scheduling.
 
-Features:
+The project was inspired by [Sandi Metz's call for programmers to aid their communities](https://www.youtube.com/watch?feature=player_detailpage&v=fhpT6Pc4AqM#t=1931) .  This project in particular looks to lessons learned in response to emergencies that inspired the National ICS program.  It has often been found that there is plentiful equipment and personnel, but not the organization to know what was available nor the ability to manage it.
 
-* Web-based user interface
+The goal of Ready Responder is to offer volunteer groups a program that allows them to track their resources and personnel, especially during emergencies or multi-day events.  This application might be used by volunteer firefighters, auxiliary police, Medical Reserve Corp (MRC), CERT organizations, amateur radio operators (ARES/RACES), church based relief groups, shelter managers or even science-fiction conventions.
+
+#### Current Features:
+* Web-based user interface, available from both desktop and mobile
 * Tracks complete data of personnel, including attendance, responsiveness and training
 * Tracks equipment, including serial numbers, sources, grants and service records
-* Will produce QR Codes of people to allow easier addition into a cell phone
-* will produce qr code to allow people to sign up for events
-* Will contact members via email, SMS over email and VOIP to alert them
-* Will capture availablity via VOIP IVR, SMS and email
 
-## Getting Started
+#### Upcoming Features
+* Will produce QR Codes of people to allow easier addition into a cell phone
+* Will produce QR code to allow people to sign up for events
+* Will contact members via email, SMS and VOIP to alert them
+
+The program is currently in production, getting live feedback.
+
+## Contributing to Ready Responder
+We have a Slack channel at [readyresponder.slack.com](readyresponder.slack.com) to give help if you need it.
+
+### Getting Started
 
 This is a Rails project that is configured to run on Ruby 2, and on a Postgres database.  So, the things you'll need to install before running ReadyResponder locally are Ruby, the `bundler` gem, and Postgres version 9.
 
@@ -26,11 +35,21 @@ This is a Rails project that is configured to run on Ruby 2, and on a Postgres d
   * If you have `homebrew` on a Mac, you can run `brew install postgres`.
   * Alternatively, [Postgres.app](http://postgresapp.com) is an easy way to get started with PostgreSQL on the Mac. [PostgresApp 9.4.8](https://github.com/PostgresApp/PostgresApp/releases/tag/9.4.8) has been tested (when configuring, add `host: localhost` to `config/database.yml`).
 
+  One more thing to install: The testing framework requires the [PhantomJS](http://phantomjs.org) library.  In order to code in ReadyResponder, you'll need to install PhantomJS separately.
+
+```
+# install phantomjs...
+# via npm:
+sudo npm install -g phantomjs-prebuilt
+# via homebrew:
+brew install phantomjs
+# on ubuntu:
+sudo apt-get install phantomjs
+```
+
 *Feel free to ask for help!*
 
-#### Contributing to ReadyResponder: Coding :smiley:
-
-One more thing to install: The testing framework requires the [PhantomJS](http://phantomjs.org) library.  In order to code in ReadyResponder, you'll need to install PhantomJS separately (see below).
+### Contributing to ReadyResponder: Coding :smiley:
 
 Then get the project code locally and set it up:
 
@@ -40,24 +59,15 @@ Then get the project code locally and set it up:
 1. Copy `config/database.example.yml` to `config/database.yml`.  Edit `config/database.yml` if necessary to match your postgres configuration.
 1. `bundle exec rake db:create`
 1. `bundle exec rake db:schema:load`
+1. `bundle exec rake db:seed  `
+
+You should note the output of the db:seed, as it will spit out the password at the end.
 
 At this point you should be able to run the rails server via `bundle exec rails s`, the rails console via `bundle exec rails c`, and the tests via `bundle exec rspec spec/`
 
-Note: You can use the UI to create a user and sign in, but the UI doesn't allow creation of an admin user.  To use all the features of ReadyResponder in the browser, you will need to enable admin privileges for your local user in the rails console after signing up via the UI:
-
-`User.first.roles << Role.where(name: "Manager").first_or_create`
-
-#### One-time setup for tests:
+### One-time setup for tests:
 ```shell
 bundle exec rake db:test:prepare
-
-# install phantomjs...
-# via npm:
-sudo npm install -g phantomjs-prebuilt
-# via homebrew:
-brew install phantomjs
-# on ubuntu: 
-sudo apt-get install phantomjs
 ```
 
 ## More information
