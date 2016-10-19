@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161009235659) do
+ActiveRecord::Schema.define(version: 20161008061337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -247,17 +247,19 @@ ActiveRecord::Schema.define(version: 20161009235659) do
 
   create_table "notifications", force: :cascade do |t|
     t.integer  "event_id"
-    t.string   "status"
-    t.integer  "hours_to_try"
-    t.integer  "minutes_interval"
-    t.integer  "attempts_before_escalation"
-    t.datetime "start_at"
-    t.datetime "started_at"
-    t.string   "channels"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.string   "groups"
     t.integer  "author_id"
+    t.string   "status"
+    t.integer  "time_to_live"
+    t.integer  "interval"
+    t.integer  "iterations_to_escalation"
+    t.datetime "scheduled_start_time"
+    t.datetime "start_time"
+    t.text     "channels"
+    t.text     "groups"
+    t.text     "departments"
+    t.text     "divisions"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   add_index "notifications", ["event_id"], name: "index_notifications_on_event_id", using: :btree
@@ -284,11 +286,11 @@ ActiveRecord::Schema.define(version: 20161009235659) do
     t.integer  "weight"
     t.integer  "height"
     t.string   "eyes"
-    t.string   "blood_type",     limit: 12
+    t.string   "blood_type",       limit: 12
     t.string   "allergies"
     t.string   "passwordhash"
     t.text     "comments"
-    t.decimal  "total_hours",               precision: 7, scale: 2
+    t.decimal  "total_hours",                 precision: 7, scale: 2
     t.date     "start_date"
     t.date     "end_date"
     t.string   "title"
@@ -468,6 +470,5 @@ ActiveRecord::Schema.define(version: 20161009235659) do
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
   add_foreign_key "notifications", "events"
-  add_foreign_key "notifications", "users", column: "author_id"
   add_foreign_key "tasks", "events"
 end

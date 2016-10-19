@@ -15,7 +15,7 @@ I need to allow info only Notifications
       <tr>
         <td><%= notification.status %></td>
         <td><%= notification.event ? (link_to notification.event.title, notification.event) : 'None' %></td>
-        <td><%= notification.start_at %></td>
+        <td><%= notification.scheduled_start_time %></td>
         <td><%= notification.channels %></td>
         <td><%= link_to 'Edit', edit_notification_path(notification) %></td>
       </tr>

@@ -4,11 +4,11 @@
   <div class="form-inputs">
     <%= f.association :event %>
     <%= f.input :status, as: :select, collection: Notification::VALID_STATUSES %>
-    <%= f.input :hours_to_try %>
-    <%= f.input :minutes_interval %>
-    <%= f.input :attempts_before_escalation %>
-    <%= f.input :start_at %>
-    <%= f.input :started_at %>
+    <%= f.input :time_to_live %>
+    <%= f.input :interval %>
+    <%= f.input :iterations_to_escalation %>
+    <%= f.input :scheduled_start_time %>
+    <%= f.input :start_time %>
     <%= f.input :channels %>
   </div>
 
