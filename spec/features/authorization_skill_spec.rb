@@ -6,14 +6,17 @@ RSpec.describe "a user" do
 
     it "cannot view skills" do
       skill = create(:skill)
+
       visit people_path
+      expect(page).to have_content("Access Denied")
       expect(page).not_to have_content('Edit') #Need to scope this, or it will fail on Edith
       expect(page).not_to have_content(skill.name)
-      expect(page).to have_content("Access Denied")
 
       visit skill_path(skill)
+      expect(page).to have_content("Access Denied")
       expect(page).not_to have_content('Edit') #Need to scope this, or it will fail on Edith
       expect(page).not_to have_content(skill.name)
+
       visit edit_skill_path(skill)
       expect(page).to have_content("Access Denied")
     end

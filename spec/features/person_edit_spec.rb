@@ -66,11 +66,12 @@ RSpec.describe "Person" do
       person = create(:person)
       person.titles << title
       cert = create(:cert, person: person, course: frfacourse)
+
       visit person_path(person)
-      #save_and_open_page
       expect(page).to have_content("NOT qualified for Police Officer")
       expect(page).to have_content("Driving") #This test is vague. Need to ensure Driving is in the missing skills section
       cert = create(:cert, person: person, course: drivingcourse)
+
       visit person_path(person)
       expect(page).to have_content("Qualified for Police Officer")
       expect(page).not_to have_content("NOT Qualified")
