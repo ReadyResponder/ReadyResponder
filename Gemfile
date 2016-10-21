@@ -21,8 +21,6 @@ end
 gem 'devise', '~> 3.0'
 
 group :test, :development do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
   gem 'thin'
   gem "rspec-rails"
   # gem 'rspec-activemodel-mocks' # TODO: remove if we no longer need mock_model or stub_model
@@ -48,6 +46,17 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug'
+
+  # Use Capistrano for deployment
+  gem 'capistrano-rails'
+end
+
+group :production do
+  # Use Unicorn as the app server
+  gem 'unicorn'
 end
 
 group :test do
@@ -72,12 +81,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
-
-# Use Unicorn as the app server
-gem 'unicorn'
-
-# Use Capistrano for deployment
-gem 'capistrano-rails', group: :development
 
 # # Deploy with Capistrano
 # gem 'capistrano', '~> 2.15'
