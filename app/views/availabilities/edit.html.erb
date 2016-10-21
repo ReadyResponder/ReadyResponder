@@ -1,7 +1,6 @@
 <% content_for :sidebar do %>
   <h1>Editing Availability</h1>
-  <%= sidebar_button_link 'Show', @availability.person %>
-  <%= sidebar_button_link 'Back', availabilities_path %>
+  <%= sidebar_button_link 'Cancel Edit', :back %>
 <% end %>
 
 <%= render 'form' %>
