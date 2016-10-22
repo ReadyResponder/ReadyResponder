@@ -24,7 +24,7 @@ class Event < ActiveRecord::Base
 
   scope :upcoming, -> { order("start_time ASC").where( status: ["Scheduled", "In-session"] ) }
 
-  CATEGORY_CHOICES = ['Training', 'Patrol', 'Meeting', 'Admin', 'Event']
+  CATEGORY_CHOICES = ['Training', 'Patrol', 'Meeting', 'Admin', 'Event', 'Template']
   STATUS_CHOICES = ['Scheduled', 'In-session', 'Completed', 'Cancelled', "Closed"]
 
   def to_s
