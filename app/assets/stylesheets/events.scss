@@ -17,3 +17,16 @@
     color: #666;
   }
 }
+
+.event-tabs {
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  .event-tabs-anchor{
+    font-size: 20px;
+  }
+
+  .tab-pane {
+    margin-top: 10px;
+  }
+}
