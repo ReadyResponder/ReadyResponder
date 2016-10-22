@@ -1,4 +1,5 @@
 class NotificationsController < ApplicationController
+  before_filter :authenticate_user!
   before_action :set_notification, only: [:show, :edit, :update, :destroy]
 
   # GET /notifications
@@ -55,8 +56,8 @@ class NotificationsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def notification_params
-      params.require(:notification).permit(:event_id, :status, :subject, :body,
-         :time_to_live, :interval, :iterations_to_escalation,
-          :scheduled_start_time, :start_time, :channels)
+      params.require(:notification).permit(:event_id, :author_id, :status,
+         :time_to_live, :interval, :iterations_to_escalation, :groups,
+          :scheduled_start_time, :start_time, :channels, :departments, :divisions)
     end
 end
