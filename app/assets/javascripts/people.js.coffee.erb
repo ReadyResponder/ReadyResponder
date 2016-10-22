@@ -14,3 +14,13 @@ jQuery ->
                   { orderData: 5, targets: 6 }
                   { orderable: false, targets: 13 }
                 ]
+  $('#person_zipcode').change ->
+    code = $(@).val()
+    $.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + code + "&key=<%= ENV['GOOGLE_MAPS_API_KEY'] %>", (data) ->
+      results = data
+      city = data.results[0].address_components[1].long_name
+      state = data.results[0].address_components[3].short_name
+      $('#person_city').val city
+      $('#person_state').val state
+      return
+    )

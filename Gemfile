@@ -25,6 +25,8 @@ group :test, :development do
   gem 'byebug'
   gem 'thin'
   gem "rspec-rails"
+  # Dotenv to hold environment variables
+  gem 'dotenv-rails'
   # gem 'rspec-activemodel-mocks' # TODO: remove if we no longer need mock_model or stub_model
   gem "factory_girl_rails"
   gem "capybara"

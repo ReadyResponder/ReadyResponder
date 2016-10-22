@@ -23,3 +23,5 @@
 /config/database.yml
 
 spec/examples.txt
+
+.env
