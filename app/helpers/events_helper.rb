@@ -6,18 +6,19 @@ module EventsHelper
 
   def display_event_status(event)
     available    = event.availabilities.count.to_s
+    partial      = event.partial_availabilities.count.to_s
     unavailable  = event.unavailabilities.count.to_s
     no_response  = event.unresponsive_people.count.to_s
     content_tag(:div) {
       capture do
         concat event_status_label(event)
-        concat " (Personnel: "
-        concat make_label(available, 'label label-success', tooltip: 'available')
-        concat "/"
-        concat make_label(unavailable, 'label label-danger', tooltip: 'unavailable')
-        concat "/"
-        concat make_label(no_response, 'label label-warning', tooltip: 'no response')
-        concat ")"
+
+        concat content_tag(:span, 'Personnel:', class: 'event-labels')
+        # concat " Personnel: "
+        concat make_label(available, 'label label-success event-labels', tooltip: 'available')
+        concat make_label(partial, 'label label-warning event-labels', tooltip: 'available')
+        concat make_label(unavailable, 'label label-danger event-labels', tooltip: 'unavailable')
+        concat make_label(no_response, 'label label-default event-labels', tooltip: 'no response')
       end
     }
   end

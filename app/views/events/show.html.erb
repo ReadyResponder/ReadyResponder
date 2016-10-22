@@ -39,12 +39,13 @@
     <div class="tab-pane" id="event-availability-tab">
       <div id="event_availabilities" >
         <%= render(:partial => "availabilities/availabilities_table",
-                   :locals => { :availabilities => ( @event.responses)} ) || "No Availabilities yet !" %>
+                   :locals => { :availabilities => ( @event.responses),
+                                :partial_availabilities => ( @event.partial_responses)} ) || "No Availabilities yet !" %>
 
         <%= render(partial: "people/people_table",
                    locals: { people: @event.unresponsive_people,
                              title: "No Response",
-                             row_class: 'class="warning"'}) || "Everyone Responded !" %>
+                             row_class: 'class="default"'}) || "Everyone Responded !" %>
       </div>
     </div>
   </div>
