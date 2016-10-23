@@ -12,6 +12,7 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 require 'capybara/rspec'
 require 'capybara/poltergeist'
+require 'devise'
 Capybara.javascript_driver = :poltergeist
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -65,6 +66,7 @@ RSpec.configure do |config|
   config.include Devise::TestHelpers, type: :controller
   config.include MailerMacros, type: :mailer
   config.extend AuthorizationViewHelper, type: :feature
+  config.include AuthenticationHelper
 end
 
 Shoulda::Matchers.configure do |config|
