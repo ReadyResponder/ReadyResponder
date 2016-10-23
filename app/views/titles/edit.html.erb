@@ -1,3 +1,6 @@
-<h1>Editing title</h1>
+<% content_for :sidebar do %>
+  <h1>Editing Title</h1>
+  <%= sidebar_button_link 'Cancel Edit', :back %>
+<% end %>
 
 <%= render 'form' %>

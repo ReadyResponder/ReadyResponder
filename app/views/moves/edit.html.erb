@@ -1,7 +1,6 @@
 <% content_for :sidebar do %>
   <h1>Editing move</h1>
-  <%= sidebar_button_link 'Show', @move %>
-  <%= sidebar_button_link 'Back', moves_path %>
+  <%= sidebar_button_link 'Cancel Edit', :back %>
 <% end %>
 
 <%= render 'form' %>

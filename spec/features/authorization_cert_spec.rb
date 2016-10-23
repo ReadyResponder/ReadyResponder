@@ -1,17 +1,9 @@
 require 'rails_helper'
-      #save_and_open_page
+
 RSpec.describe "a user" do
   describe "in the reader role" do
-    before (:each) do
-      person = create(:person, lastname: 'YesDoe')
-      somebody = create(:user)
-      r = create(:role, name: 'Reader')
-      somebody.roles << r
-      visit new_user_session_path
-      fill_in 'user_email', :with => somebody.email
-      fill_in 'user_password', :with => somebody.password
-      click_on 'Sign in'
-    end
+    before (:each) { sign_in_as('Reader') }
+
     it "cannot edit certs" do
       acert = create(:cert)
       visit certs_path

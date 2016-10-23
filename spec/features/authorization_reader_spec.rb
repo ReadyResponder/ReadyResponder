@@ -1,16 +1,12 @@
 require 'rails_helper'
-      #save_and_open_page
+
 RSpec.describe "a user" do
   describe "in the reader role" do
     before (:each) do
       @person = create(:person)
-      somebody = create(:user)
-      somebody.roles << create(:role, name: 'Reader')
-      visit new_user_session_path
-      fill_in 'user_email', :with => somebody.email
-      fill_in 'user_password', :with => somebody.password
-      click_on 'Sign in'
+      sign_in_as('Reader')
     end
+
     it "cannot edit people" do
       visit edit_person_path(@person)
       expect(page).to have_content("Access Denied")

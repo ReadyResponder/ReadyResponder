@@ -2,16 +2,8 @@ require 'rails_helper'
 #Don't use capybara (ie visit/have_content) and rspec matchers together  {response.status.should be(200)}
 
 RSpec.describe "Inspection" do
-  before (:each)  do
-    somebody = create(:user)
-    r = create(:role, name: 'Editor')
-    somebody.roles << r
+  before(:each) { sign_in_as('Editor') }
 
-    visit new_user_session_path
-    fill_in('user_email', :with => somebody.email)
-    fill_in('user_password', :with => somebody.password)
-    click_on 'Sign in'
-  end
   describe "when not logged in" do
     let(:an_item)  { create(:item) }
     let(:an_inspection) { create(:inspection, item: an_item) }

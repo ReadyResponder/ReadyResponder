@@ -29,7 +29,7 @@
           <%= c.input :carrier, :as => :select, :collection => Phone::CARRIERS %>
           <%= c.input :priority, :as => :select, :collection => Phone::PRIORITIES %>
           <%= c.input :channel_type, as: :select, collection: Phone::TYPES %>
-          <%= c.input :sms_available, as: :boolean %>
+          <%= c.input :sms_available, as: :boolean, label: 'Text Message (SMS)' %>
         </fieldset>
         <hr />
       <% end %>
@@ -47,7 +47,7 @@
         <hr />
       <% end %>
 
-    <%= f.input :icsid, :input_html => { :size => 5 } %>
+    <%= f.input :icsid, label: 'ICS id', :input_html => { :size => 5 } %>
     <%= f.input :title, :as => :select, label: 'Rank', :collection => Person::TITLES %>
     <%= f.association :titles %>
     <%= f.input :start_date, as: :string,

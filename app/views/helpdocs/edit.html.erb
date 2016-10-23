@@ -1,7 +1,6 @@
 <% content_for :sidebar do %>
   <h1>Editing helpdoc</h1>
-  <%= sidebar_button_link 'Show', @helpdoc %>
-  <%= sidebar_button_link 'Back', helpdocs_path %>
+  <%= sidebar_button_link 'Cancel Edit', :back %>
 <% end %>
 
 <%= render 'form' %>
