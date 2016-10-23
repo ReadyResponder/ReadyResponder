@@ -7,13 +7,17 @@ RSpec.describe "departments/index", :type => :view do
         :name => "Name",
         :status => "Status",
         :contact_id => 1,
-        :description => "MyText"
+        :description => "MyText",
+        :manage_people => false,
+        :manage_items => true
       ),
       Department.create!(
         :name => "Name",
         :status => "Status",
         :contact_id => 1,
-        :description => "MyText"
+        :description => "MyText",
+        :manage_people => true,
+        :manage_items => false
       )
     ])
   end
@@ -24,5 +28,7 @@ RSpec.describe "departments/index", :type => :view do
     assert_select "tr>td", :text => "Status".to_s, :count => 2
     assert_select "tr>td", :text => 1.to_s, :count => 2
     assert_select "tr>td", :text => "MyText".to_s, :count => 2
+    assert_select "tr>td", :text => "true".to_s, :count => 2
+    assert_select "tr>td", :text => "false".to_s, :count => 2
   end
 end
