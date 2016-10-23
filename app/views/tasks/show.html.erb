@@ -30,7 +30,8 @@
 
 <div id="task_event_availabilities" >
   <%= render(:partial => "availabilities/availabilities_table",
-             :locals => { :availabilities => ( @task.event.responses)} ) || "No Availabilities yet !" %>
+             :locals => { :availabilities => ( @task.event.responses),
+                          :partial_availabilities => ( @task.event.partial_responses) } ) || "No Availabilities yet !" %>
 
   <%= render(partial: "people/people_table",
              locals: { people: @task.event.unresponsive_people,
