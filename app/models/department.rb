@@ -7,4 +7,8 @@ class Department < ActiveRecord::Base
   has_many :people
   has_many :items
   has_many :locations
+
+  def self.managing_items
+    Department.where(manage_items: true)
+  end
 end
