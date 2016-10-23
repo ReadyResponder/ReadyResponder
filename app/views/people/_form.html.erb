@@ -13,6 +13,8 @@
                 input_html: { class: 'datepicker', size: 11,
                               value: format_date_value(f.object.end_date) } %>
     <%= f.input :department, :as => :select, :collection => Department.all %>
+    <%= f.input :division1, :as => :select, :label => 'Division', :collection => Department.all, :as => :grouped_select, :group_method => :division1 %>
+    <%= f.input :division2, :as => :select, :label => 'Squad', :collection => Department.all, :as => :grouped_select, :group_method => :division2 %>
     <%= f.input :application_date, as: :string,
               input_html: { class: 'datepicker', size: 11,
                               value: format_date_value(f.object.application_date) } %>
@@ -53,8 +55,6 @@
     <%= f.input :start_date, as: :string,
                 input_html: { class: 'datepicker', size: 11,
                               value: format_date_value(f.object.start_date) } %>
-    <%= f.input :division1, :as => :select, :label => 'Division', :collection => Department.all, :as => :grouped_select, :group_method => :division1 %>
-    <%= f.input :division2, :as => :select, :label => 'Squad', :collection => Department.all, :as => :grouped_select, :group_method => :division2 %>
     <h4> Personnel Image </h4>
     <%= @person.portrait %>
     <%= f.file_field :portrait %>
