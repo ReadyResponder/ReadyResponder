@@ -32,8 +32,21 @@ class Event < ActiveRecord::Base
   end
 
   def unavailabilities
-    responses.unavailable
+    responses.unavailable + partial_responses.unavailable
   end
+
+  def partial_responses
+    Availability.partially_available(self.start_time..self.end_time)
+  end
+
+  def partial_availabilities
+    partial_responses.available
+  end
+
+  def partial_respondents
+    self.partial_responses.map { |a| a.person }
+  end
+
 
   def availabilities
     responses.available
@@ -57,7 +70,7 @@ class Event < ActiveRecord::Base
   end
 
   def unresponsive_people
-    eligible_people - respondents
+    eligible_people - respondents - partial_respondents
   end
 
   def manhours
