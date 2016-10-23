@@ -11,4 +11,12 @@ class Department < ActiveRecord::Base
   def self.managing_items
     Department.where(manage_items: true)
   end
+
+  def formatted_division1
+    division1.join(', ')
+  end
+
+  def formatted_division2
+    division2.join(', ')
+  end
 end
