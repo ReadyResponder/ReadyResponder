@@ -1,4 +1,6 @@
 class DepartmentsController < ApplicationController
+    before_action :format_divisions, :only => [:create, :update]
+
   # GET /departments
   # GET /departments.json
   def index
@@ -57,7 +59,6 @@ class DepartmentsController < ApplicationController
   # PATCH/PUT /departments/1.json
   def update
     @department = Department.find(params[:id])
-
     respond_to do |format|
       if @department.update_attributes(department_params)
         format.html { redirect_to @department, notice: 'Department was successfully updated.' }
@@ -83,11 +84,17 @@ class DepartmentsController < ApplicationController
 
   private
 
+    # Takes the passed in CSV and converts it into an array that removes any leading/trailing whitespace on each item
+    def format_divisions
+      params[:department][:division1] = params[:department][:division1].split(',').map{|x| x.chomp.lstrip}
+      params[:department][:division2] = params[:department][:division2].split(',').map{|x| x.chomp.lstrip}
+    end
+
     # Use this method to whitelist the permissible parameters. Example:
     # params.require(:person).permit(:name, :age)
     # Also, you can specialize this method with per-user checking of permissible attributes.
     def department_params
       params.require(:department).permit(:name, :shortname, :status,
-        :contact_id, :description, :manage_items, :manage_people)
+        :contact_id, :description, :manage_items, :manage_people, :division1 => [], :division2 => [])
     end
 end

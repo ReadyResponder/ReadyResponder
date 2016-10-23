@@ -7,6 +7,8 @@
     <%= f.input :status, :as => :select, :collection => ["Active", "Inactive"] %>
     <%= f.association :contact %>
     <%= f.input :description %>
+    <%= f.input :division1, :label => 'Division 1 (Enter comma separated list of divisions):', :input_html => { :value => @department.division1.join(', ') } %>
+    <%= f.input :division2, :label => 'Division 2 (Enter comma separated list of divisions):', :input_html => { :value => @department.division2.join(', ') } %>
     <%= f.input :manage_people, as: :boolean %>
     <%= f.input :manage_items, as: :boolean %>
   </div>
