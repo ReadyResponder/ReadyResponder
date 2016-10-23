@@ -7,4 +7,5 @@ class Department < ActiveRecord::Base
   has_many :people
   has_many :items
   has_many :locations
+
 end

@@ -46,14 +46,14 @@ Skill.create([
 
 jane = Person.create(
    firstname: "Jane", lastname: "Doe", status: "Active", gender: "Female",
-   start_date: 3.years.ago, department: "Medical Reserve Corp",
+   start_date: 3.years.ago, department_id: Department.find_by(name: "Medical Reserve Corp").id,
    nickname: "Janey", division1: "Division 1", division2: "Squad 2",
    icsid: "321", deployable: true
   )
 
 jake = Person.create(
    firstname: "Jake", lastname: "D", status: "Active", gender: "Male",
-   start_date: 1.years.ago, department: "Police",
+   start_date: 1.years.ago, department_id: Department.find_by(name: "Police").id,
    division1: "Division 1", division2: "Squad 1",
    icsid: "323", deployable: true
   )
