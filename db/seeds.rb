@@ -30,11 +30,11 @@ Role.find_or_create_by(name: "Admin")
 
 # Departments are where people call home.
 Department.create([
-  {name: "Community Emergency Response Team", status: "Active", division1: ["Team 1", "Team 2"], division2: ["Squad 1", "Squad 2"]},
-  {name: "Medical Reserve Corp", status: "Active", division1: ["Team 1", "Team 2"], division2: ["Squad 1", "Squad 2"]},
-  {name: "Department Public Works", status: "Active", division1: ["Team 1", "Team 2"], division2: ["Squad 1", "Squad 2"]},
-  {name: "Inactive Department", status: "Inactive", division1: ["Team 1", "Team 2"], division2: ["Squad 1", "Squad 2"]},
-  {name: "Police", status: "Active", division1: ["Team 1", "Team 2"], division2: ["Squad 1", "Squad 2"]}
+  {name: "Community Emergency Response Team", status: "Active", division1: ["Division 1", "Division 2"], division2: ["Squad 1", "Squad 2"]},
+  {name: "Medical Reserve Corp", status: "Active", division1: ["Division 1", "Division 2"], division2: ["Squad 1", "Squad 2"]},
+  {name: "Department Public Works", status: "Active", division1: ["Division 1", "Division 2"], division2: ["Squad 1", "Squad 2"]},
+  {name: "Inactive Department", status: "Inactive", division1: ["Division 1", "Division 2"], division2: ["Squad 1", "Squad 2"]},
+  {name: "Police", status: "Active", division1: ["Division 1", "Division 2"], division2: ["Squad 1", "Squad 2"]}
   ])
 
 Skill.create([
@@ -47,14 +47,14 @@ Skill.create([
 jane = Person.create(
    firstname: "Jane", lastname: "Doe", status: "Active", gender: "Female",
    start_date: 3.years.ago, department: "Medical Reserve Corp",
-   nickname: "Janey", division1: "Division 1", division2: "Task Force 2",
+   nickname: "Janey", division1: "Division 1", division2: "Squad 2",
    icsid: "321", deployable: true
   )
 
 jake = Person.create(
    firstname: "Jake", lastname: "D", status: "Active", gender: "Male",
    start_date: 1.years.ago, department: "Police",
-   division1: "Division 1", division2: "Task Force 2",
+   division1: "Division 1", division2: "Squad 1",
    icsid: "323", deployable: true
   )
 
