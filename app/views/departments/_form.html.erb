@@ -7,6 +7,8 @@
     <%= f.input :status, :as => :select, :collection => ["Active", "Inactive"] %>
     <%= f.association :contact %>
     <%= f.input :description %>
+    <%= f.input :manage_people, as: :boolean %>
+    <%= f.input :manage_items, as: :boolean %>
   </div>
 
   <div class="form-actions">

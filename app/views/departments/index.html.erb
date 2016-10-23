@@ -7,6 +7,8 @@
       <th>Status</th>
       <th>Contact</th>
       <th>Description</th>
+      <th>Manage People</th>
+      <th>Manage Items</th>
       <th></th>
       <th></th>
       <th></th>
@@ -19,6 +21,8 @@
         <td><%= department.status %></td>
         <td><%= department.contact_id %></td>
         <td><%= department.description %></td>
+        <td><%= department.manage_people %></td>
+        <td><%= department.manage_items %></td>
         <td><%= table_button_link 'Show', department %></td>
         <td><%= table_button_link 'Edit', edit_department_path(department) %></td>
         <td><%= table_button_link 'Destroy', department, method: :delete %></td>
