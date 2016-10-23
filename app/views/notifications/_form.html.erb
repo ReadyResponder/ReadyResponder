@@ -1,0 +1,20 @@
+<%= simple_form_for(@notification) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :event %>
+    <%= f.input :status, as: :select, collection: Notification::VALID_STATUSES %>
+    <%= f.input :time_to_live, hint: 'Length to keep trying to notify non-responders, in hours' %>
+    <%= f.input :interval, hint: 'Frequency to send duplicate messags, in minutes' %>
+    <%= f.input :iterations_to_escalation, hint: 'Number of texts before voice calls'%>
+    <%= f.input :scheduled_start_time %>
+    <%= f.input :channels %>
+    <%= f.input :groups %>
+    <%= f.input :departments %>
+    <%= f.input :divisions %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

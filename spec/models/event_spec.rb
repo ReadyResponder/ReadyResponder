@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Event do
+  describe 'associations' do
+    it 'has many notifications' do
+      expect(subject).to have_many(:notifications)
+    end
+  end
+
   it "has a valid factory" do
     expect(create(:event)).to be_valid
   end

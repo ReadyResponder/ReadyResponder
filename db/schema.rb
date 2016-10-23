@@ -247,6 +247,25 @@ ActiveRecord::Schema.define(version: 20161023073142) do
     t.datetime "updated_at"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "event_id"
+    t.integer  "author_id"
+    t.string   "status"
+    t.integer  "time_to_live"
+    t.integer  "interval"
+    t.integer  "iterations_to_escalation"
+    t.datetime "scheduled_start_time"
+    t.datetime "start_time"
+    t.text     "channels"
+    t.text     "groups"
+    t.text     "departments"
+    t.text     "divisions"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "notifications", ["event_id"], name: "index_notifications_on_event_id", using: :btree
+
   create_table "people", force: :cascade do |t|
     t.string   "firstname"
     t.string   "lastname"
@@ -454,5 +473,6 @@ ActiveRecord::Schema.define(version: 20161023073142) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
+  add_foreign_key "notifications", "events"
   add_foreign_key "tasks", "events"
 end
