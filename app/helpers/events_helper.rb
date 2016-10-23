@@ -1,7 +1,7 @@
 module EventsHelper
 
   def event_status_label(event)
-    make_label(event.status, event_label_class(event))
+    make_label(event.status, event_label_class(event.status))
   end
 
   def display_event_status(event)
@@ -72,10 +72,10 @@ module EventsHelper
       end
     end
 
-    def event_label_class(event)
+    def event_label_class(event_status)
       # The options are found in app/models/event.rb: STATUS_CHOICES
-      return nil if event.status.blank?
-      case event.status
+      return nil if event_status.blank?
+      case event_status
       when 'Scheduled', 'In-session', 'Completed'
         return 'label label-success'
       when 'Cancelled', 'closed'
@@ -85,5 +85,4 @@ module EventsHelper
         return 'label label-default'
       end
     end
-
 end

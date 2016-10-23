@@ -1,10 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe Task, type: :model do
-  let(:an_event) { create(:event) }
+  let(:an_event) { build_stubbed(:event) }
   it "has a valid factory" do
-    expect(create(:task)).to be_valid
-    expect(create(:task, event: an_event)).to be_valid
+    expect(build_stubbed(:task)).to be_valid
+    expect(build_stubbed(:task, event: an_event)).to be_valid
+  end
+
+  context 'locations' do
+    let(:an_event_with_location) { build_stubbed(:event, location: "a place") }
+    let(:a_task) { build_stubbed(:task, event: an_event_with_location) }
+    it "should fall back to the event location if no task location is set" do
+      expect(a_task.location).to equal(an_event_with_location.location)
+    end
   end
 
   context 'validations' do
@@ -14,7 +22,7 @@ RSpec.describe Task, type: :model do
     it { should validate_presence_of(:end_time) }
 
     it "requires end_time to be after start_time" do #chronology
-      @task = build(:task, event: an_event, start_time: Time.current, end_time: 2.minutes.ago)
+      @task = build_stubbed(:task, event: an_event, start_time: Time.current, end_time: 2.minutes.ago)
       expect(@task).not_to be_valid
     end
 
@@ -23,8 +31,8 @@ RSpec.describe Task, type: :model do
       let(:end_t)       { 4.days.from_now }
       let(:bad_start_t) { 6.days.from_now }
       let(:bad_end_t)   { 0.days.from_now }
-      let(:a_task)      { create(:task, event: an_event, title: "a task",
-                                             start_time: start_t, end_time: end_t) }
+      let(:a_task)      { build_stubbed(:task, event: an_event, title: "a task",
+                                        start_time: start_t, end_time: end_t) }
 
       before(:each) do
         a_task.start_time = start_t
