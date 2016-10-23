@@ -1,4 +1,7 @@
 class DepartmentsController < ApplicationController
+  before_filter :authenticate_user!
+  load_and_authorize_resource
+
   # GET /departments
   # GET /departments.json
   def index
