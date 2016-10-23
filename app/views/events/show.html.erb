@@ -44,8 +44,7 @@
 
         <%= render(partial: "people/people_table",
                    locals: { people: @event.unresponsive_people,
-                             title: "No Response",
-                             row_class: 'class="default"'}) || "Everyone Responded !" %>
+                             title: "No Response" }) || "Everyone Responded !" %>
       </div>
     </div>
   </div>

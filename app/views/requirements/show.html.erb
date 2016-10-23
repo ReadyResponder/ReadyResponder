@@ -1,0 +1,35 @@
+<% content_for :sidebar do %>
+  <h2>Requirement</h2>
+  <%= sidebar_button_link 'Return to Task', @requirement.task %>
+  <%= sidebar_button_link 'Return to Event', @requirement.task.event %>
+  <%= sidebar_button_link 'Edit Requirement', edit_requirement_path(@requirement) if can? :edit, @requirement %>
+<% end %>
+
+<p>
+  <span class="h3">
+    <% if @requirement.title.present? %>
+      <%= @requirement.title %>
+    <% elsif @requirement.skill.present? %>
+      <%= @requirement.skill %>
+    <% end %>
+  </span>
+  for
+  <span class="h4"><%= link_to @requirement.task.event.title, event_path(@requirement.task.event) %></span>:
+  <span class="h5"><%= link_to @requirement.task.title, task_path(@requirement.task)%></span>
+  <% if @requirement.task.location.present? %>
+    at <%= @requirement.task.location %>
+  <% end %>
+  (<%= format_time_span(@requirement.task.start_time, @requirement.task.end_time) %>)
+</p>
+
+<p><%= requirement_status_label(@requirement) %> (personnel requirements met: <%= @requirement.number_filled %>/<%= @requirement.desired_people %> desired)</p>
+<p>
+  <b>Assigned People:</b> <%= @requirement.number_filled %><br>
+  <b>Desired People:</b> <%= @requirement.desired_people %><br>
+  <b>Minimum People:</b> <%= @requirement.minimum_people %><br>
+  <b>Maximum People:</b> <%= @requirement.maximum_people %>
+</p>
+<p>
+  <b>Optional:</b> <%= @requirement.optional ? "Yes" : "No" %><br>
+  <b>Floating:</b> <%= @requirement.floating ? "Yes" : "No" %>
+</p>
