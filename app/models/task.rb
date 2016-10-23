@@ -6,7 +6,7 @@ class Task < ActiveRecord::Base
   validates :end_time, presence: true
   validates_chronology :start_time, :end_time
 
-  # has_many :requirements
+  has_many :requirements
   # has_many :assignments, through: :requirements
 
   # The following provides the equivalent of:
@@ -32,9 +32,10 @@ class Task < ActiveRecord::Base
   end
 
   def requirements_count
+    return requirements.count
     # (set and) return a random number of requirements
-    @stub_requirements_count ||= rand(25) + 2
-    return @stub_requirements_count
+    # @stub_requirements_count ||= rand(25) + 2
+    # return @stub_requirements_count
   end
 
   def requirements_met_count

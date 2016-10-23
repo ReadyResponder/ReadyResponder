@@ -1,0 +1,18 @@
+<%= simple_form_for([@task, @requirement]) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :title %>
+    <%= f.association :skill %>
+    <%= f.input :priority, as: :select, collection: Requirement::PRIORITIES %>
+    <%= f.input :desired_people, as: :integer %>
+    <%= f.input :minimum_people, as: :integer %>
+    <%= f.input :maximum_people, as: :integer %>
+    <%= f.input :optional, as: :boolean %>
+    <%= f.input :floating, as: :boolean %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

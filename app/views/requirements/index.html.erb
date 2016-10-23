@@ -1,0 +1,37 @@
+<% content_for :sidebar do %>
+  <h1>Listing requirements</h1>
+<% end %>
+
+<table id="requirements" class="datatable table table-striped table-bordered">
+  <caption><h3><%= "Requirements" %></h3></caption>
+  <thead>
+    <tr>
+      <th>Task</th>
+      <th>Priority</th>
+      <th>Qualification</th>
+      <th>Status</th>
+      <th>Staffing Filled (of desired)</th>
+      <th>Minimum</th>
+      <th>Maximum</th>
+      <th>Optional</th>
+      <th>Floating</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @requirements.each do |requirement| %>
+      <tr <%== requirement_status_class(requirement) %>>
+        <td><%= link_to requirement.task.title, requirement.task %></td>
+        <td <%== sorting_order(requirement.priority) %>><%= requirement_priority_label(requirement) %></td>
+        <td><%= link_to (requirement.title.present? ? requirement.title : requirement.skill), requirement %></td>
+        <td <%== sorting_order(requirement.status_value) %>><%= requirement_status_label(requirement) %></td>
+        <td><%= requirement.number_filled %>/<%= requirement.desired_people %></td>
+        <td><%= requirement.minimum_people %></td>
+        <td><%= requirement.maximum_people %></td>
+        <td><%= requirement.optional ? "Yes" : "No" %></td>
+        <td><%= requirement.floating ? "Yes" : "No" %></td>
+        <td><%= table_button_link 'Edit', edit_requirement_path(requirement) if can? :edit, requirement %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

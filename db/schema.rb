@@ -343,6 +343,24 @@ ActiveRecord::Schema.define(version: 20161023073142) do
     t.decimal  "cost",         precision: 8, scale: 2
   end
 
+  create_table "requirements", force: :cascade do |t|
+    t.integer  "task_id"
+    t.integer  "skill_id"
+    t.integer  "title_id"
+    t.integer  "priority"
+    t.integer  "minimum_people"
+    t.integer  "maximum_people"
+    t.integer  "desired_people"
+    t.boolean  "floating"
+    t.boolean  "optional"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "requirements", ["skill_id"], name: "index_requirements_on_skill_id", using: :btree
+  add_index "requirements", ["task_id"], name: "index_requirements_on_task_id", using: :btree
+  add_index "requirements", ["title_id"], name: "index_requirements_on_title_id", using: :btree
+
   create_table "resource_types", force: :cascade do |t|
     t.string   "name"
     t.string   "status"
@@ -474,5 +492,8 @@ ActiveRecord::Schema.define(version: 20161023073142) do
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
   add_foreign_key "notifications", "events"
+  add_foreign_key "requirements", "skills"
+  add_foreign_key "requirements", "tasks"
+  add_foreign_key "requirements", "titles"
   add_foreign_key "tasks", "events"
 end

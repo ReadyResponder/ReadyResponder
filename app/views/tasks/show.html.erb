@@ -2,6 +2,7 @@
   <%= sidebar_button_link 'Return to Event', @task.event %>
   <%= sidebar_button_link 'Return to Tasks List', tasks_path %>
   <%= sidebar_button_link 'Edit Task', edit_task_path(@task) if can? :edit, @task %>
+  <%= sidebar_button_link 'New Requirement', new_task_requirement_path(@task) if can? :create, Requirement %>
 <% end %>
 
 <p>
@@ -12,7 +13,7 @@
   (<%= format_time_span(@task.start_time, @task.end_time) %>)
 </p>
 
-<p><%= task_status_label(@task) %> (personnel requirements met: <%= @task.requirements_met_count %>/<%= @task.requirements_count %>)</p>
+<p><%= task_status_label(@task) %> (requirements met: <%= @task.requirements_met_count %>/<%= @task.requirements_count %>)</p>
 
 <% if @task.description.present? %>
   <p><b>Description:</b> <%= @task.description %></p>
@@ -24,17 +25,33 @@
     <%= @task.city %>, <%= @task.state %> <%= @task.zipcode %>
   </p>
 <% end %>
+
 <% if @task.latitude.present? and @task.longitude.present? %>
   <p>(<%= @task.latitude %>, <%= @task.longitude %>)</p>
 <% end %>
 
-<div id="task_event_availabilities" >
-  <%= render(:partial => "availabilities/availabilities_table",
-             :locals => { :availabilities => ( @task.event.responses),
-                          :partial_availabilities => ( @task.event.partial_responses) } ) || "No Availabilities yet !" %>
+<div class='task-tabs'>
+  <ul class="nav nav-tabs">
+    <li class="active"><a class='task-tabs-anchor' href="#task-requirement-tab" data-toggle="tab">Requirements</a></li>
+    <li><a class='task-tabs-anchor' href="#task-availability-tab" data-toggle="tab">Availabilities</a></li>
+  </ul>
 
-  <%= render(partial: "people/people_table",
-             locals: { people: @task.event.unresponsive_people,
-               title: "No Response",
-               row_class: 'class="warning"'}) || "Everyone Responded !" %>
+  <div class="tab-content">
+    <div class="tab-pane active" id="task-requirement-tab">
+      <%= render(partial: 'requirements/task_requirements_table', locals: { requirements: @task.requirements }) %>
+    </div>
+
+    <div class="tab-pane" id="task-availability-tab">
+      <div id="task_event_availabilities" >
+        <%= render(:partial => "availabilities/availabilities_table",
+                   :locals => { :availabilities => ( @task.event.responses),
+                                :partial_availabilities => ( @task.event.partial_responses) }
+                  ) || "No Availabilities yet !" %>
+
+        <%= render(partial: "people/people_table",
+                   locals: { people: @task.event.unresponsive_people,
+                             title: "No Response" }) || "Everyone Responded !" %>
+      </div>
+    </div>
+  </div>
 </div>
