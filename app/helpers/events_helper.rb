@@ -12,9 +12,7 @@ module EventsHelper
     content_tag(:div) {
       capture do
         concat event_status_label(event)
-
         concat content_tag(:span, 'Personnel:', class: 'event-labels')
-        # concat " Personnel: "
         concat make_label(available, 'label label-success event-labels', tooltip: 'available')
         concat make_label(partial, 'label label-warning event-labels', tooltip: 'available')
         concat make_label(unavailable, 'label label-danger event-labels', tooltip: 'unavailable')
