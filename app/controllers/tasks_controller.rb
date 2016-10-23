@@ -51,6 +51,6 @@ class TasksController < ApplicationController
     end
 
     def task_params
-      params.require(:task).permit(:title, :description, :street, :city, :state, :zipcode, :latitude, :longitude, :start_time, :end_time)
+      params.require(:task).permit(:title, :priority, :description, :location, :street, :city, :state, :zipcode, :latitude, :longitude, :start_time, :end_time)
     end
 end
