@@ -22,6 +22,5 @@
 #Ignore database settings
 /config/database.yml
 
-spec/examples.txt
-
-.env
+# Ignore rspec profiling data
+/spec/examples.txt
