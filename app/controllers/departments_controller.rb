@@ -1,5 +1,7 @@
 class DepartmentsController < ApplicationController
-    before_action :format_divisions, :only => [:create, :update]
+  before_filter :authenticate_user!
+  before_action :format_divisions, :only => [:create, :update]
+  load_and_authorize_resource
 
   # GET /departments
   # GET /departments.json

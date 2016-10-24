@@ -27,6 +27,7 @@ Role.find_or_create_by(name: "Author")
 Role.find_or_create_by(name: "Depositor")
 Role.find_or_create_by(name: "Trainer")
 Role.find_or_create_by(name: "Admin")
+Role.find_or_create_by(name: "Reader")
 
 # Departments are where people call home.
 Department.create([
