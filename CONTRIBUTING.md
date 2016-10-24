@@ -3,23 +3,23 @@ Contributing to ReadyResponder
 
 First of all: thank you! We appreciate any help you can give ReadyResponder.
 
-You can contribue in several ways:
+You can contribute in several ways:
 
-* Write some code !
-* Report an issue
-* Provide some documentation
-* Make a feature request
-* Share a success story
+* Write some code!
+* Report an issue.
+* Provide some documentation.
+* Make a feature request.
+* Share a success story.
 
 Many people contribute to ReadyResponder by writing some code! Here's how:
 
-1. [Fork](https://help.github.com/articles/fork-a-repo) ReadyResponder
-2. Create a topic branch - `git checkout -b my_branch`
-3. Make your changes
-4. Commit your changes to your branch
-3. Push your branch to your github repo - `git push origin my_branch`
+1. [Fork](https://help.github.com/articles/fork-a-repo) ReadyResponder.
+2. Create a topic branch. - `git checkout -b my_branch`
+3. Make your changes.
+4. Commit your changes to your branch.
+3. Push your branch to your GitHub repo. - `git push origin my_branch`
 4. Create a [Pull Request](http://help.github.com/pull-requests/) from
-   your branch
+   your branch.
 5. That's it!
 
 If you're not doing some sort of refactoring, a CHANGELOG entry is appropriate.
@@ -59,7 +59,7 @@ Please include the following four things in your report:
 4. What version of ReadyResponder you're using. You can find this in the footer on
    every page
 
-The more information the better.
+The more information, the better.
 
 ### Reproduction
 
