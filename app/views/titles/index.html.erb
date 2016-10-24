@@ -1,3 +1,6 @@
+<% content_for :sidebar do %>
+  <%= sidebar_button_link 'New Title', new_title_path %>
+<% end %>
 <table id="titles" class="datatable table table-striped table-bordered" >
   <caption><h3><%= @page_title %></h3></caption>
   <thead>
