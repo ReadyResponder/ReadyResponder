@@ -1,10 +1,6 @@
 <% content_for :sidebar do %>
   <h1>New Notification</h1>
-  <%= sidebar_button_link 'New', new_notification_path %>
+  <%= sidebar_button_link 'New Notification', new_notification_path %>
 <% end %>
 
 <%= render(partial: 'notifications/notifications_table', locals: { notifications: @notifications, title: @page_title }) %>
-
-<br>
-
-<%= link_to 'New Notification', new_notification_path %>

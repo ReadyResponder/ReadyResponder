@@ -6,7 +6,6 @@ class Event < ActiveRecord::Base
                   :duration, :start_time, :end_time, :instructor, :location,
                   :id_code, :status, :timecard_ids, :person_ids, :comments
 
-
   validates_presence_of :category, :title, :status
 
   validates_presence_of :start_time

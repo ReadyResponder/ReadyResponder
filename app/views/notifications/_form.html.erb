@@ -5,11 +5,19 @@
     <%= f.input :subject %>
     <%= f.input :body %>
     <%= f.association :event %>
+<<<<<<< HEAD
     <%= f.input :status, as: :select, collection: @statuses %>
     <%= f.input :time_to_live, hint: 'Length to keep trying to notify non-responders, in hours' %>
     <%= f.input :interval, hint: 'Frequency to send duplicate messags, in minutes' %>
     <%= f.input :iterations_to_escalation, hint: 'Number of texts before voice calls'%>
     <%= f.input :scheduled_start_time %>
+=======
+    <%= f.input :status, as: :select, collection: Notification::VALID_STATUSES %>
+    <%= f.input :hours_to_try, hint: 'Length to keep trying to notify non-responders, in hours' %>
+    <%= f.input :minutes_interval, hint: 'Frequency to send duplicate messags, in minutes' %>
+    <%= f.input :attempts_before_escalation, hint: 'Number of texts before voice calls'%>
+    <%#= f.input :start_at %>
+>>>>>>> Rough code that works
     <%= f.input :channels %>
     <%#= f.input :departments %>
     <%#= f.input :divisions %>
