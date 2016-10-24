@@ -23,4 +23,15 @@ RSpec.describe Availability, type: :model do
       expect(@availability).not_to be_valid
     end
   end
+
+  context 'partially_available?' do
+    it 'returns false for full availabilities' do
+      start_time = Time.now
+      end_time = start_time + 2.minutes
+      availability = build(:availability, person: a_person, start_time: start_time, end_time: end_time)
+
+      event = create(:event, start_time: start_time, end_time: end_time, status: "Scheduled")
+      expect(availability.partially_available?(event)).to eq(false)
+    end
+  end
 end
