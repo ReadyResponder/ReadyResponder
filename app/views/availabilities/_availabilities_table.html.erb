@@ -12,7 +12,7 @@
   </thead>
   <tbody>
       <!-- Full available -->
-    <% (availabilities + partial_availabilities).each do |availability| %>
+    <% (availabilities + partial_availabilities).uniq.each do |availability| %>
       <tr <%== availability_status_class(availability, @event) %>>
         <td><%= availability_status_label(availability, @event) %></td>
         <td><%= availability.person.icsid %></td>
