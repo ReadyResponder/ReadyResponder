@@ -14,13 +14,15 @@ You can contribute in several ways:
 Many people contribute to ReadyResponder by writing some code! Here's how:
 
 1. [Fork](https://help.github.com/articles/fork-a-repo) ReadyResponder.
-2. Create a topic branch. - `git checkout -b my_branch`
-3. Make your changes.
-4. Commit your changes to your branch.
-3. Push your branch to your GitHub repo. - `git push origin my_branch`
-4. Create a [Pull Request](http://help.github.com/pull-requests/) from
+2. [Clone](https://help.github.com/articles/cloning-a-repository/) the forked
+   repository to your development or local machine.
+3. Create a topic branch. - `git checkout -b my_branch`
+4. Make your changes.
+5. Commit your changes to your branch.
+6. Push your branch to your GitHub repo. - `git push origin my_branch`
+7. Create a [Pull Request](http://help.github.com/pull-requests/) from
    your branch.
-5. That's it!
+8. That's it!
 
 If you're not doing some sort of refactoring, a CHANGELOG entry is appropriate.
 Please include them in pull requests adding features or fixing bugs.
