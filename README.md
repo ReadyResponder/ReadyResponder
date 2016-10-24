@@ -21,7 +21,7 @@ The goal of Ready Responder is to offer volunteer groups a program that allows t
 The program is currently in production, getting live feedback.
 
 ## Contributing to Ready Responder
-We have a Slack channel at [readyresponder.slack.com](readyresponder.slack.com) to give help if you need it.
+We have a Slack channel at [readyresponder.slack.com](https://readyresponder.slack.com) to give help if you need it.
 
 ### Getting Started
 
