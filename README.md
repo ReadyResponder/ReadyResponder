@@ -9,7 +9,7 @@ The project was inspired by [Sandi Metz's call for programmers to aid their comm
 The goal of Ready Responder is to offer volunteer groups a program that allows them to track their resources and personnel, especially during emergencies or multi-day events.  This application might be used by volunteer firefighters, auxiliary police, Medical Reserve Corp (MRC), CERT organizations, amateur radio operators (ARES/RACES), church based relief groups, shelter managers or even science-fiction conventions.
 
 #### Current Features:
-* Web-based user interface, available from both desktop, and mobile
+* Web-based user interface, available from both desktop and mobile
 * Tracks complete data of personnel, including attendance, responsiveness, and training
 * Tracks equipment, including serial numbers, sources, grants, and service records
 
