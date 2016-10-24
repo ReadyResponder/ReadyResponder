@@ -12,11 +12,11 @@
   </thead>
   <tbody>
       <!-- Full available -->
-    <% (availabilities + partial_availabilities).each do |availability| %>
+    <% (availabilities + partial_availabilities).uniq.each do |availability| %>
       <tr <%== availability_status_class(availability, @event) %>>
-        <td><%= availability_status_label(availability, @event) %></td>
+        <td><%= link_to availability_status_label(availability, @event), availability_path(availability) %></td>
         <td><%= availability.person.icsid %></td>
-        <td><%= link_to availability.person.fullname, availability_path(availability) %></td>
+        <td><%= link_to availability.person.fullname, availability.person %></td>
         <td><%= number_to_phone(availability.person.phone) %></td>
         <td><time><%= availability.start_time %></time></td>
         <td><%= availability.end_time %></td>

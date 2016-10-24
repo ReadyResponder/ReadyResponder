@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :notifications
   resources :availabilities
   resources :unique_ids
 
@@ -35,7 +36,12 @@ Rails.application.routes.draw do
   resources :courses
   resources :certs
 
-  resources :tasks, except: [:new, :create], constraints: { id: /\d+/ }
+  resources :requirements, except: [:new, :create], constraints: { id: /\d+/ }
+
+  resources :tasks, except: [:new, :create], constraints: { id: /\d+/ } do
+    resources :requirements, only: [:new, :create]
+  end
+
   resources :events do
     resources :tasks, only: [:new, :create]
     resources :availabilities
