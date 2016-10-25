@@ -12,13 +12,13 @@ class PeopleController < ApplicationController
   end
 
   def orgchart
-    @people = Person.police.active
+    @people = Person.active.select{|person| person.department&.name == "Police"}
     @page_title = "Org Chart"
     render :layout => "orgchart"
   end
 
   def police
-    @people = Person.police.active
+    @people = Person.active.select{|person| person.department&.name == "Police"}
     @page_title = "Police"
     render :template => "people/index"
   end
@@ -28,13 +28,13 @@ class PeopleController < ApplicationController
     render :template => "people/index"
   end
   def cert
-    @people = Person.cert.active
+    @people = Person.active.select{|person| person.department&.name == "CERT"} + Person.cert.all
     @page_title = "CERT"
     render :template => "people/index"
   end
 
   def other
-    @people = Person.active.select{|person| person.department&.name = 'Other' }
+    @people = Person.active.select{|person| person.department&.name != 'CERT' && person.department&.name != 'Police'}
     @page_title = "Other Active People"
     render :template => "people/index"
   end
@@ -68,7 +68,7 @@ class PeopleController < ApplicationController
   end
 
   def index
-    @people = Person.active.select{|person| person.department&.name = 'CERT' || person.department&.name = 'Police'}
+    @people = Person.active.select{|person| person.department&.name == 'CERT' || person.department&.name == 'Police'}
     @page_title = "Active Police and CERT"
     respond_to do |format|
       format.html # index.html.erb
