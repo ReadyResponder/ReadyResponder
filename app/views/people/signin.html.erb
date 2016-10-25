@@ -152,7 +152,7 @@ thead td.left {
    <tr><td colspan = 2 class="left">Date:</td><td class="left">Event:</td>
    <td >Time In</td><td>Time Out</td></tr>
   </thead>
-  <% Person.active.where(department: @department).pluck(:division1).uniq.each do |d1| %>
+  <% Person.active.where(department_id: @department.id).pluck(:division1).uniq.each do |d1| %>
     <thead>
      <tr><td colspan = 5><%= d1 %></td></tr>
     </thead>
