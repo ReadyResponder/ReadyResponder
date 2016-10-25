@@ -34,7 +34,7 @@ class PeopleController < ApplicationController
   end
 
   def other
-    @people = Person.active.select{|person| person.department = 'Other' }
+    @people = Person.active.select{|person| person.department&.name = 'Other' }
     @page_title = "Other Active People"
     render :template => "people/index"
   end
@@ -68,7 +68,7 @@ class PeopleController < ApplicationController
   end
 
   def index
-    @people = Person.active.where(department: ['Police', 'CERT'])
+    @people = Person.active.select{|person| person.department&.name = 'CERT' || person.department&.name = 'Police'}
     @page_title = "Active Police and CERT"
     respond_to do |format|
       format.html # index.html.erb
