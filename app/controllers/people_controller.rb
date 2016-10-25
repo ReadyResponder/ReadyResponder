@@ -6,19 +6,19 @@ class PeopleController < ApplicationController
   def signin
     #This is the sign-in sheet, not anything about authentication
     @people = Person.active
-    @department = "Police"
+    @department = Department.where(name: "Police")&.first
     @page_title = "Sign-in"
     render :layout => "print_signin"
   end
 
   def orgchart
-    @people = Person.police.active
+    @people = Person.active.select{|person| person.department&.name == "Police"}
     @page_title = "Org Chart"
     render :layout => "orgchart"
   end
 
   def police
-    @people = Person.police.active
+    @people = Person.active.select{|person| person.department&.name == "Police"}
     @page_title = "Police"
     render :template => "people/index"
   end
@@ -28,13 +28,13 @@ class PeopleController < ApplicationController
     render :template => "people/index"
   end
   def cert
-    @people = Person.cert.active
+    @people = Person.active.select{|person| person.department&.name == "CERT"} + Person.cert.all
     @page_title = "CERT"
     render :template => "people/index"
   end
 
   def other
-    @people = Person.active.where(department: 'Other')
+    @people = Person.active.select{|person| person.department&.name != 'CERT' && person.department&.name != 'Police'}
     @page_title = "Other Active People"
     render :template => "people/index"
   end
@@ -68,7 +68,7 @@ class PeopleController < ApplicationController
   end
 
   def index
-    @people = Person.active.where(department: ['Police', 'CERT'])
+    @people = Person.active.select{|person| person.department&.name == 'CERT' || person.department&.name == 'Police'}
     @page_title = "Active Police and CERT"
     respond_to do |format|
       format.html # index.html.erb
@@ -91,6 +91,7 @@ class PeopleController < ApplicationController
     @person = Person.new(status: cookies[:status], state: 'MA')
     @person.emails.build(category: 'E-Mail', status: 'OK', usage: '1-All')
     @person.phones.build(category: "Mobile Phone", status: "OK", usage: "1-All")
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @person }
@@ -160,7 +161,7 @@ class PeopleController < ApplicationController
 
   def person_params
     params.require(:person).permit(
-      :firstname, :lastname, :status, :icsid, :department,
+      :firstname, :lastname, :status, :icsid, :department, :department_id,
       :city, :state, :zipcode, :start_date, :end_date,
       :application_date, :title, :gender, :portrait, :date_of_birth,
       :division1, :division2, :channels_attributes, :title_ids,

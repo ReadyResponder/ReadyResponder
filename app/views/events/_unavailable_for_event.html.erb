@@ -13,7 +13,7 @@
       <tr>
         <td><%= link_to timecard.person.fullname, timecard %></td>
         <td><%= timecard.description %></td>
-        <td><%= timecard.person.department %></td>
+        <td><%= timecard.person.department&.name %></td>
         <td><%= available_button(timecard) %></td>
         <td><%= scheduled_button(timecard) %></td>
         <td><%= worked_button(timecard) %></td>
