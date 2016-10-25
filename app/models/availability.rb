@@ -21,4 +21,16 @@ class Availability < ActiveRecord::Base
     return false if event.nil? || (event.end_time == self.end_time && event.start_time == self.start_time)
     (event.end_time >= self.end_time && self.end_time >= event.start_time) || (event.end_time >= self.start_time && self.start_time >= event.start_time)
   end
+
+  def self.process_data
+    availabilities = Availability.available
+    start_time = availabilities.map(&:start_time).min.to_datetime
+    end_time = availabilities.map(&:end_time).max.to_datetime
+    data = []
+    data <<
+      (start_time..end_time).map do |date|
+        count = Availability.where('date(start_time) <= ? AND date(end_time) >= ?', date, date).count
+        { 'Date' => date, 'Count' => count }
+      end
+  end
 end
