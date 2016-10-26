@@ -1,5 +1,6 @@
 <% content_for :sidebar do %>
   <h2>Skill<br/><%= @skill.name %></h2>
+  <%= sidebar_button_link 'New Skill', new_skill_path if can? :create, Title %>
   <%= sidebar_button_link 'Edit', edit_skill_path(@skill) %>
   <%#= sidebar_button_link 'Destroy', @skill, method: :delete %>
   <%= sidebar_button_link 'Skills Listing', skills_path %>
