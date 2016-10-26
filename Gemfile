@@ -23,6 +23,9 @@ gem 'twilio-ruby', '~> 4.11.1'
 #Handles authentication
 gem 'devise', '~> 3.0'
 
+# For model versioning
+gem 'paper_trail'
+
 group :test, :development do
   gem 'thin'
   gem "rspec-rails"
