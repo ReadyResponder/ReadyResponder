@@ -46,7 +46,8 @@
   <b>Date expires:</b>
   <%= @cert.expiration_date %>
 </p>
-<% image_tag @cert.certification_url.to_s unless @cert.certification_url.blank?%>
+<%= image_tag @cert.certification_url.to_s unless @cert.certification_url.blank? %>
+
 <p>
   <b>Comments:</b>
   <%= @cert.comments %>
