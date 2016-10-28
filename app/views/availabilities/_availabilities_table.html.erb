@@ -1,5 +1,4 @@
 <table id="availabilities" class="generic_datatable table table-striped table-bordered">
-  <caption><h3><%= "Availability" %></h3></caption>
   <thead>
     <tr>
       <th>Status</th>
@@ -12,16 +11,18 @@
     </tr>
   </thead>
   <tbody>
-    <% availabilities.each do |availability| %>
-      <tr <%== availability_status_class(availability) %>>
-        <td><%= availability_status_label(availability) %></td>
+      <!-- Full available -->
+    <% (availabilities + partial_availabilities).uniq.each do |availability| %>
+      <tr <%== availability_status_class(availability, @event) %>>
+        <td><%= link_to availability_status_label(availability, @event), availability_path(availability) %></td>
         <td><%= availability.person.icsid %></td>
-        <td><%= link_to availability.person.fullname, availability_path(availability) %></td>
+        <td><%= link_to availability.person.fullname, availability.person %></td>
         <td><%= number_to_phone(availability.person.phone) %></td>
         <td><time><%= availability.start_time %></time></td>
         <td><%= availability.end_time %></td>
         <td><%= truncate(availability.description, length: 24) %></td>
       </tr>
     <% end %>
+
   </tbody>
 </table>

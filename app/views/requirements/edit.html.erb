@@ -1,0 +1,9 @@
+<% content_for :sidebar do %>
+  <h2>Edit Requirement</h2>
+  <h3>(for <%= @requirement.task.title %>)</h3>
+  <%= sidebar_button_link 'Return to Task', @requirement.task %>
+  <%= sidebar_button_link 'Return to Requirements List', requirements_path %>
+  <%= sidebar_button_link 'Cancel Edit', :back %>
+<% end %>
+
+<%= render 'form' %>

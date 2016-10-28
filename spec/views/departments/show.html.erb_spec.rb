@@ -6,7 +6,9 @@ RSpec.describe "departments/show", :type => :view do
       :name => "Name",
       :status => "Status",
       :contact_id => 1,
-      :description => "MyText"
+      :description => "MyText",
+      :manage_people => false,
+      :manage_items => true
     ))
   end
 
@@ -16,5 +18,7 @@ RSpec.describe "departments/show", :type => :view do
     expect(rendered).to match(/Status/)
     expect(rendered).to match(/1/)
     expect(rendered).to match(/MyText/)
+    expect(rendered).to match(/false/)
+    expect(rendered).to match(/true/)
   end
 end

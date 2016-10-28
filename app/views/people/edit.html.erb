@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
   <h1>Editing Person</h1>
-  <%= sidebar_button_link 'Cancel', :back %>
+  <%= sidebar_button_link 'Cancel Edit', :back %>
   <br>
   <%= image_tag @person.portrait_url if @person.portrait.file.present? %>
 <% end %>

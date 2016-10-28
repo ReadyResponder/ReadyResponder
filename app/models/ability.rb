@@ -18,11 +18,13 @@ class Ability
       can [:read, :update, :create, :edit], Item
       can [:read, :update, :create, :edit], Event
       can [:read, :update, :create, :edit], Task
+      can [:read, :update, :create, :edit], Requirement
       can [:read, :update, :create, :edit], Course
       can [:read, :update, :create, :edit], Skill
       can [:read, :update, :create, :edit], Inspection
       can [:read, :update, :create, :edit], Location
       can [:read, :update, :create, :edit], Repair
+      can [:read, :update, :create, :edit], Department
       can [:read, :create], Activity
       can [:signin, :orgchart], Person
       can :read, :all
@@ -30,12 +32,14 @@ class Ability
       can [:read, :update, :create, :edit], Cert
       can [:read, :update, :create, :edit], Event
       can [:read, :update, :create, :edit], Task
+      can [:read, :update, :create, :edit], Requirement
       can [:read, :update, :create, :edit], Course
+      can [:read, :update, :create, :edit], Department
       can [:read], [Person, Channel, Timecard, Item, Skill, Inspection, Repair]
       can [:signin, :orgchart], Person
       can [:read, :create], Activity
    elsif roles.include? 'Reader'
-      can [:read], [Person, Channel, Timecard, Cert, Item, Event, Task, Course, Skill, Inspection, Repair, Activity]
+      can [:read], [Person, Channel, Timecard, Cert, Item, Event, Task, Course, Skill, Inspection, Repair, Activity, Department]
       can [:signin], Person
       can :orgchart, Person
     end

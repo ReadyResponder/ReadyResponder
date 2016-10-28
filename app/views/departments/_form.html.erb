@@ -7,6 +7,10 @@
     <%= f.input :status, :as => :select, :collection => ["Active", "Inactive"] %>
     <%= f.association :contact %>
     <%= f.input :description %>
+    <%= f.input :division1, :label => 'Division 1 (Enter comma separated list of divisions):', :input_html => { :value => @department.formatted_division1 } %>
+    <%= f.input :division2, :label => 'Division 2 (Enter comma separated list of divisions):', :input_html => { :value => @department.formatted_division2 } %>
+    <%= f.input :manage_people, as: :boolean %>
+    <%= f.input :manage_items, as: :boolean %>
   </div>
 
   <div class="form-actions">

@@ -1,17 +1,12 @@
 require 'rails_helper'
 
-      #save_and_open_page
 RSpec.describe "a user" do
   describe "in the reader role" do
     before (:each) do
       @person = create(:person)
-      somebody = create(:user)
-      somebody.roles << create(:role, name: 'Reader')
-      visit new_user_session_path
-      fill_in 'user_email', :with => somebody.email
-      fill_in 'user_password', :with => somebody.password
-      click_on 'Sign in'
+      sign_in_as('Reader')
     end
+
     it "cannot edit people" do
       visit people_path
       expect(page).not_to have_content('Edit') #Need to scope this, or it will fail on Edith
@@ -29,7 +24,8 @@ RSpec.describe "a user" do
       click_on @person.lastname
       expect(page).to have_content(@person.lastname)
     end
-end
+  end
+
 =begin
     it "a new person form with a first name field" do
       visit new_person_path
@@ -43,12 +39,12 @@ end
       firstaidskill = create(:skill, name: "FRFA")
       title.skills << drivingskill
       title.skills << firstaidskill
-      
+
       frfacourse = create(:course, name: "FRFA")
       firstaidskill.courses << frfacourse
       drivingcourse = create(:course, name: "Mass DL")
       drivingskill.courses << drivingcourse
-      
+
       person = create(:person)
       person.titles << title
       cert = create(:cert, person: person, course: frfacourse)

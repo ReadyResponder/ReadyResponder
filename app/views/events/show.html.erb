@@ -26,16 +26,28 @@
 <% end %>
 <%= display_event_status(@event) %>
 
-<%= render(partial: 'tasks/tasks_table', locals: { tasks: @event.tasks}) %>
+<div class='event-tabs'>
+  <ul class="nav nav-tabs">
+    <li class="active"><a class='event-tabs-anchor' href="#event-task-tab" data-toggle="tab">Tasks</a></li>
+    <li><a class='event-tabs-anchor' href="#event-availability-tab" data-toggle="tab">Availabilities</a></li>
+  </ul>
 
-<div id="event_availabilities" >
-  <%= render(:partial => "availabilities/availabilities_table",
-             :locals => { :availabilities => ( @event.responses)} ) || "No Availabilities yet !" %>
+  <div class="tab-content">
+    <div class="tab-pane active" id="event-task-tab">
+      <%= render(partial: 'tasks/tasks_table', locals: { tasks: @event.tasks}) %>
+    </div>
+    <div class="tab-pane" id="event-availability-tab">
+      <div id="event_availabilities" >
+        <%= render(:partial => "availabilities/availabilities_table",
+                   :locals => { :availabilities => ( @event.responses),
+                                :partial_availabilities => ( @event.partial_responses)} ) || "No Availabilities yet !" %>
 
-  <%= render(partial: "people/people_table",
-             locals: { people: @event.unresponsive_people,
-                       title: "No Response",
-                       row_class: 'class="warning"'}) || "Everyone Responded !" %>
+        <%= render(partial: "people/people_table",
+                   locals: { people: @event.unresponsive_people,
+                             title: "No Response" }) || "Everyone Responded !" %>
+      </div>
+    </div>
+  </div>
 </div>
 
 <% if @event.comments.present? %>

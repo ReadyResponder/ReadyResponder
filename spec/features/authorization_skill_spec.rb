@@ -1,38 +1,30 @@
 require 'rails_helper'
-      #save_and_open_page
+
 RSpec.describe "a user" do
   describe "without a role" do
-    before (:each) do
-      somebody = create(:user)
-      visit new_user_session_path
-      fill_in 'user_email', :with => somebody.email
-      fill_in 'user_password', :with => somebody.password
-      click_on 'Sign in'
-    end
+    before (:each) { sign_in_as(nil) } # no role
+
     it "cannot view skills" do
       skill = create(:skill)
+
       visit people_path
-      expect(page).not_to have_content('Edit') #Need to scope this, or it will fail on Edith
-      expect(page).not_to have_content(skill.name)
       expect(page).to have_content("Access Denied")
-      
-      visit skill_path(skill)
       expect(page).not_to have_content('Edit') #Need to scope this, or it will fail on Edith
       expect(page).not_to have_content(skill.name)
+
+      visit skill_path(skill)
+      expect(page).to have_content("Access Denied")
+      expect(page).not_to have_content('Edit') #Need to scope this, or it will fail on Edith
+      expect(page).not_to have_content(skill.name)
+
       visit edit_skill_path(skill)
       expect(page).to have_content("Access Denied")
     end
   end
+
   describe "in the reader role" do
-    before (:each) do
-      somebody = create(:user)
-      r = create(:role, name: 'Reader')
-      somebody.roles << r
-      visit new_user_session_path
-      fill_in 'user_email', :with => somebody.email
-      fill_in 'user_password', :with => somebody.password
-      click_on 'Sign in'
-    end
+    before (:each) { sign_in_as('Reader') }
+
     it "cannot edit skills" do
       skill = create(:skill)
       visit edit_skill_path(skill)
@@ -51,17 +43,13 @@ RSpec.describe "a user" do
       expect(page).to have_content(skill.name)
     end
   end
+
   describe "in the editor role" do
     before (:each) do
       @person = create(:person)
-      somebody = create(:user)
-      r = create(:role, name: 'Editor')
-      somebody.roles << r
-      visit new_user_session_path
-      fill_in 'user_email', :with => somebody.email
-      fill_in 'user_password', :with => somebody.password
-      click_on 'Sign in'
+      sign_in_as('Editor')
     end
+
     it "can edit people" do
       visit people_path
       within_table("people") do

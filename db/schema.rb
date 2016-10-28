@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161008061337) do
+ActiveRecord::Schema.define(version: 20161025064005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,6 +108,8 @@ ActiveRecord::Schema.define(version: 20161008061337) do
     t.datetime "updated_at"
     t.string   "division1"
     t.string   "division2"
+    t.boolean  "manage_people", default: false
+    t.boolean  "manage_items",  default: false
   end
 
   create_table "events", force: :cascade do |t|
@@ -245,6 +247,25 @@ ActiveRecord::Schema.define(version: 20161008061337) do
     t.datetime "updated_at"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "event_id"
+    t.integer  "author_id"
+    t.string   "status"
+    t.integer  "time_to_live"
+    t.integer  "interval"
+    t.integer  "iterations_to_escalation"
+    t.datetime "scheduled_start_time"
+    t.datetime "start_time"
+    t.text     "channels"
+    t.text     "groups"
+    t.text     "departments"
+    t.text     "divisions"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "notifications", ["event_id"], name: "index_notifications_on_event_id", using: :btree
+
   create_table "people", force: :cascade do |t|
     t.string   "firstname"
     t.string   "lastname"
@@ -322,6 +343,24 @@ ActiveRecord::Schema.define(version: 20161008061337) do
     t.decimal  "cost",         precision: 8, scale: 2
   end
 
+  create_table "requirements", force: :cascade do |t|
+    t.integer  "task_id"
+    t.integer  "skill_id"
+    t.integer  "title_id"
+    t.integer  "priority"
+    t.integer  "minimum_people"
+    t.integer  "maximum_people"
+    t.integer  "desired_people"
+    t.boolean  "floating"
+    t.boolean  "optional"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "requirements", ["skill_id"], name: "index_requirements_on_skill_id", using: :btree
+  add_index "requirements", ["task_id"], name: "index_requirements_on_task_id", using: :btree
+  add_index "requirements", ["title_id"], name: "index_requirements_on_title_id", using: :btree
+
   create_table "resource_types", force: :cascade do |t|
     t.string   "name"
     t.string   "status"
@@ -375,6 +414,8 @@ ActiveRecord::Schema.define(version: 20161008061337) do
     t.datetime "end_time"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "location"
+    t.integer  "priority"
   end
 
   add_index "tasks", ["event_id"], name: "index_tasks_on_event_id", using: :btree
@@ -450,5 +491,20 @@ ActiveRecord::Schema.define(version: 20161008061337) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
+  create_table "versions", force: :cascade do |t|
+    t.string   "item_type",  null: false
+    t.integer  "item_id",    null: false
+    t.string   "event",      null: false
+    t.string   "whodunnit"
+    t.text     "object"
+    t.datetime "created_at"
+  end
+
+  add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
+
+  add_foreign_key "notifications", "events"
+  add_foreign_key "requirements", "skills"
+  add_foreign_key "requirements", "tasks"
+  add_foreign_key "requirements", "titles"
   add_foreign_key "tasks", "events"
 end

@@ -1,3 +1,13 @@
+filterLocationsBasedOnDepartment = (department, locations, reset = false) ->
+  espaced_department = department.replace(/([ #;&,.+*~\':"!^$[\]()=>|\/@])/g, '\\$1')
+  options = $(locations).filter("optgroup[label='#{espaced_department}']").html()
+  if options
+    $('#item_location_id').html(options)
+  else
+    $('#item_location_id').empty()
+  if reset
+    $('#item_location_id').prepend("<option value='' selected='selected'></option>")
+
 jQuery ->
   $('form').on 'click', '.add_fields', (event) ->
     time = new Date().getTime()
@@ -16,12 +26,9 @@ jQuery ->
                   { orderable: false, targets: -1 },
                 ]
 
+  department = $('#item_department_id :selected').text()
   locations = $('#item_location_id').html()
+  filterLocationsBasedOnDepartment(department, locations)
   $('#item_department_id').change ->
     department = $('#item_department_id :selected').text()
-    espaced_department = department.replace(/([ #;&,.+*~\':"!^$[\]()=>|\/@])/g, '\\$1')
-    options = $(locations).filter("optgroup[label='#{espaced_department}']").html()
-    if options
-      $('#item_location_id').html(options).prepend("<option value='' selected='selected'></option>")
-    else
-      $('#item_location_id').empty()
+    filterLocationsBasedOnDepartment(department, locations, true)

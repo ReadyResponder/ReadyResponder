@@ -11,3 +11,9 @@ jQuery ->
     columnDefs: [
                   { orderable: false, targets: [-1] },
                 ]
+
+  $('a[data-toggle="tab"]').on 'shown.bs.tab', (e) ->
+    $.fn.dataTable.tables(
+      visible: true
+      api: true).columns.adjust()
+    return

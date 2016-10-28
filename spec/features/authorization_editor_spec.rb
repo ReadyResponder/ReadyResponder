@@ -1,16 +1,13 @@
 require 'rails_helper'
-      #save_and_open_page
+
 RSpec.describe "a user" do
+  before(:each) do
+    @person = create(:person)
+  end
+
   describe "in the reader role" do
-    before (:each) do
-      @person = create(:person)
-      somebody = create(:user)
-      somebody.roles << create(:role, name: 'Reader')
-      visit new_user_session_path
-      fill_in 'user_email', :with => somebody.email
-      fill_in 'user_password', :with => somebody.password
-      click_on 'Sign in'
-    end
+    before (:each) { sign_in_as('Reader') }
+
     it "cannot edit people" do
       visit edit_person_path(@person)
       expect(page).to have_content("Access Denied")
@@ -35,16 +32,10 @@ RSpec.describe "a user" do
       expect(page).not_to have_content(@person_inactive.lastname)
     end
   end
+
   describe "in the editor role" do
-    before (:each) do
-      @person = create(:person)
-      somebody = create(:user)
-      somebody.roles << create(:role, name: 'Editor')
-      visit new_user_session_path
-      fill_in 'user_email', :with => somebody.email
-      fill_in 'user_password', :with => somebody.password
-      click_on 'Sign in'
-    end
+    before (:each) { sign_in_as('Editor') }
+
     it "can edit people" do
       visit people_path
       expect(page).to have_content('Edit') #Need to scope this, or it will fail on Edith

@@ -19,7 +19,7 @@
 *.kate-swp
 /public/uploads
 
-#Ignore database settings
+# Ignore database settings
 /config/database.yml
 
 # Ignore rspec profiling data

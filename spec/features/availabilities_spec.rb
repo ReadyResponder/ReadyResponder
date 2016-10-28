@@ -1,15 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Availabilities" do
-  before (:each)  do
-    somebody = create(:user)
-    r = create(:role, name: 'Editor')
-    somebody.roles << r
-    visit new_user_session_path
-    fill_in 'user_email', :with => somebody.email
-    fill_in 'user_password', :with => somebody.password
-    click_on 'Sign in'
-  end
+  before(:each) { sign_in_as('Editor') }
 
   # get_basic_editor_views('availability',['person', 'description', 'status'])
 

@@ -1,23 +1,22 @@
 module EventsHelper
 
   def event_status_label(event)
-    make_label(event.status, event_label_class(event))
+    make_label(event.status, event_label_class(event.status))
   end
 
   def display_event_status(event)
-    available    = event.availabilities.count.to_s
-    unavailable  = event.unavailabilities.count.to_s
-    no_response  = event.unresponsive_people.count.to_s
+    available            = event.availabilities.count.to_s
+    partially_available  = event.partial_availabilities.count.to_s
+    unavailable          = event.unavailabilities.count.to_s
+    no_response          = event.unresponsive_people.count.to_s
     content_tag(:div) {
       capture do
         concat event_status_label(event)
-        concat " (Personnel: "
-        concat make_label(available, 'label label-success', tooltip: 'available')
-        concat "/"
-        concat make_label(unavailable, 'label label-danger', tooltip: 'unavailable')
-        concat "/"
-        concat make_label(no_response, 'label label-warning', tooltip: 'no response')
-        concat ")"
+        concat content_tag(:span, 'Personnel:', class: 'event-labels')
+        concat make_label(available, 'label label-success event-labels', tooltip: 'Available')
+        concat make_label(partially_available, 'label label-warning event-labels', tooltip: 'Partially Available')
+        concat make_label(unavailable, 'label label-danger event-labels', tooltip: 'Unavailable')
+        concat make_label(no_response, 'label label-default event-labels', tooltip: 'No Response')
       end
     }
   end
@@ -72,10 +71,10 @@ module EventsHelper
       end
     end
 
-    def event_label_class(event)
+    def event_label_class(event_status)
       # The options are found in app/models/event.rb: STATUS_CHOICES
-      return nil if event.status.blank?
-      case event.status
+      return nil if event_status.blank?
+      case event_status
       when 'Scheduled', 'In-session', 'Completed'
         return 'label label-success'
       when 'Cancelled', 'closed'
@@ -85,5 +84,4 @@ module EventsHelper
         return 'label label-default'
       end
     end
-
 end

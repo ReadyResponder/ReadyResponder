@@ -15,10 +15,10 @@
   <tbody>
     <% @availabilities.each do |availability| %>
       <tr <%== availability_status_class(availability) %>>
-        <td><%= link_to availability.person.fullname, availability_path(availability) %></td>
+        <td><%= link_to availability.person.fullname, availability.person %></td>
         <td><%= availability.start_time.to_s(:short) %></td>
         <td><%= availability.end_time.to_s(:short) %></td>
-        <td><%= availability_status_label(availability) %></td>
+        <td><%= link_to availability_status_label(availability), availability_path(availability) %></td>
         <td><%= availability.description %></td>
         <td><%= table_button_link 'Edit', edit_availability_path(availability) %></td>
       </tr>

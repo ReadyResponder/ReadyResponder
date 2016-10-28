@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :notifications
   resources :availabilities
   resources :unique_ids
 
@@ -25,6 +26,10 @@ Rails.application.routes.draw do
     resources :inspections, only: [:new, :create]
   end
 
+  get '/uploads/item/item_image/:id/:basename.:extension', controller: 'items', action: 'download', type: 'item_image'
+  get '/uploads/person/portrait/:id/:basename.:extension', controller: 'people', action: 'download', type: 'portrait'
+  get '/uploads/cert/certification/:id/:basename.:extension', controller: 'certs', action: 'download', type: 'certification'
+
   get 'landing/help', as: 'help', path: '/help'
 
   devise_for :users
@@ -35,7 +40,12 @@ Rails.application.routes.draw do
   resources :courses
   resources :certs
 
-  resources :tasks, except: [:new, :create], constraints: { id: /\d+/ }
+  resources :requirements, except: [:new, :create], constraints: { id: /\d+/ }
+
+  resources :tasks, except: [:new, :create], constraints: { id: /\d+/ } do
+    resources :requirements, only: [:new, :create]
+  end
+
   resources :events do
     resources :tasks, only: [:new, :create]
     resources :availabilities

@@ -12,7 +12,9 @@
     <%= f.input :end_date, as: :string,
                 input_html: { class: 'datepicker', size: 11,
                               value: format_date_value(f.object.end_date) } %>
-    <%= f.input :department, :as => :select, :collection => Person::DEPARTMENT %>
+    <%= f.input :department, :as => :select, :collection => Department.all %>
+    <%= f.input :division1, :as => :grouped_select, :group_method => :division1, :label => 'Division', :collection => Department.all %>
+    <%= f.input :division2, :as => :grouped_select, :group_method => :division2, :label => 'Squad', :collection => Department.all %>
     <%= f.input :application_date, as: :string,
               input_html: { class: 'datepicker', size: 11,
                               value: format_date_value(f.object.application_date) } %>
@@ -29,7 +31,7 @@
           <%= c.input :carrier, :as => :select, :collection => Phone::CARRIERS %>
           <%= c.input :priority, :as => :select, :collection => Phone::PRIORITIES %>
           <%= c.input :channel_type, as: :select, collection: Phone::TYPES %>
-          <%= c.input :sms_available, as: :boolean %>
+          <%= c.input :sms_available, as: :boolean, label: 'Text Message (SMS)' %>
         </fieldset>
         <hr />
       <% end %>
@@ -47,14 +49,12 @@
         <hr />
       <% end %>
 
-    <%= f.input :icsid, :input_html => { :size => 5 } %>
+    <%= f.input :icsid, label: 'ICS id', :input_html => { :size => 5 } %>
     <%= f.input :title, :as => :select, label: 'Rank', :collection => Person::TITLES %>
     <%= f.association :titles %>
     <%= f.input :start_date, as: :string,
                 input_html: { class: 'datepicker', size: 11,
                               value: format_date_value(f.object.start_date) } %>
-    <%= f.input :division1, :as => :select, :label => 'Division', :collection => Person::DIVISION1 %>
-    <%= f.input :division2, :as => :select, :label => 'Squad', :collection => Person::DIVISION2 %>
     <h4> Personnel Image </h4>
     <%= @person.portrait %>
     <%= f.file_field :portrait %>
