@@ -26,7 +26,7 @@ Rails.application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
-  
+
   # Asset digests allow you to set far-future HTTP expiration dates on all assets,
   # yet still be able to expire them through the digest params.
   config.assets.digest = true
@@ -51,7 +51,7 @@ Rails.application.configure do
     password: ENV["MAIL_PASSWORD"]
   }
   config.action_mailer.default_url_options = { :host => 'localhost:3000' } # this is used by Devise for confirmation e-mails et al
-  
+
   config.action_controller.action_on_unpermitted_parameters = :raise
 
   # Suppress complaints when a console cannot be shown for a given IP address or content type.

@@ -27,5 +27,8 @@ module ReadyResponder
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Hold Google maps API key
+    GOOGLE_MAPS_API_KEY = Rails.application.secrets.GOOGLE_MAPS_API_KEY
   end
 end
