@@ -44,4 +44,5 @@ Rails.application.configure do
 
   config.action_controller.action_on_unpermitted_parameters = :raise
 
+  GOOGLE_MAPS_API_KEY = Rails.application.secrets.GOOGLE_MAPS_API_KEY
 end

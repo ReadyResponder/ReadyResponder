@@ -17,3 +17,9 @@ jQuery ->
       visible: true
       api: true).columns.adjust()
     return
+
+  $('#event_start_time').change ->
+    eventStartTime = $('#event_start_time').datetimepicker('getValue')
+    eventEndTime = $('#event_end_time').datetimepicker('getValue')
+    if (not eventEndTime?) or (eventStartTime > eventEndTime)
+      $('#event_end_time').datetimepicker('setOptions', {startDate: eventStartTime})
