@@ -1,6 +1,6 @@
 class PeopleController < ApplicationController
   before_filter :authenticate_user!
-  authorize_resource
+  load_and_authorize_resource
   before_action :set_referrer_path, only: [:new, :edit]
 
   def signin

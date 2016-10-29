@@ -6,6 +6,7 @@ class Item < ActiveRecord::Base
                   :source, :status, :comments, :item_image,
                   :department_id, :resource_type_id, :item_type_id,
                   :unique_ids_attributes
+  has_paper_trail
 
   # validates_chronology :purchase_date, :sell_date     # ? - if so, needs a test
   # validates_chronology :grantstart, :grantexpiration  # ? - if so, needs a test
