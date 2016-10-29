@@ -2,7 +2,7 @@ class Event < ActiveRecord::Base
   has_paper_trail
   before_save :calc_duration
 
-  attr_accessible :title, :description, :category, :course_id, :duration, :start_time, :end_time, :instructor, :location, :status, :timecard_ids, :person_ids, :comments
+  attr_accessible :title, :description, :category, :course_id, :is_template, :duration, :start_time, :end_time, :instructor, :location, :status, :timecard_ids, :person_ids, :comments
 
   validates_presence_of :category, :title, :status
 

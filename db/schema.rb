@@ -128,6 +128,7 @@ ActiveRecord::Schema.define(version: 20161029014201) do
     t.text     "comments"
     t.string   "error_code"
     t.string   "id_code"
+    t.boolean  "is_template",                         default: false
   end
 
   create_table "helpdocs", force: :cascade do |t|
