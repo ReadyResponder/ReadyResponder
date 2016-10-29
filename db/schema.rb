@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161025064005) do
+ActiveRecord::Schema.define(version: 20161029014201) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -230,11 +230,11 @@ ActiveRecord::Schema.define(version: 20161025064005) do
     t.string   "subject"
     t.string   "status"
     t.string   "body"
-    t.string   "channels"
     t.datetime "sent_at"
-    t.integer  "created_by"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "recipient_id"
+    t.integer  "channel_id"
   end
 
   create_table "moves", force: :cascade do |t|
@@ -327,6 +327,16 @@ ActiveRecord::Schema.define(version: 20161025064005) do
     t.text     "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "recipients", force: :cascade do |t|
+    t.integer  "notification_id"
+    t.integer  "person_id"
+    t.text     "status"
+    t.text     "response_channel"
+    t.datetime "response_time"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "repairs", force: :cascade do |t|
