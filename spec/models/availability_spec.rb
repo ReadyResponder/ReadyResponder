@@ -4,6 +4,8 @@ RSpec.describe Availability, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 
   let(:a_person) { build(:person) }
+  let(:start_time) { Time.now }
+  let(:end_time) { Time.now + 1.hour }
 
   describe "creation" do
     it "has a valid factory" do
@@ -32,6 +34,33 @@ RSpec.describe Availability, type: :model do
 
       event = create(:event, start_time: start_time, end_time: end_time, status: "Scheduled")
       expect(availability.partially_available?(event)).to eq(false)
+    end
+  end
+
+  before(:each) do
+    availability = build(:availability, person: a_person, start_time: start_time, end_time: end_time)
+    availability.save
+  end
+  context 'can not enclose previously claimed times' do
+    it 'returns false for same claimed times' do
+      availability = build(:availability, person: a_person, start_time: start_time, end_time: end_time)
+      expect(availability.valid?).to eq(false)
+    end
+
+    it 'returns false for enclosing previously claimed times' do
+      new_start_time = start_time + 15.minutes
+      new_end_time = end_time + 15.minutes
+
+      availability = build(:availability, person: a_person, start_time: new_start_time, end_time: new_end_time)
+      expect(availability.valid?).to eq(false)
+    end
+
+    it 'returns true for starting with previously claimed end_time' do
+      new_start_time = end_time
+      new_end_time = end_time + 15.minutes
+
+      availability = build(:availability, person: a_person, start_time: new_start_time, end_time: new_end_time)
+      expect(availability.valid?).to eq(true)
     end
   end
 end
