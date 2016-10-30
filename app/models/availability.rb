@@ -16,8 +16,9 @@ class Availability < ActiveRecord::Base
   # Available part of event
   scope :partially_available, -> (range) { where("? >= end_time AND end_time >= ? OR ? >= start_time AND start_time >= ?", range.last, range.first, range.last, range.first) }
 
-  scope :available, -> { where(status: "Available")}
-  scope :unavailable, -> { where(status: "Unavailable")}
+  scope :available, -> { where(status: "Available") }
+  scope :unavailable, -> { where(status: "Unavailable") }
+  scope :cancelled, -> { where(status: "Cancelled") }
 
   def partially_available?(event)
     return false if event.nil? || (event.end_time == self.end_time && event.start_time == self.start_time)
@@ -31,7 +32,7 @@ class Availability < ActiveRecord::Base
   # He/She may not fill in another time from 9:15 to 10:15 AM
   # However he/she may fill in from 10:00 AM to 10:15 AM
   def must_not_enclose_previously_claimed_times
-    if person.availabilities.where("? > end_time AND end_time > ? OR ? > start_time AND start_time > ?", end_time, start_time, end_time, start_time).present?
+    if person.availabilities.where.not.cancelled.where("? > end_time AND end_time > ? OR ? > start_time AND start_time > ?", end_time, start_time, end_time, start_time).present?
       errors.add(:unpermitted, "Start Time and End Time can not enclose previously claimed times")
     end
   end
