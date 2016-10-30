@@ -21,6 +21,10 @@ class TimeRoundingService
   def nearest_fifteen_after time
     minutes = time.min
     minutes = ((minutes / 60.0 * 4).ceil / 4.0 * 60).to_i
+    if minutes == 60
+      minutes = 0
+      time = time.advance(:hours => 1)
+    end
     time.change(:min => minutes)
   end
 
