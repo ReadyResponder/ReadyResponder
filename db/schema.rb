@@ -122,13 +122,13 @@ ActiveRecord::Schema.define(version: 20161105063525) do
     t.decimal  "duration",                precision: 7, scale: 2
     t.string   "category",    limit: 255
     t.string   "status",      limit: 255
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.datetime "created_at",                                                      null: false
+    t.datetime "updated_at",                                                      null: false
     t.string   "title",       limit: 255
     t.text     "comments"
-    t.string   "error_code"
-    t.string   "id_code"
-    t.boolean  "is_template",                         default: false
+    t.string   "error_code",  limit: 255
+    t.string   "id_code",     limit: 255
+    t.boolean  "is_template",                                     default: false
   end
 
   create_table "helpdocs", force: :cascade do |t|
@@ -228,16 +228,14 @@ ActiveRecord::Schema.define(version: 20161105063525) do
   end
 
   create_table "messages", force: :cascade do |t|
-    t.string   "subject"
-    t.string   "status"
-    t.string   "body"
+    t.string   "subject",      limit: 255
+    t.string   "status",       limit: 255
+    t.string   "body",         limit: 255
     t.datetime "sent_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.integer  "recipient_id"
     t.integer  "channel_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
   end
 
   create_table "moves", force: :cascade do |t|

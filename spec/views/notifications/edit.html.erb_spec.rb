@@ -4,7 +4,7 @@ RSpec.describe "notifications/edit", type: :view do
   before(:each) do
     @notification = assign(:notification, Notification.create!(
       :event => nil,
-      :status => "active",
+      :status => "Active",
       :channels => "MyString"
     ))
   end
@@ -18,7 +18,7 @@ RSpec.describe "notifications/edit", type: :view do
 
       assert_select "select#notification_status[name=?]", "notification[status]"
 
-      assert_select "textarea#notification_channels[name=?]", "notification[channels]"
+      assert_select "select#notification_channels[name=?]", "notification[channels]"
     end
   end
 end

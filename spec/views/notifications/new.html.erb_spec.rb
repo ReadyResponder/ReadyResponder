@@ -5,7 +5,7 @@ RSpec.describe "notifications/new", type: :view do
     assign(:notification, Notification.new(
       :event => nil,
       :status => "Active",
-      :channels => "MyString"
+      :channels => "Text"
     ))
   end
 
@@ -15,7 +15,7 @@ RSpec.describe "notifications/new", type: :view do
     assert_select "form[action=?][method=?]", notifications_path, "post" do
       assert_select "select#notification_event_id[name=?]", "notification[event_id]"
       assert_select "select#notification_status[name=?]", "notification[status]"
-      assert_select "textarea#notification_channels[name=?]", "notification[channels]"
+      assert_select "select#notification_channels[name=?]", "notification[channels]"
     end
   end
 end

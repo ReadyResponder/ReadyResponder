@@ -12,6 +12,9 @@ class Notification < ActiveRecord::Base
     'Expired' => []
   }
 
+  VALID_STATUSES = STATUS_STATES.keys
+  validates :status, inclusion: { in: VALID_STATUSES }
+
   def available_statuses
     if status
       STATUS_STATES[status]

@@ -1,4 +1,4 @@
-class NotificationTextMessage
+class Messages::SendNotificationTextMessage
   require 'twilio-ruby'
   def initialize
     # create Twilio Client
@@ -6,7 +6,6 @@ class NotificationTextMessage
     auth_token = ENV["TWILIO_AUTH_TOKEN"]   # Your Auth Token from www.twilio.com/console
 
     @client = Twilio::REST::Client.new account_sid, auth_token
-
   end
 
   def call(message, recipient_number, sender_number)

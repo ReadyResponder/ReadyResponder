@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :phone do
     name "Main Phone"
-    content "(978) 555-1212"
+    content "9785551212"
     priority 1
     category "Mobile"
     carrier "Sprint"

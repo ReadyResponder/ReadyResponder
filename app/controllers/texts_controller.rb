@@ -6,49 +6,34 @@ class TextsController < ApplicationController
   protect_from_forgery with: :null_session,
     if: Proc.new { |c| c.request.format == 'application/json' }
 
-  def receive_text
-    puts params
+  def say_voice
     cell = Phone.where(content: params[:From][2..12]).first
     sender = cell.person if cell
-    render plain: "Unknown" and return if sender.blank?
-    response = ""
-    body = params[:Body].downcase
-    split_body = body.split
-    command = split_body.select { |word| word.include? "#" }
-    code = split_body.select { |word| word.include? "@" }
-    if body.include? "upcoming"
-      events = Event.upcoming.limit(5)
-      events.each do |event|
-        response += event.start_time.to_s + " " if event.start_time.present?
-        response += event.title if event.title.present?
-        response += " (#{event.id_code.to_s}) " if event.id_code.present?
-        response += + "\n"
-      end
-    elsif body.include?(" yes")
-      # TODO we should watch for duplicate event id codes here
-      # We should get only one result.
-      event = Event.where(id_code: split_body[0]).first
-      response += event.title if event.title.present?
-      if Availability.create(person_id: sender.id,
-                          start_time: event.start_time,
-                          end_time: event.end_time,
-                          status: "Available")
-        response += " recorded Available"
-      end
-    elsif body.include?(" no")
-      # TODO we should watch for duplicate event id codes here
-      # We should get only one result.
-      event = Event.where(id_code: split_body[0]).first
-      response += event.title if event.title.present?
-      Availability.create(person_id: sender.id,
-                          start_time: event.start_time,
-                          end_time: event.end_time,
-                          status: "Unavailable")
+    their_name=sender.firstname || ""
+    response= <<-eos
+      <?xml version="1.0" encoding="UTF-8"?>
+      <Response>
+        <Say voice="alice">   Check your messages now, #{their_name} !</Say>
+        <Say voice="alice">#{Time.now.to_s}</Say>
+      </Response>
+      eos
+  render plain: response
+  end
+
+  def receive_text
+    # Message.create(params) or Something like that for inbound message
+    sender = Person::FindByChannel.new(params[:From]).call
+    render plain: "Error 421" and return if sender.blank?
+    keyword = Message::ExtractKeyword.new(params[:Body]).call
+    if keyword
+      cmd = "Msg::#{keyword}"
+      msg = Msg::Base.new({params: params, person: sender, keyword: keyword})
+      response = msg.extend(cmd.constantize).respond
     else
       response = "Hello, #{sender.fullname}"
-      response += command[0] if command.present?
-      response += code[0] if code.present?
+      response += "Unknown keyword"
     end
+    # Save outbound message here
     render plain: response
   end
 
@@ -65,11 +50,11 @@ class TextsController < ApplicationController
      "SmsSid"=>       "SMb6fed33f61d06c114be2ab5cd5702aa0",
      "MessagingServiceSid"=>"MG41b04937eadee26cb5fd10ae51d1ae86",
      "AccountSid"=>"AC38b0f9a487dcceaa9efb0cd181b1a4a9",
-     "NumMedia"=>"0",   "SmsStatus"=>"received", "Body"=>"Navy yes",
+     "NumMedia"=>"0",   "SmsStatus"=>"received", "Body"=>"Available Navy",
       "NumSegments"=>"1",  "ApiVersion"=>"2010-04-01"}
 =end
-    def text_params
-      params.require(:text).permit(:To, :From, :Body,
-        :MessageSid, :MessagingServiceSid, :AccountSid )
-    end
+  def text_params
+    params.require(:text).permit(:To, :From, :Body,
+      :MessageSid, :MessagingServiceSid, :AccountSid )
+  end
 end

@@ -1,0 +1,29 @@
+class Message::ExtractKeyword
+  # if we decide we want to use a tag to control keywords,
+  # it might look like this:
+  # command = split_body.select { |word| word.include? "#" }
+  # code = split_body.select { |word| word.include? "@" }
+
+  def initialize(*query_param)
+    @query_param = query_param[0]
+    @query_param = "Beetlejuice" if @query_param.blank?
+    @query_param = @query_param.downcase
+  end
+
+  def call
+    first_word = @query_param.split[0]
+    white_list = {"available" => "Available",
+                  "unavailable" => "Available",
+                  "yes" => "Available",
+                  "no" => "Available",
+                  "upcoming" => "Upcoming"}
+    # TODO Add keywords maybe rcv received ack
+    # TODO tasks task roster (who's assigned to event)
+    # TODO onduty on-duty for who's on duty right now. & signin signout
+    # TODO "crew id_code" to allow supervisor to see who has responded.
+    if white_list.keys.include? first_word
+      return white_list[first_word]
+    end
+    return nil
+  end
+end
