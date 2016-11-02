@@ -38,31 +38,29 @@ class Timecard < ActiveRecord::Base
     where(outcome: "Worked").where(Timecard.arel_table['actual_end_time'].not_eq(nil))
   end
 
-def find_duplicate_timecards
-  margin = 30
-  query = Timecard.where(person_id: self.person_id)
-  if self.intended_start_time.is_a?(Time) && self.intended_end_time.is_a?(Time)
-    true_start = self.intended_start_time
-    fuzzy_start = (self.intended_start_time - margin.minutes)
-    fuzzy_end = (self.intended_end_time + margin.minutes)
-    query = query.where('(? > intended_start_time AND ? < intended_end_time) OR (intended_start_time BETWEEN ? AND ?)',
-                                                true_start,fuzzy_start, fuzzy_start, fuzzy_end)
-  end
+  def find_duplicate_timecards
+    margin = 30
+    query = Timecard.where(person_id: self.person_id)
+    if self.intended_start_time.is_a?(Time) && self.intended_end_time.is_a?(Time)
+      true_start = self.intended_start_time
+      fuzzy_start = (self.intended_start_time - margin.minutes)
+      fuzzy_end = (self.intended_end_time + margin.minutes)
+      query = query.where('(? > intended_start_time AND ? < intended_end_time) OR (intended_start_time BETWEEN ? AND ?)', true_start, fuzzy_start, fuzzy_start, fuzzy_end)
+    end
 
-  if self.actual_start_time.is_a?(Time) && self.actual_end_time.is_a?(Time)
-    true_start = self.actual_start_time
-    fuzzy_start = (self.actual_start_time - margin.minutes)
-    fuzzy_end = (self.actual_end_time + margin.minutes)
-    query = query.where('(? > actual_start_time AND ? < actual_end_time) OR (actual_start_time BETWEEN ? AND ?)',
-                                                true_start,fuzzy_start, fuzzy_start, fuzzy_end)
-  end
+    if self.actual_start_time.is_a?(Time) && self.actual_end_time.is_a?(Time)
+      true_start = self.actual_start_time
+      fuzzy_start = (self.actual_start_time - margin.minutes)
+      fuzzy_end = (self.actual_end_time + margin.minutes)
+      query = query.where('(? > actual_start_time AND ? < actual_end_time) OR (actual_start_time BETWEEN ? AND ?)', true_start, fuzzy_start, fuzzy_start, fuzzy_end)
+    end
 
-  if self.new_record? #then self.id will be nil
-    query
-  else #if it's not a new record, I need to filter out itself
-    query.where("id != ?", self.id)
+    if self.new_record? #then self.id will be nil
+      query
+    else #if it's not a new record, I need to filter out itself
+      query.where("id != ?", self.id)
+    end
   end
-end
 
 private
   def has_no_duplicate_timecard
@@ -79,7 +77,7 @@ private
       self.intended_end_time = event.end_time if self.intended_end_time.nil?
     end
 
-    if self.outcome == "Worked" 
+    if self.outcome == "Worked"
       self.actual_start_time = event.start_time if self.actual_start_time.nil?
       self.actual_end_time = event.end_time if self.actual_end_time.nil?
     end
