@@ -25,6 +25,14 @@ RSpec.describe NotificationsController, type: :controller do
     end
   end
 
+  describe "GET #edit" do
+    it "assigns the requested activity as @activity" do
+      notification = Notification.create! valid_attributes
+      get :edit, {:id => notification.to_param}
+      expect(assigns(:notification)).to eq(notification)
+    end
+  end
+
   describe "POST" do
     context "post create" do
       it "post create" do
