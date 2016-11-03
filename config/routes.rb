@@ -40,6 +40,10 @@ Rails.application.routes.draw do
   resources :courses
   resources :certs
 
+  resources :analytics do
+    get 'calendar_chart', on: :collection
+  end
+
   resources :requirements, except: [:new, :create], constraints: { id: /\d+/ }
 
   resources :tasks, except: [:new, :create], constraints: { id: /\d+/ } do
