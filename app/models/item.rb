@@ -18,6 +18,7 @@ class Item < ActiveRecord::Base
   belongs_to :location
   belongs_to :department
   belongs_to :item_type
+  belongs_to :grant
   has_many :repairs
   has_many :inspections
   has_many :unique_ids
