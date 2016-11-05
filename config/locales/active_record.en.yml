@@ -1,0 +1,12 @@
+en:
+  activerecord:
+    attributes:
+      notification:
+        channels: Channels
+    errors:
+      models:
+        notification:
+          attributes:
+            channels:
+              invalid: "Channels must be some set of <email>, <text>, and <voice> with spaces between each value"
+      

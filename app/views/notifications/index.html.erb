@@ -10,7 +10,7 @@
       <th>Status</th>
       <th>Event</th>
       <th>Start at</th>
-      <th>Channels</th>
+      <th><%= t('.channels.header') %></th>
       <th colspan="1"></th>
     </tr>
   </thead>
@@ -21,7 +21,11 @@ I need to allow info only Notifications
         <td><%= notification.status %></td>
         <td><%= notification.event ? (link_to notification.event.title, notification.event) : 'None' %></td>
         <td><%= notification.scheduled_start_time %></td>
-        <td><%= notification.channels %></td>
+        <td>
+          <% notification.channels.split(' ').each do |channel| %>
+            <span><%= t(".channels.#{channel}") %></span>
+          <% end %>
+        </td>
         <td><%= link_to 'Edit', edit_notification_path(notification) %></td>
       </tr>
     <% end %>

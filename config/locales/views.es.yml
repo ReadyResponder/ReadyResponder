@@ -1,0 +1,15 @@
+es:
+  notifications:
+    show:
+      subject: Tema
+      body: Contenido
+      channels:
+        email: E-mail
+        text: SMS
+        voice: Teléfono
+    index:
+      channels:
+        header: Canales
+        email: E-mail
+        text: SMS
+        voice: Fon
