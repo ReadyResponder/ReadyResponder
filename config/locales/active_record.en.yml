@@ -1,0 +1,44 @@
+en:
+  activerecord:
+    attributes:
+      notification:
+        channels: Channels
+    errors:
+      messages:
+        accepted: "must be accepted"
+        blank: "can't be blank"
+        confirmation: "must match"
+        edit_not_authorized: "Edit is not allowed as it is not authorized for this user."
+        empty: "can't be empty"
+        end_date_after_start_date: "must be after the Start Date"
+        equal_to: "must be equal to %{count}"
+        even: "must be even"
+        exclusion: "is reserved"
+        greater_than: "must be greater than %{count}"
+        greater_than_or_equal_to: "must be greater than or equal to %{count}"
+        inclusion: "is not included in the list"
+        invalid: "is invalid"
+        less_than: "must be less than %{count}"
+        less_than_or_equal_to: "must be less than or equal to %{count}"
+        must_be_empty: "must not be selected"
+        not_a_date: "must be a valid date"
+        not_a_datetime: "must be a valid datetime"
+        not_a_number: "is not a number"
+        odd: "must be odd"
+        password: "must be at least 6 characters with 1 letter and 1 number"
+        required: "is required"
+        taken: "has already been taken"
+        too_long: "is too long (maximum is %{count} characters)"
+        too_short: "is too short (minimum is %{count} characters)"
+        wrong_length: "is the wrong length (should be %{count} characters)"
+      models:
+        notification:
+          attributes:
+            channels:
+              invalid: "Channels must be some set of <email>, <text>, and <voice> with spaces between each value" 
+      template:
+        body: "Please review the problems below:"
+        header:
+          one: "1 error prevented this from being saved:"
+          other: "%{count} errors prevented this from being saved:"
+      

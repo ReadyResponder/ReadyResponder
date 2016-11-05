@@ -1,0 +1,16 @@
+en:
+  notifications:
+    show:
+      subject: Subject
+      body: Content
+      channels:
+        email: Email
+        text: Text
+        voice: Telephone
+    index:
+      channels:
+        header: Channels
+        email: Email
+        text: SMS
+        voice: Phone
+

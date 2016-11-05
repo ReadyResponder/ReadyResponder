@@ -7,7 +7,16 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong><%= t('.subject') %></strong>
+  <%= @notification.subject %>
+</p>
 
+<p>
+  <strong><%= t('.body') %></strong>
+  <%= @notification.body %>
+</p>
+
+<p>
   <strong>Event:</strong>
   <%= @event_title %>
 </p>
@@ -39,7 +48,9 @@
 
 <p>
   <strong>Channels:</strong>
-  <%= @notification.channels %>
+  <% @notification.channels.split(' ').each do |channel| %>
+    <span><%= t(".channels.#{channel}") %></span>
+  <% end %>
 </p>
 
 <p>

@@ -10,6 +10,7 @@ gem 'rmagick', '~> 2.15.4'
 gem 'simple_form'
 gem 'geocoder'
 gem 'cancancan'
+gem 'rails-i18n', '~> 4.0.0'
 #gem "taps"
 #gem 'validates_timeliness', '~> 3.0'
 

@@ -56,8 +56,8 @@ class NotificationsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def notification_params
-      params.require(:notification).permit(:event_id, :author_id, :status,
-         :time_to_live, :interval, :iterations_to_escalation, :groups,
-          :scheduled_start_time, :start_time, :channels, :departments, :divisions)
+      params.require(:notification).permit(:subject, :body, :event_id, :author_id, :status,
+          :time_to_live, :interval, :iterations_to_escalation, :groups, :scheduled_start_time,
+          :start_time, :channels, :departments, :divisions)
     end
 end
