@@ -16,10 +16,12 @@ class NotificationsController < ApplicationController
   # GET /notifications/new
   def new
     @notification = Notification.new
+    @statuses = @notification.available_statuses
   end
 
   # GET /notifications/1/edit
   def edit
+    @statuses = @notification.available_statuses
   end
 
   # POST /notifications

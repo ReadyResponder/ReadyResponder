@@ -4,7 +4,7 @@ RSpec.describe "notifications/new", type: :view do
   before(:each) do
     assign(:notification, Notification.new(
       :event => nil,
-      :status => "active",
+      :status => "Active",
       :channels => "MyString"
     ))
   end
