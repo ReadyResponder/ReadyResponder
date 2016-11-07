@@ -21,6 +21,7 @@ class Ability
       can [:read, :update, :create, :edit], Requirement
       can [:read, :update, :create, :edit], Course
       can [:read, :update, :create, :edit], Skill
+      can [:read, :update, :create, :edit], Grant
       can [:read, :update, :create, :edit], Inspection
       can [:read, :update, :create, :edit], Location
       can [:read, :update, :create, :edit], Repair
