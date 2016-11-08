@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "notifications/index", type: :view do
+  let(:user) { FactoryGirl.create :user }
   before(:each) do
     assign(:notifications, [
       Notification.create!(
@@ -14,6 +15,7 @@ RSpec.describe "notifications/index", type: :view do
         :channels => "Channels"
       )
     ])
+    allow(controller).to receive(:current_user).and_return(user)
   end
 
   it "renders a list of notifications" do

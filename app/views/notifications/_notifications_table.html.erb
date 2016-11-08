@@ -1,0 +1,27 @@
+<table id="notifications" class="generic_datatable table table-striped table-bordered">
+  <% if defined? title %>
+    <caption><h3><%= title %></h3></caption>
+  <% end %>
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Event</th>
+      <th>Start at</th>
+      <th>Channels</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <%# TODO: I need to allow info only Notifications %>
+  <tbody>
+    <% notifications.each do |notification| %>
+      <tr>
+        <td><%= notification.status %></td>
+        <td><%= notification.event ? (link_to notification.event.title, notification.event) : 'None' %></td>
+        <td><%= notification.scheduled_start_time %></td>
+        <td><%= notification.channels %></td>
+        <td><%= link_to 'Edit', edit_notification_path(notification) if can? :update, notification %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
