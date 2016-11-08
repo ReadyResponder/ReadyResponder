@@ -2,6 +2,8 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
+    <%= f.input :subject %>
+    <%= f.input :body %>
     <%= f.association :event %>
     <%= f.input :status, as: :select, collection: @statuses %>
     <%= f.input :time_to_live, hint: 'Length to keep trying to notify non-responders, in hours' %>
