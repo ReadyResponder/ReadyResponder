@@ -24,17 +24,20 @@ class TextsController < ApplicationController
     # Message.create(params) or Something like that for inbound message
     sender = Person::FindByChannel.new(params[:From]).call
     render plain: "Error 421" and return if sender.blank?
+    # TODO Save the incoming message
+    # TODO Should the message have a link to the availability
+    # that it created ? Or whatever it created...
     keyword = Message::ExtractKeyword.new(params[:Body]).call
     if keyword
-      cmd = "Msg::#{keyword}"
-      msg = Msg::Base.new({params: params, person: sender, keyword: keyword})
-      response = msg.extend(cmd.constantize).respond
+      cmd_klass = "Msg::#{keyword}"
+      response = cmd_klass.constantize.new(
+            {params: params, person: sender}).respond
     else
       response = "Hello, #{sender.fullname}"
-      response += "Unknown keyword"
+      response += "Unknown Keyword"
     end
     # Save outbound message here
-    render plain: response
+    render plain: response.to_s
   end
 
 

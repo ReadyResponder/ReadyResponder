@@ -16,7 +16,9 @@ class Availability < ActiveRecord::Base
 
   scope :available, -> { where(status: "Available")}
   scope :unavailable, -> { where(status: "Unavailable")}
-
+  def to_s
+    self.inspect
+  end
   def partially_available?(event)
     return false if event.nil? || (event.end_time == self.end_time && event.start_time == self.start_time)
     (event.end_time >= self.end_time && self.end_time >= event.start_time) || (event.end_time >= self.start_time && self.start_time >= event.start_time)

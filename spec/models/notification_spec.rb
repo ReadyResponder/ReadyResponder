@@ -12,7 +12,7 @@ RSpec.describe Notification do
   describe 'validations' do
     context 'status' do
       it 'accepts a valid status' do
-        notification = build(:notification, status: 'Pending')
+        notification = build(:notification, status: 'Scheduled')
         expect(notification).to be_valid
       end
 
