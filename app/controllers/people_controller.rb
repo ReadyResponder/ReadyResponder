@@ -164,7 +164,7 @@ class PeopleController < ApplicationController
       :city, :state, :zipcode, :start_date, :end_date,
       :application_date, :title, :gender, :portrait, :date_of_birth,
       :division1, :division2, :channels_attributes, :title_ids,
-      :title_order, :comments,
+      :title_order, :old_comments,
       :channels_attributes => [],
       :title_ids => [],
       phones_attributes: [:id, :category, :content, :name, :status, :usage, :carrier, :sms_available, :priority, :channel_type],
