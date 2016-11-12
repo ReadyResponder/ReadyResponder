@@ -2,6 +2,13 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.input :key %>
+    <%= f.input :value %>
+    <%= f.input :category %>
+    <%= f.input :status %>
+    <%= f.input :required, as: :boolean %>
   </div>
 
   <div class="form-actions">
