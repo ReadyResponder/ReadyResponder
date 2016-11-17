@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161105063525) do
+ActiveRecord::Schema.define(version: 20161112151536) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,16 @@ ActiveRecord::Schema.define(version: 20161105063525) do
   add_index "channels", ["category"], name: "index_channels_on_category", using: :btree
   add_index "channels", ["person_id"], name: "index_channels_on_person_id", using: :btree
   add_index "channels", ["priority"], name: "index_channels_on_priority", using: :btree
+
+  create_table "comments", force: :cascade do |t|
+    t.string   "title",            limit: 50, default: ""
+    t.text     "description"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.integer  "person_id"
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+  end
 
   create_table "courses", force: :cascade do |t|
     t.string   "name"
@@ -294,7 +304,7 @@ ActiveRecord::Schema.define(version: 20161105063525) do
     t.string   "blood_type",       limit: 12
     t.string   "allergies"
     t.string   "passwordhash"
-    t.text     "comments"
+    t.text     "old_comments"
     t.decimal  "total_hours",                 precision: 7, scale: 2
     t.date     "start_date"
     t.date     "end_date"
