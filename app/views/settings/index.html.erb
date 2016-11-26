@@ -1,0 +1,32 @@
+<% content_for :sidebar do %>
+  <h1>Listing settings</h1>
+<% end %>
+
+<table id="settings" class="datatable table table-striped table-bordered">
+  <caption><h3><%= "Settings" %></h3></caption>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Key</th>
+      <th>Value</th>
+      <th>Category</th>
+      <th>Status</th>
+      <th>Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @settings.each do |setting| %>
+      <tr>
+        <td><%= setting.name %></td>
+        <td><%= truncate(setting.description) %></td>
+        <td><%= setting.key %></td>
+        <td><%= setting.value %></td>
+        <td><%= setting.category %></td>
+        <td><%= setting.status %></td>
+        <td><%= setting.required %></td>
+        <td><%= table_button_link 'Edit', edit_setting_path(setting) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

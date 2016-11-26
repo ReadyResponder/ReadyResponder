@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :settings
   resources :notifications
   resources :availabilities
   resources :unique_ids

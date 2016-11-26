@@ -79,6 +79,16 @@ ActiveRecord::Schema.define(version: 20161122015809) do
   add_index "channels", ["person_id"], name: "index_channels_on_person_id", using: :btree
   add_index "channels", ["priority"], name: "index_channels_on_priority", using: :btree
 
+  create_table "comments", force: :cascade do |t|
+    t.string   "title",            limit: 50, default: ""
+    t.text     "description"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.integer  "person_id"
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string   "name",        limit: 255
     t.string   "status",      limit: 255
@@ -314,7 +324,7 @@ ActiveRecord::Schema.define(version: 20161122015809) do
     t.string   "blood_type",       limit: 12
     t.string   "allergies",        limit: 255
     t.string   "passwordhash",     limit: 255
-    t.text     "comments"
+    t.text     "old_comments"
     t.decimal  "total_hours",                  precision: 7, scale: 2
     t.date     "start_date"
     t.date     "end_date"
@@ -418,6 +428,18 @@ ActiveRecord::Schema.define(version: 20161122015809) do
   end
 
   add_index "roles_users", ["role_id", "user_id"], name: "index_roles_users_on_role_id_and_user_id", using: :btree
+
+  create_table "settings", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "key"
+    t.string   "value"
+    t.string   "category"
+    t.string   "status"
+    t.boolean  "required",    default: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
 
   create_table "skills", force: :cascade do |t|
     t.string   "name",       limit: 255

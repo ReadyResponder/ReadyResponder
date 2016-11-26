@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '4.2.7'
+gem 'rails', '~> 4.2.7'
 
 gem 'rack'
 gem 'ransack'

@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<p><%= @setting.name %></p>
+<p><%= truncate(@setting.description) %></p>
+<p><%= @setting.key %></p>
+<p><%= @setting.value %></p>
+<p><%= @setting.category %></p>
+<p><%= @setting.status %></p>
+<p><%= @setting.required %></p>
+
+
+<%= link_to 'Edit', edit_setting_path(@setting) %> |
+<%= link_to 'Back', settings_path %>
