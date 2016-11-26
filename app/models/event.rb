@@ -80,6 +80,13 @@ class Event < ActiveRecord::Base
     self.timecards.sum('actual_duration')
   end
 
+  def self.find_by_code(id_code)
+    return Error::Base.new({code: 211, description: "No id_code given"}) if id_code.blank?
+    event = Event.where(id_code: id_code).first
+    return Error::Base.new({code: 201, description: "Event #{id_code} not found"}) if event.blank?
+    return event
+  end
+
   def scheduled_people
     # TODO In the pr that add Assignments, this will need to changes
     # Something like assignments.people.unique

@@ -6,23 +6,9 @@ class TextsController < ApplicationController
   protect_from_forgery with: :null_session,
     if: Proc.new { |c| c.request.format == 'application/json' }
 
-  def say_voice
-    cell = Phone.where(content: params[:From][2..12]).first
-    sender = cell.person if cell
-    their_name=sender.firstname || ""
-    response= <<-eos
-      <?xml version="1.0" encoding="UTF-8"?>
-      <Response>
-        <Say voice="alice">   Check your messages now, #{their_name} !</Say>
-        <Say voice="alice">#{Time.now.to_s}</Say>
-      </Response>
-      eos
-  render plain: response
-  end
-
   def receive_text
     # Message.create(params) or Something like that for inbound message
-    sender = Person::FindByChannel.new(params[:From]).call
+    sender = Person.find_by_phone(params[:From])
     render plain: "Error 421" and return if sender.blank?
     # TODO Save the incoming message
     # TODO Should the message have a link to the availability
@@ -40,6 +26,19 @@ class TextsController < ApplicationController
     render plain: response.to_s
   end
 
+  def say_voice
+    cell = Phone.where(content: params[:From][2..12]).first
+    sender = cell.person if cell
+    their_name=sender.firstname || ""
+    response= <<-eos
+      <?xml version="1.0" encoding="UTF-8"?>
+      <Response>
+        <Say voice="alice">   Check your messages now, #{their_name} !</Say>
+        <Say voice="alice">#{Time.now.to_s}</Say>
+      </Response>
+      eos
+  render plain: response
+  end
 
 
   private

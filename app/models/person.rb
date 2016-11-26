@@ -97,6 +97,10 @@ class Person < ActiveRecord::Base
     write_attribute(:state, value.strip.upcase)
   end
 
+  def self.find_by_phone(phone_number)
+    Phone.where(content: phone_number[2..12]).first.person
+  end
+
   def self.search(search)
     if search
       find :all, :conditions => ['firstname LIKE ? OR lastname LIKE ? OR city LIKE ? OR icsid like ?',

@@ -16,7 +16,7 @@
       <tr>
         <td><%= item.location.name if item.location %></td>
         <td><%= link_to item.name, item_path(item) %></td>
-        <td><%= item.model %></td>
+        <td><%= "#{item.brand} #{item.model}" %></td>
         <td><%= item.category %></td>
         <td><%= number_to_currency item.recent_costs %></td>
         <td><%= item_status_label(item) %></td>

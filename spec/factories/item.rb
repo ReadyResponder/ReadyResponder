@@ -4,8 +4,9 @@ FactoryGirl.define do
   factory :item do
     name "EMA-10"
     description "Ford F-150"
-    source "Stoneham Ford"
+    source "Main Street Ford"
     category "Vehicle"
+    brand 'Ford'
     model "F-150"
     purchase_date "2010-12-14"
     purchase_amt ""

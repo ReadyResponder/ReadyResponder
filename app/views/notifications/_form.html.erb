@@ -5,12 +5,18 @@
     <%= f.input :subject %>
     <%= f.input :body %>
     <%= f.association :event %>
-    <%= f.input :status, as: :select, collection: @statuses %>
-    <%= f.input :time_to_live, hint: 'Length to keep trying to notify non-responders, in hours' %>
-    <%= f.input :interval, hint: 'Frequency to send duplicate messags, in minutes' %>
-    <%= f.input :iterations_to_escalation, hint: 'Number of texts before voice calls'%>
-    <%= f.input :scheduled_start_time %>
-    <%= f.input :channels, :as => :select, :collection => Channel::CHANNEL_TYPES %>
+    <%= f.association :departments, as: :check_boxes,
+                              collection: Department.managing_people,
+                              include_blank: false %>
+    <%= f.input :status, as: :select, collection: @statuses,
+                         include_blank: false %>
+    <%#= f.input :time_to_live, hint: 'Length to keep trying to notify non-responders, in hours' %>
+    <%#= f.input :interval, hint: 'Frequency to send duplicate messags, in minutes' %>
+    <%#= f.input :iterations_to_escalation, hint: 'Number of texts before voice calls'%>
+    <%#= f.input :scheduled_start_time %>
+    <%= f.input :channels, :as => :select,
+                           :collection => Channel::CHANNEL_TYPES,
+                           :include_blank => false %>
     <%#= f.input :departments %>
     <%#= f.input :divisions %>
   </div>

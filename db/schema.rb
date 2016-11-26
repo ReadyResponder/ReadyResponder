@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161105063525) do
+ActiveRecord::Schema.define(version: 20161122015809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,6 +112,13 @@ ActiveRecord::Schema.define(version: 20161105063525) do
     t.boolean  "manage_items",              default: false
   end
 
+  create_table "departments_notifications", id: false, force: :cascade do |t|
+    t.integer "department_id"
+    t.integer "notification_id"
+  end
+
+  add_index "departments_notifications", ["department_id", "notification_id"], name: "departments_notifications_index", using: :btree
+
   create_table "events", force: :cascade do |t|
     t.integer  "course_id"
     t.string   "instructor",  limit: 255
@@ -129,6 +136,16 @@ ActiveRecord::Schema.define(version: 20161105063525) do
     t.string   "error_code",  limit: 255
     t.string   "id_code",     limit: 255
     t.boolean  "is_template",                                     default: false
+  end
+
+  create_table "grants", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "status"
   end
 
   create_table "helpdocs", force: :cascade do |t|
@@ -206,7 +223,10 @@ ActiveRecord::Schema.define(version: 20161105063525) do
     t.integer  "owner_id"
     t.integer  "department_id"
     t.integer  "item_type_id"
+    t.integer  "grant_id"
   end
+
+  add_index "items", ["grant_id"], name: "index_items_on_grant_id", using: :btree
 
   create_table "locations", force: :cascade do |t|
     t.string   "name",          limit: 255
@@ -250,6 +270,7 @@ ActiveRecord::Schema.define(version: 20161105063525) do
 
   create_table "notifications", force: :cascade do |t|
     t.integer  "event_id"
+    t.integer  "author_id"
     t.string   "status"
     t.integer  "time_to_live"
     t.integer  "interval"
@@ -258,12 +279,12 @@ ActiveRecord::Schema.define(version: 20161105063525) do
     t.datetime "start_time"
     t.text     "channels"
     t.text     "groups"
-    t.text     "departments"
     t.text     "divisions"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.string   "subject"
     t.text     "body"
+    t.datetime "end_time"
   end
 
   add_index "notifications", ["event_id"], name: "index_notifications_on_event_id", using: :btree

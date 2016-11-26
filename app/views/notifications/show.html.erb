@@ -17,7 +17,7 @@
 
 <p>
   <strong>Event:</strong>
-  <%= @event_title %>
+  <%= link_to @event.title, event_path(@event) if @event %>
 </p>
 
 <p>
@@ -26,25 +26,31 @@
 </p>
 
 <p>
-  <strong>Start at:</strong>
-  <%= @notification.start_time %>
+  <strong><%# Start at: %></strong>
+  <%#= @notification.start_time %>
 </p>
 
 <p>
-  <strong>Time to Live:</strong>
-  <%= @notification.time_to_live %>
+  <strong><%# Time to Live: %></strong>
+  <%#= @notification.time_to_live %>
 </p>
 
 <p>
-  <strong>Interval:</strong>
-  <%= @notification.interval %>
+  <strong><%#Interval: %></strong>
+  <%#= @notification.interval %>
 </p>
 
 <p>
-  <strong>Iterations to Escalation:</strong>
-  <%= @notification.iterations_to_escalation %>
+  <strong><%# Iterations to Escalation: %></strong>
+  <%#= @notification.iterations_to_escalation %>
 </p>
 
+<p>
+  <strong>Departments:</strong></br>
+  <% @notification.departments.each do |dept| %>
+     <%= dept.name %></br>
+  <% end %>
+</p>
 <p>
   <strong>Channels:</strong>
   <%= @notification.channels %>

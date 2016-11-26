@@ -10,24 +10,25 @@ class NotificationsController < ApplicationController
 
   # GET /notifications/1
   def show
-    @event_title = @notification.event ? @notification.event.title : 'None'
+    @event = @notification.event
   end
 
   # GET /notifications/new
   def new
     @notification = Notification.new
-    @statuses = @notification.available_statuses
+    # @statuses = @notification.available_statuses
+    @statuses = ["Active"]
+    @notification.status = "Active"
   end
 
   # GET /notifications/1/edit
   def edit
-    @statuses = @notification.available_statuses
+    @statuses = @notification.available_statuses + [@notification.status]
   end
 
   # POST /notifications
   def create
     @notification = Notification.new(notification_params)
-
     if @notification.save
       redirect_to @notification, notice: 'Notification was successfully created.'
     else
@@ -60,6 +61,6 @@ class NotificationsController < ApplicationController
     def notification_params
       params.require(:notification).permit(:subject, :body, :event_id, :author_id, :status,
          :time_to_live, :interval, :iterations_to_escalation, :groups,
-         :scheduled_start_time, :start_time, :channels, :departments, :divisions)
+         :scheduled_start_time, :start_time, :channels, :divisions, :department_ids => [])
     end
 end

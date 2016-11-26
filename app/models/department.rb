@@ -7,6 +7,12 @@ class Department < ActiveRecord::Base
   has_many :people
   has_many :items
   has_many :locations
+  has_and_belongs_to_many :notifications
+
+
+  def self.managing_people
+    Department.where(manage_people: true)
+  end
 
   def self.managing_items
     Department.where(manage_items: true)

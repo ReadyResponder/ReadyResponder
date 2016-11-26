@@ -3,8 +3,8 @@ class Msg::Upcoming < Msg::Base
     events = Event.upcoming.limit(5)
     response = ""
     events.each do |event|
-      response += "S(#{event.start_time.to_s}) " if event.start_time.present?
-      response += "E(#{event.end_time.to_s}) " if event.end_time.present?
+      response += "Start #{event.start_time.to_s} " if event.start_time.present?
+      response += "End #{event.end_time.to_s} " if event.end_time.present?
       response += " [#{event.id_code.to_s}] " if event.id_code.present?
       response += event.title.truncate(15) if event.title.present?
       # TODO need to show their status for this event (A, U, X)
