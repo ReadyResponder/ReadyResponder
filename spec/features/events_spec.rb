@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Events" do
   before(:each) { sign_in_as('Editor') }
 
-  get_basic_editor_views('event',['category', 'description', 'status'])
+  get_basic_editor_views('event',['Training', 'description', 'status'])
   describe "creates" do
     it "events" do
       @person1 = create(:person)

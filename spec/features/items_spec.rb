@@ -22,5 +22,5 @@ RSpec.describe Item do
     expect(page).to have_select("item_department_id", :options => [@department1.name, ''])
   end
 
-  get_basic_editor_views('item',['name', 'description', 'status'])
+  get_basic_editor_views('item',['status'])
 end

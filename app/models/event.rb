@@ -2,7 +2,9 @@ class Event < ActiveRecord::Base
   has_paper_trail
   before_save :calc_duration
 
-  attr_accessible :title, :description, :category, :course_id, :is_template, :duration, :start_time, :end_time, :instructor, :location, :status, :timecard_ids, :person_ids, :comments
+  attr_accessible :title, :description, :category, :course_id, :is_template,
+                  :duration, :start_time, :end_time, :instructor, :location,
+                  :id_code, :status, :timecard_ids, :person_ids, :comments
 
   validates_presence_of :category, :title, :status
 
@@ -49,7 +51,6 @@ class Event < ActiveRecord::Base
     self.partial_responses.map { |a| a.person }
   end
 
-
   def availabilities
     responses.available
   end
@@ -77,6 +78,13 @@ class Event < ActiveRecord::Base
 
   def manhours
     self.timecards.sum('actual_duration')
+  end
+
+  def self.find_by_code(id_code)
+    return Error::Base.new({code: 211, description: "No id_code given"}) if id_code.blank?
+    event = Event.where(id_code: id_code).first
+    return Error::Base.new({code: 201, description: "Event #{id_code} not found"}) if event.blank?
+    return event
   end
 
   def scheduled_people

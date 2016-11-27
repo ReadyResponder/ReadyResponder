@@ -15,7 +15,11 @@ Rails.application.routes.draw do
   resources :timecards
   resources :roles
 
-  post 'events/:id/schedule/:person_id/:card_action', to: 'events#schedule', as: 'schedule'
+  post 'events/:id/schedule/:person_id/:card_action',
+        to: 'events#schedule', as: 'schedule'
+
+  post 'texts/receive_text', to: 'texts#receive_text'
+  post 'say_voice', to: 'texts#say_voice'
 
   resources :moves
   resources :locations

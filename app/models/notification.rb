@@ -1,4 +1,6 @@
 class Notification < ActiveRecord::Base
+#  serialize :departments, Array
+  has_and_belongs_to_many :departments
   belongs_to :event
   # has_many :recipients
 
@@ -11,6 +13,9 @@ class Notification < ActiveRecord::Base
     'Complete' => [],
     'Expired' => []
   }
+
+  VALID_STATUSES = STATUS_STATES.keys
+  validates :status, inclusion: { in: VALID_STATUSES }
 
   def available_statuses
     if status

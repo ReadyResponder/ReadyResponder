@@ -2,7 +2,8 @@
 module AuthorizationViewHelper
   def get_basic_editor_views(model_name, things_to_look_for)
     it "gets the index" do
-      # I was unable to get the later attributes call to work unless factorygirl call was within the test
+      # I was unable to get the later attributes call to work
+      # unless factorygirl call was within the test
       @sample_object = create(model_name.to_sym)
       model_path = url_for(:action => 'index', :controller => model_name.pluralize)
       visit model_path
@@ -29,8 +30,9 @@ module AuthorizationViewHelper
       #visit url_for(:id => @sample_object2.id, :action => 'show', :controller => model_name.pluralize)
       model_path = url_for(@sample_object)
       visit model_path
-      #page.should have_content("Home")
-      #page.should have_content(things_to_look_for[0].titlecase)
+      expect(page).to have_content("Home")
+      expect(page).to_not have_content("Error")
+      expect(page).to have_content(things_to_look_for[0].titlecase)
     end
   end
 
@@ -59,8 +61,9 @@ module AuthorizationViewHelper
       expect(page).to have_content("New #{nested_model_name.capitalize}")
     end
     it "visits a display page" do
-      @sample_object = create(nested_model)
-      model_path = url_for(@sample_object)
+      @sample_outer_object = create(outer_model)
+      @sample_nested_object = create(nested_model, outer_model => @sample_outer_object)
+      model_path = url_for(@sample_nested_object)
       visit model_path
       expect(page).to have_content("Home")
       expect(page).to have_content(things_to_look_for[0].titlecase)

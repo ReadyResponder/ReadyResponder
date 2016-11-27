@@ -11,11 +11,15 @@ class Availability < ActiveRecord::Base
                                where("start_time <= ?", range.first) }
 
   # Available part of event
-  scope :partially_available, ->(range) { where("? >= end_time AND end_time >= ? OR ? >= start_time AND start_time >= ?", range.last, range.first, range.last, range.first) }
+  scope :partially_available, ->(range) { where("? > end_time AND end_time > ? OR ? > start_time AND start_time > ?", range.last, range.first, range.last, range.first) }
 
 
   scope :available, -> { where(status: "Available")}
   scope :unavailable, -> { where(status: "Unavailable")}
+
+  def to_s
+    "Recorded #{status}\n start #{start_time} \n end #{end_time} \n description #{description}"
+  end
 
   def partially_available?(event)
     return false if event.nil? || (event.end_time == self.end_time && event.start_time == self.start_time)

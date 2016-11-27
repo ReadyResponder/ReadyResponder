@@ -1,7 +1,6 @@
 <% content_for :sidebar do %>
-  <h1>Showing Notification</h1>
+  <%= sidebar_button_link 'List', notifications_path %>
   <%= sidebar_button_link 'Edit', edit_notification_path(@notification) %>
-  <%= sidebar_button_link 'Cancel', notifications_path %>
 <% end %>
 
 <p id="notice"><%= notice %></p>
@@ -18,7 +17,7 @@
 
 <p>
   <strong>Event:</strong>
-  <%= @event_title %>
+  <%= link_to @event.title, event_path(@event) if @event %>
 </p>
 
 <p>
@@ -27,41 +26,32 @@
 </p>
 
 <p>
-  <strong>Start at:</strong>
-  <%= @notification.scheduled_start_time %>
+  <strong><%# Start at: %></strong>
+  <%#= @notification.start_time %>
 </p>
 
 <p>
-  <strong>Time to Live:</strong>
-  <%= @notification.time_to_live %>
+  <strong><%# Time to Live: %></strong>
+  <%#= @notification.time_to_live %>
 </p>
 
 <p>
-  <strong>Interval:</strong>
-  <%= @notification.interval %>
+  <strong><%#Interval: %></strong>
+  <%#= @notification.interval %>
 </p>
 
 <p>
-  <strong>Iterations to Escalation:</strong>
-  <%= @notification.iterations_to_escalation %>
+  <strong><%# Iterations to Escalation: %></strong>
+  <%#= @notification.iterations_to_escalation %>
 </p>
 
+<p>
+  <strong>Departments:</strong></br>
+  <% @notification.departments.each do |dept| %>
+     <%= dept.name %></br>
+  <% end %>
+</p>
 <p>
   <strong>Channels:</strong>
   <%= @notification.channels %>
-</p>
-
-<p>
-  <strong>Groups:</strong>
-  <%= @notification.groups %>
-</p>
-
-<p>
-  <strong>Departments:</strong>
-  <%= @notification.departments %>
-</p>
-
-<p>
-  <strong>Divisions:</strong>
-  <%= @notification.divisions %>
 </p>

@@ -5,13 +5,13 @@ RSpec.describe "notifications/index", type: :view do
   before(:each) do
     assign(:notifications, [
       Notification.create!(
-        :event => nil,
-        :status => "active",
+        :event => create(:event),
+        :status => "Active",
         :channels => "Channels"
       ),
       Notification.create!(
-        :event => nil,
-        :status => "active",
+        :event => create(:event),
+        :status => "Complete",
         :channels => "Channels"
       )
     ])
@@ -20,8 +20,7 @@ RSpec.describe "notifications/index", type: :view do
 
   it "renders a list of notifications" do
     render
-    assert_select "tr>td", :text => 'None', :count => 2
-    assert_select "tr>td", :text => "active".to_s, :count => 2
-    assert_select "tr>td", :text => "Channels".to_s, :count => 2
+    assert_select "tr>td", :text => "Active".to_s, :count => 1
+    assert_select "tr>td", :text => "Complete".to_s, :count => 1
   end
 end

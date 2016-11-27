@@ -12,6 +12,7 @@
       <%= f.input :instructor %>
     </div>
     <%= f.input :location %>
+    <%= f.input :id_code %>
     <%= f.input :start_time, as: :string, label: "Start Time",
                 input_html: { class: "datetimepicker", size: 11,
                               value: format_datetime_value(f.object.start_time) } %>
