@@ -32,7 +32,7 @@
         </td>
         <td><%= number_to_phone(person.phone) %></td>
         <td><%= person.email %></td>
-        <td><%= person.department %></td>
+        <td><%= person.department&.name %></td>
         <td><%= person.sar_level %></td>
         <td><%= person.division1 %></td>
         <td><%= person.division2 %></td>
