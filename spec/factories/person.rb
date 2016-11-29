@@ -9,6 +9,6 @@ FactoryGirl.define do
     division2 'Command'
     title 'Captain'
     gender 'Female'
-    department 'Police'
+    association :department, factory: :department
   end
 end

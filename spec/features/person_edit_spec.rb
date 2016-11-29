@@ -6,16 +6,20 @@ RSpec.describe "Person" do
   describe "views" do
     before (:each) do
       # FIXME: This is never used
-      cj = create(:person, firstname: 'CJ',  department: 'Police' )
+      department_1 = create(:department, name: "Police")
+      department_2 = create(:department, name: "CERT")
+      department_3 = create(:department, name: "Other")
+
+      cj = create(:person, firstname: 'CJ', department_id: department_1.id )
       cj.channels << create(:channel, channel_type: 'Phone', content: '9785551212', category: "Mobile Phone")
-      sierra = create(:person, firstname: 'Sierra', department: 'CERT' )
+      sierra = create(:person, firstname: 'Sierra', department_id: department_2.id )
       sierra.channels << create(:channel, channel_type: 'Email', category: 'E-Mail', content: 'sierra@example.com')
       create(:person, firstname: 'Adam', status: 'Applicant' )
       create(:person, firstname: 'Priscilla', status: 'Prospect' )
       create(:person, firstname: 'Indy', status: 'Inactive' )
       create(:person, firstname: 'Leona', status: 'Leave of Absence' )
       create(:person, firstname: 'Donna', status: 'Declined' )
-      create(:person, firstname: 'Oscar', status: 'Active', department: 'Other' )
+      create(:person, firstname: 'Oscar', status: 'Active', department_id: department_3.id )
     end
   end
 
@@ -40,7 +44,8 @@ RSpec.describe "Person" do
     end
 
     it "does not duplicate channels on update" do
-      cj = create(:person, firstname: 'CJ',  department: 'Police' )
+      cj = create(:person, firstname: 'CJ', lastname: 'test',
+            department: Department.where(name: 'Police').first)
       cj.channels << create(:channel, type: "Phone", channel_type: 'Phone', content: '9785551212', category: "Mobile Phone")
       expect {
         visit edit_person_path(cj)

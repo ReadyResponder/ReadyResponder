@@ -12,7 +12,7 @@
     <% @people.each do |person| %>
       <tr>
         <td><%= link_to person.fullname, person %></td>
-        <td><%= person.department %></td>
+        <td><%= person.department&.name %></td>
         <td title=<%= person.application_date %> >
           <%= distance_of_time_in_words(Date.today, person.application_date) + ' ago' if person.application_date %>
         </td>

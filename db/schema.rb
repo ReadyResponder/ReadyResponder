@@ -308,16 +308,15 @@ ActiveRecord::Schema.define(version: 20161122015809) do
     t.string   "memberID",         limit: 255
     t.string   "orgcode",          limit: 255
     t.integer  "org_id"
-    t.string   "icsid",            limit: 255
-    t.string   "eligibility",      limit: 255
-    t.string   "deployable",       limit: 255
-    t.string   "gender",           limit: 255
-    t.string   "street",           limit: 255
-    t.string   "city",             limit: 255
-    t.string   "state",            limit: 255
-    t.string   "zipcode",          limit: 255
-    t.string   "license_number",   limit: 255
-    t.string   "department",       limit: 255
+    t.string   "icsid"
+    t.string   "eligibility"
+    t.string   "deployable"
+    t.string   "gender"
+    t.string   "street"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zipcode"
+    t.string   "license_number"
     t.integer  "weight"
     t.integer  "height"
     t.string   "eyes",             limit: 255
@@ -343,6 +342,7 @@ ActiveRecord::Schema.define(version: 20161122015809) do
     t.string   "nickname",         limit: 255
     t.string   "portrait",         limit: 255
     t.date     "application_date"
+    t.integer  "department_id"
   end
 
   create_table "people_titles", id: false, force: :cascade do |t|
