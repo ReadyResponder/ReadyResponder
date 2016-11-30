@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :department do
-    name "MyString"
+    name "Red Cross"
     status "Active"
     contact_id 1
-    description "MyText"
+    description "Large Organization"
   end
 
 end
