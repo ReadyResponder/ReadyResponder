@@ -1,4 +1,8 @@
-<h1>Listing departments</h1>
+<% content_for :sidebar do %>
+  <h2>Listing Departments</h2>
+  <%= sidebar_button_link 'New Department',
+      new_department_path unless cannot? :create, Department %>
+<% end %>
 
 <table id="departments" class="generic_datatable table table-striped table-bordered">
   <thead>
@@ -10,27 +14,19 @@
       <th>Manage People</th>
       <th>Manage Items</th>
       <th></th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
     <% @departments.each do |department| %>
       <tr>
-        <td><%= department.name %></td>
+        <td><%= link_to department.name,  department%></td>
         <td><%= department.status %></td>
         <td><%= department.contact_id %></td>
         <td><%= department.description %></td>
         <td><%= department.manage_people %></td>
         <td><%= department.manage_items %></td>
-        <td><%= table_button_link 'Show', department %></td>
         <td><%= table_button_link 'Edit', edit_department_path(department) %></td>
-        <td><%= table_button_link 'Destroy', department, method: :delete %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br/>
-
-<%= independent_button_link 'New Department', new_department_path %>
