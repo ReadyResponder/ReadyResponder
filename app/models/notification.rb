@@ -2,7 +2,8 @@ class Notification < ActiveRecord::Base
 #  serialize :departments, Array
   has_and_belongs_to_many :departments
   belongs_to :event
-  # has_many :recipients
+  has_many :recipients
+  has_many :people, :through => :recipients
 
   STATUS_STATES = {
     'New' => ['Scheduled', 'Active'],

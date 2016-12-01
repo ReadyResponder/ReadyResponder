@@ -8,6 +8,8 @@ class Person < ActiveRecord::Base
   before_save :title_order
 
   has_many :certs, -> { where("certs.status = 'Active'" ) }
+  has_many :recipients
+  has_many :notifications, :through => :recipients
   has_many :channels
   has_many :availabilities
   has_many :phones, -> { order(:priority) }

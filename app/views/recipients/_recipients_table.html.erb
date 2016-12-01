@@ -1,0 +1,18 @@
+<table id="notification_recipients"
+       class="datatable table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% recipients.each do |recipient| %>
+      <tr <%#== task_status_class(task) %>>
+        <td><%= link_to recipient.person.fullname, recipient.person %></td>
+        <td><%#= table_button_link 'Edit',
+                edit_recipient_path(recipient) if can? :edit, recipient %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
