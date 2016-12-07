@@ -104,7 +104,8 @@ class Person < ActiveRecord::Base
   end
 
   def self.find_by_phone(phone_number)
-    Phone.where(content: phone_number[2..12]).first.person
+    channel = Channel.where(content: phone_number[2..12]).first
+    channel.person if channel
   end
 
   def self.search(search)
