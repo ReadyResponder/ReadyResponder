@@ -75,6 +75,7 @@ Rails.application.routes.draw do
       get 'signin'
       get 'orgchart'
       get 'roster'
+      get 'department/:dept_id', action: "department", as: :department
     end
     resources :certs
     resources :availabilities
