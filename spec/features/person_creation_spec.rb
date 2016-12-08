@@ -9,7 +9,8 @@ RSpec.feature "Users can create new people" do
     fill_in 'user_email', :with => somebody.email
     fill_in 'user_password', :with => somebody.password
     click_on 'Sign in'
-    cert_dept = create(:department, shortname: "CERT")
+    aux = create(:department, shortname: "BAUX")
+    cert = create(:department, shortname: "CERT")
   end
 
   scenario "from the home page" do
