@@ -31,15 +31,17 @@ Role.find_or_create_by(name: "Reader")
 
 # Departments are where people call home.
 Department.create([
-  {name: "Department Public Works", status: "Active", division1: ["Division 1", "Division 2"], division2: ["Squad 1", "Squad 2"]},
-  {name: "Inactive Department", status: "Inactive", division1: ["Division 1", "Division 2"], division2: ["Squad 1", "Squad 2"]},
-  {name: "Police", status: "Active", division1: ["Division 1", "Division 2"], division2: ["Squad 1", "Squad 2"]}
+  {name: "Department Public Works", shortname: "DPW", status: "Active", division1: ["Division 1", "Division 2"], division2: ["Squad 1", "Squad 2"]},
+  {name: "Inactive Department", shortname: "inactive", status: "Inactive", division1: ["Division 1", "Division 2"], division2: ["Squad 1", "Squad 2"]},
+  {name: "Police", shortname: "BAUX", status: "Active", division1: ["Division 1", "Division 2"], division2: ["Squad 1", "Squad 2"]}
   ])
   cert = Department.create({name: "Community Emergency Response Team",
+                            shortname: "CERT", 
                             status: "Active",
                             division1: ["Division 1", "Division 2"],
                             division2: ["Squad 1", "Squad 2"]})
   mrc = Department.create({name: "Medical Reserve Corp",
+                            shortname: "MRC",
                             status: "Active",
                             division1: ["Division 1", "Division 2"],
                             division2: ["Team 1", "Team 2"]})

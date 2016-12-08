@@ -27,16 +27,10 @@ class PeopleController < ApplicationController
     render :template => "people/index"
   end
 
-  def police
-    redirect_to department_people_path("Police")
-  end
   def everybody
     @people = Person
     @page_title = "Everybody"
     render :template => "people/index"
-  end
-  def cert
-    redirect_to department_people_path("CERT")
   end
 
   def other

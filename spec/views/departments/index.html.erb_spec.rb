@@ -6,6 +6,7 @@ RSpec.describe "departments/index", :type => :view do
     assign(:departments, [
       Department.create!(
         :name => "Red Cross",
+        :shortname => "Red Cross",
         :status => "Active",
         :description => "MyText",
         :manage_people => false,
@@ -13,6 +14,7 @@ RSpec.describe "departments/index", :type => :view do
       ),
       Department.create!(
         :name => "MRC",
+        :shortname => "Red Cross",
         :status => "Active",
         :description => "MyText",
         :manage_people => true,

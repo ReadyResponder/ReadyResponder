@@ -70,8 +70,6 @@ Rails.application.routes.draw do
       get 'applicants'
       get 'prospects'
       get 'declined'
-      get 'cert'
-      get 'police'
       get 'signin'
       get 'orgchart'
       get 'roster'
