@@ -5,15 +5,15 @@ class PeopleController < ApplicationController
 
   def signin
     #This is the sign-in sheet, not anything about authentication
-    @department = Department.where(shortname: "BAUX")&.first
-    @people = @department.people.active
+    @department = Department.where(shortname: "BAUX").first
+    @people = @department.people.active if @department
     @page_title = "Sign-in"
     render :layout => "print_signin"
   end
 
   def orgchart
-    @department = Department.where(shortname: "BAUX")&.first
-    @people = @department.people.active
+    @department = Department.where(shortname: "BAUX").first
+    @people = @department.people.active if @department
     @page_title = "Org Chart"
     render :layout => "orgchart"
   end
