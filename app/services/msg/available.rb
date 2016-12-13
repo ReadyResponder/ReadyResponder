@@ -14,7 +14,7 @@ class Msg::Available < Msg::Base
     else
       target = Event.find_by_code(@params[:Body].split[1].downcase)
       return target if target.is_a? Error::Base
-      description = params[:Body].split[2]
+      description = @params[:Body].split[2]
     end
 
     # target = Notification::find_by_code.call(@params[:Body].split[1])

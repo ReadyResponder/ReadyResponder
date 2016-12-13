@@ -1,5 +1,4 @@
 require File.expand_path('../boot', __FILE__)
-
 require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
@@ -14,6 +13,8 @@ module ReadyResponder
 
     # load service objects
     config.autoload_paths << Rails.root.join('services')
+
+    config.assets.precompile += %w(*.js)
 
     # Load modules located in the lib directory
     config.autoload_paths << Rails.root.join('lib')

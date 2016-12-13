@@ -1,4 +1,4 @@
-class Messages::SendNotificationTextMessage
+class Message::SendNotificationTextMessage
   require 'twilio-ruby'
   def initialize
     # create Twilio Client

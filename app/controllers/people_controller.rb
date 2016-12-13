@@ -18,7 +18,8 @@ class PeopleController < ApplicationController
   end
 
   def police
-    @people = Person.active.select{|person| person.department&.name == "Police"}
+    @department = Department.where(shortname: "BAUX").first
+    @people = @department.people.active
     @page_title = "Police"
     render :template => "people/index"
   end
@@ -28,7 +29,8 @@ class PeopleController < ApplicationController
     render :template => "people/index"
   end
   def cert
-    @people = Person.active.select{|person| person.department&.name == "CERT"} + Person.cert.all
+    @department = Department.where(shortname: "CERT").first
+    @people = @department.people.active
     @page_title = "CERT"
     render :template => "people/index"
   end
@@ -101,6 +103,8 @@ class PeopleController < ApplicationController
   def edit
     @person = Person.includes(:phones, :emails).find(params[:id])
     @page_title = @person.fullname
+    @emails = @person.emails
+    @phone = @person.channels.select {|p| p.phone?}.first
   end
 
   def create
