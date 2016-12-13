@@ -22,7 +22,7 @@
                             value: format_date_value(f.object.application_date) } %>
 
       <h2> Phone information </h2>
-      <%= f.simple_fields_for @phone, wrapper: :horizontal_input_group do |c| %>
+      <%= f.simple_fields_for :phones, wrapper: :horizontal_input_group do |c| %>
         <fieldset>
           <%= c.input :id, :as => :hidden %>
           <%= c.input :category, :as => :select, :collection => Channel::CATEGORIES %>

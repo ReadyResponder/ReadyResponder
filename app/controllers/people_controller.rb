@@ -71,6 +71,7 @@ class PeopleController < ApplicationController
   end
 
   def index
+    #Person.active.joins(:department).where("departments.manage_people": true)
     @people = Person.active.select{|person| person.department&.shortname == 'CERT' || person.department&.shortname == 'BAUX'}
     @page_title = "Active Police and CERT"
     respond_to do |format|
