@@ -19,7 +19,7 @@
     <%= f.input :division2, :as => :grouped_select, :group_method => :division2, :label => 'Squad', :collection => Department.all %>
     <%= f.input :application_date, as: :string,
               input_html: { class: 'datepicker', size: 11,
-                              value: format_date_value(f.object.application_date) } %>
+                            value: format_date_value(f.object.application_date) } %>
 
       <h2> Phone information </h2>
       <%= f.simple_fields_for :phones, wrapper: :horizontal_input_group do |c| %>

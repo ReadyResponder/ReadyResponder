@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe "a user" do
   describe "in the reader role" do
     before (:each) do
-      @department = create(:department, name: "Police")
-      @person = create(:person, department_id: @department.id)
+      @department = create(:department, shortname: "BAUX")
+      @person = create(:person, department: @department)
       sign_in_as('Reader')
     end
 

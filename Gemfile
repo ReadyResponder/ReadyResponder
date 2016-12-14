@@ -13,6 +13,9 @@ gem 'cancancan'
 #gem "taps"
 #gem 'validates_timeliness', '~> 3.0'
 
+gem 'therubyracer'
+gem 'jquery-turbolinks'
+
 source 'https://rails-assets.org' do
   gem 'rails-assets-datetimepicker'
 end

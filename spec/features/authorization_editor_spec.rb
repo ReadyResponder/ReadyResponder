@@ -2,9 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "a user" do
   before(:each) do
-    @department = create(:department, name: "Police")
-    @person = create(:person, department_id: @department.id)
-    
+    @department = create(:department, shortname: "BAUX")
+    @person = create(:person, department: @department)
   end
 
   describe "in the reader role" do
@@ -26,8 +25,8 @@ RSpec.describe "a user" do
       expect(page).to have_content(@person.lastname)
     end
     it "gets a signin sheet when requested" do
-      @person_active = create(:person, department_id:  @department.id)
-      @person_inactive = create(:person, status: 'Inactive', department_id:  @department.id)
+      @person_active = create(:person, department:  @department)
+      @person_inactive = create(:person, status: 'Inactive', department:  @department)
       visit signin_people_path
       expect(page).to have_content("Command") #This is in the first heading
       expect(page).to have_content(@person_active.lastname)
