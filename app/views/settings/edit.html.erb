@@ -1,6 +1,7 @@
-<h1>Editing Setting</h1>
+<% content_for :sidebar do %>
+  <h1>Editing Setting</h1>
+  <%= sidebar_button_link 'Show', @setting %>
+  <%= sidebar_button_link 'Back', settings_path %>
+<% end %>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @setting %> |
-<%= link_to 'Back', settings_path %>
