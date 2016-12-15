@@ -25,8 +25,8 @@ Rails.application.configure do
   config.serve_static_files = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   # Compress JavaScripts and CSS.
-  # config.assets.js_compressor = :uglifier
-  # config.assets.css_compressor = :sass
+   config.assets.js_compressor = :uglifier
+   config.assets.css_compressor = :sass
 
   #config.assets.compress = true
   #Changed to false 1/3/2013 to work around a bug when trying to deploy. Wanted the new version more than the speed increase
@@ -34,7 +34,7 @@ Rails.application.configure do
   config.assets.compress = false
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
+  config.assets.compile = true 
 
   # Asset digests allow you to set far-future HTTP expiration dates on all assets,
   # yet still be able to expire them through the digest params.

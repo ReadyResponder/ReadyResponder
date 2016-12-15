@@ -1,4 +1,4 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
 gem 'rails', '~> 4.2.7'
 
@@ -12,6 +12,9 @@ gem 'geocoder'
 gem 'cancancan'
 #gem "taps"
 #gem 'validates_timeliness', '~> 3.0'
+
+gem 'therubyracer'
+gem 'jquery-turbolinks'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-datetimepicker'

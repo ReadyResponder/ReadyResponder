@@ -5,14 +5,15 @@ class PeopleController < ApplicationController
 
   def signin
     #This is the sign-in sheet, not anything about authentication
-    @people = Person.active
-    @department = Department.where(name: "Police")&.first
+    @department = Department.where(shortname: "BAUX").first
+    @people = @department.people.active if @department
     @page_title = "Sign-in"
     render :layout => "print_signin"
   end
 
   def orgchart
-    @people = Person.active.select{|person| person.department&.name == "Police"}
+    @department = Department.where(shortname: "BAUX").first
+    @people = @department.people.active if @department
     @page_title = "Org Chart"
     render :layout => "orgchart"
   end
@@ -68,7 +69,8 @@ class PeopleController < ApplicationController
   end
 
   def index
-    @people = Person.active.select{|person| person.department&.name == 'CERT' || person.department&.name == 'Police'}
+    #Person.active.joins(:department).where("departments.manage_people": true)
+    @people = Person.active.select{|person| person.department&.shortname == 'CERT' || person.department&.shortname == 'BAUX'}
     @page_title = "Active Police and CERT"
     respond_to do |format|
       format.html # index.html.erb
@@ -91,7 +93,6 @@ class PeopleController < ApplicationController
     @person = Person.new(status: cookies[:status], state: 'MA')
     @person.emails.build(category: 'E-Mail', status: 'OK', usage: '1-All')
     @person.phones.build(category: "Mobile Phone", status: "OK", usage: "1-All")
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @person }
@@ -101,6 +102,8 @@ class PeopleController < ApplicationController
   def edit
     @person = Person.includes(:phones, :emails).find(params[:id])
     @page_title = @person.fullname
+    @emails = @person.emails
+    @phone = @person.channels.select {|p| p.phone?}.first
   end
 
   def create

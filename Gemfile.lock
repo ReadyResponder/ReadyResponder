@@ -1,5 +1,5 @@
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   remote: https://rails-assets.org/
   specs:
     actionmailer (4.2.7.1)
@@ -147,6 +147,9 @@ GEM
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
+    jquery-turbolinks (2.1.0)
+      railties (>= 3.1.0)
+      turbolinks
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
     json (1.8.3)
@@ -156,6 +159,7 @@ GEM
       addressable (~> 2.3)
     letter_opener (1.4.1)
       launchy (~> 2.2)
+    libv8 (3.16.14.15)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -265,6 +269,7 @@ GEM
       ffi (>= 0.5.0)
     rdoc (4.2.2)
       json (~> 1.4)
+    ref (2.0.0)
     request_store (1.3.1)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
@@ -329,6 +334,9 @@ GEM
       net-ssh (>= 2.8.0)
     test-unit (3.2.1)
       power_assert
+    therubyracer (0.12.2)
+      libv8 (~> 3.16.14.0)
+      ref
     thin (1.5.1)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -383,6 +391,7 @@ DEPENDENCIES
   guard-livereload
   guard-rspec
   jquery-rails
+  jquery-turbolinks
   jquery-ui-rails
   launchy
   letter_opener
@@ -405,6 +414,7 @@ DEPENDENCIES
   simple_form
   spring
   test-unit
+  therubyracer
   thin
   turbolinks
   twilio-ruby (~> 4.11.1)
@@ -413,4 +423,4 @@ DEPENDENCIES
   web-console (~> 3.0)
 
 BUNDLED WITH
-   1.13.2
+   1.13.6
