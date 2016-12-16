@@ -4,6 +4,7 @@ RSpec.describe "departments/edit", :type => :view do
   before(:each) do
     @department = assign(:department, Department.create!(
       :name => "MyString",
+      :shortname => "MyString",
       :status => "MyString",
       :contact_id => 1,
       :description => "MyText",

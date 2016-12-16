@@ -26,32 +26,6 @@ RSpec.feature "Users can create new people" do
     expect(current_path).to eq root_path
   end
 
-  scenario "from the police people page" do
-    visit police_people_path
-    click_link "People"
-    click_link "New Person"
-    fill_in "First Name", with: "John"
-    fill_in "Last Name", with: "Doe"
-    fill_in "Date of birth", with: "1990-05-13"
-    select "Active", from: "person_status" #"Status" also matches Channel status
-    click_button "Create Person"
-    expect(page).to have_content "Person was successfully created."
-    expect(current_path).to eq police_people_path
-  end
-
-  scenario "from the CERT people page" do
-    visit cert_people_path
-    click_link "People"
-    click_link "New Person"
-    fill_in "First Name", with: "John"
-    fill_in "Last Name", with: "Doe"
-    fill_in "Date of birth", with: "1990-05-13"
-    select "Active", from: "person_status" #"Status" also matches Channel status
-    click_button "Create Person"
-    expect(page).to have_content "Person was successfully created."
-    expect(current_path).to eq cert_people_path
-  end
-
   scenario "from the everybody people page" do
     visit everybody_people_path
     click_link "People"

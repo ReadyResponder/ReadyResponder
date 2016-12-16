@@ -17,22 +17,20 @@ class PeopleController < ApplicationController
     @page_title = "Org Chart"
     render :layout => "orgchart"
   end
-
-  def police
-    @department = Department.where(shortname: "BAUX").first
-    @people = @department.people.active
-    @page_title = "Police"
+  
+  def department
+    dept = Department.find(params[:dept_id])
+    # TODO: more gracefully handle department not found
+    head 404 and return if dept.nil?
+    
+    @people = Person.active.where(department_id: dept.id)
+    @page_title = dept.name
     render :template => "people/index"
   end
+
   def everybody
     @people = Person
     @page_title = "Everybody"
-    render :template => "people/index"
-  end
-  def cert
-    @department = Department.where(shortname: "CERT").first
-    @people = @department.people.active
-    @page_title = "CERT"
     render :template => "people/index"
   end
 

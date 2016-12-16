@@ -8,6 +8,10 @@ class Department < ActiveRecord::Base
   has_many :items
   has_many :locations
   has_and_belongs_to_many :notifications
+  
+  validates_presence_of :shortname
+  
+  scope :active, -> { where( status: "Active" ) }
 
 
   def self.managing_people

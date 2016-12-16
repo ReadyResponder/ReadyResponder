@@ -5,8 +5,8 @@ RSpec.describe "Person" do
 
   describe "views" do
     before (:each) do
-      aux = create(:department, shortname: "BAUX")
-      cert = create(:department, shortname: "CERT")
+      aux = create(:department, name: "Police", shortname: "BAUX")
+      cert = create(:department, name: "CERT", shortname: "CERT")
       dpw = create(:department, shortname: "DPW")
 
       cj = create(:person, firstname: 'CJ',  department: aux)
@@ -37,7 +37,7 @@ RSpec.describe "Person" do
     end
 
     it "returns a page for Police" do
-      visit police_people_path
+      visit department_people_path(Department.find_by(shortname: "BAUX").id)
       expect(page).to have_content('Police')
       expect(page).to have_content('Home') # This is in the nav bar
       expect(page).to have_content('CJ')
@@ -50,7 +50,7 @@ RSpec.describe "Person" do
    end
 
     it "returns a page for CERT" do
-      visit cert_people_path
+      visit department_people_path(Department.find_by(shortname: "CERT").id)
       expect(page).to have_content('CERT')
       expect(page).to have_content('Home') # This is in the nav bar
       expect(page).not_to have_content('CJ')

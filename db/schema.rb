@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161122015809) do
+ActiveRecord::Schema.define(version: 20161208043524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,7 +110,7 @@ ActiveRecord::Schema.define(version: 20161122015809) do
 
   create_table "departments", force: :cascade do |t|
     t.string   "name",          limit: 255
-    t.string   "shortname",     limit: 255
+    t.string   "shortname",                                 null: false
     t.string   "status",        limit: 255
     t.integer  "contact_id"
     t.text     "description"
