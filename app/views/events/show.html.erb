@@ -21,6 +21,7 @@
 <% if @event.description.present? %>
   <p><b>Description:</b> <%= @event.description %></p>
 <% end %>
+<p><b>Code:</b> <%= @event.id_code %></p>  
 <% if @event.category == "Training" %>
   <p><%= @event.course.blank? ? "Training" : @event.course.name %> by <%= @event.instructor %></p>
 <% end %>
@@ -49,7 +50,7 @@
       </div>
     </div>
     <div class="tab-pane" id="event-notification-tab">
-      <%= render(partial: 'notifications/notifications_table', 
+      <%= render(partial: 'notifications/notifications_table',
                  locals: { notifications: @event.notifications }) %>
     </div>
   </div>

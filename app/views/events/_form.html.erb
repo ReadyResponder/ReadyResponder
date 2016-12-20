@@ -12,6 +12,7 @@
       <%= f.input :instructor %>
     </div>
     <%= f.input :location %>
+    <%= f.association :departments, :as => :select, :collection => Department.managing_people %>
     <%= f.input :id_code %>
     <%= f.input :start_time, as: :string, label: "Start Time",
                 input_html: { class: "datetimepicker", size: 11,

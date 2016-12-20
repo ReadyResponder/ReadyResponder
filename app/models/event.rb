@@ -4,7 +4,8 @@ class Event < ActiveRecord::Base
 
   attr_accessible :title, :description, :category, :course_id, :is_template,
                   :duration, :start_time, :end_time, :instructor, :location,
-                  :id_code, :status, :timecard_ids, :person_ids, :comments
+                  :id_code, :status, :timecard_ids, :person_ids, :comments,
+                  :department_ids
 
   validates_presence_of :category, :title, :status
 
@@ -65,12 +66,11 @@ class Event < ActiveRecord::Base
   end
 
   def eligible_people
-    Person.active.all # In the future, this will need to honor department
-    # def eligible_people
-    #   self.departments.each do |department|
-    #
-    #   end
-    # end
+    eligible_people = []
+    departments.each do |d|
+      eligible_people += d.people.active
+    end
+    return eligible_people
   end
 
   def unresponsive_people

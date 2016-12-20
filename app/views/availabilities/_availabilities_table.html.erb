@@ -5,6 +5,7 @@
       <th>ID</th>
       <th>Name</th>
       <th>Phone</th>
+      <th>Dept</th>
       <th>Start time</th>
       <th>End Time</th>
       <th>Description</th>
@@ -18,6 +19,7 @@
         <td><%= availability.person.icsid %></td>
         <td><%= link_to availability.person.fullname, availability.person %></td>
         <td><%= number_to_phone(availability.person.phone) %></td>
+        <td><%= availability.person.dept_shortname %></td>
         <td><time><%= availability.start_time %></time></td>
         <td><%= availability.end_time %></td>
         <td><%= truncate(availability.description, length: 24) %></td>
