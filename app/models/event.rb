@@ -14,6 +14,7 @@ class Event < ActiveRecord::Base
   validates_presence_of :end_time  #, :if => :completed?
   validates_chronology :start_time, :end_time
 
+  has_and_belongs_to_many :departments
   has_many :certs
   belongs_to :course
   has_many :activities, as: :loggable

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161208043524) do
+ActiveRecord::Schema.define(version: 20161220023733) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,6 +121,14 @@ ActiveRecord::Schema.define(version: 20161208043524) do
     t.boolean  "manage_people",             default: false
     t.boolean  "manage_items",              default: false
   end
+
+  create_table "departments_events", id: false, force: :cascade do |t|
+    t.integer "department_id", null: false
+    t.integer "event_id",      null: false
+  end
+
+  add_index "departments_events", ["department_id", "event_id"], name: "index_departments_events_on_department_id_and_event_id", using: :btree
+  add_index "departments_events", ["event_id", "department_id"], name: "index_departments_events_on_event_id_and_department_id", using: :btree
 
   create_table "departments_notifications", id: false, force: :cascade do |t|
     t.integer "department_id"
@@ -308,15 +316,15 @@ ActiveRecord::Schema.define(version: 20161208043524) do
     t.string   "memberID",         limit: 255
     t.string   "orgcode",          limit: 255
     t.integer  "org_id"
-    t.string   "icsid"
-    t.string   "eligibility"
-    t.string   "deployable"
-    t.string   "gender"
-    t.string   "street"
-    t.string   "city"
-    t.string   "state"
-    t.string   "zipcode"
-    t.string   "license_number"
+    t.string   "icsid",            limit: 255
+    t.string   "eligibility",      limit: 255
+    t.string   "deployable",       limit: 255
+    t.string   "gender",           limit: 255
+    t.string   "street",           limit: 255
+    t.string   "city",             limit: 255
+    t.string   "state",            limit: 255
+    t.string   "zipcode",          limit: 255
+    t.string   "license_number",   limit: 255
     t.integer  "weight"
     t.integer  "height"
     t.string   "eyes",             limit: 255
