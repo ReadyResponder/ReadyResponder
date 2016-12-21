@@ -66,11 +66,7 @@ class Event < ActiveRecord::Base
   end
 
   def eligible_people
-    eligible_people = []
-    departments.each do |d|
-      eligible_people += d.people.active
-    end
-    return eligible_people
+    Person.active.where(department: self.departments)
   end
 
   def unresponsive_people
