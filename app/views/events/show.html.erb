@@ -1,9 +1,13 @@
 <% content_for :sidebar do %>
   <%= sidebar_button_link 'Return to Events', events_path %>
-  <%= sidebar_button_link 'Edit Event', edit_event_path(@event) if can? :edit, @event %>
-  <%= sidebar_button_link 'New Task', new_event_task_path(@event) if can? :create, Task %>
-  <%= sidebar_button_link 'New Availability', new_event_availability_path(@event) if can? :create, Availability %>
-  <%= sidebar_button_link "Excel", event_path(@event, format: "xlsx") %>
+  <%= sidebar_button_link 'Edit Event',
+           edit_event_path(@event) if can? :edit, @event %>
+  <%= sidebar_button_link 'New Task',
+           new_event_task_path(@event) if can? :create, Task %>
+  <%= sidebar_button_link 'New Availability',
+           new_event_availability_path(@event) if can? :create, Availability %>
+  <%= sidebar_button_link "New Notification",
+           new_event_notification_path(@event) if can? :create, Notification %>
 <% end %>
 
 <p>
@@ -21,6 +25,8 @@
 <% if @event.description.present? %>
   <p><b>Description:</b> <%= @event.description %></p>
 <% end %>
+<p><b>Code:</b> <%= @event.id_code %></p>
+<p><b>Departments:</b> <%= @event.departments.map { |d| d.name } %></p>
 <% if @event.category == "Training" %>
   <p><%= @event.course.blank? ? "Training" : @event.course.name %> by <%= @event.instructor %></p>
 <% end %>
@@ -49,7 +55,7 @@
       </div>
     </div>
     <div class="tab-pane" id="event-notification-tab">
-      <%= render(partial: 'notifications/notifications_table', 
+      <%= render(partial: 'notifications/notifications_table',
                  locals: { notifications: @event.notifications }) %>
     </div>
   </div>

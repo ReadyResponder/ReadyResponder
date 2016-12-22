@@ -59,6 +59,7 @@ Rails.application.routes.draw do
   resources :events do
     resources :tasks, only: [:new, :create]
     resources :availabilities
+    resources :notifications
   end
 
   resources :people do

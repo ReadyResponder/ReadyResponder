@@ -5,6 +5,7 @@
       <th>ID</th>
       <th>Name</th>
       <th>Phone</th>
+      <th>Dept</th>
     </tr>
   </thead>
   <tbody>
@@ -13,6 +14,7 @@
         <td><%= person.icsid %></td>
         <td><%= link_to person.fullname, person_path(person) %></td>
         <td><%= number_to_phone(person.phone) %></td>
+        <td><%= person.dept_shortname %></td>
       </tr>
     <% end %>
   </tbody>

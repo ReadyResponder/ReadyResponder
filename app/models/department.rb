@@ -7,12 +7,12 @@ class Department < ActiveRecord::Base
   has_many :people
   has_many :items
   has_many :locations
+  has_and_belongs_to_many :events
   has_and_belongs_to_many :notifications
-  
-  validates_presence_of :shortname
-  
-  scope :active, -> { where( status: "Active" ) }
 
+  validates_presence_of :shortname
+
+  scope :active, -> { where( status: "Active" ) }
 
   def self.managing_people
     Department.where(manage_people: true)

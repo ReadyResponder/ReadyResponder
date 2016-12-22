@@ -4,7 +4,8 @@ class Event < ActiveRecord::Base
 
   attr_accessible :title, :description, :category, :course_id, :is_template,
                   :duration, :start_time, :end_time, :instructor, :location,
-                  :id_code, :status, :timecard_ids, :person_ids, :comments
+                  :id_code, :status, :timecard_ids, :person_ids, :comments,
+                  :department_ids
 
   validates_presence_of :category, :title, :status
 
@@ -14,6 +15,7 @@ class Event < ActiveRecord::Base
   validates_presence_of :end_time  #, :if => :completed?
   validates_chronology :start_time, :end_time
 
+  has_and_belongs_to_many :departments
   has_many :certs
   belongs_to :course
   has_many :activities, as: :loggable
@@ -64,12 +66,7 @@ class Event < ActiveRecord::Base
   end
 
   def eligible_people
-    Person.active.all # In the future, this will need to honor department
-    # def eligible_people
-    #   self.departments.each do |department|
-    #
-    #   end
-    # end
+    Person.active.where(department: self.departments)
   end
 
   def unresponsive_people

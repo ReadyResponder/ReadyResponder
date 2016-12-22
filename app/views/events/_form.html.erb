@@ -6,12 +6,16 @@
     <%= f.input :description %>
     <%= f.input :status, :as => :select, :collection => Event::STATUS_CHOICES %>
     <%= f.input :category, :as => :select, :collection => Event::CATEGORY_CHOICES %>
-    <%= f.input :is_template, :as => :select, :collection => [true, false], :label => "Template" %>
+    <%= f.input :is_template, :as => :select, :collection => [true, false],
+                :label => "Template" %>
     <div class="training-controls">
-      <%= f.association :course, :hint => "If the training is not for certification, do not choose a course" %>
+      <%= f.association :course,
+                        :hint => "If the training is not for certification, do not choose a course" %>
       <%= f.input :instructor %>
     </div>
     <%= f.input :location %>
+    <%= f.association :departments, :as => :select,
+                      :collection => Department.managing_people %>
     <%= f.input :id_code %>
     <%= f.input :start_time, as: :string, label: "Start Time",
                 input_html: { class: "datetimepicker", size: 11,

@@ -108,6 +108,10 @@ class Person < ActiveRecord::Base
     channel.person if channel
   end
 
+  def dept_shortname
+    department ? department.shortname : "None"
+  end
+
   def self.search(search)
     if search
       find :all, :conditions => ['firstname LIKE ? OR lastname LIKE ? OR city LIKE ? OR icsid like ?',
