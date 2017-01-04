@@ -15,7 +15,15 @@ class NotificationsController < ApplicationController
 
   # GET /notifications/new
   def new
-    @notification = Notification.new
+    @event = Event.find(params[:event_id])
+    @dept_choices = @event.departments
+    @notification = @event.notifications.new
+    @notification.departments = @dept_choices
+    start_time_display = @event.start_time.strftime('%a %b %d %k:%M')
+    end_time_display = @event.end_time.strftime('%a %b %d %k:%M')
+    @notification.subject = "Please provide availability "
+    @notification.subject += "for #{@event.title} [#{@event.id_code}] "
+    @notification.subject += "from #{start_time_display} to #{end_time_display}"
     # @statuses = @notification.available_statuses
     @statuses = ["Active"]
     @notification.status = "Active"
@@ -24,12 +32,17 @@ class NotificationsController < ApplicationController
   # GET /notifications/1/edit
   def edit
     @statuses = @notification.available_statuses + [@notification.status]
+    @event = @notification.event
+    @dept_choices = @event.departments
   end
 
   # POST /notifications
   def create
     @notification = Notification.new(notification_params)
     if @notification.save
+      if @notification.status == "Active" && !@notification.start_time
+        @notification.activate!
+      end
       redirect_to @notification, notice: 'Notification was successfully created.'
     else
       render :new
@@ -59,8 +72,9 @@ class NotificationsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def notification_params
-      params.require(:notification).permit(:subject, :body, :event_id, :author_id, :status,
-         :time_to_live, :interval, :iterations_to_escalation, :groups,
-         :scheduled_start_time, :start_time, :channels, :divisions, :department_ids => [])
+      params.require(:notification).permit(:subject, :body, :event_id, :status,
+         :author_id, :time_to_live, :interval, :iterations_to_escalation,
+         :groups, :scheduled_start_time, :start_time, :channels,
+         :divisions, :department_ids => [])
     end
 end

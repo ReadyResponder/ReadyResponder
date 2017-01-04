@@ -120,10 +120,12 @@ module ApplicationHelper
   end
 
   def format_time_span(start_time, end_time, duration = nil)
+    start_time_display = start_time.strftime('%a %b %d %k:%M')
+    end_time_display = end_time.strftime('%a %b %d %k:%M')
     if duration
-      "#{start_time} to #{end_time}, #{duration}h"
+      "#{start_time_display} to #{end_time_display}, #{duration}h"
     else
-      "#{start_time} to #{end_time}"
+      "#{start_time_display} to #{end_time_display}"
     end
   end
 

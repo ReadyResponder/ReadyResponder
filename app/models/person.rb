@@ -108,6 +108,11 @@ class Person < ActiveRecord::Base
     channel.person if channel
   end
 
+  def responded?(target)
+    return false if !target.respond_to?(:start_time) || !target.respond_to?(:end_time)
+    self.availabilities.for_time_span(target.start_time..target.end_time).count > 0
+  end
+
   def dept_shortname
     department ? department.shortname : "None"
   end

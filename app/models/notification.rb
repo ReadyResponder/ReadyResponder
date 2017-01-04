@@ -26,4 +26,31 @@ class Notification < ActiveRecord::Base
     end
   end
 
+  def start_time
+    self.event.start_time
+  end
+
+  def end_time
+    self.event.end_time
+  end
+
+  def activate!
+    self.start_time = Time.zone.now
+    self.status = "In-Progress"
+    self.save!
+    Person.active.where(department: self.departments).each do |p|
+      recipients.create(person: p) if !p.responded?(self)
+    end
+    notify!
+  end
+
+  def notify!
+    if channels.include? "Text"
+      twilio = Message::SendNotificationTextMessage.new
+      recipients.each do |r|
+        r.notify! twilio
+      end
+    end
+  end
+
 end

@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
-  <h1>New Notification</h1>
-  <%= sidebar_button_link 'Cancel', notifications_path %>
+  <h2>New Notification</h2>
+  <%= sidebar_button_link 'Cancel', event_path(@event) %>
 <% end %>
 
 <%= render 'form' %>

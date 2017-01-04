@@ -7,6 +7,8 @@
       <th>Subject</th>
       <th>Status</th>
       <th>Event</th>
+      <th>Departments</th>
+      <th>Recipients</th>
       <th>Channels</th>
       <th colspan="1"></th>
     </tr>
@@ -16,11 +18,13 @@
   <tbody>
     <% notifications.each do |notification| %>
       <tr>
-        <td><%= link_to truncate(notification.subject, length: 20), notification_path(notification) %></td>
+        <td><%= link_to truncate(notification.subject, length: 60), notification_path(notification) %></td>
         <td><%= notification.status %></td>
         <td><%= notification.event ? (link_to notification.event.title, notification.event) : 'None' %></td>
+        <td><%= notification.departments.map { |d| d.shortname }.join(", ") %></td>
+        <td><%= notification.recipients.count %></td>
         <td><%= notification.channels %></td>
-        <td><%= link_to 'Edit', edit_notification_path(notification) if can? :update, notification %></td>
+        <td><%= table_button_link  'Edit', edit_notification_path(notification) if can? :update, notification %></td>
       </tr>
     <% end %>
   </tbody>

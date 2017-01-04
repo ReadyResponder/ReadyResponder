@@ -11,6 +11,11 @@ module ReadyResponder
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
+    # Value is filtered so that sensitive things in Settings will not be logged
+    # It also filters values in Items and Unique_ids,
+    # but that's not a big problem
+    config.filter_parameters << :value
+
     # load service objects
     config.autoload_paths << Rails.root.join('services')
 

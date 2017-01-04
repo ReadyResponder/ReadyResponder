@@ -2,18 +2,19 @@ class Message::SendNotificationTextMessage
   require 'twilio-ruby'
   def initialize
     # create Twilio Client
-    account_sid = ENV["TWILIO_ACCOUNT_SID"] # Your Account SID from www.twilio.com/console
-    auth_token = ENV["TWILIO_AUTH_TOKEN"]   # Your Auth Token from www.twilio.com/console
+    account_sid = Setting.get("TWILIO_ACCOUNT_SID") # Your Account SID from www.twilio.com/console
+    auth_token = Setting.get("TWILIO_AUTH_TOKEN")  # Your Auth Token from www.twilio.com/console
 
     @client = Twilio::REST::Client.new account_sid, auth_token
   end
 
-  def call(message, recipient_number, sender_number)
+  def sms_send(message, recipient_number,
+           sender_number = Setting.get("outbound_text_number"))
     begin
         message = @client.account.messages.create(:body => message,
             :to => recipient_number,
             :from => sender_number)
-        Rails.logger.info "Sent text message: #{message.inspect}"
+        Rails.logger.warn "Sent text message: #{message.inspect}"
         return message
     rescue Twilio::REST::RequestError => e
         puts e.message
