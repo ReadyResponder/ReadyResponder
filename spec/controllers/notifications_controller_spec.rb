@@ -3,6 +3,7 @@ require 'rails_helper'
 # https://github.com/plataformatec/devise/wiki/How-To:-Test-controllers-with-Rails-3-and-4-(and-RSpec)
 
 RSpec.describe NotificationsController, type: :controller do
+  let(:event) { FactoryGirl.create(:event) }
   let(:valid_attributes) {
     FactoryGirl.attributes_for(:notification)
   }
@@ -18,30 +19,14 @@ RSpec.describe NotificationsController, type: :controller do
       get 'index'
       expect(response).to be_success
     end
-
-    it "should get new" do
-      get 'new'
-      expect(response).to be_success
-    end
   end
 
   describe "GET #edit" do
-    it "assigns the requested activity as @activity" do
+    it "assigns the requested notification" do
       notification = Notification.create! valid_attributes
+      event.notifications << notification
       get :edit, {:id => notification.to_param}
       expect(assigns(:notification)).to eq(notification)
-    end
-  end
-
-  describe "POST" do
-    context "post create" do
-      it "post create" do
-        expect {
-          post :create, notification: valid_attributes
-        }.to change(Notification, :count).by(1)
-      end
-
-      it "sets the status pending or active"
     end
   end
 

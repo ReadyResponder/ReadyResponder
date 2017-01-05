@@ -25,6 +25,7 @@ class Ability
       can [:read, :update, :create, :edit], Location
       can [:read, :update, :create, :edit], Repair
       can [:read, :update, :create, :edit], Department
+      can [:read, :update, :create, :edit], Notification
       can [:read, :create], Activity
       can [:signin, :orgchart], Person
       can :read, :all

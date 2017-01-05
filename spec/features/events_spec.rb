@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Events" do
   before(:each) { sign_in_as('Editor') }
 
-  get_basic_editor_views('event',['Training', 'description', 'status'])
+  get_basic_editor_views('event',['Training', 'Status'])
   describe "creates" do
     it "events" do
       @person1 = create(:person)
@@ -73,7 +73,7 @@ RSpec.describe "Events" do
       within_table("events") do
         expect(page).to have_content("Events")
       	within("tbody") do
-      	  expect(page).to have_content(@event.description)
+      	  expect(page).to have_content(@event.title)
       	end
       end
     end

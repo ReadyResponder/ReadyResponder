@@ -6,7 +6,6 @@ RSpec.describe "notifications/show", type: :view do
       :event => nil,
       :status => "Active",
       :channels => "Email, Text",
-      :start_time => Time.now
     ))
   end
 
