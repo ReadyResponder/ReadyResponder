@@ -1,6 +1,7 @@
 class Msg::Unavailable < Msg::Base
   def respond
-    case @params[:Body].split[1].downcase
+    codename = get_event_codename
+    case codename
     when "custom"
       begin
         # available custom 1/15/2017 0800 01/15/2021 Work
@@ -12,7 +13,7 @@ class Msg::Unavailable < Msg::Base
       target = Event.new(start_time: start_time, end_time: end_time)
       description = @params[:Body].split[6..42].join(" ") if @params[:Body].split.size > 6
     else
-      target = Event.find_by_code(@params[:Body].split[1].downcase)
+      target = Event.find_by_code(codename)
       return target if target.is_a? Error::Base
       description = @params[:Body].split[2]
     end
