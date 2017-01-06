@@ -1,0 +1,7 @@
+<% if people.size > 0 %>
+<% people.each do | person | %>
+* <%= person.first_name %> <% person.last_name %>
+<% end %>
+<% else %>
+NONE
+<% end %>

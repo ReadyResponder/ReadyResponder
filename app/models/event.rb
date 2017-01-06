@@ -41,6 +41,10 @@ class Event < ActiveRecord::Base
     responses.unavailable + partial_responses.unavailable
   end
 
+  def unavailable_people
+    unavailabilities.map{|a| a.person}
+  end
+
   def partial_responses
     Availability.partially_available(self.start_time..self.end_time)
   end
@@ -50,7 +54,7 @@ class Event < ActiveRecord::Base
   end
 
   def partially_available_people
-    partial_availabilities.inclued(:person).map{|a| a.person}.uniq
+    partial_availabilities.includes(:person).map{|a| a.person}.uniq
   end
 
   def partial_responding_people
@@ -62,7 +66,7 @@ class Event < ActiveRecord::Base
   end
 
   def available_people
-    responses.include(:person).available.map{|a|a.person}.uniq
+    responses.includes(:person).available.map{|a|a.person}.uniq
   end
 
   def responses
@@ -86,9 +90,9 @@ class Event < ActiveRecord::Base
   end
 
   def self.find_by_code(id_code)
-    return Error::Base.new({code: 211, description: "No id_code given"}) if id_code.blank?
+    return ::Error::Base.new({code: 211, description: "No id_code given"}) if id_code.blank?
     event = Event.where(id_code: id_code).first
-    return Error::Base.new({code: 201, description: "Event #{id_code} not found"}) if event.blank?
+    return ::Error::Base.new({code: 201, description: "Event #{id_code} not found"}) if event.blank?
     return event
   end
 
