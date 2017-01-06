@@ -49,7 +49,11 @@ class Event < ActiveRecord::Base
     partial_responses.available
   end
 
-  def partial_respondents
+  def partially_available_people
+    partial_availabilities.inclued(:person).map{|a| a.person}.uniq
+  end
+
+  def partial_responding_people
     self.partial_responses.map { |a| a.person }
   end
 
@@ -57,11 +61,15 @@ class Event < ActiveRecord::Base
     responses.available
   end
 
+  def available_people
+    responses.include(:person).available.map{|a|a.person}.uniq
+  end
+
   def responses
     Availability.for_time_span(self.start_time..self.end_time)
   end
 
-  def respondents
+  def responding_people
     self.responses.map { |a| a.person }
   end
 
@@ -70,7 +78,7 @@ class Event < ActiveRecord::Base
   end
 
   def unresponsive_people
-    eligible_people - respondents - partial_respondents
+    eligible_people - responding_people - partial_responding_people
   end
 
   def manhours
@@ -85,6 +93,9 @@ class Event < ActiveRecord::Base
   end
 
   def scheduled_people
+    scheduled_timecards.map{|t|t.person}.uniq
+  end
+  def scheduled_timecards
     # TODO In the pr that add Assignments, this will need to changes
     # Something like assignments.people.unique
     self.timecards.scheduled
