@@ -5,7 +5,11 @@ class Message::SendNotificationTextMessage
     account_sid = Setting.get("TWILIO_ACCOUNT_SID") # Your Account SID from www.twilio.com/console
     auth_token = Setting.get("TWILIO_AUTH_TOKEN")  # Your Auth Token from www.twilio.com/console
 
-    @client = Twilio::REST::Client.new account_sid, auth_token
+    begin
+      @client = Twilio::REST::Client.new account_sid, auth_token
+    rescue
+      return "Unable to authentiacte with Twilio"
+    end
   end
 
   def sms_send(message, recipient_number,
@@ -17,7 +21,7 @@ class Message::SendNotificationTextMessage
         Rails.logger.warn "Sent text message: #{message.inspect}"
         return message
     rescue Twilio::REST::RequestError => e
-        puts e.message
+        return e.message
     end
   end
 end

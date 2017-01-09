@@ -7,6 +7,7 @@ RSpec.describe "Notifications" do
     context "from an event" do
       let!(:event)  { create(:event) }
       it "should create a notification for that event" do
+        allow_any_instance_of(Notification).to receive(:activate!).and_return(nil)
         visit event_path(event)
         expect(page).to have_content('Description:')
         within("#sidebar") do
