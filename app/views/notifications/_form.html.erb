@@ -1,4 +1,3 @@
-<h4> Only people who have not responded will be notified. </h4>
 <%= simple_form_for(@notification) do |f| %>
   <h3><%= "#{@event.title} [#{@event.id_code}] "  %></h3>
   <h4>(<%= format_time_span(@event.start_time, @event.end_time, @event.duration) %>)</h4>
@@ -10,9 +9,11 @@
                       include_blank: false %>
     <%= f.input :subject, :hint => "Used for text messages" %>
     <%#= f.input :body, :hint => "Not used for text messages" %>
+    <%= f.input :purpose, as: :select, collection: @purpose_choices,
+                          include_blank: false %>
     <%= f.association :departments, as: :check_boxes,
-                              collection: @dept_choices,
-                              :include_blank => false %>
+                                    collection: @dept_choices,
+                                    include_blank: false %>
     <%= f.input :status, as: :select, collection: @statuses,
                          include_blank: false %>
     <%#= f.input :time_to_live, hint: 'Length to keep trying to notify non-responders, in hours' %>

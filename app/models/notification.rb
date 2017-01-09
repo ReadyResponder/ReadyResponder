@@ -39,7 +39,11 @@ class Notification < ActiveRecord::Base
     self.status = "In-Progress"
     self.save!
     Person.active.where(department: self.departments).each do |p|
-      recipients.create(person: p) if !p.responded?(self)
+      if (self.purpose == "FYI" ||
+          self.purpose == "Acknowledgment" ||
+          self.purpose == "Availability" && !p.responded?(self))
+        recipients.create(person: p)
+      end
     end
     notify!
   end

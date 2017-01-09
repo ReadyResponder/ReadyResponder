@@ -5,8 +5,8 @@ class Setting < ActiveRecord::Base
   STATUS_CHOICES = ['Active', 'Inactive']
 
   def self.get(key)
-    value = ENV[key]
-    value_object = Setting.where(key: key, status: "Active").first if value.blank?
-    value_object.value
+    return ENV[key] if ENV[key]
+    value_object = Setting.where(key: key, status: "Active").first
+    value_object.value if value_object
   end
 end
