@@ -23,7 +23,7 @@ class Person < ActiveRecord::Base
   has_many :timecards
   has_many :events, through: :timecards
   has_many :items, inverse_of: :owner, foreign_key: :owner_id
-  has_many :inspections
+  has_many :inspectors, :foreign_key => "person_id", :class_name => "Inspection"
   has_many :activities, as: :loggable
 
   belongs_to :department
