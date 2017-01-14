@@ -8,10 +8,13 @@ gem 'carrierwave'
 gem "pg", "~> 0.17.0"
 gem 'rmagick', '~> 2.15.4'
 gem 'simple_form'
+gem 'markdown-rails'
+gem 'redcarpet'
 gem 'geocoder'
 gem 'cancancan'
 #gem "taps"
 #gem 'validates_timeliness', '~> 3.0'
+
 
 gem 'therubyracer'
 gem 'jquery-turbolinks'
