@@ -36,13 +36,16 @@ Department.create([
   {name: "Police", shortname: "BAUX", status: "Active", division1: ["Division 1", "Division 2"], division2: ["Squad 1", "Squad 2"]}
   ])
   cert = Department.create({name: "Community Emergency Response Team",
-                            shortname: "CERT", 
+                            shortname: "CERT",
                             status: "Active",
+                            manage_people: true,
+                            manage_items: true,
                             division1: ["Division 1", "Division 2"],
                             division2: ["Squad 1", "Squad 2"]})
   mrc = Department.create({name: "Medical Reserve Corp",
                             shortname: "MRC",
                             status: "Active",
+                            manage_people: true,
                             division1: ["Division 1", "Division 2"],
                             division2: ["Team 1", "Team 2"]})
 Skill.create([
@@ -70,24 +73,22 @@ jake = Person.create(
 # This should be updated when we can assign the department.
 # Add department: Department.where(shortname: "DPW")
 Location.create([
-  {name: "Town Hall", status: "Active" },
-  {name: "Building 2", status: "Active" },
-  {name: "Inactive Location", status: "Inactive"}
+  {name: "Town Hall", status: "Active",
+    department: cert },
+  {name: "Building 2", status: "Active",
+    department: Department.where(name: "Department Public Works").first },
+  {name: "Inactive Location", status: "Inactive",
+    department: Department.where(name: "Department Public Works").first },
+  }
   ])
 
-# Create Association between departments and locations
-location1 = Location.first
-department1 = Department.where(name: "Community Emergency Response Team").first
-location1.department = department1
-location1.save
-
-department2 = Department.where(name: "Department Public Works").first
-other_location = Location.last(2)
-other_location.each do |loc|
-  loc.department = department2
-  loc.save
-end
 # After we create ResourceTypes, we can create Items
 ResourceType.create([
   {name: "HT Radio", description: "Handheld Radio", status: "Active", fema_code: "Unknown", fema_kind: "Unknown"}
   ])
+
+Event.create([{ title: "Sample Event", status: "Scheduled", category: "Event",
+                description: "Something to see", id_code: "howdy",
+                start_time: 24.hours.from_now, end_time: 27.hours.from_now,
+                is_template: false, departments: [cert]
+                }])

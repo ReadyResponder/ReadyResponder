@@ -4,7 +4,9 @@
     <%= f.input :firstname, :label => 'First Name' %>
     <%= f.input :lastname, :label => 'Last Name' %>
     <%= f.input :gender, :as => :select, :collection => ['Female', 'Male'] %>
-    <%= f.input :date_of_birth, as: :string, placeholder: '1990-12-31', input_html: { size: 11, value: format_date_value(f.object.date_of_birth) } %>
+    <%= f.input :date_of_birth, as: :string, placeholder: '1990-12-31',
+                input_html: { size: 11,
+                              value: format_date_value(f.object.date_of_birth) } %>
     <%= f.input :zipcode, :input_html => { :size => 10 } %>
     <%= f.input :city %>
     <%= f.input :state %>
@@ -15,10 +17,16 @@
     <%= f.label :department_id %>
     <br>
     <%= f.collection_select :department_id, Department.all, :id, :name, include_blank: true %>
-    <%= f.input :division1, :as => :grouped_select, :group_method => :division1, :label => 'Division', :collection => Department.all %>
-    <%= f.input :division2, :as => :grouped_select, :group_method => :division2, :label => 'Squad', :collection => Department.all %>
+    <%= f.input :division1, :as => :grouped_select,
+                            :group_method => :division1,
+                            :label => 'Division',
+                            :collection => Department.all %>
+    <%= f.input :division2, :as => :grouped_select,
+                            :group_method => :division2,
+                            :label => 'Squad',
+                            :collection => Department.all %>
     <%= f.input :application_date, as: :string,
-              input_html: { class: 'datepicker', size: 11,
+                            input_html: { class: 'datepicker', size: 11,
                             value: format_date_value(f.object.application_date) } %>
 
       <h2> Phone information </h2>
