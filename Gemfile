@@ -8,7 +8,6 @@ gem 'carrierwave'
 gem "pg", "~> 0.17.0"
 gem 'rmagick', '~> 2.15.4'
 gem 'simple_form'
-gem 'markdown-rails'
 gem 'redcarpet'
 gem 'geocoder'
 gem 'cancancan'

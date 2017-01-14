@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :resource_types
   resources :messages
   resources :activities
-  resources :helpdocs
+  resources :helpdocs, only: [:show, :index]
   resources :channels
   resources :departments
   resources :timecards
