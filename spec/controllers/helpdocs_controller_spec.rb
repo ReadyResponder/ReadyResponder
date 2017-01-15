@@ -21,19 +21,11 @@ require 'rails_helper'
 RSpec.describe HelpdocsController do
 
   describe "GET index" do
-    it "assigns all helpdocs as @helpdocs" do
-      helpdoc = Helpdoc.create! valid_attributes
-      get :index, {}, valid_session
-      expect(assigns(:helpdocs)).to eq([helpdoc])
-    end
+    it "lists all helpdocs in /views/helpdocs"
   end
 
   describe "GET show" do
-    it "assigns the requested helpdoc as @helpdoc" do
-      helpdoc = Helpdoc.create! valid_attributes
-      get :show, {:id => helpdoc.to_param}, valid_session
-      expect(assigns(:helpdoc)).to eq(helpdoc)
-    end
+    it "renders markdown helpdocs"
   end
 
 end
