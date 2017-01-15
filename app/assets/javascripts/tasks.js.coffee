@@ -1,5 +1,5 @@
 jQuery ->
-  $('#tasks').dataTable
+  $('#tasks_table').dataTable
     columnDefs: [
                   { orderable: false, targets: [-1] },
                 ]
