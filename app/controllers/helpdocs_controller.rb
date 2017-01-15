@@ -11,7 +11,10 @@ class HelpdocsController < ApplicationController
   end
   # GET /helpdocs/1
   def show
-
+    if params[:id] == 'index'
+      redirect_to action: 'index', status: :moved_permanently
+      return
+    end
     respond_to do |format|
       format.html { render params[:id] }
     end
