@@ -9,7 +9,7 @@ module ActionView
 
     def call(template)
       compiled_source = erb.call(template)
-      "Redcarpet::Markdown.new(Redcarpet::Render::HTML, no_intra_emphasis: true,
+      "Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(with_toc_data: true), no_intra_emphasis: true,
       autolink: true, tables: true).render(begin;#{compiled_source};end).html_safe"
     end
   end
