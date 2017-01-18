@@ -1,4 +1,4 @@
-<li class="<%= h p.title.downcase.split(" ")[0] -%>">
+<li class="<%= h p.title.to_s.downcase.split(" ")[0] -%>">
 	<%= h p.shortrank -%>
 	<%= h p.firstname[0] + " " + p.lastname -%> (<%= h p.icsid -%>)<br/>
 	<%#= number_to_phone(p.contacts.first.content, :area_code => true) +    " " + p.contacts.first.category.split(" ")[0] if p.contacts.first -%>

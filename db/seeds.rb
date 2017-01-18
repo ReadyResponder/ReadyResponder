@@ -78,8 +78,7 @@ Location.create([
   {name: "Building 2", status: "Active",
     department: Department.where(name: "Department Public Works").first },
   {name: "Inactive Location", status: "Inactive",
-    department: Department.where(name: "Department Public Works").first },
-  }
+    department: Department.where(name: "Department Public Works").first }
   ])
 
 # After we create ResourceTypes, we can create Items
