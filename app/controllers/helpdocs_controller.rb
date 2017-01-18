@@ -17,8 +17,14 @@ class HelpdocsController < ApplicationController
       redirect_to action: 'index', status: :moved_permanently
       return
     end
-    respond_to do |format|
-      format.html { render params[:id] }
+    file_name = "#{File.basename(params[:id])}.md"
+    path = Rails.root.join('app', 'views', 'helpdocs', file_name)
+    if File.exist? path
+      respond_to do |format|
+        format.html {
+          render file_name
+        }
+      end
     end
   end
 
