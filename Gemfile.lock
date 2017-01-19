@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/gwshaw/noisy_partials.git
+  revision: 9e7110bb400cd7d366adc706d7ce0934cfd3c0eb
+  specs:
+    noisy_partials (0.0.0)
+      rails (>= 3.1)
+
 GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
@@ -397,6 +404,7 @@ DEPENDENCIES
   letter_opener
   mailcatcher
   meta_request
+  noisy_partials!
   paper_trail
   pg (~> 0.17.0)
   poltergeist
@@ -423,4 +431,4 @@ DEPENDENCIES
   web-console (~> 3.0)
 
 BUNDLED WITH
-   1.13.6
+   1.13.7
