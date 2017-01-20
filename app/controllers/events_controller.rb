@@ -15,8 +15,9 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
-    @page_title = "All Events"
+    # by default show all scheduled or in-session events
+    @events = params['all_events'] == "true" ? Event.all : Event.where('end_time > ?', Time.now)
+    @page_title = params['all_events'] == "true" ? "All Events" : "Current Events"
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @events }
