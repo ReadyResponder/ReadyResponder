@@ -53,6 +53,10 @@ RSpec.describe Event do
     @event = build(:event, start_time: Time.current, end_time: 75.minutes.from_now, status: "Closed")
     expect(@event.ready_to_schedule?("Scheduled")).to eq(false)  #Never for a closed event
   end
+  it "counts as upcoming if it hasnt ended" do
+    @event = create(:event, start_time: Time.current, end_time: 75.minutes.from_now, status: "Scheduled")
+    expect(Event.upcoming.include?(@event)).to be(true)
+  end
 
   it "always fails" do
     #1.should eq(2)
