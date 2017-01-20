@@ -1,3 +1,7 @@
+<% content_for :sidebar do %>
+  <%= sidebar_button_link 'New Person', new_person_path if can? :create, Person %>
+<% end %>
+
 <table id="people" class="datatable table table-striped table-bordered" >
   <caption><h3><%= @page_title %></h3></caption>
   <thead>
@@ -32,7 +36,7 @@
         </td>
         <td><%= number_to_phone(person.phone) %></td>
         <td><%= person.email %></td>
-        <td><%= person.department&.name %></td>
+        <td><%= person.dept_shortname %></td>
         <td><%= person.sar_level %></td>
         <td><%= person.division1 %></td>
         <td><%= person.division2 %></td>

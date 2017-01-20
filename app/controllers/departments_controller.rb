@@ -7,6 +7,7 @@ class DepartmentsController < ApplicationController
   # GET /departments.json
   def index
     @departments = Department.all
+    @page_title = "All Departments"
 
     respond_to do |format|
       format.html # index.html.erb

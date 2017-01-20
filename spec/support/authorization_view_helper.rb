@@ -20,7 +20,6 @@ module AuthorizationViewHelper
       visit model_path
       expect(page).to have_content("Home")
       expect(page).to have_content(things_to_look_for[0].titlecase)
-      expect(page).to have_content("New #{model_name.capitalize}")
     end
     it "visits a display page" do
       #@sample_object = model_name.singularize.classify.constantize.create!

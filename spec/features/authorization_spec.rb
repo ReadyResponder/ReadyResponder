@@ -22,7 +22,7 @@ RSpec.describe "a user" do
     end
     it "can read a person" do
       visit people_path
-      click_on @person.lastname
+      click_on @person.fullname
       expect(page).to have_content(@person.lastname)
     end
   end

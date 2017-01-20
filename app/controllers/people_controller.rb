@@ -17,12 +17,12 @@ class PeopleController < ApplicationController
     @page_title = "Org Chart"
     render :layout => "orgchart"
   end
-  
+
   def department
     dept = Department.find(params[:dept_id])
     # TODO: more gracefully handle department not found
     head 404 and return if dept.nil?
-    
+
     @people = Person.active.where(department_id: dept.id)
     @page_title = dept.name
     render :template => "people/index"
@@ -35,7 +35,7 @@ class PeopleController < ApplicationController
   end
 
   def other
-    @people = Person.active.select{|person| person.department&.name != 'CERT' && person.department&.name != 'Police'}
+    @people = Person.active.joins(:department).where("departments.manage_people": false)
     @page_title = "Other Active People"
     render :template => "people/index"
   end
@@ -69,9 +69,8 @@ class PeopleController < ApplicationController
   end
 
   def index
-    #Person.active.joins(:department).where("departments.manage_people": true)
-    @people = Person.active.select{|person| person.department&.shortname == 'CERT' || person.department&.shortname == 'BAUX'}
-    @page_title = "Active Police and CERT"
+    @people = Person.active.joins(:department).where("departments.manage_people": true)
+    @page_title = "All Active"
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @people }

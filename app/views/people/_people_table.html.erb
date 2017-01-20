@@ -14,7 +14,7 @@
         <td><%= person.icsid %></td>
         <td><%= link_to person.fullname, person_path(person) %></td>
         <td><%= number_to_phone(person.phone) %></td>
-        <td><%= person.dept_shortname %></td>
+        <td><%= "#{person.dept_shortname} #{person.division1}" %></td>
       </tr>
     <% end %>
   </tbody>

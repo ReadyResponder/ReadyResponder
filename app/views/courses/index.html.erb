@@ -1,3 +1,7 @@
+<% content_for :sidebar do %>
+  <%= sidebar_button_link 'New Course', new_course_path if can? :create, Course %>
+<% end %>
+
 <table id="courses" class="datatable table table-striped table-bordered" >
   <caption><h3><%= @page_title %></h3></caption>
   <thead>

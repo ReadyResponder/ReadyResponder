@@ -1,3 +1,7 @@
+<% content_for :sidebar do %>
+  <%= sidebar_button_link 'New Person', new_person_path if can? :create, Person %>
+<% end %>
+
 <table id="applicants" class="datatable table table-striped table-bordered" >
   <caption><h3><%= @page_title %></h3></caption>
   <thead>
@@ -12,7 +16,7 @@
     <% @people.each do |person| %>
       <tr>
         <td><%= link_to person.fullname, person %></td>
-        <td><%= person.department&.name %></td>
+        <td><%= person.dept_shortname %></td>
         <td title=<%= person.application_date %> >
           <%= distance_of_time_in_words(Date.today, person.application_date) + ' ago' if person.application_date %>
         </td>

@@ -5,6 +5,7 @@ class SettingsController < ApplicationController
   # GET /settings
   def index
     @settings = Setting.all
+    @page_title = "Settings"
   end
 
   # GET /settings/1
