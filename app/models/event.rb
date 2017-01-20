@@ -41,6 +41,10 @@ class Event < ActiveRecord::Base
     responses.unavailable + partial_responses.unavailable
   end
 
+  def unavailable_people
+    unavailabilities.map{|a| a.person}
+  end
+
   def partial_responses
     Availability.partially_available(self.start_time..self.end_time)
   end
@@ -49,7 +53,11 @@ class Event < ActiveRecord::Base
     partial_responses.available
   end
 
-  def partial_respondents
+  def partially_available_people
+    partial_availabilities.includes(:person).map{|a| a.person}.uniq
+  end
+
+  def partial_responding_people
     self.partial_responses.map { |a| a.person }
   end
 
@@ -57,11 +65,15 @@ class Event < ActiveRecord::Base
     responses.available
   end
 
+  def available_people
+    responses.includes(:person).available.map{|a|a.person}.uniq
+  end
+
   def responses
     Availability.for_time_span(self.start_time..self.end_time)
   end
 
-  def respondents
+  def responding_people
     self.responses.map { |a| a.person }
   end
 
@@ -70,7 +82,7 @@ class Event < ActiveRecord::Base
   end
 
   def unresponsive_people
-    eligible_people - respondents - partial_respondents
+    eligible_people - responding_people - partial_responding_people
   end
 
   def manhours
@@ -78,13 +90,16 @@ class Event < ActiveRecord::Base
   end
 
   def self.find_by_code(id_code)
-    return Error::Base.new({code: 211, description: "No id_code given"}) if id_code.blank?
+    return ::Error::Base.new({code: 211, description: "No id_code given"}) if id_code.blank?
     event = Event.where(id_code: id_code).first
-    return Error::Base.new({code: 201, description: "Event #{id_code} not found"}) if event.blank?
+    return ::Error::Base.new({code: 201, description: "Event #{id_code} not found"}) if event.blank?
     return event
   end
 
   def scheduled_people
+    scheduled_timecards.map{|t|t.person}.uniq
+  end
+  def scheduled_timecards
     # TODO In the pr that add Assignments, this will need to changes
     # Something like assignments.people.unique
     self.timecards.scheduled

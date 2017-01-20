@@ -1,0 +1,13 @@
+Event Name: <%=event.title%> (<%= event.id_code %>)
+Duration: <%= event.start_time %> to <%= event.end_time %>
+Description: <%= event.description %>
+<%
+  avp  = event.available_people
+  pavp = event.partially_available_people
+  uavp = event.unavailable_people
+  lame = event.unresponsive_people
+%>
+Available: <%= avp.count %>
+Partially Available: <%= pavp.count %>
+Unavailable: <%= uavp.count %>
+Unknown: <%= lame.count %>

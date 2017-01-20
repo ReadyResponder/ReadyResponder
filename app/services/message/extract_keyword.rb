@@ -12,11 +12,12 @@ class Message::ExtractKeyword
 
   def call
     first_word = @query_param.split[0]
-    white_list = {"available" => "Available",
-                  "yes" => "Available",
+    white_list = {"available"   => "Available",
+                  "yes"         => "Available",
                   "unavailable" => "Unavailable",
-                  "no" => "Unavailable",
-                  "upcoming" => "Upcoming"}
+                  "no"          => "Unavailable",
+                  "upcoming"    => "Upcoming",
+                  "info"        => "Info"}
     # TODO Additional keywords => maybe rcv received ack
     # TODO tasks task roster (who's assigned to event)
     # TODO schedule (What I'm scheduled for)

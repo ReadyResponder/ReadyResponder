@@ -28,8 +28,6 @@ class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     @page_title = @event.title
-    @respondents =  @event.respondents
-    @unresponsive_people = @event.unresponsive_people
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @event }
