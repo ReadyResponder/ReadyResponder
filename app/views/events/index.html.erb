@@ -1,3 +1,7 @@
+<% content_for :sidebar do %>
+  <%= sidebar_button_link 'New Event', new_event_path if can? :create, Event %>
+<% end %>
+
 <table id="events" class="generic_datatable table table-striped table-bordered">
   <caption><h3><%= @page_title %></h3></caption>
   <thead>

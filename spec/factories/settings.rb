@@ -4,6 +4,6 @@ FactoryGirl.define do
     key "token"
     value "1234"
     category "category"
-    status "status"
+    status "Active"
   end
 end

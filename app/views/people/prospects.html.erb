@@ -1,3 +1,7 @@
+<% content_for :sidebar do %>
+  <%= sidebar_button_link 'New Person', new_person_path if can? :create, Person %>
+<% end %>
+
 <table id="prospects" class="datatable table table-striped table-bordered" >
   <caption><h3><%= @page_title %></h3></caption>
   <thead>

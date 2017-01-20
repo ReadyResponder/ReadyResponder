@@ -1,6 +1,9 @@
-<h1>Listing Item Types</h1>
+<% content_for :sidebar do %>
+  <%= sidebar_button_link 'New Item Type', new_item_type_path if can? :create, ItemType %>
+<% end %>
 
 <table id="item_types" class="generic_datatable table table-striped table-bordered" >
+  <caption><h3><%= @page_title %></h3></caption>
   <thead>
     <tr>
       <th>Name</th>
@@ -9,27 +12,19 @@
       <th>Is a group</th>
       <th>Parent</th>
       <th></th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @item_types.each do |item_type| %>
       <tr>
-        <td><%= item_type.name %></td>
+        <td><%= link_to item_type.name, item_type %></td>
         <td><%= item_type.status %></td>
         <td><%= item_type.is_groupable %></td>
         <td><%= item_type.is_a_group %></td>
         <td><%= item_type.parent_id %></td>
-        <td><%= table_button_link 'Show', item_type %></td>
         <td><%= table_button_link 'Edit', edit_item_type_path(item_type) %></td>
-        <td><%= table_button_link 'Destroy', item_type, method: :delete %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br/>
-
-<%= independent_button_link 'New Item type', new_item_type_path %>

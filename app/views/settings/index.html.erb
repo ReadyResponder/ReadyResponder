@@ -1,9 +1,9 @@
 <% content_for :sidebar do %>
-  <h1>Listing settings</h1>
+  <%= sidebar_button_link 'New Setting', new_setting_path if can? :create, Setting %>
 <% end %>
 
 <table id="settings" class="datatable table table-striped table-bordered">
-  <caption><h3><%= "Settings" %></h3></caption>
+  <caption><h3><%= @page_title %></h3></caption>
   <thead>
     <tr>
       <th>Name</th>

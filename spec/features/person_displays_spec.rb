@@ -7,7 +7,7 @@ RSpec.describe "Person" do
     before (:each) do
       aux = create(:department, name: "Police", shortname: "BAUX")
       cert = create(:department, name: "CERT", shortname: "CERT")
-      dpw = create(:department, shortname: "DPW")
+      dpw = create(:department, shortname: "DPW", manage_people: false)
 
       cj = create(:person, firstname: 'CJ',  department: aux)
       cj.channels << create(:phone, channel_type: 'Phone', content: '9785551212', category: "Mobile Phone")
