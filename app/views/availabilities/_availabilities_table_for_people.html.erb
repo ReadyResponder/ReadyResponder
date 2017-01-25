@@ -8,12 +8,12 @@
     </tr>
   </thead>
   <tbody>
-    <% availabilities.each do |availability| %>
-      <tr <%== success_class_if_match(availability.status, 'Available') %>>
-        <td><%= availability.status %></td>
-        <td><time><%= availability.start_time %></time></td>
-        <td><%= availability.end_time %></td>
-        <td><%= truncate(availability.description, length: 24) %></td>
+    <% availabilities.each do |a| %>
+    <tr <%== availability_status_class(a) %> >
+        <td><%= link_to availability_status_label(a), availability_path(a) %></td>
+        <td><time><%= a.start_time %></time></td>
+        <td><%= a.end_time %></td>
+        <td><%= truncate(a.description, length: 24) %></td>
       </tr>
     <% end %>
   </tbody>
