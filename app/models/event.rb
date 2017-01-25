@@ -7,12 +7,10 @@ class Event < ActiveRecord::Base
                   :id_code, :status, :timecard_ids, :person_ids, :comments,
                   :department_ids
 
-  validates_presence_of :category, :title, :status
+  validates_presence_of :category, :title, :status, :id_code
+  validates_uniqueness_of :id_code
 
-  validates_presence_of :start_time
-  # Currently we need an end time to provide proper ranges to the scopes.
-  # This will need to be revisited
-  validates_presence_of :end_time  #, :if => :completed?
+  validates_presence_of :start_time, :end_time
   validates_chronology :start_time, :end_time
 
   has_and_belongs_to_many :departments
@@ -147,6 +145,6 @@ private
   def calc_duration #This is also used in timecards; it should be extracted out
      if !(start_time.blank?) and !(end_time.blank?)
       self.duration = ((end_time - start_time) / 1.hour).round(2) || 0
-    end
+     end
   end
 end
