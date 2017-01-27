@@ -33,7 +33,7 @@ RSpec.describe TextsController, type: :controller do
                            start_time: 3.days.from_now,
                            end_time: 4.days.from_now)
       channel = FactoryGirl.create(:channel,
-                                    content: "5555555555",
+                                    content: "+15555555555",
                                     # currently only works with US phone numbers
                                     person: person)
 
