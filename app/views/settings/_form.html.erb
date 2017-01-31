@@ -7,7 +7,7 @@
     <%= f.input :key %>
     <%= f.input :value %>
     <%= f.input :category %>
-    <%= f.input :status %>
+    <%= f.input :status, :as => :select, :collection => Setting::STATUS_CHOICES %> 
     <%= f.input :required, as: :boolean %>
   </div>
 

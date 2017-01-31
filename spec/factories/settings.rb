@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :setting do
-    name "abc"
-    key "token"
+    name "Name"
+    key "Key"
     value "1234"
-    category "category"
+    category "Unknown"
     status "Active"
   end
 end
