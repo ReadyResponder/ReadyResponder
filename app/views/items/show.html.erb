@@ -62,3 +62,9 @@
 <hr>
 <%= render(:partial => "inspections/inspections_table", :inpections => @item.inspections) || "No Inspections yet !" %>
 <%= image_tag @item.item_image.to_s if @item.item_image.present? %>
+
+<span>
+  Created <%= @item.created_at %><br/>
+  Last Modified <%= @item.updated_at %><br/>
+  Last Editor <%= @last_editor %>
+</span>

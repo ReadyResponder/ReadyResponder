@@ -1,13 +1,12 @@
-<%= simple_form_for(@item_type) do |f| %>
+<%= simple_form_for(@item_category) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :item_category %>
+    <b>* Department </b></br>
+    <%= f.collection_select :department_id, Department.managing_items.all, :id, :name, include_blank: true %>
     <%= f.input :name %>
     <%= f.input :status, :as => :select, :collection => ["Active", "Inactive"] %>
-    <%#= f.input :is_groupable, as: :boolean %>
-    <%#= f.input :is_a_group, as: :boolean %>
-    <%#= f.input :parent_id %>
+    <%= f.input :description, :as => :text %>
   </div>
 
   <div class="form-actions">

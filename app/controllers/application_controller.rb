@@ -16,6 +16,12 @@ class ApplicationController < ActionController::Base
     send_file path, x_sendfile: true
   end
 
+  def last_editor(the_object)
+    if the_object.paper_trail.try(:originator)
+      User.find(the_object.paper_trail.originator).fullname
+    end
+  end
+
   protected
     def configure_permitted_parameters
       devise_parameter_sanitizer.for(:sign_up) << :username
