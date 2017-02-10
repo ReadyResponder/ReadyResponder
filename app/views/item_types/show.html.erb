@@ -1,29 +1,22 @@
 <% content_for :sidebar do %>
-  <%= sidebar_button_link 'Edit', edit_item_type_path(@item_type) %>
-  <%= sidebar_button_link 'Back', item_types_path %>
+  <%= sidebar_button_link 'Edit',
+           edit_item_type_path(@item_type) if can? :edit, @item_type %>
+  <%= sidebar_button_link 'New Item',
+           new_item_path if can? :create, Item %>
 <% end %>
 
-<p>
-  <b>Name:</b>
-  <%= @item_type.name %>
-</p>
+<h3><%= @item_type.name %></h3>
+
+<h4><%= link_to @item_type.item_category,
+                item_category_path(@item_type.item_category) %></h4>
+
+<b>Status:</b><%= success_or_warning_label(@item_type.status, 'Active') %>
+
+<%= render(partial: 'items/items_table',
+           locals: { items: @item_type.items}) %>
 
 <p>
-  <b>Status:</b>
-  <%= @item_type.status %>
-</p>
-
-<p>
-  <b>Is groupable:</b>
-  <%= @item_type.is_groupable %>
-</p>
-
-<p>
-  <b>Is a group:</b>
-  <%= @item_type.is_a_group %>
-</p>
-
-<p>
-  <b>Parent:</b>
-  <%= @item_type.parent_id %>
+ Created <%= @item_type.created_at %><br/>
+ Last Modified <%= @item_type.updated_at %><br/>
+ Last Editor <%= @last_editor %>
 </p>

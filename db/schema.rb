@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170108155303) do
+ActiveRecord::Schema.define(version: 20170210003147) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -193,6 +193,17 @@ ActiveRecord::Schema.define(version: 20170108155303) do
 
   add_index "inspections", ["item_id"], name: "index_inspections_on_item_id", using: :btree
 
+  create_table "item_categories", force: :cascade do |t|
+    t.string   "name"
+    t.string   "status"
+    t.string   "description"
+    t.integer  "department_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "item_categories", ["department_id"], name: "index_item_categories_on_department_id", using: :btree
+
   create_table "item_types", force: :cascade do |t|
     t.string   "name"
     t.string   "status"
@@ -201,6 +212,8 @@ ActiveRecord::Schema.define(version: 20170108155303) do
     t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "item_category_id"
+    t.string   "description"
   end
 
   create_table "items", force: :cascade do |t|
@@ -553,6 +566,7 @@ ActiveRecord::Schema.define(version: 20170108155303) do
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
+  add_foreign_key "item_categories", "departments"
   add_foreign_key "notifications", "events"
   add_foreign_key "requirements", "skills"
   add_foreign_key "requirements", "tasks"

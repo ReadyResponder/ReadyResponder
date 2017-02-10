@@ -1,0 +1,26 @@
+<% content_for :sidebar do %>
+  <%= sidebar_button_link 'New Item Category', new_item_category_path if can? :create, ItemCategory %>
+<% end %>
+
+<table id="item_categories" class="generic_datatable table table-striped table-bordered">
+  <caption><h3><%= @page_title %></h3></caption>
+  <thead>
+    <tr>
+      <th>Department</th>
+      <th>Category Name</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @item_categories.each do |itc| %>
+      <tr>
+        <td><%= link_to itc.department_name, itc.department %></td>
+        <td><%= link_to itc.name, itc %></td>
+        <td><%= itc.status %></td>
+        <td><%= table_button_link 'Edit', edit_item_category_path(itc) if can? :update, itc %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :item_categories do
+    resources :item_types
+  end
   resources :recipients, except: [:index]
   resources :settings
   resources :notifications

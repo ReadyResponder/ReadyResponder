@@ -1,0 +1,18 @@
+<table id="item_types" class="datatable table table-striped table-bordered" >
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Items</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% item_types.each do |it| %>
+      <tr>
+        <td><%= link_to it.name, item_type_path(it) %></td>
+        <td><%= it.items.count %></td>
+        <td><%= table_button_link 'Edit', edit_item_type_path(it) unless cannot? :edit, it %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

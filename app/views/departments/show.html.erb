@@ -1,5 +1,6 @@
 <% content_for :sidebar do %>
-  <%= sidebar_button_link 'Edit', edit_department_path(@department) %>
+  <%= sidebar_button_link 'Edit',
+                 edit_department_path(@department) if can? :edit, @department %>
   <%= sidebar_button_link 'Back', departments_path %>
 <% end %>
 

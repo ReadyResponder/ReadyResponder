@@ -1,0 +1,21 @@
+<% content_for :sidebar do %>
+  <%= sidebar_button_link 'Return to Categories', item_categories_path %>
+  <%= sidebar_button_link 'Edit Category',
+           edit_item_category_path(@item_category) if can? :edit, @item_category %>
+  <%= sidebar_button_link 'New Item Type',
+           new_item_category_item_type_path(@item_category) if can? :create, ItemType %>
+<% end %>
+
+<span class="h3"><%= @item_category.name %></span>
+
+<p><%= @item_category.description %></p>
+
+<p><b>Department:</b> <%= @item_category.department_name %></p>
+<%= render(partial: 'item_types/item_types_table',
+           locals: { item_types: @item_category.item_types}) if @item_category.item_types %>
+
+<p>
+  Created <%= @item_category.created_at %><br/>
+  Last Modified <%= @item_category.updated_at %><br/>
+  Last Editor <%= @last_editor %>
+</p>

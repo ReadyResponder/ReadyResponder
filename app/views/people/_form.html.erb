@@ -16,7 +16,7 @@
                               value: format_date_value(f.object.end_date) } %>
     <%= f.label :department_id %>
     <br>
-    <%= f.collection_select :department_id, Department.all, :id, :name, include_blank: true %>
+    <%= f.collection_select :department_id, Department.managing_people.all, :id, :name, include_blank: true %>
     <%= f.input :division1, :as => :grouped_select,
                             :group_method => :division1,
                             :label => 'Division',

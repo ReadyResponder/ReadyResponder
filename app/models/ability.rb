@@ -15,6 +15,8 @@ class Ability
       can [:read, :update, :create, :edit], Channel
       can [:read, :update, :create, :edit], Availability
       can [:read, :update, :create, :edit], Cert
+      can [:read, :update, :create, :edit], ItemCategory
+      can [:read, :update, :create, :edit], ItemType
       can [:read, :update, :create, :edit], Item
       can [:read, :update, :create, :edit], Event
       can [:read, :update, :create, :edit], Task
@@ -26,6 +28,7 @@ class Ability
       can [:read, :update, :create, :edit], Repair
       can [:read, :update, :create, :edit], Department
       can [:read, :update, :create, :edit], Notification
+      can [:read, :update, :create, :edit], Setting
       can [:read, :create], Activity
       can [:signin, :orgchart], Person
       can :read, :all
@@ -40,7 +43,8 @@ class Ability
       can [:signin, :orgchart], Person
       can [:read, :create], Activity
    elsif roles.include? 'Reader'
-      can [:read], [Person, Channel, Timecard, Cert, Item, Event, Task, Course, Skill, Inspection, Repair, Activity, Department]
+      can [:read], [Person, Channel, Timecard, Cert, ItemCategory, ItemType, Item,
+                    Event, Task, Course, Skill, Inspection, Repair, Activity, Department]
       can [:signin], Person
       can :orgchart, Person
     end
