@@ -1,7 +1,7 @@
 class TimecardsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
-  
+
   def index
     @timecards = Timecard.all
 
@@ -22,8 +22,8 @@ class TimecardsController < ApplicationController
 
   def new
     @timecard = Timecard.new
-    #Seems like I should be able to use Timecard.new(params[:timecard]), but they're not nested
-    if params[:event_id]  
+    # Seems like I should be able to use Timecard.new(params[:timecard]), but they're not nested
+    if params[:event_id]
       @event = Event.find(params[:event_id])
       @timecard.person_id = params[:person_id]
       @timecard.event_id = params[:event_id]
@@ -73,9 +73,9 @@ class TimecardsController < ApplicationController
       if @timecard.update_attributes(params[:timecard])
         @event = @timecard.event
         format.html { redirect_to event_url(@event) }
-        #redirect_to event_url(@event), status: :found, notice: "Timecard created"
-        #redirect_to event_url(@event), status: :found, notice: "Timecard updated"
-        #format.html { redirect_to @timecard, notice: 'Timecard was successfully updated.' }
+        # redirect_to event_url(@event), status: :found, notice: "Timecard created"
+        # redirect_to event_url(@event), status: :found, notice: "Timecard updated"
+        # format.html { redirect_to @timecard, notice: 'Timecard was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
