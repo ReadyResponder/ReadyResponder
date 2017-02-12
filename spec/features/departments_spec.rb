@@ -22,7 +22,7 @@ RSpec.feature "Department" do
       fill_in "Description", with: "Police department"
       select "Active", from: "Status"
       click_button "Create Department"
-      expect(page).to have_content "Department was successfully created."
+      expect(page).to have_content "Department successfully created."
       expect(current_path).to eq department_path(Department.last)
     end
 
@@ -31,7 +31,7 @@ RSpec.feature "Department" do
       fill_in "Name", with: "Technology"
       fill_in "Shortname", with: "Tech"
       click_button "Update Department"
-      expect(page).to have_content "Department was successfully updated."
+      expect(page).to have_content "Department successfully updated."
       expect(current_path).to eq department_path(@department)
     end
   end
