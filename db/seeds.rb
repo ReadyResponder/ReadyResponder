@@ -42,12 +42,12 @@ Department.create([
                             manage_items: true,
                             division1: ["Division 1", "Division 2"],
                             division2: ["Squad 1", "Squad 2"]})
-  mrc = Department.create({name: "Medical Reserve Corp",
-                            shortname: "MRC",
-                            status: "Active",
-                            manage_people: true,
-                            division1: ["Division 1", "Division 2"],
-                            division2: ["Team 1", "Team 2"]})
+mrc = Department.create({name: "Medical Reserve Corp",
+                          shortname: "MRC",
+                          status: "Active",
+                          manage_people: true,
+                          division1: ["Division 1", "Division 2"],
+                          division2: ["Team 1", "Team 2"]})
 Skill.create([
   {name: "EMT-B", status: "Active"},
   {name: "First Responder First Aid", status: "Active"},
