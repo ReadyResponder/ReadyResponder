@@ -41,15 +41,15 @@ class InspectionsController < ApplicationController
   end
 
   private
-    def set_item
-      @item = Item.find(params[:item_id])
-    end
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
 
-    def set_inspection
-      @inspection = Inspection.find(params[:id])
-    end
+  def set_inspection
+    @inspection = Inspection.find(params[:id])
+  end
 
-    def inspection_params
-      params.require(:inspection).permit(:inspection_date, :status, :comments)
-    end
+  def inspection_params
+    params.require(:inspection).permit(:inspection_date, :status, :comments)
+  end
 end
