@@ -67,10 +67,10 @@ class NotificationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_notification
-      @notification = Notification.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_notification
+    @notification = Notification.find(params[:id])
+  end
 
     def set_choices
       @dept_choices = @event ? @event.departments.managing_people : Department.managing_people
@@ -80,11 +80,11 @@ class NotificationsController < ApplicationController
 
     end
 
-    # Only allow a trusted parameter "white list" through.
-    def notification_params
-      params.require(:notification).permit(:subject, :body, :event_id, :status,
-         :author_id, :time_to_live, :interval, :iterations_to_escalation,
-         :groups, :scheduled_start_time, :start_time, :channels, :purpose,
-         :divisions, :department_ids => [])
-    end
+  # Only allow a trusted parameter "white list" through.
+  def notification_params
+    params.require(:notification).permit(:subject, :body, :event_id, :status,
+       :author_id, :time_to_live, :interval, :iterations_to_escalation,
+       :groups, :scheduled_start_time, :start_time, :channels, :purpose,
+       :divisions, :department_ids => [])
+  end
 end
