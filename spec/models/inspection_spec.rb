@@ -6,6 +6,6 @@ RSpec.describe Inspection do
     expect(create(:inspection, item: an_item)).to be_valid
   end
 
-  #mail.subject.should eq("Cert expiring")
-  #an_example.status.should eq("Active")
+  # mail.subject.should eq("Cert expiring")
+  # an_example.status.should eq("Active")
 end

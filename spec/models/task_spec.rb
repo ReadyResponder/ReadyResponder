@@ -21,12 +21,12 @@ RSpec.describe Task, type: :model do
     it { should validate_presence_of(:start_time) }
     it { should validate_presence_of(:end_time) }
 
-    it "requires end_time to be after start_time" do #chronology
+    it "requires end_time to be after start_time" do # chronology
       @task = build_stubbed(:task, event: an_event, start_time: Time.current, end_time: 2.minutes.ago)
       expect(@task).not_to be_valid
     end
 
-    context 'chronology validations' do #chronology
+    context 'chronology validations' do # chronology
       let(:start_t)     { 2.days.from_now }
       let(:end_t)       { 4.days.from_now }
       let(:bad_start_t) { 6.days.from_now }
