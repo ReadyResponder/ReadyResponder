@@ -18,7 +18,7 @@ RSpec.describe Availability, type: :model do
     it { should validate_presence_of(:start_time) }
     it { should validate_presence_of(:end_time) }
 
-    it "requires end_time to be after start_time" do #chronology
+    it "requires end_time to be after start_time" do # chronology
       @availability = build(:availability, person: a_person, start_time: Time.current, end_time: 2.minutes.ago)
       expect(@availability).not_to be_valid
     end

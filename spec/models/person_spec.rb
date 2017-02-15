@@ -21,7 +21,7 @@ RSpec.describe Person do
       end
     end
 
-    it "requires end_date to be after start_date" do #chronology
+    it "requires end_date to be after start_date" do # chronology
       @person = build(:person, start_date: 2.days.from_now, end_date: 2.days.ago)
       expect(@person).not_to be_valid
     end
