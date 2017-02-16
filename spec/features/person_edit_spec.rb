@@ -11,7 +11,7 @@ RSpec.describe "Person" do
       department_3 = create(:department, name: "Other")
 
       cj = create(:person, firstname: 'CJ', department_id: department_1.id )
-      cj.channels << create(:channel, channel_type: 'Phone', content: '9785551212', category: "Mobile Phone")
+      cj.channels << create(:channel, channel_type: 'Phone', content: '+19785551212', category: "Mobile Phone")
       sierra = create(:person, firstname: 'Sierra', department_id: department_2.id )
       sierra.channels << create(:channel, channel_type: 'Email', category: 'E-Mail', content: 'sierra@example.com')
       create(:person, firstname: 'Adam', status: 'Applicant' )
@@ -46,7 +46,7 @@ RSpec.describe "Person" do
     it "does not duplicate channels on update" do
       cj = create(:person, firstname: 'CJ', lastname: 'test',
             department: Department.where(name: 'Police').first)
-      cj.channels << create(:channel, type: "Phone", channel_type: 'Phone', content: '9785551212', category: "Mobile Phone")
+      cj.channels << create(:channel, type: "Phone", channel_type: 'Phone', content: '+19785551212', category: "Mobile Phone")
       expect {
         visit edit_person_path(cj)
         fill_in('Zipcode', :with => '02108')
