@@ -8,16 +8,8 @@ RSpec.describe Timecard do
       expect(@timecard).to be_valid
     end
 
-    it "requires an event" do
-      @timecard = build(:timecard, event: nil)
-      expect(@timecard).not_to be_valid
-    end
     it "requires a person" do
       @timecard = build(:timecard, person: nil)
-      expect(@timecard).not_to be_valid
-    end
-    it "requires intended_end_time to be after intended_start_time" do #chronology
-      @timecard = build(:timecard, intended_start_time: Time.current, intended_end_time: 2.minutes.ago)
       expect(@timecard).not_to be_valid
     end
     it "requires actual_end_time to be after actual_start_time" do #chronology
@@ -42,7 +34,7 @@ RSpec.describe Timecard do
       @event = create(:event)
       @person = create(:person)
       @original_timecard = create(:timecard, event: @event, person: @person,
-                                              intended_start_time: 42.minutes.from_now, 
+                                              intended_start_time: 42.minutes.from_now,
                                               intended_end_time: 8.hours.from_now,
                                               intention: "Available")
       @duplicate_timecard = build(:timecard, event: @event, person: @person,
