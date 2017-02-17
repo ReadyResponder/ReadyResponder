@@ -10,7 +10,7 @@ RSpec.describe "Person" do
       dpw = create(:department, shortname: "DPW", manage_people: false)
 
       cj = create(:person, firstname: 'CJ',  department: aux)
-      cj.channels << create(:phone, channel_type: 'Phone', content: '9785551212', category: "Mobile Phone")
+      cj.channels << create(:phone, channel_type: 'Phone', content: '+19785551212', category: "Mobile Phone")
       sierra = create(:person, firstname: 'Sierra', department: cert)
       sierra.channels << create(:email, channel_type: 'Email', category: 'E-Mail', content: 'sierra@example.com')
       create(:person, firstname: 'Adam', status: 'Applicant' )
