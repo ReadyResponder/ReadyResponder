@@ -9,7 +9,6 @@
         </tr>
       <tr>
         <th>Person</th>
-        <th>Event</th>
         <th>Category</th>
         <th>Start</th>
         <th>End</th>
@@ -18,14 +17,12 @@
         <th>End</th>
         <th>Duration</th>
         <th></th>
-        <th></th>
       </tr>
     </thead>
     <tbody>
         <% @timecards.each do |timecard| %>
             <tr>
                 <td><%= link_to timecard.person.fullname, person_path(timecard.person) %></td>
-                <td><%= link_to timecard.event.title, timecard.event %></td>
                 <td><%= timecard.category %></td>
                 <td><%= timecard.intended_start_time.to_s(:short) if timecard.intended_start_time %></td>
                 <td><%= timecard.intended_end_time.to_s(:short) if timecard.intended_end_time%></td>
@@ -34,7 +31,6 @@
                 <td><%= timecard.actual_end_time.to_s(:short)  if timecard.actual_end_time %></td>
                 <td><%= timecard.actual_duration %></td>
                 <td><%= table_button_link 'Edit', edit_timecard_path(timecard) if can? :edit, timecard %></td>
-                <td><%= table_button_link 'Worked', edit_timecard_path(timecard), title: "Use times and values from the event" if can? :edit, timecard %></td>
             </tr>
         <% end %>
     </tbody>

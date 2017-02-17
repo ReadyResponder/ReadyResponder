@@ -30,14 +30,13 @@ RSpec.describe Timecard do
     end
 
     it "finds the existing timecard if it's a duplicate",
-       skip: "Find duplicate timecards is too simple, but not needed until people are scanning in" do
-      @event = create(:event)
+      skip: "Find duplicate timecards is too simple, but not needed until people are scanning in" do
       @person = create(:person)
-      @original_timecard = create(:timecard, event: @event, person: @person,
+      @original_timecard = create(:timecard,  person: @person,
                                               intended_start_time: 42.minutes.from_now,
                                               intended_end_time: 8.hours.from_now,
                                               intention: "Available")
-      @duplicate_timecard = build(:timecard, event: @event, person: @person,
+      @duplicate_timecard = build(:timecard,  person: @person,
                                               intended_start_time: 42.minutes.from_now,
                                               intended_end_time: 8.hours.from_now,
                                               intention: "Available")

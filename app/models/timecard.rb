@@ -1,16 +1,14 @@
 class Timecard < ActiveRecord::Base
-  before_save :pull_defaults_from_event
   before_save :calc_durations
   attr_accessible :intention, :intended_start_time, :intended_end_time,
                   :outcome, :actual_start_time, :actual_end_time, :event_id, :person_id, :category, :description
 
   belongs_to :person
-  belongs_to :event
 
   INTENTION_CHOICES = ['Unknown', 'Available', 'Scheduled','Not Needed']
   OUTCOME_CHOICES = ["Not Needed", 'Worked', 'Unavailable', 'AWOL', 'Vacation']
 
-  validates_presence_of :person_id, :event_id
+  validates_presence_of :person_id
 
   validates_chronology :intended_start_time, :intended_end_time
   validates_chronology :actual_start_time, :actual_end_time
@@ -68,20 +66,6 @@ private
   def has_no_duplicate_timecard
     if find_duplicate_timecards.count > 0
       errors.add :base, "Duplicate timecard found, please edit that one instead"
-    end
-  end
-
-  def pull_defaults_from_event
-    event = self.event || Event.new
-    self.category = event.category if self.category.nil?
-    if ["Unavailable", "Available", "Scheduled"].include? intention
-      self.intended_start_time = event.start_time if self.intended_start_time.nil?
-      self.intended_end_time = event.end_time if self.intended_end_time.nil?
-    end
-
-    if self.outcome == "Worked" 
-      self.actual_start_time = event.start_time if self.actual_start_time.nil?
-      self.actual_end_time = event.end_time if self.actual_end_time.nil?
     end
   end
 
