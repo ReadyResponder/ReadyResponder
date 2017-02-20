@@ -192,11 +192,11 @@ RSpec.describe "Person" do
     end
 
     it "a person page" do
-      @timecard = create(:timecard) #this creates a person as well
-      @person = @timecard.person
-      @certification = create(:cert, person: @person)
-      visit person_path(@person)
-      expect(page).to have_content(@person.fullname)
+      person = create(:person, icsid: "509")
+      @timecard = create(:timecard, person: person)
+      @certification = create(:cert, person: person)
+      visit person_path(person)
+      expect(page).to have_content(person.fullname)
     end
 
     it "a person without a start date" do

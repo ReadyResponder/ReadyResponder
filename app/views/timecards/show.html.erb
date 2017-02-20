@@ -15,41 +15,21 @@
 </p>
 
 <p>
-  <b>Intention:</b>
-  <%= @timecard.intention %>
+  <b>Status:</b>
+  <%= @timecard.status %>
 </p>
 
 <p>
-  <b>Intended Start</b>
-  <%= @timecard.intended_start_time.strftime("%B %e, %Y %H:%M") if @timecard.intended_start_time %>
+  <b>Start</b>
+  <%= @timecard.start_time.strftime("%B %e, %Y %H:%M") if @timecard.start_time %>
 </p>
 
 <p>
-  <b>Intended End</b>
-  <%= l @timecard.intended_end_time, :format => :long if @timecard.intended_end_time %>
+  <b>End</b>
+  <%= l @timecard.end_time, :format => :long if @timecard.end_time %>
 </p>
 
 <p>
-  <b>Intended Duration:</b>
-  <%= @timecard.intended_duration %>
-</p>
-
-<p>
-  <b>Actual Outcome</b>
-  <%= @timecard.outcome %>
-</p>
-
-<p>
-  <b>Actual Start</b>
-  <%= @timecard.actual_start_time %>
-</p>
-
-<p>
-  <b>Actual End</b>
-  <%= @timecard.actual_end_time %>
-</p>
-
-<p>
-  <b>Actual Duration:</b>
-  <%= @timecard.actual_duration %>
+  <b>Duration:</b>
+  <%= @timecard.duration %>
 </p>

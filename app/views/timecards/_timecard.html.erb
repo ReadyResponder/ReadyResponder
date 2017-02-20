@@ -1,12 +1,3 @@
 <tr>
   <td><%= timecard.description %></td>
-  <td><%= timecard.intention  %></td>
-  <td><%= timecard.intended_start_time  %></td>
-  <td><%= timecard.intended_end_time %></td>
-  <td><%= timecard.intended_duration %></td>
-  <td><%= timecard.outcome  %></td>
-  <td><%= timecard.actual_start_time  %></td>
-  <td><%= timecard.actual_end_time %></td>
-  <td><%= timecard.actual_duration %></td>
-  <td><%= table_button_link 'Edit', edit_timecard_path(timecard) if can? :update, timecard %></td>
 </tr>

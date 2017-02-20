@@ -10,9 +10,7 @@
       <tr>
         <th>Person</th>
         <th>Category</th>
-        <th>Start</th>
-        <th>End</th>
-        <th>Duration</th>
+        <th>Status</th>
         <th>Start</th>
         <th>End</th>
         <th>Duration</th>
@@ -24,12 +22,10 @@
             <tr>
                 <td><%= link_to timecard.person.fullname, person_path(timecard.person) %></td>
                 <td><%= timecard.category %></td>
-                <td><%= timecard.intended_start_time.to_s(:short) if timecard.intended_start_time %></td>
-                <td><%= timecard.intended_end_time.to_s(:short) if timecard.intended_end_time%></td>
-                <td><%= timecard.intended_duration %></td>
-                <td><%= timecard.actual_start_time.to_s(:short) if timecard.actual_start_time %></td>
-                <td><%= timecard.actual_end_time.to_s(:short)  if timecard.actual_end_time %></td>
-                <td><%= timecard.actual_duration %></td>
+                <td><%= timecard.status %></td>
+                <td><%= timecard.start_time.to_s(:short) if timecard.start_time %></td>
+                <td><%= timecard.end_time.to_s(:short) if timecard.end_time%></td>
+                <td><%= timecard.duration %></td>
                 <td><%= table_button_link 'Edit', edit_timecard_path(timecard) if can? :edit, timecard %></td>
             </tr>
         <% end %>

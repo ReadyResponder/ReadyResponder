@@ -1,7 +1,6 @@
 class Timecard < ActiveRecord::Base
-  before_save :calc_durations
-  attr_accessible :intention, :intended_start_time, :intended_end_time,
-                  :outcome, :actual_start_time, :actual_end_time, :event_id, :person_id, :category, :description
+  before_save :calc_duration
+  attr_accessible :start_time, :end_time, :status, :person_id, :category, :description
 
   belongs_to :person
 
@@ -10,8 +9,7 @@ class Timecard < ActiveRecord::Base
 
   validates_presence_of :person_id
 
-  validates_chronology :intended_start_time, :intended_end_time
-  validates_chronology :actual_start_time, :actual_end_time
+  validates_chronology :start_time, :end_time
 
   #validate :has_no_duplicate_timecard
 
@@ -69,17 +67,11 @@ private
     end
   end
 
-  def calc_durations
-    if intended_start_time.blank? or intended_end_time.blank?
-      self.intended_duration = 0
+  def calc_duration
+    if start_time.blank? or end_time.blank?
+      self.duration = 0
     else
-      self.intended_duration = ((intended_end_time - intended_start_time) / 1.hour).round(2) || 0
-    end
-
-    if actual_start_time.blank? or actual_end_time.blank?
-      self.actual_duration = 0
-    else
-      self.actual_duration = ((actual_end_time - actual_start_time) / 1.hour).round(2) || 0
+      self.duration = ((end_time - start_time) / 1.hour).round(2) || 0
     end
   end
 end
