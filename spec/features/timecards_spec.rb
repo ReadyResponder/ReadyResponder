@@ -36,7 +36,7 @@ RSpec.describe Timecard do
       visit new_timecard_path
       expect(page).to have_content("Home")
       expect(page).to have_css('#sidebar')
-      expect(page).to have_content('Category')
+      expect(page).to have_content('Status')
       expect(page).to have_content("New Timecard")
     end
 
@@ -44,7 +44,6 @@ RSpec.describe Timecard do
       visit timecard_path(@tc)
       expect(page).to have_content("Home")
       expect(page).to have_css('#sidebar')
-      expect(page).to have_content(@tc.category)
       expect(page).to have_content(@tc.status)
     end
 
@@ -54,7 +53,7 @@ RSpec.describe Timecard do
       visit timecard_path(@tc)
       expect(page).to have_content("Home")
       expect(page).to have_css('#sidebar')
-      expect(page).to have_content(@tc.category)
+      expect(page).to have_content(@tc.status)
 
       visit timecards_path
       expect(page).to have_content("Home")

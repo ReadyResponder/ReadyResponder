@@ -100,21 +100,17 @@
   </div>
 
 
-  <h3>Times (<%= @person.timecards.uniq.count %>)</h3>
+  <h3>Timecards (<%= @person.timecards.count %>)</h3>
   <div>
     <table class="table table-striped table-bordered">
       <% if @person.timecards.any? %>
         <thead>
           <tr>
-            <th>Title</th>
+            <th>Status</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Duration</th>
             <th>Description</th>
-            <th>Intention</th>
-            <th>Intended Start</th>
-            <th>Intended End</th>
-            <th>Intended Hours</th>
-            <th>Actual Start</th>
-            <th>Actual End</th>
-            <th>Actual Hours</th>
             <th></th>
           </tr>
         </thead>

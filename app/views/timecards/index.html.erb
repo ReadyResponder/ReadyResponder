@@ -1,15 +1,12 @@
+<% content_for :sidebar do %>
+  <%= sidebar_button_link 'New Timecard', new_timecard_path if can? :create, Timecard %>
+<% end %>
+
 <table id="timecards" class="datatable table table-striped table-bordered">
     <caption><h3>Listing Timecards</h3></caption>
     <thead>
-        <tr>
-            <th colspan="3"></th>
-            <th colspan="3"><center>Intended</center></th>
-            <th colspan="3"><center>Actual</center></th>
-            <th colspan="2"></th>
-        </tr>
       <tr>
         <th>Person</th>
-        <th>Category</th>
         <th>Status</th>
         <th>Start</th>
         <th>End</th>
@@ -18,16 +15,15 @@
       </tr>
     </thead>
     <tbody>
-        <% @timecards.each do |timecard| %>
-            <tr>
-                <td><%= link_to timecard.person.fullname, person_path(timecard.person) %></td>
-                <td><%= timecard.category %></td>
-                <td><%= timecard.status %></td>
-                <td><%= timecard.start_time.to_s(:short) if timecard.start_time %></td>
-                <td><%= timecard.end_time.to_s(:short) if timecard.end_time%></td>
-                <td><%= timecard.duration %></td>
-                <td><%= table_button_link 'Edit', edit_timecard_path(timecard) if can? :edit, timecard %></td>
-            </tr>
-        <% end %>
+      <% @timecards.each do |timecard| %>
+        <tr>
+          <td><%= link_to timecard.person.fullname, person_path(timecard.person) %></td>
+          <td><%= link_to timecard.status, timecard_path(timecard) %></td>
+          <td><%= timecard.start_time.strftime('%a %b %d %Y %k:%M') if timecard.start_time %></td>
+          <td><%= timecard.end_time.strftime('%a %b %d %Y %k:%M') if timecard.end_time%></td>
+          <td><%= timecard.duration %></td>
+          <td><%= table_button_link 'Edit', edit_timecard_path(timecard) if can? :edit, timecard %></td>
+        </tr>
+      <% end %>
     </tbody>
 </table>

@@ -3,8 +3,7 @@
 
   <div class="form-inputs">
     <%= f.association :person, :collection => Person.active %>
-    <%= f.input :category, :as => :select, :collection => Event::CATEGORY_CHOICES %>
-    <%= f.input :status, :as => :select, :collection => Event::CATEGORY_CHOICES %>
+    <%= f.input :status, :as => :select, :collection => Timecard::STATUS_CHOICES %>
     <%= f.input :description %>
 
     <fieldset>
@@ -12,7 +11,7 @@
       <%= f.input :start_time, as: :string,
                   input_html: { class: "datetimepicker", size: 11,
                                 value: format_datetime_value(f.object.start_time) } %>
-      <%= f.input :intended_end_time, as: :string,
+      <%= f.input :end_time, as: :string,
                   input_html: { class: "datetimepicker", size: 11,
                                 value: format_datetime_value(f.object.end_time) } %>
     </fieldset>

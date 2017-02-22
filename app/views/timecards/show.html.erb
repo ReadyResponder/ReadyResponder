@@ -10,11 +10,6 @@
 </p>
 
 <p>
-  <b>Category:</b>
-  <%= @timecard.category %>
-</p>
-
-<p>
   <b>Status:</b>
   <%= @timecard.status %>
 </p>
@@ -32,4 +27,10 @@
 <p>
   <b>Duration:</b>
   <%= @timecard.duration %>
+</p>
+
+<p>
+  Created <%= @timecard.created_at %><br/>
+  Last Modified <%= @timecard.updated_at %><br/>
+  Last Editor <%= @last_editor %>
 </p>
