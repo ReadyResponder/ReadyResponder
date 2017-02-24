@@ -8,7 +8,6 @@ class TitlesController < ApplicationController
   end
 
   def show
-    @title = Title.find(params[:id])
   end
 
   def new
@@ -16,7 +15,6 @@ class TitlesController < ApplicationController
   end
 
   def edit
-    @title = Title.find(params[:id])
   end
 
   def create
@@ -30,8 +28,6 @@ class TitlesController < ApplicationController
   end
 
   def update
-    @title = Title.find(params[:id])
-
     if @title.update_attributes(params[:title])
       redirect_to @title, notice: 'Title was successfully updated.'
     else
@@ -40,7 +36,6 @@ class TitlesController < ApplicationController
   end
 
   def destroy
-    @title = Title.find(params[:id])
     @title.destroy
 
     redirect_to titles_url
