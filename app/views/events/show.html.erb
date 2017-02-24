@@ -8,6 +8,8 @@
            new_event_availability_path(@event) if can? :create, Availability %>
   <%= sidebar_button_link "New Notification",
            new_event_notification_path(@event) if can? :create, Notification %>
+  <%= sidebar_button_link "New Timecard",
+           new_timecard_path(event: @event) if can? :create, Timecard %>
 <% end %>
 
 <p>

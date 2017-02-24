@@ -18,12 +18,9 @@ class Event < ActiveRecord::Base
   belongs_to :course
   has_many :activities, as: :loggable
 
-  has_many :timecards
-  has_many :people, :through => :timecards
   has_many :tasks
   has_many :notifications
 
-  accepts_nested_attributes_for :timecards
   accepts_nested_attributes_for :certs
 
   scope :upcoming, -> { order("start_time ASC").where( "status in (?) AND end_time > ?", ["Scheduled", "In-session"], Time.now ) }
@@ -94,36 +91,8 @@ class Event < ActiveRecord::Base
     return event
   end
 
-  def scheduled_people
-    scheduled_timecards.map{|t|t.person}.uniq
-  end
-  def scheduled_timecards
-    # TODO In the pr that add Assignments, this will need to changes
-    # Something like assignments.people.unique
-    self.timecards.scheduled
-  end
-
   def completed?
     status == "Completed"
-  end
-
-  def schedule(schedulable, schedule_action, timecard = Timecard.new )
-    # TODO This is probably now deprecated. PR for assignments should remove this
-    @card = timecard
-    @card.person = schedulable if schedulable.class.name == "Person"
-    @card.event = self
-    case schedule_action
-      when "Available", "Scheduled", "Unavailable"
-        @card.intention = schedule_action
-        @card.intended_start_time = self.start_time
-        @card.intended_end_time = self.end_time
-      when "Worked"
-        @card.outcome = schedule_action
-        @card.actual_start_time = self.start_time
-        @card.actual_end_time = self.end_time
-    end
-    @card.save
-    return @card
   end
 
   def ready_to_schedule?(schedule_action)

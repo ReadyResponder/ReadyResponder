@@ -22,21 +22,12 @@ RSpec.describe "Events" do
       click_on 'Create'
       expect(page).to have_content "Event was successfully created."
 
-      @event = Event.last
-      expect(@event.timecards.count).to eq(0)
-      # @timecard_person2 = create(:timecard, event: @event, person: @person2, intention: "Available")
-      # @timecard_person3 = create(:timecard, event: @event, person: @person3, intention: "Unavailable")
-      # @timecard_person4 = create(:timecard, event: @event, person: @person4, intention: "Scheduled")
-      # @timecard_person5 = create(:timecard, event: @event, person: @person5, intention: "Scheduled", outcome: "Worked", actual_start_time: "2013-10-31 18:30" )
+      # @event = Event.last
       # expect(@event.timecards.count).to eq(4)
       # expect(@event.available_people.count).to eq(1)
       # expect(@event.available_people.first.person).to eq(@person2)
-      # expect(@event.timecards.unavailable.count).to eq(1)
-      # expect(@event.timecards.unavailable.first.person).to eq(@person3)
-      # expect(@event.timecards.scheduled.count).to eq(1)
-      # expect(@event.timecards.scheduled.first.person).to eq(@person4)
       # expect(@event.unknown_people.count).to eq(1)
-      # visit event_path(@event)  #Need to reload it after the changes to the timecards
+      # visit event_path(@event)  # Need to reload it after the changes to the timecards
       # expect(current_path).to eq(event_path(@event))
       # within("#event_timecards") do
       #   within("#unknown") do

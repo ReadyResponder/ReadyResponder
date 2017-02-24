@@ -2,31 +2,18 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :person, :collection => Person.active %>
-    <%= f.association :event %>
-    <%= f.input :category, :as => :select, :collection => Event::CATEGORY_CHOICES %>
+    <%= f.association :person, :collection => Person.order(:firstname).active %>
+    <%= f.input :status, :as => :select, :collection => Timecard::STATUS_CHOICES %>
     <%= f.input :description %>
 
     <fieldset>
-      <legend>Intention</legend>
-      <%= f.input :intention, :as => :select, :collection => Timecard::INTENTION_CHOICES %>
-      <%= f.input :intended_start_time, as: :string,
+      <legend>Times</legend>
+      <%= f.input :start_time, as: :string,
                   input_html: { class: "datetimepicker", size: 11,
-                                value: format_datetime_value(f.object.intended_start_time) } %>
-      <%= f.input :intended_end_time, as: :string,
+                                value: format_datetime_value(f.object.start_time) } %>
+      <%= f.input :end_time, as: :string,
                   input_html: { class: "datetimepicker", size: 11,
-                                value: format_datetime_value(f.object.intended_end_time) } %>
-    </fieldset>
-    <fieldset>
-      <legend>Outcome</legend>
-      <%= f.input :outcome, :as => :select, :collection => Timecard::OUTCOME_CHOICES %>
-      <%= f.input :actual_start_time, as: :string,
-                  input_html: { class: "datetimepicker", size: 11,
-                                value: format_datetime_value(f.object.actual_start_time),
-                                title: "When they actually started to work" } %>
-      <%= f.input :actual_end_time, as: :string,
-      input_html: { class: "datetimepicker", size: 11,
-                    value: format_datetime_value(f.object.actual_end_time) } %>
+                                value: format_datetime_value(f.object.end_time) } %>
     </fieldset>
   </div>
 
