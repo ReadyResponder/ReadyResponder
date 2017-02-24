@@ -28,7 +28,7 @@ RSpec.describe "a user" do
       @person_active = create(:person, department:  @department)
       @person_inactive = create(:person, status: 'Inactive', department:  @department)
       visit signin_people_path
-      expect(page).to have_content("Command") #This is in the first heading
+      expect(page).to have_content("Command") # This is in the first heading
       expect(page).to have_content(@person_active.lastname)
       expect(page).not_to have_content(@person_inactive.lastname)
     end
@@ -39,9 +39,9 @@ RSpec.describe "a user" do
 
     it "can edit people" do
       visit people_path
-      expect(page).to have_content('Edit') #Need to scope this, or it will fail on Edith
+      expect(page).to have_content('Edit') # Need to scope this, or it will fail on Edith
       visit person_path(@person)
-      expect(page).to have_content('Edit') #Need to scope this, or it will fail on Edith
+      expect(page).to have_content('Edit') # Need to scope this, or it will fail on Edith
       click_on 'Edit'
       expect(current_path).to eq(edit_person_path(@person))
       expect(page).not_to have_content("Access Denied")
@@ -62,7 +62,7 @@ RSpec.describe "a user" do
       @person_active = create(:person, department_id:  @department.id)
       @person_inactive = create(:person, status: 'Inactive', department_id:  @department.id)
       visit signin_people_path
-      expect(page).to have_content("Command") #This is in the first heading
+      expect(page).to have_content("Command") # This is in the first heading
       expect(page).to have_content(@person_active.lastname)
       expect(page).not_to have_content(@person_inactive.lastname)
     end
