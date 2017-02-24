@@ -81,6 +81,7 @@ Rails.application.routes.draw do
     end
     resources :certs
     resources :availabilities
+    resources :timecards
     resources :titles
     resources :items
     resources :channels

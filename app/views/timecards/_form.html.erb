@@ -2,7 +2,7 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :person, :collection => Person.active %>
+    <%= f.association :person, :collection => Person.order(:firstname).active %>
     <%= f.input :status, :as => :select, :collection => Timecard::STATUS_CHOICES %>
     <%= f.input :description %>
 

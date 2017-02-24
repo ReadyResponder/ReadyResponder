@@ -1,8 +1,9 @@
 <% content_for :sidebar do %>
-  <%= sidebar_button_link 'Return to Listing', :back %>
+  <%= sidebar_button_link 'Return to People', people_path %>
   <%= sidebar_button_link 'Edit Person', edit_person_path(@person) if can? :edit, @person %>
   <%= sidebar_button_link 'New Certification', new_person_cert_path(@person) if can? :create, Cert %>
   <%= sidebar_button_link 'New Availability', new_person_availability_path(@person) if can? :create, Availability %>
+  <%= sidebar_button_link 'New Timecard', new_person_timecard_path(@person) if can? :create, Timecard %>
   <br>
   <%= image_tag @person.portrait_url if @person.portrait.file.present? %>
 <% end %>

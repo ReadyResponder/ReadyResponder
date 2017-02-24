@@ -11,8 +11,12 @@ class TimecardsController < ApplicationController
   end
 
   def new
+    event = Event.find params[:event] if params.has_key? :event
     @timecard = Timecard.new
-    @timecard.person_id = params[:person_id]
+    @timecard.start_time = event.start_time if event
+    @timecard.end_time = event.end_time if event
+    @timecard.person_id = params[:person_id] if params.has_key? :person_id
+    @timecard.status = "Verified"
   end
 
   def edit
