@@ -2,6 +2,7 @@ class PeopleController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
   before_action :set_referrer_path, only: [:new, :edit]
+  before_action :set_return_path, only: [:show]
 
   def signin
     #This is the sign-in sheet, not anything about authentication
@@ -152,6 +153,13 @@ class PeopleController < ApplicationController
   end
 
   private
+  def set_return_path
+    if request.referer
+      (session[:before_show] = request.referer unless request.referer.include? "edit")
+    else
+      (session[:before_show] = people_path)
+    end
+  end
 
   def set_referrer_path
     session[:referrer] = request.referer
