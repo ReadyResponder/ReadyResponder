@@ -10,7 +10,7 @@ RSpec.describe "a user" do
 
     it "cannot edit people" do
       visit people_path
-      expect(page).not_to have_content('Edit') #Need to scope this, or it will fail on Edith
+      expect(page).not_to have_content('Edit') # Need to scope this, or it will fail on Edith
       visit edit_person_path(@person)
       expect(page).to have_content("Access Denied")
     end
