@@ -9,12 +9,12 @@ RSpec.describe "a user" do
 
       visit people_path
       expect(page).to have_content("Access Denied")
-      expect(page).not_to have_content('Edit') #Need to scope this, or it will fail on Edith
+      expect(page).not_to have_content('Edit') # Need to scope this, or it will fail on Edith
       expect(page).not_to have_content(skill.name)
 
       visit skill_path(skill)
       expect(page).to have_content("Access Denied")
-      expect(page).not_to have_content('Edit') #Need to scope this, or it will fail on Edith
+      expect(page).not_to have_content('Edit') # Need to scope this, or it will fail on Edith
       expect(page).not_to have_content(skill.name)
 
       visit edit_skill_path(skill)
@@ -55,10 +55,10 @@ RSpec.describe "a user" do
       visit people_path
       within_table("people") do
         expect(page).to have_content("Active")
-        expect(page).to have_content('Edit') #Need to scope this, or it will fail on Edith
+        expect(page).to have_content('Edit') # Need to scope this, or it will fail on Edith
       end
       visit person_path(@person)
-      expect(page).to have_content('Edit') #Need to scope this, or it will fail on Edith
+      expect(page).to have_content('Edit') # Need to scope this, or it will fail on Edith
       click_on 'Edit'
       expect(current_path).to eq(edit_person_path(@person))
       expect(page).not_to have_content("Access Denied")

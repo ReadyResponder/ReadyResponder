@@ -3,6 +3,7 @@
   <%= sidebar_button_link 'Edit Person', edit_person_path(@person) if can? :edit, @person %>
   <%= sidebar_button_link 'New Certification', new_person_cert_path(@person) if can? :create, Cert %>
   <%= sidebar_button_link 'New Availability', new_person_availability_path(@person) if can? :create, Availability %>
+  <%= sidebar_button_link 'New Timecard', new_person_timecard_path(@person) if can? :create, Timecard %>
   <br>
   <%= image_tag @person.portrait_url if @person.portrait.file.present? %>
 <% end %>
@@ -100,22 +101,17 @@
   </div>
 
 
-  <h3>Times (<%= @person.timecards.uniq.count %>)</h3>
+  <h3>Timecards (<%= @person.timecards.count %>)</h3>
   <div>
     <table class="table table-striped table-bordered">
       <% if @person.timecards.any? %>
         <thead>
           <tr>
-            <th>Title</th>
+            <th>Status</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Duration</th>
             <th>Description</th>
-            <th>Intention</th>
-            <th>Intended Start</th>
-            <th>Intended End</th>
-            <th>Intended Hours</th>
-            <th>Outcome</th>
-            <th>Actual Start</th>
-            <th>Actual End</th>
-            <th>Actual Hours</th>
             <th></th>
           </tr>
         </thead>

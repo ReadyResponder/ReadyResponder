@@ -1,13 +1,8 @@
 <tr>
-  <td><%= link_to timecard.event.title, timecard %></td>
-  <td><%= timecard.description %></td>
-  <td><%= timecard.intention  %></td>
-  <td><%= timecard.intended_start_time  %></td>
-  <td><%= timecard.intended_end_time %></td>
-  <td><%= timecard.intended_duration %></td>
-  <td><%= timecard.outcome  %></td>
-  <td><%= timecard.actual_start_time  %></td>
-  <td><%= timecard.actual_end_time %></td>
-  <td><%= timecard.actual_duration %></td>
-  <td><%= table_button_link 'Edit', edit_timecard_path(timecard) if can? :update, timecard %></td>
+  <td><%= link_to timecard.status, timecard_path(timecard) %></td>
+  <td><%= timecard.start_time.strftime('%a %b %d %Y %k:%M') if timecard.start_time %></td>
+  <td><%= timecard.end_time.strftime('%a %b %d %Y %k:%M') if timecard.end_time%></td>
+  <td><%= timecard.duration %></td>
+  <td><%= truncate(timecard.description, length: 24) %></td>
+  <td><%= table_button_link 'Edit', edit_timecard_path(timecard) if can? :edit, timecard %></td>
 </tr>

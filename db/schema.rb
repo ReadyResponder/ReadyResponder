@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170210003147) do
+ActiveRecord::Schema.define(version: 20170222003315) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -486,21 +486,15 @@ ActiveRecord::Schema.define(version: 20170210003147) do
 
   create_table "timecards", force: :cascade do |t|
     t.integer  "person_id"
-    t.integer  "event_id"
-    t.string   "category"
-    t.string   "intention"
-    t.datetime "intended_start_time"
-    t.datetime "intended_end_time"
-    t.decimal  "actual_duration",     precision: 7, scale: 2
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
-    t.string   "outcome"
-    t.datetime "actual_start_time"
-    t.datetime "actual_end_time"
-    t.decimal  "intended_duration",   precision: 7, scale: 2
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.decimal  "duration",    precision: 7, scale: 2
     t.text     "comments"
     t.string   "error_code"
     t.string   "description"
+    t.string   "status"
   end
 
   create_table "titles", force: :cascade do |t|

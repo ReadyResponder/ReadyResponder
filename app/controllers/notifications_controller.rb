@@ -2,19 +2,17 @@ class NotificationsController < ApplicationController
   before_filter :authenticate_user!
   before_action :set_notification, only: [:show, :edit, :update, :destroy]
   before_action :set_choices, only: [:new, :edit]
+  load_and_authorize_resource
 
-  # GET /notifications
   def index
     @notifications = Notification.all
     @page_title = "All Notifications"
   end
 
-  # GET /notifications/1
   def show
     @event = @notification.event
   end
 
-  # GET /notifications/new
   def new
     @event = Event.find(params[:event_id])
     @notification = @event.notifications.new
@@ -29,13 +27,11 @@ class NotificationsController < ApplicationController
     @notification.status = "Active"
   end
 
-  # GET /notifications/1/edit
   def edit
     @statuses = @notification.available_statuses + [@notification.status]
     @event = @notification.event
   end
 
-  # POST /notifications
   def create
     @notification = Notification.new(notification_params)
     if @notification.save
@@ -48,7 +44,6 @@ class NotificationsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /notifications/1
   def update
     if @notification.update(notification_params)
       if @notification.status == "Active"
@@ -60,7 +55,6 @@ class NotificationsController < ApplicationController
     end
   end
 
-  # DELETE /notifications/1
   def destroy
     @notification.destroy
     redirect_to notifications_url, notice: 'Notification was successfully destroyed.'
