@@ -55,6 +55,7 @@ class ItemTypesController < ApplicationController
   # Also, you can specialize this method with per-user checking of permissible attributes.
   def item_type_params
     params.require(:item_type).permit(:is_a_group, :is_groupable,
-                               :name, :parent_id, :status, :item_category_id )
+                               :name, :parent_id, :status, :item_category_id,
+                                    :description )
   end
 end

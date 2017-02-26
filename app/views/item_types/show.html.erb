@@ -10,6 +10,8 @@
 <h4><%= link_to @item_type.item_category,
                 item_category_path(@item_type.item_category) %></h4>
 
+<p><%= @item_type.description %></p>
+
 <b>Status:</b><%= success_or_warning_label(@item_type.status, 'Active') %>
 
 <%= render(partial: 'items/items_table',
