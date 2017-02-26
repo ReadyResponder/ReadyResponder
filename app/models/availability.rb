@@ -17,6 +17,8 @@ class Availability < ActiveRecord::Base
   scope :available, -> { where(status: "Available")}
   scope :unavailable, -> { where(status: "Unavailable")}
 
+  scope :active, -> { joins(:person).where(people: {status: "Active"}) }
+
   def to_s
     "Recorded #{status}\n start #{start_time} \n end #{end_time} \n description #{description}"
   end
