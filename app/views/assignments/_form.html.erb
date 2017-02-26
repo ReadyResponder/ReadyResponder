@@ -1,0 +1,16 @@
+<%= simple_form_for(@assignment) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :person %>
+    <%= f.association :requirement %>
+    <%= f.input :start_time %>
+    <%= f.input :end_time %>
+    <%= f.input :status %>
+    <%= f.input :duration %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :assignments
   resources :item_categories do
     resources :item_types
   end
