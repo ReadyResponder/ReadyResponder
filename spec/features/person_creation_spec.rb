@@ -26,4 +26,20 @@ RSpec.feature "Users can create new people" do
     expect(current_path).to eq everybody_people_path
   end
 
+  scenario "person can not be created if start date is before application date" do
+    visit everybody_people_path
+    click_link "People"
+    click_link "New Person"
+    fill_in "First Name", with: "John"
+    fill_in "Last Name", with: "Doe"
+    fill_in "Date of birth", with: "1990-05-13"
+    select "Active", from: "person_status"
+    fill_in "person[application_date]", with: "1991-05-13"
+    fill_in "person[start_date]", with: "1990-05-13"
+
+    click_button "Create Person"
+
+    expect(current_path).to eq(new_person_path)
+  end
+
 end
