@@ -110,7 +110,6 @@ class PeopleController < ApplicationController
     @person = Person.new(person_params)
     cookies[:status] = person_params[:status]
     respond_to do |format|
-      require "pry"; binding.pry
       if @person.save && @person.application_and_start_validation
         format.html {
           redirect_to referrer_or(everybody_people_path), notice: 'Person was successfully created.'
