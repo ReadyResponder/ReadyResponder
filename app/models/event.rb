@@ -65,7 +65,7 @@ class Event < ActiveRecord::Base
   end
 
   def responses
-    Availability.for_time_span(self.start_time..self.end_time)
+    Availability.for_time_span(self.start_time..self.end_time).active
   end
 
   def responding_people
