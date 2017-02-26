@@ -1,8 +1,15 @@
-<p id="notice"><%= notice %></p>
+<% content_for :sidebar do %>
+  <%= sidebar_button_link 'All Assignments', assignments_path %>
+  <%= sidebar_button_link 'Edit Assignment',
+           edit_assignment_path(@assignment) if can? :edit, @assignment %>
+  <p id="notice"><%= notice %></p>
+<% end %>
+
+<p><h4><%= link_to @assignment.task, @assignment.task %></h4></p>
 
 <p>
   <strong>Person:</strong>
-  <%= @assignment.person %>
+  <%= @assignment.person.to_s %>
 </p>
 
 <p>
@@ -30,5 +37,8 @@
   <%= @assignment.duration %>
 </p>
 
-<%= link_to 'Edit', edit_assignment_path(@assignment) %> |
-<%= link_to 'Back', assignments_path %>
+<p>
+  Created <%= @assignment.created_at %><br/>
+  Last Modified <%= @assignment.updated_at %><br/>
+  Last Editor <%= @last_editor %>
+</p>

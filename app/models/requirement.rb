@@ -24,6 +24,12 @@ class Requirement < ActiveRecord::Base
     PRIORITIES[priority - 1][0] if priority.present?
   end
 
+  def to_s
+    return title if title.present?
+    return skill if skill.present?
+    "Error"
+  end
+  
   def status
     case
     when number_filled >= maximum_people

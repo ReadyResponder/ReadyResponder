@@ -20,6 +20,10 @@ class Task < ActiveRecord::Base
     PRIORITIES[priority - 1][0] if priority.present?
   end
 
+  def to_s
+    title
+  end
+  
   def status
     # (set and) return a random status for testing.
     @stub_status ||= STATUS_CHOICES.keys[rand(STATUS_CHOICES.count)]
