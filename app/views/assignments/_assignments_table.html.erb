@@ -1,0 +1,19 @@
+<table id="assignments" class="datatable table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Person</th>
+      <th>Assignment Status</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% assignments.each do |assignment| %>
+      <tr>
+        <td><%= link_to assignment.person.fullname, assignment %></td>
+        <td><%= assignment.status %></td>
+        <td><%= table_button_link 'Edit',
+                    edit_assignment_path(assignment) if can? :edit, assignment %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

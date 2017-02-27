@@ -8,17 +8,18 @@
            new_assignment_path(requirement: @requirement) if can? :create, Assignment %>
 <% end %>
 
+<span class="h3"><%= link_to @requirement.task.event.title, event_path(@requirement.task.event) %></span><br>
+<span class="h3"><%= link_to @requirement.task.title, task_path(@requirement.task)%></span><br>
+
 <p>
-  <span class="h3">
+  <span class="h4">
     <% if @requirement.title.present? %>
       <%= @requirement.title %>
     <% elsif @requirement.skill.present? %>
       <%= @requirement.skill %>
     <% end %>
-  </span>
-  for
-  <span class="h4"><%= link_to @requirement.task.event.title, event_path(@requirement.task.event) %></span>:
-  <span class="h5"><%= link_to @requirement.task.title, task_path(@requirement.task)%></span>
+  </span><br>
+
   <% if @requirement.task.location.present? %>
     at <%= @requirement.task.location %>
   <% end %>
@@ -36,3 +37,7 @@
   <b>Optional:</b> <%= @requirement.optional ? "Yes" : "No" %><br>
   <b>Floating:</b> <%= @requirement.floating ? "Yes" : "No" %>
 </p>
+
+<%= render(partial: "assignments/assignments_table",
+           locals: { assignments: @requirement.assignments,
+                     title: "Assignments" }) || "No Assignments Yet !" %>

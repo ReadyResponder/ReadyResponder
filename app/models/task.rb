@@ -23,11 +23,9 @@ class Task < ActiveRecord::Base
   def to_s
     title
   end
-  
+
   def status
-    # (set and) return a random status for testing.
-    @stub_status ||= STATUS_CHOICES.keys[rand(STATUS_CHOICES.count)]
-    return @stub_status
+
   end
 
   def status_value
@@ -43,9 +41,10 @@ class Task < ActiveRecord::Base
   end
 
   def requirements_met_count
-    # (set and) return a random number of requirements met
-    @stub_requirements_met_count ||= requirements_met_for_stub
-    return @stub_requirements_met_count
+    # TODO This will be an initial pass.
+    # The results will not correctly look at a requirement lasting
+    # more than one operational period.
+    requirements.inject(0) { |sum, req| sum + (req.met? ? 1 : 0) }
   end
 
   def requirements_unmet_count
@@ -58,17 +57,5 @@ class Task < ActiveRecord::Base
   end
 
   private
-    def requirements_met_for_stub
-      # generate a value compatible with status
-      case status
-      when 'Full'
-        return requirements_count
-      when 'Empty'
-        return 0
-      when 'Cancelled' # Can have any value from 0 to total number of requirements
-        return rand(requirements_count + 1)
-      else # 'Partially Filled' can have any value but full or 0.
-        return 1 + rand(requirements_count - 1)
-      end
-    end
+
 end

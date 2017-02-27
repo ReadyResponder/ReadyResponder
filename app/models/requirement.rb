@@ -2,7 +2,7 @@ class Requirement < ActiveRecord::Base
   belongs_to :task
   belongs_to :skill
   belongs_to :title
-  #has_many :assignments
+  has_many :assignments
 
   validates :task, presence: true
 
@@ -29,7 +29,7 @@ class Requirement < ActiveRecord::Base
     return skill if skill.present?
     "Error"
   end
-  
+
   def status
     case
     when number_filled >= maximum_people
@@ -50,10 +50,12 @@ class Requirement < ActiveRecord::Base
     return STATUS_CHOICES[status]
   end
 
+  def met?
+    true if ["Adequate", "Satisfied", "Full"].include? status
+  end
+
   def number_filled
-    # temporary, until assignments are implemented
-    @stub_number_filled ||= rand(maximum_people + 1)
-    return @stub_number_filled
+    assignments.active.count
   end
 
   private
