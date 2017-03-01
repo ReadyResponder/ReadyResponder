@@ -53,13 +53,15 @@ sudo apt-get install phantomjs
 
 Then get the project code locally and set it up:
 
-1. `git clone https://github.com/ReadyResponder/ReadyResponder.git`
-1. `cd ReadyResponder`
-1. `bundle install`
-1. Copy `config/database.example.yml` to `config/database.yml`.  Edit `config/database.yml` if necessary to match your postgres configuration.
-1. `bundle exec rake db:create`
-1. `bundle exec rake db:schema:load`
-1. `bundle exec rake db:seed  `
+1. [Fork](https://help.github.com/articles/fork-a-repo) ReadyResponder.
+2. [Clone](https://help.github.com/articles/cloning-a-repository/) the forked
+   repository to your development or local machine.
+3. `cd ReadyResponder`
+4. `bundle install`
+5. Copy `config/database.example.yml` to `config/database.yml`.  Edit `config/database.yml` if necessary to match your postgres configuration.
+6. `bundle exec rake db:create`
+7. `bundle exec rake db:schema:load`
+8. `bundle exec rake db:seed  `
 
 You should note the output of the db:seed, as it will spit out the password at the end.
 
