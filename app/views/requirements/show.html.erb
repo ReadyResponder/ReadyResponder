@@ -5,7 +5,7 @@
   <%= sidebar_button_link 'Edit Requirement',
            edit_requirement_path(@requirement) if can? :edit, @requirement %>
   <%= sidebar_button_link "New Assignment",
-           new_assignment_path(requirement: @requirement) if can? :create, Assignment %>
+           new_requirement_assignment_path(@requirement) if can? :create, Assignment %>
 <% end %>
 
 <span class="h3"><%= link_to @requirement.task.event.title, event_path(@requirement.task.event) %></span><br>

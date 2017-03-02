@@ -10,7 +10,7 @@ RSpec.describe "assignments", :type => :request do
       assignment_attributes = FactoryGirl.attributes_for(:assignment)
 
       expect {
-        post "/assignments", { assignment: assignment_attributes }
+        post "/requirements/1/assignments", { assignment: assignment_attributes }
       }.to_not change(Assignment, :count)
 
       expect(response).to redirect_to new_user_session_path
@@ -28,11 +28,6 @@ RSpec.describe "assignments", :type => :request do
 
     it "assignments#index" do
       get assignments_path
-      expect(response).to redirect_to new_user_session_path
-    end
-
-    it "assignments#new" do
-      get new_assignment_path
       expect(response).to redirect_to new_user_session_path
     end
 

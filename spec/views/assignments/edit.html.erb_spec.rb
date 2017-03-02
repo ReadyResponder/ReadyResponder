@@ -15,10 +15,9 @@ RSpec.describe "assignments/edit", type: :view do
     render
 
     assert_select "form[action=?][method=?]", assignment_path(@assignment), "post" do
-
-      assert_select "input#assignment_status[name=?]", "assignment[status]"
-
-      assert_select "input#assignment_duration[name=?]", "assignment[duration]"
+      assert_select "select#assignment_person_id[name=?]", "assignment[person_id]"
+      assert_select "input#assignment_start_time[name=?]", "assignment[start_time]"
+      assert_select "input#assignment_end_time[name=?]", "assignment[end_time]"
     end
   end
 end

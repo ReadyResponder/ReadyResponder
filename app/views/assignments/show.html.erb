@@ -5,17 +5,11 @@
   <p id="notice"><%= notice %></p>
 <% end %>
 
+<p><h4><%= link_to @assignment.event.title, @assignment.event %></h4></p>
 <p><h4><%= link_to @assignment.task, @assignment.task %></h4></p>
+<p><h4><%= link_to @assignment.requirement, @assignment.requirement %></h4></p>
+<p><h4><%= link_to @assignment.person.to_s, @assignment.person %></h4></p>
 
-<p>
-  <strong>Person:</strong>
-  <%= @assignment.person.to_s %>
-</p>
-
-<p>
-  <strong>Requirement:</strong>
-  <%= @assignment.requirement %>
-</p>
 
 <p>
   <strong>Start time:</strong>

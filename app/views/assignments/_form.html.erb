@@ -1,17 +1,15 @@
-<%= simple_form_for(@assignment) do |f| %>
+<%= simple_form_for [@requirement, @assignment] do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
     <%= f.association :person %>
-    <%= f.association :requirement %>
     <%= f.input :start_time, as: :string, label: "Start Time",
                 input_html: { class: "datetimepicker", size: 11,
                               value: format_datetime_value(f.object.start_time) } %>
     <%= f.input :end_time, as: :string, label: "End Time",
                 input_html: { class: "datetimepicker", size: 11,
                               value: format_datetime_value(f.object.end_time) } %>
-    <%= f.input :status %>
-    <%= f.input :duration %>
+    <%= f.input :status, :as => :select, :collection => ["New", "Active", "Cancelled"] %>
   </div>
 
   <div class="form-actions">

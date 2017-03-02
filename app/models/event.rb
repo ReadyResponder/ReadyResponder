@@ -19,6 +19,9 @@ class Event < ActiveRecord::Base
   has_many :activities, as: :loggable
 
   has_many :tasks
+  has_many :requirements, :through => :tasks
+  has_many :assignments, :through => :requirements
+
   has_many :notifications
 
   accepts_nested_attributes_for :certs

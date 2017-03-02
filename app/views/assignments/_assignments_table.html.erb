@@ -3,6 +3,8 @@
     <tr>
       <th>Person</th>
       <th>Assignment Status</th>
+      <th>Start Time</th>
+      <th>End Time</th>
       <th></th>
     </tr>
   </thead>
@@ -11,8 +13,11 @@
       <tr>
         <td><%= link_to assignment.person.fullname, assignment %></td>
         <td><%= assignment.status %></td>
+        <td><%= assignment.start_time.strftime('%a %b %d %k:%M') %></td>
+        <td><%= assignment.end_time.strftime('%a %b %d %k:%M') %></td>
+
         <td><%= table_button_link 'Edit',
-                    edit_assignment_path(assignment) if can? :edit, assignment %></td>
+                    edit_requirement_assignment_path(@requirement, assignment) if can? :edit, assignment %></td>
       </tr>
     <% end %>
   </tbody>

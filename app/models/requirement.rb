@@ -25,8 +25,8 @@ class Requirement < ActiveRecord::Base
   end
 
   def to_s
-    return title if title.present?
-    return skill if skill.present?
+    return title.to_s if title.present?
+    return skill.to_s if skill.present?
     "Error"
   end
 
@@ -56,6 +56,14 @@ class Requirement < ActiveRecord::Base
 
   def number_filled
     assignments.active.count
+  end
+
+  def start_time
+    task.start_time if task.present?
+  end
+
+  def end_time
+    task.end_time if task.present?
   end
 
   private

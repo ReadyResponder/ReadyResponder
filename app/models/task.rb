@@ -7,7 +7,7 @@ class Task < ActiveRecord::Base
   validates_chronology :start_time, :end_time
 
   has_many :requirements
-  # has_many :assignments, through: :requirements
+  has_many :assignments, through: :requirements
 
   # The following provides the equivalent of:
   # STATUS_CHOICES = { 'Empty' => 0, 'Inadequate' => 1, 'Adequate' => 2, 'Satisfied' => 3, 'Full' => 4, 'Cancelled' => 5 }
