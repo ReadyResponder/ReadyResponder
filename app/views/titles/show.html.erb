@@ -2,7 +2,7 @@
   <h2>Title<br/><%= @title.name %></h2>
   <%= sidebar_button_link 'Edit', edit_title_path(@title) %>
   <%#= sidebar_button_link 'Destroy', @skill, method: :delete %>
-  <%= sidebar_button_link 'New Title', new_title_path(@title) if can? :create, Title %>
+  <%= sidebar_button_link 'New Title', new_title_path if can? :create, Title %>
   <%= sidebar_button_link 'Titles Listing', titles_path %>
 <% end %>
 
