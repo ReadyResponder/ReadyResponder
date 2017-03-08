@@ -4,7 +4,6 @@ RSpec.describe Message::ExtractKeyword do
   it 'returns the keyword if handed something on the white list' do
     expect(Message::ExtractKeyword.new("Available").call).to eq("Available")
   end
-
   it 'returns the keyword if handed something on the white list, any case' do
     expect(Message::ExtractKeyword.new("AvAIlAblE").call).to eq("Available")
   end
