@@ -43,6 +43,4 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { :host => 'localhost:3000' } # this is used by Devise for confirmation e-mails
 
   config.action_controller.action_on_unpermitted_parameters = :raise
-
-  GOOGLE_MAPS_API_KEY = Rails.application.secrets.GOOGLE_MAPS_API_KEY
 end
