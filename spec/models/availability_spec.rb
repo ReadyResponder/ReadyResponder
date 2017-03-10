@@ -34,4 +34,16 @@ RSpec.describe Availability, type: :model do
       expect(availability.partially_available?(event)).to eq(false)
     end
   end
+
+  context 'cancel_duplicates' do
+    it 'sets status for previous availabilities with matching start and end times to Cancelled' do
+      start_time = Time.now
+      end_time = start_time + 2.minutes
+      first_availability = create(:availability, person: a_person, start_time: start_time, end_time: end_time, created_at: Time.now - 2.minutes)
+      second_availability = create(:availability, person: a_person, start_time: start_time, end_time: end_time)
+
+      expect(first_availability.reload.status).to eq('Cancelled')
+      expect(second_availability.status).to eq('Unavailable')
+    end
+  end
 end

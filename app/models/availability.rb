@@ -1,6 +1,8 @@
 class Availability < ActiveRecord::Base
   belongs_to :person
 
+  before_create :cancel_duplicates
+
   validates_presence_of :person, :status, :start_time, :end_time
   validates_chronology :start_time, :end_time
 
@@ -38,5 +40,16 @@ class Availability < ActiveRecord::Base
         count = Availability.where('date(start_time) <= ? AND date(end_time) >= ?', date, date).count
         { 'Date' => date, 'Count' => count }
       end
+  end
+
+  private
+
+  def cancel_duplicates
+    previous_availabilities = person.availabilities.for_time_span(start_time..end_time).order(:created_at)
+    previous_availabilities.each do |a|
+      if start_time == a.start_time && end_time == a.end_time
+        a.update(status: "Cancelled")
+      end
+    end
   end
 end
