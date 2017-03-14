@@ -56,6 +56,6 @@ class ItemTypesController < ApplicationController
   def item_type_params
     params.require(:item_type).permit(:is_a_group, :is_groupable,
                                :name, :parent_id, :status, :item_category_id,
-                                    :description )
+                                    :description, :item_type_image )
   end
 end
