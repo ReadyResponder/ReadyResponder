@@ -16,6 +16,7 @@
 
 <%= render(partial: 'items/items_table',
            locals: { items: @item_type.items}) %>
+<%= image_tag @item_type.item_type_image.url if @item_type.item_type_image.present? %>
 
 <p>
  Created <%= @item_type.created_at %><br/>

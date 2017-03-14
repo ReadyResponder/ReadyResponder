@@ -5,6 +5,7 @@
     <%= f.association :item_category %>
     <%= f.input :name %>
     <%= f.input :status, :as => :select, :collection => ["Active", "Inactive"] %>
+    <%= f.file_field :item_type_image %>
     <%= f.input :description, :as => :text %>
     <%#= f.input :is_groupable, as: :boolean %>
     <%#= f.input :is_a_group, as: :boolean %>
