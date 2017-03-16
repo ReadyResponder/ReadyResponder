@@ -1,6 +1,6 @@
-<h1>Editing Assignment</h1>
+<% content_for :sidebar do %>
+  <h3>Assignment for</br> <%= @requirement %> </br> <%= @requirement.task %></h3>
+  <p id="notice"><%= notice %></p>
+<% end %>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @assignment %> |
-<%= link_to 'Back', assignments_path %>

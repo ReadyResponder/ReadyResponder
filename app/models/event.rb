@@ -21,6 +21,7 @@ class Event < ActiveRecord::Base
   has_many :tasks
   has_many :requirements, :through => :tasks
   has_many :assignments, :through => :requirements
+  has_many :people, through: :assignments
 
   has_many :notifications
 

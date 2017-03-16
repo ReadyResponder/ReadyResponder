@@ -3,6 +3,7 @@ class Requirement < ActiveRecord::Base
   belongs_to :skill
   belongs_to :title
   has_many :assignments
+  has_many :people, through: :assignments
 
   validates :task, presence: true
 
@@ -22,6 +23,10 @@ class Requirement < ActiveRecord::Base
 
   def priority_str
     PRIORITIES[priority - 1][0] if priority.present?
+  end
+
+  def assignees
+    assignments.active.map { |a| a.person }
   end
 
   def to_s

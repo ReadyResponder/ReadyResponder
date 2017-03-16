@@ -9,7 +9,7 @@
     <%= f.input :end_time, as: :string, label: "End Time",
                 input_html: { class: "datetimepicker", size: 11,
                               value: format_datetime_value(f.object.end_time) } %>
-    <%= f.input :status, :as => :select, :collection => ["New", "Active", "Cancelled"] %>
+    <%= f.input :status, :as => :select, :collection => Assignment::STATUS_CHOICES %>
   </div>
 
   <div class="form-actions">

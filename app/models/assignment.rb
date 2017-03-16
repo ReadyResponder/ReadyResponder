@@ -6,7 +6,7 @@ class Assignment < ActiveRecord::Base
   delegate :task, :to => :requirement
   delegate :event, :to => :task
 
-  STATUS = [ 'New', 'Active', 'Cancelled' ]
+  STATUS_CHOICES = [ 'New', 'Active', 'Cancelled' ]
 
   scope :active, -> { where( status: ["New", "Active"] ) }
 

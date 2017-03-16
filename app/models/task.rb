@@ -8,6 +8,7 @@ class Task < ActiveRecord::Base
 
   has_many :requirements
   has_many :assignments, through: :requirements
+  has_many :people, through: :assignments
 
   # The following provides the equivalent of:
   # STATUS_CHOICES = { 'Empty' => 0, 'Inadequate' => 1, 'Adequate' => 2, 'Satisfied' => 3, 'Full' => 4, 'Cancelled' => 5 }
@@ -20,12 +21,17 @@ class Task < ActiveRecord::Base
     PRIORITIES[priority - 1][0] if priority.present?
   end
 
-  def to_s
-    title
+  def assignees
+    folks = Array.new
+    requirements.each do |requirement|
+      folks << requirement.assignments.active.map { |a| a.person }
+    end
+    folks.flatten!.uniq if folks.present?
+    return folks
   end
 
-  def status
-
+  def to_s
+    title
   end
 
   def status_value

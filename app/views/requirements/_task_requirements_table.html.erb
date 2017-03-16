@@ -4,6 +4,7 @@
       <th>Priority</th>
       <th>Qualification</th>
       <th>Status</th>
+      <th></th>
       <th>Staffing Filled (of desired)</th>
       <th>Minimum</th>
       <th>Maximum</th>
@@ -18,6 +19,7 @@
         <td <%== sorting_order(requirement.priority) %>><%= requirement_priority_label(requirement) %></td>
         <td><%= link_to (requirement.title.present? ? requirement.title : requirement.skill), requirement %></td>
         <td <%== sorting_order(requirement.status_value) %>><%= requirement_status_label(requirement) %></td>
+        <td><%= requirement.assignees.map{ |p| p.fullname}.join ", " %></td>
         <td><%= requirement.number_filled %>/<%= requirement.desired_people %></td>
         <td><%= requirement.minimum_people %></td>
         <td><%= requirement.maximum_people %></td>

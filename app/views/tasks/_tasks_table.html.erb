@@ -3,8 +3,7 @@
     <tr>
       <th>Title</th>
       <th>Priority</th>
-      <th>Description</th>
-      <th>Location</th>
+      <th>Assignees</th>
       <th>Status</th>
       <th>Requirements Met</th>
       <th>Start Time</th>
@@ -17,12 +16,11 @@
       <tr <%== task_status_class(task) %>>
         <td><%= link_to task.title, task %></td>
         <td <%== sorting_order(task.priority) %>><%= task_priority_label(task) %></td>
-        <td><%= truncate(task.description) %></td>
-        <td><%= truncate(task.location) %></td>
+        <td><%= task.assignees.map{ |p| p.fullname}.join ", " %></td>
         <td <%== sorting_order(task.status_value) %>><%= task_status_label(task) %></td>
         <td><%= task.requirements_met_count %>/<%= task.requirements_count %></td>
-        <td><%= task.start_time %></td>
-        <td><%= task.end_time %></td>
+        <td><%= task.start_time.strftime('%a %b %d %k:%M') if task.start_time %></td>
+        <td><%= task.end_time.strftime('%a %b %d %k:%M') if task.end_time %></td>
         <td><%= table_button_link 'Edit', edit_task_path(task) if can? :edit, task %></td>
       </tr>
     <% end %>
