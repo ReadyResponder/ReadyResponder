@@ -1,5 +1,5 @@
 <% content_for :sidebar do %>
-  <h1>Listing tasks</h1>
+  <h1>Listing Tasks</h1>
 <% end %>
 
 <table id="tasks_table" class="datatable table table-striped table-bordered">
@@ -26,7 +26,7 @@
         <td <%== sorting_order(task.priority) %>><%= task_priority_label(task) %></td>
         <td><%= truncate(task.description) %></td>
         <td><%= truncate(task.location) %></td>
-        <td <%== sorting_order(task.status_value) %>><%= task_status_label(task) %></td>
+        <td <%== sorting_order(task.staffing_value) %>><%= task_staffing_label(task) %></td>
         <td><%= task.requirements_met_count %>/<%= task.requirements_count %></td>
         <td><%= task.start_time %></td>
         <td><%= task.end_time %></td>

@@ -1,11 +1,11 @@
 module TasksHelper
   def task_status_class(task)
-    color = task_status_color(task.status)
+    color = task_status_color(task.staffing_level)
     return "class=\"#{color}\"" if color
   end
 
-  def task_status_label(task)
-    content_tag(:span, task.status, class: task_label_class(task.status))
+  def task_staffing_label(task)
+    content_tag(:span, task.staffing_level, class: task_label_class(task.staffing_level))
   end
 
   def task_priority_label(task)

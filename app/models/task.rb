@@ -34,9 +34,22 @@ class Task < ActiveRecord::Base
     title
   end
 
-  def status_value
+  def staffing_level
+    return STATUS_CHOICES_ARRAY[5] if status == 'Cancelled'
+
+    statuses = requirements.map { |r| Requirement::STATUS_CHOICES[r.status] }
+    sorted = statuses.uniq.sort
+    return STATUS_CHOICES_ARRAY[0] if sorted.empty?   # Empty
+    return STATUS_CHOICES_ARRAY[0] if sorted == [0]   # Empty
+    return STATUS_CHOICES_ARRAY[1] if sorted[0] <= 1  # Inadequate
+    return STATUS_CHOICES_ARRAY[2] if sorted[0] == 2  # Adequate
+    return STATUS_CHOICES_ARRAY[3] if sorted[0] == 3  # Satisfied
+    return STATUS_CHOICES_ARRAY[4] if sorted == [4]  # Full
+  end
+
+  def staffing_value
     # return a value for sorting
-    return STATUS_CHOICES[status]
+    return STATUS_CHOICES[staffing_level]
   end
 
   def requirements_count
