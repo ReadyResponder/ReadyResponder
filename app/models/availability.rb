@@ -1,7 +1,7 @@
 class Availability < ActiveRecord::Base
   belongs_to :person
 
-  before_create :cancel_duplicates
+  after_create :cancel_duplicates
 
   validates_presence_of :person, :status, :start_time, :end_time
   validates_chronology :start_time, :end_time
