@@ -18,7 +18,7 @@ class Event < ActiveRecord::Base
   belongs_to :course
   has_many :activities, as: :loggable
 
-  has_many :tasks
+  has_many :tasks, -> { where("tasks.status = 'Active'" ) }
   has_many :requirements, :through => :tasks
   has_many :assignments, :through => :requirements
   has_many :people, through: :assignments
@@ -27,7 +27,8 @@ class Event < ActiveRecord::Base
 
   accepts_nested_attributes_for :certs
 
-  scope :upcoming, -> { order("start_time ASC").where( "status in (?) AND end_time > ?", ["Scheduled", "In-session"], Time.now ) }
+  scope :upcoming, -> { order("start_time ASC").where( "status in (?) AND end_time > ?",
+                        ["Scheduled", "In-session"], Time.now ) }
 
   CATEGORY_CHOICES = ['Training', 'Patrol', 'Meeting', 'Admin', 'Event', 'Template']
   STATUS_CHOICES = ['Scheduled', 'In-session', 'Completed', 'Cancelled', "Closed"]
@@ -96,13 +97,8 @@ class Event < ActiveRecord::Base
   end
 
   def assignees
-    folks = Array.new
-    tasks.active.each do |task|
-      requirements.each do |requirement|
-        folks << requirement.assignments.active.map { |a| a.person }
-      end
-    end
-    folks.flatten!.uniq if folks.present?
+    folks = assignments.active.map {|a| a.person }
+    folks.uniq if folks.present?
     return folks
   end
 
