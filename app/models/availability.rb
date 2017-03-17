@@ -48,7 +48,7 @@ class Availability < ActiveRecord::Base
     previous_availabilities = person.availabilities.for_time_span(start_time..end_time).order(:created_at)
     previous_availabilities.each do |a|
       if start_time == a.start_time && end_time == a.end_time
-        a.update(status: "Cancelled")
+        a.update(status: "Cancelled") unless self == a
       end
     end
   end
