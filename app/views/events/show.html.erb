@@ -48,7 +48,7 @@
     <div class="tab-pane" id="event-availability-tab">
       <div id="event_availabilities" >
         <%= render(:partial => "availabilities/availabilities_table",
-                   :locals => { :availabilities => ( @event.responses),
+                   :locals => { :availabilities => ( @event.responses + @event.assignments.active),
                                 :partial_availabilities => ( @event.partial_responses)} ) || "No Availabilities yet !" %>
 
         <%= render(partial: "people/people_table",

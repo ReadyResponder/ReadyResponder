@@ -10,4 +10,7 @@ class Assignment < ActiveRecord::Base
 
   scope :active, -> { where( status: ["New", "Active"] ) }
 
+  def description
+    task.to_s
+  end
 end

@@ -10,6 +10,8 @@ class Task < ActiveRecord::Base
   has_many :assignments, through: :requirements
   has_many :people, through: :assignments
 
+  scope :active, -> { where( status: "Active" ) }
+
   # The following provides the equivalent of:
   # STATUS_CHOICES = { 'Empty' => 0, 'Inadequate' => 1, 'Adequate' => 2, 'Satisfied' => 3, 'Full' => 4, 'Cancelled' => 5 }
   STATUS_CHOICES_ARRAY = ['Empty', 'Inadequate', 'Adequate', 'Satisfied', 'Full', 'Cancelled']

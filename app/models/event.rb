@@ -95,6 +95,17 @@ class Event < ActiveRecord::Base
     return event
   end
 
+  def assignees
+    folks = Array.new
+    tasks.active.each do |task|
+      requirements.each do |requirement|
+        folks << requirement.assignments.active.map { |a| a.person }
+      end
+    end
+    folks.flatten!.uniq if folks.present?
+    return folks
+  end
+
   def completed?
     status == "Completed"
   end

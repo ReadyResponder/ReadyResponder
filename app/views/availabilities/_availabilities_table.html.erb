@@ -20,8 +20,8 @@
         <td><%= link_to a.person.fullname, a.person %></td>
         <td><%= number_to_phone(a.person.phone) %></td>
         <td><%= "#{a.person.dept_shortname} #{a.person.division1}" %></td>
-        <td><time><%= a.start_time %></time></td>
-        <td><%= a.end_time %></td>
+        <td><time><%= a.start_time.strftime('%a %b %d %k:%M') if a.start_time  %></time></td>
+        <td><time><%= a.end_time.strftime('%a %b %d %k:%M') if a.end_time  %></time></td>
         <td><%= truncate(a.description, length: 24) %></td>
       </tr>
     <% end %>
