@@ -17,17 +17,17 @@ RSpec.describe Msg::Arrive do
     end
     
     context "with an existing incomplete timecard" do
-      before(:each) do
+      let!(:timecard) do
         Timecard.create!(person_id: person.id,
                         status: "Incomplete",
                         start_time: Time.now)
       end
       
-      it "should not start a new timecard" do
+      it "should start a new timecard and error incomplete ones" do
         msg = Msg::Arrive.new({params: {Body: "arrive"}, person: person})
         expect {
-          expect(msg.respond).to eq "Error: incomplete timecard exists."
-        }.to change(Timecard, :count).by(0)
+          expect(msg.respond).to eq "Timecard started. (Incomplete timecards closed: 1)"
+        }.to change(Timecard, :count).by(1)
       end
     end
     
