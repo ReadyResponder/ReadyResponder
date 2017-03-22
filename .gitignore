@@ -24,3 +24,6 @@
 
 # Ignore rspec profiling data
 /spec/examples.txt
+
+# Ignore byebug history
+/.byebug_history

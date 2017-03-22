@@ -19,8 +19,7 @@ class TextsController < ApplicationController
       response = cmd_klass.constantize.new(
             {params: params, person: sender}).respond
     else
-      response = "Hello, #{sender.fullname}"
-      response += "Unknown Keyword"
+      response = "Hello, #{sender.fullname}. Unknown Keyword"
     end
     # Save outbound message here
     render plain: response.to_s
