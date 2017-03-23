@@ -13,6 +13,7 @@ RSpec.describe "Tasks" do
       fill_in "Title", with: task_title
       fill_in "task_start_time", with: format_datetime_value(2.days.from_now)
       fill_in "task_end_time", with: format_datetime_value(3.days.from_now)
+      select "Active", from: :task_status
       click_on 'Create Task'
       expect(page).to have_content "Task was successfully created."
       visit event_path(@event)

@@ -10,6 +10,11 @@ class Assignment < ActiveRecord::Base
 
   scope :active, -> { where( status: ["New", "Active"] ) }
 
+  scope :for_time_span, ->(range) {
+                      where("end_time >= ?", range.last).
+                      where("start_time <= ?", range.first)
+                    }
+
   def description
     task.to_s
   end

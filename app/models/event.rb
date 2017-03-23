@@ -27,8 +27,10 @@ class Event < ActiveRecord::Base
 
   accepts_nested_attributes_for :certs
 
-  scope :upcoming, -> { order("start_time ASC").where( "status in (?) AND end_time > ?",
-                        ["Scheduled", "In-session"], Time.now ) }
+  scope :upcoming, -> {
+    order("start_time ASC").where( "status in (?) AND end_time > ?",
+    ["Scheduled", "In-session"], Time.now )
+  }
 
   CATEGORY_CHOICES = ['Training', 'Patrol', 'Meeting', 'Admin', 'Event', 'Template']
   STATUS_CHOICES = ['Scheduled', 'In-session', 'Completed', 'Cancelled', "Closed"]

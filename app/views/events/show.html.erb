@@ -43,13 +43,15 @@
 
   <div class="tab-content">
     <div class="tab-pane active" id="event-task-tab">
-      <%= render(partial: 'tasks/tasks_table', locals: { tasks: @event.tasks.unscoped}) %>
+      <%= render(partial: 'tasks/tasks_table', locals: { tasks: @event.tasks}) %>
     </div>
     <div class="tab-pane" id="event-availability-tab">
       <div id="event_availabilities" >
         <%= render(:partial => "availabilities/availabilities_table",
-                   :locals => { :availabilities => ( @event.responses + @event.assignments.active),
-                                :partial_availabilities => ( @event.partial_responses)} ) || "No Availabilities yet !" %>
+                   :locals => { :availabilities => ( @event.responses +
+                                Assignment.active.for_time_span(@event.start_time..@event.end_time)),
+                                :partial_availabilities => ( @event.partial_responses)} ) \
+                                 || "No Availabilities yet !" %>
 
         <%= render(partial: "people/people_table",
                    locals: { people: @event.unresponsive_people,

@@ -5,9 +5,10 @@
       <th>Qualification</th>
       <th>Status</th>
       <th></th>
-      <th>Staffing Filled (of desired)</th>
-      <th>Minimum</th>
-      <th>Maximum</th>
+      <th>Filled</th>
+      <th>Min</th>
+      <th>Desired</th>
+      <th>Max</th>
       <th>Optional</th>
       <th>Floating</th>
       <th></th>
@@ -20,8 +21,9 @@
         <td><%= link_to (requirement.title.present? ? requirement.title : requirement.skill), requirement %></td>
         <td <%== sorting_order(requirement.status_value) %>><%= requirement_status_label(requirement) %></td>
         <td><%= requirement.assignees.map{ |p| p.fullname}.join ", " %></td>
-        <td><%= requirement.number_filled %>/<%= requirement.desired_people %></td>
+        <td><%= requirement.number_filled %></td>
         <td><%= requirement.minimum_people %></td>
+        <td><%= requirement.desired_people %></td>
         <td><%= requirement.maximum_people %></td>
         <td><%= requirement.optional ? "Yes" : "No" %></td>
         <td><%= requirement.floating ? "Yes" : "No" %></td>
