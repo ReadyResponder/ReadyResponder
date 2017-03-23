@@ -2,6 +2,29 @@ Rails.application.routes.draw do
   resources :item_categories do
     resources :item_types
   end
+
+  resources :people do
+    collection do
+      get 'inactive'
+      get 'leave'
+      get 'other'
+      get 'everybody'
+      get 'applicants'
+      get 'prospects'
+      get 'declined'
+      get 'signin'
+      get 'orgchart'
+      get 'roster'
+      get 'department/:dept_id', action: "department", as: :department
+    end
+    resources :certs
+    resources :availabilities
+    resources :timecards
+    resources :titles
+    resources :items
+    resources :channels
+  end
+
   resources :recipients, except: [:index]
   resources :settings
   resources :notifications
@@ -53,39 +76,21 @@ Rails.application.routes.draw do
     get 'calendar_chart', on: :collection
   end
 
-  resources :requirements, except: [:new, :create], constraints: { id: /\d+/ }
-
-  resources :tasks, except: [:new, :create], constraints: { id: /\d+/ } do
-    resources :requirements, only: [:new, :create]
-  end
-
   resources :events do
     resources :tasks, only: [:new, :create]
     resources :availabilities
     resources :notifications
   end
 
-  resources :people do
-    collection do
-      get 'inactive'
-      get 'leave'
-      get 'other'
-      get 'everybody'
-      get 'applicants'
-      get 'prospects'
-      get 'declined'
-      get 'signin'
-      get 'orgchart'
-      get 'roster'
-      get 'department/:dept_id', action: "department", as: :department
-    end
-    resources :certs
-    resources :availabilities
-    resources :timecards
-    resources :titles
-    resources :items
-    resources :channels
+  resources :tasks, except: [:new, :create], constraints: { id: /\d+/ } do
+    resources :requirements, only: [:new, :create]
   end
+
+  resources :requirements, except: [:new, :create], constraints: { id: /\d+/ } do
+    resources :assignments, only: [:new, :create, :edit, :update]
+  end
+
+  resources :assignments, except: [:new, :create], constraints: { id: /\d+/ }
 
   root "landing#index"
 

@@ -59,6 +59,10 @@ class Person < ActiveRecord::Base
   STATUS = ['Leave of Absence', 'Inactive', 'Active', 'Applicant','Prospect','Declined']
   DEPARTMENT = ['Police', 'CERT', 'Other']
 
+  def to_s
+    fullname
+  end
+  
   def fullname
     fname = self.nickname ||= self.firstname
     (fname + " " + (self.middleinitial || "") + " " + self.lastname).squeeze(" ")

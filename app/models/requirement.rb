@@ -2,7 +2,8 @@ class Requirement < ActiveRecord::Base
   belongs_to :task
   belongs_to :skill
   belongs_to :title
-  #has_many :assignments
+  has_many :assignments
+  has_many :people, through: :assignments
 
   validates :task, presence: true
 
@@ -22,6 +23,16 @@ class Requirement < ActiveRecord::Base
 
   def priority_str
     PRIORITIES[priority - 1][0] if priority.present?
+  end
+
+  def assignees
+    assignments.active.map { |a| a.person }
+  end
+
+  def to_s
+    return title.to_s if title.present?
+    return skill.to_s if skill.present?
+    "Error"
   end
 
   def status
@@ -44,10 +55,20 @@ class Requirement < ActiveRecord::Base
     return STATUS_CHOICES[status]
   end
 
+  def met?
+    true if ["Adequate", "Satisfied", "Full"].include? status
+  end
+
   def number_filled
-    # temporary, until assignments are implemented
-    @stub_number_filled ||= rand(maximum_people + 1)
-    return @stub_number_filled
+    assignments.active.count
+  end
+
+  def start_time
+    task.start_time if task.present?
+  end
+
+  def end_time
+    task.end_time if task.present?
   end
 
   private

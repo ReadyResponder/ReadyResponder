@@ -5,6 +5,7 @@ module EventsHelper
   end
 
   def display_event_status(event)
+    assignees            = event.assignments.active.count.to_s
     available            = event.availabilities.count.to_s
     partially_available  = event.partial_availabilities.count.to_s
     unavailable          = event.unavailabilities.count.to_s
@@ -13,6 +14,7 @@ module EventsHelper
       capture do
         concat event_status_label(event)
         concat content_tag(:span, 'Personnel:', class: 'event-labels')
+        concat make_label(assignees, 'label label-info event-labels', tooltip: 'Assigned to THIS Event')
         concat make_label(available, 'label label-success event-labels', tooltip: 'Available')
         concat make_label(partially_available, 'label label-warning event-labels', tooltip: 'Partially Available')
         concat make_label(unavailable, 'label label-danger event-labels', tooltip: 'Unavailable')

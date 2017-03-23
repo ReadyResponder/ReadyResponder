@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170222003315) do
+ActiveRecord::Schema.define(version: 20170316221533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,20 @@ ActiveRecord::Schema.define(version: 20170222003315) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "assignments", force: :cascade do |t|
+    t.integer  "person_id"
+    t.integer  "requirement_id"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.string   "status"
+    t.decimal  "duration",       precision: 7, scale: 2
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
+  add_index "assignments", ["person_id"], name: "index_assignments_on_person_id", using: :btree
+  add_index "assignments", ["requirement_id"], name: "index_assignments_on_requirement_id", using: :btree
 
   create_table "availabilities", force: :cascade do |t|
     t.datetime "start_time"
@@ -480,6 +494,7 @@ ActiveRecord::Schema.define(version: 20170222003315) do
     t.datetime "updated_at",  null: false
     t.string   "location"
     t.integer  "priority"
+    t.string   "status"
   end
 
   add_index "tasks", ["event_id"], name: "index_tasks_on_event_id", using: :btree
@@ -560,6 +575,8 @@ ActiveRecord::Schema.define(version: 20170222003315) do
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
+  add_foreign_key "assignments", "people"
+  add_foreign_key "assignments", "requirements"
   add_foreign_key "item_categories", "departments"
   add_foreign_key "notifications", "events"
   add_foreign_key "requirements", "skills"

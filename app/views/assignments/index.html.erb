@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Assignments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Person</th>
+      <th>Requirement</th>
+      <th>Start time</th>
+      <th>End time</th>
+      <th>Status</th>
+      <th>Duration</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @assignments.each do |assignment| %>
+      <tr>
+        <td><%= assignment.person %></td>
+        <td><%= assignment.requirement %></td>
+        <td><%= assignment.start_time %></td>
+        <td><%= assignment.end_time %></td>
+        <td><%= assignment.status %></td>
+        <td><%= assignment.duration %></td>
+        <td><%= link_to 'Edit', edit_assignment_path(assignment) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

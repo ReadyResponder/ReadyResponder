@@ -1,16 +1,20 @@
 module AvailabilitiesHelper
-  def availability_status_label(availability, event = nil)
-    if availability.partially_available?(event)
-      content_tag(:span, availability.status == "Available" ? "Partially Available" : availability.status, class: availability_label_class(availability, true))
+  def availability_status_label(a, event = nil)
+    if a.class.to_s=='Assignment'
+      content_tag(:span, 'Assigned', class: 'label label-info')
+    elsif a.partially_available?(event)
+      content_tag(:span, a.status == "Available" ? "Partially Available" : a.status,
+                  class: availability_label_class(a, true))
     else
-      content_tag(:span, availability.status, class: availability_label_class(availability, false))
+      content_tag(:span, a.status, class: availability_label_class(a, false))
     end
   end
 
-  def availability_status_class(availability, event = nil)
-    case availability.status
+  def availability_status_class(a, event = nil)
+    return 'class="info"' if a.class.to_s=='Assignment'
+    case a.status
     when 'Available'
-      return availability.partially_available?(event) ? 'class="warning"' : 'class="success"'
+      return a.partially_available?(event) ? 'class="warning"' : 'class="success"'
     when 'Unavailable', 'Cancelled'
       return 'class="danger"'
     else

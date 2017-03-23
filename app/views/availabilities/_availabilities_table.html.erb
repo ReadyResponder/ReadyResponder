@@ -13,15 +13,15 @@
   </thead>
   <tbody>
       <!-- Full available -->
-    <% (availabilities + partial_availabilities).uniq.each do |a| %>
+    <% (availabilities + partial_availabilities).each do |a| %>
       <tr <%== availability_status_class(a, @event) %>>
-        <td><%= link_to availability_status_label(a, @event), availability_path(a) %></td>
+        <td><%= link_to availability_status_label(a, @event), a %></td>
         <td><%= a.person.icsid %></td>
         <td><%= link_to a.person.fullname, a.person %></td>
         <td><%= number_to_phone(a.person.phone) %></td>
         <td><%= "#{a.person.dept_shortname} #{a.person.division1}" %></td>
-        <td><time><%= a.start_time %></time></td>
-        <td><%= a.end_time %></td>
+        <td><time><%= a.start_time.strftime('%a %b %d %k:%M') if a.start_time  %></time></td>
+        <td><time><%= a.end_time.strftime('%a %b %d %k:%M') if a.end_time  %></time></td>
         <td><%= truncate(a.description, length: 24) %></td>
       </tr>
     <% end %>

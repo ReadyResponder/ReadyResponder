@@ -13,7 +13,7 @@ RSpec.describe "availabilities/new", type: :view do
   it "renders new availability form" do
     render
 
-    assert_select "form[action=?][method=?]", availabilities_path, "post" do
+    assert_select "form[action=?]", availabilities_path do
 
       assert_select "select#availability_status[name=?]", "availability[status]"
 
