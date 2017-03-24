@@ -1,8 +1,8 @@
 class NotificationsController < ApplicationController
   before_filter :authenticate_user!
-  before_action :set_notification, only: [:show, :edit, :update, :destroy]
-  before_action :set_choices, only: [:new, :edit]
   load_and_authorize_resource
+  
+  before_action :set_choices, only: [:new, :edit]
 
   def index
     @notifications = Notification.all
@@ -11,6 +11,7 @@ class NotificationsController < ApplicationController
 
   def show
     @event = @notification.event
+    @last_editor = last_editor(@notification)
   end
 
   def new
@@ -62,9 +63,6 @@ class NotificationsController < ApplicationController
 
   private
   # Use callbacks to share common setup or constraints between actions.
-  def set_notification
-    @notification = Notification.find(params[:id])
-  end
 
     def set_choices
       @dept_choices = @event ? @event.departments.managing_people : Department.managing_people

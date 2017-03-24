@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
+  
   before_action :set_event, only: [:new, :create]
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 

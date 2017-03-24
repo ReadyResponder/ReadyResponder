@@ -52,13 +52,6 @@ RSpec.describe RecipientsController, type: :controller do
     end
   end
 
-  describe "GET #new" do
-    it "assigns a new recipient as @recipient" do
-      get :new, params: {}, session: valid_session
-      expect(assigns(:recipient)).to be_a_new(Recipient)
-    end
-  end
-
   describe "GET #edit" do
     it "assigns the requested recipient as @recipient" do
       recipient = Recipient.create! valid_attributes
