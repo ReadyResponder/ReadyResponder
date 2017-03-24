@@ -1,6 +1,7 @@
 class ItemCategoriesController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
+  
   before_action :set_item_category, only: [:show, :edit, :update, :destroy]
 
   # GET /item_categories
@@ -49,7 +50,7 @@ class ItemCategoriesController < ApplicationController
   end
 
   private
-  
+
   # Use callbacks to share common setup or constraints between actions.
   def set_item_category
     @item_category = ItemCategory.find(params[:id])

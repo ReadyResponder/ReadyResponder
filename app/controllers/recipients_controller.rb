@@ -1,25 +1,21 @@
 class RecipientsController < ApplicationController
-  before_action :set_recipient, only: [:show, :edit, :update, :destroy]
-
-  # GET /recipients
+  before_filter :authenticate_user!
+  load_and_authorize_resource
+  
   def index
     @recipients = Recipient.all
   end
 
-  # GET /recipients/1
   def show
   end
 
-  # GET /recipients/new
   def new
     @recipient = Recipient.new
   end
 
-  # GET /recipients/1/edit
   def edit
   end
 
-  # POST /recipients
   def create
     @recipient = Recipient.new(recipient_params)
 
@@ -30,7 +26,6 @@ class RecipientsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /recipients/1
   def update
     if @recipient.update(recipient_params)
       redirect_to @recipient, notice: 'Recipient was successfully updated.'
@@ -46,10 +41,6 @@ class RecipientsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_recipient
-      @recipient = Recipient.find(params[:id])
-    end
 
     # Only allow a trusted parameter "white list" through.
     def recipient_params

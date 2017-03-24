@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
 
   def last_editor(the_object)
     if the_object.paper_trail.try(:originator)
-      User.find(the_object.paper_trail.originator).fullname
+      User.find(the_object.paper_trail.originator).try(:fullname)
     end
   end
 

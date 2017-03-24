@@ -1,8 +1,9 @@
 class DepartmentsController < ApplicationController
   before_filter :authenticate_user!
   before_action :format_divisions, :only => [:create, :update]
-  before_action :set_department, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
+
+  before_action :set_title, only: [:show, :edit]
 
   def index
     @departments = Department.all
@@ -21,6 +22,9 @@ class DepartmentsController < ApplicationController
   end
 
   def create
+#    params[:department][:division1] = params[:department][:division1].split(',').map{|x| x.chomp.lstrip}
+#    params[:department][:division2] = params[:department][:division2].split(',').map{|x| x.chomp.lstrip}
+
     @department = Department.new(department_params)
     if @department.save
       redirect_to @department, notice: 'Department successfully created.'
@@ -50,9 +54,8 @@ class DepartmentsController < ApplicationController
     params[:department][:division2] = params[:department][:division2].split(',').map{|x| x.chomp.lstrip}
   end
 
-  def set_department
-    @department = Department.find(params[:id])
-    @page_title = "Dept: #{@department.name}"
+  def set_title
+    @page_title = "Dept: #{@department.shortname}"
   end
 
   def department_params
