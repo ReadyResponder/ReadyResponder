@@ -1,4 +1,6 @@
 class Cert < ActiveRecord::Base
+  has_paper_trail
+
   attr_accessible :category, :person_id, :course_id, :expiration_date, :issued_date, :cert_number, :level,  :status, :certification, :comments
   belongs_to :person
   belongs_to :course
