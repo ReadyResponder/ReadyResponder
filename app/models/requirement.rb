@@ -4,6 +4,7 @@ class Requirement < ActiveRecord::Base
   belongs_to :title
   has_many :assignments
   has_many :people, through: :assignments
+  delegate :event, :to => :task
 
   validates :task, presence: true
 

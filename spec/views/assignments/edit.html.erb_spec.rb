@@ -14,6 +14,8 @@ RSpec.describe "assignments/edit", type: :view do
 
   it "renders the edit assignment form" do
     allow(@requirement).to receive(:task).and_return(Task.new)
+    allow(@requirement).to receive(:event).and_return(Event.new)
+
     allow(@requirement).to receive(:id).and_return(1)
     allow(@assignment).to receive(:requirement).and_return(@requirement)
     render
