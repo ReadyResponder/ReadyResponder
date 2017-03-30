@@ -13,3 +13,5 @@ ratings:
  - "**.rb"
 
 exclude_paths:
+- "test/**"
+- "vendor/**"
