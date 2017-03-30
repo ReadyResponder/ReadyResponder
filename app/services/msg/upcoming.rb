@@ -1,6 +1,6 @@
 class Msg::Upcoming < Msg::Base
   def respond
-    events = Event.upcoming.limit(5)
+    events = Event.upcoming.limit(10)
     response = ""
     events.each do |event|
       response += "#{event.start_time.strftime('%a %b %d %k:%M')} - " if event.start_time.present?

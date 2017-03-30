@@ -19,7 +19,11 @@ class Message::ExtractKeyword
                   "upcoming"    => "Upcoming",
                   "info"        => "Info",
                   "arrive"      => "Arrive",
-                  "depart"      => "Depart"}
+                  "depart"      => "Depart",
+                  "arrived"     => "Arrive",
+                  "departed"    => "Depart",
+                  "here"        => "Arrive",
+                  "gone"        => "Depart"}
     # TODO Additional keywords => maybe rcv received ack
     # TODO tasks task roster (who's assigned to event)
     # TODO schedule (What I'm scheduled for)
