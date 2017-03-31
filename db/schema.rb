@@ -228,6 +228,7 @@ ActiveRecord::Schema.define(version: 20170316221533) do
     t.datetime "updated_at"
     t.integer  "item_category_id"
     t.string   "description"
+    t.string   "item_type_image"
   end
 
   create_table "items", force: :cascade do |t|

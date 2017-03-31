@@ -59,6 +59,7 @@ Rails.application.routes.draw do
   end
 
   get '/uploads/item/item_image/:id/:basename.:extension', controller: 'items', action: 'download', type: 'item_image'
+  get '/uploads/item_type/item_type_image/:id/:basename.:extension', controller: 'item_types', action: 'download', type: 'item_type_image'
   get '/uploads/person/portrait/:id/:basename.:extension', controller: 'people', action: 'download', type: 'portrait'
   get '/uploads/cert/certification/:id/:basename.:extension', controller: 'certs', action: 'download', type: 'certification'
 
