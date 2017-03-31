@@ -1,19 +1,20 @@
 <% content_for :sidebar do %>
   <%= sidebar_button_link 'Return to Event', @task.event %>
-  <%= sidebar_button_link 'Return to Tasks List', tasks_path %>
   <%= sidebar_button_link 'Edit Task', edit_task_path(@task) if can? :edit, @task %>
   <%= sidebar_button_link 'New Requirement', new_task_requirement_path(@task) if can? :create, Requirement %>
 <% end %>
 
 <p>
-  <span class="h3"><%= link_to @task.event.title, event_path(@task.event) %>: <%= @task.title %></span>
+  <span class="h3"><%= link_to @task.event.title, event_path(@task.event) %></span></br>
+  <span class="h3"><%= @task.title %></span>
   <% if @task.location.present? %>
-    at <%= @task.location %>
+    <%= @task.location %>
   <% end %>
-  (<%= format_time_span(@task.start_time, @task.end_time) %>)
 </p>
+<span class="h3"><%= format_time_span(@task.start_time, @task.end_time) %></span>
 
-<p><%= task_status_label(@task) %> (requirements met: <%= @task.requirements_met_count %>/<%= @task.requirements_count %>)</p>
+<p><%= task_staffing_label(@task) %>
+  Requirements met: <%= @task.requirements_met_count %>/<%= @task.requirements_count %></p>
 
 <% if @task.description.present? %>
   <p><b>Description:</b> <%= @task.description %></p>

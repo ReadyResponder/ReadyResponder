@@ -1,6 +1,7 @@
 class RequirementsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
+  
   before_action :set_task, only: [:new, :create]
   before_action :set_requirement, only: [:show, :edit, :update, :destroy]
 

@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_paper_trail
+
   has_and_belongs_to_many :roles
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -15,7 +17,7 @@ class User < ActiveRecord::Base
   def role?(role)
     self.roles.include? role.to_s
   end
-  
+
   def fullname
     (firstname + " " + lastname).squeeze(" ")
   end

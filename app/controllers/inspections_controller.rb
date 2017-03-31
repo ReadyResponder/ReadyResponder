@@ -1,6 +1,7 @@
 class InspectionsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
+  
   before_action :set_item, only: [:new, :create]
   before_action :set_inspection, only: [:show, :edit, :update, :destroy]
 

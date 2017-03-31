@@ -1,5 +1,7 @@
 class HelpdocsController < ApplicationController
-
+  before_filter :authenticate_user!
+  load_and_authorize_resource
+  
   def index
     dir = Rails.root.join('app', 'views', 'helpdocs')
     @files = (

@@ -7,7 +7,10 @@ class Task < ActiveRecord::Base
   validates_chronology :start_time, :end_time
 
   has_many :requirements
-  # has_many :assignments, through: :requirements
+  has_many :assignments, through: :requirements
+  has_many :people, through: :assignments
+
+  scope :active, -> { where( status: "Active" ) }
 
   # The following provides the equivalent of:
   # STATUS_CHOICES = { 'Empty' => 0, 'Inadequate' => 1, 'Adequate' => 2, 'Satisfied' => 3, 'Full' => 4, 'Cancelled' => 5 }
@@ -20,15 +23,35 @@ class Task < ActiveRecord::Base
     PRIORITIES[priority - 1][0] if priority.present?
   end
 
-  def status
-    # (set and) return a random status for testing.
-    @stub_status ||= STATUS_CHOICES.keys[rand(STATUS_CHOICES.count)]
-    return @stub_status
+  def assignees
+    folks = Array.new
+    requirements.each do |requirement|
+      folks << requirement.assignments.active.map { |a| a.person }
+    end
+    folks.flatten!.uniq if folks.present?
+    return folks
   end
 
-  def status_value
+  def to_s
+    title
+  end
+
+  def staffing_level
+    return STATUS_CHOICES_ARRAY[5] if status == 'Cancelled'
+
+    statuses = requirements.map { |r| Requirement::STATUS_CHOICES[r.status] }
+    sorted = statuses.uniq.sort
+    return STATUS_CHOICES_ARRAY[0] if sorted.empty?   # Empty
+    return STATUS_CHOICES_ARRAY[0] if sorted == [0]   # Empty
+    return STATUS_CHOICES_ARRAY[1] if sorted[0] <= 1  # Inadequate
+    return STATUS_CHOICES_ARRAY[2] if sorted[0] == 2  # Adequate
+    return STATUS_CHOICES_ARRAY[3] if sorted[0] == 3  # Satisfied
+    return STATUS_CHOICES_ARRAY[4] if sorted == [4]  # Full
+  end
+
+  def staffing_value
     # return a value for sorting
-    return STATUS_CHOICES[status]
+    return STATUS_CHOICES[staffing_level]
   end
 
   def requirements_count
@@ -39,9 +62,10 @@ class Task < ActiveRecord::Base
   end
 
   def requirements_met_count
-    # (set and) return a random number of requirements met
-    @stub_requirements_met_count ||= requirements_met_for_stub
-    return @stub_requirements_met_count
+    # TODO This will be an initial pass.
+    # The results will not correctly look at a requirement lasting
+    # more than one operational period.
+    requirements.inject(0) { |sum, req| sum + (req.met? ? 1 : 0) }
   end
 
   def requirements_unmet_count
@@ -54,17 +78,5 @@ class Task < ActiveRecord::Base
   end
 
   private
-    def requirements_met_for_stub
-      # generate a value compatible with status
-      case status
-      when 'Full'
-        return requirements_count
-      when 'Empty'
-        return 0
-      when 'Cancelled' # Can have any value from 0 to total number of requirements
-        return rand(requirements_count + 1)
-      else # 'Partially Filled' can have any value but full or 0.
-        return 1 + rand(requirements_count - 1)
-      end
-    end
+
 end

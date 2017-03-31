@@ -1,4 +1,6 @@
 class Channel < ActiveRecord::Base
+  has_paper_trail
+
   belongs_to :person
 
   USAGES = ['1-All','2-Emergency Only','3-Info Only','4-Testing']

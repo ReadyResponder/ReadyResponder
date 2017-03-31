@@ -1,0 +1,38 @@
+<% content_for :sidebar do %>
+  <%= sidebar_button_link 'All Assignments', assignments_path %>
+  <%= sidebar_button_link 'Edit Assignment',
+           edit_assignment_path(@assignment) if can? :edit, @assignment %>
+  <p id="notice"><%= notice %></p>
+<% end %>
+
+<p><h4><%= link_to @assignment.event.title, @assignment.event %></h4></p>
+<p><h4><%= link_to @assignment.task, @assignment.task %></h4></p>
+<p><h4><%= link_to @assignment.requirement, @assignment.requirement %></h4></p>
+<p><h4><%= link_to @assignment.person.to_s, @assignment.person %></h4></p>
+
+
+<p>
+  <strong>Start time:</strong>
+  <%= @assignment.start_time %>
+</p>
+
+<p>
+  <strong>End time:</strong>
+  <%= @assignment.end_time %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @assignment.status %>
+</p>
+
+<p>
+  <strong>Duration:</strong>
+  <%= @assignment.duration %>
+</p>
+
+<p>
+  Created <%= @assignment.created_at %><br/>
+  Last Modified <%= @assignment.updated_at %><br/>
+  Last Editor <%= @last_editor %>
+</p>

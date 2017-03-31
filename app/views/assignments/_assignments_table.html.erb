@@ -1,0 +1,25 @@
+<table id="assignments" class="datatable table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Person</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% assignments.each do |assignment| %>
+      <tr <%== assignment_status_class(assignment) %> >
+        <td><%= link_to assignment.status, assignment %></td>
+        <td><%= link_to assignment.person.fullname, assignment.person %></td>
+        <td><%= assignment.start_time.strftime('%a %b %d %k:%M') %></td>
+        <td><%= assignment.end_time.strftime('%a %b %d %k:%M') %></td>
+
+        <td><%= table_button_link 'Edit',
+                    edit_requirement_assignment_path(@requirement, assignment) \
+                    if can? :edit, assignment %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

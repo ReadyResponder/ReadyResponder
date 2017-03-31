@@ -17,15 +17,18 @@ class Message::ExtractKeyword
                   "unavailable" => "Unavailable",
                   "no"          => "Unavailable",
                   "upcoming"    => "Upcoming",
-                  "info"        => "Info"}
+                  "info"        => "Info",
+                  "arrive"      => "Arrive",
+                  "depart"      => "Depart",
+                  "arrived"     => "Arrive",
+                  "departed"    => "Depart",
+                  "here"        => "Arrive",
+                  "gone"        => "Depart"}
     # TODO Additional keywords => maybe rcv received ack
     # TODO tasks task roster (who's assigned to event)
     # TODO schedule (What I'm scheduled for)
     # TODO onduty on-duty for who's on duty right now. & signin signout
     # TODO "crew id_code" to allow supervisor to see who has responded.
-    if white_list.keys.include? first_word
-      return white_list[first_word]
-    end
-    return nil
+    return white_list[first_word]
   end
 end

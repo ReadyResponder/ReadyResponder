@@ -2,20 +2,24 @@
   <h2>Requirement</h2>
   <%= sidebar_button_link 'Return to Task', @requirement.task %>
   <%= sidebar_button_link 'Return to Event', @requirement.task.event %>
-  <%= sidebar_button_link 'Edit Requirement', edit_requirement_path(@requirement) if can? :edit, @requirement %>
+  <%= sidebar_button_link 'Edit Requirement',
+           edit_requirement_path(@requirement) if can? :edit, @requirement %>
+  <%= sidebar_button_link "New Assignment",
+           new_requirement_assignment_path(@requirement) if can? :create, Assignment %>
 <% end %>
 
+<span class="h3"><%= link_to @requirement.task.event.title, event_path(@requirement.task.event) %></span><br>
+<span class="h3"><%= link_to @requirement.task.title, task_path(@requirement.task)%></span><br>
+
 <p>
-  <span class="h3">
+  <span class="h4">
     <% if @requirement.title.present? %>
       <%= @requirement.title %>
     <% elsif @requirement.skill.present? %>
       <%= @requirement.skill %>
     <% end %>
-  </span>
-  for
-  <span class="h4"><%= link_to @requirement.task.event.title, event_path(@requirement.task.event) %></span>:
-  <span class="h5"><%= link_to @requirement.task.title, task_path(@requirement.task)%></span>
+  </span><br>
+
   <% if @requirement.task.location.present? %>
     at <%= @requirement.task.location %>
   <% end %>
@@ -25,11 +29,15 @@
 <p><%= requirement_status_label(@requirement) %> (personnel requirements met: <%= @requirement.number_filled %>/<%= @requirement.desired_people %> desired)</p>
 <p>
   <b>Assigned People:</b> <%= @requirement.number_filled %><br>
-  <b>Desired People:</b> <%= @requirement.desired_people %><br>
   <b>Minimum People:</b> <%= @requirement.minimum_people %><br>
+  <b>Desired People:</b> <%= @requirement.desired_people %><br>
   <b>Maximum People:</b> <%= @requirement.maximum_people %>
 </p>
 <p>
   <b>Optional:</b> <%= @requirement.optional ? "Yes" : "No" %><br>
   <b>Floating:</b> <%= @requirement.floating ? "Yes" : "No" %>
 </p>
+
+<%= render(partial: "assignments/assignments_table",
+           locals: { assignments: @requirement.assignments,
+                     title: "Assignments" }) || "No Assignments Yet !" %>
