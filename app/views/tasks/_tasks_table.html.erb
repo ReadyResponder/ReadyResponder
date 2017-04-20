@@ -16,7 +16,7 @@
       <tr <%== task_status_class(task) %>>
         <td><%= link_to task.title, task %></td>
         <td <%== sorting_order(task.priority) %>><%= task_priority_label(task) %></td>
-        <td><%= task.assignees.map{ |p| p.fullname}.join ", " %></td>
+        <td><ol><%= render partial: "assignee", collection: task.assignees %></ol></td>
         <td <%== sorting_order(task.staffing_value) %>><%= task_staffing_label(task) %></td>
         <td><%= task.requirements_met_count %>/<%= task.requirements_count %></td>
         <td><%= task.start_time.strftime('%a %b %d %k:%M') if task.start_time %></td>
