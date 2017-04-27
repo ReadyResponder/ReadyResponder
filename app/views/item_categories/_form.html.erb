@@ -2,8 +2,6 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <b>* Department </b></br>
-    <%= f.collection_select :department_id, Department.managing_items.all, :id, :name, include_blank: true %>
     <%= f.input :name %>
     <%= f.input :status, :as => :select, :collection => ["Active", "Inactive"] %>
     <%= f.input :description, :as => :text %>

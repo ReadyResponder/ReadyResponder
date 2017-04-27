@@ -37,4 +37,9 @@ class Item < ActiveRecord::Base
     repairs.where("service_date > ?", 6.months.ago).pluck(:cost).compact.inject(:+) || 0
   end
 
+  def location_name
+    location.name if location
+    "Unknown"
+  end
+  
 end

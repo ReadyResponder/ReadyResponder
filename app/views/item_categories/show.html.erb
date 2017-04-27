@@ -10,7 +10,6 @@
 
 <p><%= @item_category.description %></p>
 
-<p><b>Department:</b> <%= @item_category.department_name %></p>
 <%= render(partial: 'item_types/item_types_table',
            locals: { item_types: @item_category.item_types}) if @item_category.item_types %>
 
