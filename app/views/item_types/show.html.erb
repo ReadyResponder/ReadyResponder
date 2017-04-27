@@ -1,8 +1,10 @@
 <% content_for :sidebar do %>
-  <%= sidebar_button_link 'Return to Categories', item_categories_path %>
-  <%= sidebar_button_link 'Edit',
+<%= sidebar_button_link 'Return to All Categories', item_categories_path %>
+<%= sidebar_button_link 'Return to Vehicles',
+                         item_category_path(@item_type.item_category) %>
+  <%= sidebar_button_link 'Edit Item Type',
            edit_item_type_path(@item_type) if can? :edit, @item_type %>
-  <%= sidebar_button_link 'New Item',
+  <%= sidebar_button_link "New #{@item_type.item_category} Item",
            new_item_type_item_path(@item_type) if can? :create, Item %>
 <% end %>
 
@@ -11,8 +13,6 @@
 <%= @item_type.name %></h3>
 
 <p><%= @item_type.description %></p>
-
-<b>Status:</b><%= success_or_warning_label(@item_type.status, 'Active') %>
 
 <%= render(partial: 'items/items_table',
            locals: { items: @item_type.items}) %>

@@ -13,7 +13,7 @@ RSpec.describe Item do
   it "a new item form with appropriate fields" do
     visit new_item_type_item_path(item_type)
     fill_in('item_model', :with => 'Model T')
-    expect(find_field('item_status').value).to have_content('Available')
+    expect(find_field('item_status').value).to have_content('Unassigned')
   end
 
   it "an edit form with values filled in" do

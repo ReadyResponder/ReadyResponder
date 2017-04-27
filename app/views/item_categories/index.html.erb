@@ -7,8 +7,6 @@
   <thead>
     <tr>
       <th>Category Name</th>
-      <th>Status</th>
-      <th></th>
     </tr>
   </thead>
 
@@ -16,8 +14,6 @@
     <% @item_categories.each do |itc| %>
       <tr>
         <td><%= link_to itc.name, itc %></td>
-        <td><%= itc.status %></td>
-        <td><%= table_button_link 'Edit', edit_item_category_path(itc) if can? :update, itc %></td>
       </tr>
     <% end %>
   </tbody>

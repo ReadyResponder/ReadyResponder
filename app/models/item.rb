@@ -5,7 +5,7 @@ class Item < ActiveRecord::Base
                   :model, :brand, :name, :owner_id, :po_number,
                   :value, :grant, :purchase_amt, :purchase_date,
                   :sell_amt, :sell_date, :stock_number,
-                  :source, :status, :comments, :item_image,
+                  :source, :status, :condition, :comments, :item_image,
                   :department_id, :resource_type_id, :item_type_id,
                   :unique_ids_attributes
 
@@ -30,8 +30,13 @@ class Item < ActiveRecord::Base
            allow_destroy: true,
            reject_if: :all_blank
 
-  STATUS_CHOICES = ['In Service', 'In Service - Degraded', 'Out of Service','Available','Sold', 'Destroyed']
-  CATEGORY_CHOICES = ['Pump','Light','Generator','Shelter', 'Radio', 'Vehicle', 'Other']
+  STATUS_CHOICES = ['Assigned', 'Unassigned', 'Retired']
+  CONDITION_CHOICES = ['Ready', 'In-Service - Maintenance', 'In-Service - Degraded', 'Out of Service' ]
+
+  def status
+    return 'Out of Service' if condition == 'Out of Service'
+    self[:status]
+  end
 
   def recent_costs
     repairs.where("service_date > ?", 6.months.ago).pluck(:cost).compact.inject(:+) || 0
@@ -41,5 +46,5 @@ class Item < ActiveRecord::Base
     location.name if location
     "Unknown"
   end
-  
+
 end
