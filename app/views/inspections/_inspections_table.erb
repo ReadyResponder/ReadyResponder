@@ -9,7 +9,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @inspections.each do |inspection| %>
+    <% @item.inspections.each do |inspection| %>
       <tr>
         <td><%= link_to format_datetime_value(inspection.inspection_date), inspection %></td>
         <td><%= inspection_status_label(inspection) %></td>

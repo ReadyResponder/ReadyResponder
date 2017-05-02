@@ -2,7 +2,7 @@
   <%= sidebar_button_link 'Return to Categories', item_categories_path %>
   <%= sidebar_button_link 'Edit Category',
            edit_item_category_path(@item_category) if can? :edit, @item_category %>
-  <%= sidebar_button_link 'New Item Type',
+  <%= sidebar_button_link "New #{@item_category.name.singularize} Type",
            new_item_category_item_type_path(@item_category) if can? :create, ItemType %>
 <% end %>
 

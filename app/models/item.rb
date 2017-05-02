@@ -26,6 +26,9 @@ class Item < ActiveRecord::Base
   has_many :repairs
   has_many :inspections
   has_many :unique_ids
+
+  delegate :item_category, :to => :item_type
+
   accepts_nested_attributes_for :unique_ids,
            allow_destroy: true,
            reject_if: :all_blank

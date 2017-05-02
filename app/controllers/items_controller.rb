@@ -8,13 +8,8 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
-    @item_type = @item.item_type
     @last_editor = last_editor(@item)
     @page_title = "Item: #{@item.name}"
-
-    @inspections = @item.inspections
-    @repairs = @item.repairs
   end
 
   def new
@@ -28,8 +23,6 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item = Item.find(params[:id])
-    @item_type = @item.item_type
     @page_title = "Editing Item #{@item.name}"
   end
 

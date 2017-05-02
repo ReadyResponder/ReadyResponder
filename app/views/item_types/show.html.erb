@@ -1,10 +1,10 @@
 <% content_for :sidebar do %>
-<%= sidebar_button_link 'Return to All Categories', item_categories_path %>
-<%= sidebar_button_link 'Return to Vehicles',
+  <%= sidebar_button_link 'Return to All Categories', item_categories_path %>
+  <%= sidebar_button_link 'Return to Vehicles',
                          item_category_path(@item_type.item_category) %>
-  <%= sidebar_button_link 'Edit Item Type',
+  <%= sidebar_button_link "Edit #{@item_type.name.singularize} Type",
            edit_item_type_path(@item_type) if can? :edit, @item_type %>
-  <%= sidebar_button_link "New #{@item_type.item_category} Item",
+  <%= sidebar_button_link "New #{@item_type.name.singularize}",
            new_item_type_item_path(@item_type) if can? :create, Item %>
 <% end %>
 
