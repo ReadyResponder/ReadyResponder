@@ -7,9 +7,8 @@ class RepairsController < ApplicationController
   end
 
   def show
-    @item = @repair.item
-    @item_type = @item.item_type
-    @item_category = @item_type.item_category
+    @last_editor = last_editor(@repair)
+    @page_title = "Repair for #{@repair.item}"
   end
 
   def new

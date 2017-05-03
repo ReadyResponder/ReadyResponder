@@ -13,7 +13,7 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @item_type = ItemType.find ( params[:item_type_id])
+    @item_type = ItemType.find( params[:item_type_id])
     @item = Item.new(
             status: 'Unassigned',
             condition: 'Available',

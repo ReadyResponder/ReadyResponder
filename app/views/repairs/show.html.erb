@@ -3,10 +3,10 @@
 <% end %>
 
 <h3>
-  <%= link_to @item_type.item_category,
-                item_category_path(@item_type.item_category) %> >
-  <%= link_to @item_type.name, @item_type %>  >
-  <%= link_to @item.name, @item %> > Repair
+  <%= link_to @repair.item_category,
+                item_category_path(@repair.item_category) %> >
+  <%= link_to @repair.item_type, @repair.item_type %>  >
+  <%= link_to @repair.item, @item %> > Repair
 </h3>
 
 <p>

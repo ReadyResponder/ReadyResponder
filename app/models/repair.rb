@@ -4,6 +4,10 @@ class Repair < ActiveRecord::Base
                   :status, :user_id, :cost
   belongs_to :item
   belongs_to :person
+  delegate :item_category, :to => :item
+  delegate :item_type, :to => :item
+
+
   validates_numericality_of :cost, :allow_nil => true, :allow_blank => true
 
   STATUS_CHOICES = ['Needed', 'In-progress', 'Awaiting Parts',

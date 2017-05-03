@@ -4,6 +4,7 @@
   <div class="form-inputs">
     <%= f.association :department, collection: Department.managing_items.order(:name) %>
     <%= f.association :location, :collection => Department.all, :as => :grouped_select, :group_method => :locations %>
+    <%= f.input :name %>
     <%= f.association :owner %>
     <%= f.input :status, :as => :select, :collection => Item::STATUS_CHOICES %>
     <%= f.input :condition, :as => :select, :collection => Item::CONDITION_CHOICES %>
