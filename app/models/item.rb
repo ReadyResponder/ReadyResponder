@@ -36,6 +36,10 @@ class Item < ActiveRecord::Base
   STATUS_CHOICES = ['Assigned', 'Unassigned', 'Retired']
   CONDITION_CHOICES = ['Ready', 'In-Service - Maintenance', 'In-Service - Degraded', 'Out of Service' ]
 
+  def to_s
+    name
+  end
+
   def status
     return 'Out of Service' if condition == 'Out of Service'
     self[:status]
@@ -46,7 +50,7 @@ class Item < ActiveRecord::Base
   end
 
   def location_name
-    location.name if location
+    return location.name if location
     "Unknown"
   end
 

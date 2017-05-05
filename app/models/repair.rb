@@ -9,7 +9,7 @@ class Repair < ActiveRecord::Base
 
 
   validates_numericality_of :cost, :allow_nil => true, :allow_blank => true
-
+  validates_presence_of :status
   STATUS_CHOICES = ['Needed', 'In-progress', 'Awaiting Parts',
                     'Completed - Repaired', 'Completed - No Trouble Found']
   CATEGORY_CHOICES = ['Repair', 'Inspection' ]

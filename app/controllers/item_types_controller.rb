@@ -2,8 +2,6 @@ class ItemTypesController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
 
-  before_action :set_common_values, only: [:show, :edit, :update, :destroy]
-
   def index
     @item_types = ItemType.all
   end

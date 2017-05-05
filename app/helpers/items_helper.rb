@@ -10,7 +10,7 @@ module ItemsHelper
 
   def edit_item_button
     return nil if cannot? :edit, @item
-    return link_to "Edit #{@item.name}",
+    return link_to "Edit #{@item}",
                    edit_item_path(@item),
                    class: 'btn btn-block btn-primary'
   end

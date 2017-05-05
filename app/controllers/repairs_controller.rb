@@ -22,12 +22,10 @@ class RepairsController < ApplicationController
   def create
     @repair = Repair.new(params[:repair])
 
-    respond_to do |format|
-      if @repair.save
-        redirect_to @repair, notice: 'Repair was successfully created.'
-      else
-        render action: "new"
-      end
+    if @repair.save
+      redirect_to @repair, notice: 'Repair was successfully created.'
+    else
+      render action: "new"
     end
   end
 

@@ -16,8 +16,7 @@ class ItemCategoriesController < ApplicationController
 
   # GET /item_categories/new
   def new
-    @item_category = ItemCategory.new
-    @item_category.status = 'Active'
+    @item_category = ItemCategory.new(status: 'Active')
   end
 
   # GET /item_categories/1/edit
