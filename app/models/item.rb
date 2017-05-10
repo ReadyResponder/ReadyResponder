@@ -40,11 +40,6 @@ class Item < ActiveRecord::Base
     name
   end
 
-  def status
-    return 'Out of Service' if condition == 'Out of Service'
-    self[:status]
-  end
-
   def recent_costs
     repairs.where("service_date > ?", 6.months.ago).pluck(:cost).compact.inject(:+) || 0
   end
