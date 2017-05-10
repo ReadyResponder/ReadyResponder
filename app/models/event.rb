@@ -32,7 +32,7 @@ class Event < ActiveRecord::Base
     ["Scheduled", "In-session"], Time.now )
   }
 
-  CATEGORY_CHOICES = ['Training', 'Patrol', 'Meeting', 'Admin', 'Event', 'Template']
+  CATEGORY_CHOICES = ['Training', 'Patrol', 'Meeting', 'Admin', 'Event']
   STATUS_CHOICES = ['Scheduled', 'In-session', 'Completed', 'Cancelled', "Closed"]
 
   def to_s
