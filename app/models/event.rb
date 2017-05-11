@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
   has_paper_trail
-  before_save :calc_duration
+  before_save :calc_duration, :trim_id_code
 
   attr_accessible :title, :description, :category, :course_id, :is_template,
                   :duration, :start_time, :end_time, :instructor, :location,
@@ -128,5 +128,9 @@ private
      if !(start_time.blank?) and !(end_time.blank?)
       self.duration = ((end_time - start_time) / 1.hour).round(2) || 0
      end
+  end
+
+  def trim_id_code
+    self.id_code = self.id_code.split[0].downcase
   end
 end
