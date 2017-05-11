@@ -39,7 +39,7 @@ RSpec.describe Availability, type: :model do
 
   context 'cancel_duplicates' do
     it 'sets status for previous availabilities with matching start and end times to Cancelled' do
-      start_time = Time.current
+      start_time = Time.at(0)
       end_time = start_time + 2.minutes
       first_availability = create(:availability, person: a_person,
                                   start_time: start_time, end_time: end_time)
