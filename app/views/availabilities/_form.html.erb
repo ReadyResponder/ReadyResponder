@@ -3,7 +3,7 @@
 
   <div class="form-inputs">
     <%= f.association :person, collection: Person.active %>
-    <%= f.input :status, :as => :select, :collection => (Availability::STATUS - ["Cancelled"]) %>
+    <%= f.input :status, :as => :select, :collection => Availability::STATUS_CHOICES %>
     <%= f.input :description %>
 
     <%= f.input :start_time, as: :string,
