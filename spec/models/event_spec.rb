@@ -6,6 +6,8 @@ RSpec.describe Event do
       expect(subject).to have_many(:notifications)
     end
   end
+  it { should validate_presence_of(:status) }
+  it { should validate_presence_of(:id_code) }
 
   it "has a valid factory" do
     expect(create(:event)).to be_valid
@@ -34,6 +36,11 @@ RSpec.describe Event do
     expect(@event.ready_to_schedule?("Worked")).to eq(false)  # Need an end time
     @event = build(:event, start_time: Time.current, end_time: 75.minutes.from_now, status: "Closed")
     expect(@event.ready_to_schedule?("Scheduled")).to eq(false)  # Never for a closed event
+  end
+
+  it "changes the id_code to lower case and trims it" do
+    @event = create(:event, id_code: " HowDy DOOdy ")
+    expect(@event.id_code).to eq("howdy")
   end
 
   it "counts as upcoming if it hasnt ended" do
