@@ -1,14 +1,13 @@
 <% content_for :sidebar do %>
-  <h1>Repair</h1>
-  <%= sidebar_button_link 'Repairs List', repairs_path %>
-  <%= sidebar_button_link 'Items List', items_path %>
+  <%= sidebar_button_link 'Edit Repair', edit_repair_path(@repair) %>
 <% end %>
 
-<p>
-  <b>Item:</b>
-  <%= link_to @repair.item.name, @repair.item %>
-</p>
-
+<h3>
+  <%= link_to @repair.item_category,
+                item_category_path(@repair.item_category) %> >
+  <%= link_to @repair.item_type, @repair.item_type %>  >
+  <%= link_to @repair.item, @item %> > Repair
+</h3>
 
 <p>
   <b>Repairer:</b>

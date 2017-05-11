@@ -1,24 +1,22 @@
 <table id="items" class="datatable table table-striped table-bordered" >
   <thead>
     <tr>
-      <th>Location</th>
       <th>Name</th>
       <th>Model</th>
-      <th>Category</th>
-      <th>Costs</th>
       <th>Status</th>
+      <th>Condition</th>
+      <th>Location</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
     <% items.each do |item| %>
       <tr>
-        <td><%= item.location.name if item.location %></td>
         <td><%= link_to item.name, item_path(item) %></td>
         <td><%= "#{item.brand} #{item.model}" %></td>
-        <td><%= item.category %></td>
-        <td><%= number_to_currency item.recent_costs %></td>
         <td><%= item_status_label(item) %></td>
+        <td><%= item_condition_label(item) %></td>
+        <td><%= item.location.name if item.location %></td>
         <td><%= table_button_link 'Edit', edit_item_path(item) unless cannot? :edit, item %></td>
       </tr>
     <% end %>

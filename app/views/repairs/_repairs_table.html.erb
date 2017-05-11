@@ -11,7 +11,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @repairs.each do |repair| %>
+    <% @item.repairs.each do |repair| %>
       <tr>
         <td><%= link_to repair.description, repair_path(repair) %></td>
         <td><%= repair.status %></td>

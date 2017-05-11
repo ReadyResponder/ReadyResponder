@@ -2,7 +2,14 @@ require 'rails_helper'
 #Don't use capybara (ie visit/have_content) and rspec matchers together  {response.status.should be(200)}
 
 RSpec.describe "Inspection" do
-  before(:each) { sign_in_as('Editor') }
+  let!(:item_category) { create(:item_category) }
+  let!(:item_type) { create(:item_type, :item_category => item_category)}
+
+  before(:each) do
+    sign_in_as('Editor')
+
+    allow_any_instance_of(Item).to receive(:item_type).and_return(item_type)
+  end
 
   describe "when not logged in" do
     let(:an_item)  { create(:item) }

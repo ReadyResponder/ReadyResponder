@@ -6,20 +6,14 @@
   <caption><h3><%= @page_title %></h3></caption>
   <thead>
     <tr>
-      <th>Department</th>
       <th>Category Name</th>
-      <th>Status</th>
-      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @item_categories.each do |itc| %>
       <tr>
-        <td><%= link_to itc.department_name, itc.department %></td>
         <td><%= link_to itc.name, itc %></td>
-        <td><%= itc.status %></td>
-        <td><%= table_button_link 'Edit', edit_item_category_path(itc) if can? :update, itc %></td>
       </tr>
     <% end %>
   </tbody>

@@ -8,22 +8,22 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
     @last_editor = last_editor(@item)
     @page_title = "Item: #{@item.name}"
-
-    @inspections = @item.inspections
-    @repairs = @item.repairs
   end
 
   def new
-    @item = Item.new(status: 'Available')
+    @item_type = ItemType.find( params[:item_type_id])
+    @item = Item.new(
+            status: 'Unassigned',
+            condition: 'Available',
+            item_type_id: params[:item_type_id])
+
     @page_title = "New Item"
   end
 
   def edit
-    @item = Item.find(params[:id])
-    @page_title = "Editting Item #{@item.name}"
+    @page_title = "Editing Item #{@item.name}"
   end
 
   def create

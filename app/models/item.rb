@@ -5,7 +5,7 @@ class Item < ActiveRecord::Base
                   :model, :brand, :name, :owner_id, :po_number,
                   :value, :grant, :purchase_amt, :purchase_date,
                   :sell_amt, :sell_date, :stock_number,
-                  :source, :status, :comments, :item_image,
+                  :source, :status, :condition, :comments, :item_image,
                   :department_id, :resource_type_id, :item_type_id,
                   :unique_ids_attributes
 
@@ -26,15 +26,27 @@ class Item < ActiveRecord::Base
   has_many :repairs
   has_many :inspections
   has_many :unique_ids
+
+  delegate :item_category, :to => :item_type
+
   accepts_nested_attributes_for :unique_ids,
            allow_destroy: true,
            reject_if: :all_blank
 
-  STATUS_CHOICES = ['In Service', 'In Service - Degraded', 'Out of Service','Available','Sold', 'Destroyed']
-  CATEGORY_CHOICES = ['Pump','Light','Generator','Shelter', 'Radio', 'Vehicle', 'Other']
+  STATUS_CHOICES = ['Assigned', 'Unassigned', 'Retired']
+  CONDITION_CHOICES = ['Ready', 'In-Service - Maintenance', 'In-Service - Degraded', 'Out of Service' ]
+
+  def to_s
+    name
+  end
 
   def recent_costs
     repairs.where("service_date > ?", 6.months.ago).pluck(:cost).compact.inject(:+) || 0
+  end
+
+  def location_name
+    return location.name if location
+    "Unknown"
   end
 
 end

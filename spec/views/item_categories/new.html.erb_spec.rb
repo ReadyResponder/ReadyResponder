@@ -3,10 +3,9 @@ require 'rails_helper'
 RSpec.describe "item_categories/new", type: :view do
   before(:each) do
     assign(:item_category, ItemCategory.new(
-      :name => "MyString",
-      :status => "MyString",
-      :description => "MyString",
-      :department => nil
+      :name => "thing",
+      :status => "Active",
+      :description => "A Cool thing"
     ))
   end
 
@@ -21,7 +20,6 @@ RSpec.describe "item_categories/new", type: :view do
 
       assert_select "#item_category_description[name=?]", "item_category[description]"
 
-      assert_select "select#item_category_department_id[name=?]", "item_category[department_id]"
     end
   end
 end

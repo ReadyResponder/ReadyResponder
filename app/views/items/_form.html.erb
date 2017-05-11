@@ -4,11 +4,12 @@
   <div class="form-inputs">
     <%= f.association :department, collection: Department.managing_items.order(:name) %>
     <%= f.association :location, :collection => Department.all, :as => :grouped_select, :group_method => :locations %>
+    <%= f.input :name %>
     <%= f.association :owner %>
     <%= f.input :status, :as => :select, :collection => Item::STATUS_CHOICES %>
+    <%= f.input :condition, :as => :select, :collection => Item::CONDITION_CHOICES %>
     <%= f.association :resource_type, :label => 'FEMA Resource Type' %>
     <%= f.association :item_type, :label => 'Item Type' %>
-    <%= f.input :name %>
     <%= f.input :brand %>
     <%= f.input :model %>
     <%= f.input :stock_number %>
@@ -25,6 +26,7 @@
                 input_html: { class: 'datepicker', size: 11,
                               value: format_date_value(f.object.sell_date) } %>
     <%= f.input :sell_amt %>
+    Image
     <%= f.file_field :item_image %>
     <%= f.input :comments %>
   </div>
@@ -32,8 +34,9 @@
   <%= f.fields_for :unique_ids do |builder| %>
     <%= render 'unique_id_fields', f: builder %>
   <% end %>
-  <%= link_to_add_fields "Add Unique ID", f, :unique_ids %>
 
+  <div><%= link_to_add_fields "Add Unique ID", f, :unique_ids %></div>
+<br/>
   <div class="form-actions">
     <%= f.button :submit %>
   </div>

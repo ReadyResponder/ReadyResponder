@@ -1,4 +1,5 @@
 <% content_for :sidebar do %>
+  <%= sidebar_button_link 'Return to Categories', item_categories_path %>
   <%= sidebar_button_link 'New Item', new_item_path if can? :create, Item %>
 <% end %>
 
@@ -6,10 +7,10 @@
   <caption><h3><%= @page_title %></h3></caption>
   <thead>
     <tr>
-      <th>Location</th>
       <th>Name</th>
       <th>Model</th>
       <th>Category</th>
+      <th>Location</th>
       <th>Costs</th>
       <th>Status</th>
       <th></th>
@@ -18,10 +19,10 @@
   <tbody>
     <% @items.each do |item| %>
       <tr>
-        <td><%= item.location.name if item.location %></td>
         <td><%= link_to item.name, item_path(item) %></td>
         <td><%= "#{item.brand} #{item.model}" %></td>
         <td><%= item.category %></td>
+        <td><%= item.location_name %></td>
         <td><%= number_to_currency item.recent_costs %></td>
         <td><%= item_status_label(item) %></td>
         <td><%= table_button_link 'Edit', edit_item_path(item) unless cannot? :edit, item %></td>

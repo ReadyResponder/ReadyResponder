@@ -1,12 +1,12 @@
 class ItemCategoriesController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
-  
+
   before_action :set_item_category, only: [:show, :edit, :update, :destroy]
 
   # GET /item_categories
   def index
-    @item_categories = ItemCategory.all
+    @item_categories = ItemCategory.all.order(:name)
   end
 
   # GET /item_categories/1
@@ -16,7 +16,7 @@ class ItemCategoriesController < ApplicationController
 
   # GET /item_categories/new
   def new
-    @item_category = ItemCategory.new
+    @item_category = ItemCategory.new(status: 'Active')
   end
 
   # GET /item_categories/1/edit

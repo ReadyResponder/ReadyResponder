@@ -1,18 +1,15 @@
 <% content_for :sidebar do %>
-  <%= sidebar_button_link 'Edit',
+  <%= sidebar_button_link "Edit #{@item_type.name.singularize} Type",
            edit_item_type_path(@item_type) if can? :edit, @item_type %>
-  <%= sidebar_button_link 'New Item',
-           new_item_path if can? :create, Item %>
+  <%= sidebar_button_link "New #{@item_type.name.singularize}",
+           new_item_type_item_path(@item_type) if can? :create, Item %>
 <% end %>
 
-<h3><%= @item_type.name %></h3>
-
-<h4><%= link_to @item_type.item_category,
-                item_category_path(@item_type.item_category) %></h4>
+<h3><%= link_to @item_type.item_category,
+                item_category_path(@item_type.item_category) %> >
+<%= @item_type.name %></h3>
 
 <p><%= @item_type.description %></p>
-
-<b>Status:</b><%= success_or_warning_label(@item_type.status, 'Active') %>
 
 <%= render(partial: 'items/items_table',
            locals: { items: @item_type.items}) %>
