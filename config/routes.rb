@@ -31,7 +31,9 @@ Rails.application.routes.draw do
   resources :availabilities
   resources :unique_ids
 
-  resources :item_types
+  resources :item_types do
+    resources :items
+  end
 
   resources :resource_types
   resources :messages

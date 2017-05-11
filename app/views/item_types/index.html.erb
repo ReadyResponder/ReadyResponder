@@ -1,4 +1,5 @@
 <% content_for :sidebar do %>
+  <%= sidebar_button_link 'Return to Categories', item_categories_path %>
   <%= sidebar_button_link 'New Item Type', new_item_type_path if can? :create, ItemType %>
 <% end %>
 

@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
   <h1>Editing Item</h1>
-  <%= sidebar_button_link 'Cancel Edit', :back %>
+  <%= sidebar_button_link 'Cancel', item_type_path(@item_type) %>
 <% end %>
 
 <%= render 'form' %>

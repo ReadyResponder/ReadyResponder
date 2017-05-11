@@ -1,14 +1,14 @@
 <% content_for :sidebar do %>
+  <%= sidebar_button_link 'Return to Categories', item_categories_path %>
   <%= sidebar_button_link 'Edit',
            edit_item_type_path(@item_type) if can? :edit, @item_type %>
   <%= sidebar_button_link 'New Item',
-           new_item_path if can? :create, Item %>
+           new_item_type_item_path(@item_type) if can? :create, Item %>
 <% end %>
 
-<h3><%= @item_type.name %></h3>
-
-<h4><%= link_to @item_type.item_category,
-                item_category_path(@item_type.item_category) %></h4>
+<h3><%= link_to @item_type.item_category,
+                item_category_path(@item_type.item_category) %> >
+<%= @item_type.name %></h3>
 
 <p><%= @item_type.description %></p>
 

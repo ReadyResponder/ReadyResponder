@@ -1,9 +1,13 @@
 <% content_for :sidebar do %>
-  <%= sidebar_button_link 'Return to Listing', items_path %>
+  <%= sidebar_button_link 'Return to Categories', item_categories_path %>
   <%= edit_item_button %>
   <%= add_repair_button %>
   <%= add_inspection_button %>
 <% end %>
+
+<h3><%= link_to @item_type.item_category,
+                item_category_path(@item_type.item_category) %> >
+<%= link_to @item_type.name, @item_type %></h3>
 
 <h3>
   <% if @item.status.present? %>
@@ -25,10 +29,6 @@
 
 <% if @item.source.present? %>
   <p><b>Source:</b> <%= @item.source %></p>
-<% end %>
-
-<% if @item.item_type.present? %>
-  <p><b>Item Type:</b> <%= @item.item_type %></p>
 <% end %>
 
 <% if @item.owner.present? %>
