@@ -15,8 +15,10 @@ module AvailabilitiesHelper
     case a.status
     when 'Available'
       return a.partially_available?(event) ? 'class="warning"' : 'class="success"'
-    when 'Unavailable', 'Cancelled'
+    when 'Unavailable'
       return 'class="danger"'
+    when 'Cancelled'
+      return 'label label-default'
     else
       return nil
     end

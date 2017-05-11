@@ -4,7 +4,7 @@ class Availability < ActiveRecord::Base
   validates_presence_of :person, :status, :start_time, :end_time
   validates_chronology :start_time, :end_time
 
-  STATUS = [ 'Available', 'Unavailable', "Cancelled" ]
+  STATUS_CHOICES = [ 'Available', 'Unavailable', "Cancelled" ]
 
   # Available the entire event
   scope :for_time_span, ->(range) { where("end_time >= ?", range.last).
