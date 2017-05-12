@@ -32,13 +32,13 @@ class Event < ActiveRecord::Base
     ["Scheduled", "In-session"], Time.now )
   }
 
-  scope :concurrent, ->(range) {
+  def self.concurrent (range)
     where_clause =  '(:end >= start_time AND start_time >= :start) OR '
     where_clause += '(:end >= end_time AND end_time >= :start) OR '
     where_clause += '(start_time <= :start AND end_time >= :end)'
     order("start_time ASC").where(where_clause,
          { start: range.first, end: range.last })
-   }
+   end
 
   CATEGORY_CHOICES = ['Training', 'Patrol', 'Meeting', 'Admin', 'Event']
   STATUS_CHOICES = ['Scheduled', 'In-session', 'Completed', 'Cancelled', "Closed"]
