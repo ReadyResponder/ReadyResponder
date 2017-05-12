@@ -17,6 +17,11 @@ class Timecard < ActiveRecord::Base
     where(end_time: nil, status: 'Incomplete')
   end
 
+  def concurrent_events
+    return Event.none if start_time.blank? || end_time.blank?
+    Event.concurrent(start_time..end_time)
+  end
+
 private
   def find_duplicate_timecards
     margin = 30

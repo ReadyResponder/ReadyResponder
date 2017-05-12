@@ -5,13 +5,11 @@
 <% end %>
 
 <p>
-  <b>Person:</b>
-  <%= link_to @timecard.person.fullname, @timecard.person %>
+  <b>Person:</b><%= link_to @timecard.person.fullname, @timecard.person %>
 </p>
 
 <p>
-  <b>Status:</b>
-  <%= @timecard.status %>
+  <b>Status:</b><%= @timecard.status %>
 </p>
 
 <p>
@@ -25,9 +23,11 @@
 </p>
 
 <p>
-  <b>Duration:</b>
-  <%= @timecard.duration %>
+  <b>Duration:</b>  <%= @timecard.duration %>
 </p>
+
+<%= render(partial: 'events/events_table',
+           locals: { events: @timecard.concurrent_events }) %>
 
 <p>
   Created <%= @timecard.created_at %><br/>
