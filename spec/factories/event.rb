@@ -5,7 +5,7 @@ FactoryGirl.define do
     description "A good time was had by all"
     category "Training"
     status "Scheduled"
-    start_time Time.now
+    start_time Time.current
     end_time 23.hours.from_now
   end
 end

@@ -1,0 +1,30 @@
+<table id="events" class="generic_datatable table table-striped table-bordered">
+  <caption><h3><%= @page_title %></h3></caption>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Location</th>
+      <th>Start time</th>
+      <th>End time</th>
+      <th>Duration</th>
+      <th>Category</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% events.each do |event| %>
+      <tr>
+        <td><%= link_to event.title, event%></td>
+        <td><%= event.location %></td>
+        <td><%= event.start_time %></td>
+        <td><%= event.end_time %></td>
+        <td><%= event.duration %></td>
+        <td><%= event.category %></td>
+        <td><%= event.status %></td>
+        <td><%= table_button_link 'Edit', edit_event_path(event) unless cannot? :update, event %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
