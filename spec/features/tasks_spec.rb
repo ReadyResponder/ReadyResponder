@@ -3,8 +3,6 @@ require 'rails_helper'
 RSpec.describe "Tasks" do
   before(:each) { sign_in_as('Editor') }
 
-  get_nested_editor_views('event', 'task', ['title', 'description', 'street'])
-
   let(:task_title) { "A Fantastic Task" }
   describe "creates" do
     it "tasks" do

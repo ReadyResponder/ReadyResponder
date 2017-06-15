@@ -4,13 +4,13 @@ class EventsController < ApplicationController
 
   def index
     # by default show all scheduled or in-session events
-    @events = params['all_events'] == "true" ? Event.all : Event.where('end_time > ?', Time.now)
+    @events = params['all_events'] == "true" ? Event.all : Event.actual.where('end_time > ?', Time.now)
     @page_title = params['all_events'] == "true" ? "All Events" : "Current Events"
   end
 
   def show
-    @event = Event.find(params[:id])
     @page_title = @event.title
+    @last_editor = last_editor(@event)
   end
 
   def new
@@ -19,12 +19,13 @@ class EventsController < ApplicationController
   end
 
   def edit
-    @event = Event.find(params[:id])
     @page_title = "Event: #{@event.title}"
   end
 
   def create
-    @event = Event.new(params[:event])
+    @event = Event.new(event_params)
+    @event.use_template if @event.template.present?
+
     if @event.save
       redirect_to @event, notice: 'Event was successfully created.'
     else
@@ -33,8 +34,7 @@ class EventsController < ApplicationController
   end
 
   def update
-    @event = Event.find(params[:id])
-    if @event.update_attributes(params[:event])
+    if @event.update_attributes(event_params)
       redirect_to @event, notice: 'Event was successfully updated.'
     else
       render action: "edit"
@@ -42,8 +42,15 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    @event = Event.find(params[:id])
     @event.destroy
     redirect_to events_url
+  end
+
+  private
+  def event_params
+    params.require(:event).permit(:title, :description, :category,
+    :course_id, :duration, :start_time, :end_time, :instructor, :location,
+    :id_code, :status, :timecard_ids, :person_ids, :comments, :is_template, :template_id ,
+    :department_ids => [])
   end
 end
