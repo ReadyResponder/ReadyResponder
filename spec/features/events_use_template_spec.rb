@@ -26,6 +26,8 @@ RSpec.describe "Events" do
                          title: "The Template", status: "In-session")
       @task1 = create(:task, event: @template, title: "Staff Medical Intake")
       @task2 = create(:task, event: @template, title: "Parking")
+      @title = create(:title, name: "EMT")
+      @task1_req1 = create(:requirement, task: @task1, title: @title)
       visit new_event_path
       fill_in "Title", with: "A Standard Event"
       select 'Meeting', :from => 'event_category'
@@ -39,7 +41,9 @@ RSpec.describe "Events" do
       expect(page).to have_content "Event was successfully created."
       expect(page).to have_content @task1.title
       expect(page).to have_content @task2.title
-
+      visit task_path( @task1)
+      # save_and_open_page
+      expect(page).to have_content @task1_req1.title
     end
 
   end
