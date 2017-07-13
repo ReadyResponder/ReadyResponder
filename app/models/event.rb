@@ -7,12 +7,9 @@ class Event < ActiveRecord::Base
 
   validates_presence_of :start_time, :end_time
   validates_chronology :start_time, :end_time
-# In order to implement templates, I think we'll want self-referential
-# association. This will require a template_id on the event table.
-# https://collectiveidea.com/blog/archives/2015/07/30/bi-directional-and-self-referential-associations-in-rails
-# http://stackoverflow.com/questions/5109893/rails-how-do-self-referential-has-many-models-work
+
   belongs_to :template, :class_name => "Event"
-  has_many :templated_events, :class_name => "Event", :foreign_key => "template_id"
+  has_many :templated_events, class_name: "Event", foreign_key: "template_id"
   has_and_belongs_to_many :departments
   has_many :certs
   belongs_to :course
@@ -119,7 +116,7 @@ class Event < ActiveRecord::Base
     status == "Completed"
   end
 
-  def use_template
+  def use_a_template
     logger.info ">>> Using Event template #{self.template.title}"
     self.template.tasks.each do |template_task|
       logger.info ">>>> Duplicating #{template_task.title}"

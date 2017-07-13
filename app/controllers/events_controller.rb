@@ -24,7 +24,7 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-    @event.use_template if @event.template.present?
+    @event.use_a_template if @event.template.present?
 
     if @event.save
       redirect_to @event, notice: 'Event was successfully created.'
@@ -43,14 +43,14 @@ class EventsController < ApplicationController
 
   def destroy
     @event.destroy
-    redirect_to events_url
+    redirect_to events_path
   end
 
   private
   def event_params
     params.require(:event).permit(:title, :description, :category,
     :course_id, :duration, :start_time, :end_time, :instructor, :location,
-    :id_code, :status, :timecard_ids, :person_ids, :comments, :is_template, :template_id ,
-    :department_ids => [])
+    :id_code, :status, :timecard_ids, :person_ids, :comments,
+    :is_template, :template_id, department_ids: [])
   end
 end
