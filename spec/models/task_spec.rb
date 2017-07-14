@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe Task, type: :model do
   let(:an_event) { build_stubbed(:event) }
   it "has a valid factory" do
-    expect(build_stubbed(:task)).to be_valid
     expect(build_stubbed(:task, event: an_event)).to be_valid
   end
 

@@ -4,10 +4,13 @@
   <div class="form-inputs">
     <%= f.input :title %>
     <%= f.input :description %>
-    <%= f.input :status, :as => :select, :collection => Event::STATUS_CHOICES %>
-    <%= f.input :category, :as => :select, :collection => Event::CATEGORY_CHOICES %>
-    <%= f.input :is_template, :as => :select, :collection => [true, false],
-                :label => "Template" %>
+    <%= f.input :status, as: :select, collection: Event::STATUS_CHOICES %>
+    <%= f.input :category, as: :select, collection: Event::CATEGORY_CHOICES %>
+    <%= f.input :is_template, as: :select, collection: [true, false],
+                label: "Define this event as a template" if @event.new_record? %>
+    <%= f.association :template, :as => :select, collection: Event.templates,
+                label: 'Base this event on a template' if @event.new_record? %>
+
     <div class="training-controls">
       <%= f.association :course,
                         :hint => "If the training is not for certification, do not choose a course" %>

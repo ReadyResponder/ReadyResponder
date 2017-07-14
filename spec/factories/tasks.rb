@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :task do
-    association :event
-    title "MyString"
-    description "MyText"
+    title "A Tough Task"
+    status "Active"
+    description "A task description"
     street "MyString"
     city "MyString"
     state "MyString"

@@ -12,7 +12,8 @@ RSpec.describe "Requirements" do
 
   describe "creates" do
     it "requirements" do
-      @task = create(:task)
+      @event = create(:event)
+      @task = create(:task, event: @event)
       @skill = create(:skill)
       visit new_task_requirement_path(@task)
       select @skill.name, from: :requirement_skill_id

@@ -7,12 +7,12 @@ RSpec.describe "notifications/index", type: :view do
       Notification.create!(
         :event => create(:event),
         :status => "Active",
-        :channels => "Channels"
+        :channels => "Text"
       ),
       Notification.create!(
         :event => create(:event),
         :status => "Complete",
-        :channels => "Channels"
+        :channels => "EMail"
       )
     ])
     allow(controller).to receive(:current_user).and_return(user)

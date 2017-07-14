@@ -18,7 +18,7 @@
     <% requirements.each do |requirement| %>
       <tr <%== requirement_status_class(requirement) %>>
         <td <%== sorting_order(requirement.priority) %>><%= requirement_priority_label(requirement) %></td>
-        <td><%= link_to (requirement.title.present? ? requirement.title : requirement.skill), requirement %></td>
+        <td><%= link_to requirement, requirement %></td>
         <td <%== sorting_order(requirement.status_value) %>><%= requirement_status_label(requirement) %></td>
         <td><%= requirement.assignees.map{ |p| p.fullname}.join ", " %></td>
         <td><%= requirement.number_filled %></td>

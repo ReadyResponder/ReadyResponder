@@ -2,17 +2,14 @@ class Event < ActiveRecord::Base
   has_paper_trail
   before_save :calc_duration, :trim_id_code
 
-  attr_accessible :title, :description, :category, :course_id, :is_template,
-                  :duration, :start_time, :end_time, :instructor, :location,
-                  :id_code, :status, :timecard_ids, :person_ids, :comments,
-                  :department_ids
-
   validates_presence_of :category, :title, :status, :id_code
-  validates_uniqueness_of :id_code
+  validates_uniqueness_of :id_code, :title
 
   validates_presence_of :start_time, :end_time
   validates_chronology :start_time, :end_time
 
+  belongs_to :template, :class_name => "Event"
+  has_many :templated_events, class_name: "Event", foreign_key: "template_id"
   has_and_belongs_to_many :departments
   has_many :certs
   belongs_to :course
@@ -32,6 +29,9 @@ class Event < ActiveRecord::Base
     ["Scheduled", "In-session"], Time.now )
   }
 
+  scope :actual, -> { where(:is_template => false)}
+  scope :templates, -> { where(:is_template => true, :status => "In-session")}
+
   def self.concurrent (range)
     where_clause =  '(:end >= start_time AND start_time >= :start) OR '
     where_clause += '(:end >= end_time AND end_time >= :start) OR '
@@ -44,7 +44,7 @@ class Event < ActiveRecord::Base
   STATUS_CHOICES = ['Scheduled', 'In-session', 'Completed', 'Cancelled', "Closed"]
 
   def to_s
-    description
+    title
   end
 
   def unavailabilities
@@ -114,6 +114,19 @@ class Event < ActiveRecord::Base
 
   def completed?
     status == "Completed"
+  end
+
+  def use_a_template
+    logger.info ">>> Using Event template #{self.template.title}"
+    self.template.tasks.each do |template_task|
+      logger.info ">>>> Duplicating #{template_task.title}"
+      new_task = template_task.dup
+      self.tasks << new_task
+      template_task.requirements.each do |req|
+        logger.info ">>>>> Duplicating #{template_task.title} requirement #{req}"
+        new_task.requirements << req.dup
+      end
+    end
   end
 
   def ready_to_schedule?(schedule_action)
