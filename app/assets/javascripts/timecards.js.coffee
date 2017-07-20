@@ -3,16 +3,8 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 jQuery ->
-  $("#timeslot_person_id").focus();
-  $('#timeslots').dataTable
-    "columns": [null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  {"orderable" : false},
-                  {"orderable" : false}]
+  $("#timecards_person_id").focus();
+  $('#timecards').dataTable
+    columnDefs: [
+                  { orderable: false, targets: 5 }
+                ]
