@@ -16,7 +16,6 @@
       <th>Phone</th>
       <th>E-Mail</th>
       <th>Dept</th>
-      <th>SAR</th>
       <th>Division 1</th>
       <th>Division 2</th>
       <th></th>
@@ -37,7 +36,6 @@
         <td><%= number_to_phone(person.phone) %></td>
         <td><%= person.email %></td>
         <td><%= person.dept_shortname %></td>
-        <td><%= person.sar_level %></td>
         <td><%= person.division1 %></td>
         <td><%= person.division2 %></td>
         <td><%= table_button_link 'Edit', edit_person_path(person) if can? :update, person %></td>
