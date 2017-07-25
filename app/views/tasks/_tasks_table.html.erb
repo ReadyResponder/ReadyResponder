@@ -2,10 +2,10 @@
   <thead>
     <tr>
       <th>Title</th>
-      <th>Priority</th>
       <th>Assignees</th>
+      <th>Priority</th>
       <th>Status</th>
-      <th>Requirements Met</th>
+      <th>Reqs</th>
       <th>Start Time</th>
       <th>End Time</th>
       <th></th>
@@ -15,8 +15,8 @@
     <% tasks.each do |task| %>
       <tr <%== task_status_class(task) %>>
         <td><%= link_to task.title, task %></td>
-        <td <%== sorting_order(task.priority) %>><%= task_priority_label(task) %></td>
         <td><ol><%= render partial: "assignee", collection: task.assignees %></ol></td>
+        <td <%== sorting_order(task.priority) %>><%= task_priority_label(task) %></td>
         <td <%== sorting_order(task.staffing_value) %>><%= task_staffing_label(task) %></td>
         <td><%= task.requirements_met_count %>/<%= task.requirements_count %></td>
         <td><%= task.start_time.strftime('%a %b %d %k:%M') if task.start_time %></td>
