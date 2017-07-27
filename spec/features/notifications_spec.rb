@@ -3,7 +3,14 @@ require 'rails_helper'
 RSpec.describe "Notifications" do
   describe " visit notifications" do
     before (:each) { sign_in_as('Editor') }
-
+    let!(:notification)  { create(:notification, subject: "Howdy from Hopedale") }
+    context "basic CRUD" do
+      let!(:notification)  { create(:notification, subject: "Howdy from Hopedale") }
+      it "should display one at a time" do
+        visit notification_path(notification)
+        expect(page).to have_content("Howdy")
+      end
+    end
     context "from an event" do
       let!(:event)  { create(:event) }
       it "should create a notification for that event" do
@@ -22,5 +29,6 @@ RSpec.describe "Notifications" do
           expect(page).to have_content "Notification was successfully created."
         end
       end
-    end  end
+    end
+  end
 end
