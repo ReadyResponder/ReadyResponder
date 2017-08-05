@@ -56,7 +56,7 @@ class Event < ActiveRecord::Base
   end
 
   def partial_responses
-    Availability.partially_available(self.start_time..self.end_time)
+    Availability.partially_available(self.start_time..self.end_time).active
   end
 
   def partial_availabilities
