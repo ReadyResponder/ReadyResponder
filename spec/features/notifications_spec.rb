@@ -5,8 +5,7 @@ RSpec.describe "Notifications" do
     before (:each) { sign_in_as('Editor') }
     let!(:notification)  { create(:notification, subject: "Howdy from Hopedale") }
     context "basic CRUD" do
-      let!(:notification)  { create(:notification, subject: "Howdy from Hopedale") }
-      it "should display one at a time" do
+      it "should display a single notification" do
         visit notification_path(notification)
         expect(page).to have_content("Howdy")
       end
