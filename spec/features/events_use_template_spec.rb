@@ -41,9 +41,9 @@ RSpec.describe "Events" do
       expect(page).to have_content "Event was successfully created."
       expect(page).to have_content @task1.title
       expect(page).to have_content @task2.title
-      visit task_path( @task1)
-      # save_and_open_page
+      click_on @task1.title # The duplicate will have the same title
       expect(page).to have_content @task1_req1.title
+      expect(page).to have_content "Oct 31"
     end
 
   end

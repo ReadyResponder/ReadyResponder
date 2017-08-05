@@ -56,7 +56,7 @@ class Event < ActiveRecord::Base
   end
 
   def partial_responses
-    Availability.partially_available(self.start_time..self.end_time)
+    Availability.partially_available(self.start_time..self.end_time).active
   end
 
   def partial_availabilities
@@ -121,6 +121,9 @@ class Event < ActiveRecord::Base
     self.template.tasks.each do |template_task|
       logger.info ">>>> Duplicating #{template_task.title}"
       new_task = template_task.dup
+      new_task.start_time = start_time
+      new_task.end_time = end_time
+      new_task.save
       self.tasks << new_task
       template_task.requirements.each do |req|
         logger.info ">>>>> Duplicating #{template_task.title} requirement #{req}"
