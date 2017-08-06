@@ -62,7 +62,7 @@ class Person < ActiveRecord::Base
   def to_s
     fullname
   end
-  
+
   def fullname
     fname = self.nickname ||= self.firstname
     (fname + " " + (self.middleinitial || "") + " " + self.lastname).squeeze(" ")
@@ -147,8 +147,8 @@ class Person < ActiveRecord::Base
       age
   end
 
-  def skilled?(skill_name)
-    skill = Skill.find_by_name(skill_name)
+  def skilled?(skill)
+    skill = Skill.find_by_name(skill) if skill.is_a? String
     if skill.blank?
       false
     else
@@ -156,13 +156,28 @@ class Person < ActiveRecord::Base
     end
   end
 
-  def qualified?(title_name)
-    title = Title.find_by_name(title_name)
+  def qualified?(title)
+    title = Title.find_by_name(title) if title.is_a? String
+    return true if titled? title
     if title
       (title.skills - self.skills).empty?  # then true
     else
       false
     end
+  end
+
+  def titled?(title)
+    titles.include? title
+  end
+
+  # returns true if this person has ANY of the
+  # supplied titles or skills
+  def has_any_of_titles_or_skills?(titles_and_skills)
+    titles_and_skills.each do | ts |
+      return true if ts.is_a?(Title) && titled?(ts)
+      return true if ts.is_a?(Skill) && skilled?(ts)
+    end
+    false
   end
 
   def missing_skills(title)

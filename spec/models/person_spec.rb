@@ -28,6 +28,27 @@ RSpec.describe Person do
 
   end
 
+  describe 'has_any_of_title_or_skills?' do
+    it "returns true if the person has a matching title" do
+      title = create(:title)
+      person = build(:person, titles: [title])
+      expect(person.has_any_of_titles_or_skills?([title])).to be true
+    end
+    it "returns true if the person has a matching skill" do
+      person = build(:person)
+      skill = create(:skill)
+      allow(person).to(receive(:skills).and_return([skill]))
+      expect(person.has_any_of_titles_or_skills?([skill])).to be true
+    end
+
+    it "returns false if the person has no matching title or skill" do
+      person = build(:person)
+      skill = create(:skill)
+      title = create(:title)
+      expect(person.has_any_of_titles_or_skills?([skill, title])).to be false
+
+    end
+  end
   describe 'skills' do
     subject { create :person }
     let(:evoc_course) { create :course, skills: [skill] }
