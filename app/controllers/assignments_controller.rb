@@ -24,11 +24,16 @@ class AssignmentsController < ApplicationController
   end
 
   def create
-    @assignment = @requirement.assignments.new(assignment_params)
-
-    if @assignment.save
-      redirect_to @requirement, notice: 'Assignment was successfully created.'
+    person = Person.find(assignment_params[:person_id])
+    if @requirement.assignable? person
+      @assignment = @requirement.assignments.new(assignment_params)
+      if @assignment.save
+        redirect_to @requirement, notice: 'Assignment was successfully created.'
+      else
+        render :new
+      end
     else
+      flash[:error] = "#{@person} can't be assigned to this."
       render :new
     end
   end

@@ -30,6 +30,15 @@ class Requirement < ActiveRecord::Base
     assignments.active.map { |a| a.person }
   end
 
+  def assignable?(person)
+    return false if number_filled >= maximum_people
+    return false if people.include? person
+
+    return true if !title.nil? && person.titles.include?(title)
+    return true if !skill.nil? && person.skills.include?(skill)
+    false
+  end
+
   def to_s
     return title.to_s if title.present?
     return skill.to_s if skill.present?

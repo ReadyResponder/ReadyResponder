@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Requirement, type: :model do
-  let(:an_event) { build_stubbed(:event) }
-  let(:a_task) { build_stubbed(:task, event: an_event) }
+  let(:an_event) { build(:event) }
+  let(:a_task) { build(:task, event: an_event) }
   let(:a_skill) { build_stubbed(:skill) }
   let(:a_title) { build_stubbed(:title) }
   it "has a valid factory" do
@@ -11,6 +11,49 @@ RSpec.describe Requirement, type: :model do
     expect(build_stubbed(:requirement, task: a_task, title: a_title)).to be_valid
   end
 
+  context 'assignable?' do
+    # person->certs->courses->skills
+    let!(:person)  { create(:person) }
+    let!(:skill_1) { create(:skill) }
+    let!(:course_1){ create(:course,  skills: [skill_1]) }
+    let!(:cert_1)  { create(:cert, course: course_1) }
+    context '(when people are needed)' do
+      it "should return true when person has matching skill" do
+        req = build(:requirement, task: a_task, skill: skill_1)
+        person.certs << cert_1
+        expect(req.assignable?(person)).to(eq(true))
+      end
+      it "should return true when person has matching title" do
+        req = build(:requirement, task: a_task, title: a_title)
+        p = build(:person, titles: [a_title])
+        expect(req.assignable?(p)).to(eq(true))
+      end
+      it "should return false when the person is already assigned" do
+        req = create(:requirement, task: a_task, skill: skill_1, maximum_people: 5)
+        person.certs.push(cert_1)
+        ass = create(:assignment, person: person, requirement: req)
+        req.assignments << ass
+        expect(req.assignable?(person)).to(eq(false))
+      end
+    end
+
+    context '(when people are not needed)' do
+      it "should return false for people with matching skills" do
+        req = create(:requirement, task: a_task, skill: skill_1)
+        person.certs << cert_1
+        ass = create(:assignment, person: person, requirement: req)
+        req.assignments << ass
+        expect(req.assignable?(person)).to(eq(false))
+      end
+      it "should return false for people with matching titles" do
+        req = build(:requirement, task: a_task, title: a_title)
+        person.certs.push(cert_1)
+        ass = build(:assignment, person: person, requirement: req)
+        req.assignments.push(ass)
+        expect(req.assignable?(person)).to(eq(false))
+      end
+    end
+  end
   context 'validations' do
     it { should belong_to(:task) }
     it { should validate_presence_of(:task) }
