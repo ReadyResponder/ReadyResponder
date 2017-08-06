@@ -34,9 +34,7 @@ class Requirement < ActiveRecord::Base
     return false if number_filled >= maximum_people
     return false if people.include? person
 
-    return true if !title.nil? && person.titles.include?(title)
-    return true if !skill.nil? && person.skills.include?(skill)
-    false
+    return person.has_any_of_titles_or_skills?([title, skill].flatten)
   end
 
   def to_s
