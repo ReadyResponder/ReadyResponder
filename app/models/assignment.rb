@@ -5,6 +5,7 @@ class Assignment < ActiveRecord::Base
   belongs_to :requirement
   delegate :task, :to => :requirement
   delegate :event, :to => :task
+  validates_presence_of :person
 
   STATUS_CHOICES = [ 'New', 'Active', 'Cancelled' ]
 

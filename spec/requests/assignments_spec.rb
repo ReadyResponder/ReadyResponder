@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe "assignments", :type => :request do
   describe "Denies public access to assignments", type: :request do
     before(:all) do
-      @assignment = create :assignment
+      @person = create :person
+      @assignment = create(:assignment, person_id: @person.id)
     end
 
     it "assignments#create" do
