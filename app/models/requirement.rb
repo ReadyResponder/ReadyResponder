@@ -11,6 +11,7 @@ class Requirement < ActiveRecord::Base
   # validates :skill, presence: title.blank?
   # validates :title, presence: skill.blank?
   validate  :valid_title_or_skill
+  # ^^^ guarantees one or the other has been set (not both)
 
   validates :minimum_people, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :maximum_people, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
@@ -91,6 +92,10 @@ class Requirement < ActiveRecord::Base
       if title.blank? && skill.blank?
         errors.add(:title, "must have a title or a skill")
         errors.add(:skill, "must have a title or a skill")
+      end
+      if title.present? && skill.present?
+        errors.add(:title, "must have only a title or a skill")
+        errors.add(:skill, "must have only a title or a skill")
       end
     end
 end

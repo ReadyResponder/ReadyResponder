@@ -9,6 +9,8 @@ RSpec.describe Requirement, type: :model do
     # expect(build_stubbed(:requirement)).to be_valid
     expect(build_stubbed(:requirement, task: a_task, skill: a_skill)).to be_valid
     expect(build_stubbed(:requirement, task: a_task, title: a_title)).to be_valid
+    expect(build_stubbed(:requirement, task: a_task, title: a_title,
+                         skill: a_skill)).to_not be_valid
   end
 
   context 'validations' do
