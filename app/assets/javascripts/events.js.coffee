@@ -3,9 +3,9 @@ jQuery ->
   $('#events').dataTable
     order: [[3, 'asc']],
     columnDefs: [
-                  { orderable: false, targets: -1 }
-                  { orderData: 2, targets: 3 }
-                  { orderData: 4, targets: 5 }
+                  { orderable: false, targets: -1 },
+                  { orderData: 2, targets: 3 },
+                  { orderData: 4, targets: 5 },
                   { visible: false, targets: [2,4] }
                 ]
 
