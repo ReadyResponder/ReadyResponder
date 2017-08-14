@@ -4,32 +4,38 @@
   <%= sidebar_button_link 'Show All Events', events_path + "?all_events=true" %>
 <% end %>
 
-<table id="events" class="generic_datatable table table-striped table-bordered">
+<table id="events" class="datatable table table-striped table-bordered">
   <caption><h3><%= @page_title %></h3></caption>
   <thead>
     <tr>
       <th>Title</th>
       <th>Location</th>
       <th>Start time</th>
+      <th>Start time</th>
+      <th>End time</th>
       <th>End time</th>
       <th>Duration</th>
-      <th>Category</th>
       <th>Status</th>
       <th></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @events.each do |event| %>
+    <% @events.each do |e| %>
       <tr>
-        <td><%= link_to event.title, event%></td>
-        <td><%= event.location %></td>
-        <td><%= event.start_time %></td>
-        <td><%= event.end_time %></td>
-        <td><%= event.duration %></td>
-        <td><%= event.category %></td>
-        <td><%= event.status %></td>
-        <td><%= table_button_link 'Edit', edit_event_path(event) unless cannot? :update, event %></td>
+        <td><%= link_to e.title, e %></td>
+        <td><%= e.location %></td>
+        <td><%= e.start_time %></td>
+        <td><time>
+          <%= e.start_time.strftime('%a %b %d %k:%M') if e.start_time  %>
+        </time></td>
+        <td><%= e.end_time %></td>
+        <td><time>
+          <%= e.end_time.strftime('%a %b %d %k:%M') if e.end_time  %>
+        </time></td>
+        <td><%= e.duration %></td>
+        <td><%= e.status %></td>
+        <td><%= table_button_link 'Edit', edit_event_path(e) unless cannot? :update, e %></td>
       </tr>
     <% end %>
   </tbody>
