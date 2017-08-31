@@ -11,16 +11,20 @@ RSpec.describe "Notifications" do
       end
     end
     context "from an event" do
-      let!(:event)  { create(:event) }
+      let!(:valid_department)  { create(:department, manage_people: true, name: 'Valid Dept') }
+      let!(:invalid_department)  { create(:department, manage_people: false, name: 'Invalid Dept') }
+      let!(:event)  { create(:event, departments: [valid_department]) }
       it "should create a notification for that event" do
         allow_any_instance_of(Notification).to receive(:activate!).and_return(nil)
-        allow_any_instance_of(Notification).to receive(:event).and_return(Event.new)
+        allow_any_instance_of(Notification).to receive(:event).and_return(event)
         visit event_path(event)
         expect(page).to have_content('Description:')
         within("#sidebar") do
           expect(page).to have_content('New Notification')
         end
         click_on 'New Notification'
+        expect(page).to have_content('Valid Dept')
+        expect(page).to_not have_content('Invalid Dept')
         fill_in 'Subject', with: "Please respond"
         select 'Active', :from => 'Status'
         click_on 'Create Notification'
