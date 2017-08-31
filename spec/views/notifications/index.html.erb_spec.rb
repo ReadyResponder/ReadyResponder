@@ -2,17 +2,21 @@ require 'rails_helper'
 
 RSpec.describe "notifications/index", type: :view do
   let(:user) { FactoryGirl.create :user }
+  let(:department) { create(:department) }
+
   before(:each) do
     assign(:notifications, [
       Notification.create!(
         :event => create(:event),
         :status => "Active",
-        :channels => "Text"
+        :channels => "Text",
+        :departments => [department]
       ),
       Notification.create!(
         :event => create(:event),
         :status => "Complete",
-        :channels => "EMail"
+        :channels => "EMail",
+        :departments => [department]
       )
     ])
     allow(controller).to receive(:current_user).and_return(user)

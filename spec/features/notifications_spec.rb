@@ -3,7 +3,10 @@ require 'rails_helper'
 RSpec.describe "Notifications" do
   describe " visit notifications" do
     before (:each) { sign_in_as('Editor') }
-    let!(:notification)  { create(:notification, subject: "Howdy from Hopedale") }
+    let(:department) { create(:department) }
+    let!(:notification)  { create(:notification,
+                                  subject: "Howdy from Hopedale",
+                                  departments: [department]) }
     context "basic CRUD" do
       it "should display a single notification" do
         visit notification_path(notification)
@@ -27,6 +30,7 @@ RSpec.describe "Notifications" do
         expect(page).to_not have_content('Invalid Dept')
         fill_in 'Subject', with: "Please respond"
         select 'Active', :from => 'Status'
+        check 'Valid Dept'
         click_on 'Create Notification'
         within("#flash_notice") do
           expect(page).to have_content "Notification was successfully created."

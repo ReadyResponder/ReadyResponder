@@ -19,6 +19,15 @@ class Notification < ActiveRecord::Base
 
   VALID_STATUSES = STATUS_STATES.keys
   validates :status, inclusion: { in: VALID_STATUSES }
+  validate :notification_has_at_least_one_recipient
+
+   def notification_has_at_least_one_recipient
+     # As we add more ways to choose recipients,
+     # we'll need to expand this validator
+     if departments.blank?
+       errors[:base] << "All recipients can't be blank"
+     end
+   end
 
   def available_statuses
     if status
