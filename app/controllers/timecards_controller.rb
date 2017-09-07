@@ -40,6 +40,28 @@ class TimecardsController < ApplicationController
     end
   end
 
+  def verify
+    @timecard = Timecard.find(params[:timecard_id])
+    if @timecard.status == 'Verified'
+      redirect_to request.referrer || timecards_path, notice: 'Timecard already verified.'
+    else
+      authorize! :edit, @timecard
+      @timecard.status = 'Verified'
+      if @timecard.save
+        respond_to do |format|
+          format.html {
+            redirect_to request.referrer || timecards_path
+          }
+          format.json {
+            render json: @timecard
+          }
+        end
+      else
+        render action: "edit"
+      end
+    end
+  end
+
   def destroy
     @timecard.destroy
     redirect_to timecards_path

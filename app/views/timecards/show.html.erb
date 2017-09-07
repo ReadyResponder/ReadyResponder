@@ -9,7 +9,7 @@
 </p>
 
 <p>
-  <b>Status:</b><%= @timecard.status %>
+  <b>Status:</b><span id='<%= "js-timecard-status-id-#{@timecard.id}" %>'><%= @timecard.status %></span>
 </p>
 
 <p>
@@ -25,6 +25,8 @@
 <p>
   <b>Duration:</b>  <%= @timecard.duration %>
 </p>
+
+<%= button_to 'Verify', timecard_verify_path(@timecard), form_class: 'timecard-verify', id: "js-timecard-verify-btn-id-#{@timecard.id}", class: 'js-timecard-verify-btn btn btn-success' if (can? :edit, @timecard) && @timecard.status != 'Verified' %>
 
 <%= render(partial: 'events/events_table',
            locals: { events: @timecard.concurrent_events }) %>
