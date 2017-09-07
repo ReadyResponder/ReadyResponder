@@ -9,15 +9,13 @@ RSpec.describe Notification do
   describe 'validations' do
     context 'status' do
       it 'accepts a valid status' do
-        allow_any_instance_of(Notification).to \
-                    receive(:notification_has_at_least_one_recipient).and_return(true)
-        notification = build(:notification)
+        notification = build(:notification, departments: [build(:department)])
         expect(notification).to be_valid
       end
 
       it 'rejects an invalid status' do
         allow_any_instance_of(Notification).to \
-                    receive(:notification_has_at_least_one_recipient).and_return(true)
+              receive(:notification_has_at_least_one_recipient).and_return(true)
         notification = build(:notification, status: 'fake_status')
         expect(notification).to_not be_valid
       end

@@ -21,14 +21,6 @@ class Notification < ActiveRecord::Base
   validates :status, inclusion: { in: VALID_STATUSES }
   validate :notification_has_at_least_one_recipient
 
-   def notification_has_at_least_one_recipient
-     # As we add more ways to choose recipients,
-     # we'll need to expand this validator
-     if departments.blank?
-       errors[:base] << "All recipients can't be blank"
-     end
-   end
-
   def available_statuses
     if status
       STATUS_STATES[status]
@@ -65,6 +57,16 @@ class Notification < ActiveRecord::Base
       recipients.each do |r|
         r.notify! twilio
       end
+    end
+  end
+
+private
+
+  def notification_has_at_least_one_recipient
+    # As we add more ways to choose recipients,
+    # we'll need to expand this validator
+    if departments.blank?
+      errors[:base] << "All recipients can't be blank"
     end
   end
 
