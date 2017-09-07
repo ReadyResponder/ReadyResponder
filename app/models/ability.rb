@@ -5,8 +5,8 @@ class Ability
     current_user ||= User.new
     roles = current_user.roles.map {|x| x.to_s}
     if roles.blank?
-      cannot :update, :all
-      cannot :read, :all
+      cannot :manage, :all
+      cannot [:read, :update, :create, :edit], :all
     elsif roles.include? "Manager"
       can :manage, :all
     elsif roles.include? "Editor"
@@ -24,8 +24,8 @@ class Ability
       can [:read, :update, :create, :edit], ItemType
       can [:read, :update, :create, :edit], Location
       can [:read, :update, :create, :edit], Notification
-      can [:read, :update, :create, :edit, :department, :applicants,:prospects,
-           :other, :inactive, :leave, :declined, :everybody, :signin,
+      can [:read, :update, :create, :edit, :department, :download, :applicants,
+           :prospects, :other, :inactive, :leave, :declined, :everybody, :signin,
            :orgchart], Person
       can [:read, :update, :create, :edit], Repair
       can [:read, :update, :create, :edit], Requirement
@@ -48,8 +48,7 @@ class Ability
       can [:read], [Person, Channel, Timecard, Cert, ItemCategory, ItemType,
                     Item, Event, Task, Course, Skill, Inspection, Repair,
                     Activity, Department]
-      can [:signin], Person
-      can :orgchart, Person
+      can [:signin, :download, :orgchart], Person
     end
   end
 end
