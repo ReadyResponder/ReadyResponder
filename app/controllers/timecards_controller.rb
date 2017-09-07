@@ -1,6 +1,6 @@
 class TimecardsController < ApplicationController
   before_filter :authenticate_user!
-  load_and_authorize_resource
+  load_and_authorize_resource except: :verify
 
   def index
     @timecards = Timecard.all.order(start_time: :desc)
@@ -41,11 +41,11 @@ class TimecardsController < ApplicationController
   end
 
   def verify
+    authorize! :edit, Timecard
     @timecard = Timecard.find(params[:timecard_id])
     if @timecard.status == 'Verified'
       redirect_to request.referrer || timecards_path, notice: 'Timecard already verified.'
     else
-      authorize! :edit, @timecard
       @timecard.status = 'Verified'
       if @timecard.save
         respond_to do |format|

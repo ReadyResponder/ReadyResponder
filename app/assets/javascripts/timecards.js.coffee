@@ -17,7 +17,7 @@ jQuery ->
       type: 'POST'
       dataType: 'JSON'
       error: (data, error) ->
-        console.log("Verify Error: #{data.statusText}")
+        console.log("Verify Error: #{error}")
       success: (data) ->
         $("#js-timecard-verify-btn-id-#{data.id}").remove()
         $("#js-timecard-status-id-#{data.id}").html(data.status)
