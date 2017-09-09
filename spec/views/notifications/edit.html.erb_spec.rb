@@ -7,6 +7,7 @@ RSpec.describe "notifications/edit", type: :view do
     @notification = assign(:notification, Notification.create!(
       :event => @event,
       :status => "Active",
+      :subject => "Please respond",
       :channels => "voice",
       :departments => [department]
     ))

@@ -9,12 +9,14 @@ RSpec.describe "notifications/index", type: :view do
       Notification.create!(
         :event => create(:event),
         :status => "Active",
+        :subject => "Please respond",
         :channels => "Text",
         :departments => [department]
       ),
       Notification.create!(
         :event => create(:event),
         :status => "Complete",
+        :subject => "Please respond",
         :channels => "EMail",
         :departments => [department]
       )

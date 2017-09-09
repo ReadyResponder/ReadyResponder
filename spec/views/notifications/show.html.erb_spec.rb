@@ -7,6 +7,7 @@ RSpec.describe "notifications/show", type: :view do
       :event => nil,
       :status => "Active",
       :channels => "Email, Text",
+      :subject => "Please respond",
       :departments => [department]
     ))
   end
