@@ -6,6 +6,7 @@ FactoryGirl.define do
     description "Ford F-150"
     source "Main Street Ford"
     category "Vehicle"
+    qty 1
     brand 'Ford'
     model "F-150"
     purchase_date "2010-12-14"

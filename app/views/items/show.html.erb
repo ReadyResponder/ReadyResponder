@@ -46,6 +46,7 @@
 <% end %>
 
 <p><b>Expenses in last 6 months </b><%= number_to_currency @item.recent_costs %></p>
+<p>Quantity: <b><%= @item.qty %></b></p>
 
 <% if @item.purchase_amt.present? %>
   <p><b>Purchase amt:</b> <%= @item.purchase_amt %></p>

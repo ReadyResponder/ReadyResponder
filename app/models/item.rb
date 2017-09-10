@@ -1,7 +1,7 @@
 class Item < ActiveRecord::Base
   has_paper_trail
 
-  attr_accessible :category, :description, :location_id,
+  attr_accessible :category, :description, :location_id, :qty,
                   :model, :brand, :name, :owner_id, :po_number,
                   :value, :grant, :purchase_amt, :purchase_date,
                   :sell_amt, :sell_date, :stock_number,
@@ -14,6 +14,7 @@ class Item < ActiveRecord::Base
 
   mount_uploader :item_image, ItemImageUploader
 
+  validates_numericality_of :qty, :greater_than_or_equal_to => 0
   validates_numericality_of :value, :allow_nil => true, :allow_blank => true
   validates_numericality_of :sell_amt, :allow_nil => true, :allow_blank => true
   validates_numericality_of :purchase_amt, :allow_nil => true, :allow_blank => true

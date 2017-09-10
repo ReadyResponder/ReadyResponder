@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Qty</th>
       <th>Model</th>
       <th>Status</th>
       <th>Condition</th>
@@ -13,6 +14,7 @@
     <% items.each do |item| %>
       <tr>
         <td><%= link_to item.name, item_path(item) %></td>
+        <td><%= item.qty %></td>
         <td><%= "#{item.brand} #{item.model}" %></td>
         <td><%= item_status_label(item) %></td>
         <td><%= item_condition_label(item) %></td>
