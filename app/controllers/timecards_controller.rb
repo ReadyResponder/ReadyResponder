@@ -1,6 +1,6 @@
 class TimecardsController < ApplicationController
   before_filter :authenticate_user!
-  load_and_authorize_resource except: :verify
+  load_and_authorize_resource
 
   def index
     @timecards = Timecard.all.order(start_time: :desc)
@@ -41,11 +41,7 @@ class TimecardsController < ApplicationController
   end
 
   def verify
-    authorize! :edit, Timecard
-    @timecard = Timecard.find(params[:timecard_id])
-    if @timecard.status == 'Verified'
-      redirect_to request.referrer || timecards_path, notice: 'Timecard already verified.'
-    else
+    if @timecard.status == 'Unverified'
       @timecard.status = 'Verified'
       if @timecard.save
         respond_to do |format|
@@ -56,8 +52,15 @@ class TimecardsController < ApplicationController
             render json: @timecard
           }
         end
-      else
-        render action: "edit"
+      end
+    else
+      respond_to do |format|
+        format.html {
+          redirect_to request.referrer || timecards_path, notice: 'Timecard is not in an unverfied status'
+        }
+        format.json {
+          render json: { notice: 'Timecard is not in an unverfied status' }
+        }
       end
     end
   end

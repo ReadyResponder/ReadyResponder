@@ -5,7 +5,15 @@
   <td><%= timecard.duration %></td>
   <td><%= truncate(timecard.description, length: 24) %></td>
   <td>
-    <%= button_to 'Verify', timecard_verify_path(timecard), form_class: 'timecard-verify', id: "js-timecard-verify-btn-id-#{timecard.id}", class: 'js-timecard-verify-btn btn btn-xs btn-success' if (can? :edit, timecard) && timecard.status != 'Verified' %>
+    <% if (can? :verify, timecard) && timecard.status == 'Unverified' %>
+      <%= button_to 'Verify',
+        timecard_verify_path(timecard),
+        form_class: 'timecard-verify',
+        params: { id: timecard.id },
+        id: "js-timecard-verify-btn-id-#{timecard.id}",
+        class: 'js-timecard-verify-btn btn btn-xs btn-success'
+      %>
+    <% end %>
     <%= table_button_link 'Edit', edit_timecard_path(timecard) if can? :edit, timecard %>
   </td>
 </tr>
