@@ -46,8 +46,10 @@
         <h3>NOT qualified for <%= title.name %></h3>
         <div>
           Skills Missing:
-          <ul>
-            <%= render(@person.missing_skills(title)) %>
+          <ul class="missing_titles">
+            <% @person.missing_skills(title).each do |missing_skill| %>
+                 <li><%= missing_skill %></li>
+            <% end %>
           </ul>
         </div>
       <% end %>
