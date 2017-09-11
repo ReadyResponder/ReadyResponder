@@ -56,10 +56,10 @@ class TimecardsController < ApplicationController
     else
       respond_to do |format|
         format.html {
-          redirect_to request.referrer || timecards_path, notice: 'Timecard is not in an unverfied status'
+          redirect_to request.referrer || timecards_path, notice: 'Timecard is not in an unverified status'
         }
         format.json {
-          render json: { notice: 'Timecard is not in an unverfied status' }
+          render json: { notice: 'Timecard is not in an unverified status' }
         }
       end
     end
