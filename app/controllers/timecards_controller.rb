@@ -40,6 +40,31 @@ class TimecardsController < ApplicationController
     end
   end
 
+  def verify
+    if @timecard.status == 'Unverified'
+      @timecard.status = 'Verified'
+      if @timecard.save
+        respond_to do |format|
+          format.html {
+            redirect_to request.referrer || timecards_path
+          }
+          format.json {
+            render json: @timecard
+          }
+        end
+      end
+    else
+      respond_to do |format|
+        format.html {
+          redirect_to request.referrer || timecards_path, notice: 'Timecard is not in an unverified status'
+        }
+        format.json {
+          render json: { notice: 'Timecard is not in an unverified status' }
+        }
+      end
+    end
+  end
+
   def destroy
     @timecard.destroy
     redirect_to timecards_path

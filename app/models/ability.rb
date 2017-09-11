@@ -32,7 +32,7 @@ class Ability
       can [:read, :update, :create, :edit], Setting
       can [:read, :update, :create, :edit], Skill
       can [:read, :update, :create, :edit], Task
-      can [:read, :update, :create, :edit], Timecard
+      can [:read, :update, :create, :edit, :verify], Timecard
       can :read, :all
     elsif roles.include? 'Trainer'
       can [:read, :create], Activity
