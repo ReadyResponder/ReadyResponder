@@ -4,9 +4,10 @@ require 'rails_helper'
 
 RSpec.describe NotificationsController, type: :controller do
   let(:event) { FactoryGirl.create(:event) }
-  let(:valid_attributes) {
-    FactoryGirl.attributes_for(:notification)
-  }
+  let(:department) { create(:department) }
+  let!(:notification)  { create(:notification,
+                                subject: "Howdy from Hopedale",
+                                departments: [department]) }
 
   before { login_admin }
 
@@ -23,7 +24,6 @@ RSpec.describe NotificationsController, type: :controller do
 
   describe "GET #edit" do
     it "assigns the requested notification" do
-      notification = Notification.create! valid_attributes
       event.notifications << notification
       get :edit, {:id => notification.to_param}
       expect(assigns(:notification)).to eq(notification)

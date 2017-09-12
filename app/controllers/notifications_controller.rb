@@ -1,8 +1,8 @@
 class NotificationsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
-  
-  before_action :set_choices, only: [:new, :edit]
+
+  before_action :set_form_values, only: [:new, :edit, :create, :update]
 
   def index
     @notifications = Notification.all
@@ -15,9 +15,7 @@ class NotificationsController < ApplicationController
   end
 
   def new
-    @event = Event.find(params[:event_id])
     @notification = @event.notifications.new
-    @notification.departments = @dept_choices
     start_time_display = @event.start_time.strftime('%a %b %d %k:%M')
     end_time_display = @event.end_time.strftime('%a %b %d %k:%M')
     @notification.subject = "Please provide availability "
@@ -30,7 +28,6 @@ class NotificationsController < ApplicationController
 
   def edit
     @statuses = @notification.available_statuses + [@notification.status]
-    @event = @notification.event
   end
 
   def create
@@ -64,7 +61,8 @@ class NotificationsController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
 
-    def set_choices
+    def set_form_values
+      @event = params[:event_id].present? ? Event.find(params[:event_id]) : @notification.event
       @dept_choices = @event ? @event.departments.managing_people : Department.managing_people
       @purpose_choices = [["Request for Availability", "Availability"],
                           ["Info only", "FYI"],

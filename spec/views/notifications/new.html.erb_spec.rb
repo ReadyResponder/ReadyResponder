@@ -6,6 +6,7 @@ RSpec.describe "notifications/new", type: :view do
     assign(:notification, Notification.new(
       :event => @event,
       :status => "Active",
+      :subject => "Please respond",
       :channels => "Text"
     ))
   end

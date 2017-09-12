@@ -2,11 +2,14 @@ require 'rails_helper'
 
 RSpec.describe "notifications/edit", type: :view do
   before(:each) do
-    @event = FactoryGirl.create(:event)
+    @event = create(:event)
+    department = create(:department)
     @notification = assign(:notification, Notification.create!(
       :event => @event,
       :status => "Active",
-      :channels => "MyString"
+      :subject => "Please respond",
+      :channels => "voice",
+      :departments => [department]
     ))
 
   end

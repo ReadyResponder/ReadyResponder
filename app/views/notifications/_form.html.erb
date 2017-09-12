@@ -5,7 +5,7 @@
 
   <div class="form-inputs">
     <%= f.association :event,
-                      collection: Event.upcoming,
+                      collection: Event.upcoming + [@event],
                       include_blank: false %>
     <%= f.input :subject, :hint => "Used for text messages" %>
     <%#= f.input :body, :hint => "Not used for text messages" %>
