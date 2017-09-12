@@ -16,7 +16,8 @@ class ItemsController < ApplicationController
     @item_type = ItemType.find( params[:item_type_id])
     @item = Item.new(
             status: 'Unassigned',
-            condition: 'Available',
+            condition: 'Ready',
+            qty: 1,
             item_type_id: params[:item_type_id])
 
     @page_title = "New Item"
