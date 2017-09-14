@@ -26,9 +26,8 @@ RSpec.describe "Person" do
       expect(page).to have_content('People')
       expect(page).to have_content('Home') # This is in the nav bar
       expect(page).to have_content('CJ')
-      expect(page).to have_content('555-1212')
+      expect(page).to have_content('CERT')
       expect(page).to have_content('Sierra')
-      expect(page).to have_content('sierra@example.com')
       expect(page).to_not have_content('Adam') # Should not show applicant
       expect(page).to_not have_content('Priscilla')
       expect(page).to_not have_content('Indy')
