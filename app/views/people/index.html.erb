@@ -16,6 +16,7 @@
       <th>Last Response</th>
       <th>Last Available</th>
       <th>Last Worked</th>
+      <th>Last 3/6/12 Months</th>
       <th></th>
     </tr>
   </thead>
@@ -34,6 +35,7 @@
         <%= display_date_with_days_hint(person, 'date_last_responded') %>
         <%= display_date_with_days_hint(person, 'date_last_available') %>
         <%= display_date_with_days_hint(person, 'date_last_worked') %>
+        <%= display_hours_worked(person) %>
         <td><%= table_button_link 'Edit', edit_person_path(person) if can? :update, person %></td>
       </tr>
     <% end %>
