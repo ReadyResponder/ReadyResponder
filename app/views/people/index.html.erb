@@ -13,7 +13,7 @@
       <th>(S) Start Date</th>
       <th>Duration</th>
       <th>Dept</th>
-      <th>Last Resppnse</th>
+      <th>Last Response</th>
       <th>Last Available</th>
       <th>Last Worked</th>
       <th></th>
@@ -31,9 +31,9 @@
           <%= distance_of_time_in_words(((person.end_date) || Date.today), person.start_date) if person.start_date %>
         </td>
         <td><%= "#{person.dept_shortname} #{person.division1}" %></td>
-        <%= display_date_with_days_hint(person.date_last_responded) %>
-        <%= display_date_with_days_hint(person.date_last_available) %>
-        <%= display_date_with_days_hint(person.date_last_worked) %>
+        <%= display_date_with_days_hint(person, 'date_last_responded') %>
+        <%= display_date_with_days_hint(person, 'date_last_available') %>
+        <%= display_date_with_days_hint(person, 'date_last_worked') %>
         <td><%= table_button_link 'Edit', edit_person_path(person) if can? :update, person %></td>
       </tr>
     <% end %>
