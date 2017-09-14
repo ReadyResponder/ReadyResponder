@@ -25,7 +25,41 @@ RSpec.describe Person do
       @person = build(:person, start_date: 2.days.from_now, end_date: 2.days.ago)
       expect(@person).not_to be_valid
     end
+  end
 
+  describe 'date_last for availability' do
+    let!(:employee) {create :person}
+    let!(:early_available) { create :availability, person: employee,
+                             start_time: 300.hours.ago, end_time: 290.hours.ago,
+                             status: 'Available' }
+    let!(:recent_available) { create :availability, person: employee,
+                            start_time: 24.hours.ago, end_time: 16.hours.ago,
+                            status: 'Available' }
+    let!(:recent_unavailable) { create :availability, person: employee,
+                             start_time: 19.hours.ago, end_time: 16.hours.ago,
+                             status: 'Unavailable' }
+    it 'finds the correct date_last_responded' do
+      expect(employee.date_last_responded).to eq(recent_unavailable.start_time)
+    end
+    it 'finds the correct date_last_available' do
+      expect(employee.date_last_available).to eq(recent_available.start_time)
+    end
+  end
+
+  describe 'date_last for timecards' do
+    let!(:employee) {create :person}
+    let!(:early_timecard) { create :timecard, person: employee,
+                          start_time: 250.hours.ago, end_time: 225.hours.ago,
+                          status: 'Verified'}
+    let!(:recent_timecard) { create :timecard, person: employee,
+                          start_time: 16.hours.ago, end_time: 8.hours.ago,
+                          status: 'Verified'}
+    let!(:unverified_timecard) { create :timecard, person: employee,
+                          start_time: 2.hours.ago, end_time: 1.hours.ago,
+                          status: 'Unverified'}
+    it 'finds the correct date_last_worked' do
+      expect(employee.date_last_worked).to eq(recent_timecard.start_time)
+    end
   end
 
   describe 'skills' do
