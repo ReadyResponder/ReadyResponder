@@ -39,10 +39,10 @@ RSpec.describe Person do
                              start_time: 19.hours.ago, end_time: 16.hours.ago,
                              status: 'Unavailable' }
     it 'finds the correct date_last_responded' do
-      expect(employee.date_last_responded).to eq(recent_unavailable.start_time)
+      expect(employee.date_last_responded).to be_within(1.second).of recent_unavailable.start_time
     end
     it 'finds the correct date_last_available' do
-      expect(employee.date_last_available).to eq(recent_available.start_time)
+      expect(employee.date_last_available).to be_within(1.second).of recent_available.start_time
     end
   end
 
@@ -58,7 +58,7 @@ RSpec.describe Person do
                           start_time: 2.hours.ago, end_time: 1.hours.ago,
                           status: 'Unverified'}
     it 'finds the correct date_last_worked' do
-      expect(employee.date_last_worked).to eq(recent_timecard.start_time)
+      expect(employee.date_last_worked).to be_within(1.second).of recent_timecard.start_time
     end
   end
 
