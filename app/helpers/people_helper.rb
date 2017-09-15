@@ -3,7 +3,7 @@ module PeopleHelper
     html = '<td title="'
     html += person.send(field_name).strftime('%a %b %d') + '" '
     html += td_class_string(person, field_name) + ' > '
-    html += distance_of_time_in_words(person.send(field_name), Date.today)
+    html += distance_of_time_in_words(person.send(field_name), Time.zone.today)
     html += '</td>'
 
     raw html
@@ -24,7 +24,7 @@ module PeopleHelper
 
   private
   def td_class_string (person, field_name)
-    case (Date.today - person.send(field_name).to_date).to_i
+    case (Time.zone.today - person.send(field_name).to_date).to_i
     when 14..60000 # Look this up !
       return 'class="danger"'
     when 7..14
