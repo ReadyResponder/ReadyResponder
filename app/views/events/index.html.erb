@@ -1,7 +1,5 @@
 <% content_for :sidebar do %>
   <%= sidebar_button_link 'New Event', new_event_path if can? :create, Event %>
-  <!-- <%= sidebar_button_link 'Show Current Events', events_path %>
-  <%= sidebar_button_link 'Show All Events', events_path + "?all_events=true" %> -->
 <% end %>
 <table id="events" class="datatable table table-striped table-bordered">
   <caption>

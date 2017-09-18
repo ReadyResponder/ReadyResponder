@@ -16,29 +16,28 @@ jQuery ->
   <label>Templates:<input type="checkbox" id="js-events-template-checkbox" name="event-filter"></label>')
 
   filterCheckboxes = (element, criteria) ->
-    $.fn.dataTable.ext.search.push(
-        ( settings, data, dataIndex ) ->
-          checkboxState = element.checked
-          itemStatus  = data[7]
-          endTime = new Date(data[5])
-          isTemplate = data[8]
+    $.fn.dataTable.ext.search.push((settings, data, dataIndex) ->
+      checkboxState = element.checked
+      itemStatus  = data[7]
+      endTime = new Date(data[5])
+      isTemplate = data[8]
 
-          if criteria.type is "current"
-            if (checkboxState is false) or (checkboxState is true and
-                endTime > criteria.dateTime)
-              return true
-            return false
-          else if criteria.type is "past"
-            if (checkboxState is false) or (checkboxState is true and
-                endTime < criteria.dateTime)
-              return true
-            return false
-          else if criteria.type is "template"
-            if (checkboxState is false) or (checkboxState is true and
-                isTemplate is "True")
-              return true
-            return false
-        )
+      if criteria.type is "current"
+        if (checkboxState is false) or (checkboxState is true and
+            endTime > criteria.dateTime)
+          return true
+        return false
+      else if criteria.type is "past"
+        if (checkboxState is false) or (checkboxState is true and
+            endTime < criteria.dateTime)
+          return true
+        return false
+      else if criteria.type is "template"
+        if (checkboxState is false) or (checkboxState is true and
+            isTemplate is "True")
+          return true
+        return false
+      )
     table.fnDraw()
 
   $('#js-events-current-checkbox').click ->

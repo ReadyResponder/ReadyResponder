@@ -69,10 +69,10 @@ RSpec.describe "Events" do
     end
 
     it "checkboxes current, past, templates on index page", js: true do
-      @current = create(:event, title: "Current Title", start_time: DateTime.now, end_time: DateTime.now + 2.hours)
+      @current = create(:event, title: "Current Title")
       @past = create(:event, title: "Past Title", start_time: DateTime.now - 5.hours, end_time: DateTime.now - 1.hours)
       @template = create(:event, title: "Template Title 1", is_template: true)
-      visit events_path(all_events: true)
+      visit events_path
       expect(page).to have_content(@current.title)
       expect(page).to have_content(@past.title)
       expect(page).to have_content(@template.title)
