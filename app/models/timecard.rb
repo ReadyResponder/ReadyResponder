@@ -6,7 +6,7 @@ class Timecard < ActiveRecord::Base
 
   belongs_to :person
 
-  STATUS_CHOICES = ['Incomplete', 'Unverified', "Error", "Verified"]
+  STATUS_CHOICES = ['Incomplete', 'Unverified', "Error", "Verified", "Cancelled"]
 
   validates_presence_of :person_id
   validates_chronology :start_time, :end_time
