@@ -1,11 +1,13 @@
 <% content_for :sidebar do %>
   <%= sidebar_button_link 'New Event', new_event_path if can? :create, Event %>
-  <%= sidebar_button_link 'Show Current Events', events_path %>
-  <%= sidebar_button_link 'Show All Events', events_path + "?all_events=true" %>
+  <!-- <%= sidebar_button_link 'Show Current Events', events_path %>
+  <%= sidebar_button_link 'Show All Events', events_path + "?all_events=true" %> -->
 <% end %>
-
 <table id="events" class="datatable table table-striped table-bordered">
-  <caption><h3><%= @page_title %></h3></caption>
+  <caption>
+    <h3 id="js-events-page-title"><%= @page_title %></h3>
+    <p><em><strong>(Templates are highlighted)</strong></em></p>
+  </caption>
   <thead>
     <tr>
       <th>Title</th>
@@ -16,25 +18,26 @@
       <th>End time</th>
       <th>Duration</th>
       <th>Status</th>
+      <th>Template</th>
       <th></th>
     </tr>
   </thead>
-
   <tbody>
     <% @events.each do |e| %>
-      <tr>
+      <tr class='<%= e.is_template ? "highlighted" : nil  %>'>
         <td><%= link_to e.title, e %></td>
         <td><%= e.location %></td>
         <td><%= e.start_time %></td>
         <td><time>
-          <%= e.start_time.strftime('%a %b %d %k:%M') if e.start_time  %>
+          <%= e.start_time.strftime('%a %m/%d/%Y %I:%M %p') if e.start_time  %>
         </time></td>
         <td><%= e.end_time %></td>
         <td><time>
-          <%= e.end_time.strftime('%a %b %d %k:%M') if e.end_time  %>
+          <%= e.end_time.strftime('%a %m/%d/%Y %I:%M %p') if e.end_time  %>
         </time></td>
         <td><%= e.duration %></td>
         <td><%= e.status %></td>
+        <td><%= e.is_template.to_s.capitalize %></td>
         <td><%= table_button_link 'Edit', edit_event_path(e) unless cannot? :update, e %></td>
       </tr>
     <% end %>
