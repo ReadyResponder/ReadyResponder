@@ -91,27 +91,25 @@ Event.create([{ title: "Sample Event", status: "Scheduled", category: "Event",
                 start_time: 24.hours.from_now, end_time: 27.hours.from_now,
                 is_template: false, departments: [cert]
                 }])
-comms = ItemCategory.find_or_create_by_name([
-  {name: "Communication",
+comms = ItemCategory.find_or_create_by(
+   name: "Communication",
    status: "Active",
    description: "Radios, antennae, telephones, repeaters and all assorted peripherals including microphones and earpieces."
-  }
-  ])
+  )
 
-ht = ItemType.find_or_create_by_name([
-  {item_category: comms,
+ht = ItemType.find_or_create_by(
+   item_category: comms,
    name: "Radio, Portable",
    status: "Active",
    description: "Handheld radios"
-  }
-  ])
+  )
 
-Item.find_or_create_by_name([
-  {item_type: ht,
+Item.find_or_create_by(
+   item_type: ht,
    department: mrc,
    name: "Radio 1",
    status: "Unassigned",
    condition: "Ready",
    brand: "Motorola",
-   model: "HT-1000"}
-  ])
+   model: "HT-1000"
+  )
