@@ -6,6 +6,7 @@ class Timecard < ActiveRecord::Base
 
   belongs_to :person
 
+  scope :verified, -> { where(:status => 'Verified')}
   STATUS_CHOICES = ['Incomplete', 'Unverified', "Error", "Verified", "Cancelled"]
 
   validates_presence_of :person_id

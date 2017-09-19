@@ -62,7 +62,7 @@ class Person < ActiveRecord::Base
   def to_s
     fullname
   end
-  
+
   def fullname
     fname = self.nickname ||= self.firstname
     (fname + " " + (self.middleinitial || "") + " " + self.lastname).squeeze(" ")
@@ -168,6 +168,21 @@ class Person < ActiveRecord::Base
   def missing_skills(title)
     return "Invalid title" unless title.kind_of?(Title)
     title.skills - self.skills
+  end
+
+  def date_last_responded
+    a = availabilities.order(:start_time).last
+    a ? a.start_time : Time.new(1980,1,1)
+  end
+
+  def date_last_available
+    a = availabilities.available.order(:start_time).last
+    a ? a.start_time : Time.new(1980,1,1)
+  end
+
+  def date_last_worked
+    t = timecards.verified.order(:start_time).last
+    t ? t.start_time : Time.new(1980,1,1)
   end
 
   def service_duration

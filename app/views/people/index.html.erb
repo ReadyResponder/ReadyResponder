@@ -6,18 +6,17 @@
   <caption><h3><%= @page_title %></h3></caption>
   <thead>
     <tr>
-      <th>(S)Rank Order</th>
+      <th>(S) Rank Order</th>
       <th>Title</th>
-      <th>(S)Last Name</th>
+      <th>(S) Last Name</th>
       <th>Name</th>
-      <th>Badge</th>
       <th>(S) Start Date</th>
       <th>Duration</th>
-      <th>Phone</th>
-      <th>E-Mail</th>
       <th>Dept</th>
-      <th>Division 1</th>
-      <th>Division 2</th>
+      <th>Last Response</th>
+      <th>Last Available</th>
+      <th>Last Worked</th>
+      <th>Last 3/6/12 Months</th>
       <th></th>
     </tr>
   </thead>
@@ -28,16 +27,15 @@
         <td><%= person.shortrank %></td>
         <td><%= person.lastname %></td>
         <td><%= link_to person.fullname, person %></td>
-        <td><%= person.icsid %></td>
         <td><%= person.start_date %></td>
         <td title=<%= person.start_date %> >
           <%= distance_of_time_in_words(((person.end_date) || Date.today), person.start_date) if person.start_date %>
         </td>
-        <td><%= number_to_phone(person.phone) %></td>
-        <td><%= person.email %></td>
-        <td><%= person.dept_shortname %></td>
-        <td><%= person.division1 %></td>
-        <td><%= person.division2 %></td>
+        <td><%= "#{person.dept_shortname} #{person.division1}" %></td>
+        <%= display_date_with_days_hint(person, 'date_last_responded') %>
+        <%= display_date_with_days_hint(person, 'date_last_available') %>
+        <%= display_date_with_days_hint(person, 'date_last_worked') %>
+        <%= display_hours_worked(person) %>
         <td><%= table_button_link 'Edit', edit_person_path(person) if can? :update, person %></td>
       </tr>
     <% end %>
