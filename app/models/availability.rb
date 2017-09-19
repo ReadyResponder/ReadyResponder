@@ -26,7 +26,7 @@ class Availability < ActiveRecord::Base
   end
 
   def partially_available?(event)
-    return false if event.nil? || (event.end_time == self.end_time && event.start_time == self.start_time)
+    return false if event.nil? || (event.end_time <= self.end_time && event.start_time >= self.start_time)
     (event.end_time >= self.end_time && self.end_time >= event.start_time) || (event.end_time >= self.start_time && self.start_time >= event.start_time)
   end
 
