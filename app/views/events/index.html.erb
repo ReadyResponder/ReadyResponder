@@ -4,7 +4,6 @@
 <table id="events" class="datatable table table-striped table-bordered">
   <caption>
     <h3 id="js-events-page-title"><%= @page_title %></h3>
-    <p><em><strong>(Templates are highlighted)</strong></em></p>
   </caption>
   <thead>
     <tr>
@@ -22,7 +21,7 @@
   </thead>
   <tbody>
     <% @events.each do |e| %>
-      <tr class='<%= e.is_template ? "highlighted" : nil  %>'>
+      <tr class='<%= column_color_class(e) %>'>
         <td><%= link_to e.title, e %></td>
         <td><%= e.location %></td>
         <td><%= e.start_time %></td>

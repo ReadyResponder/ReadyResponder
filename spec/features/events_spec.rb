@@ -73,34 +73,49 @@ RSpec.describe "Events" do
       @past = create(:event, title: "Past Title", start_time: DateTime.now - 5.hours, end_time: DateTime.now - 1.hours)
       @template = create(:event, title: "Template Title 1", is_template: true)
       visit events_path
-      expect(page).to have_content(@current.title)
-      expect(page).to have_content(@past.title)
-      expect(page).to have_content(@template.title)
-      check "js-events-current-checkbox"
+      # current checkbox should be clicked by default
       expect(page).to have_content(@current.title)
       expect(page).not_to have_content(@past.title)
-      expect(page).to have_content(@template.title)
+      expect(page).not_to have_content(@template.title)
+      page.has_css?("table tr.current-highlight")
+
       uncheck "js-events-current-checkbox"
       check "js-events-past-checkbox"
       expect(page).not_to have_content(@current.title)
       expect(page).to have_content(@past.title)
       expect(page).not_to have_content(@template.title)
+      page.has_css?("table tr.past-highlight")
+
       uncheck "js-events-past-checkbox"
       check "js-events-template-checkbox"
       expect(page).not_to have_content(@current.title)
       expect(page).not_to have_content(@past.title)
       expect(page).to have_content(@template.title)
+      page.has_css?("table tr.template-highlight")
+
+      check "js-events-current-checkbox"
+      check "js-events-past-checkbox"
+      expect(page).to have_content(@current.title)
+      expect(page).to have_content(@past.title)
+      expect(page).to have_content(@template.title)
+
+      uncheck "js-events-current-checkbox"
+      uncheck "js-events-past-checkbox"
+      uncheck "js-events-template-checkbox"
+      expect(page).not_to have_content(@current.title)
+      expect(page).not_to have_content(@past.title)
+      expect(page).not_to have_content(@template.title)
+      expect(page).to have_content("No matching records found")
     end
 
     it "a template", js: true do
       @template = create(:event, title: "Template Title 2", status: "In-Session", is_template: true)
-      visit events_path(all_events: true)
+      visit events_path
+      check "js-events-template-checkbox"
       within_table("events") do
-        expect(page).to have_content("Template")
       	within("tbody") do
       	  expect(page).to have_content(@template.title)
           expect(page).not_to have_content(@template.is_template.to_s.capitalize)
-          page.find("tr")[:class].include?("highlighted")
       	end
       end
     end

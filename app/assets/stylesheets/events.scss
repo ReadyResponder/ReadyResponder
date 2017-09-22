@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$current-events-color: #5cb85c;
+$past-events-color: #f0ad4e;
+$template-events-color: #e2db30;
+
 #event_timecards {
   border: 1px solid #e1e1e8;
   padding: 9px 14px;
@@ -36,6 +40,19 @@
   margin-left: 3px;
 }
 
-.highlighted {
-  background-color: #dad224 !important;
+div.eventToolbar label {
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.template-highlight, div.eventToolbar label:last-child {
+  background-color: $template-events-color !important;
+}
+
+.current-highlight, div.eventToolbar label:first-child {
+  background-color: $current-events-color !important;
+}
+
+.past-highlight, div.eventToolbar label:nth-child(2) {
+  background-color: $past-events-color !important;
 }
