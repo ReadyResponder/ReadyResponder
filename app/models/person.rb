@@ -185,6 +185,10 @@ class Person < ActiveRecord::Base
     t ? t.start_time : Time.new(1980,1,1)
   end
 
+  def monthly_hours_going_back(x)
+    timecards.where('start_time > ?', x.months.ago).sum(:duration).to_i.to_s
+  end
+
   def service_duration
     if self.start_date.present?
       if self.end_date.present?
