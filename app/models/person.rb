@@ -171,18 +171,22 @@ class Person < ActiveRecord::Base
   end
 
   def date_last_responded
-    a = availabilities.order(:start_time).last
-    a ? a.start_time : Time.new(1980,1,1)
+    a = availabilities.order(:created_at).last
+    a ? a.created_at : Time.new(1980,1,1)
   end
 
   def date_last_available
-    a = availabilities.available.order(:start_time).last
+    a = availabilities.available.in_the_past.order(:start_time).last
     a ? a.start_time : Time.new(1980,1,1)
   end
 
   def date_last_worked
     t = timecards.verified.order(:start_time).last
     t ? t.start_time : Time.new(1980,1,1)
+  end
+
+  def monthly_hours_going_back(x)
+    timecards.where('start_time > ?', x.months.ago).sum(:duration).to_i.to_s
   end
 
   def service_duration

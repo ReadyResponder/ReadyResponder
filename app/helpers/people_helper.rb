@@ -1,9 +1,9 @@
 module PeopleHelper
   def display_date_with_days_hint (person, field_name)
     html = '<td title="'
-    html += person.send(field_name).strftime('%a %b %d') + '" '
+    html += distance_of_time_in_words(person.send(field_name), Time.zone.today) + '" '
     html += td_class_string(person, field_name) + ' > '
-    html += distance_of_time_in_words(person.send(field_name), Time.zone.today)
+    html += person.send(field_name).strftime('%a %b %d')
     html += '</td>'
 
     raw html
@@ -12,11 +12,11 @@ module PeopleHelper
 
   def display_hours_worked (person)
     html = '<td>'
-    html += person.timecards.where('start_time > ?', 3.months.ago).sum(:duration).to_s
+    html += person.monthly_hours_going_back(3)
     html += '/'
-    html += person.timecards.where('start_time > ?', 6.months.ago).sum(:duration).to_s
+    html += person.monthly_hours_going_back(6)
     html += '/'
-    html += person.timecards.where('start_time > ?', 12.months.ago).sum(:duration).to_s
+    html += person.monthly_hours_going_back(12)
     html += ' hours</td>'
 
     raw html
