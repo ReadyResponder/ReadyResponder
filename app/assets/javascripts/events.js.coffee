@@ -1,6 +1,5 @@
-
 jQuery ->
-  $("#event_title").focus();
+  $("#event_title").focus()
   $table = $('#events').dataTable
     "dom": '<"eventToolbar dataTables_filter">frtip',
     order: [[3, 'asc']],
@@ -10,51 +9,40 @@ jQuery ->
                   { orderData: 4, targets: 5 },
                   { visible: false, targets: [2,4,8] }
                 ]
+
 # sets checkbox elements within #events dataTable()
-  $('div.eventToolbar').html('<label>Current:<input type="checkbox" id="js-events-current-checkbox" name="event-filter"></label>
-  <label>Past:<input type="checkbox" id="js-events-past-checkbox" name="event-filter"></label>
-  <label>Templates:<input type="checkbox" id="js-events-template-checkbox" name="event-filter"></label>')
+  $('div.eventToolbar').html('<label>Current:<input type="checkbox" id="js-events-current-checkbox" class="event-filter" value="current"></label>
+  <label>Past:<input type="checkbox" id="js-events-past-checkbox" class="event-filter" value="past"></label>
+  <label>Templates:<input type="checkbox" id="js-events-template-checkbox" class="event-filter" value="template"></label>')
 
-# logic handling checkbox filtering with dataTables()
-  filterCheckboxes = (element, criteria) ->
-    $.fn.dataTable.ext.search.push((settings, data) ->
-      checkboxState = element.checked
-      endTime = new Date(data[5])
-      isTemplate = data[8]
+#logic handling checkbox filtering with dataTables()
+  $.fn.dataTableExt.afnFiltering.push((settings, data) ->
+    checked = []
+    currentTime = new Date()
+    endTime = new Date(data[5])
+    isTemplate = data[8]
+    $('.event-filter').each ->
+      $this = $(this)
+      if $this.is(':checked')
+        checked.push($this)
 
-      if criteria.type is "current" and (checkboxState is false or (checkboxState is true and endTime > criteria.dateTime))
-        return true
-      else if criteria.type is "past" and (checkboxState is false or (checkboxState is true and endTime < criteria.dateTime))
-        return true
-      else if criteria.type is "template" and (checkboxState is false or (checkboxState is true and isTemplate is "True"))
-        return true
-      else
-        return false
-      )
+    if checked.length
+      returnValue = false
+      $.each(checked, (i, element) ->
+        if (element.val() is 'current' and endTime > currentTime and isTemplate is 'False') or
+           (element.val() is 'past' and endTime < currentTime and isTemplate is 'False') or
+           (element.val() is 'template' and isTemplate is 'True')
+          returnValue = true;
+          return false;
+          )
+    else
+      return false
+    return returnValue
+    )
+
+  #re-draws table after checking or unchecking a filter checkbox
+  $('.event-filter').change ->
     $table.fnDraw()
-
-  # events handling checkboxes
-  $('#js-events-current-checkbox').change ->
-    $("#js-events-past-checkbox").prop('checked', false)
-    criteria = {
-      type: "current",
-      dateTime: new Date()
-    }
-    filterCheckboxes(this, criteria)
-
-  $('#js-events-past-checkbox').change ->
-    $("#js-events-current-checkbox").prop('checked', false)
-    criteria = {
-      type: "past",
-      dateTime: new Date()
-    }
-    filterCheckboxes(this, criteria)
-
-  $('#js-events-template-checkbox').change ->
-    criteria = {
-      type: "template",
-    }
-    filterCheckboxes(this, criteria)
 
   $("#event_category").change ->
     temp = $("#event_category option:selected").text();
@@ -80,3 +68,6 @@ jQuery ->
     eventEndTime = $('#event_end_time').datetimepicker('getValue')
     if (not eventEndTime?) or (eventStartTime > eventEndTime)
       $('#event_end_time').datetimepicker('setOptions', {startDate: eventStartTime})
+
+$(document).ready ->
+  $("#js-events-current-checkbox").click()
