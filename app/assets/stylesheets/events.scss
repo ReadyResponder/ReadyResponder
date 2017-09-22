@@ -49,10 +49,11 @@ div.eventToolbar label {
   background-color: $template-events-color !important;
 }
 
-.current-highlight, div.eventToolbar label:first-child {
-  background-color: $current-events-color !important;
-}
-
-.past-highlight, div.eventToolbar label:nth-child(2) {
-  background-color: $past-events-color !important;
-}
+// Uncomment if you want to highlight current and past event filters
+// .current-highlight, div.eventToolbar label:first-child {
+//   background-color: $current-events-color !important;
+// }
+//
+// .past-highlight, div.eventToolbar label:nth-child(2) {
+//   background-color: $past-events-color !important;
+// }
