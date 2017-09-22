@@ -39,7 +39,7 @@ RSpec.describe Person do
                              start_time: 19.hours.ago, end_time: 16.hours.ago,
                              status: 'Unavailable' }
     it 'finds the correct date_last_responded' do
-      expect(employee.date_last_responded).to be_within(1.second).of recent_unavailable.start_time
+      expect(employee.date_last_responded).to be_within(1.second).of recent_unavailable.created_at
     end
     it 'finds the correct date_last_available' do
       expect(employee.date_last_available).to be_within(1.second).of recent_available.start_time
