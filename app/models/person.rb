@@ -171,12 +171,12 @@ class Person < ActiveRecord::Base
   end
 
   def date_last_responded
-    a = availabilities.order(:start_time).last
-    a ? a.start_time : Time.new(1980,1,1)
+    a = availabilities.order(:created_at).last
+    a ? a.created_at : Time.new(1980,1,1)
   end
 
   def date_last_available
-    a = availabilities.available.order(:start_time).last
+    a = availabilities.available.in_the_past.order(:start_time).last
     a ? a.start_time : Time.new(1980,1,1)
   end
 
