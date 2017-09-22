@@ -198,4 +198,13 @@ class Person < ActiveRecord::Base
       end
     end
   end
+
+  def application_and_start_validation
+    if start_date == nil || application_date == nil
+      true
+    else
+      result = start_date - application_date
+      result >= 0
+    end
+  end
 end
