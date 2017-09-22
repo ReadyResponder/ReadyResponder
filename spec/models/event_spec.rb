@@ -29,15 +29,6 @@ RSpec.describe Event do
     expect(build(:event, status: "Completed", start_time: Time.current, end_time: nil)).not_to be_valid
   end
 
-  it "reports if it's ready to schedule" do
-    @event = build(:event, start_time: nil, end_time: 75.minutes.from_now, status: "Scheduled")
-    expect(@event.ready_to_schedule?("Available")).to eq(false)  # Need a start time
-    @event = build(:event, start_time: Time.current, end_time: nil, status: "Scheduled")
-    expect(@event.ready_to_schedule?("Worked")).to eq(false)  # Need an end time
-    @event = build(:event, start_time: Time.current, end_time: 75.minutes.from_now, status: "Closed")
-    expect(@event.ready_to_schedule?("Scheduled")).to eq(false)  # Never for a closed event
-  end
-
   it "changes the id_code to lower case and trims it" do
     @event = create(:event, id_code: " HowDy DOOdy ")
     expect(@event.id_code).to eq("howdy")
