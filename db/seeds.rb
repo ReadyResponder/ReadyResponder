@@ -92,23 +92,24 @@ Event.create([{ title: "Sample Event", status: "Scheduled", category: "Event",
                 is_template: false, departments: [cert]
                 }])
 
-comms = ItemCategory.find_or_create_by(name: "Communication") do |item|
-          item.status = "Active",
-          item.description = "Radios, antennae, telephones, repeaters and all assorted peripherals including microphones and earpieces."
-        end
+comms = ItemCategory.find_or_create_by(name: "Communication") do |item_cat|
+  item_cat.status = "Active"
+  item_cat.description = "Radios, antennae, telephones, repeaters and all assorted peripherals including microphones and earpieces."
+end
 
-ht = comms.item_types.find_or_create_by(name: "Radio, Portable") do |item|
-       item.status = "Active",
-       item.description = "Handheld radios"
-     end
+ht = ItemType.find_or_create_by(name: "Radio, Portable") do |item_type|
+  item_type.item_category = comms
+  item_type.status = "Active"
+  item_type.description = "Handheld radios"
+end
 
 Item.find_or_create_by(name: "Radio 1") do |item|
-  item.item_type_id = ht.id,
-  item.department_id = mrc.id,
-  item.name = "Radio 1",
-  item.status = "Unassigned",
-  item.condition = "Ready",
-  item.brand = "Motorola",
-  item.model = "HT-1000",
+  item.item_type = ht
+  item.department = mrc
+  item.name = "Radio 1"
+  item.status = "Unassigned"
+  item.condition = "Ready"
+  item.brand = "Motorola"
+  item.model = "HT-1000"
   item.qty = 1
 end
