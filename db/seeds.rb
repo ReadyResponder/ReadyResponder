@@ -91,27 +91,25 @@ Event.create([{ title: "Sample Event", status: "Scheduled", category: "Event",
                 start_time: 24.hours.from_now, end_time: 27.hours.from_now,
                 is_template: false, departments: [cert]
                 }])
-comms = ItemCategory.find_or_create_by_name([
-  {name: "Communication",
-   status: "Active",
-   description: "Radios, antennae, telephones, repeaters and all assorted peripherals including microphones and earpieces."
-  }
-  ])
 
-ht = ItemType.find_or_create_by_name([
-  {item_category: comms,
-   name: "Radio, Portable",
-   status: "Active",
-   description: "Handheld radios"
-  }
-  ])
+comms = ItemCategory.find_or_create_by(name: "Communication") do |item_cat|
+  item_cat.status = "Active"
+  item_cat.description = "Radios, antennae, telephones, repeaters and all assorted peripherals including microphones and earpieces."
+end
 
-Item.find_or_create_by_name([
-  {item_type: ht,
-   department: mrc,
-   name: "Radio 1",
-   status: "Unassigned",
-   condition: "Ready",
-   brand: "Motorola",
-   model: "HT-1000"}
-  ])
+ht = ItemType.find_or_create_by(name: "Radio, Portable") do |item_type|
+  item_type.item_category = comms
+  item_type.status = "Active"
+  item_type.description = "Handheld radios"
+end
+
+Item.find_or_create_by(name: "Radio 1") do |item|
+  item.item_type = ht
+  item.department = mrc
+  item.name = "Radio 1"
+  item.status = "Unassigned"
+  item.condition = "Ready"
+  item.brand = "Motorola"
+  item.model = "HT-1000"
+  item.qty = 1
+end
