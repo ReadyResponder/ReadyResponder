@@ -24,7 +24,7 @@
         <td><%= event.duration %></td>
         <td><%= event.category %></td>
         <td><%= event.status %></td>
-        <td><%= e.is_template.to_s.capitalize %></td>
+        <td><%= event.is_template.to_s.capitalize %></td>
         <td><%= table_button_link 'Edit', edit_event_path(event) unless cannot? :update, event %></td>
       </tr>
     <% end %>

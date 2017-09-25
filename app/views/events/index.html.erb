@@ -26,11 +26,11 @@
         <td><%= e.location %></td>
         <td><%= e.start_time %></td>
         <td><time>
-          <%= e.start_time.strftime('%a %m/%d/%Y %I:%M %p') if e.start_time  %>
+          <%= e.start_time.strftime('%a, %b %d, %y %k:%M') if e.start_time  %>
         </time></td>
         <td><%= e.end_time %></td>
         <td><time>
-          <%= e.end_time.strftime('%a %m/%d/%Y %I:%M %p') if e.end_time  %>
+          <%= e.end_time.strftime('%a, %b %d, %y %k:%M') if e.end_time  %>
         </time></td>
         <td><%= e.duration %></td>
         <td><%= e.status %></td>
