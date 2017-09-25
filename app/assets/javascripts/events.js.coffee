@@ -1,7 +1,6 @@
 jQuery ->
   $("#event_title").focus()
   $table = $('#events').dataTable
-    "dom": '<"eventToolbar dataTables_filter">frtip',
     order: [[3, 'asc']],
     columnDefs: [
                   { orderable: false, targets: -1 },
@@ -11,7 +10,7 @@ jQuery ->
                 ]
 
 # sets checkbox elements within #events dataTable()
-  $('div.eventToolbar').html('<label>Current:<input type="checkbox" id="js-events-current-checkbox" class="event-filter" value="current"></label>
+  $('table.datatable caption').append('<label>Current:<input type="checkbox" id="js-events-current-checkbox" class="event-filter" value="current"></label>
   <label>Past:<input type="checkbox" id="js-events-past-checkbox" class="event-filter" value="past"></label>
   <label>Templates:<input type="checkbox" id="js-events-template-checkbox" class="event-filter" value="template"></label>')
 

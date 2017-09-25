@@ -44,20 +44,20 @@ $template-events-color: #e2db30;
   display: none;
 }
 
-div.eventToolbar label {
+div.dataTables_scrollHead > div > table > caption > label {
   padding: 5px;
   border-radius: 5px;
 }
 
-.template-highlight, div.eventToolbar label:last-child {
+.template-highlight, div.dataTables_scrollHead > div > table > caption > label:last-child {
   background-color: $template-events-color !important;
 }
 
 // Uncomment if you want to highlight current and past event filters
-// .current-highlight, div.eventToolbar label:first-child {
+// .current-highlight, div.dataTables_scrollHead > div > table > caption > label:nth-child(2) {
 //   background-color: $current-events-color !important;
 // }
 //
-// .past-highlight, div.eventToolbar label:nth-child(2) {
+// .past-highlight, div.dataTables_scrollHead > div > table > caption > label:nth-child(3) {
 //   background-color: $past-events-color !important;
 // }
