@@ -30,8 +30,8 @@ This is a Rails project that is configured to run on Ruby 2, and on a Postgres d
 1. Ruby: There's a detailed list of options for installing Ruby on the [official Ruby website](https://www.ruby-lang.org/en/documentation/installation/).
   * [RVM](http://rvm.io/), [rbenv](https://github.com/rbenv/rbenv#readme), and [chruby](https://github.com/postmodern/chruby#readme) are common ruby installation managers for Macs & Linux.
   * The exact version of Ruby that ReadyResponder is using is specified in the [.ruby-version](.ruby-version) file.
-1. Bundler: `gem install bundler`
-1. Postgres
+2. Bundler: `gem install bundler`
+3. Postgres
   * If you have `homebrew` on a Mac, you can run `brew install postgres`.
   * Alternatively, [Postgres.app](http://postgresapp.com) is an easy way to get started with PostgreSQL on the Mac. [PostgresApp 9.4.8](https://github.com/PostgresApp/PostgresApp/releases/tag/9.4.8) has been tested (when configuring, add `host: localhost` to `config/database.yml`).
 
@@ -57,13 +57,14 @@ Then get the project code locally and set it up:
 2. [Clone](https://help.github.com/articles/cloning-a-repository/) the forked
    repository to your development or local machine.
 3. `cd ReadyResponder`
-4. `bundle install`
-5. Copy `config/database.example.yml` to `config/database.yml`.  Edit `config/database.yml` if necessary to match your postgres configuration.
-6. `bundle exec rake db:create`
-7. `bundle exec rake db:schema:load`
-8. `bundle exec rake db:seed  `
+4. Rmagick version 2.15.4 requires Imagemagick version 6 be installed first. `brew install imagemagick@6` before running bundle
+5. `bundle install`
+6. Copy `config/database.example.yml` to `config/database.yml`.  Edit `config/database.yml` if necessary to match your postgres configuration.
+7. `bundle exec rake db:create`
+8. `bundle exec rake db:schema:load`
+9. `bundle exec rake db:seed`
 
-You should note the output of the db:seed, as it will spit out the password at the end.
+**You should note the output of the db:seed, as it will spit out the password at the end.**
 
 At this point you should be able to run the rails server via `bundle exec rails s`, the rails console via `bundle exec rails c`, and the tests via `bundle exec rspec spec/`
 

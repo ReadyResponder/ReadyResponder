@@ -62,6 +62,16 @@ module EventsHelper
     return raw button
   end
 
+  def column_color_class(event)
+    if event.is_template
+      return 'template-highlight'
+    elsif event.end_time > DateTime.now
+      return 'current-highlight'
+    elsif event.end_time < DateTime.now
+      return 'past-highlight'
+    end
+  end
+
   private
     def make_label(text, class_str, tooltip: nil)
       if tooltip

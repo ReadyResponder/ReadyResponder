@@ -5,7 +5,7 @@ RSpec.describe "Events" do
 
   get_basic_editor_views('event',['Training', 'Status'])
   describe "creates" do
-    it "events" do
+    it "events", js: true do
       @person1 = create(:person)
       @person2 = create(:person, firstname: "Jane")
       @person3 = create(:person)
@@ -39,14 +39,12 @@ RSpec.describe "Events" do
       #     expect(page).to have_content(@person2.fullname)
       #     expect(page).not_to have_content(@person1.fullname)
       #     expect(page).not_to have_content(@person3.fullname)
-      #   #check(@person2.fullname)
+      #     check(@person2.fullname)
       #   end
       #   within("#unavailable") do
       #     expect(page).to have_content(@person3.fullname)
       #     expect(page).not_to have_content(@person1.fullname)
       #     expect(page).not_to have_content(@person2.fullname)
-      #
-      #     #save_and_open_page
       #   end
       #   page.has_css?('#xxscheduled-headings') #Why doesn't this fail ?!?
       #   within("#scheduled") do
@@ -70,7 +68,59 @@ RSpec.describe "Events" do
       end
     end
 
-    it 'an edit form' do
+    it "checkboxes current, past, templates on index page", js: true do
+      @current = create(:event, title: "Current Title")
+      @past = create(:event, title: "Past Title", start_time: DateTime.now - 5.hours, end_time: DateTime.now - 1.hours)
+      @template = create(:event, title: "Template Title 1", is_template: true)
+      visit events_path
+      # current checkbox should be clicked by default
+      expect(page).to have_content(@current.title)
+      expect(page).not_to have_content(@past.title)
+      expect(page).not_to have_content(@template.title)
+      page.has_css?("table tr.current-highlight")
+
+      uncheck "js-events-current-checkbox"
+      check "js-events-past-checkbox"
+      expect(page).not_to have_content(@current.title)
+      expect(page).to have_content(@past.title)
+      expect(page).not_to have_content(@template.title)
+      page.has_css?("table tr.past-highlight")
+
+      uncheck "js-events-past-checkbox"
+      check "js-events-template-checkbox"
+      expect(page).not_to have_content(@current.title)
+      expect(page).not_to have_content(@past.title)
+      expect(page).to have_content(@template.title)
+      page.has_css?("table tr.template-highlight")
+
+      check "js-events-current-checkbox"
+      check "js-events-past-checkbox"
+      expect(page).to have_content(@current.title)
+      expect(page).to have_content(@past.title)
+      expect(page).to have_content(@template.title)
+
+      uncheck "js-events-current-checkbox"
+      uncheck "js-events-past-checkbox"
+      uncheck "js-events-template-checkbox"
+      expect(page).not_to have_content(@current.title)
+      expect(page).not_to have_content(@past.title)
+      expect(page).not_to have_content(@template.title)
+      expect(page).to have_content("No matching records found")
+    end
+
+    it "a template", js: true do
+      @template = create(:event, title: "Template Title 2", status: "In-Session", is_template: true)
+      visit events_path
+      check "js-events-template-checkbox"
+      within_table("events") do
+      	within("tbody") do
+      	  expect(page).to have_content(@template.title)
+          expect(page).not_to have_content(@template.is_template.to_s.capitalize)
+      	end
+      end
+    end
+
+    it "an edit form" do
       @event = create(:event, title: "Something divine")
       visit edit_event_path(@event)
       within("#sidebar") do
@@ -87,8 +137,7 @@ RSpec.describe "Events" do
       expect(page).to have_content(@event.title)
       expect(current_path).to eq(event_path(@event))
     end
-    it "hides the course if category isn't training" , js: true,
-        :skip => 'Errors in Javascript library' do
+    it "the course if category is training", js: true do
       visit new_event_path
       select 'Patrol', :from => 'event_category'
       fill_in "Description", with: "Really Long Text..."  #This ensures the blur event happens
@@ -96,9 +145,6 @@ RSpec.describe "Events" do
       select 'Training', :from => 'event_category'
       fill_in "Description", with: "Really Long Text..."  #This ensures the blur event happens
       expect(page).to have_content("Course")
-    end
-    it "always fails" do
-     #1.should eq(2)
     end
   end
 end
