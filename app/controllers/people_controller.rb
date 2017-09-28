@@ -14,10 +14,12 @@ class PeopleController < ApplicationController
   end
 
   def orgchart
-    @department = Department.where(shortname: "BAUX").first
-    @people = @department.people.active if @department
-    @page_title = "Org Chart"
+    @department = Department.find(params[:dept_id])
+    @people = @department.people.active
+    @page_title = "Org Chart: #{@department.shortname}"
     render :layout => "orgchart"
+  rescue ActiveRecord::RecordNotFound
+    head 404
   end
 
   def department

@@ -63,7 +63,9 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Reports<span class="caret"></span></a>
             <ul class="dropdown-menu">
               <%= nav_link "Attendance Sheet", signin_people_path %>
-              <%= nav_link "Org Chart", orgchart_people_path %>
+              <% Department.active.managing_people.order("shortname ASC").each do |dept| %>
+                <%= nav_link "Org Chart: #{dept.shortname}", orgchart_people_path(dept) %>
+              <% end %>
               <%= nav_link 'Calendar Chart', calendar_chart_analytics_path, :get %>
             </ul>
           </li>

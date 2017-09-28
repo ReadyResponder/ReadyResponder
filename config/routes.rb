@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       get 'prospects'
       get 'declined'
       get 'signin'
-      get 'orgchart'
+      get 'orgchart/:dept_id', action: "orgchart", as: :orgchart
       get 'roster'
       get 'department/:dept_id', action: "department", as: :department
     end
