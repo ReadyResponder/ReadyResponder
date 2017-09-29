@@ -125,19 +125,11 @@ RSpec.describe "Person" do
       expect(page).not_to have_content('Oscar')
     end
 
-    skip "returns a page for other" do
-      #
-      find('#navbar').click_link('Other')
-      #visit other_people_path
+    it "returns a page for other" do
+      find('#navbar').click_link('Others Active')
       expect(page).to have_content('Others')
       expect(page).to have_content('Home') # This is in the nav bar
-      # Factory Gem Creates a Second CJ that isn't a police officer or CERT so this part fails.
-      # The original CJ passes with flying colors and is not displayed
-
-      # KGF 12/7/16 I wonder if this is related to my issue at line ~33
-      # I think this entire block needs to go. There probably won't be an 'other'
-      # TODO reenable this assertion
-      # expect(page).not_to have_content('CJ')
+      expect(page).not_to have_content('CJ')
       expect(page).not_to have_content('Sierra')
       expect(page).not_to have_content('Adam')
       expect(page).not_to have_content('Priscilla')
