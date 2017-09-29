@@ -13,6 +13,7 @@ jQuery ->
     temp = $("#event_category option:selected").text();
     if temp is "Training"
       $(".training-controls").show()
+      $(".training-controls").css("display", "block")
     else
       $(".training-controls").hide()
   $("#event_status").change ->
