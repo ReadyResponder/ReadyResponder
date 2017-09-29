@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$current-events-color: #5cb85c;
+$past-events-color: #f0ad4e;
+$template-events-color: #fff0a0;
+
 #event_timecards {
   border: 1px solid #e1e1e8;
   padding: 9px 14px;
@@ -35,3 +39,21 @@
   font-size: 15px;
   margin-left: 3px;
 }
+
+div.dataTables_scrollHead > div > table > caption > label {
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.template-highlight, div.dataTables_scrollHead > div > table > caption > label:last-child {
+  background-color: $template-events-color !important;
+}
+
+// Uncomment if you want to highlight current and past event filters
+// .current-highlight, div.dataTables_scrollHead > div > table > caption > label:nth-child(2) {
+//   background-color: $current-events-color !important;
+// }
+//
+// .past-highlight, div.dataTables_scrollHead > div > table > caption > label:nth-child(3) {
+//   background-color: $past-events-color !important;
+// }

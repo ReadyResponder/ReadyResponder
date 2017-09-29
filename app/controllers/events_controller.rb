@@ -3,9 +3,8 @@ class EventsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    # by default show all scheduled or in-session events
-    @events = params['all_events'] == "true" ? Event.all : Event.actual.where('end_time > ?', Time.now)
-    @page_title = params['all_events'] == "true" ? "All Events" : "Current Events"
+    @events = Event.all
+    @page_title = "Events"
   end
 
   def show
