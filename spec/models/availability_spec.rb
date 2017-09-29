@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Availability, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
-
   let(:a_person) { build(:person) }
 
   describe "creation" do
@@ -39,10 +37,10 @@ RSpec.describe Availability, type: :model do
     it 'returns false for full availabilities which extend past event boundaries' do
       start_time = Time.current
       end_time = start_time + 2.minutes
-      availability = build(:availability, person: a_person, 
+      availability = build(:availability, person: a_person,
                             start_time: start_time, end_time: end_time + 2.minutes)
 
-      event = create(:event, status: "Scheduled", 
+      event = create(:event, status: "Scheduled",
                       start_time: start_time, end_time: end_time)
       expect(availability.partially_available?(event)).to eq(false)
     end
