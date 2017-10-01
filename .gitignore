@@ -28,3 +28,13 @@
 
 # Ignore byebug history
 /.byebug_history
+
+# Ignore Vagrant + Ansible configuration files
+Vagrantfile
+.vagrant/
+roles/
+group_vars/
+hosts
+playbook.yml
+playbook.retry
+test_models.rb
