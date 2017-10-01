@@ -28,7 +28,11 @@
 
 <p>
   <b>Skills:</b>
-  <%= @title.skills.join(', ') %>
+  <ul>
+  <% @title.skills.each do |skill| %>
+    <li><%= skill %></li>
+  <% end %>
+  </ul>
 </p>
 
 <table class="generic_datatable table table-striped table-bordered">
