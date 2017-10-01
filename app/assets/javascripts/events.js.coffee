@@ -7,7 +7,7 @@ jQuery ->
                   { orderable: false, targets: -1 },
                   { orderData: 2, targets: 3 },
                   { orderData: 4, targets: 5 },
-                  { visible: false, targets: [2,4,8] }
+                  { visible: false, targets: [2,4] }
                 ]
 
 # sets checkbox elements within #events dataTable()
@@ -27,6 +27,7 @@ jQuery ->
     checked = []
     startTime = new Date(data[3])
     status = data[7]
+    debugger
     $('.event-filter').each ->
       $this = $(this)
       if $this.is(':checked')
