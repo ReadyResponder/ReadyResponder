@@ -1,0 +1,23 @@
+<% content_for :table_headers do %>
+  <th>Title</th>
+  <th>Location</th>
+  <th>Start time</th>
+  <th>End time</th>
+  <th>Duration</th>
+  <th>Category</th>
+  <th>Status</th>
+<% end %>
+<% content_for :table_data do %>
+  <% events.each do |e| %>
+    <tr class='<%= e.is_template ? "highlighted" : nil  %>'>
+      <td><%= link_to e.title, e%></td>
+      <td><%= e.location %></td>
+      <td><%= e.start_time %></td>
+      <td><%= e.end_time %></td>
+      <td><%= e.duration %></td>
+      <td><%= e.category %></td>
+      <td><%= e.status %></td>
+      <td><%= table_button_link 'Edit', edit_event_path(e) unless cannot? :update, e %></td>
+    </tr>
+  <% end %>
+<% end %>

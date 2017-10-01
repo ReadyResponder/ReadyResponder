@@ -1,0 +1,25 @@
+<% content_for :table_headers do %>
+  <th>Title</th>
+  <th>Location</th>
+  <th>Start time</th>
+  <th>End time</th>
+  <th>Duration</th>
+  <th>Status</th>
+<% end %>
+<% content_for :table_data do %>
+  <% events.each do |e| %>
+    <tr class='<%= column_color_class(e) %>'>
+      <td><%= link_to e.title, e %></td>
+      <td><%= e.location %></td>
+      <td><time>
+        <%= e.start_time.strftime('%a, %b %d, %y %k:%M') if e.start_time  %>
+      </time></td>
+      <td><time>
+        <%= e.end_time.strftime('%a, %b %d, %y %k:%M') if e.end_time  %>
+      </time></td>
+      <td><%= e.duration %></td>
+      <td><%= e.status %></td>
+      <td><%= table_button_link 'Edit', edit_event_path(e) unless cannot? :update, e %></td>
+    </tr>
+  <% end %>
+<% end %>

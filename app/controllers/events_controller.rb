@@ -3,8 +3,18 @@ class EventsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @events = Event.all
+    @events = Event.where('is_template = ? AND status != ?', false, "Completed")
     @page_title = "Events"
+  end
+
+  def templates
+    @templates = Event.where(is_template: true)
+    @page_title = "Templates"
+  end
+
+  def archives
+    @archives = Event.where(status: "Completed")
+    @page_title = "Archives"
   end
 
   def show
