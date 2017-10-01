@@ -87,8 +87,7 @@ RSpec.describe "Events" do
       expect(page).to have_content(@event.title)
       expect(current_path).to eq(event_path(@event))
     end
-    it "hides the course if category isn't training" , js: true,
-        :skip => 'Errors in Javascript library' do
+    it "hides the course if category isn't training" , :type => :feature, js: true do
       visit new_event_path
       select 'Patrol', :from => 'event_category'
       fill_in "Description", with: "Really Long Text..."  #This ensures the blur event happens
