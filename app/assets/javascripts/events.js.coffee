@@ -27,7 +27,6 @@ jQuery ->
     checked = []
     startTime = new Date(data[3])
     status = data[7]
-    debugger
     $('.event-filter').each ->
       $this = $(this)
       if $this.is(':checked')
