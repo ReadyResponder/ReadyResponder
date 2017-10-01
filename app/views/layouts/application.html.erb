@@ -21,6 +21,7 @@
           <% flash.each do |name,msg| %>
             <%= content_tag :div, msg, id: "flash_#{name}" %>
           <% end %>
+          <p id="js-notice"></p>
           <%= content_tag :p, flash[notice], class: "notice" if flash[notice] %>
           <%= content_tag :p, flash[alert], class: "alert" if flash[alert] %>
         </div>

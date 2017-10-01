@@ -42,6 +42,10 @@ Rails.application.routes.draw do
   resources :channels
   resources :departments
   resources :timecards
+  
+  resources :timecards do
+    post 'verify'
+  end
   resources :roles
 
   post 'events/:id/schedule/:person_id/:card_action',

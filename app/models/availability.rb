@@ -18,7 +18,7 @@ class Availability < ActiveRecord::Base
 
   scope :available, -> { where(status: "Available")}
   scope :unavailable, -> { where(status: "Unavailable")}
-
+  scope :in_the_past, -> { where("start_time <= ?", Time.zone.now) }
   scope :active, -> { where(status: ['Available', 'Unavailable']).joins(:person).where(people: {status: "Active"}) }
 
   def to_s

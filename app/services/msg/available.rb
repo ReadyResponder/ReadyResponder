@@ -8,7 +8,7 @@ class Msg::Available < Msg::Base
         start_time = Time.zone.parse(@params[:Body].split[2..3].join " ")
         end_time = Time.zone.parse(@params[:Body].split[4..5].join " ")
       rescue StandardError => error
-        return "Error! Sample => unavailable custom 2016-11-23 00:01 2017-12-31 17:00 Leave of absense <= #{error}"
+        return "Error! Sample => unavailable custom 2016-11-23 00:01 2017-12-31 17:00 Leave of absense <="
       end
       target = Event.new(start_time: start_time, end_time: end_time)
       description = @params[:Body].split[6..42].join(" ") if @params[:Body].split.size > 6
