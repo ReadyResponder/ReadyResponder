@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Item do
   context "associations" do
-    it { is_expected.to belong_to(:grant) }
+    it { is_expected.to belong_to(:grantor) }
   end
 
   it "has a valid factory" do
