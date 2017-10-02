@@ -30,34 +30,26 @@
                             value: format_date_value(f.object.application_date) } %>
 
       <h2> Phone information </h2>
-      <%= f.simple_fields_for :phones, wrapper: :horizontal_input_group do |c| %>
-        <fieldset>
-          <%= c.input :id, :as => :hidden %>
-          <%= c.input :category, :as => :select, :collection => Channel::CATEGORIES %>
-          <%= c.input :content, :placeholder => '9785551212' %>
-          <%= c.input :name, :label => 'Description' %>
-          <%= c.input :status, :as => :select, :collection => Channel::STATUSES %>
-          <%= c.input :usage, :as => :select, :collection => Channel::USAGES %>
-          <%= c.input :carrier, :as => :select, :collection => Phone::CARRIERS %>
-          <%= c.input :priority, :as => :select, :collection => Phone::PRIORITIES %>
-          <%= c.input :channel_type, as: :select, collection: Phone::TYPES %>
-          <%= c.input :sms_available, as: :boolean, label: 'Text Message (SMS)' %>
-        </fieldset>
-        <hr />
-      <% end %>
+      <div id="phones">
+        <%= f.simple_fields_for :phones, wrapper: :horizontal_input_group do |phone| %>
+          <%= render 'phones/phone_fields', phone: phone %>
+        <% end %>
+        <div class="links">
+          <%= link_to_add_association 'Add phone', f, :phones, partial: 'phones/phone_fields', form_name: :phone,
+          render_options: { wrapper: :horizontal_input_group } %>
+        </div>
+      </div>
 
       <h2> Email information </h2>
-      <%= f.simple_fields_for :emails, wrapper: :horizontal_input_group do |c| %>
-        <fieldset>
-          <%= c.input :id, :as => :hidden %>
-          <%= c.input :category, :as => :select, :collection => Channel::CATEGORIES %>
-          <%= c.input :content, :placeholder => 'me@example.com' %>
-          <%= c.input :name, :label => 'Description' %>
-          <%= c.input :status, :as => :select, :collection => Channel::STATUSES %>
-          <%= c.input :usage, :as => :select, :collection => Channel::USAGES %>
-        </fieldset>
-        <hr />
-      <% end %>
+      <div id="emails">
+        <%= f.simple_fields_for :emails, wrapper: :horizontal_input_group do |email| %>
+          <%= render 'emails/email_fields', email: email %>
+        <% end %>
+        <div class="links">
+          <%= link_to_add_association 'Add email', f, :emails, partial: 'emails/email_fields', form_name: :email,
+          render_options: { wrapper: :horizontal_input_group } %>
+        </div>
+      </div>
 
     <%= f.input :icsid, label: 'ICS id', :input_html => { :size => 5 } %>
     <%= f.input :title, :as => :select, label: 'Rank', :collection => Person::TITLES %>

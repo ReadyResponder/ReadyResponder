@@ -18,4 +18,5 @@
 //= require jquery-ui/accordion
 //= require datetimepicker
 //= require jquery-ui
+//= require cocoon
 //= require_tree .
