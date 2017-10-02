@@ -1,0 +1,27 @@
+<% content_for :sidebar do %>
+  <%= sidebar_button_link 'New Grant', new_grant_path if can? :create, Grant %>
+<% end %>
+
+<table id="grants" class="datatable table table-striped table-bordered" >
+  <caption><h3><%= @page_title %></h3></caption>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Number of Items</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @grants.each do |g| %>
+      <tr>
+        <td><%= link_to g.name, grant_path(g) %></td>
+        <td><%= g.start_date %></td>
+        <td><%= g.end_date %></td>
+        <td><%= g.items.count %></td>
+        <td><%= table_button_link 'Edit', edit_grant_path(g) unless cannot? :edit, Grant %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
