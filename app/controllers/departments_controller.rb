@@ -46,6 +46,15 @@ class DepartmentsController < ApplicationController
     redirect_to departments_url, notice: 'Department successfully destroyed.'
   end
 
+  def orgchart
+    @department = Department.find(params[:dept_id])
+    @people = @department.people.active
+    @page_title = "Org Chart: #{@department.shortname}"
+    render layout: "orgchart"
+  rescue ActiveRecord::RecordNotFound
+    head 404
+  end
+
   private
 
   # Takes the passed in CSV and converts it into an array that removes any leading/trailing whitespace on each item

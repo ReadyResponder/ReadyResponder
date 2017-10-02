@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe PeopleController do
+RSpec.describe DepartmentsController do
   
   before(:each) { login_admin }
 

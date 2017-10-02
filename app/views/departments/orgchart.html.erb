@@ -119,7 +119,7 @@ li.squads {
 <h2>Department Roster: <%= @department.name %> (<%= Date::today().to_s %>)</h2>
 <ul class="senior_staff">
   <% @people.divisionC.each do |p| %>
-    <%= render :partial => 'coc_boxes', :locals => { :p => p} %>
+    <%= render :partial => 'people/coc_boxes', :locals => { :p => p} %>
   <% end %>
 </ul>
 
@@ -127,20 +127,20 @@ li.squads {
 <ul class="division" id="division1" >
   <li class="division_heading">Division 1</li>
   <% @people.division1.squadC.each do |p| %>
-    <%= render :partial => 'coc_boxes', :locals => { :p => p} %>
+    <%= render :partial => 'people/coc_boxes', :locals => { :p => p} %>
   <% end %>
   <li class="squads">
     <ul class="squad1">
       <li class="squad_heading">Squad 1</li>
       <% @people.division1.squad1.each do |p| %>
-        <%= render :partial => 'coc_boxes', :locals => { :p => p} %>
+        <%= render :partial => 'people/coc_boxes', :locals => { :p => p} %>
       <% end %>
     </ul>
 
     <ul class="squad2">
       <li class="squad_heading">Squad 2</li>
       <% @people.division1.squad2.each do |p| %>
-        <%= render :partial => 'coc_boxes', :locals => { :p => p} %>
+        <%= render :partial => 'people/coc_boxes', :locals => { :p => p} %>
       <% end %>
     </ul>
   </li>
@@ -149,20 +149,20 @@ li.squads {
 <ul class="division" id="division2" >
   <li class="division_heading">Division 2</li>
   <% @people.division2.squadC.each do |p| %>
-    <%= render :partial => 'coc_boxes', :locals => { :p => p} %>
+    <%= render :partial => 'people/coc_boxes', :locals => { :p => p} %>
   <% end %>
   <li class="squads">
     <ul class="squad1">
       <li class="squad_heading">Squad 1</li>
       <% @people.division2.squad1.each do |p| %>
-        <%= render :partial => 'coc_boxes', :locals => { :p => p} %>
+        <%= render :partial => 'people/coc_boxes', :locals => { :p => p} %>
       <% end %>
     </ul>
 
     <ul class="squad2">
       <li class="squad_heading">Squad 2</li>
       <% @people.division2.squad2.each do |p| %>
-        <%= render :partial => 'coc_boxes', :locals => { :p => p} %>
+        <%= render :partial => 'people/coc_boxes', :locals => { :p => p} %>
       <% end %>
     </ul>
   </li>

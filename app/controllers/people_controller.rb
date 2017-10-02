@@ -13,15 +13,6 @@ class PeopleController < ApplicationController
     render :layout => "print_signin"
   end
 
-  def orgchart
-    @department = Department.find(params[:dept_id])
-    @people = @department.people.active
-    @page_title = "Org Chart: #{@department.shortname}"
-    render :layout => "orgchart"
-  rescue ActiveRecord::RecordNotFound
-    head 404
-  end
-
   def department
     dept = Department.find(params[:dept_id])
     # TODO: more gracefully handle department not found
