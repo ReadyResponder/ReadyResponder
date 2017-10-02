@@ -34,7 +34,7 @@
         <fieldset>
           <%= c.input :id, :as => :hidden %>
           <%= c.input :category, :as => :select, :collection => Channel::CATEGORIES %>
-          <%= c.input :content, :placeholder => '9785551212' %>
+          <%= c.input :content, :placeholder => '+19785551212' %>
           <%= c.input :name, :label => 'Description' %>
           <%= c.input :status, :as => :select, :collection => Channel::STATUSES %>
           <%= c.input :usage, :as => :select, :collection => Channel::USAGES %>

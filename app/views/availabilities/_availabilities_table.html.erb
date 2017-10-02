@@ -1,8 +1,9 @@
-<table id="availabilities" class="generic_datatable table table-striped table-bordered">
+<table id="availabilities" class="datatable table table-striped table-bordered">
   <thead>
     <tr>
+      <th>(S) Rank Order</th>
       <th>Status</th>
-      <th>ID</th>
+      <th>Title</th>
       <th>Name</th>
       <th>Phone</th>
       <th>Dept</th>
@@ -15,8 +16,9 @@
       <!-- Full available -->
     <% (availabilities + partial_availabilities).each do |a| %>
       <tr <%== availability_status_class(a, @event) %>>
+        <td><%= Person::TITLE_ORDER[a.person.title] %></td>
         <td><%= link_to availability_status_label(a, @event), a %></td>
-        <td><%= a.person.icsid %></td>
+        <td><%= a.person.title %></td>
         <td><%= link_to a.person.fullname, a.person %></td>
         <td><%= number_to_phone(a.person.phone) %></td>
         <td><%= "#{a.person.dept_shortname} #{a.person.division1}" %></td>
