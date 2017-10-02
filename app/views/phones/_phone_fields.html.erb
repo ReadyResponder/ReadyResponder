@@ -2,7 +2,7 @@
   <fieldset>
     <%= phone.input :id, :as => :hidden %>
     <%= phone.input :category, :as => :select, :collection => Channel::CATEGORIES %>
-    <%= phone.input :content, :placeholder => '9785551212' %>
+    <%= phone.input :content, label: 'Number', placeholder:  '+19995551212' %>
     <%= phone.input :name, :label => 'Description' %>
     <%= phone.input :status, :as => :select, :collection => Channel::STATUSES %>
     <%= phone.input :usage, :as => :select, :collection => Channel::USAGES %>
