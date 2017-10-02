@@ -1,0 +1,31 @@
+<% content_for :sidebar do %>
+  <%= edit_grant_button %>
+<% end %>
+
+<h3>
+  <%= link_to 'Grants', grants_path %> >
+  <%= @grant.name %>
+</h3>
+<hr/>
+
+<% if @grant.description.present? %>
+  <p><b>Description:</b> <%= @grant.description %></p>
+<% end %>
+
+<% if @grant.start_date.present? %>
+  <p><b>Start date:</b> <%= @grant.start_date %></p>
+<% end %>
+
+<% if @grant.end_date.present? %>
+  <p><b>End date:</b> <%= @grant.end_date %></p>
+<% end %>
+
+<p><b>Status:</b> <%= @grant.status.presence || 'N/A' %></p>
+
+<p><b>Grant Items:</b></p>
+<% if @grant.items.present? %>
+  <%= render partial: 'items/items_table', locals: { items: @grant.items } %>
+<% else %>
+  <p>Not Available</p>
+<% end %>
+

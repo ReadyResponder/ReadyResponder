@@ -19,6 +19,7 @@
     <%= f.input :po_number %>
     <%= f.input :value, :placeholder => 'Replacement price' %>
     <%= f.input :grant, :placeholder => 'Grant name, if applicable' %>
+    <%= f.input :grant_id, label: 'Granted by', :as => :select, :collection => Grant.active %>
     <%= f.input :purchase_date, as: :string,
                 input_html: { class: 'datepicker', size: 11,
                               value: format_date_value(f.object.purchase_date) } %>
