@@ -42,7 +42,7 @@ Rails.application.routes.draw do
   resources :channels
   resources :departments
   resources :timecards
-  
+
   resources :timecards do
     post 'verify'
   end
@@ -82,6 +82,9 @@ Rails.application.routes.draw do
   resources :analytics do
     get 'calendar_chart', on: :collection
   end
+
+  get 'events/templates', to: 'events#templates'
+  get 'events/archives', to: 'events#archives'
 
   resources :events do
     resources :tasks, only: [:new, :create]

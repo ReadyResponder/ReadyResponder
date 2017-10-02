@@ -67,3 +67,16 @@ div {
     list-style: square;
   }
 }
+
+li.nav-item.dropdown:hover {
+  background: #090909;
+}
+
+.nav li a.split-dropdown {
+  padding: 15px 7px 15px 5px;
+}
+
+ul.split-dropdown {
+  left: -73px;
+  min-width: inherit;
+}

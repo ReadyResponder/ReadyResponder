@@ -3,8 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 $current-events-color: #5cb85c;
-$past-events-color: #f0ad4e;
-$template-events-color: #fff0a0;
+$recent-events-color: #f0ad4e;
 
 #event_timecards {
   border: 1px solid #e1e1e8;
@@ -44,20 +43,18 @@ $template-events-color: #fff0a0;
   display: none;
 }
 
-div.dataTables_scrollHead > div > table > caption > label {
-  padding: 5px;
-  border-radius: 5px;
-}
-
-.template-highlight, div.dataTables_scrollHead > div > table > caption > label:last-child {
-  background-color: $template-events-color !important;
-}
-
 // Uncomment if you want to highlight current and past event filters
+
+// div.dataTables_scrollHead > div > table > caption > label {
+//   padding: 5px;
+//   border-radius: 5px;
+// }
+//
 // .current-highlight, div.dataTables_scrollHead > div > table > caption > label:nth-child(2) {
 //   background-color: $current-events-color !important;
 // }
 //
-// .past-highlight, div.dataTables_scrollHead > div > table > caption > label:nth-child(3) {
-//   background-color: $past-events-color !important;
+// .recent-highlight, div.dataTables_scrollHead > div > table > caption > label:last-child {
+//   background-color: $recent-events-color !important;
 // }
+// Uncomment if you want to highlight current and past event filters

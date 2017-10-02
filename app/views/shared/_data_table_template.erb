@@ -1,0 +1,11 @@
+<table id="<%= table_title.downcase || nil %>" class="<%= table_class ||= 'generic_datatable' %> table table-striped table-bordered" >
+  <caption><h3><%= table_title %></h3></caption>
+  <thead>
+    <tr>
+      <%= yield :table_headers %>
+    </tr>
+  </thead>
+  <tbody>
+    <%= yield :table_data %>
+  </tbody>
+</table>

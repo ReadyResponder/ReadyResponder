@@ -1,36 +1,41 @@
 jQuery ->
   $("#event_title").focus()
-  $table = $('#events').dataTable
+  $eventTable = $('#events').dataTable
+    'dom': "fr<'event-table-info't>ip",
     order: [[3, 'asc']],
     columnDefs: [
                   { orderable: false, targets: -1 },
                   { orderData: 2, targets: 3 },
                   { orderData: 4, targets: 5 },
-                  { visible: false, targets: [2,4,8] }
+                  { visible: false, targets: [2,4] }
                 ]
 
 # sets checkbox elements within #events dataTable()
-  $('table.datatable caption').append('<label>Current:<input type="checkbox" id="js-events-current-checkbox" class="event-filter" value="current"></label>
-  <label>Past:<input type="checkbox" id="js-events-past-checkbox" class="event-filter" value="past"></label>
-  <label>Templates:<input type="checkbox" id="js-events-template-checkbox" class="event-filter" value="template"></label>')
+  $('.event-table-info caption').append('<label>Current:<input type="checkbox" id="js-events-current-checkbox" class="event-filter" value="current"></label>
+  <label>Recent:(Last 13 Months)<input type="checkbox" id="js-events-recent-checkbox" class="event-filter" value="recent"></label>')
 
 #logic handling checkbox filtering with dataTables()
   $.fn.dataTableExt.afnFiltering.push((settings, data) ->
+    # add table ID to array if you would like it to be included in filtering
+    allowedTables = ['events'];
+    if ( $.inArray( settings.nTable.getAttribute('id'), allowedTables ) == -1 )
+       # if not table should be ignored
+       return true;
+    oneYearAgo = new Date()
+    # todays date minus 396 days
+    oneYearAgo.setDate(oneYearAgo.getDate() - 396)
     checked = []
-    currentTime = new Date()
-    endTime = new Date(data[5])
-    isTemplate = data[8]
+    startTime = new Date(data[3])
+    status = data[7]
     $('.event-filter').each ->
       $this = $(this)
       if $this.is(':checked')
         checked.push($this)
-
     if checked.length
       returnValue = false
       $.each(checked, (i, element) ->
-        if (element.val() is 'current' and endTime > currentTime and isTemplate is 'False') or
-           (element.val() is 'past' and endTime < currentTime and isTemplate is 'False') or
-           (element.val() is 'template' and isTemplate is 'True')
+        if element.val() is 'current' and (status is "In-session" or status is "Scheduled") or
+           element.val() is 'recent' and (startTime > oneYearAgo)
           returnValue = true;
           return false;
           )
@@ -41,7 +46,7 @@ jQuery ->
 
   #re-draws table after checking or unchecking a filter checkbox
   $('.event-filter').change ->
-    $table.fnDraw()
+    $eventTable.fnDraw()
 
   $("#event_category").change ->
     temp = $("#event_category option:selected").text();

@@ -1,9 +1,74 @@
 require 'rails_helper'
 
 RSpec.describe "Events" do
-  before(:each) { sign_in_as('Editor') }
+  before(:each) do
+    sign_in_as('Editor')
+    @template = create(:event, title: "template title", is_template: true)
+    @current = create(:event, title: "current title", status: "In-session")
+    @recent = create(:event, title: "recent title")
+    @archive = create(:event, title: "archive title", status: "Completed")
+  end
 
   get_basic_editor_views('event',['Training', 'Status'])
+
+  describe "search" do
+    it "finds current event", js: true do
+      @event_two = create(:event, title: "another event")
+      @event_three = create(:event, title: "different event")
+      visit events_path
+      fill_in "Search", with: "current title"
+      within_table("events") do
+      	within("tbody") do
+      	  expect(page).to have_content(@current.title)
+          expect(page).not_to have_content(@event_two.title)
+          expect(page).not_to have_content(@event_three.title)
+      	end
+      end
+    end
+
+    it "finds template event", js: true do
+      @event_two = create(:event, title: "another event", is_template: true)
+      @event_three = create(:event, title: "different event", is_template: true)
+      visit events_templates_path
+      fill_in "Search", with: "template title"
+      within_table("templates") do
+      	within("tbody") do
+      	  expect(page).to have_content(@template.title)
+          expect(page).not_to have_content(@event_two.title)
+          expect(page).not_to have_content(@event_three.title)
+      	end
+      end
+    end
+
+    it "finds archive event", js: true do
+      @event_two = create(:event, title: "another event")
+      @event_three = create(:event, title: "different event")
+      visit events_archives_path
+      fill_in "Search", with: "archive title"
+      within_table("archives") do
+      	within("tbody") do
+      	  expect(page).to have_content(@archive.title)
+          expect(page).not_to have_content(@event_two.title)
+          expect(page).not_to have_content(@event_three.title)
+      	end
+      end
+    end
+
+    it "finds no results", js: true do
+      visit events_archives_path
+      fill_in "Search", with: "this will not find anything"
+      within_table("archives") do
+      	within("tbody") do
+      	  expect(page).not_to have_content(@template.title)
+          expect(page).not_to have_content(@current.title)
+          expect(page).not_to have_content(@recent.title)
+          expect(page).not_to have_content(@archive.title)
+          expect(page).to have_content("No matching records found")
+      	end
+      end
+    end
+  end
+
   describe "creates" do
     it "events", js: true do
       @person1 = create(:person)
@@ -69,53 +134,88 @@ RSpec.describe "Events" do
     end
 
     it "checkboxes current, past, templates on index page", js: true do
-      @current = create(:event, title: "Current Title")
-      @past = create(:event, title: "Past Title", start_time: DateTime.now - 5.hours, end_time: DateTime.now - 1.hours)
-      @template = create(:event, title: "Template Title 1", is_template: true)
+      @current_insession = create(:event, title: "Current insession Title", status: "In-session")
+      @cancelled = create(:event, title: "Cancelled Title", status: "Cancelled")
+      @closed = create(:event, title: "Closed Title", status: "Closed")
+      @not_recent = create(:event, title: "Not Recent Title", start_time: DateTime.now - 14.months, end_time: DateTime.now - 1.hours, status: "Cancelled")
       visit events_path
       # current checkbox should be clicked by default
+      expect(page).to have_content(@current_insession.title)
       expect(page).to have_content(@current.title)
-      expect(page).not_to have_content(@past.title)
+      expect(page).to have_content(@recent.title)
+      expect(page).not_to have_content(@cancelled.title)
+      expect(page).not_to have_content(@closed.title)
+      expect(page).not_to have_content(@not_recent.title)
       expect(page).not_to have_content(@template.title)
       page.has_css?("table tr.current-highlight")
+      page.has_css?("table tr.recent-highlight")
 
       uncheck "js-events-current-checkbox"
-      check "js-events-past-checkbox"
-      expect(page).not_to have_content(@current.title)
-      expect(page).to have_content(@past.title)
+      check "js-events-recent-checkbox"
+      expect(page).to have_content(@current_insession.title)
+      expect(page).to have_content(@current.title)
+      expect(page).to have_content(@recent.title)
+      expect(page).to have_content(@cancelled.title)
+      expect(page).to have_content(@closed.title)
+      expect(page).not_to have_content(@not_recent.title)
       expect(page).not_to have_content(@template.title)
-      page.has_css?("table tr.past-highlight")
-
-      uncheck "js-events-past-checkbox"
-      check "js-events-template-checkbox"
-      expect(page).not_to have_content(@current.title)
-      expect(page).not_to have_content(@past.title)
-      expect(page).to have_content(@template.title)
-      page.has_css?("table tr.template-highlight")
+      page.has_css?("table tr.recent-highlight")
+      page.has_css?("table tr.current-highlight")
 
       check "js-events-current-checkbox"
-      check "js-events-past-checkbox"
+      check "js-events-recent-checkbox"
+      expect(page).to have_content(@current_insession.title)
       expect(page).to have_content(@current.title)
-      expect(page).to have_content(@past.title)
-      expect(page).to have_content(@template.title)
+      expect(page).to have_content(@recent.title)
+      expect(page).to have_content(@cancelled.title)
+      expect(page).to have_content(@closed.title)
+      expect(page).not_to have_content(@not_recent.title)
+      expect(page).not_to have_content(@template.title)
 
       uncheck "js-events-current-checkbox"
-      uncheck "js-events-past-checkbox"
-      uncheck "js-events-template-checkbox"
+      uncheck "js-events-recent-checkbox"
+      expect(page).not_to have_content(@current_insession.title)
       expect(page).not_to have_content(@current.title)
-      expect(page).not_to have_content(@past.title)
+      expect(page).not_to have_content(@closed.title)
+      expect(page).not_to have_content(@cancelled.title)
+      expect(page).not_to have_content(@recent.title)
+      expect(page).not_to have_content(@not_recent.title)
       expect(page).not_to have_content(@template.title)
       expect(page).to have_content("No matching records found")
     end
 
     it "a template", js: true do
-      @template = create(:event, title: "Template Title 2", status: "In-Session", is_template: true)
-      visit events_path
-      check "js-events-template-checkbox"
-      within_table("events") do
+      visit events_templates_path
+      within_table("templates") do
       	within("tbody") do
       	  expect(page).to have_content(@template.title)
+          expect(page).not_to have_content(@current.title)
           expect(page).not_to have_content(@template.is_template.to_s.capitalize)
+          expect(page).to have_content("Scheduled")
+      	end
+      end
+    end
+
+    it "all events", js: true do
+      @scheduled = create(:event, title: "scheduled", status: "Scheduled")
+      @in_session = create(:event, title: "in session", status: "In-session")
+      @closed = create(:event, title: "closed", status: "Closed")
+      @cancelled = create(:event, title: "cancelled", status: "Cancelled")
+      @completed = create(:event, title: "completed", status: "Completed")
+      @not_recent = create(:event, title: "Not Recent Title", start_time: DateTime.now - 14.months, end_time: DateTime.now - 1.hours)
+      visit events_archives_path
+      within_table("archives") do
+      	within("tbody") do
+      	  expect(page).to have_content(@archive.title)
+          expect(page).to have_content(@current.title)
+          expect(page).to have_content(@recent.title)
+          expect(page).to have_content(@scheduled.title)
+          expect(page).to have_content(@in_session.title)
+          expect(page).to have_content(@not_recent.title)
+          expect(page).to have_content(@closed.title)
+          expect(page).to have_content(@cancelled.title)
+          expect(page).to have_content(@completed.title)
+          expect(page).not_to have_content(@template.title)
       	end
       end
     end

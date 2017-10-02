@@ -63,12 +63,16 @@ module EventsHelper
   end
 
   def column_color_class(event)
-    if event.is_template
-      return 'template-highlight'
-    elsif event.end_time > DateTime.now
-      return 'current-highlight'
-    elsif event.end_time < DateTime.now
-      return 'past-highlight'
+    begin
+      if event.is_template
+        return 'template-highlight'
+      elsif event.status == "In-session" || event.status == "Scheduled"
+        return 'current-highlight'
+      elsif event.start_time > (DateTime.now - 13.months)
+        return 'recent-highlight'
+      end
+    rescue NoMethodError
+      nil
     end
   end
 

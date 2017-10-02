@@ -35,18 +35,6 @@ This is a Rails project that is configured to run on Ruby 2, and on a Postgres d
   * If you have `homebrew` on a Mac, you can run `brew install postgres`.
   * Alternatively, [Postgres.app](http://postgresapp.com) is an easy way to get started with PostgreSQL on the Mac. [PostgresApp 9.4.8](https://github.com/PostgresApp/PostgresApp/releases/tag/9.4.8) has been tested (when configuring, add `host: localhost` to `config/database.yml`).
 
-  One more thing to install: The testing framework requires the [PhantomJS](http://phantomjs.org) library.  In order to code in ReadyResponder, you'll need to install PhantomJS separately.
-
-```
-# install phantomjs...
-# via npm:
-sudo npm install -g phantomjs-prebuilt
-# via homebrew:
-brew install phantomjs
-# on ubuntu:
-sudo apt-get install phantomjs
-```
-
 *Feel free to ask for help!*
 
 ### Contributing to ReadyResponder: Coding :smiley:
@@ -72,6 +60,8 @@ At this point you should be able to run the rails server via `bundle exec rails 
 ```shell
 bundle exec rake db:test:prepare
 ```
+One more thing to note: The testing framework will run much faster over time if you run it via Spring.
+When running rake enter bin/rake to execute via Spring pre-loader.
 
 ## More information
 
