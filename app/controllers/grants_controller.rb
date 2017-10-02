@@ -21,7 +21,7 @@ class GrantsController < ApplicationController
   end
 
   def create
-    @grant = Grant.new(grant_params)
+    @grant = Grant.new(params[:grant])
 
     if @grant.save
       redirect_to @grant, notice: 'Grant was successfully created.'

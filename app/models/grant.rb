@@ -1,7 +1,9 @@
 class Grant < ActiveRecord::Base
-  has_many :items
+  attr_accessible :name, :description, :start_date, :end_date, :status
 
   validate :end_date_after_start_date?
+
+  has_many :items
 
   scope :active, -> { where(status: "Active") }
 
