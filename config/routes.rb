@@ -92,11 +92,6 @@ Rails.application.routes.draw do
     resources :notifications
   end
 
-
-
-
-
-
   resources :tasks, except: [:new, :create], constraints: { id: /\d+/ } do
     resources :requirements, only: [:new, :create]
   end
