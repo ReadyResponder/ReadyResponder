@@ -20,6 +20,8 @@
   <p><b>End date:</b> <%= @grant.end_date %></p>
 <% end %>
 
+<p><b>Status:</b> <%= @grant.status.presence || 'N/A' %></p>
+
 <p><b>Grant Items:</b></p>
 <% if @grant.items.present? %>
   <%= render partial: 'items/items_table', locals: { items: @grant.items } %>

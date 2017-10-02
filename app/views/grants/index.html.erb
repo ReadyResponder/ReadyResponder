@@ -9,6 +9,7 @@
       <th>Name</th>
       <th>Start Date</th>
       <th>End Date</th>
+      <th>Status</th>
       <th>Number of Items</th>
       <th></th>
     </tr>
@@ -17,8 +18,9 @@
     <% @grants.each do |g| %>
       <tr>
         <td><%= link_to g.name, grant_path(g) %></td>
-        <td><%= g.start_date %></td>
-        <td><%= g.end_date %></td>
+        <td><%= g.start_date.try(:to_date) %></td>
+        <td><%= g.end_date.try(:to_date) %></td>
+        <td><%= g.status %></td>
         <td><%= g.items.count %></td>
         <td><%= table_button_link 'Edit', edit_grant_path(g) unless cannot? :edit, Grant %></td>
       </tr>

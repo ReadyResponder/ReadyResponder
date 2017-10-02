@@ -46,7 +46,7 @@ class GrantsController < ApplicationController
   private
 
   def grant_params
-    params.require(:grant).permit(:name, :description, :start_date, :end_date)
+    params.require(:grant).permit(:name, :description, :start_date, :end_date, :status)
   end
 
 end
