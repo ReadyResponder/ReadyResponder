@@ -3,7 +3,7 @@ class EventsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @events = Event.where('is_template = ? AND status != ?', false, "Completed")
+    @events = all_events_except_templates
     @page_title = "Events"
   end
 
@@ -13,7 +13,7 @@ class EventsController < ApplicationController
   end
 
   def archives
-    @archives = Event.where(status: "Completed")
+    @archives = all_events_except_templates
     @page_title = "Archives"
   end
 
@@ -56,6 +56,11 @@ class EventsController < ApplicationController
   end
 
   private
+
+  def all_events_except_templates
+    Event.where(is_template: false)
+  end
+
   def event_params
     params.require(:event).permit(:title, :description, :category,
     :course_id, :duration, :start_time, :end_time, :instructor, :location,

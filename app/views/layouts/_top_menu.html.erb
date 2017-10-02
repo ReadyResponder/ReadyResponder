@@ -33,7 +33,7 @@
           <% if can? :read, Event %>
             <%= nav_link "Events", events_path %>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+              <a class="nav-link split-dropdown dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
               <ul class="split-dropdown dropdown-menu">
                 <%= nav_link "Templates", events_templates_path %>
                 <%= nav_link "Archives", events_archives_path %>
