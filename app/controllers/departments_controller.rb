@@ -47,7 +47,7 @@ class DepartmentsController < ApplicationController
   end
 
   def orgchart
-    @department = Department.find(params[:dept_id])
+    @department = Department.accessible_by(current_ability).find(params[:id])
     @people = @department.people.active
     @page_title = "Org Chart: #{@department.shortname}"
     render layout: "orgchart"

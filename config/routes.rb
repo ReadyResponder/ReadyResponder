@@ -41,7 +41,7 @@ Rails.application.routes.draw do
   resources :channels
   resources :departments do
     collection do
-      get 'orgchart/:dept_id', action: "orgchart", as: :orgchart
+      get 'orgchart/:id', action: "orgchart", as: :orgchart
     end
   end
   resources :timecards
