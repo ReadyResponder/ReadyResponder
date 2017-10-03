@@ -59,6 +59,7 @@
               <%= nav_link "Locations", locations_path if can? :read, Location %>
               <%= nav_link "Resource Types", resource_types_path if can? :read, ResourceType%>
               <%= nav_link "Item Types", item_types_path if can? :read, ItemType %>
+              <%= nav_link "Grants", grants_path if can? :read, Grant %>
               <%= nav_link "Users", users_path if can? :read, User %>
               <%= nav_link "Settings", settings_path if can? :read, Setting %>
             </ul>

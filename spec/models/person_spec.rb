@@ -4,6 +4,7 @@ RSpec.describe Person do
   describe 'validations' do
     it { is_expected.to validate_length_of(:state).is_equal_to 2 }
     it { is_expected.to validate_uniqueness_of(:icsid) }
+    it { should have_many(:inspectors) }
 
     describe 'divisions' do
       context 'division 1 present' do

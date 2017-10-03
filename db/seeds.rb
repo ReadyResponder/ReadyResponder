@@ -103,6 +103,13 @@ ht = ItemType.find_or_create_by(name: "Radio, Portable") do |item_type|
   item_type.description = "Handheld radios"
 end
 
+tmp_grant = Grant.find_or_create_by(name: "foo-grant") do |grant|
+  grant.description = "Donated a collection of 200 books by XYZ publications"
+  grant.start_date = '12-12-2012'
+  grant.start_date = '10-10-2017'
+  grant.status = 'Active'
+end
+
 Item.find_or_create_by(name: "Radio 1") do |item|
   item.item_type = ht
   item.department = mrc
@@ -112,4 +119,5 @@ Item.find_or_create_by(name: "Radio 1") do |item|
   item.brand = "Motorola"
   item.model = "HT-1000"
   item.qty = 1
+  item.grant_id = tmp_grant.id
 end

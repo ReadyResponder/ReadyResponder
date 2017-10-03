@@ -1,0 +1,16 @@
+<div class="nested-fields">
+  <fieldset>
+    <%= phone.input :id, :as => :hidden %>
+    <%= phone.input :category, :as => :select, :collection => Channel::CATEGORIES %>
+    <%= phone.input :content, label: 'Number', placeholder:  '+19995551212' %>
+    <%= phone.input :name, :label => 'Description' %>
+    <%= phone.input :status, :as => :select, :collection => Channel::STATUSES %>
+    <%= phone.input :usage, :as => :select, :collection => Channel::USAGES %>
+    <%= phone.input :carrier, :as => :select, :collection => Phone::CARRIERS %>
+    <%= phone.input :priority, :as => :select, :collection => Phone::PRIORITIES %>
+    <%= phone.input :channel_type, as: :select, collection: Phone::TYPES %>
+    <%= phone.input :sms_available, as: :boolean, label: 'Text Message (SMS)' %>
+  </fieldset>
+  <%= link_to_remove_association "Remove this phone", phone %>
+  <hr />
+</div>

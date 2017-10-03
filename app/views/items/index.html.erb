@@ -1,5 +1,4 @@
 <% content_for :sidebar do %>
-  <%= sidebar_button_link 'Return to Categories', item_categories_path %>
   <%= sidebar_button_link 'New Item', new_item_path if can? :create, Item %>
 <% end %>
 
@@ -8,11 +7,12 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Qty</th>
       <th>Model</th>
-      <th>Category</th>
+      <th>Item Type</th>
       <th>Location</th>
-      <th>Costs</th>
       <th>Status</th>
+      <th>Condition</th>
       <th></th>
     </tr>
   </thead>
@@ -20,11 +20,12 @@
     <% @items.each do |item| %>
       <tr>
         <td><%= link_to item.name, item_path(item) %></td>
+        <td><%= item.qty %></td>
         <td><%= "#{item.brand} #{item.model}" %></td>
-        <td><%= item.category %></td>
+        <td><%= item.item_type %></td>
         <td><%= item.location_name %></td>
-        <td><%= number_to_currency item.recent_costs %></td>
         <td><%= item_status_label(item) %></td>
+        <td><%= item_condition_label(item) %></td>
         <td><%= table_button_link 'Edit', edit_item_path(item) unless cannot? :edit, item %></td>
       </tr>
     <% end %>
