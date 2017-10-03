@@ -106,7 +106,7 @@ end
 tmp_grant = Grant.find_or_create_by(name: "foo-grant") do |grant|
   grant.description = "Donated a collection of 200 books by XYZ publications"
   grant.start_date = '12-12-2012'
-  grant.start_date = '10-10-2017'
+  grant.end_date = '10-10-2017'
   grant.status = 'Active'
 end
 

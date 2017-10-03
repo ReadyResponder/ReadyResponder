@@ -87,6 +87,9 @@ Rails.application.routes.draw do
     get 'calendar_chart', on: :collection
   end
 
+  get 'events/templates', to: 'events#templates'
+  get 'events/archives', to: 'events#archives'
+
   resources :events do
     resources :tasks, only: [:new, :create]
     resources :availabilities

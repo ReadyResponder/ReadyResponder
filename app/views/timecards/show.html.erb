@@ -35,8 +35,9 @@
   %>
 <% end %>
 
-<%= render(partial: 'events/events_table',
-           locals: { events: @timecard.concurrent_events }) %>
+<!-- renders table data and then actual dataTable()  -->
+<%= render 'timecards/table_data/show_events', events: @timecard.concurrent_events %>
+<%= render 'shared/data_table_template', table_title: 'Concurrent Events' %>
 
 <p>
   Created <%= @timecard.created_at %><br/>
