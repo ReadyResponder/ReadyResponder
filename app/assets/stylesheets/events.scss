@@ -43,6 +43,37 @@ $recent-events-color: #f0ad4e;
   display: none;
 }
 
+.add-btn {
+  color: white;
+  margin: 0 0 10px 5px;
+  position: relative;
+  background-color: #3072ab;
+  padding: 0;
+  width: 35px;
+  height: 35px;
+  border: none;
+  border-radius: 50%;
+
+    p {
+      font-size: 14px;
+      display: table-cell;
+      vertical-align: middle;
+      line-height: 0;
+      height: 34px;
+      width: 34px;
+      text-align: center;
+    }
+  &:hover {
+    color: white;
+    background-color: #286090;
+  }
+
+  &:visited {
+    color: white;
+    background-color: inherit;
+  }
+}
+
 // Uncomment if you want to highlight current and past event filters
 
 // div.dataTables_scrollHead > div > table > caption > label {
