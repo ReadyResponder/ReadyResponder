@@ -27,6 +27,7 @@ class Item < ActiveRecord::Base
   belongs_to :grantor, foreign_key: :grant_id, class_name: 'Grant'
   has_many :repairs
   has_many :inspections
+  has_many :inspection_questions, through: :inspections
   has_many :unique_ids
 
   delegate :item_category, :to => :item_type
