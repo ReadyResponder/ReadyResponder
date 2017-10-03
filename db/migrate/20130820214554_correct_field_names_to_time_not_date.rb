@@ -1,4 +1,4 @@
-class CorrectFieldNamesToTimeNotDate < ActiveRecord::Migration
+class CorrectFieldNamesToTimeNotDate < ActiveRecord::Migration[4.2]
   def up
     rename_column :events, :start_date, :start_time
     rename_column :events, :end_date, :end_time

@@ -1,4 +1,4 @@
-class RemoveRequiredForCertFromSkills < ActiveRecord::Migration
+class RemoveRequiredForCertFromSkills < ActiveRecord::Migration[4.2]
   def up
     remove_column :skills, :required_for_pd
     remove_column :skills, :required_for_cert

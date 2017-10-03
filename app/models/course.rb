@@ -1,7 +1,8 @@
-class Course < ActiveRecord::Base
+class Course < ApplicationRecord
   has_paper_trail
-
-  attr_accessible :category, :comments, :description, :duration, :status, :term, :name, :skill_ids
+  
+  # TODO => USE STRONG PARAMETERS
+  # attr_accessible :category, :comments, :description, :duration, :status, :term, :name, :skill_ids
   has_many :certs
   has_many :people, :through => :certs
   has_many :events, :through => :certs

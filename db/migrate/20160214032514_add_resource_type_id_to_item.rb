@@ -1,4 +1,4 @@
-class AddResourceTypeIdToItem < ActiveRecord::Migration
+class AddResourceTypeIdToItem < ActiveRecord::Migration[4.2]
   def up
     if column_exists? :items, :resourcetype_id
       remove_column :items, :resourcetype_id

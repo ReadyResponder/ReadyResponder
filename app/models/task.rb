@@ -1,5 +1,5 @@
-class Task < ActiveRecord::Base
-  belongs_to :event
+class Task < ApplicationRecord
+  belongs_to :event, optional: true
   validates :event, presence: true
   validates :title, presence: true
   validates :start_time, presence: true

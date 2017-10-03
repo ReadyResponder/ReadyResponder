@@ -1,4 +1,4 @@
-class Person < ActiveRecord::Base
+class Person < ApplicationRecord
   has_paper_trail
   include Commentable
 
@@ -26,7 +26,7 @@ class Person < ActiveRecord::Base
   has_many :inspections
   has_many :activities, as: :loggable
 
-  belongs_to :department
+  belongs_to :department, optional: true
 
   validates_presence_of :firstname, :lastname, :status
   validates_uniqueness_of :icsid, :allow_nil => true, :allow_blank => true   # this needs to be scoped to active members, or more sophisticated rules

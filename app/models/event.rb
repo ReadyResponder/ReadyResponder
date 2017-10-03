@@ -1,4 +1,4 @@
-class Event < ActiveRecord::Base
+class Event < ApplicationRecord
   has_paper_trail
   before_save :calc_duration, :trim_id_code
 
@@ -8,11 +8,11 @@ class Event < ActiveRecord::Base
   validates_presence_of :start_time, :end_time
   validates_chronology :start_time, :end_time
 
-  belongs_to :template, :class_name => "Event"
+  belongs_to :template, :class_name => "Event", optional: true
   has_many :templated_events, class_name: "Event", foreign_key: "template_id"
   has_and_belongs_to_many :departments
   has_many :certs
-  belongs_to :course
+  belongs_to :course, optional: true
   has_many :activities, as: :loggable
 
   has_many :tasks, -> { where("tasks.status = 'Active'" ) }

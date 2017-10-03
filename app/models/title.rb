@@ -1,5 +1,6 @@
-class Title < ActiveRecord::Base
-  attr_accessible :comments, :description, :status, :name, :skill_ids
+class Title < ApplicationRecord
+	# TODO => USE STRONG PARAMETERS
+  # attr_accessible :comments, :description, :status, :name, :skill_ids
   has_and_belongs_to_many :people
   has_and_belongs_to_many :skills
   has_many :requirements

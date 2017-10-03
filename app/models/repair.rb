@@ -1,9 +1,10 @@
-class Repair < ActiveRecord::Base
-  attr_accessible :category, :comments, :description,
-                  :item_id, :person_id, :service_date,
-                  :status, :user_id, :cost
-  belongs_to :item
-  belongs_to :person
+class Repair < ApplicationRecord
+  # TODO => USE STRONG PARAMETERS
+  # attr_accessible :category, :comments, :description,
+  #                 :item_id, :person_id, :service_date,
+  #                 :status, :user_id, :cost
+  belongs_to :item, optional: true
+  belongs_to :person, optional: true
   delegate :item_category, :to => :item
   delegate :item_type, :to => :item
 

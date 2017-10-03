@@ -1,4 +1,4 @@
-class ChangeTimeslotsToIntentionAndOutcome < ActiveRecord::Migration
+class ChangeTimeslotsToIntentionAndOutcome < ActiveRecord::Migration[4.2]
   def up
     rename_column :timeslots, :status, :intention
     rename_column :timeslots, :start_time, :intended_start_time

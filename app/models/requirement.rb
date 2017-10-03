@@ -1,7 +1,7 @@
-class Requirement < ActiveRecord::Base
-  belongs_to :task
-  belongs_to :skill
-  belongs_to :title
+class Requirement < ApplicationRecord
+  belongs_to :task, optional: true
+  belongs_to :skill, optional: true
+  belongs_to :title, optional: true
   has_many :assignments
   has_many :people, through: :assignments
   delegate :event, :to => :task

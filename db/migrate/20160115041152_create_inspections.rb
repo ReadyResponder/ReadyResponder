@@ -1,4 +1,4 @@
-class CreateInspections < ActiveRecord::Migration
+class CreateInspections < ActiveRecord::Migration[4.2]
   def up
     drop_table :inspections if table_exists? :inspections
 

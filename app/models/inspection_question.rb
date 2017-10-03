@@ -1,4 +1,4 @@
-class InspectionQuestion < ActiveRecord::Base
-  belongs_to :inspection
-  belongs_to :question
+class InspectionQuestion < ApplicationRecord
+  belongs_to :inspection, optional: true
+  belongs_to :question, optional: true
 end

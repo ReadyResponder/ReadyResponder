@@ -1,4 +1,4 @@
-class ChangeOwnerIdToPersonIdInItems < ActiveRecord::Migration
+class ChangeOwnerIdToPersonIdInItems < ActiveRecord::Migration[4.2]
   def up
      rename_column :items, :owner_id, :person_id
   end

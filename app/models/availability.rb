@@ -1,5 +1,5 @@
-class Availability < ActiveRecord::Base
-  belongs_to :person
+class Availability < ApplicationRecord
+  belongs_to :person, optional: true
 
   after_create :cancel_duplicates
 

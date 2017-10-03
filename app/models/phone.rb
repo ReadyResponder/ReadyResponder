@@ -1,6 +1,8 @@
 class Phone < Channel
   include ActiveModel::ForbiddenAttributesProtection
-  belongs_to :person
+  
+  belongs_to :person, optional: true
+
   validates_format_of :content, :with => /\A[+][1]\d{10}\z/,
                                 :allow_nil => true, :allow_blank => true
   validates_uniqueness_of :content, :allow_nil => true, :allow_blank => true

@@ -1,4 +1,4 @@
-class Setting < ActiveRecord::Base
+class Setting < ApplicationRecord
 
   validates_presence_of :name, :key, :value, :category, :status
 

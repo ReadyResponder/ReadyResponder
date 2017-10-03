@@ -1,4 +1,4 @@
-class Message < ActiveRecord::Base
-  belongs_to :recipient
-  belongs_to :channel
+class Message < ApplicationRecord
+  belongs_to :recipient, optional: true
+  belongs_to :channel, optional: true
 end

@@ -1,4 +1,4 @@
-class Addsourcetoitem < ActiveRecord::Migration
+class Addsourcetoitem < ActiveRecord::Migration[4.2]
   def change
     add_column :items, :grant, :string
     add_column :items, :grantstart, :date
