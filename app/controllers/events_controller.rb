@@ -3,9 +3,18 @@ class EventsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    # by default show all scheduled or in-session events
-    @events = params['all_events'] == "true" ? Event.all : Event.actual.where('end_time > ?', Time.now)
-    @page_title = params['all_events'] == "true" ? "All Events" : "Current Events"
+    @events = all_events_except_templates
+    @page_title = "Events"
+  end
+
+  def templates
+    @templates = Event.where(is_template: true)
+    @page_title = "Templates"
+  end
+
+  def archives
+    @archives = all_events_except_templates
+    @page_title = "Archives"
   end
 
   def show
@@ -47,6 +56,11 @@ class EventsController < ApplicationController
   end
 
   private
+
+  def all_events_except_templates
+    Event.where(is_template: false)
+  end
+
   def event_params
     params.require(:event).permit(:title, :description, :category,
     :course_id, :duration, :start_time, :end_time, :instructor, :location,

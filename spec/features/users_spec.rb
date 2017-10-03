@@ -21,7 +21,6 @@ RSpec.describe "user" do
     @user = create(:user, lastname: "Doe")
     visit users_path
     expect(page).to have_content("Home") # In the nav bar
-    expect(page).to have_css('#sidebar')
     within_table("users") do
       expect(page).to have_content("Users")
     end
