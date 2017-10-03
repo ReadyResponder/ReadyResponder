@@ -11,13 +11,23 @@ RSpec.describe DepartmentsController do
     render_views
     
     it "shows an orgchart" do
-      get :orgchart, {dept_id: department.id}
+      get :orgchart, {id: department.id}
       expect(response).to be_success
     end
     
+    context "as a reader" do
+      before(:each) { login_as('Reader') }
+      
+      it "has no permission to orgchart" do
+        get :orgchart, {id: department.id}
+        expect(response).to be_redirect
+      end
+    end
+    
     it "returns 404 on not found" do
-      get :orgchart, {dept_id: -1}
-      expect(response.code).to eq "404"
+      expect {
+        get :orgchart, {id: -1}
+      }.to raise_error ActiveRecord::RecordNotFound
     end
   end
 

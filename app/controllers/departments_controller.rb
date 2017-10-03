@@ -47,12 +47,9 @@ class DepartmentsController < ApplicationController
   end
 
   def orgchart
-    @department = Department.accessible_by(current_ability).find(params[:id])
     @people = @department.people.active
     @page_title = "Org Chart: #{@department.shortname}"
     render layout: "orgchart"
-  rescue ActiveRecord::RecordNotFound
-    head 404
   end
 
   private

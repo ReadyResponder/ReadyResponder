@@ -38,7 +38,7 @@ class Ability
       can [:read, :create], Activity
       can [:read, :update, :create, :edit], Cert
       can [:read, :update, :create, :edit], Course
-      can [:read, :update, :create, :edit], Department
+      can [:read, :update, :create, :edit, :orgchart], Department
       can [:read, :update, :create, :edit], Event
       can [:signin, :orgchart], Person
       can [:read, :update, :create, :edit], Requirement
