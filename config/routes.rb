@@ -63,6 +63,7 @@ Rails.application.routes.draw do
     resources :repairs
     resources :inspections, only: [:new, :create]
   end
+  resources :grants
 
   get '/uploads/item/item_image/:id/:basename.:extension', controller: 'items', action: 'download', type: 'item_image'
   get '/uploads/item_type/item_type_image/:id/:basename.:extension', controller: 'item_types', action: 'download', type: 'item_type_image'

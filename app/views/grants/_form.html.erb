@@ -1,0 +1,21 @@
+<%= simple_form_for @grant, :html => {:multipart => true} do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name, :value => f.object.name %>
+    <%= f.input :description, :value => f.object.description %>
+    <%= f.input :start_date, as: :string,
+                input_html: { class: 'datepicker', size: 11,
+                              value: format_date_value(f.object.start_date) } %>
+    <%= f.input :end_date, as: :string,
+                input_html: { class: 'datepicker', size: 11,
+                              value: format_date_value(f.object.end_date) } %>
+    <%= f.input :status, :as => :select, :collection => Grant::STATUS_CHOICES %>
+  </div>
+
+  <br/>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

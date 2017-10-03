@@ -1,0 +1,12 @@
+<div class="nested-fields">
+  <fieldset>
+    <%= email.input :id, :as => :hidden %>
+    <%= email.input :category, :as => :select, :collection => Channel::CATEGORIES %>
+    <%= email.input :content, :placeholder => 'me@example.com' %>
+    <%= email.input :name, :label => 'Description' %>
+    <%= email.input :status, :as => :select, :collection => Channel::STATUSES %>
+    <%= email.input :usage, :as => :select, :collection => Channel::USAGES %>
+  </fieldset>
+  <%= link_to_remove_association "Remove this email", email %>
+  <hr />
+</div>

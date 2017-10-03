@@ -31,6 +31,9 @@ gem 'devise', '~> 3.0'
 # For model versioning
 gem 'paper_trail'
 
+#For nested forms
+gem 'cocoon'
+
 group :test, :development do
   gem 'thin'
   gem "rspec-rails"
