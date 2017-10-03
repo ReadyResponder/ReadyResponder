@@ -416,7 +416,7 @@ DEPENDENCIES
   protected_attributes
   pry
   rack
-  rails (~> 4.2.7.1)
+  rails (~> 4.2.7)
   rails-assets-datetimepicker!
   ransack
   redcarpet
