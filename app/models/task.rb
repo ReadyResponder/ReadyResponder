@@ -1,4 +1,6 @@
 class Task < ActiveRecord::Base
+  has_paper_trail
+
   belongs_to :event
   validates :event, presence: true
   validates :title, presence: true
