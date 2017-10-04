@@ -12,7 +12,7 @@ $.extend( true, $.fn.dataTable.defaults, {
   retrieve: true,
   pageLength: 100,
   searching: true,
-  lengthChange: false,
+  lengthChange: false
 } );
 
 /* Initialize all DataTables of class generic_datatable */

@@ -30,10 +30,16 @@
               <%= nav_link "Declined", declined_people_path %>
             </ul>
           </li>
-
-          <li >
-            <%= nav_link "Events", events_path if can? :read, Event %>
-          </li>
+          <% if can? :read, Event %>
+            <%= nav_link "Events", events_path %>
+            <li class="nav-item dropdown">
+              <a class="nav-link split-dropdown dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+              <ul class="split-dropdown dropdown-menu">
+                <%= nav_link "Templates", events_templates_path %>
+                <%= nav_link "Archives", events_archives_path %>
+              </ul>
+            </li>
+          <% end %>
 
           <li>
             <%= nav_link "Notifications", notifications_path if can? :read, Notification %>
@@ -63,7 +69,16 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Reports<span class="caret"></span></a>
             <ul class="dropdown-menu">
               <%= nav_link "Attendance Sheet", signin_people_path %>
-              <%= nav_link "Org Chart", orgchart_people_path %>
+              <li class="menu-item dropdown dropdown-submenu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Org Charts</a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <% Department.active.managing_people.order("shortname ASC").each do |dept| %>
+                      <%= nav_link dept.shortname, orgchart_departments_path(dept) %>
+                    <% end %>
+                  </li>
+                </ul>
+              </li>
               <%= nav_link 'Calendar Chart', calendar_chart_analytics_path, :get %>
             </ul>
           </li>

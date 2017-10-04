@@ -13,7 +13,6 @@ Rails.application.routes.draw do
       get 'prospects'
       get 'declined'
       get 'signin'
-      get 'orgchart'
       get 'roster'
       get 'department/:dept_id', action: "department", as: :department
     end
@@ -40,7 +39,11 @@ Rails.application.routes.draw do
   resources :activities
   resources :helpdocs, only: [:show, :index]
   resources :channels
-  resources :departments
+  resources :departments do
+    collection do
+      get 'orgchart/:id', action: "orgchart", as: :orgchart
+    end
+  end
   resources :timecards
 
   resources :timecards do
@@ -83,6 +86,9 @@ Rails.application.routes.draw do
   resources :analytics do
     get 'calendar_chart', on: :collection
   end
+
+  get 'events/templates', to: 'events#templates'
+  get 'events/archives', to: 'events#archives'
 
   resources :events do
     resources :tasks, only: [:new, :create]

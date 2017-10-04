@@ -2,6 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$current-events-color: #5cb85c;
+$recent-events-color: #f0ad4e;
+
 #event_timecards {
   border: 1px solid #e1e1e8;
   padding: 9px 14px;
@@ -39,3 +42,50 @@
 .training-controls {
   display: none;
 }
+
+.add-btn {
+  color: white;
+  margin: 0 0 10px 5px;
+  position: relative;
+  background-color: #3072ab;
+  padding: 0;
+  width: 35px;
+  height: 35px;
+  border: none;
+  border-radius: 50%;
+
+    p {
+      font-size: 14px;
+      display: table-cell;
+      vertical-align: middle;
+      line-height: 0;
+      height: 34px;
+      width: 34px;
+      text-align: center;
+    }
+  &:hover {
+    color: white;
+    background-color: #286090;
+  }
+
+  &:visited {
+    color: white;
+    background-color: inherit;
+  }
+}
+
+// Uncomment if you want to highlight current and past event filters
+
+// div.dataTables_scrollHead > div > table > caption > label {
+//   padding: 5px;
+//   border-radius: 5px;
+// }
+//
+// .current-highlight, div.dataTables_scrollHead > div > table > caption > label:nth-child(2) {
+//   background-color: $current-events-color !important;
+// }
+//
+// .recent-highlight, div.dataTables_scrollHead > div > table > caption > label:last-child {
+//   background-color: $recent-events-color !important;
+// }
+// Uncomment if you want to highlight current and past event filters
