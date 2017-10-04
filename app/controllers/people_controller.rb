@@ -13,13 +13,6 @@ class PeopleController < ApplicationController
     render :layout => "print_signin"
   end
 
-  def orgchart
-    @department = Department.where(shortname: "BAUX").first
-    @people = @department.people.active if @department
-    @page_title = "Org Chart"
-    render :layout => "orgchart"
-  end
-
   def department
     dept = Department.find(params[:dept_id])
     # TODO: more gracefully handle department not found

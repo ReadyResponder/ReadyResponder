@@ -46,6 +46,12 @@ class DepartmentsController < ApplicationController
     redirect_to departments_url, notice: 'Department successfully destroyed.'
   end
 
+  def orgchart
+    @people = @department.people.active
+    @page_title = "Org Chart: #{@department.shortname}"
+    render layout: "orgchart"
+  end
+
   private
 
   # Takes the passed in CSV and converts it into an array that removes any leading/trailing whitespace on each item
