@@ -38,3 +38,4 @@ playbook.yml
 playbook.retry
 test_models.rb
 Procfile
+uploads/
