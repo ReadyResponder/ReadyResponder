@@ -103,11 +103,15 @@ ht = ItemType.find_or_create_by(name: "Radio, Portable") do |item_type|
   item_type.description = "Handheld radios"
 end
 
-tmp_grant = Grant.find_or_create_by(name: "foo-grant") do |grant|
-  grant.description = "Donated a collection of 200 books by XYZ publications"
-  grant.start_date = '12-12-2012'
-  grant.end_date = '10-10-2017'
-  grant.status = 'Active'
+
+tmp_grant = Grant.find_or_initialize_by(name: "foo-grant").tap do |grant|
+  base_attrs = {
+    description: 'Donated a collection of 200 books by XYZ publications',
+    start_date: '12-12-2012',
+    end_date: '10-10-2017',
+    status: 'Active'
+  }
+  grant.update(base_attrs)
 end
 
 Item.find_or_create_by(name: "Radio 1") do |item|
