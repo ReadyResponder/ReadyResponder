@@ -62,6 +62,20 @@ module EventsHelper
     return raw button
   end
 
+  def column_color_class(event)
+    begin
+      if event.is_template
+        return 'template-highlight'
+      elsif event.status == "In-session" || event.status == "Scheduled"
+        return 'current-highlight'
+      elsif event.start_time > (DateTime.now - 13.months)
+        return 'recent-highlight'
+      end
+    rescue NoMethodError
+      nil
+    end
+  end
+
   private
     def make_label(text, class_str, tooltip: nil)
       if tooltip

@@ -11,7 +11,7 @@
     <% availabilities.each do |a| %>
     <tr <%== availability_status_class(a) %> >
         <td><%= link_to availability_status_label(a), availability_path(a) %></td>
-        <td><time><%= a.start_time %></time></td>
+        <td><%= a.start_time %></td>
         <td><%= a.end_time %></td>
         <td><%= truncate(a.description, length: 24) %></td>
       </tr>

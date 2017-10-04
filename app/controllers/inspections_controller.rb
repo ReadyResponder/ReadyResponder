@@ -1,7 +1,7 @@
 class InspectionsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
-  
+
   before_action :set_item, only: [:new, :create]
   before_action :set_inspection, only: [:show, :edit, :update, :destroy]
 
@@ -42,6 +42,7 @@ class InspectionsController < ApplicationController
   end
 
   private
+
   def set_item
     @item = Item.find(params[:item_id])
   end
@@ -51,6 +52,8 @@ class InspectionsController < ApplicationController
   end
 
   def inspection_params
-    params.require(:inspection).permit(:inspection_date, :status, :comments)
+    params.require(:inspection).permit(
+      :inspection_date, :status, :comments, :person_id
+    )
   end
 end
