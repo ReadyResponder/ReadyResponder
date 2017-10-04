@@ -7,4 +7,4 @@ jQuery ->
     "columns": [null,
                   null,
                     null,
-                      {"orderable" : false}],
+                    {"orderable" : false}],
