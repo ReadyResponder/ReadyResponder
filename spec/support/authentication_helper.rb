@@ -24,6 +24,14 @@ module AuthenticationHelper
     user = create(:user, roles: [create(:role, name: role.to_s.titleize)])
     sign_in user
   end
+
+  def login_manager
+    @request.env["devise.mapping"] = Devise.mappings[:user]
+    user = FactoryGirl.create(:user)
+    r = create(:role, name: 'Manager')
+    user.roles << r
+    sign_in user
+  end
 end
 
 RSpec.configure do |c|

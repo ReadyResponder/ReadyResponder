@@ -4,6 +4,7 @@
     <tr>
       <th>Date</th>
       <th>Status</th>
+      <th>Inspector</th>
       <th>Comments</th>
       <th></th>
     </tr>
@@ -13,6 +14,11 @@
       <tr>
         <td><%= link_to format_datetime_value(inspection.inspection_date), inspection %></td>
         <td><%= inspection_status_label(inspection) %></td>
+        <% if inspection.person %>
+          <td><%= link_to inspection.person.fullname, person_path(inspection.person) %></td>
+        <% else %>
+          <td>Unassigned</td>
+        <% end %>
         <td><%= truncate(inspection.comments) %></td>
         <td><%= table_button_link 'Edit', edit_inspection_path(inspection) if can? :edit, inspection %></td>
       </tr>
