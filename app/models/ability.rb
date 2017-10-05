@@ -16,8 +16,8 @@ class Ability
       can [:read, :update, :create, :edit], Cert
       can [:read, :update, :create, :edit], Channel
       can [:read, :update, :create, :edit], Course
-      can [:read, :update, :create, :edit], Department
-      can [:read, :update, :create, :edit], Event
+      can [:read, :update, :create, :edit, :orgchart], Department
+      can [:read, :update, :create, :edit, :templates, :archives], Event
       can [:read, :update, :create, :edit], Inspection
       can [:read, :update, :create, :edit], Item
       can [:read, :update, :create, :edit], ItemCategory
@@ -25,8 +25,8 @@ class Ability
       can [:read, :update, :create, :edit], Location
       can [:read, :update, :create, :edit], Notification
       can [:read, :update, :create, :edit, :department, :download, :applicants,
-           :prospects, :other, :inactive, :leave, :declined, :everybody, :signin,
-           :orgchart], Person
+           :prospects, :other, :inactive, :leave, :declined, :everybody, :signin
+           ], Person
       can [:read, :update, :create, :edit], Repair
       can [:read, :update, :create, :edit], Requirement
       can [:read, :update, :create, :edit], Setting
@@ -38,8 +38,8 @@ class Ability
       can [:read, :create], Activity
       can [:read, :update, :create, :edit], Cert
       can [:read, :update, :create, :edit], Course
-      can [:read, :update, :create, :edit], Department
-      can [:read, :update, :create, :edit], Event
+      can [:read, :update, :create, :edit, :orgchart], Department
+      can [:read, :update, :create, :edit, :templates, :archives], Event
       can [:signin, :orgchart], Person
       can [:read, :update, :create, :edit], Requirement
       can [:read, :update, :create, :edit], Task
@@ -48,6 +48,7 @@ class Ability
       can [:read], [Person, Channel, Timecard, Cert, ItemCategory, ItemType,
                     Item, Event, Task, Course, Skill, Inspection, Repair,
                     Activity, Department]
+      can [:templates, :archives], Event
       can [:signin, :download, :orgchart], Person
     end
   end

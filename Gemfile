@@ -31,12 +31,18 @@ gem 'devise', '~> 3.0'
 # For model versioning
 gem 'paper_trail'
 
+#For nested forms
+gem 'cocoon'
+
 group :test, :development do
   gem 'thin'
   gem "rspec-rails"
   # gem 'rspec-activemodel-mocks' # TODO: remove if we no longer need mock_model or stub_model
   gem "factory_girl_rails"
   gem "capybara"
+  # Use selenium and chrome for handling JS automated testing
+  gem 'selenium-webdriver'
+  gem 'chromedriver-helper', '1.0.0'
   gem "guard-rspec", require: false
   gem 'guard-livereload'
   gem "mailcatcher"
@@ -47,7 +53,6 @@ group :test, :development do
   gem 'meta_request'
   gem 'database_cleaner', '1.0.1'
   gem 'test-unit'
-  gem 'poltergeist'
   gem 'pry'
 end
 

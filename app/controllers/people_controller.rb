@@ -1,7 +1,7 @@
 class PeopleController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
-  
+
   before_action :set_referrer_path, only: [:new, :edit]
   before_action :set_return_path, only: [:show]
 
@@ -11,13 +11,6 @@ class PeopleController < ApplicationController
     @people = @department.people.active if @department
     @page_title = "Sign-in"
     render :layout => "print_signin"
-  end
-
-  def orgchart
-    @department = Department.where(shortname: "BAUX").first
-    @people = @department.people.active if @department
-    @page_title = "Org Chart"
-    render :layout => "orgchart"
   end
 
   def department
@@ -181,8 +174,8 @@ class PeopleController < ApplicationController
       :title_ids => [],
       phones_attributes: [:id, :category, :content, :name, :status,
                           :usage, :carrier, :sms_available,
-                          :priority, :channel_type],
-      emails_attributes: [:id, :category, :content, :name, :status, :usage]
+                          :priority, :channel_type, :_destroy],
+      emails_attributes: [:id, :category, :content, :name, :status, :usage, :_destroy]
     )
   end
 end

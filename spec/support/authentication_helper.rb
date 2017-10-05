@@ -1,5 +1,5 @@
 module AuthenticationHelper
-
+  # Feature spec helper to login as a certain role.
   def sign_in_as(role_name)
     somebody = create(:user)
     if role_name
@@ -12,10 +12,23 @@ module AuthenticationHelper
     click_on 'Sign in'
   end
 
+  # Controller helper to login as an editor.
   def login_admin
+    login_as('Editor')
+  end
+
+  # Controller helper to login as a certain role.
+  # @param [String] the role to become: 'Editor', 'Manager', 'Reader', etc
+  def login_as(role)
+    @request.env["devise.mapping"] = Devise.mappings[:user]
+    user = create(:user, roles: [create(:role, name: role.to_s.titleize)])
+    sign_in user
+  end
+
+  def login_manager
     @request.env["devise.mapping"] = Devise.mappings[:user]
     user = FactoryGirl.create(:user)
-    r = create(:role, name: 'Editor')
+    r = create(:role, name: 'Manager')
     user.roles << r
     sign_in user
   end

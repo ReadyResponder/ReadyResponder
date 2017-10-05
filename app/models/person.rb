@@ -23,7 +23,7 @@ class Person < ActiveRecord::Base
   has_many :timecards
   has_many :events, through: :timecards
   has_many :items, inverse_of: :owner, foreign_key: :owner_id
-  has_many :inspections
+  has_many :inspectors, foreign_key: :person_id, class_name: 'Inspection'
   has_many :activities, as: :loggable
 
   belongs_to :department
@@ -35,6 +35,8 @@ class Person < ActiveRecord::Base
   validates_presence_of :division2, :unless => "division1.blank?"
   validates_presence_of :division1, :unless => "division2.blank?"
   validates_chronology :start_date, :end_date
+
+  validate :start_date_cannot_be_before_application_date
 
   scope :cert, -> { order("division1, division2, title_order, start_date ASC").where( department: "CERT" ) }
   scope :police, -> { order("division1, division2, title_order, start_date ASC").where( department: "Police" ) }
@@ -196,6 +198,16 @@ class Person < ActiveRecord::Base
       else
         Date.today.year - self.start_date.year + ( self.start_date.yday < Date.today.yday ? 1 : 0 )
       end
+    end
+  end
+
+  private
+
+  def start_date_cannot_be_before_application_date
+    return unless start_date && application_date
+
+    if start_date < application_date
+      errors.add(:start_date, "cannot be before the application date")
     end
   end
 end

@@ -4,6 +4,7 @@ RSpec.describe Person do
   describe 'validations' do
     it { is_expected.to validate_length_of(:state).is_equal_to 2 }
     it { is_expected.to validate_uniqueness_of(:icsid) }
+    it { should have_many(:inspectors) }
 
     describe 'divisions' do
       context 'division 1 present' do
@@ -24,6 +25,46 @@ RSpec.describe Person do
     it "requires end_date to be after start_date" do # chronology
       @person = build(:person, start_date: 2.days.from_now, end_date: 2.days.ago)
       expect(@person).not_to be_valid
+    end
+
+    describe "application_date_cannot_be_before_start_date" do
+      let(:person) { build :person, start_date: start_date, application_date: application_date }
+
+      context "when the start date is not present" do
+        let!(:application_date) { Time.zone.today }
+        let!(:start_date) { nil }
+
+        it "is a valid person" do
+          expect(person).to be_valid
+        end
+      end
+
+      context "when the application date is not present" do
+        let!(:application_date) { nil }
+        let!(:start_date) { Time.zone.today }
+
+        it "is a valid person" do
+          expect(person).to be_valid
+        end
+      end
+
+      context "when the application date and start date are the same" do
+        let!(:application_date) { Time.zone.today }
+        let!(:start_date) { Time.zone.today }
+
+        it "is a valid person" do
+          expect(person).to be_valid
+        end
+      end
+
+      context "when the start date is before the application date" do
+        let!(:application_date) { Time.zone.today }
+        let!(:start_date) { Time.zone.yesterday }
+
+        it "is not a valid person" do
+          expect(person).to_not be_valid
+        end
+      end
     end
   end
 
