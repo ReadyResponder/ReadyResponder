@@ -30,6 +30,37 @@ RSpec.describe NotificationsController, type: :controller do
     end
   end
 
+  describe 'POST #create' do
+    let(:notification_params) { { notification: {} } }
+    let(:notification) do
+      FactoryGirl.build(:notification,
+                        status: 'Active',
+                        event: FactoryGirl.create(:event),
+                        departments: [FactoryGirl.build(:department)])
+    end
+
+    before do
+      allow(Notification).to receive(:new) { notification }
+    end
+
+    context 'successfully initialized client' do
+      it 'delivers the notification' do
+        expect(notification).to receive(:activate!)
+        post :create, { notification: { subject: anything } }
+        expect(subject).to redirect_to(notification.event)
+      end
+    end
+
+    context 'unsuccessfully initialized client' do
+      it 'rescues an error and sets a flash message' do
+        expect(notification).to receive(:activate!)
+                            .and_raise(Message::SendNotificationTextMessage::InvalidClient)
+        post :create, { notification: { subject: anything } }
+        expect(subject).to render_template(:new)
+      end
+    end
+  end
+
   describe "UPDATE" do
     # it "re-renders the 'edit' template"
   end

@@ -34,7 +34,12 @@ class NotificationsController < ApplicationController
     @notification = Notification.new(notification_params)
     if @notification.save
       if @notification.status == "Active"
-        @notification.activate!
+        begin
+          @notification.activate!
+        rescue Message::SendNotificationTextMessage::InvalidClient
+          flash[:error] = 'Notification failed to deliver, no valid delivery client.'
+          return render :new
+        end
       end
       redirect_to @notification.event, notice: 'Notification was successfully created.'
     else
