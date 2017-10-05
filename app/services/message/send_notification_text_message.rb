@@ -1,4 +1,5 @@
 class Message::SendNotificationTextMessage
+  class InvalidClient < StandardError; end
   require 'twilio-ruby'
   def initialize
     # create Twilio Client
@@ -15,13 +16,15 @@ class Message::SendNotificationTextMessage
   def sms_send(message, recipient_number,
            sender_number = Setting.get("outbound_text_number"))
     begin
-        message = @client.account.messages.create(:body => message,
-            :to => recipient_number,
-            :from => sender_number)
-        Rails.logger.warn "Sent text message: #{message.inspect}"
-        return message
+      raise InvalidClient.new('Invalid Twilio Client') if @client.nil?
+      message = @client.account.messages.create(
+                    :body => message,
+                    :to => recipient_number,
+                    :from => sender_number)
+      Rails.logger.warn "Sent text message: #{message.inspect}"
+      return message
     rescue Twilio::REST::RequestError => e
-        return e.message
+      return e.message
     end
   end
 end
