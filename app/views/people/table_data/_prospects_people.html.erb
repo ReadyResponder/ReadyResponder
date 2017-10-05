@@ -1,0 +1,14 @@
+<% content_for :table_headers do %>
+  <th>Name</th>
+  <th>Department</th>
+  <th></th>
+<% end %>
+<% content_for :table_data do %>
+  <% @people.each do |person| %>
+    <tr>
+      <td><%= link_to person.fullname, person %></td>
+      <td><%= person.department&.name %></td>
+      <td><%= table_button_link 'Edit', edit_person_path(person) if can? :update, person %></td>
+    </tr>
+  <% end %>
+<% end %>

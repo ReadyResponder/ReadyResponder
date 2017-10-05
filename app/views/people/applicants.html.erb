@@ -1,27 +1,3 @@
-<% content_for :sidebar do %>
-  <%= sidebar_button_link 'New Person', new_person_path if can? :create, Person %>
-<% end %>
-
-<table id="applicants" class="datatable table table-striped table-bordered" >
-  <caption><h3><%= @page_title %></h3></caption>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Department</th>
-      <th>Application date</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @people.each do |person| %>
-      <tr>
-        <td><%= link_to person.fullname, person %></td>
-        <td><%= person.dept_shortname %></td>
-        <td title=<%= person.application_date %> >
-          <%= distance_of_time_in_words(Date.today, person.application_date) + ' ago' if person.application_date %>
-        </td>
-        <td><%= table_button_link 'Edit', edit_person_path(person) if can? :update, person %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<!-- renders table data and then actual dataTable()  -->
+<%= render 'people/table_data/applicants_people', events: @people %>
+<%= render 'shared/data_table_template', table_title: @page_title, table_id: "applicants", table_class: "datatable" %>
