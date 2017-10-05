@@ -1,5 +1,4 @@
 <% content_for :sidebar do %>
-  <%= sidebar_button_link 'Return to List', certs_path %>
   <%= sidebar_button_link 'Edit Cert', edit_cert_path(@cert) unless cannot? :edit, @cert %>
 <% end %>
 
