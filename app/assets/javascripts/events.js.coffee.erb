@@ -1,7 +1,8 @@
+<% self.class.include Rails.application.routes.url_helpers %>
+
 jQuery ->
   $("#event_title").focus()
   $eventTable = $('#events').dataTable
-    'dom': "fr<'event-table-info't>ip",
     order: [[3, 'asc']],
     columnDefs: [
                   { orderable: false, targets: -1 },
@@ -11,7 +12,7 @@ jQuery ->
                 ]
 
 # sets checkbox elements within #events dataTable()
-  $('.event-table-info caption').append('<a role="button" class="add-btn btn" href="/events/new"><p>+</p></a>
+  $('#events_wrapper > div.event-table-info > div > div.dataTables_scrollHead > div > table > caption').append('<a role="button" class="add-btn btn" href="<%= new_event_path %>"><p>+</p></a>
   <div><label>Current:<input type="checkbox" id="js-events-current-checkbox" class="event-filter" value="current"></label>
   <label>Recent:(Last 13 Months)<input type="checkbox" id="js-events-recent-checkbox" class="event-filter" value="recent"></label></div>')
 

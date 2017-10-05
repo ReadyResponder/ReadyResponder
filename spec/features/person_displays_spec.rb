@@ -33,6 +33,7 @@ RSpec.describe "Person" do
       expect(page).to_not have_content('Indy')
       expect(page).to_not have_content('Leona')
       expect(page).to_not have_content('Oscar')
+      page.has_css?('add-btn')
     end
 
     it "returns a page for Police" do
@@ -72,6 +73,7 @@ RSpec.describe "Person" do
       expect(page).not_to have_content('Indy')
       expect(page).not_to have_content('Leona')
       expect(page).not_to have_content('Oscar')
+      page.has_css?('add-btn')
     end
 
     it "returns a page for Prospects" do
@@ -85,6 +87,7 @@ RSpec.describe "Person" do
       expect(page).not_to have_content('Indy')
       expect(page).not_to have_content('Leona')
       expect(page).not_to have_content('Oscar')
+      page.has_css?('add-btn')
     end
 
     it "returns a page for Inactive" do
@@ -98,6 +101,7 @@ RSpec.describe "Person" do
       expect(page).to have_content('Indy')
       expect(page).not_to have_content('Leona')
       expect(page).not_to have_content('Oscar')
+      page.has_css?('add-btn')
     end
     it "returns a page for Declined" do
       find('#navbar').click_link('Declined')

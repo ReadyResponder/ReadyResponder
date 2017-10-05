@@ -1,6 +1,7 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+<% self.class.include Rails.application.routes.url_helpers %>
 
 jQuery ->
   $("#person_firstname").focus();
@@ -14,6 +15,9 @@ jQuery ->
                   { orderData: 5, targets: 6 }
                   { orderable: false, targets: -1 }
                 ]
+  # renders new people button within dataTable()
+  $('#people_wrapper > div.event-table-info > div > div.dataTables_scrollHead > div > table > caption').append('<a role="button" class="add-btn btn" href="<%= new_person_path %>"><p>+</p></a>')
+
   $('#person_zipcode').change ->
     code = $(@).val()
     $.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + code + "&key=<%= GOOGLE_MAPS_API_KEY %>", (data) ->

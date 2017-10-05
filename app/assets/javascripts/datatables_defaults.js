@@ -3,6 +3,7 @@
 /* https://datatables.net/reference/option/ */
 
 $.extend( true, $.fn.dataTable.defaults, {
+  'dom': "fr<'event-table-info't>ip",
   scrollCollapse: true,         // https://datatables.net/reference/option/scrollCollapse
   scrollY: '50vh',              // https://datatables.net/examples/basic_init/scroll_y_dynamic.html
   responsive: true,             // https://datatables.net/extensions/responsive/priority
