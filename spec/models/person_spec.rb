@@ -31,7 +31,7 @@ RSpec.describe Person do
       let(:person) { build :person, start_date: start_date, application_date: application_date }
 
       context "when the start date is not present" do
-        let!(:application_date) { Date.today }
+        let!(:application_date) { Time.zone.today }
         let!(:start_date) { nil }
 
         it "is a valid person" do
@@ -41,7 +41,7 @@ RSpec.describe Person do
 
       context "when the application date is not present" do
         let!(:application_date) { nil }
-        let!(:start_date) { Date.today }
+        let!(:start_date) { Time.zone.today }
 
         it "is a valid person" do
           expect(person).to be_valid
@@ -49,8 +49,8 @@ RSpec.describe Person do
       end
 
       context "when the application date and start date are the same" do
-        let!(:application_date) { Date.today }
-        let!(:start_date) { Date.today }
+        let!(:application_date) { Time.zone.today }
+        let!(:start_date) { Time.zone.today }
 
         it "is a valid person" do
           expect(person).to be_valid
@@ -58,8 +58,8 @@ RSpec.describe Person do
       end
 
       context "when the start date is before the application date" do
-        let!(:application_date) { Date.today }
-        let!(:start_date) { Date.yesterday }
+        let!(:application_date) { Time.zone.today }
+        let!(:start_date) { Time.zone.yesterday }
 
         it "is not a valid person" do
           expect(person).to_not be_valid
