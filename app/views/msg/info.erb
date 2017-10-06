@@ -1,13 +1,19 @@
-Event Name: <%=event.title%> (<%= event.id_code %>)
-Duration: <%= event.start_time %> to <%= event.end_time %>
+Name: <%=event.title%> (<%= event.id_code %>)
+<%= event.start_time %> to <%= event.end_time %>
 Description: <%= event.description %>
 <%
   avp  = event.available_people
   pavp = event.partially_available_people
   uavp = event.unavailable_people
   lame = event.unresponsive_people
+  short_date_time = lambda { |from, to| "#{from.strftime('%m/%d %H%M')}-#{to.strftime('%H%M')}" }
 %>
 Available: <%= avp.count %>
 Partially Available: <%= pavp.count %>
 Unavailable: <%= uavp.count %>
 Unknown: <%= lame.count %>
+<% if event.people.include?(person) %>
+Your Assignments: <% event.assignments.where(person: person).each do |asmt| %>
+<%= "#{short_date_time.call(asmt.start_time, asmt.end_time)} #{asmt.task.title}" %>
+<% end %>
+<% end %>
