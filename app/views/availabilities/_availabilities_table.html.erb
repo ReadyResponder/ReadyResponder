@@ -16,7 +16,7 @@
       <!-- Full available -->
     <% (availabilities + partial_availabilities).each do |a| %>
       <tr <%== availability_status_class(a, @event) %>>
-        <td><%= Person::TITLE_ORDER[a.person.shortrank] %></td>
+        <td><%= Person::TITLE_ORDER[a.person.title] %></td>
         <td><%= link_to availability_status_label(a, @event), a %></td>
         <td><%= a.person.shortrank %></td>
         <td><%= link_to a.person.fullname, a.person %></td>
