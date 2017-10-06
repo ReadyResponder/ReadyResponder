@@ -13,7 +13,7 @@ Partially Available: <%= pavp.count %>
 Unavailable: <%= uavp.count %>
 Unknown: <%= lame.count %>
 <% if event.people.include?(person) %>
-Your Assignments: <% event.assignments.each do |asmt| %>
-<%= "#{short_date_time.call(asmt.start_time, asmt.end_time)} #{asmt.task.title}" if asmt.person_id == person.id  %>
+Your Assignments: <% event.assignments.where(person: person).each do |asmt| %>
+<%= "#{short_date_time.call(asmt.start_time, asmt.end_time)} #{asmt.task.title}" %>
 <% end %>
 <% end %>
