@@ -55,5 +55,13 @@
   <strong>Channels:</strong>
   <%= @notification.channels %>
 </p>
+
+
 <%= render(partial: 'recipients/recipients_table',
            locals: { recipients: @notification.recipients}) %>
+
+<p>
+  Created <%= @notification.created_at %><br/>
+  Last Modified <%= @notification.updated_at %><br/>
+  Last Editor <%= @last_editor %>
+</p>

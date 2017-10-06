@@ -20,6 +20,9 @@
 /public/uploads
 *.DS_Store
 
+# Ignore gemfile lock
+Gemfile.lock
+
 # Ignore database settings
 /config/database.yml
 
