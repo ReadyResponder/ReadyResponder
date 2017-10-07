@@ -46,12 +46,12 @@ RSpec.describe AvailabilitiesController, type: :controller do
 
     describe '@people_collection' do
       it 'is assigned' do
-        get :edit, { person_id: person.id, id: availability.id }
+        get :edit, { id: availability.id }
         expect(assigns(:people_collection)).not_to be_nil
       end
 
       it 'includes the person that is part of the @availability' do
-        get :edit, { person_id: person.id, id: availability.id }
+        get :edit, { id: availability.id }
         expect(assigns(:people_collection)).to include(availability.person)
       end
     end
@@ -60,7 +60,7 @@ RSpec.describe AvailabilitiesController, type: :controller do
       let(:person) { create(:inactive_person) }
 
       it 'sets up @people_collection including the person' do
-        get :edit, { person_id: person.id, id: availability.id }
+        get :edit, { id: availability.id }
         expect(assigns(:people_collection)).to include(availability.person)
       end
     end

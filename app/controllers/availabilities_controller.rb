@@ -21,16 +21,14 @@ class AvailabilitiesController < ApplicationController
     @availability.person = person if person
 
     @people_collection = Person.active
+    @people_collection |= [person]
   end
 
   def edit
     @people_collection = Person.active
     
     # Ensure person is included in @people_collection
-    if params.include? 'person_id'
-      person = Person.find params[:person_id]
-      @people_collection |= [person]
-    end
+    @people_collection |= [@availability.person] if @availability.person
   end
 
   def create
