@@ -14,9 +14,10 @@
     <%= f.input :end_date, as: :string,
                 input_html: { class: 'datepicker', size: 11,
                               value: format_date_value(f.object.end_date) } %>
-    <%= f.label :department_id %>
-    <br>
-    <%= f.collection_select :department_id, Department.managing_people.all, :id, :name, include_blank: true %>
+
+    <%= f.input :department_id, :collection => Department.managing_people.all,
+                :required => true, :selected => Department.managing_people.all.length == 1 ? Department.managing_people.all[0].id : nil %>
+
     <%= f.input :division1, :as => :grouped_select,
                             :group_method => :division1,
                             :label => 'Division',

@@ -21,6 +21,8 @@ RSpec.feature "Users can create new people" do
     fill_in "Last Name", with: "Doe"
     fill_in "Date of birth", with: "1990-05-13"
     select "Active", from: "person_status" #"Status" also matches Channel status
+    # Used `find` instead of select, as `select Department.first.id, from: "person_department_id"` raises "Ambiguous match" error
+    find(:css, '#person_department_id > option:nth-child(2)').select_option
     click_button "Create Person"
     expect(page).to have_content "Person was successfully created."
     expect(current_path).to eq everybody_people_path

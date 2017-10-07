@@ -5,6 +5,7 @@ RSpec.describe Person do
     it { is_expected.to validate_length_of(:state).is_equal_to 2 }
     it { is_expected.to validate_uniqueness_of(:icsid) }
     it { should have_many(:inspectors) }
+    it { should validate_presence_of(:department) }
 
     describe 'divisions' do
       context 'division 1 present' do
