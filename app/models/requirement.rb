@@ -1,4 +1,6 @@
 class Requirement < ActiveRecord::Base
+  has_paper_trail
+
   belongs_to :task
   belongs_to :skill
   belongs_to :title
