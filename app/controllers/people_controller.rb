@@ -31,33 +31,10 @@ class PeopleController < ApplicationController
     @page_title = "Everybody"
   end
 
-  # def other
-  #   @people = Person.active.joins(:department).where("departments.manage_people": false)
-  #   @page_title = "Other Active People"
-  #   render :template => "people/index"
-  # end
-
   def applicants
     @people = Person.applicants + Person.prospects
     @page_title = "Applicants"
   end
-
-  # def prospects
-  #   @people = Person.prospects
-  #   @page_title = "Prospects"
-  # end
-
-  # def declined
-  #   @people = Person.declined
-  #   @page_title = "Declined"
-  #   render :template => "people/index"
-  # end
-
-  # def leave
-  #   @people = Person.leave
-  #   @page_title = "People On-Leave"
-  #   render :template => "people/index"
-  # end
 
   def inactive
     @people = Person.inactive + Person.declined
