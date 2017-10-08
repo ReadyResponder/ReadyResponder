@@ -17,4 +17,6 @@ class Repair < ActiveRecord::Base
   def repairer_name
     return person.present? ? person.name : "Unknown"
   end
+
+  scope :not_completed, (-> { where('status NOT LIKE ?', '%Completed%') })
 end
