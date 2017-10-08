@@ -1,4 +1,5 @@
 class Setting < ActiveRecord::Base
+  has_paper_trail
 
   validates_presence_of :name, :key, :value, :category, :status
 

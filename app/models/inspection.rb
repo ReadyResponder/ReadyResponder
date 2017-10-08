@@ -1,4 +1,6 @@
 class Inspection < ActiveRecord::Base
+  has_paper_trail
+
   belongs_to :item
   belongs_to :person
   has_many :inspection_questions
