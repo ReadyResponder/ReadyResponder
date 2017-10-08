@@ -16,7 +16,7 @@
                               value: format_date_value(f.object.end_date) } %>
 
     <%= f.input :department_id, :collection => Department.managing_people.all,
-                :required => true, :selected => Department.managing_people.all.length == 1 ? Department.managing_people.all[0].id : nil %>
+                                :required => true %>
 
     <%= f.input :division1, :as => :grouped_select,
                             :group_method => :division1,

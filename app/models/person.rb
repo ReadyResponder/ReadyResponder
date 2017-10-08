@@ -61,6 +61,15 @@ class Person < ActiveRecord::Base
   STATUS = ['Leave of Absence', 'Inactive', 'Active', 'Applicant','Prospect','Declined']
   DEPARTMENT = ['Police', 'CERT', 'Other']
 
+  after_initialize do
+    if self.new_record?
+      # values will be available for new record forms.
+      if self.department.nil? && Department.managing_people.count == 1
+        self.department = Department.managing_people.first
+      end
+    end
+  end
+
   def to_s
     fullname
   end

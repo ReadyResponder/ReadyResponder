@@ -161,4 +161,23 @@ RSpec.describe Person do
       end
     end
   end
+
+  describe 'department' do
+    context 'only one department available' do
+      Department.destroy_all
+      let!(:department) { create :department }
+      subject { Person.new()}
+      it 'should have default department' do
+        expect(subject.department).not_to be_nil
+      end
+    end
+    context 'more than one department available' do
+      let!(:department_1) { create :department }
+      let!(:department_2) { create :department }
+      subject { Person.new()}
+      it 'should not have default department' do
+        expect(subject.department).to be_nil
+      end
+    end
+  end
 end
