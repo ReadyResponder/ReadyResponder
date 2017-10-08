@@ -105,7 +105,7 @@
 
   <h3>Timecards (<%= @person.timecards.count %>)</h3>
   <div>
-    <table class="table table-striped table-bordered">
+    <table class="generic_datatable table table-striped table-bordered">
       <% if @person.timecards.any? %>
         <thead>
           <tr>
@@ -119,7 +119,7 @@
         </thead>
       <% end %>
       <tbody>
-        <%= render(@person.timecards.uniq) || raw("No timecards yet !") %>
+        <%= render(@person.timecards.most_recent.uniq) || raw("No timecards yet !") %>
       </tbody>
     </table>
   </div>
