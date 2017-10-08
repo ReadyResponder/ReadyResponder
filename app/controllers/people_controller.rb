@@ -1,6 +1,8 @@
 class PeopleController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
+  before_action :manage_people_depts, only: [:applicants, :index]
+  before_action :load_all_depts, only: [:inactive, :everybody]
 
   before_action :set_referrer_path, only: [:new, :edit]
   before_action :set_return_path, only: [:show]
@@ -15,8 +17,9 @@ class PeopleController < ApplicationController
 
   def department
     dept = Department.find(params[:dept_id])
+    @available_departments = [dept]
     # TODO: more gracefully handle department not found
-    head 404 and return if dept.nil?
+    head 404 and return if dept.nil? || dept.status == "Inactive"
 
     @people = Person.active.where(department_id: dept.id)
     @page_title = dept.name
@@ -24,47 +27,23 @@ class PeopleController < ApplicationController
   end
 
   def everybody
-    @people = Person
+    @people = Person.all
     @page_title = "Everybody"
-    render :template => "people/index"
-  end
-
-  def other
-    @people = Person.active.joins(:department).where("departments.manage_people": false)
-    @page_title = "Other Active People"
-    render :template => "people/index"
   end
 
   def applicants
-    @people = Person.applicants
+    @people = Person.applicants + Person.prospects
     @page_title = "Applicants"
   end
 
-  def prospects
-    @people = Person.prospects
-    @page_title = "Prospects"
-  end
-
-  def declined
-    @people = Person.declined
-    @page_title = "Declined"
-    render :template => "people/index"
-  end
-
-  def leave
-    @people = Person.leave
-    @page_title = "People On-Leave"
-    render :template => "people/index"
-  end
-
   def inactive
-    @people = Person.inactive
+    @people = Person.inactive + Person.declined
     @page_title = "Inactive People"
-    render :template => "people/index"
   end
 
   def index
-    @people = Person.active.joins(:department).where("departments.manage_people": true)
+    @people = Person.active.joins(:department).accessible_by(current_ability) +
+              Person.leave.joins(:department).accessible_by(current_ability)
     @page_title = "All Active"
     respond_to do |format|
       format.html # index.html.erb
@@ -147,6 +126,15 @@ class PeopleController < ApplicationController
   end
 
   private
+
+  def manage_people_depts
+    @available_departments = Department.where(manage_people: true)
+  end
+
+  def load_all_depts
+    @available_departments = Department.all
+  end
+
   def set_return_path
     if request.referer
       (session[:before_show] = request.referer unless request.referer.include? "edit")

@@ -1,11 +1,7 @@
 <%= render 'shared/filter_by_dept' %>
-<table id="people" class="datatable table table-striped table-bordered" >
+<table id="everybody" class="datatable table table-striped table-bordered" >
   <caption>
     <h3 class="data-table-title"><%= @page_title %></h3>
-    <!-- decides whether or not to render create event button  -->
-    <% if can? :create, Person %>
-      <a role="button" class='js-create-person add-btn btn' href='<%= new_person_path %>'><p>+</p></a>
-    <% end %>
   </caption>
   <thead>
     <tr>

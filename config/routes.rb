@@ -6,12 +6,8 @@ Rails.application.routes.draw do
   resources :people do
     collection do
       get 'inactive'
-      get 'leave'
-      get 'other'
       get 'everybody'
       get 'applicants'
-      get 'prospects'
-      get 'declined'
       get 'signin'
       get 'roster'
       get 'department/:dept_id', action: "department", as: :department

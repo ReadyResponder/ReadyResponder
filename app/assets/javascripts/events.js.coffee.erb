@@ -1,5 +1,3 @@
-<% self.class.include Rails.application.routes.url_helpers %>
-
 jQuery ->
   $("#event_title").focus()
   $eventTable = $('#events').dataTable
@@ -12,8 +10,7 @@ jQuery ->
                 ]
 
 # sets checkbox elements within #events dataTable()
-  $('#events_wrapper > div.event-table-info > div > div.dataTables_scrollHead > div > table > caption').append('<a role="button" class="add-btn btn" href="<%= new_event_path %>"><p>+</p></a>
-  <div><label>Current:<input type="checkbox" id="js-events-current-checkbox" class="event-filter" value="current"></label>
+  $('#events_wrapper > div.event-table-info > div > div.dataTables_scrollHead > div > table > caption').append('<div><label>Current:<input type="checkbox" id="js-events-current-checkbox" class="event-filter" value="current"></label>
   <label>Recent:(Last 13 Months)<input type="checkbox" id="js-events-recent-checkbox" class="event-filter" value="recent"></label></div>')
 
 #logic handling checkbox filtering with dataTables()

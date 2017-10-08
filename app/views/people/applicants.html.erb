@@ -1,3 +1,31 @@
-<!-- renders table data and then actual dataTable()  -->
-<%= render 'people/table_data/applicants_people', events: @people %>
-<%= render 'shared/data_table_template', table_title: @page_title, table_id: "applicants", table_class: "datatable" %>
+<table id="applicants" class="datatable table table-striped table-bordered">
+  <caption>
+    <h3 class="data-table-title"><%= @page_title %></h3>
+    <!-- decides whether or not to render create event button  -->
+    <% if can? :create, Person %>
+      <a role="button" class='js-create-person add-btn btn' href='<%= new_person_path %>'><p>+</p></a>
+    <% end %>
+  </caption>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Department</th>
+      <th>Application date</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @people.each do |person| %>
+      <tr>
+        <td><%= link_to person.fullname, person %></td>
+        <td><%= person.dept_shortname %></td>
+        <td title=<%= person.application_date %> >
+          <%= distance_of_time_in_words(Date.today, person.application_date) + ' ago' if person.application_date %>
+        </td>
+        <td><%= person.status %></td>
+        <td><%= table_button_link 'Edit', edit_person_path(person) if can? :update, person %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

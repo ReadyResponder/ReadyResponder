@@ -16,22 +16,12 @@
           <li class="nav-item dropdown">
             <a class="nav-link split-dropdown dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
             <ul class="split-dropdown dropdown-menu">
-              <% Department.active.managing_people.order("shortname ASC").each do |dept| %>
-                <%= nav_link dept.shortname, department_people_path(dept) %>
-              <% end %>
-              <%= nav_link "Active", people_path %>
-              <%= nav_link "Others Active", other_people_path %>
-              <%= nav_link "Everybody", everybody_people_path %>
-              <li role="separator" class="divider"></li>
               <%= nav_link "Applicants", applicants_people_path %>
-              <%= nav_link "Prospects", prospects_people_path %>
-              <li role="separator" class="divider"></li>
-              <%= nav_link "Leave", leave_people_path %>
               <%= nav_link "Inactive", inactive_people_path %>
-              <%= nav_link "Declined", declined_people_path %>
+              <%= nav_link "Everybody", everybody_people_path %>
             </ul>
           </li>
-          
+
           <% if can? :read, Event %>
             <%= nav_link "Events", events_path %>
             <li class="nav-item dropdown">

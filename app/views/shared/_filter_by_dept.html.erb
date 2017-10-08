@@ -1,0 +1,6 @@
+<div class="data-table-departments">
+  <h5>Filter by department:</h5>
+  <%= collection_check_boxes(:department, :id, @available_departments, :shortname, :shortname) do |b| %>
+    <%= b.label("data-value": b.value ) { b.check_box(checked: true, class: 'department-filter') + b.text } %>
+  <% end %>
+</div>
