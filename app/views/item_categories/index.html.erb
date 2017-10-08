@@ -18,3 +18,34 @@
     <% end %>
   </tbody>
 </table>
+
+<% if @repairs.length > 0 %>
+  <hr />
+  <h3> Repairs</h3>
+  <table id="repair_items" class="generic_datatable table table-striped table table-bordered">
+    <thead>
+      <tr>
+        <th>Item Name</th>
+        <th>Service Date</th>
+        <th>Status</th>
+        <th>Description</th>
+        <th>Repairer</th>
+        <th>Cost</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @repairs.each do |repair|%>
+        <tr>
+          <td><%= link_to repair.item.name, item_path(repair.item) %></td>
+          <td><%= repair.service_date%></td>
+          <td><%= repair.status %></td>
+          <td><%= repair.description %></td>
+          <td><%= repair.repairer_name %></td>
+          <td><%= repair.cost %></td>
+          <td><%= table_button_link 'Edit', edit_repair_path(repair) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
