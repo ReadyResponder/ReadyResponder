@@ -98,7 +98,6 @@ GEM
     chromedriver-helper (1.0.0)
       archive-zip (~> 0.7.0)
       nokogiri (~> 1.6)
-    cliver (0.3.2)
     cocoon (1.2.10)
     coderay (1.1.1)
     coffee-rails (4.2.1)
