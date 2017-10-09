@@ -1,19 +1,81 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
-
 jQuery ->
   $("#person_firstname").focus();
-  $('#people').dataTable
-    columnDefs: [
-                  ## https://datatables.net/extensions/responsive/priority
-                  { responsivePriority: 1, targets: [1, 3, 7] },
-                  { visible: false, targets: [0, 2, 4]  },
-                  { orderData: 1, targets: 1 }
-                  { orderData: 3, targets: 1 }
-                  { orderData: 5, targets: 6 }
-                  { orderable: false, targets: -1 }
-                ]
+  tableOptions = columnDefs: [
+                ## https://datatables.net/extensions/responsive/priority
+                { responsivePriority: 1, targets: [1, 3, 7] },
+                { visible: false, targets: [0, 2, 4]  },
+                { orderData: 1, targets: 1 }
+                { orderData: 3, targets: 1 }
+                { orderData: 5, targets: 6 }
+                { orderable: false, targets: -1 }
+              ]
+
+  # initialize people dataTables()
+  $peopleTable = $('#people').dataTable(tableOptions);
+  $everybodyTable = $('#everybody').dataTable(tableOptions);
+  $inactiveTable = $('#inactive').dataTable(tableOptions);
+
+  #logic handling department filtering with dataTables()
+  # dept checkbox filters rendered in shared
+  $.fn.dataTableExt.afnFiltering.push((settings, data) ->
+    # add table ID to array if you would like it to be included in filtering
+    allowedTables = ['people', 'everybody', 'inactive'];
+    if ( $.inArray( settings.nTable.getAttribute('id'), allowedTables ) == -1 )
+       # if not table should be ignored
+       return true;
+    checked = [];
+    department = data[6];
+    $('.department-filter').each ->
+      $this = $(this);
+      if $this.is(':checked')
+        checked.push($this);
+    if checked.length
+      returnValue = false;
+      $.each(checked, (i, dept) ->
+        if department.includes(dept.val())
+          returnValue = true;
+          return false;
+          )
+    else
+      return false;
+    return returnValue;
+    )
+
+#logic handling internal checkboxes to dataTable()
+  $.fn.dataTableExt.afnFiltering.push((settings, data) ->
+    # add table ID to array if you would like it to be included in filtering
+    allowedTables = ['people'];
+    if ( $.inArray( settings.nTable.getAttribute('id'), allowedTables ) == -1 )
+       # if not table should be ignored
+       return true;
+    checked = [];
+    status = data[11];
+    $('.people-filter').each ->
+      $this = $(this)
+      if $this.is(':checked')
+        checked.push($this)
+    if checked.length
+      returnValue = false;
+      $.each(checked, (i, element) ->
+        if element.val() is 'active' and (status is 'Active') or
+           element.val() is 'onLeave' and (status is 'Leave of Absence')
+          returnValue = true;
+          return false;
+          )
+    else
+      return false;
+    return returnValue;
+    )
+
+  #re-draws table after checking or unchecking a filter checkbox
+  $('.people-filter, .department-filter').change ->
+    $peopleTable.fnDraw();
+    $everybodyTable.fnDraw();
+    $inactiveTable.fnDraw();
+
   $('#person_zipcode').change ->
     code = $(@).val()
     $.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + code + "&key=<%= GOOGLE_MAPS_API_KEY %>", (data) ->
@@ -24,3 +86,6 @@ jQuery ->
       $('#person_state').val state
       return
     )
+
+  $(document).ready ->
+    $("#js-people-active-checkbox").click()

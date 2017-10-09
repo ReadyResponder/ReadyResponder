@@ -1,0 +1,41 @@
+# Place all the behaviors and hooks related to the matching controller here.
+# All this logic will automatically be available in application.js.
+# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+jQuery ->
+  $applicantTable = $('#applicants').dataTable
+                      columnDefs: [
+                                    { orderable: false}
+                                  ],
+
+  #logic handling internal checkboxes to dataTable()
+  $.fn.dataTableExt.afnFiltering.push((settings, data) ->
+    # add table ID to array if you would like it to be included in filtering
+    allowedTables = ['applicants'];
+    if ( $.inArray( settings.nTable.getAttribute('id'), allowedTables ) == -1 )
+       # if not table should be ignored
+       return true;
+    checked = []
+    status = data[3]
+    $('.people-filter').each ->
+      $this = $(this)
+      if $this.is(':checked')
+        checked.push($this)
+    if checked.length
+      returnValue = false
+      $.each(checked, (i, element) ->
+        if element.val() is 'applicant' and (status is 'Applicant') or
+           element.val() is 'prospect' and (status is 'Prospect')
+          returnValue = true;
+          return false;
+          )
+    else
+      return false
+    return returnValue
+    )
+
+  #re-draws table after checking or unchecking a filter checkbox
+  $('.people-filter').change ->
+    $applicantTable.fnDraw();
+
+  $(document).ready ->
+    $("#js-people-applicant-checkbox").click()
