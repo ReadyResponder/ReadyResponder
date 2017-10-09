@@ -1,16 +1,7 @@
-
-<table id="people" class="datatable table table-striped table-bordered" >
+<table id="everybody" class="datatable table table-striped table-bordered" >
   <caption>
     <h3 class="data-table-title"><%= @page_title %></h3>
-    <!-- decides whether or not to render create event button  -->
-    <% if can? :create, Person %>
-      <a role="button" class='js-create-person add-btn btn' href='<%= new_person_path %>'><p>+</p></a>
-    <% end %>
     <%= render 'shared/filter_by_dept' %>
-    <div>
-      <label>Active:<input type="checkbox" id="js-people-active-checkbox" class="people-filter" value="active"></label>
-      <label>On-leave:<input type="checkbox" id="js-people-onLeave-checkbox" class="people-filter" value="onLeave"></label>
-    </div>
   </caption>
   <thead>
     <tr>

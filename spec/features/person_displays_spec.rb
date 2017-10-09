@@ -4,10 +4,11 @@ RSpec.describe "Person" do
   before(:each) { sign_in_as('Editor') }
 
   describe "views" do
-    before (:each) do
+    before(:each) do
+      Department.destroy_all
       aux = create(:department, name: "Police", shortname: "BAUX")
       cert = create(:department, name: "CERT", shortname: "CERT")
-      dpw = create(:department, shortname: "DPW", manage_people: false)
+      @dpw = create(:department, shortname: "DPW", manage_people: false)
 
       cj = create(:person, firstname: 'CJ',  department: aux)
       cj.channels << create(:phone, channel_type: 'Phone', content: '+19785551212', category: "Mobile Phone")
@@ -18,126 +19,100 @@ RSpec.describe "Person" do
       create(:person, firstname: 'Indy', status: 'Inactive' )
       create(:person, firstname: 'Leona', status: 'Leave of Absence' )
       create(:person, firstname: 'Donna', status: 'Declined' )
-      create(:person, firstname: 'Oscar', status: 'Active',  department: dpw)
+      create(:person, firstname: 'Oscar', status: 'Active',  department: @dpw)
+      @people_manage_depts = Department.where(manage_people: true)
+      @all_depts = Department.all
     end
 
-    it "returns the index page" do
+    it "returns page for All Active people", js: true do
       visit people_path
-      expect(page).to have_content('People')
+      # Active checked by default
+      expect(page).to have_content('People') # This is in the nav bar
+      expect(page).to have_content('All Active')
+      expect(page).to have_content('Active:')
+      expect(page).to have_content('On-leave:')
+      expect(page).to have_checked_field('Active')
+      expect(page).to have_unchecked_field('On-leave')
+      within(".data-table-departments") do
+        expect(page).to have_content('Departments:')
+        @people_manage_depts.each do |dept|
+          expect(page).to have_content(dept.shortname)
+        end
+      end
+      expect(page).not_to have_content(@dpw.shortname)
       expect(page).to have_content('Home') # This is in the nav bar
       expect(page).to have_content('CJ')
-      expect(page).to have_content('CERT')
-      expect(page).to have_content('Sierra')
-      expect(page).to_not have_content('Adam') # Should not show applicant
-      expect(page).to_not have_content('Priscilla')
-      expect(page).to_not have_content('Indy')
-      expect(page).to_not have_content('Leona')
-      expect(page).to_not have_content('Oscar')
-    end
+      expect(page).to have_content('Sierra') # Should only show active people from depts managed by people
+      expect(page).not_to have_content('Adam')
+      expect(page).not_to have_content('Priscilla')
+      expect(page).not_to have_content('Indy')
+      expect(page).not_to have_content('Leona')
+      expect(page).not_to have_content('Oscar')
+      page.has_css?('add-btn')
 
-    it "returns a page for Police" do
-      visit department_people_path(Department.find_by(shortname: "BAUX").id)
-      expect(page).to have_content('Police')
-      expect(page).to have_content('Home') # This is in the nav bar
-      expect(page).to have_content('CJ')
-      expect(page).not_to have_content('Sierra')
-      expect(page).not_to have_content('Adam')
-      expect(page).not_to have_content('Priscilla')
-      expect(page).not_to have_content('Indy')
-      expect(page).not_to have_content('Leona')
-      expect(page).not_to have_content('Oscar')
-   end
-
-    it "returns a page for CERT" do
-      visit department_people_path(Department.find_by(shortname: "CERT").id)
-      expect(page).to have_content('CERT')
-      expect(page).to have_content('Home') # This is in the nav bar
-      expect(page).not_to have_content('CJ')
-      expect(page).to have_content('Sierra')
-      expect(page).not_to have_content('Adam')
-      expect(page).not_to have_content('Priscilla')
-      expect(page).not_to have_content('Indy')
-      expect(page).not_to have_content('Oscar')
-      expect(page).not_to have_content('Leona')
-    end
-
-    it "returns a page for Applicants" do
-      visit applicants_people_path
-      expect(page).to have_content('Applicants')
-      expect(page).to have_content('Home') # This is in the nav bar
-      expect(page).not_to have_content('CJ')
-      expect(page).not_to have_content('Sierra')
-      expect(page).to have_content('Adam')
-      expect(page).not_to have_content('Priscilla')
-      expect(page).not_to have_content('Indy')
-      expect(page).not_to have_content('Leona')
-      expect(page).not_to have_content('Oscar')
-    end
-
-    it "returns a page for Prospects" do
-      visit prospects_people_path
-      expect(page).to have_content('Prospects')
-      expect(page).to have_content('Home') # This is in the nav bar
-      expect(page).not_to have_content('CJ')
-      expect(page).not_to have_content('Sierra')
-      expect(page).not_to have_content('Adam')
-      expect(page).to have_content('Priscilla')
-      expect(page).not_to have_content('Indy')
-      expect(page).not_to have_content('Leona')
-      expect(page).not_to have_content('Oscar')
-    end
-
-    it "returns a page for Inactive" do
-      visit inactive_people_path
-      expect(page).to have_content('Inactive')
-      expect(page).to have_content('Home') # This is in the nav bar
-      expect(page).not_to have_content('CJ')
-      expect(page).not_to have_content('Sierra')
-      expect(page).not_to have_content('Adam')
-      expect(page).not_to have_content('Priscilla')
-      expect(page).to have_content('Indy')
-      expect(page).not_to have_content('Leona')
-      expect(page).not_to have_content('Oscar')
-    end
-    it "returns a page for Declined" do
-      find('#navbar').click_link('Declined')
-      expect(page).to have_content('Declined')
-      expect(page).to have_content('Home') # This is in the nav bar
-      expect(page).not_to have_content('CJ')
-      expect(page).not_to have_content('Sierra')
-      expect(page).not_to have_content('Adam')
-      expect(page).not_to have_content('Priscilla')
-      expect(page).not_to have_content('Indy')
-      expect(page).not_to have_content('Leona')
-      expect(page).to have_content('Donna')
-      expect(page).not_to have_content('Oscar')
-    end
-    it "returns a page for on leave" do
-      find('#navbar').click_link('Leave')
-      expect(page).to have_content('On-Leave')
-      expect(page).to have_content('Home') # This is in the nav bar
-      expect(page).not_to have_content('CJ')
-      expect(page).not_to have_content('Sierra')
-      expect(page).not_to have_content('Adam')
-      expect(page).not_to have_content('Priscilla')
-      expect(page).not_to have_content('Indy')
+      check "js-people-onLeave-checkbox"
       expect(page).to have_content('Leona')
-      expect(page).not_to have_content('Oscar')
     end
 
-    it "returns a page for other" do
-      find('#navbar').click_link('Others Active')
-      expect(page).to have_content('Others')
+    it "returns a page for Applicants", js: true do
+      visit applicants_people_path
+      expect(page).to have_content('People') # This is in the nav bar
+      expect(page).to have_content('Applicants')
+      expect(page).to have_content('Applicants:')
+      expect(page).to have_content('Prospects:')
+      expect(page).not_to have_selector(".data-table-departments")
       expect(page).to have_content('Home') # This is in the nav bar
-      expect(page).not_to have_content('CJ')
+      expect(page).to have_content('Adam') # Should only show applicants by default
       expect(page).not_to have_content('Sierra')
-      expect(page).not_to have_content('Adam')
       expect(page).not_to have_content('Priscilla')
       expect(page).not_to have_content('Indy')
       expect(page).not_to have_content('Leona')
-      expect(page).to have_content('Oscar')
+      expect(page).not_to have_content('Oscar')
+      page.has_css?('add-btn')
+
+      check "js-people-prospect-checkbox"
+      expect(page).to have_content('Priscilla')
     end
 
+    it "returns a page for Inactive", js: true do
+      visit inactive_people_path
+      expect(page).to have_content('People') # This is in the nav bar
+      expect(page).to have_content('Inactive People')
+      within(".data-table-departments") do
+        expect(page).to have_content('Departments:')
+        @all_depts.each do |dept|
+          expect(page).to have_content(dept.shortname)
+        end
+      end
+      expect(page).to have_content('Home') # This is in the nav bar
+      expect(page).to have_content('Indy') # Should only show inactive by default
+      expect(page).not_to have_content('Adam')
+      expect(page).not_to have_content('Sierra')
+      expect(page).not_to have_content('Priscilla')
+      expect(page).not_to have_content('Leona')
+      expect(page).not_to have_content('Oscar')
+      page.has_no_css?('add-btn')
+    end
+
+    it "returns a page for Everybody", js: true do
+      visit everybody_people_path
+      expect(page).to have_content('People') # This is in the nav bar
+      expect(page).to have_content('Everybody')
+      within(".data-table-departments") do
+        expect(page).to have_content('Departments:')
+        @all_depts.each do |dept|
+          expect(page).to have_content(dept.shortname)
+        end
+      end
+      expect(page).to have_content('Home') # This is in the nav bar
+      expect(page).to have_content('Indy') # Should show all people
+      expect(page).to have_content('Adam')
+      expect(page).to have_content('Sierra')
+      expect(page).to have_content('Priscilla')
+      expect(page).to have_content('Leona')
+      expect(page).to have_content('Oscar')
+      page.has_no_css?('add-btn')
+    end
   end
 
   describe "forms should display" do
@@ -209,19 +184,19 @@ RSpec.describe "Person" do
     it "redirects to previous category" do
       cert = create(:department, name: "CERT", shortname: "CERT")
       person = create(:person, department: cert)
-      visit department_people_path(Department.find_by(shortname: "CERT").id)
+      visit people_path
 
       click_link(person.name)
 
       click_on('Return to Listing')
 
-      expect(current_path).to eq(department_people_path(Department.find_by(shortname: "CERT").id))
+      expect(current_path).to eq(people_path)
     end
 
     it "redirects properly after edit" do
       cert = create(:department, name: "CERT", shortname: "CERT")
       person = create(:person, department: cert)
-      visit department_people_path(Department.find_by(shortname: "CERT").id)
+      visit people_path
 
       click_link(person.name)
 
@@ -234,7 +209,7 @@ RSpec.describe "Person" do
 
       click_on('Return to Listing')
 
-      expect(current_path).to eq(department_people_path(Department.find_by(shortname: "CERT").id))
+      expect(current_path).to eq(people_path)
       expect(page).to have_content("Jane Doe")
     end
   end
