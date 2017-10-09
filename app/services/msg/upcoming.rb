@@ -3,7 +3,7 @@ class Msg::Upcoming < Msg::Base
   def respond
     events = Event.upcoming.limit(10)
     response = ""
-    events.each do |event|
+    @person.department.events.each do |event|
       if event.people.include?(@person)
         response += "🔷 "
       elsif event.available_people.include?(@person)
