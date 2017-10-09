@@ -1,4 +1,6 @@
 class Department < ActiveRecord::Base
+  has_paper_trail
+
   serialize :division1, Array
   serialize :division2, Array
   attr_accessible :contact_id, :description, :manage_items, :manage_people,
