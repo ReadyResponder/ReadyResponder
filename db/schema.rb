@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171002095035) do
+ActiveRecord::Schema.define(version: 20171009043433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -169,6 +169,7 @@ ActiveRecord::Schema.define(version: 20171002095035) do
     t.string   "id_code"
     t.boolean  "is_template",                         default: false
     t.integer  "template_id"
+    t.string   "min_title",                           default: "Recruit"
   end
 
   create_table "grants", force: :cascade do |t|

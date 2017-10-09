@@ -4,6 +4,7 @@
   <th>Start time</th>
   <th>End time</th>
   <th>Duration</th>
+  <th>Minimum Rank</th>
   <th>Status</th>
   <th></th>
 <% end %>
@@ -19,6 +20,7 @@
         <%= e.end_time.strftime('%a, %b %d, %y %k:%M') if e.end_time  %>
       </time></td>
       <td><%= e.duration %></td>
+      <td><%= e.min_title %></td>
       <td><%= e.status %></td>
       <td><%= table_button_link 'Edit', edit_event_path(e) unless cannot? :update, e %></td>
     </tr>
