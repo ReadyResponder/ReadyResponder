@@ -91,7 +91,6 @@
     <ul>
       <%= render(@person.items) || raw("No Items Found !") %>
     </ul>
-    <%= independent_button_link 'New Item', new_person_item_path(@person) if can? :create, Item %>
   </div>
 
   <h3>Availabilities (<%= @person.availabilities.uniq.count %>)</h3>
