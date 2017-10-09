@@ -44,7 +44,7 @@ class PeopleController < ApplicationController
   def index
     @people = Person.active.joins(:department).accessible_by(current_ability) +
               Person.leave.joins(:department).accessible_by(current_ability)
-    @page_title = "All Active"
+    @page_title = "All Active People"
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @people }

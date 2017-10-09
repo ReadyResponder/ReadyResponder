@@ -34,7 +34,7 @@ RSpec.describe "Person" do
       expect(page).to have_checked_field('Active')
       expect(page).to have_unchecked_field('On-leave')
       within(".data-table-departments") do
-        expect(page).to have_content('Filter by department:')
+        expect(page).to have_content('Departments:')
         @people_manage_depts.each do |dept|
           expect(page).to have_content(dept.shortname)
         end
@@ -119,7 +119,7 @@ RSpec.describe "Person" do
       expect(page).to have_content('People') # This is in the nav bar
       expect(page).to have_content('Inactive People')
       within(".data-table-departments") do
-        expect(page).to have_content('Filter by department:')
+        expect(page).to have_content('Departments:')
         @all_depts.each do |dept|
           expect(page).to have_content(dept.shortname)
         end
@@ -139,7 +139,7 @@ RSpec.describe "Person" do
       expect(page).to have_content('People') # This is in the nav bar
       expect(page).to have_content('Everybody')
       within(".data-table-departments") do
-        expect(page).to have_content('Filter by department:')
+        expect(page).to have_content('Departments:')
         @all_depts.each do |dept|
           expect(page).to have_content(dept.shortname)
         end
