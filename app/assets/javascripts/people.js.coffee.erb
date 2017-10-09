@@ -3,7 +3,6 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 jQuery ->
   $("#person_firstname").focus();
-
   tableOptions = columnDefs: [
                 ## https://datatables.net/extensions/responsive/priority
                 { responsivePriority: 1, targets: [1, 3, 7] },
@@ -18,10 +17,6 @@ jQuery ->
   $peopleTable = $('#people').dataTable(tableOptions);
   $everybodyTable = $('#everybody').dataTable(tableOptions);
   $inactiveTable = $('#inactive').dataTable(tableOptions);
-
-  # renders new people button and checkboxes within people dataTable()
-  $('#people_wrapper > div.event-table-info > div > div.dataTables_scrollHead > div > table > caption').append('<div><label>Active:<input type="checkbox" id="js-people-active-checkbox" class="people-filter" value="active"></label>
-  <label>On-leave:<input type="checkbox" id="js-people-onLeave-checkbox" class="people-filter" value="onLeave"></label></div>')
 
   #logic handling department filtering with dataTables()
   # dept checkbox filters rendered in shared

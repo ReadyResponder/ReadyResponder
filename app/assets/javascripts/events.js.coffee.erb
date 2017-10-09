@@ -9,10 +9,6 @@ jQuery ->
                   { visible: false, targets: [2,4] }
                 ]
 
-# sets checkbox elements within #events dataTable()
-  $('#events_wrapper > div.event-table-info > div > div.dataTables_scrollHead > div > table > caption').append('<div><label>Current:<input type="checkbox" id="js-events-current-checkbox" class="event-filter" value="current"></label>
-  <label>Recent:(Last 13 Months)<input type="checkbox" id="js-events-recent-checkbox" class="event-filter" value="recent"></label></div>')
-
 #logic handling checkbox filtering with dataTables()
   $.fn.dataTableExt.afnFiltering.push((settings, data) ->
     # add table ID to array if you would like it to be included in filtering

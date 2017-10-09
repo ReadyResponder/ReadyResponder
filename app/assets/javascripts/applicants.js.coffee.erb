@@ -7,10 +7,6 @@ jQuery ->
                                     { orderable: false}
                                   ],
 
-  # sets checkbox elements within #events dataTable()
-  $('#applicants_wrapper > div.event-table-info > div > div.dataTables_scrollHead > div > table > caption').append('<div><label>Applicants:<input type="checkbox" id="js-people-applicant-checkbox" class="people-filter" value="applicant"></label>
-  <label>Prospects:<input type="checkbox" id="js-people-prospect-checkbox" class="people-filter" value="prospect"></label></div>')
-
   #logic handling internal checkboxes to dataTable()
   $.fn.dataTableExt.afnFiltering.push((settings, data) ->
     # add table ID to array if you would like it to be included in filtering

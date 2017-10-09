@@ -117,7 +117,7 @@ class PeopleController < ApplicationController
   private
 
   def manage_people_depts
-    @available_departments = Department.where(manage_people: true)
+    @available_departments = Department.active.where(manage_people: true)
   end
 
   def load_all_depts

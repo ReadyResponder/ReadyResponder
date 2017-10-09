@@ -5,6 +5,10 @@
     <% if can? :create, Person %>
       <a role="button" class='js-create-person add-btn btn' href='<%= new_person_path %>'><p>+</p></a>
     <% end %>
+    <div>
+      <label>Applicants:<input type="checkbox" id="js-people-applicant-checkbox" class="people-filter" value="applicant"></label>
+      <label>Prospects:<input type="checkbox" id="js-people-prospect-checkbox" class="people-filter" value="prospect"></label>
+    </div>
   </caption>
   <thead>
     <tr>
