@@ -15,17 +15,6 @@ class PeopleController < ApplicationController
     render :layout => "print_signin"
   end
 
-  def department
-    dept = Department.find(params[:dept_id])
-    @available_departments = [dept]
-    # TODO: more gracefully handle department not found
-    head 404 and return if dept.nil? || dept.status == "Inactive"
-
-    @people = Person.active.where(department_id: dept.id)
-    @page_title = dept.name
-    render :template => "people/index"
-  end
-
   def everybody
     @people = Person.all
     @page_title = "Everybody"
