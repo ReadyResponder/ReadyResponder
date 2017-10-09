@@ -42,6 +42,9 @@ applications used to manage your ruby version are:
   [ruby-build](https://github.com/rbenv/ruby-build#readme) plugin
 * [chruby](https://github.com/postmodern/chruby#readme)
 
+The exact version of Ruby that ReadyResponder is using is specified in the
+[.ruby-version](.ruby-version) file.
+
 After setting up ruby on your system, install the `bundler` gem with `gem
 install bundler`.
 
