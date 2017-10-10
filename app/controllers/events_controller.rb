@@ -18,7 +18,6 @@ class EventsController < ApplicationController
   end
 
   def show
-    @timecards = Timecard.all
     @page_title = @event.title
     @last_editor = last_editor(@event)
   end
