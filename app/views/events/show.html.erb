@@ -39,6 +39,7 @@
     <li class="active"><a class='event-tabs-anchor' href="#event-task-tab" data-toggle="tab">Tasks</a></li>
     <li><a class='event-tabs-anchor' href="#event-availability-tab" data-toggle="tab">Availabilities</a></li>
     <li><a class='event-tabs-anchor' href='#event-notification-tab' data-toggle="tab">Notifications</a></li>
+    <li><a class='event-tabs-anchor' href='#event-timecards-tab' data-toggle="tab">Timecards</a></li>
   </ul>
 
   <div class="tab-content">
@@ -61,6 +62,9 @@
     <div class="tab-pane" id="event-notification-tab">
       <%= render(partial: 'notifications/notifications_table',
                  locals: { notifications: @event.notifications }) %>
+    </div>
+    <div class="tab-pane" id="event-timecards-tab">
+      <%= render 'timecards/timecards_table', timecards: @event.timecards %>
     </div>
   </div>
 </div>

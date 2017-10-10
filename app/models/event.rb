@@ -132,6 +132,10 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def timecards
+    Timecard.where('(start_time > ? OR end_time > ?) AND (start_time < ? OR end_time < ?)', start_time,start_time,end_time,end_time)
+  end
+
 private
   def calc_duration #This is also used in timecards; it should be extracted out
      if !(start_time.blank?) and !(end_time.blank?)

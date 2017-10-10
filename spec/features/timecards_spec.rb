@@ -106,6 +106,16 @@ RSpec.describe Timecard do
         expect(page).not_to have_button('Verify')
         expect(page).not_to have_content('Unverified')
       end
+
+      it 'views timecards from event show', js: true do
+        @event = create(:event, start_time: 1.day.ago, end_time: 1.day.from_now)
+        @event_timecard = create(:timecard, start_time: Time.current, end_time: 60.minutes.from_now)
+        visit event_path(@event)
+
+        click_link 'Timecards'
+        expect(page).not_to have_content(@tc.person.name)
+        expect(page).to have_content(@event_timecard.person.name)
+      end
     end
 
     context "unable to verify timecard" do

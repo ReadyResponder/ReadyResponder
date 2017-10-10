@@ -20,6 +20,7 @@ class TimecardsController < ApplicationController
   end
 
   def edit
+    session[:return_to] ||= request.referer
   end
 
   def create
@@ -34,7 +35,7 @@ class TimecardsController < ApplicationController
 
   def update
     if @timecard.update_attributes(params[:timecard])
-      redirect_to timecards_path, notice: 'Timecard was successfully updated.'
+      redirect_to session.delete(:return_to) || timecards_path, notice: 'Timecard was successfully updated.'
     else
       render action: "edit"
     end

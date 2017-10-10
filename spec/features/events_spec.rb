@@ -8,7 +8,7 @@ RSpec.describe "Events" do
     @recent = create(:event, title: "recent title")
     @archive = create(:event, title: "archive title", status: "Completed")
   end
-  
+
   # removed sidebar so disabling this test for now
   # get_basic_editor_views('event',['Training', 'Status'])
 
