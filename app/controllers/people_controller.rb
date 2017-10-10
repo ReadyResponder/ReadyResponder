@@ -56,8 +56,9 @@ class PeopleController < ApplicationController
     @person.emails.build(category: 'E-Mail', status: 'OK', usage: '1-All')
     @person.phones.build(category: "Mobile Phone", status: "OK", usage: "1-All")
 
+    # Set default department if there is only one active department
     departments = Department.active.managing_people
-    if @person.department.nil? && departments.count == 1
+    if departments.count == 1
       @person.department = departments.first
     end
 

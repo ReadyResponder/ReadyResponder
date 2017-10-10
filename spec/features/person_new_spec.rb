@@ -9,8 +9,6 @@ RSpec.feature "On new person page" do
     fill_in 'user_email', :with => somebody.email
     fill_in 'user_password', :with => somebody.password
     click_on 'Sign in'
-    aux = create(:department, shortname: "BAUX")
-    cert = create(:department, shortname: "CERT")
   end
 
   scenario "default department should be selected when there is only one active department", js: true do
@@ -23,8 +21,8 @@ RSpec.feature "On new person page" do
 
   scenario "department should be empty when there are more than one active department", js: true do
     Department.destroy_all
-    department1 = create(:department, :name => "dep1")
-    department2 = create(:department, :name => "dep2")
+    create(:department, shortname: "BAUX")
+    create(:department, shortname: "CERT")
     visit people_path
     find('.add-btn').click
     expect(page).to have_field("person_department_id", :with => "")
