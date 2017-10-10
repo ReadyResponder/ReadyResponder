@@ -48,8 +48,6 @@ RSpec.describe Event do
     expect(@event.id_code).to eq("howdy")
   end
 
-
-
   context "finds the correct events as concurrent" do
     it "doesn't find an old event" do
       @old_event = create(:event, id_code: "old", start_time: Time.at(111), end_time: Time.at(222))
