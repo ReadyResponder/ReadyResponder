@@ -7,10 +7,10 @@ class Timecard < ActiveRecord::Base
   belongs_to :person
 
   scope :verified, -> { where(:status => 'Verified')}
-  scope :most_recent, -> { order(start_time: :desc) }
+  scope :most_recent, -> { order(:start_time) }
   STATUS_CHOICES = ['Incomplete', 'Unverified', "Error", "Verified", "Cancelled"]
 
-  validates_presence_of :person_id
+  validates_presence_of :person
   validates_chronology :start_time, :end_time
 
   # validate :has_no_duplicate_timecard
