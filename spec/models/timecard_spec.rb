@@ -7,10 +7,11 @@ RSpec.describe Timecard do
 
   describe '.during_event' do
     it 'returns all timecards between start_time and end_time' do
-      past_timecard = create(:timecard, start_time: 2.days.ago, end_time: 1.day.ago)
-      future_timecard = create(:timecard, start_time: 2.days.from_now, end_time: 3.days.from_now)
-      in_between_event_timecard = create(:timecard, start_time: Time.current, end_time: 60.minutes.from_now)
-      overlapping_timecard = create(:timecard, start_time: 2.days.ago, end_time: 3.days.from_now)
+      person = create(:person)
+      past_timecard = create(:timecard, person: person, start_time: 2.days.ago, end_time: 1.day.ago)
+      future_timecard = create(:timecard, person: person, start_time: 2.days.from_now, end_time: 3.days.from_now)
+      in_between_event_timecard = create(:timecard, person: person, start_time: Time.current, end_time: 60.minutes.from_now)
+      overlapping_timecard = create(:timecard, person: person, start_time: 2.days.ago, end_time: 3.days.from_now)
 
       event = create(:event)
       event_timecards = Timecard.during_event(event)

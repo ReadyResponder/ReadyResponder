@@ -108,9 +108,10 @@ RSpec.describe Timecard do
       end
 
       it 'views timecards from event show', js: true do
+        @person = create(:person)
         @event = create(:event, start_time: 1.day.ago, end_time: 1.day.from_now)
-        @overlapping_timecard = create(:timecard, start_time: Time.current, end_time: 60.minutes.from_now)
-        @no_end_date = create(:timecard, start_time: Time.current, end_time: nil)
+        @overlapping_timecard = create(:timecard, person: @person, start_time: Time.current, end_time: 60.minutes.from_now)
+        @no_end_date = create(:timecard, person: @person, start_time: Time.current, end_time: nil)
         visit event_path(@event)
 
         click_link 'Timecards'
