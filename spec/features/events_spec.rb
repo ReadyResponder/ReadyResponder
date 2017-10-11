@@ -238,6 +238,7 @@ RSpec.describe "Events" do
       expect(page).to have_content(@event.title)
       expect(current_path).to eq(event_path(@event))
     end
+    
     it "the course if category is training", js: true do
       visit new_event_path
       select 'Patrol', :from => 'event_category'

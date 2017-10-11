@@ -35,7 +35,43 @@
   %>
 <% end %>
 
-<%= render 'timecards/timecards_table', timecards: @timecard.concurrent_events, title: 'Concurrent Events' %>
+<table class="generic-datatable table table-striped table-bordered" >
+  <caption>
+    <h3 class="data-table-title">Concurrent Events</h3>
+  </caption>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Location</th>
+      <th>Start time</th>
+      <th>Start time</th>
+      <th>End time</th>
+      <th>End time</th>
+      <th>Duration</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @timecard.concurrent_events.each do |e| %>
+      <tr class='<%= column_color_class(e) %>'>
+        <td><%= link_to e.title, e %></td>
+        <td><%= e.location %></td>
+        <td><%= e.start_time %></td>
+        <td><time>
+          <%= e.start_time.strftime('%a, %b %d, %y %k:%M') if e.start_time  %>
+        </time></td>
+        <td><%= e.end_time %></td>
+        <td><time>
+          <%= e.end_time.strftime('%a, %b %d, %y %k:%M') if e.end_time  %>
+        </time></td>
+        <td><%= e.duration %></td>
+        <td><%= e.status %></td>
+        <td><%= table_button_link 'Edit', edit_event_path(e) unless cannot? :update, e %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <p>
   Created <%= @timecard.created_at %><br/>
