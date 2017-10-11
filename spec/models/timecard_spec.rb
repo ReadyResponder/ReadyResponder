@@ -134,6 +134,27 @@ RSpec.describe Timecard do
     end
   end
 
+  describe 'older_than scope' do
+    context 'given 2 timecards with different start_times' do
+      before(:example) do
+        @timecard_with_7hours = create(:timecard, person: @cj,
+                                       start_time: 7.hours.ago)
+        @timecard_with_2hours = create(:timecard, person: @cj,
+                                       start_time: 2.hours.ago)
+      end
+
+      it 'returns timecards with a start_time older than 3 hours' do
+        expect(described_class.older_than(3)).to contain_exactly(
+          @timecard_with_7hours)
+      end
+
+      it 'returns timecards with a start_time older than 1 hour' do
+        expect(described_class.older_than(1)).to contain_exactly(
+          @timecard_with_7hours, @timecard_with_2hours)
+      end
+    end
+  end
+
   describe 'duration' do
     let(:timecard) { build(:timecard, person: @cj,
                            start_time: start_time, end_time: end_time) }

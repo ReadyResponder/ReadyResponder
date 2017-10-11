@@ -6,10 +6,17 @@ class Timecard < ActiveRecord::Base
 
   belongs_to :person
 
-  scope :verified,    -> { where(:status => 'Verified')}
+  scope :verified, -> { where(:status => 'Verified')}
+  
   scope :most_recent, -> { order(:start_time) }
-  scope :active,      -> { where(status: ['Incomplete', 'Unverified', 'Error', 'Verified']) }
-  scope :working,     -> { where(end_time: nil, status: 'Incomplete') }
+  
+  scope :active, -> { where(status: ['Incomplete', 'Unverified', 'Error', 'Verified']) }
+  
+  scope :working, -> { where(end_time: nil, status: 'Incomplete') }
+  
+  scope :older_than, -> (hour_amount)  do
+    where('start_time < ?', Time.now - hour_amount.hours)
+  end
 
   STATUS_CHOICES = ['Incomplete', 'Unverified', "Error", "Verified", "Cancelled"]
 
