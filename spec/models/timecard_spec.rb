@@ -122,6 +122,10 @@ RSpec.describe Timecard do
   end
 
   describe 'active scope' do
+    it 'returns a chainable relation' do
+      expect(described_class.active).to be_a_kind_of(ActiveRecord::Relation)
+    end
+    
     it 'returns all timecards that are not cancelled' do
       incomplete_timecard = create(:timecard, person: @cj, status: 'Incomplete')
       unverified_timecard = create(:timecard, person: @cj, status: 'Unverified')
@@ -135,6 +139,10 @@ RSpec.describe Timecard do
   end
 
   describe 'older_than scope' do
+    it 'returns a chainable relation' do
+      expect(described_class.older_than(1)).to be_a_kind_of(ActiveRecord::Relation)
+    end
+    
     context 'given 2 timecards with different start_times' do
       before(:example) do
         @timecard_with_7hours = create(:timecard, person: @cj,
@@ -151,6 +159,28 @@ RSpec.describe Timecard do
       it 'returns timecards with a start_time older than 1 hour' do
         expect(described_class.older_than(1)).to contain_exactly(
           @timecard_with_7hours, @timecard_with_2hours)
+      end
+    end
+  end
+
+  describe 'open_for_more_than scope' do
+    it 'returns a chainable relation' do
+      expect(described_class.open_for_more_than(1)).to be_a_kind_of(ActiveRecord::Relation)
+    end
+    
+    context 'given a timecard that was created more than 6 hours ago and
+             is considered :working and another one that is more recent 
+             but not working' do
+      before(:example) do
+        @working_timecard_with_7hours = create(:timecard, person: @cj,
+          status: 'Incomplete', start_time: 7.hours.ago, end_time: nil)
+        @recent_and_finished_timecard = create(:timecard, person: @cj,
+          start_time: 3.hours.ago, end_time: 1.hour.ago)
+      end
+
+      it 'returns the old but working timecard' do
+        expect(described_class.open_for_more_than(2)).to contain_exactly(
+          @working_timecard_with_7hours)
       end
     end
   end

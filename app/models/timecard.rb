@@ -18,6 +18,8 @@ class Timecard < ActiveRecord::Base
     where('start_time < ?', Time.now - hour_amount.hours)
   end
 
+  scope :open_for_more_than, -> (hour_amount) { working.older_than(hour_amount) }
+
   STATUS_CHOICES = ['Incomplete', 'Unverified', "Error", "Verified", "Cancelled"]
 
   validates_presence_of :person
