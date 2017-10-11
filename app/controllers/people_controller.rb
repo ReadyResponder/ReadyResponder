@@ -55,6 +55,13 @@ class PeopleController < ApplicationController
     @person = Person.new(status: cookies[:status], state: 'MA')
     @person.emails.build(category: 'E-Mail', status: 'OK', usage: '1-All')
     @person.phones.build(category: "Mobile Phone", status: "OK", usage: "1-All")
+
+    # Set default department if there is only one active department
+    departments = Department.active.managing_people
+    if departments.count == 1
+      @person.department = departments.first
+    end
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @person }
