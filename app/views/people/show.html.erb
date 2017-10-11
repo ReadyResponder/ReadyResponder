@@ -128,7 +128,7 @@
   <div>
     <ul>
       <%= render(:partial => "comments/comments_table_for_people",
-                 :locals => { :comments => @person.comments }) %>
+                 :locals => { :comments => @person.comments.recent }) %>
     </ul>
   </div>
 </div>

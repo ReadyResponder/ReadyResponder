@@ -73,7 +73,7 @@ class PeopleController < ApplicationController
   end
 
   def show
-    @person = Person.find(params[:id])
+    @person = Person.includes(:comments).find(params[:id])
     @page_title = @person.fullname
     @phones = @person.phones
     respond_to do |format|
