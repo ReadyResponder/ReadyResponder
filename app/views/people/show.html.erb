@@ -123,6 +123,14 @@
       </tbody>
     </table>
   </div>
+
+  <h3>Comments (<%= @person.comments.count %>)</h3>
+  <div>
+    <ul>
+      <%= render(:partial => "comments/comments_table_for_people",
+                 :locals => { :comments => @person.comments }) %>
+    </ul>
+  </div>
 </div>
 
 <% content_for :parking do %>
