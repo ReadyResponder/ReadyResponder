@@ -9,25 +9,21 @@ RSpec.describe Timecard do
     it { should belong_to(:person) }
   end
 
-  describe "creation" do
-    it "has a valid factory" do
-      timecard = build(:timecard, person: @cj)
-      expect(timecard).to be_valid
-    end
-
+  describe 'validation' do
     it { should validate_presence_of(:person) }
 
     it "requires end_time to be after start_time" do # chronology
       timecard = build(:timecard, person: @cj, start_time: Time.current, end_time: 2.minutes.ago)
       expect(timecard).not_to be_valid
     end
+  end
 
-    it "calculates an duration" do
-      @timecard = create(:timecard,  person: @cj, start_time: Time.current, end_time: Time.current)
-      expect(@timecard.duration).to eq(0)
-      @timecard = create(:timecard,  person: @cj, start_time: Time.current, end_time: 75.minutes.from_now)
-      expect(@timecard.duration).to eq(1.25)
+  describe "creation" do
+    it "has a valid factory" do
+      timecard = build(:timecard, person: @cj)
+      expect(timecard).to be_valid
     end
+
 
     it "finds the existing timecard if it's a duplicate",
       skip: "Find duplicate timecards is too simple, but not needed until people are scanning in" do
@@ -68,7 +64,7 @@ RSpec.describe Timecard do
 
     context 'given 3 timecards with unordered start_time, the most_recent scope' do
       before(:example) do
-        @last_timecard   = create(:timecard, person: @cj, start_time: Time.now, end_time: 1.second.from_now)
+        @last_timecard   = create(:timecard, person: @cj, start_time: Time.current, end_time: 1.second.from_now)
         @first_timecard  = create(:timecard, person: @cj, start_time: 2.hours.ago, end_time: 1.second.from_now)
         @middle_timecard = create(:timecard, person: @cj, start_time: 1.hour.ago, end_time: 1.second.from_now)
       end
@@ -87,6 +83,33 @@ RSpec.describe Timecard do
 
       it 'returns the oldest timecard as its last element' do
         expect(described_class.most_recent.last).to eq(@last_timecard)
+      end
+    end
+  end
+
+  describe 'duration' do
+    let(:timecard) { build(:timecard, person: @cj,
+                           start_time: start_time, end_time: end_time) }
+
+    context 'given a start_time and no end_time' do
+      let(:start_time) { 30.minutes.ago }
+      let(:end_time)   { nil }
+
+      it 'is set to 0 when the timecard is saved' do
+        timecard.save
+        timecard.reload
+        expect(timecard.duration).to eq(0)
+      end
+    end
+
+    context 'given a start_time and an end_time' do
+      let(:start_time) { 1.hour.ago }
+      let(:end_time)   { Time.now }
+
+      it 'is set to the time difference (in hours) between both values when the timecard is saved' do
+        timecard.save
+        timecard.reload
+        expect(timecard.duration).to be_within(0.1).of(1.0)
       end
     end
   end
