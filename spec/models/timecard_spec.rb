@@ -56,51 +56,34 @@ RSpec.describe Timecard do
     end
   end
 
-  describe '.active' do
-    it 'returns all timecards that are not cancelled' do
-      incomplete_timecard = create(:timecard, person: @cj, status: 'Incomplete')
-      unverified_timecard = create(:timecard, person: @cj, status: 'Unverified')
-      error_timecard = create(:timecard, person: @cj, status: 'Error')
-      verified_timecard = create(:timecard, person: @cj, status: 'Verified')
-      cancelled_timecard = create(:timecard, person: @cj, status: 'Cancelled')
-      active_timecards = Timecard.active
-      expect(active_timecards).to include(incomplete_timecard)
-      expect(active_timecards).to include(unverified_timecard)
-      expect(active_timecards).to include(error_timecard)
-      expect(active_timecards).to include(verified_timecard)
-      expect(active_timecards).not_to include(cancelled_timecard)
-    end
-  end
 
-  describe 'scopes' do
-    context 'given a Verified timecard and another one with a different status, the verified scope' do
+  describe 'verified scope' do
+    it 'returns a chainable relation' do
+      expect(described_class.verified).to be_a_kind_of(ActiveRecord::Relation)
+    end
+
+    context 'given a Verified timecard and another one with a different status' do
       before(:example) do
         @verified_timecard = create(:timecard, person: @cj, status: 'Verified')
         @another_timecard = create(:timecard, person: @cj, status: 'another')
-      end
-      
-      it 'returns a chainable relation' do
-        expect(described_class.verified).to be_a_kind_of(ActiveRecord::Relation)
       end
 
       it 'returns a collection with Verified timecards' do
         expect(described_class.verified).to contain_exactly(@verified_timecard)
       end
+    end
+  end
 
-      it 'returns a collection that has no unverified timecards' do
-        expect(described_class.verified).not_to include(@another_timecard)
-      end
+  describe 'most_recent scope' do
+    it 'returns a chainable relation' do
+      expect(described_class.most_recent).to be_a_kind_of(ActiveRecord::Relation)
     end
 
-    context 'given 3 timecards with unordered start_time, the most_recent scope' do
+    context 'given 3 timecards with unordered start_time' do
       before(:example) do
         @last_timecard   = create(:timecard, person: @cj, start_time: Time.current, end_time: 1.second.from_now)
         @first_timecard  = create(:timecard, person: @cj, start_time: 2.hours.ago, end_time: 1.second.from_now)
         @middle_timecard = create(:timecard, person: @cj, start_time: 1.hour.ago, end_time: 1.second.from_now)
-      end
-
-      it 'returns a chainable relation' do
-        expect(described_class.most_recent).to be_a_kind_of(ActiveRecord::Relation)
       end
 
       it 'includes all existing timecards' do
@@ -114,6 +97,40 @@ RSpec.describe Timecard do
       it 'returns the oldest timecard as its last element' do
         expect(described_class.most_recent.last).to eq(@last_timecard)
       end
+    end
+  end
+
+  describe 'working scope' do
+    it 'returns a chainable relation' do
+      expect(described_class.working).to be_a_kind_of(ActiveRecord::Relation)
+    end
+
+    context 'given 3 timecards: an Incomplete one with no end_time; another also Incomplete 
+             but with an end_time; a generic timecard' do
+      before(:example) do
+        @working_timecard  = create(:timecard, person: @cj, start_time: Time.current,
+                                    end_time: nil, status: 'Incomplete')
+        @finished_timecard = create(:timecard, person: @cj, start_time: 1.hour.ago,
+                                    end_time: Time.current, status: 'Incomplete')
+        @timecard          = create(:timecard, person: @cj)
+      end
+
+      it 'returns the timecard with Incomplete status and no end_time' do
+        expect(described_class.working).to contain_exactly(@working_timecard)
+      end
+    end
+  end
+
+  describe 'active scope' do
+    it 'returns all timecards that are not cancelled' do
+      incomplete_timecard = create(:timecard, person: @cj, status: 'Incomplete')
+      unverified_timecard = create(:timecard, person: @cj, status: 'Unverified')
+      error_timecard = create(:timecard, person: @cj, status: 'Error')
+      verified_timecard = create(:timecard, person: @cj, status: 'Verified')
+      cancelled_timecard = create(:timecard, person: @cj, status: 'Cancelled')
+      active_timecards = Timecard.active
+      expect(active_timecards).to include(incomplete_timecard, unverified_timecard, error_timecard, verified_timecard)
+      expect(active_timecards).not_to include(cancelled_timecard)
     end
   end
 

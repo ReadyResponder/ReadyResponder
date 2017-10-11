@@ -9,6 +9,7 @@ class Timecard < ActiveRecord::Base
   scope :verified,    -> { where(:status => 'Verified')}
   scope :most_recent, -> { order(:start_time) }
   scope :active,      -> { where(status: ['Incomplete', 'Unverified', 'Error', 'Verified']) }
+  scope :working,     -> { where(end_time: nil, status: 'Incomplete') }
 
   STATUS_CHOICES = ['Incomplete', 'Unverified', "Error", "Verified", "Cancelled"]
 
@@ -22,10 +23,6 @@ class Timecard < ActiveRecord::Base
     range_endtime = range.last || Time.current
     where("(end_time >= :range_start AND start_time <= :range_end) OR (end_time IS NULL AND start_time <= :range_end)",
     range_start: range.first, range_end: range_endtime)
-  end
-
-  def self.working
-    where(end_time: nil, status: 'Incomplete')
   end
 
   def concurrent_events
