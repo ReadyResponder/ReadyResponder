@@ -6,14 +6,23 @@ class Timecard < ActiveRecord::Base
 
   belongs_to :person
 
-  scope :verified, -> { where(:status => 'Verified')}
+  scope :verified,    -> { where(:status => 'Verified')}
   scope :most_recent, -> { order(:start_time) }
+  scope :active,      -> { where(status: ['Incomplete', 'Unverified', 'Error', 'Verified']) }
+
   STATUS_CHOICES = ['Incomplete', 'Unverified', "Error", "Verified", "Cancelled"]
 
   validates_presence_of :person
   validates_chronology :start_time, :end_time
 
   # validate :has_no_duplicate_timecard
+
+  # returns timecards that overlap an event
+  def self.overlapping_time(range)
+    range_endtime = range.last || Time.current
+    where("(end_time >= :range_start AND start_time <= :range_end) OR (end_time IS NULL AND start_time <= :range_end)",
+    range_start: range.first, range_end: range_endtime)
+  end
 
   def self.working
     where(end_time: nil, status: 'Incomplete')

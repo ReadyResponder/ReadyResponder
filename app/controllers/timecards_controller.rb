@@ -11,6 +11,7 @@ class TimecardsController < ApplicationController
   end
 
   def new
+    session[:return_to] ||= request.referer
     event = Event.find params[:event] if params.has_key? :event
     @timecard = Timecard.new
     @timecard.start_time = event.start_time if event
@@ -20,13 +21,14 @@ class TimecardsController < ApplicationController
   end
 
   def edit
+    session[:return_to] ||= request.referer
   end
 
   def create
     @timecard = Timecard.new(params[:timecard])
 
     if @timecard.save
-      redirect_to @timecard, notice: 'Timecard was successfully created.'
+      redirect_to session.delete(:return_to) || @timecard, notice: 'Timecard was successfully created.'
     else
       render action: "new"
     end
@@ -34,7 +36,7 @@ class TimecardsController < ApplicationController
 
   def update
     if @timecard.update_attributes(params[:timecard])
-      redirect_to timecards_path, notice: 'Timecard was successfully updated.'
+      redirect_to session.delete(:return_to) || timecards_path, notice: 'Timecard was successfully updated.'
     else
       render action: "edit"
     end
