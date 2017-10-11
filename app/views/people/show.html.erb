@@ -104,7 +104,7 @@
 
   <h3>Timecards (<%= @person.timecards.count %>)</h3>
   <div>
-    <%= render 'timecards/timecards_table', timecards: @person.timecards.most_recent.uniq, table_class: "datatable" %>
+    <%= render 'timecards/timecards_table', timecards: @person.timecards.most_recent.uniq %>
   </div>
 </div>
 
