@@ -39,6 +39,13 @@ class Timecard < ActiveRecord::Base
     Event.concurrent(start_time..end_time)
   end
 
+  # Warning: this skips validations and does not change timestamps
+  # Rails 5 allows us to use update(attribute: value), but generates an update
+  # query for each record affected, which may hinder performance
+  def self.mark_as_error!
+    update_all(status: 'Error')
+  end
+
 private
   def find_duplicate_timecards
     margin = 30

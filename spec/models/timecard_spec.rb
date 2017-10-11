@@ -55,6 +55,28 @@ RSpec.describe Timecard do
       expect(event_timecards).not_to include(future_timecard)
     end
   end
+  
+  describe 'self.mark_as_error!' do
+    before(:example) do
+      @timecard_a = create(:timecard, person: @cj, status: 'A')
+      @timecard_b = create(:timecard, person: @cj, status: 'B')
+    end
+
+    it 'updates all timecards\'s status to Error when called on the class' do
+      expect { described_class.mark_as_error! }.to change {
+        described_class.where(status: 'Error').count }.by(2)
+    end
+
+    it 'only updates the number of timecards in the relation it was chained with' do
+      expect { described_class.where(status: 'A').mark_as_error! }.to change {
+        described_class.where(status: 'Error').count }.by(1)
+    end
+
+    it 'updates the timecards matched by the relation it was chained with' do
+      described_class.where(status: 'A').mark_as_error!
+      expect(@timecard_a.reload.status).to eq('Error')
+    end
+  end
 
 
   describe 'verified scope' do
