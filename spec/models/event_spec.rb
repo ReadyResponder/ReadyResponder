@@ -6,6 +6,7 @@ RSpec.describe Event do
       expect(subject).to have_many(:notifications)
     end
   end
+
   it { should validate_presence_of(:status) }
   it { should validate_presence_of(:id_code) }
 

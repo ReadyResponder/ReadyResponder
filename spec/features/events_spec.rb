@@ -8,7 +8,7 @@ RSpec.describe "Events" do
     @recent = create(:event, title: "recent title")
     @archive = create(:event, title: "archive title", status: "Completed")
   end
-  
+
   # removed sidebar so disabling this test for now
   # get_basic_editor_views('event',['Training', 'Status'])
 
@@ -238,6 +238,7 @@ RSpec.describe "Events" do
       expect(page).to have_content(@event.title)
       expect(current_path).to eq(event_path(@event))
     end
+    
     it "the course if category is training", js: true do
       visit new_event_path
       select 'Patrol', :from => 'event_category'
