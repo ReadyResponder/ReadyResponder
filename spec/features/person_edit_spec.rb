@@ -44,8 +44,9 @@ RSpec.describe "Person" do
     end
 
     it "does not duplicate channels on update" do
+      police_department = create(:department, name: "Police")
       cj = create(:person, firstname: 'CJ', lastname: 'test',
-            department: Department.where(name: 'Police').first)
+            department: police_department)
       cj.channels << create(:channel, type: "Phone", channel_type: 'Phone', content: '+19785551212', category: "Mobile Phone")
       expect {
         visit edit_person_path(cj)
