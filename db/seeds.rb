@@ -125,3 +125,12 @@ Item.find_or_create_by(name: "Radio 1") do |item|
   item.qty = 1
   item.grant_id = tmp_grant.id
 end
+
+Setting.find_or_create_by(key: 'TIMECARD_MAXIMUM_HOURS') do |setting|
+  setting.name = 'Timecard maximum hours'
+  setting.description = 'Number of hours from start_time after which timecards with no end_time and Incomplete status are considered stale and marked as Error.'
+  setting.value = 24
+  setting.category = 'Timecard'
+  setting.status = 'Active'
+  setting.required = true
+end
