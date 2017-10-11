@@ -8,6 +8,7 @@ class Timecard < ActiveRecord::Base
 
   scope :verified, -> { where(:status => 'Verified')}
   scope :most_recent, -> { order(start_time: :desc) }
+  scope :active, -> { where(status: ['Incomplete', 'Unverified', 'Error', 'Verified']) }
 
   STATUS_CHOICES = ['Incomplete', 'Unverified', "Error", "Verified", "Cancelled"]
 
@@ -17,10 +18,10 @@ class Timecard < ActiveRecord::Base
   # validate :has_no_duplicate_timecard
 
   # returns timecards that overlap an event
-  def self.during_event(event)
-    event_endtime = event.end_time || Time.current
-    where('((start_time <= :event_end) AND (end_time >= :event_start) OR ((end_time IS NULL) AND (start_time <= :event_end))) AND status != :status',
-    event_start: event.start_time, event_end: event_endtime, status: "Cancelled")
+  def self.overlapping_time(range)
+    range_endtime = range.last || Time.current
+    where("(end_time >= :range_start AND start_time <= :range_end) OR (end_time IS NULL AND start_time <= :range_end)",
+    range_start: range.first, range_end: range_endtime)
   end
 
   def self.working

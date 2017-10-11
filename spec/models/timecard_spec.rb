@@ -5,20 +5,34 @@ RSpec.describe Timecard do
     @cj = create(:person, firstname: 'CJ')
   end
 
-  describe '.during_event' do
-    it 'returns all timecards between start_time and end_time' do
-      person = create(:person)
-      past_timecard = create(:timecard, person: person, start_time: 2.days.ago, end_time: 1.day.ago)
-      future_timecard = create(:timecard, person: person, start_time: 2.days.from_now, end_time: 3.days.from_now)
-      in_between_event_timecard = create(:timecard, person: person, start_time: Time.current, end_time: 60.minutes.from_now)
-      overlapping_timecard = create(:timecard, person: person, start_time: 2.days.ago, end_time: 3.days.from_now)
-
+  describe 'self.overlapping_time' do
+    it 'returns all timecards that overlap a date range (start..end)' do
+      past_timecard = create(:timecard, person: @cj, start_time: 2.days.ago, end_time: 1.day.ago)
+      future_timecard = create(:timecard, person: @cj, start_time: 2.days.from_now, end_time: 3.days.from_now)
+      in_between_event_timecard = create(:timecard, person: @cj, start_time: Time.current, end_time: 60.minutes.from_now)
+      overlapping_timecard = create(:timecard, person: @cj, start_time: 2.days.ago, end_time: 3.days.from_now)
       event = create(:event)
-      event_timecards = Timecard.during_event(event)
+      event_timecards = Timecard.overlapping_time(event.start_time..event.end_time)
       expect(event_timecards).to include(in_between_event_timecard)
       expect(event_timecards).to include(overlapping_timecard)
       expect(event_timecards).not_to include(past_timecard)
       expect(event_timecards).not_to include(future_timecard)
+    end
+  end
+
+  describe '.active' do
+    it 'returns all timecards that are not cancelled' do
+      incomplete_timecard = create(:timecard, person: @cj, status: 'Incomplete')
+      unverified_timecard = create(:timecard, person: @cj, status: 'Unverified')
+      error_timecard = create(:timecard, person: @cj, status: 'Error')
+      verified_timecard = create(:timecard, person: @cj, status: 'Verified')
+      cancelled_timecard = create(:timecard, person: @cj, status: 'Cancelled')
+      active_timecards = Timecard.active
+      expect(active_timecards).to include(incomplete_timecard)
+      expect(active_timecards).to include(unverified_timecard)
+      expect(active_timecards).to include(error_timecard)
+      expect(active_timecards).to include(verified_timecard)
+      expect(active_timecards).not_to include(cancelled_timecard)
     end
   end
 
