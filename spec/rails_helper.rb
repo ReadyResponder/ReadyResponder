@@ -90,6 +90,9 @@ RSpec.configure do |config|
   config.include MailerMacros, type: :mailer
   config.extend AuthorizationViewHelper, type: :feature
   config.include AuthenticationHelper
+
+  # Allow spec files to include shared contexts
+  config.include_context 'rake', :include_shared => true
 end
 
 Shoulda::Matchers.configure do |config|
