@@ -19,6 +19,12 @@ $.extend( true, $.fn.dataTable.defaults, {
 /* https://datatables.net/examples/basic_init/multiple_tables.html */
 
 $(document).ready(function() {
-  $('table.generic_datatable').DataTable({
+  $('table.generic_datatable').DataTable()
+
+  $(".accordion").accordion({
+   activate: function(event, ui) {
+      $($.fn.dataTable.tables(true)).DataTable()
+         .columns.adjust();
+       }
   });
 } );
