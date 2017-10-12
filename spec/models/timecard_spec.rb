@@ -168,9 +168,9 @@ RSpec.describe Timecard do
     context 'given 2 timecards with different start_times' do
       before(:example) do
         @timecard_with_7hours = create(:timecard, person: @cj,
-                                       start_time: 7.hours.ago)
+          start_time: 7.hours.ago, end_time: 1.hour.ago)
         @timecard_with_2hours = create(:timecard, person: @cj,
-                                       start_time: 2.hours.ago)
+          start_time: 2.hours.ago, end_time: 1.hour.ago)
       end
 
       it 'returns timecards with a start_time older than 3 hours' do
