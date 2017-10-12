@@ -1,4 +1,4 @@
-class CreateHelpdocs < ActiveRecord::Migration
+class CreateHelpdocs < ActiveRecord::Migration[4.2]
   def change
     create_table :helpdocs do |t|
       t.string :title

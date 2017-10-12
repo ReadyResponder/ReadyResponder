@@ -1,9 +1,9 @@
-class Department < ActiveRecord::Base
+class Department < ApplicationRecord
   serialize :division1, Array
   serialize :division2, Array
-  attr_accessible :contact_id, :description, :manage_items, :manage_people,
-    :name, :shortname, :status, :division1, :division2
-  belongs_to :contact, class_name: "Person"
+  # TODO => USE STRONG PARAMETERS
+  # attr_accessible :contact_id, :description, :manage_items, :manage_people, :name, :shortname, :status, :division1, :division2
+  belongs_to :contact, class_name: "Person", optional: true
   has_many :people
   has_many :items
   has_many :locations

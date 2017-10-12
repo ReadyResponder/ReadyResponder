@@ -1,112 +1,69 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.2.7'
-
+gem 'rails',                  '5.1.2'
+gem 'simple_form',            '3.5.0'
+gem 'jquery-rails',           '4.3.1'
+gem 'turbolinks',             '5.0.1'
+gem 'sass-rails',             '5.0.6'
+gem 'coffee-rails',           '4.2.2'
+gem 'uglifier',               '3.2.0'
+gem 'jquery-ui-rails'
+gem 'bootstrap-sass',         '3.3.7'
+gem 'jquery-turbolinks'
 gem 'rack'
-gem 'ransack'
+gem 'ransack',                 '1.8.3'
 gem 'carrierwave'
-gem "pg", "~> 0.17.0"
-gem 'rmagick', '~> 2.15.4'
-gem 'simple_form'
+gem "pg"
+gem 'rmagick'
 gem 'redcarpet'
 gem 'geocoder'
 gem 'cancancan'
+gem 'paper_trail'
+gem 'therubyracer'
+gem 'twilio-ruby',             '~> 4.11.1'
 #gem "taps"
 #gem 'validates_timeliness', '~> 3.0'
-
-
-gem 'therubyracer'
-gem 'jquery-turbolinks'
+gem 'devise'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-datetimepicker'
 end
 
-# Handles text messages and voice calls
-gem 'twilio-ruby', '~> 4.11.1'
-
-#Handles authentication
-gem 'devise', '~> 3.0'
-
-# For model versioning
-gem 'paper_trail'
-
-group :test, :development do
-  gem 'thin'
-  gem "rspec-rails"
-  # gem 'rspec-activemodel-mocks' # TODO: remove if we no longer need mock_model or stub_model
-  gem "factory_girl_rails"
-  gem "capybara"
-  gem "guard-rspec", require: false
-  gem 'guard-livereload'
-  gem "mailcatcher"
-  gem "launchy"
-  gem "letter_opener"
-  gem 'better_errors'
-  gem 'binding_of_caller'
-  gem 'meta_request'
-  gem 'database_cleaner', '1.0.1'
-  gem 'test-unit'
-  gem 'poltergeist'
-  gem 'pry'
-end
-
-group :development do
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 3.0'
-
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-
-  # Use Capistrano for deployment
-  gem 'capistrano-rails'
-
-
-  # Helps you figure out where a piece of the UI is coming from by
-  # adding comments to the source code at the begin and end of each template.
-  gem 'noisy_partials', git: 'git://github.com/gwshaw/noisy_partials.git'
-end
-
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
-end
-
-group :production do
-  # Use Unicorn as the app server
+group :production, :staging do
+  gem 'rails_12factor',       '0.0.3'
   gem 'unicorn'
 end
 
-group :test do
-  gem 'shoulda-matchers'
+group :development do
+  gem 'foreman',              '0.84.0'
+  gem 'jumpup',               '0.0.8'
+  gem 'jumpup-heroku',        '0.0.6'
+  gem 'better_errors',        '2.1.1'
+  gem 'binding_of_caller',    '0.7.2'
+  gem 'letter_opener',        '1.4.1'
+  gem 'bullet',               '5.5.1'
+  gem 'listen',               '3.1.5'
+  gem 'noisy_partials',        git: 'git://github.com/gwshaw/noisy_partials.git'
+  gem 'web-console'
 end
 
-gem 'sass-rails'
-gem 'uglifier', '>= 1.0.3'
-# Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails'
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+group :test do
+  gem 'shoulda-matchers',     '3.1.2',  require: false
+  gem 'simplecov',            '0.14.1', require: false
+  gem 'email_spec',           '2.1.0'
+  gem 'capybara'
+  gem 'poltergeist',          '1.8.0'
+  gem 'vcr',                  '3.0.0'
+  gem 'webmock',              '1.22.3'
+  gem 'database_cleaner',     '1.6.1'
+end
 
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-# gem 'jbuilder', '~> 2.0'
-# bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc
-
-# Use ActiveModel has_secure_password
-gem 'bcrypt-ruby', '~> 3.0.0'
-
-# # Deploy with Capistrano
-# gem 'capistrano', '~> 2.15'
-# # This is used by Capistrano, but 2.8 has issues
-# gem "net-ssh", "~> 2.7.0"
-
-gem 'jquery-ui-rails'
-gem 'bootstrap-sass', '3.3.7'
-# gem 'chosen-rails'
-
-gem 'protected_attributes'
+group :development, :test do
+  gem 'rspec-rails',           '3.6.1'
+  gem 'factory_girl_rails',    '4.8.0'
+  gem 'pry-byebug',            '3.4.2'
+  gem 'dotenv-rails',          '2.2.1'
+  gem 'awesome_print',         '1.7.0'
+  gem 'spring-commands-rspec', '1.0.4'
+  gem 'spring',                '2.0.2'
+end

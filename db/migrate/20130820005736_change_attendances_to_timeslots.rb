@@ -1,4 +1,4 @@
-class ChangeAttendancesToTimeslots < ActiveRecord::Migration
+class ChangeAttendancesToTimeslots < ActiveRecord::Migration[4.2]
   def up
   	 drop_table :attendances
   	 create_table :timeslots do |t|

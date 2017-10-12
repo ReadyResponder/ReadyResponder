@@ -1,4 +1,4 @@
-class CreateRepairs < ActiveRecord::Migration
+class CreateRepairs < ActiveRecord::Migration[4.2]
   def change
     create_table :repairs do |t|
       t.integer :item_id

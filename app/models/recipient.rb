@@ -1,6 +1,6 @@
-class Recipient < ActiveRecord::Base
-  belongs_to :notification
-  belongs_to :person
+class Recipient < ApplicationRecord
+  belongs_to :notification, optional: true
+  belongs_to :person, optional: true
   has_many :messages
 
   def notify! twilio = Message::SendNotificationTextMessage.new

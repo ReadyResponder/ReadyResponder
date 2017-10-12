@@ -1,2 +1,2 @@
-class Question < ActiveRecord::Base
+class Question < ApplicationRecord
 end

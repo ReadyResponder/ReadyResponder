@@ -1,4 +1,4 @@
-class CorrectTimecardSchema < ActiveRecord::Migration
+class CorrectTimecardSchema < ActiveRecord::Migration[4.2]
   def change
     add_column :timecards, :status, :string
 

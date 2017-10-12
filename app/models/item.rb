@@ -1,13 +1,14 @@
-class Item < ActiveRecord::Base
+class Item < ApplicationRecord
   has_paper_trail
-
-  attr_accessible :category, :description, :location_id, :qty,
-                  :model, :brand, :name, :owner_id, :po_number,
-                  :value, :grant, :purchase_amt, :purchase_date,
-                  :sell_amt, :sell_date, :stock_number,
-                  :source, :status, :condition, :comments, :item_image,
-                  :department_id, :resource_type_id, :item_type_id,
-                  :unique_ids_attributes
+  
+  # TODO => USE STRONG PARAMETERS
+  # attr_accessible :category, :description, :location_id, :qty,
+  #                 :model, :brand, :name, :owner_id, :po_number,
+  #                 :value, :grant, :purchase_amt, :purchase_date,
+  #                 :sell_amt, :sell_date, :stock_number,
+  #                 :source, :status, :condition, :comments, :item_image,
+  #                 :department_id, :resource_type_id, :item_type_id,
+  #                 :unique_ids_attributes
 
   # validates_chronology :purchase_date, :sell_date     # ? - if so, needs a test
   # validates_chronology :grantstart, :grantexpiration  # ? - if so, needs a test
@@ -19,11 +20,11 @@ class Item < ActiveRecord::Base
   validates_numericality_of :sell_amt, :allow_nil => true, :allow_blank => true
   validates_numericality_of :purchase_amt, :allow_nil => true, :allow_blank => true
 
-  belongs_to :owner, class_name: 'Person', inverse_of: :items
-  belongs_to :resource_type
-  belongs_to :location
-  belongs_to :department
-  belongs_to :item_type
+  belongs_to :owner, class_name: 'Person', inverse_of: :items, optional: true
+  belongs_to :resource_type, optional: true
+  belongs_to :location, optional: true
+  belongs_to :department, optional: true
+  belongs_to :item_type, optional: true
   has_many :repairs
   has_many :inspections
   has_many :unique_ids

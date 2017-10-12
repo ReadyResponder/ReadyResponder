@@ -1,7 +1,7 @@
-class Channel < ActiveRecord::Base
+class Channel < ApplicationRecord
   has_paper_trail
 
-  belongs_to :person
+  belongs_to :person, optional: true
 
   USAGES = ['1-All','2-Emergency Only','3-Info Only','4-Testing']
   STATUSES = ['OK','Invalid']

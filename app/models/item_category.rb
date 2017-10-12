@@ -1,4 +1,4 @@
-class ItemCategory < ActiveRecord::Base
+class ItemCategory < ApplicationRecord
   has_paper_trail
 
   has_many :item_types

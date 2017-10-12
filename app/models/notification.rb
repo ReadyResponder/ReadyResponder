@@ -1,9 +1,9 @@
-class Notification < ActiveRecord::Base
+class Notification < ApplicationRecord
 #  serialize :departments, Array
   has_paper_trail
 
   has_and_belongs_to_many :departments
-  belongs_to :event
+  belongs_to :event, optional: true
   has_many :recipients
   has_many :people, :through => :recipients
 

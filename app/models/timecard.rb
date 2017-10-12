@@ -1,10 +1,11 @@
-class Timecard < ActiveRecord::Base
+class Timecard < ApplicationRecord
   has_paper_trail
 
   before_save :calc_duration
-  attr_accessible :start_time, :end_time, :status, :person_id, :description
+  # TODO => USE STRONG PARAMETERS
+  # attr_accessible :start_time, :end_time, :status, :person_id, :description
 
-  belongs_to :person
+  belongs_to :person, optional: true
 
   scope :verified, -> { where(:status => 'Verified')}
   STATUS_CHOICES = ['Incomplete', 'Unverified', "Error", "Verified", "Cancelled"]

@@ -1,8 +1,8 @@
-class Assignment < ActiveRecord::Base
+class Assignment < ApplicationRecord
   has_paper_trail
 
-  belongs_to :person
-  belongs_to :requirement
+  belongs_to :person, optional: true
+  belongs_to :requirement, optional: true
   delegate :task, :to => :requirement
   delegate :event, :to => :task
   validates_presence_of :person
