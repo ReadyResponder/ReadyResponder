@@ -20,7 +20,6 @@ RSpec.describe 'timecards:mark_stale_as_error' do
 
   context 'when TIMECARD_MAXIMUM_HOURS is defined and 2 open timecards exist' do
     before(:example) do
-      setting = class_double('Setting').as_stubbed_const
       allow(Setting).to receive(:get) { 10 }
       
       person = create(:person)
