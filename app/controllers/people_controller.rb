@@ -51,11 +51,11 @@ class PeopleController < ApplicationController
   end
 
   def new
+    set_referrer_path
     @page_title = "New Person"
     @person = Person.new(status: cookies[:status], state: 'MA')
     @person.emails.build(category: 'E-Mail', status: 'OK', usage: '1-All')
     @person.phones.build(category: "Mobile Phone", status: "OK", usage: "1-All")
-
     # Set default department if there is only one active department
     departments = Department.active.managing_people
     if departments.count == 1
@@ -69,6 +69,7 @@ class PeopleController < ApplicationController
   end
 
   def edit
+    set_referrer_path
     @person = Person.includes(:phones, :emails).find(params[:id])
     @page_title = @person.fullname
     @emails = @person.emails
@@ -91,7 +92,7 @@ class PeopleController < ApplicationController
         }
         format.json { render json: @person, status: :created, location: @person }
       else
-        format.html { redirect_to new_person_path, alert: @person.errors.full_messages }
+        format.html { render :edit, alert: @person.errors.full_messages }
         format.json { render json: @person.errors, status: :unprocessable_entity }
       end
     end
@@ -129,22 +130,6 @@ class PeopleController < ApplicationController
 
   def load_all_depts
     @available_departments = Department.all
-  end
-
-  def set_return_path
-    if request.referer
-      (session[:before_show] = request.referer unless request.referer.include? "edit")
-    else
-      (session[:before_show] = people_path)
-    end
-  end
-
-  def set_referrer_path
-    session[:referrer] = request.referer
-  end
-
-  def referrer_or(fallback_destination)
-    session.delete(:referrer) || fallback_destination
   end
 
   def person_params
