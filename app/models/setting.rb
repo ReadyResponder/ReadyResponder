@@ -3,6 +3,8 @@ class Setting < ActiveRecord::Base
 
   validates_presence_of :name, :key, :value, :category, :status
 
+  MissingSettingError = Class.new(StandardError)
+
   STATUS_CHOICES = ['Active', 'Inactive']
 
   def self.get(key)

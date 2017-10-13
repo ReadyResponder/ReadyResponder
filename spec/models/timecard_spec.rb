@@ -1,38 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe Timecard do
-  before(:all) do
+  before(:context) do
     @cj = create(:person, firstname: 'CJ')
   end
-
-  describe 'self.overlapping_time' do
-    it 'returns all timecards that overlap a date range (start..end)' do
-      past_timecard = create(:timecard, person: @cj, start_time: 2.days.ago, end_time: 1.day.ago)
-      future_timecard = create(:timecard, person: @cj, start_time: 2.days.from_now, end_time: 3.days.from_now)
-      in_between_event_timecard = create(:timecard, person: @cj, start_time: Time.current, end_time: 60.minutes.from_now)
-      overlapping_timecard = create(:timecard, person: @cj, start_time: 2.days.ago, end_time: 3.days.from_now)
-      event = create(:event)
-      event_timecards = Timecard.overlapping_time(event.start_time..event.end_time)
-      expect(event_timecards).to include(in_between_event_timecard)
-      expect(event_timecards).to include(overlapping_timecard)
-      expect(event_timecards).not_to include(past_timecard)
-      expect(event_timecards).not_to include(future_timecard)
-    end
+  
+  describe 'associations' do
+    it { should belong_to(:person) }
   end
 
-  describe '.active' do
-    it 'returns all timecards that are not cancelled' do
-      incomplete_timecard = create(:timecard, person: @cj, status: 'Incomplete')
-      unverified_timecard = create(:timecard, person: @cj, status: 'Unverified')
-      error_timecard = create(:timecard, person: @cj, status: 'Error')
-      verified_timecard = create(:timecard, person: @cj, status: 'Verified')
-      cancelled_timecard = create(:timecard, person: @cj, status: 'Cancelled')
-      active_timecards = Timecard.active
-      expect(active_timecards).to include(incomplete_timecard)
-      expect(active_timecards).to include(unverified_timecard)
-      expect(active_timecards).to include(error_timecard)
-      expect(active_timecards).to include(verified_timecard)
-      expect(active_timecards).not_to include(cancelled_timecard)
+  describe 'validation' do
+    it { should validate_presence_of(:person) }
+
+    it "requires end_time to be after start_time" do # chronology
+      timecard = build(:timecard, person: @cj, start_time: Time.current, end_time: 2.minutes.ago)
+      expect(timecard).not_to be_valid
     end
   end
 
@@ -40,23 +22,6 @@ RSpec.describe Timecard do
     it "has a valid factory" do
       timecard = build(:timecard, person: @cj)
       expect(timecard).to be_valid
-    end
-
-    it "requires a person" do
-      timecard = build(:timecard, person: nil)
-      expect(timecard).not_to be_valid
-    end
-
-    it "requires end_time to be after start_time" do # chronology
-      timecard = build(:timecard, person: @cj, start_time: Time.current, end_time: 2.minutes.ago)
-      expect(timecard).not_to be_valid
-    end
-
-    it "calculates an duration" do
-      @timecard = create(:timecard,  person: @cj, start_time: Time.current, end_time: Time.current)
-      expect(@timecard.duration).to eq(0)
-      @timecard = create(:timecard,  person: @cj, start_time: Time.current, end_time: 75.minutes.from_now)
-      expect(@timecard.duration).to eq(1.25)
     end
 
     it "finds the existing timecard if it's a duplicate",
@@ -73,6 +38,198 @@ RSpec.describe Timecard do
       expect(@duplicate_timecard.find_duplicate_timecards.size).to eq(1)
       @duplicate_timecard = build(:timecard, event: @event, person: @person, actual_start_time: 42.minutes.from_now, outcome: "Worked")
       expect(@duplicate_timecard.find_duplicate_timecards.size).to eq(1)
+    end
+  end
+
+  describe 'self.overlapping_time' do
+    it 'returns all timecards that overlap a date range (start..end)' do
+      past_timecard = create(:timecard, person: @cj, start_time: 2.days.ago, end_time: 1.day.ago)
+      future_timecard = create(:timecard, person: @cj, start_time: 2.days.from_now, end_time: 3.days.from_now)
+      in_between_event_timecard = create(:timecard, person: @cj, start_time: Time.current, end_time: 60.minutes.from_now)
+      overlapping_timecard = create(:timecard, person: @cj, start_time: 2.days.ago, end_time: 3.days.from_now)
+      event = create(:event)
+      event_timecards = Timecard.overlapping_time(event.start_time..event.end_time)
+      expect(event_timecards).to include(in_between_event_timecard)
+      expect(event_timecards).to include(overlapping_timecard)
+      expect(event_timecards).not_to include(past_timecard)
+      expect(event_timecards).not_to include(future_timecard)
+    end
+  end
+  
+  describe 'self.mark_as_error!' do
+    before(:example) do
+      @timecard_a = create(:timecard, person: @cj, status: 'A')
+      @timecard_b = create(:timecard, person: @cj, status: 'B')
+    end
+
+    it 'updates all timecards\'s status to Error when called on the class' do
+      expect { described_class.mark_as_error! }.to change {
+        described_class.where(status: 'Error').count }.by(2)
+    end
+
+    it 'only updates the number of timecards in the relation it was chained with' do
+      expect { described_class.where(status: 'A').mark_as_error! }.to change {
+        described_class.where(status: 'Error').count }.by(1)
+    end
+
+    it 'updates the timecards matched by the relation it was chained with' do
+      described_class.where(status: 'A').mark_as_error!
+      expect(@timecard_a.reload.status).to eq('Error')
+    end
+  end
+
+
+  describe 'verified scope' do
+    it 'returns a chainable relation' do
+      expect(described_class.verified).to be_a_kind_of(ActiveRecord::Relation)
+    end
+
+    context 'given a Verified timecard and another one with a different status' do
+      before(:example) do
+        @verified_timecard = create(:timecard, person: @cj, status: 'Verified')
+        @another_timecard = create(:timecard, person: @cj, status: 'another')
+      end
+
+      it 'returns a collection with Verified timecards' do
+        expect(described_class.verified).to contain_exactly(@verified_timecard)
+      end
+    end
+  end
+
+  describe 'most_recent scope' do
+    it 'returns a chainable relation' do
+      expect(described_class.most_recent).to be_a_kind_of(ActiveRecord::Relation)
+    end
+
+    context 'given 3 timecards with unordered start_time' do
+      before(:example) do
+        @last_timecard   = create(:timecard, person: @cj, start_time: Time.current, end_time: 1.second.from_now)
+        @first_timecard  = create(:timecard, person: @cj, start_time: 2.hours.ago, end_time: 1.second.from_now)
+        @middle_timecard = create(:timecard, person: @cj, start_time: 1.hour.ago, end_time: 1.second.from_now)
+      end
+
+      it 'includes all existing timecards' do
+        expect(described_class.most_recent.count).to eq(3)
+      end
+
+      it 'returns the most recent timecard as its first element' do
+        expect(described_class.most_recent.first).to eq(@first_timecard)
+      end
+
+      it 'returns the oldest timecard as its last element' do
+        expect(described_class.most_recent.last).to eq(@last_timecard)
+      end
+    end
+  end
+
+  describe 'working scope' do
+    it 'returns a chainable relation' do
+      expect(described_class.working).to be_a_kind_of(ActiveRecord::Relation)
+    end
+
+    context 'given 3 timecards: an Incomplete one with no end_time; another also Incomplete 
+             but with an end_time; a generic timecard' do
+      before(:example) do
+        @working_timecard  = create(:timecard, person: @cj, start_time: Time.current,
+                                    end_time: nil, status: 'Incomplete')
+        @finished_timecard = create(:timecard, person: @cj, start_time: 1.hour.ago,
+                                    end_time: Time.current, status: 'Incomplete')
+        @timecard          = create(:timecard, person: @cj)
+      end
+
+      it 'returns the timecard with Incomplete status and no end_time' do
+        expect(described_class.working).to contain_exactly(@working_timecard)
+      end
+    end
+  end
+
+  describe 'active scope' do
+    it 'returns a chainable relation' do
+      expect(described_class.active).to be_a_kind_of(ActiveRecord::Relation)
+    end
+    
+    it 'returns all timecards that are not cancelled' do
+      incomplete_timecard = create(:timecard, person: @cj, status: 'Incomplete')
+      unverified_timecard = create(:timecard, person: @cj, status: 'Unverified')
+      error_timecard = create(:timecard, person: @cj, status: 'Error')
+      verified_timecard = create(:timecard, person: @cj, status: 'Verified')
+      cancelled_timecard = create(:timecard, person: @cj, status: 'Cancelled')
+      active_timecards = Timecard.active
+      expect(active_timecards).to include(incomplete_timecard, unverified_timecard, error_timecard, verified_timecard)
+      expect(active_timecards).not_to include(cancelled_timecard)
+    end
+  end
+
+  describe 'older_than scope' do
+    it 'returns a chainable relation' do
+      expect(described_class.older_than(1)).to be_a_kind_of(ActiveRecord::Relation)
+    end
+    
+    context 'given 2 timecards with different start_times' do
+      before(:example) do
+        @timecard_started_7hrs_ago = create(:timecard, person: @cj,
+          start_time: 7.hours.ago, end_time: 1.hour.ago)
+        @timecard_started_2hrs_ago = create(:timecard, person: @cj,
+          start_time: 2.hours.ago, end_time: 1.hour.ago)
+      end
+
+      it 'returns timecards with a start_time older than 3 hours' do
+        expect(described_class.older_than(3)).to contain_exactly(
+          @timecard_started_7hrs_ago)
+      end
+
+      it 'returns timecards with a start_time older than 1 hour' do
+        expect(described_class.older_than(1)).to contain_exactly(
+          @timecard_started_7hrs_ago, @timecard_started_2hrs_ago)
+      end
+    end
+  end
+
+  describe 'open_for_more_than scope' do
+    it 'returns a chainable relation' do
+      expect(described_class.open_for_more_than(1)).to be_a_kind_of(ActiveRecord::Relation)
+    end
+    
+    context 'given a timecard that was created 7 hours ago and is considered
+             :working and another one that is more recent but not working' do
+      before(:example) do
+        @working_timecard_started_7hrs_ago = create(:timecard, person: @cj,
+          status: 'Incomplete', start_time: 7.hours.ago, end_time: nil)
+        @recent_and_finished_timecard = create(:timecard, person: @cj,
+          start_time: 3.hours.ago, end_time: 1.hour.ago)
+      end
+
+      it 'returns the old but working timecard' do
+        expect(described_class.open_for_more_than(2)).to contain_exactly(
+          @working_timecard_started_7hrs_ago)
+      end
+    end
+  end
+
+  describe 'duration' do
+    let(:timecard) { build(:timecard, person: @cj,
+                           start_time: start_time, end_time: end_time) }
+
+    context 'given a start_time and no end_time' do
+      let(:start_time) { 30.minutes.ago }
+      let(:end_time)   { nil }
+
+      it 'is set to 0 when the timecard is saved' do
+        timecard.save
+        timecard.reload
+        expect(timecard.duration).to eq(0)
+      end
+    end
+
+    context 'given a start_time and an end_time' do
+      let(:start_time) { 1.hour.ago }
+      let(:end_time)   { Time.now }
+
+      it 'is set to the time difference (in hours) between both values when the timecard is saved' do
+        timecard.save
+        timecard.reload
+        expect(timecard.duration).to be_within(0.1).of(1.0)
+      end
     end
   end
 end
