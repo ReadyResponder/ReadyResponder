@@ -36,7 +36,7 @@ class Person < ActiveRecord::Base
   validates_presence_of :division1, :unless => "division2.blank?"
   validates_chronology :start_date, :end_date
 
-  validate :start_date_cannot_be_before_application_date
+  validate :start_date_cannot_be_before_application_date, :check_zipcode
 
   scope :cert, -> { order("division1, division2, title_order, start_date ASC").where( department: "CERT" ) }
   scope :police, -> { order("division1, division2, title_order, start_date ASC").where( department: "Police" ) }
@@ -202,6 +202,11 @@ class Person < ActiveRecord::Base
   end
 
   private
+
+  def check_zipcode
+    return unless zipcode.present? && !zipcode.match(/^(?:[1-9]|0(?!0{4}))\d{4}(?:[-\s]\d{4})?$/)
+    errors.add(:zipcode, "use format - ex. 12345 or 12345-1234")
+  end
 
   def start_date_cannot_be_before_application_date
     return unless start_date && application_date

@@ -78,14 +78,25 @@ jQuery ->
 
   $('#person_zipcode').change ->
     code = $(@).val()
-    $.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + code + "&key=<%= GOOGLE_MAPS_API_KEY %>", (data) ->
-      results = data
-      city = data.results[0].address_components[1].long_name
-      state = data.results[0].address_components[3].short_name
-      $('#person_city').val city
-      $('#person_state').val state
-      return
-    )
+    if code.match(/^(?:[1-9]|0(?!0{4}))\d{4}(?:[-\s]\d{4})?$/ig)
+      $.ajax({
+          url: "https://maps.googleapis.com/maps/api/geocode/json?address=" + code + "&key=<%= GOOGLE_MAPS_API_KEY %>",
+          type: "GET",
+          success: (data) ->
+            addressArr = data.results[0].formatted_address.split(",");
+            if data.status is "ZERO_RESULTS" or addressArr.length < 3
+              return console.log("No results found")
+            else
+              if addressArr[2].includes("USA")
+                city = addressArr[0]
+                state = addressArr[1].replace(/\d{5}/, "").trim()
+                $('#person_city').val city
+                $('#person_state').val state
+            return
+          ,
+          error: (data) ->
+            return null;
+        });
 
   $(document).ready ->
     $("#js-people-active-checkbox").click()
