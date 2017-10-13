@@ -40,3 +40,6 @@ playbook.retry
 test_models.rb
 Procfile
 uploads/
+
+# Ignore rvm gemset
+.ruby-gemset
