@@ -348,7 +348,7 @@ ActiveRecord::Schema.define(version: 20171013013908) do
     t.string   "street"
     t.string   "city"
     t.string   "state"
-    t.string   "zipcode",          limit: 5
+    t.string   "zipcode",          limit: 10
     t.string   "license_number"
     t.integer  "weight"
     t.integer  "height"
