@@ -205,7 +205,7 @@ class Person < ActiveRecord::Base
 
   def check_zipcode
     return unless zipcode.present? && !zipcode.match(/^(?:[1-9]|0(?!0{4}))\d{4}(?:[-\s]\d{4})?$/)
-    errors.add(:zipcode, "invalid format - must be 5 digits, ex. 12345")
+    errors.add(:zipcode, "use format - ex. 12345 or 12345-1234")
   end
 
   def start_date_cannot_be_before_application_date
