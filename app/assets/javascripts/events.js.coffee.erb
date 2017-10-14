@@ -43,13 +43,19 @@ jQuery ->
   $('.event-filter').change ->
     $eventTable.fnDraw()
 
+  # training events should display course info
+  $(window).load ->
+    edit_event_cat = $('.edit_event #event_category option:selected').text()
+    if edit_event_cat is 'Training'
+      $(".training-controls").css("display", "block")
+
   $("#event_category").change ->
-    temp = $("#event_category option:selected").text();
-    if temp is "Training"
-      $(".training-controls").show()
+    event_cat = $("#event_category option:selected").text();
+    if event_cat is "Training"
       $(".training-controls").css("display", "block")
     else
-      $(".training-controls").hide()
+      $(".training-controls").css("display", "none")
+
   $("#event_status").change ->
     status = $("#event_status option:selected").text();
     start_time = $("#event_start_time").text();

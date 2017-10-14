@@ -7,5 +7,21 @@ FactoryGirl.define do
     status "Scheduled"
     start_time Time.current
     end_time 23.hours.from_now
+
+    trait :training do
+      category "Training"
+    end
+
+    trait :meeting  do
+      category "Meeting"
+    end
+
+    trait :patrol do
+      category "Patrol"
+    end
+
+    trait :event do
+      category "Event"
+    end
   end
 end
