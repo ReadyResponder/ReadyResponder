@@ -20,8 +20,9 @@ class AvailabilitiesController < ApplicationController
                                      end_time: event.end_time)
     @availability.person = person if person
 
-    @people_collection = Person.active
-    @people_collection |= [person]
+    people = Person.active
+    people |= [person]
+    @people_collection = people.sort_by {|firstname, middleinitial, lastname| "#{firstname} #{middleinitial} #{lastname}"}.compact
   end
 
   def edit
