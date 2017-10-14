@@ -18,7 +18,6 @@ class AssignmentsController < ApplicationController
     @assignment.status = "New"
     @assignment.start_time = @requirement.start_time
     @assignment.end_time = @requirement.end_time
-    @people_collection = Person.active.where(:department => @requirement.event.departments).sort_by {|firstname, middleinitial, lastname| "#{firstname} #{middleinitial} #{lastname}"}.compact
   end
 
   def edit
