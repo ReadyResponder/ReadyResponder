@@ -30,6 +30,7 @@ class AvailabilitiesController < ApplicationController
     
     # Ensure person is included in @people_collection
     @people_collection |= [@availability.person] if @availability.person
+    @people_collection = @people_collection.sort_by {|firstname, middleinitial, lastname| "#{firstname} #{middleinitial} #{lastname}"}.compact
   end
 
   def create
