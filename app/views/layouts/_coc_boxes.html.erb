@@ -2,4 +2,8 @@
 	<%= h p.shortrank -%>
 	<%= h p.lastname -%> (<%= h p.memberID -%>)<br/>
 	<%= number_to_phone(p.contacts.first.content, :area_code => true) +    " " + p.contacts.first.category.split(" ")[0] if p.contacts.first -%>
-</li>
+</li><p>
+  Created <%= @item_category.created_at %><br/>
+Last Modified <%= @item_category.updated_at %><br/> 
+Last Editor <%= @last_editor %> 
+</p>

@@ -2,3 +2,8 @@
 
 <%= link_to 'Edit', edit_recipient_path(@recipient) %> |
 <%= link_to 'Back', recipients_path %>
+<p>
+  Created <%= @item_category.created_at %><br/>
+Last Modified <%= @item_category.updated_at %><br/> 
+Last Editor <%= @last_editor %> 
+</p>

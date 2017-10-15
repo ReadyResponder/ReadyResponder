@@ -3,3 +3,8 @@
 <p>You can confirm your account email through the link below:</p>
 
 <p><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>
+<p>
+  Created <%= @item_category.created_at %><br/>
+Last Modified <%= @item_category.updated_at %><br/> 
+Last Editor <%= @last_editor %> 
+</p>

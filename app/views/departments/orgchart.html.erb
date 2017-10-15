@@ -51,3 +51,8 @@
 </ul>
 <span id="thedate" > <%#= Date::today().to_s %></span>
 </div>
+<p>
+  Created <%= @item_category.created_at %><br/>
+Last Modified <%= @item_category.updated_at %><br/> 
+Last Editor <%= @last_editor %> 
+</p>

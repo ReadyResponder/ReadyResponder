@@ -4,3 +4,8 @@
 <% end %>
 
 <%= render(partial: 'notifications/notifications_table', locals: { notifications: @notifications, title: @page_title }) %>
+<p>
+  Created <%= @item_category.created_at %><br/>
+Last Modified <%= @item_category.updated_at %><br/> 
+Last Editor <%= @last_editor %> 
+</p>
