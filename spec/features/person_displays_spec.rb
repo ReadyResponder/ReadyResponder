@@ -179,38 +179,4 @@ RSpec.describe "Person" do
       expect(page).to have_content("Basket Weaving")
     end
   end
-
-  describe "'Return to Listing' button" do
-    it "redirects to previous category" do
-      cert = create(:department, name: "CERT", shortname: "CERT")
-      person = create(:person, department: cert)
-      visit people_path
-
-      click_link(person.name)
-
-      click_on('Return to Listing')
-
-      expect(current_path).to eq(people_path)
-    end
-
-    it "redirects properly after edit" do
-      cert = create(:department, name: "CERT", shortname: "CERT")
-      person = create(:person, department: cert)
-      visit people_path
-
-      click_link(person.name)
-
-      click_on('Edit Person')
-
-      fill_in 'First Name', with: "Jane"
-      fill_in 'Last Name', with: "Doe"
-
-      click_on('Update Person')
-
-      click_on('Return to Listing')
-
-      expect(current_path).to eq(people_path)
-      expect(page).to have_content("Jane Doe")
-    end
-  end
 end

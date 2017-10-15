@@ -51,7 +51,6 @@ class PeopleController < ApplicationController
   end
 
   def new
-    set_referrer_path
     @page_title = "New Person"
     @person = Person.new(status: cookies[:status], state: 'MA')
     @person.emails.build(category: 'E-Mail', status: 'OK', usage: '1-All')
@@ -69,7 +68,6 @@ class PeopleController < ApplicationController
   end
 
   def edit
-    set_referrer_path
     @person = Person.includes(:phones, :emails).find(params[:id])
     @page_title = @person.fullname
     @emails = @person.emails
