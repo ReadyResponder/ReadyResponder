@@ -9,6 +9,7 @@ class AvailabilitiesController < ApplicationController
   end
 
   def show
+    @last_editor = last_editor(@availability)
   end
 
   def new

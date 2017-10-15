@@ -2,6 +2,8 @@ class TimecardsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
 
+  before_action :set_referrer_path, only: [:edit, :new]
+
   def index
     @timecards = Timecard.all.order(start_time: :desc)
   end
@@ -11,7 +13,6 @@ class TimecardsController < ApplicationController
   end
 
   def new
-    set_referrer_path
     event = Event.find params[:event] if params.has_key? :event
     @timecard = Timecard.new
     @timecard.start_time = event.start_time if event
@@ -21,7 +22,6 @@ class TimecardsController < ApplicationController
   end
 
   def edit
-    set_referrer_path
   end
 
   def create
