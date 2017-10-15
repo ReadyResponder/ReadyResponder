@@ -2,3 +2,8 @@
   <%= f.input :value, :label => 'Unique ID' %><br/>
   <%= f.input :category, :collection => UniqueId::CATEGORY_CHOICES %><br/>
 </fieldset>
+<p>
+  Created <%= @item_category.created_at %><br/>
+Last Modified <%= @item_category.updated_at %><br/> 
+Last Editor <%= @last_editor %> 
+</p>

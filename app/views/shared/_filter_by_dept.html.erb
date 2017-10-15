@@ -4,3 +4,8 @@
     <%= b.label("data-value": b.value ) { b.check_box(checked: true, class: 'department-filter') + b.text } %>
   <% end %>
 </div>
+<p>
+  Created <%= @item_category.created_at %><br/>
+Last Modified <%= @item_category.updated_at %><br/> 
+Last Editor <%= @last_editor %> 
+</p>

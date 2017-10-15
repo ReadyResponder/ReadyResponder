@@ -3,3 +3,8 @@
 	<%= h p.firstname[0] + " " + p.lastname -%> (<%= h p.icsid -%>)<br/>
 	<%#= number_to_phone(p.contacts.first.content, :area_code => true) +    " " + p.contacts.first.category.split(" ")[0] if p.contacts.first -%>
 </li>
+<p>
+  Created <%= @item_category.created_at %><br/>
+Last Modified <%= @item_category.updated_at %><br/> 
+Last Editor <%= @last_editor %> 
+</p>

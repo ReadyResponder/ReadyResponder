@@ -16,4 +16,8 @@ Unknown: <%= lame.count %>
 Your Assignments: <% event.assignments.where(person: person).each do |asmt| %>
 <%= "#{short_date_time.call(asmt.start_time, asmt.end_time)} #{asmt.task.title}" %>
 <% end %>
-<% end %>
+<% end %><p>
+  Created <%= @item_category.created_at %><br/>
+Last Modified <%= @item_category.updated_at %><br/> 
+Last Editor <%= @last_editor %> 
+</p>

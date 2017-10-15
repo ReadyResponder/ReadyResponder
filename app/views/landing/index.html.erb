@@ -3,3 +3,8 @@
 <% if current_user.blank? then %>
   Please <%= link_to 'sign in', new_user_session_path %> to access the system
 <% end %>
+<p>
+  Created <%= @item_category.created_at %><br/>
+Last Modified <%= @item_category.updated_at %><br/> 
+Last Editor <%= @last_editor %> 
+</p>

@@ -9,3 +9,8 @@
 <span class="h3">Task: <%= link_to @requirement.task, task_path(@requirement.task) %></span></br>
 <span class="h3"> Edit Requirement </span></br></br>
 <%= render 'form' %>
+<p>
+  Created <%= @item_category.created_at %><br/>
+Last Modified <%= @item_category.updated_at %><br/> 
+Last Editor <%= @last_editor %> 
+</p>

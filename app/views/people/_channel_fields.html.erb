@@ -7,4 +7,8 @@
         <%= f.input :carrier, :as => :select, :collection => Channel::CARRIERS %>
         <%= f.input :usage, :as => :select, :collection => Channel::USAGES %>
         <%= f.check_box :_destroy %><%= f.label :_destroy, "Remove Channel" %>
-      </fieldset>
+      </fieldset><p>
+  Created <%= @item_category.created_at %><br/>
+Last Modified <%= @item_category.updated_at %><br/> 
+Last Editor <%= @last_editor %> 
+</p>
