@@ -4,7 +4,7 @@
       <th>Priority</th>
       <th>Qualification</th>
       <th>Status</th>
-      <th></th>
+      <th>Assignees</th>
       <th>Filled</th>
       <th>Min</th>
       <th>Desired</th>
@@ -20,7 +20,7 @@
         <td <%== sorting_order(requirement.priority) %>><%= requirement_priority_label(requirement) %></td>
         <td><%= link_to requirement, requirement %></td>
         <td <%== sorting_order(requirement.status_value) %>><%= requirement_status_label(requirement) %></td>
-        <td><%= requirement.assignees.map{ |p| p.fullname}.join ", " %></td>
+        <td><ol><%= render partial: "events/assignee", collection: requirement.assignees %></ol></td>        
         <td><%= requirement.number_filled %></td>
         <td><%= requirement.minimum_people %></td>
         <td><%= requirement.desired_people %></td>
