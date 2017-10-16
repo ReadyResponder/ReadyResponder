@@ -7,6 +7,7 @@ class ItemCategoriesController < ApplicationController
   # GET /item_categories
   def index
     @item_categories = ItemCategory.all.order(:name)
+    @repairs = Repair.includes(:item, :person).not_completed
   end
 
   # GET /item_categories/1

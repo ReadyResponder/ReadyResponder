@@ -2,6 +2,8 @@ class TimecardsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
 
+  before_action :set_referrer_path, only: [:edit, :new]
+
   def index
     @timecards = Timecard.all.order(start_time: :desc)
   end
@@ -26,7 +28,7 @@ class TimecardsController < ApplicationController
     @timecard = Timecard.new(params[:timecard])
 
     if @timecard.save
-      redirect_to @timecard, notice: 'Timecard was successfully created.'
+      redirect_to referrer_or(@timecard), notice: 'Timecard was successfully created.'
     else
       render action: "new"
     end
@@ -34,7 +36,7 @@ class TimecardsController < ApplicationController
 
   def update
     if @timecard.update_attributes(params[:timecard])
-      redirect_to timecards_path, notice: 'Timecard was successfully updated.'
+      redirect_to referrer_or(timecards_path), notice: 'Timecard was successfully updated.'
     else
       render action: "edit"
     end

@@ -10,7 +10,7 @@
     <% item_types.each do |it| %>
       <tr>
         <td><%= link_to it.name, item_type_path(it) %></td>
-        <td><%= it.items.count %></td>
+        <td><%= it.items.sum(:qty) %></td>
         <td><%= table_button_link 'Edit', edit_item_type_path(it) unless cannot? :edit, it %></td>
       </tr>
     <% end %>

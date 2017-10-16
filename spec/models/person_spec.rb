@@ -5,6 +5,7 @@ RSpec.describe Person do
     it { is_expected.to validate_length_of(:state).is_equal_to 2 }
     it { is_expected.to validate_uniqueness_of(:icsid) }
     it { should have_many(:inspectors) }
+    it { should validate_presence_of(:department) }
 
     describe 'divisions' do
       context 'division 1 present' do
@@ -20,6 +21,19 @@ RSpec.describe Person do
           expect(person).not_to be_valid
         end
       end
+    end
+
+    it "zipcode must be 5 digits" do
+      @person1 = build(:person, zipcode: "abcde")
+      @person2 = build(:person, zipcode: "1234")
+      @person3 = build(:person, zipcode: "#2827c")
+      @person4 = build(:person, zipcode: "12345")
+      @person5 = build(:person, zipcode: "12345-1234")
+      expect(@person1).not_to be_valid
+      expect(@person2).not_to be_valid
+      expect(@person3).not_to be_valid
+      expect(@person4).to be_valid
+      expect(@person5).to be_valid
     end
 
     it "requires end_date to be after start_date" do # chronology

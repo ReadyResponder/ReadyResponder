@@ -9,18 +9,29 @@ class AvailabilitiesController < ApplicationController
   end
 
   def show
+    @last_editor = last_editor(@availability)
   end
 
   def new
-    @person = Person.find(params[:person_id]) if params.include? "person_id"
-    @event = Event.find(params[:event_id]) if params.include? "event_id"
-    @event = Event.new if @event.blank?
-    @availability = Availability.new(start_time: @event.start_time,
-                                     end_time: @event.end_time)
-    @availability.person = @person if @person
+    person = Person.find(params[:person_id]) if params.include? "person_id"
+    event = Event.find(params[:event_id]) if params.include? "event_id"
+    event = Event.new if event.blank?
+
+    @availability = Availability.new(start_time: event.start_time,
+                                     end_time: event.end_time)
+    @availability.person = person if person
+
+    people = Person.active
+    people |= [person]
+    @people_collection = people.sort_by {|firstname, middleinitial, lastname| "#{firstname} #{middleinitial} #{lastname}"}.compact
   end
 
   def edit
+    @people_collection = Person.active
+    
+    # Ensure person is included in @people_collection
+    @people_collection |= [@availability.person] if @availability.person
+    @people_collection = @people_collection.sort_by {|firstname, middleinitial, lastname| "#{firstname} #{middleinitial} #{lastname}"}.compact
   end
 
   def create
