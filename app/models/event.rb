@@ -145,7 +145,8 @@ private
   end
 
   def expired?
-    Event.where(id_code: id_code).maximum('end_time') <= 6.months.ago
+    Event.where(id_code: id_code)
+      .select { |event| event.end_time > 6.months.ago }.empty?
   end
 
 end
