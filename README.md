@@ -83,7 +83,7 @@ Run `apt-get update` before you install the dependencies.
 Install Postgres:
 
 ```shell
-apt-get install postgres libpq-dev
+apt-get install postgresql libpq-dev
 ```
 
 Install SQLite:

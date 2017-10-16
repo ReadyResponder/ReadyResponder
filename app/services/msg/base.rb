@@ -4,11 +4,23 @@ class Msg::Base
     @params = args[:params]
   end
 
+  def body
+    @body ||= @params[:Body] if @params.has_key? :Body
+  end
+
+  def body_words
+    return [] unless body
+    @body_words ||= @body.split
+  end
+
+  def body_size
+    return 0 unless body
+    @body_size ||= body_words.count
+  end
+
   def get_event_codename
-    if @params.has_key?(:Body) and @params[:Body].present?
-      return @params[:Body].split[1].downcase
-    end
-    nil
+    return nil unless body
+    body_words[1].downcase
   end
 
 end
