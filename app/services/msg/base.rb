@@ -20,7 +20,8 @@ class Msg::Base
 
   def get_event_codename
     return nil unless body
-    body_words[1].downcase
+    @event_codename ||= body_words[1].downcase
   end
+  alias_method :event_codename, :get_event_codename
 
 end
