@@ -1,7 +1,6 @@
 class Msg::Available < Msg::Base
   def respond
-    codename = get_event_codename
-    case codename
+    case event_codename
     when "custom"
       # available custom 1/15/2017 0800 01/15/2021 Work
       unless start_time.is_a? Time and end_time.is_a? Time
@@ -11,12 +10,12 @@ class Msg::Available < Msg::Base
       target = Event.new(start_time: start_time, end_time: end_time)
       description = body_words[6..42].join(" ") if body_size > 6
     else
-      target = Event.find_by_code(codename)
+      target = Event.find_by_code(event_codename)
       return target if target.is_a? Error::Base
       description = body_words[2..-1].join(' ')
     end
 
-    # target = Notification::find_by_code.call(codename)
+    # target = Notification::find_by_code.call(event_codename)
     # TODO Need to verify and save Availabilites as needed.
 
     Availability.create(person: @person,
@@ -29,14 +28,12 @@ class Msg::Available < Msg::Base
   private
 
   def start_time
-    return nil unless event_codename
-    return nil unless body_size > 5
+    return nil unless event_codename and body_size > 5
     @start_time ||= Time.zone.parse body_words[2..3].join(' ')
   end
 
   def end_time
-    return nil unless event_codename
-    return nil unless body_size > 5
+    return nil unless event_codename and body_size > 5
     @end_time ||= Time.zone.parse body_words[4..5].join(' ')
   end
 end
