@@ -36,7 +36,8 @@ class Item < ActiveRecord::Base
            reject_if: :all_blank
 
   STATUS_CHOICES = ['Assigned', 'Unassigned', 'Retired']
-  CONDITION_CHOICES = ['Ready', 'In-Service - Maintenance', 'In-Service - Degraded', 'Out of Service' ]
+  CONDITION_CHOICES = ['Ready', 'In-Service - Maintenance', 
+                       'In-Service - Degraded', 'Out of Service']
 
   def to_s
     name
@@ -51,4 +52,13 @@ class Item < ActiveRecord::Base
     "Unknown"
   end
 
+  def repair_condition
+    severity_index = 0
+    repairs.each do |a|
+      if !CONDITION_CHOICES.index(a.condition).nil? && CONDITION_CHOICES.index(a.condition) > severity_index
+        severity_index = CONDITION_CHOICES.index(a.condition)
+      end
+    end
+    self.update(condition: CONDITION_CHOICES[severity_index])
+  end
 end

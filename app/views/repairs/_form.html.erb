@@ -9,6 +9,7 @@
                 input_html: { class: 'datepicker', size: 11,
                               value: format_date_value(f.object.service_date) } %>
     <%= f.input :description %>
+    <%= f.input :condition, :as => :select, :collection => Repair::CONDITION_CHOICES %>
     <%= f.input :cost %>
     <%= f.input :comments %>
   </div>

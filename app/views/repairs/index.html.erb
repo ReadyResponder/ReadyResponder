@@ -12,6 +12,7 @@
       <th>Service date</th>
       <th>Status</th>
       <th>Description</th>
+      <th>Condition</th>
       <th>Comments</th>
       <th></th>
     </tr>
@@ -26,6 +27,7 @@
         <td><%= repair.service_date %></td>
         <td><%= repair.status %></td>
         <td><%= repair.description %></td>
+        <td><%= repair.condition %></td>
         <td><%= repair.comments %></td>
         <td><%= table_button_link 'Edit', edit_repair_path(repair) %></td>
       </tr>
