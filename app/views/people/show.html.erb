@@ -1,5 +1,4 @@
 <% content_for :sidebar do %>
-  <%= sidebar_button_link 'Return to Listing', session[:before_show] %>
   <%= sidebar_button_link 'Edit Person', edit_person_path(@person) if can? :edit, @person %>
   <%= sidebar_button_link 'New Certification', new_person_cert_path(@person) if can? :create, Cert %>
   <%= sidebar_button_link 'New Availability', new_person_availability_path(@person) if can? :create, Availability %>
@@ -91,7 +90,6 @@
     <ul>
       <%= render(@person.items) || raw("No Items Found !") %>
     </ul>
-    <%= independent_button_link 'New Item', new_person_item_path(@person) if can? :create, Item %>
   </div>
 
   <h3>Availabilities (<%= @person.availabilities.uniq.count %>)</h3>
@@ -102,26 +100,11 @@
     </ul>
   </div>
 
-
   <h3>Timecards (<%= @person.timecards.count %>)</h3>
   <div>
-    <table class="table table-striped table-bordered">
-      <% if @person.timecards.any? %>
-        <thead>
-          <tr>
-            <th>Status</th>
-            <th>Start</th>
-            <th>End</th>
-            <th>Duration</th>
-            <th>Description</th>
-            <th></th>
-          </tr>
-        </thead>
-      <% end %>
-      <tbody>
-        <%= render(@person.timecards.uniq) || raw("No timecards yet !") %>
-      </tbody>
-    </table>
+    <ul>
+      <%= render 'timecards/timecards_table', timecards: @person.timecards.most_recent.uniq %>
+    </ul>
   </div>
 </div>
 

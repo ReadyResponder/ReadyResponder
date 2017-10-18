@@ -1,4 +1,6 @@
 class Skill < ActiveRecord::Base
+  has_paper_trail
+
   attr_accessible :name, :status, :course_ids, :title_ids
   has_and_belongs_to_many :courses
   has_and_belongs_to_many :titles

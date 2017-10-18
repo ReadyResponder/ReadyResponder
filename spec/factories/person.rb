@@ -10,5 +10,12 @@ FactoryGirl.define do
     title 'Captain'
     gender 'Female'
     association :department, factory: :department
+  
+    factory :active_person do
+    end
+
+    factory :inactive_person do
+      status "Inactive"
+    end
   end
 end

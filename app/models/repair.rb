@@ -1,5 +1,6 @@
 class Repair < ActiveRecord::Base
   has_paper_trail
+
   attr_accessible :category, :comments, :description,
                   :item_id, :person_id, :service_date,
                   :status, :user_id, :cost, :condition
@@ -19,4 +20,6 @@ class Repair < ActiveRecord::Base
   def repairer_name
     return person.present? ? person.name : "Unknown"
   end
+
+  scope :not_completed, (-> { where('status NOT LIKE ?', '%Completed%') })
 end

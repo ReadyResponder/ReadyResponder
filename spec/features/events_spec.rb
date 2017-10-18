@@ -8,7 +8,7 @@ RSpec.describe "Events" do
     @recent = create(:event, title: "recent title")
     @archive = create(:event, title: "archive title", status: "Completed")
   end
-  
+
   # removed sidebar so disabling this test for now
   # get_basic_editor_views('event',['Training', 'Status'])
 
@@ -222,7 +222,7 @@ RSpec.describe "Events" do
     end
 
     it "an edit form" do
-      @event = create(:event, title: "Something divine")
+      @event = create(:event, :meeting, title: "Something divine")
       visit edit_event_path(@event)
       within("#sidebar") do
         expect(page).to have_content("Cancel")
@@ -230,7 +230,7 @@ RSpec.describe "Events" do
     end
 
     it "an event page" do
-      @event = create(:event)
+      @event = create(:event, :meeting)
       visit event_path(@event)
       within('#sidebar') do
         expect(page).to have_content "Return to"
@@ -238,7 +238,8 @@ RSpec.describe "Events" do
       expect(page).to have_content(@event.title)
       expect(current_path).to eq(event_path(@event))
     end
-    it "the course if category is training", js: true do
+
+    it "the new course if category is training", js: true do
       visit new_event_path
       select 'Patrol', :from => 'event_category'
       fill_in "Description", with: "Really Long Text..."  #This ensures the blur event happens
@@ -247,5 +248,32 @@ RSpec.describe "Events" do
       fill_in "Description", with: "Really Long Text..."  #This ensures the blur event happens
       expect(page).to have_content("Course")
     end
+
+    it "the new course if category is not training", js: true do
+      visit new_event_path
+      select 'Patrol', :from => 'event_category'
+      fill_in "Description", with: "Really Long Text..."  #This ensures the blur event happens
+      expect(page).not_to have_content("Course")
+      select 'Meeting', :from => 'event_category'
+      fill_in "Description", with: "Really Long Text..."  #This ensures the blur event happens
+      expect(page).to_not have_content("Course")
+    end
+
+    it "the edit course if original category is training", js: true do
+      @event = create(:event, :training)
+      visit edit_event_path(@event)
+      expect(page).to have_content("Course")
+      select "Meeting", :from => 'event_category'
+      expect(page).to_not have_content("Course")
+    end
+
+    it "the edit course if original category is not training", js: true do
+      @event = create(:event, :meeting)
+      visit edit_event_path(@event)
+      expect(page).to_not have_content("Course")
+      select "Training", :from => 'event_category'
+      expect(page).to have_content("Course")
+    end
+
   end
 end

@@ -9,6 +9,7 @@ jQuery ->
                   { orderable: false, targets: 5 }
                 ]
 
+
 jQuery ->
   $('.js-timecard-verify-btn').click (event)->
     event.preventDefault()
