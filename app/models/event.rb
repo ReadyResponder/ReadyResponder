@@ -88,7 +88,7 @@ class Event < ActiveRecord::Base
   end
 
   def eligible_people
-    Person.active.where(department: self.departments)
+    Person.active.where(department: self.departments).where("title_order >= ?", Person::TITLE_ORDER[min_title])
   end
 
   def unresponsive_people
