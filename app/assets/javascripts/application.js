@@ -15,8 +15,10 @@
 //= require bootstrap-sprockets
 //= require jquery_ujs
 //= require datatables
+//= require dhtmlxscheduler
 //= require jquery-ui/accordion
 //= require datetimepicker
 //= require jquery-ui
 //= require cocoon
-//= require_tree .
+//= require_tree "."
+//= stub "event_scheduler"
