@@ -7,20 +7,43 @@ class Timecard < ActiveRecord::Base
   belongs_to :person
 
   scope :verified, -> { where(:status => 'Verified')}
+  
+  scope :most_recent, -> { order(:start_time) }
+  
+  scope :active, -> { where(status: ['Incomplete', 'Unverified', 'Error', 'Verified']) }
+  
+  scope :working, -> { where(end_time: nil, status: 'Incomplete') }
+  
+  scope :older_than, lambda { |hour_amount|
+    where('start_time < ?', Time.now - hour_amount.hours) }
+  
+
+  scope :open_for_more_than, -> (hour_amount) { working.older_than(hour_amount) }
+
   STATUS_CHOICES = ['Incomplete', 'Unverified', "Error", "Verified", "Cancelled"]
 
-  validates_presence_of :person_id
+  validates_presence_of :person
   validates_chronology :start_time, :end_time
 
   # validate :has_no_duplicate_timecard
 
-  def self.working
-    where(end_time: nil, status: 'Incomplete')
+  # returns timecards that overlap an event
+  def self.overlapping_time(range)
+    range_endtime = range.last || Time.current
+    where("(end_time >= :range_start AND start_time <= :range_end) OR (end_time IS NULL AND start_time <= :range_end)",
+    range_start: range.first, range_end: range_endtime)
   end
 
   def concurrent_events
     return Event.none if start_time.blank? || end_time.blank?
     Event.concurrent(start_time..end_time)
+  end
+
+  # Warning: this skips validations and does not change timestamps
+  # Rails 5 allows us to use update(attribute: value), but generates an update
+  # query for each record affected, which may hinder performance
+  def self.mark_as_error!
+    update_all(status: 'Error')
   end
 
 private

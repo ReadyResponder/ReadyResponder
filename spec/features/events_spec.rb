@@ -8,7 +8,7 @@ RSpec.describe "Events" do
     @recent = create(:event, title: "recent title")
     @archive = create(:event, title: "archive title", status: "Completed")
   end
-  
+
   # removed sidebar so disabling this test for now
   # get_basic_editor_views('event',['Training', 'Status'])
 
@@ -134,55 +134,58 @@ RSpec.describe "Events" do
       end
     end
 
-    it "checkboxes current, past, templates on index page", js: true do
+    it "checkboxes current, recent on index page", js: true do
       @current_insession = create(:event, title: "Current insession Title", status: "In-session")
       @cancelled = create(:event, title: "Cancelled Title", status: "Cancelled")
       @closed = create(:event, title: "Closed Title", status: "Closed")
       @not_recent = create(:event, title: "Not Recent Title", start_time: DateTime.now - 14.months, end_time: DateTime.now - 1.hours, status: "Cancelled")
       visit events_path
-      # current checkbox should be clicked by default
-      expect(page).to have_content(@current_insession.title)
-      expect(page).to have_content(@current.title)
-      expect(page).to have_content(@recent.title)
-      expect(page).not_to have_content(@cancelled.title)
-      expect(page).not_to have_content(@closed.title)
-      expect(page).not_to have_content(@not_recent.title)
-      expect(page).not_to have_content(@template.title)
-      page.has_css?("table tr.current-highlight")
-      page.has_css?("table tr.recent-highlight")
+      page.execute_script "window.scrollBy(0,1500)"
+      within(".dataTables_scroll") do
+        # current checkbox should be clicked by default
+        expect(page).to have_content(@current_insession.title)
+        expect(page).to have_content(@current.title)
+        expect(page).to have_content(@recent.title)
+        expect(page).not_to have_content(@cancelled.title)
+        expect(page).not_to have_content(@closed.title)
+        expect(page).not_to have_content(@not_recent.title)
+        expect(page).not_to have_content(@template.title)
+        page.has_css?("table tr.current-highlight")
+        page.has_css?("table tr.recent-highlight")
 
-      uncheck "js-events-current-checkbox"
-      check "js-events-recent-checkbox"
-      expect(page).to have_content(@current_insession.title)
-      expect(page).to have_content(@current.title)
-      expect(page).to have_content(@recent.title)
-      expect(page).to have_content(@cancelled.title)
-      expect(page).to have_content(@closed.title)
-      expect(page).not_to have_content(@not_recent.title)
-      expect(page).not_to have_content(@template.title)
-      page.has_css?("table tr.recent-highlight")
-      page.has_css?("table tr.current-highlight")
+        uncheck "js-events-current-checkbox"
+        check "js-events-recent-checkbox"
+        expect(page).to have_content(@current_insession.title)
+        expect(page).to have_content(@current.title)
+        expect(page).to have_content(@recent.title)
+        expect(page).not_to have_content(@cancelled.title)
+        expect(page).not_to have_content(@closed.title)
+        expect(page).not_to have_content(@not_recent.title)
+        expect(page).not_to have_content(@template.title)
+        page.has_css?("table tr.recent-highlight")
+        page.has_css?("table tr.current-highlight")
 
-      check "js-events-current-checkbox"
-      check "js-events-recent-checkbox"
-      expect(page).to have_content(@current_insession.title)
-      expect(page).to have_content(@current.title)
-      expect(page).to have_content(@recent.title)
-      expect(page).to have_content(@cancelled.title)
-      expect(page).to have_content(@closed.title)
-      expect(page).not_to have_content(@not_recent.title)
-      expect(page).not_to have_content(@template.title)
+        check "js-events-current-checkbox"
+        check "js-events-recent-checkbox"
+        expect(page).to have_content(@current_insession.title)
+        expect(page).to have_content(@current.title)
+        expect(page).to have_content(@recent.title)
+        expect(page).not_to have_content(@cancelled.title)
+        expect(page).not_to have_content(@closed.title)
+        expect(page).not_to have_content(@not_recent.title)
+        expect(page).not_to have_content(@template.title)
 
-      uncheck "js-events-current-checkbox"
-      uncheck "js-events-recent-checkbox"
-      expect(page).not_to have_content(@current_insession.title)
-      expect(page).not_to have_content(@current.title)
-      expect(page).not_to have_content(@closed.title)
-      expect(page).not_to have_content(@cancelled.title)
-      expect(page).not_to have_content(@recent.title)
-      expect(page).not_to have_content(@not_recent.title)
-      expect(page).not_to have_content(@template.title)
-      expect(page).to have_content("No matching records found")
+        uncheck "js-events-current-checkbox"
+        uncheck "js-events-recent-checkbox"
+        expect(page).not_to have_content(@current_insession.title)
+        expect(page).not_to have_content(@current.title)
+        expect(page).not_to have_content(@closed.title)
+        expect(page).not_to have_content(@cancelled.title)
+        expect(page).not_to have_content(@recent.title)
+        expect(page).not_to have_content(@not_recent.title)
+        expect(page).not_to have_content(@template.title)
+        expect(page).to have_content("No matching records found")
+      end
     end
 
     it "a template", js: true do
@@ -197,7 +200,7 @@ RSpec.describe "Events" do
       end
     end
 
-    it "all events", js: true do
+    it "archives", js: true do
       @scheduled = create(:event, title: "scheduled", status: "Scheduled")
       @in_session = create(:event, title: "in session", status: "In-session")
       @closed = create(:event, title: "closed", status: "Closed")
@@ -222,7 +225,7 @@ RSpec.describe "Events" do
     end
 
     it "an edit form" do
-      @event = create(:event, title: "Something divine")
+      @event = create(:event, :meeting, title: "Something divine")
       visit edit_event_path(@event)
       within("#sidebar") do
         expect(page).to have_content("Cancel")
@@ -230,7 +233,7 @@ RSpec.describe "Events" do
     end
 
     it "an event page" do
-      @event = create(:event)
+      @event = create(:event, :meeting)
       visit event_path(@event)
       within('#sidebar') do
         expect(page).to have_content "Return to"
@@ -238,7 +241,8 @@ RSpec.describe "Events" do
       expect(page).to have_content(@event.title)
       expect(current_path).to eq(event_path(@event))
     end
-    it "the course if category is training", js: true do
+
+    it "the new course if category is training", js: true do
       visit new_event_path
       select 'Patrol', :from => 'event_category'
       fill_in "Description", with: "Really Long Text..."  #This ensures the blur event happens
@@ -247,5 +251,32 @@ RSpec.describe "Events" do
       fill_in "Description", with: "Really Long Text..."  #This ensures the blur event happens
       expect(page).to have_content("Course")
     end
+
+    it "the new course if category is not training", js: true do
+      visit new_event_path
+      select 'Patrol', :from => 'event_category'
+      fill_in "Description", with: "Really Long Text..."  #This ensures the blur event happens
+      expect(page).not_to have_content("Course")
+      select 'Meeting', :from => 'event_category'
+      fill_in "Description", with: "Really Long Text..."  #This ensures the blur event happens
+      expect(page).to_not have_content("Course")
+    end
+
+    it "the edit course if original category is training", js: true do
+      @event = create(:event, :training)
+      visit edit_event_path(@event)
+      expect(page).to have_content("Course")
+      select "Meeting", :from => 'event_category'
+      expect(page).to_not have_content("Course")
+    end
+
+    it "the edit course if original category is not training", js: true do
+      @event = create(:event, :meeting)
+      visit edit_event_path(@event)
+      expect(page).to_not have_content("Course")
+      select "Training", :from => 'event_category'
+      expect(page).to have_content("Course")
+    end
+
   end
 end

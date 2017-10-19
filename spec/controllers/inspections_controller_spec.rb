@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe InspectionsController, type: :controller do
-  let!(:inspections) { create_list(:inspection, 3) }
+  let(:item) { create(:item) }
+  let!(:inspections) { create_list(:inspection, 3, item_id: item.id) }
   let(:inspection) { inspections.first }
-  let(:item) { inspection.item }
 
   before { login_manager }
 
@@ -26,8 +26,6 @@ RSpec.describe InspectionsController, type: :controller do
   end
 
   describe '#new' do
-    let(:item) { inspections.first.item }
-
     subject { get :new, item_id: item.id }
 
     before { subject }
@@ -52,11 +50,10 @@ RSpec.describe InspectionsController, type: :controller do
   end
 
   describe '#create' do
-    let(:item) { inspections.first.item }
-    let(:inspection_params) do
+    let!(:inspection_params) do
       {
         item_id: item.id,
-        inspection: { inspection_date: Time.now, status: 'Passed' }
+        inspection: { inspection_date: Time.now.strftime('%Y-%m-%d %H:%M'), status: 'Passed' }
       }
     end
 
@@ -100,7 +97,7 @@ RSpec.describe InspectionsController, type: :controller do
     let(:inspection_params) do
       {
         id: inspection.id,
-        inspection: { inspection_date: Time.now, status: 'Incomplete' }
+        inspection: { inspection_date: Time.now.strftime('%Y-%m-%d %H:%M'), status: 'Incomplete' }
       }
     end
 

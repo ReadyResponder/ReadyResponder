@@ -1,6 +1,9 @@
 class Setting < ActiveRecord::Base
+  has_paper_trail
 
   validates_presence_of :name, :key, :value, :category, :status
+
+  MissingSettingError = Class.new(StandardError)
 
   STATUS_CHOICES = ['Active', 'Inactive']
 

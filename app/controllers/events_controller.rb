@@ -3,7 +3,7 @@ class EventsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @events = all_events_except_templates
+    @events = Event.recent
     @page_title = "Events"
   end
 
@@ -13,11 +13,12 @@ class EventsController < ApplicationController
   end
 
   def archives
-    @archives = all_events_except_templates
+    @archives = Event.actual
     @page_title = "Archives"
   end
 
   def show
+    @timecards = Timecard.active.overlapping_time(@event.start_time..@event.end_time)
     @page_title = @event.title
     @last_editor = last_editor(@event)
   end
@@ -56,10 +57,6 @@ class EventsController < ApplicationController
   end
 
   private
-
-  def all_events_except_templates
-    Event.where(is_template: false)
-  end
 
   def event_params
     params.require(:event).permit(:title, :description, :category,

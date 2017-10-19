@@ -1,9 +1,17 @@
-<% content_for :sidebar do %>
-  <%= sidebar_button_link 'New Person', new_person_path if can? :create, Person %>
-<% end %>
 
 <table id="people" class="datatable table table-striped table-bordered" >
-  <caption><h3><%= @page_title %></h3></caption>
+  <caption>
+    <h3 class="data-table-title"><%= @page_title %></h3>
+    <!-- decides whether or not to render create event button  -->
+    <% if can? :create, Person %>
+      <a role="button" class='js-create-person add-btn btn' href='<%= new_person_path %>'><p>+</p></a>
+    <% end %>
+    <%= render 'shared/filter_by_dept' %>
+    <div>
+      <label>Active:<input type="checkbox" id="js-people-active-checkbox" class="people-filter" value="active"></label>
+      <label>On-leave:<input type="checkbox" id="js-people-onLeave-checkbox" class="people-filter" value="onLeave"></label>
+    </div>
+  </caption>
   <thead>
     <tr>
       <th>(S) Rank Order</th>
@@ -17,6 +25,7 @@
       <th>Last Available</th>
       <th>Last Worked</th>
       <th>Last 3/6/12 Months</th>
+      <th>Status</th>
       <th></th>
     </tr>
   </thead>
@@ -36,6 +45,7 @@
         <%= display_date_with_days_hint(person, 'date_last_available') %>
         <%= display_date_with_days_hint(person, 'date_last_worked') %>
         <%= display_hours_worked(person) %>
+        <td><%= person.status %></td>
         <td><%= table_button_link 'Edit', edit_person_path(person) if can? :update, person %></td>
       </tr>
     <% end %>

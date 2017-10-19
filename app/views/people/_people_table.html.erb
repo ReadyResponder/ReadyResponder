@@ -2,7 +2,7 @@
   <caption><h3><%= title %></h3></caption>
   <thead>
     <tr>
-      <th>ID</th>
+      <th>Title</th>
       <th>Name</th>
       <th>Phone</th>
       <th>Dept</th>
@@ -11,7 +11,7 @@
   <tbody>
     <% people.each do |person| %>
       <tr <%== row_class if local_assigns[:row_class] %>>
-        <td><%= person.icsid %></td>
+        <td><%= person.shortrank %></td>
         <td><%= link_to person.fullname, person_path(person) %></td>
         <td><%= number_to_phone(person.phone) %></td>
         <td><%= "#{person.dept_shortname} #{person.division1}" %></td>

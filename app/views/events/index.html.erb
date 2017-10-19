@@ -1,3 +1,60 @@
-<!-- renders table data and then actual dataTable()  -->
-<%= render 'events/table_data/index_events', events: @events %>
-<%= render 'shared/data_table_template', table_title: @page_title, table_class: "datatable" %>
+<div id="index-event-scheduler" class="dhx_cal_container" style='width:100%; min-height:600px;'>
+  <div class="dhx_cal_navline">
+    <div class="dhx_cal_prev_button">&nbsp;</div>
+    <div class="dhx_cal_next_button">&nbsp;</div>
+    <div class="dhx_cal_today_button"></div>
+    <div class="dhx_cal_date"></div>
+    <div class="dhx_cal_tab" name="day_tab" style="right:204px;"></div>
+    <div class="dhx_cal_tab" name="week_tab" style="right:140px;"></div>
+    <div class="dhx_cal_tab" name="month_tab" style="right:76px;"></div>
+  </div>
+  <div class="dhx_cal_header"></div>
+  <div class="dhx_cal_data"></div>
+</div>
+<table id="events" class="datatable table table-striped table-bordered" >
+  <caption>
+    <h3 class="data-table-title"><%= @page_title %></h3>
+    <!-- decides whether or not to render create event button  -->
+    <% if can? :create, Event %>
+      <a role="button" class='js-create-event add-btn btn' href='<%= new_event_path %>'><p>+</p></a>
+    <% end %>
+    <div>
+      <label>Current:<input type="checkbox" id="js-events-current-checkbox" class="event-filter" value="current"></label>
+      <label>Recent:(Last 13 Months)<input type="checkbox" id="js-events-recent-checkbox" class="event-filter" value="recent"></label>
+    </div>
+  </caption>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Location</th>
+      <th>Start time</th>
+      <th>Start time</th>
+      <th>End time</th>
+      <th>End time</th>
+      <th>Duration</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @events.each do |e| %>
+      <tr class='<%= column_color_class(e) %>'>
+        <td><%= link_to e.title, e %></td>
+        <td><%= e.location %></td>
+        <td><%= e.start_time %></td>
+        <td><time>
+          <%= e.start_time.strftime('%a, %b %d, %y %k:%M') if e.start_time  %>
+        </time></td>
+        <td><%= e.end_time %></td>
+        <td><time>
+          <%= e.end_time.strftime('%a, %b %d, %y %k:%M') if e.end_time  %>
+        </time></td>
+        <td><%= e.duration %></td>
+        <td><%= e.status %></td>
+        <td><%= table_button_link 'Edit', edit_event_path(e) unless cannot? :update, e %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= javascript_include_tag 'dhtmlxscheduler'%>
+<%= javascript_include_tag 'event_scheduler'%>

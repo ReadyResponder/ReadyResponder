@@ -1,7 +1,6 @@
 jQuery ->
   $("#event_title").focus()
   $eventTable = $('#events').dataTable
-    'dom': "fr<'event-table-info't>ip",
     order: [[3, 'asc']],
     columnDefs: [
                   { orderable: false, targets: -1 },
@@ -9,11 +8,6 @@ jQuery ->
                   { orderData: 4, targets: 5 },
                   { visible: false, targets: [2,4] }
                 ]
-
-# sets checkbox elements within #events dataTable()
-  $('.event-table-info caption').append('<a role="button" class="add-btn btn" href="/events/new"><p>+</p></a>
-  <div><label>Current:<input type="checkbox" id="js-events-current-checkbox" class="event-filter" value="current"></label>
-  <label>Recent:(Last 13 Months)<input type="checkbox" id="js-events-recent-checkbox" class="event-filter" value="recent"></label></div>')
 
 #logic handling checkbox filtering with dataTables()
   $.fn.dataTableExt.afnFiltering.push((settings, data) ->
@@ -49,13 +43,19 @@ jQuery ->
   $('.event-filter').change ->
     $eventTable.fnDraw()
 
+  # training events should display course info
+  $(window).load ->
+    edit_event_cat = $('.edit_event #event_category option:selected').text()
+    if edit_event_cat is 'Training'
+      $(".training-controls").css("display", "block")
+
   $("#event_category").change ->
-    temp = $("#event_category option:selected").text();
-    if temp is "Training"
-      $(".training-controls").show()
+    event_cat = $("#event_category option:selected").text();
+    if event_cat is "Training"
       $(".training-controls").css("display", "block")
     else
-      $(".training-controls").hide()
+      $(".training-controls").css("display", "none")
+
   $("#event_status").change ->
     status = $("#event_status option:selected").text();
     start_time = $("#event_start_time").text();
