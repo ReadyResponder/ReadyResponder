@@ -50,10 +50,10 @@ RSpec.describe InspectionsController, type: :controller do
   end
 
   describe '#create' do
-    let(:inspection_params) do
+    let!(:inspection_params) do
       {
         item_id: item.id,
-        inspection: { inspection_date: Time.now, status: 'Passed' }
+        inspection: { inspection_date: Time.now.strftime('%Y-%m-%d %H:%M'), status: 'Passed' }
       }
     end
 
@@ -97,7 +97,7 @@ RSpec.describe InspectionsController, type: :controller do
     let(:inspection_params) do
       {
         id: inspection.id,
-        inspection: { inspection_date: Time.now, status: 'Incomplete' }
+        inspection: { inspection_date: Time.now.strftime('%Y-%m-%d %H:%M'), status: 'Incomplete' }
       }
     end
 

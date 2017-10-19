@@ -16,12 +16,6 @@
     <% end %>
     <div class="container-fluid">
       <div class="row">
-        <% flash.each do |name,msg| %>
-          <%= content_tag :div, msg, id: "flash_#{name}" %>
-        <% end %>
-        <p id="js-notice"></p>
-        <%= content_tag :p, flash[notice], class: "notice" if flash[notice] %>
-        <%= content_tag :p, flash[alert], class: "alert" if flash[alert] %>
         <% if content_for?(:sidebar) %>
           <div id="sidebar" class="col-md-2">
             <%= yield :sidebar %>
@@ -30,6 +24,12 @@
         <% else %>
           <div class="col-md-12">
         <% end %>
+          <% flash.each do |name,msg| %>
+            <%= content_tag :div, msg, id: "flash_#{name}" %>
+          <% end %>
+          <p id="js-notice"></p>
+          <%= content_tag :p, flash[notice], class: "notice" if flash[notice] %>
+          <%= content_tag :p, flash[alert], class: "alert" if flash[alert] %>
           <%= yield %><br/><br/>
           <div class="col-md-12">
             <%= render "layouts/footer" %>
