@@ -22,4 +22,5 @@ class Repair < ActiveRecord::Base
   end
 
   scope :not_completed, (-> { where('status NOT LIKE ?', '%Completed%') })
+  scope :not_ready, (-> { where('condition NOT LIKE ?', '%Ready%') })
 end

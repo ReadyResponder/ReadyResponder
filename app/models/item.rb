@@ -52,9 +52,9 @@ class Item < ActiveRecord::Base
     "Unknown"
   end
 
-  def repair_condition
+  def set_repair_condition
     severity_index = 0
-    repairs.each do |a|
+    repairs.not_ready.each do |a|
       if !CONDITION_CHOICES.index(a.condition).nil? && CONDITION_CHOICES.index(a.condition) > severity_index
         severity_index = CONDITION_CHOICES.index(a.condition)
       end
