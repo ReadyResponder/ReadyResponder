@@ -24,19 +24,19 @@ class RepairsController < ApplicationController
 
     if @repair.save
       redirect_to @repair, notice: 'Repair was successfully created.'
+      @repair.item.set_repair_condition
     else
       render action: "new"
     end
   end
 
   def update
-    respond_to do |format|
       if @repair.update_attributes(params[:repair])
         redirect_to @repair.item, notice: 'Repair was successfully updated.'
+        @repair.item.set_repair_condition
       else
         render action: "edit"
       end
-    end
   end
 
   def destroy
