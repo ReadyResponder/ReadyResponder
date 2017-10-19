@@ -13,36 +13,34 @@ RSpec.feature "Users can create new people" do
     cert = create(:department, shortname: "CERT")
   end
 
-  scenario "from the everybody people page" do
-    visit everybody_people_path
-    click_link "People"
-    click_link "New Person"
+  scenario "from the people page a.k.a all active", js: true do
+    visit people_path
+    find('.add-btn').click
     fill_in "First Name", with: "John"
     fill_in "Last Name", with: "Doe"
     fill_in "Date of birth", with: "1990-05-13"
     select "Active", from: "person_status" #"Status" also matches Channel status
+    # Used `find` instead of select, as `select Department.first.id, from: "person_department_id"` raises "Ambiguous match" error
+    find(:css, '#person_department_id > option:nth-child(2)').select_option
+    page.execute_script "window.scrollBy(0,1500)"
     click_button "Create Person"
     expect(page).to have_content "Person was successfully created."
-    expect(current_path).to eq everybody_people_path
+    expect(current_path).to eq people_path
   end
 
 
-  scenario "when user-entered start date is before the applicaton date" do
-    visit everybody_people_path
-
-    click_link "People"
-    click_link "New Person"
-
+  scenario "when user-entered start date is before the applicaton date", js: true do
+    visit applicants_people_path
+    find('.add-btn').click
     fill_in "First Name", with: "G.I."
     fill_in "Last Name", with: "Joe"
     select "Active", from: "person_status"
-
     fill_in "Start date", with: "2017-01-01"
     fill_in "Application date", with: "2017-12-01"
-
+    find(:css, '#person_department_id > option:nth-child(2)').select_option
+    page.execute_script "window.scrollBy(0,1500)"
     click_button "Create Person"
     expect(page).to have_content "Start date cannot be before the application date"
-
     expect(page).not_to have_content "Person was sucessfully created"
   end
 end

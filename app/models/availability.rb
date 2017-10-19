@@ -1,4 +1,6 @@
 class Availability < ActiveRecord::Base
+  has_paper_trail
+
   belongs_to :person
 
   after_create :cancel_duplicates

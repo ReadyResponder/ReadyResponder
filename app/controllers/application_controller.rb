@@ -23,6 +23,22 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+    def set_return_path
+      if request.referer
+        (session[:before_show] = request.referer unless request.referer.include? "edit")
+      else
+        (session[:before_show] = people_path)
+      end
+    end
+
+    def set_referrer_path
+      session[:referrer] = request.referer
+    end
+
+    def referrer_or(fallback_destination)
+      session.delete(:referrer) || fallback_destination
+    end
+
     def configure_permitted_parameters
       devise_parameter_sanitizer.for(:sign_up) << :username
       devise_parameter_sanitizer.for(:account_update) << :username

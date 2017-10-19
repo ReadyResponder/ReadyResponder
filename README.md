@@ -23,17 +23,80 @@ The program is currently in production, getting live feedback.
 ## Contributing to Ready Responder
 We have a Slack channel at [readyresponder.slack.com](https://readyresponder.slack.com) to give help if you need it.
 
-### Getting Started
+### Getting Started - Dependencies
 
-This is a Rails project that is configured to run on Ruby 2, and on a Postgres database.  So, the things you'll need to install before running ReadyResponder locally are Ruby, the `bundler` gem, and Postgres version 9.
+This is a Rails project that is configured to run on Ruby 2, and on a Postgres
+database. So, the things you'll need to install before running ReadyResponder locally are:
 
-1. Ruby: There's a detailed list of options for installing Ruby on the [official Ruby website](https://www.ruby-lang.org/en/documentation/installation/).
-  * [RVM](http://rvm.io/), [rbenv](https://github.com/rbenv/rbenv#readme), and [chruby](https://github.com/postmodern/chruby#readme) are common ruby installation managers for Macs & Linux.
-  * The exact version of Ruby that ReadyResponder is using is specified in the [.ruby-version](.ruby-version) file.
-2. Bundler: `gem install bundler`
-3. Postgres
-  * If you have `homebrew` on a Mac, you can run `brew install postgres`.
-  * Alternatively, [Postgres.app](http://postgresapp.com) is an easy way to get started with PostgreSQL on the Mac. [PostgresApp 9.4.8](https://github.com/PostgresApp/PostgresApp/releases/tag/9.4.8) has been tested (when configuring, add `host: localhost` to `config/database.yml`).
+* Ruby
+* the `bundler` gem
+* Postgres version 9, the database used to store the application data
+* SQLite, a dependency of the mailcatcher gem
+* ImageMagick, a dependency of the rmagick gem, used to process images
+
+For **ruby**, you can find a detailed list of options on the [official Ruby website](
+https://www.ruby-lang.org/en/documentation/installation/). The most common
+applications used to manage your ruby version are:
+* [RVM](https://rvm.io)
+* [rbenv](https://github.com/rbenv/rbenv#readme), with the
+  [ruby-build](https://github.com/rbenv/ruby-build#readme) plugin
+* [chruby](https://github.com/postmodern/chruby#readme)
+
+The exact version of Ruby that ReadyResponder is using is specified in the
+[.ruby-version](.ruby-version) file.
+
+After setting up ruby on your system, install the `bundler` gem with `gem
+install bundler`.
+
+Below you will find instructions on installing the remaining dependencies for Mac
+OS and Ubuntu.
+
+#### Dependencies - Mac OS
+
+Ensure you have the [Homebrew](https://brew.sh/) package manager. Run `bew
+update` before you install the dependencies. You can also use other package
+managers, such as [MacPorts](https://www.macports.org/install.php), but the
+following instructions assume you're using Homebrew.
+
+Install Postgres
+
+```shell
+brew install postgres
+```
+
+Install SQLite:
+
+```shell
+brew install sqlite
+```
+
+Install ImageMagick
+
+```shell
+brew install imagemagick@6
+```
+
+#### Dependencies - Ubuntu
+
+Run `apt-get update` before you install the dependencies.
+
+Install Postgres:
+
+```shell
+apt-get install postgres libpq-dev
+```
+
+Install SQLite:
+
+```shell
+apt-get install sqlite3 libsqlite3-dev
+```
+
+Install ImageMagick
+
+```shell
+apt-get install libmagickwand-dev
+```
 
 *Feel free to ask for help!*
 
@@ -41,18 +104,42 @@ This is a Rails project that is configured to run on Ruby 2, and on a Postgres d
 
 Then get the project code locally and set it up:
 
-1. [Fork](https://help.github.com/articles/fork-a-repo) ReadyResponder.
-2. [Clone](https://help.github.com/articles/cloning-a-repository/) the forked
+1. install the dependencies ([Mac](#dependencies---mac-os),
+   [Ubuntu](#dependencies---ubuntu))
+2. [Fork](https://help.github.com/articles/fork-a-repo) ReadyResponder.
+3. [Clone](https://help.github.com/articles/cloning-a-repository/) the forked
    repository to your development or local machine.
-3. `cd ReadyResponder`
-4. Rmagick version 2.15.4 requires Imagemagick version 6 be installed first. `brew install imagemagick@6` before running bundle
+4. `cd ReadyResponder`
 5. `bundle install`
-6. Copy `config/database.example.yml` to `config/database.yml`.  Edit `config/database.yml` if necessary to match your postgres configuration.
-7. `bundle exec rake db:create`
-8. `bundle exec rake db:schema:load`
-9. `bundle exec rake db:seed`
-
-**You should note the output of the db:seed, as it will spit out the password at the end.**
+6. set up the local database
+    1. Ensure you have a user for the database
+        ```shell
+        sudo -i -u postgres
+        createuser -P --interactive <database-username>
+        exit
+        ```
+        Enter a password and answer the prompts, you will have a user (role)
+        named <database-username> with the selected privileges. Make sure the new
+        role can create databases
+    2. copy the example database configuration file
+        ```shell
+        cp config/database.example.yml config/database.yml
+        ```
+    3. fill in the copied file with your database user information and add
+        an entry with `host: localhost`. Edit both the `development` and `test`
+        keys
+    4. create the databases (test and development) and apply the schema defined in
+        `db/schema.rb`
+        ```shell
+        bundle exec rake db:create
+        bundle exec rake db:schema:load`
+        ```
+7. seed the database with some sample data and create an admin for you to use on
+    the local server
+    ```shell
+    bundle exec rake db:seed
+    ```
+    **You should note the output of the db:seed, as it will spit out the password at the end.**
 
 At this point you should be able to run the rails server via `bundle exec rails s`, the rails console via `bundle exec rails c`, and the tests via `bundle exec rspec spec/`
 

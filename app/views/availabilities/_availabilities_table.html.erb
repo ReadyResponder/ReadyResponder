@@ -18,7 +18,7 @@
       <tr <%== availability_status_class(a, @event) %>>
         <td><%= Person::TITLE_ORDER[a.person.title] %></td>
         <td><%= link_to availability_status_label(a, @event), a %></td>
-        <td><%= a.person.title %></td>
+        <td><%= a.person.shortrank %></td>
         <td><%= link_to a.person.fullname, a.person %></td>
         <td><%= number_to_phone(a.person.phone) %></td>
         <td><%= "#{a.person.dept_shortname} #{a.person.division1}" %></td>

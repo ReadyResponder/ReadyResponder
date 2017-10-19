@@ -106,6 +106,19 @@ RSpec.describe Timecard do
         expect(page).not_to have_button('Verify')
         expect(page).not_to have_content('Unverified')
       end
+
+      it 'views timecards from event show', js: true do
+        @person = create(:person)
+        @event = create(:event, start_time: 1.day.ago, end_time: 1.day.from_now)
+        @overlapping_timecard = create(:timecard, person: @person, start_time: Time.current, end_time: 60.minutes.from_now)
+        @no_end_date = create(:timecard, person: @person, start_time: Time.current, end_time: nil)
+        visit event_path(@event)
+
+        click_link 'Timecards'
+        expect(page).not_to have_content(@tc.person.name)
+        expect(page).to have_content(@overlapping_timecard.person.name)
+        expect(page).to have_content(@no_end_date.person.name)
+      end
     end
 
     context "unable to verify timecard" do

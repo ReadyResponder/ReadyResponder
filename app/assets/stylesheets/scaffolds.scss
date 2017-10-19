@@ -6,6 +6,11 @@ body {
   line-height: 18px;
 }
 
+.nav > li > a {
+  padding-left: 10px;
+  padding-right: 14px;
+}
+
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
@@ -80,7 +85,25 @@ li.nav-item.dropdown:hover {
   padding: 15px 7px 15px 5px;
 }
 
+@media screen and (max-width: 767px) {
+  .nav li a.split-dropdown {
+    padding: 0 7px 0 5px;
+  }
+}
+
 ul.split-dropdown {
-  left: -73px;
+  left: -67px;
   min-width: inherit;
+}
+
+.data-table-departments {
+  padding-bottom: 10px;
+}
+
+.ui-accordion-content ul {
+  min-height: 100px;
+}
+
+.dhx_cal_container {
+  margin-bottom: 2rem;
 }
