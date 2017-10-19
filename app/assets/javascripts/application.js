@@ -19,4 +19,5 @@
 //= require datetimepicker
 //= require jquery-ui
 //= require cocoon
-//= require_tree .
+//= require_tree "."
+//= stub "event_scheduler"
