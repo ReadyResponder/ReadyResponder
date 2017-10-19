@@ -3,5 +3,5 @@ class Comment < ActiveRecord::Base
 
   default_scope ->{ order('created_at DESC') }
 
-  validates_presence_of :person_id, :description
+  validates_presence_of :description
 end
