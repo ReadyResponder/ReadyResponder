@@ -6,12 +6,12 @@ RSpec.describe Comment do
     it { is_expected.to validate_presence_of :description }
   end
 
-  describe '.recent' do
+  describe 'the default scope' do
     let!(:first_comment) { create(:comment) }
     let!(:second_comment) { create(:comment) }
 
     it 'orders comments by newest to oldest' do
-      expect(Comment.recent).to eq([second_comment, first_comment])
+      expect(Comment.all).to eq([second_comment, first_comment])
     end
   end
 end
