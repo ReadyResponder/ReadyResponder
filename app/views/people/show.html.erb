@@ -106,6 +106,14 @@
       <%= render 'timecards/timecards_table', timecards: @person.timecards.most_recent.uniq %>
     </ul>
   </div>
+
+  <h3>Comments (<%= @person.comments.count %>)</h3>
+  <div>
+    <ul>
+      <%= render(:partial => "comments/comments_table_for_people",
+                 :locals => { :comments => @person.comments }) %>
+    </ul>
+  </div>
 </div>
 
 <% content_for :parking do %>

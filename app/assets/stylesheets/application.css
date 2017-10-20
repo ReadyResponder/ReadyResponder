@@ -13,6 +13,7 @@
  *
  *= require_tree .
  *= require datatables
+ *= require dhtmlxscheduler
  *= require jquery-ui/core
  *= require jquery-ui/theme
  *= require datetimepicker
