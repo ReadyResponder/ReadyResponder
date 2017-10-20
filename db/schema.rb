@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20171018155509) do
-=======
-ActiveRecord::Schema.define(version: 20171009043433) do
->>>>>>> Add Minimum Title field to events.
+ActiveRecord::Schema.define(version: 20171020223415) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -173,7 +169,7 @@ ActiveRecord::Schema.define(version: 20171009043433) do
     t.string   "id_code"
     t.boolean  "is_template",                         default: false
     t.integer  "template_id"
-    t.string   "min_title",                           default: "Recruit"
+    t.string   "min_title",                           default: ""
   end
 
   create_table "grants", force: :cascade do |t|
