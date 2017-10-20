@@ -31,7 +31,8 @@ class Event < ActiveRecord::Base
 
   scope :actual, -> { where(is_template: false)}
   scope :templates, -> { where(is_template: true, status: "In-session")}
-  scope :recent, ->  { where(is_template: false, status: ["In-session", "Scheduled"])}
+  scope :active, ->  { where(is_template: false, status: ["In-session", "Scheduled"]) }
+  scope :recent, -> { where(is_template: false).where('start_time > ?', 13.months.ago) }
 
   def self.concurrent (range)
     where_clause =  '(:end >= start_time AND start_time >= :start) OR '
