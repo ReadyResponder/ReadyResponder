@@ -3,7 +3,7 @@ class EventsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @events = Event.recent
+    @events = (Event.active + Event.recent).uniq
     @page_title = "Events"
   end
 
