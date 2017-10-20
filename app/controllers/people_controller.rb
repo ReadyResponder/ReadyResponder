@@ -44,7 +44,8 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
     @page_title = @person.fullname
     @phones = @person.phones
-    @qr = QrCode::Generator.call(@person)
+    vcard = Vcard::Generator.call(@person)
+    @qr = QrCode::Generator.call(vcard.to_s)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @person }

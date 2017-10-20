@@ -1,18 +1,17 @@
 require 'rqrcode'
 module QrCode
   class Generator
-    attr_reader :person, :vcard
-    def self.call(person)
-      new(person).call
+    attr_reader :text
+    def self.call(text)
+      new(text).call
     end
 
-    def initialize(person)
-      @person = person
+    def initialize(text)
+      @text = text
     end
 
     def call
-      vcard = Vcard::Generator.call(person)
-      RQRCode::QRCode.new( vcard.to_s, :level => :q ).as_html
+      RQRCode::QRCode.new(text, level: :q ).as_html
     end
   end
 end
