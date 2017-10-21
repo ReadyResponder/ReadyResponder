@@ -12,11 +12,11 @@ module Vcard
 
     def call
       @vcard = VCardigan.create(version: VERSION)
-      vcard.name person.firstname, person.lastname, '', gender_abbr
+      vcard.name person.firstname, person.lastname
       vcard.fullname person.fullname
       vcard.email person.email
       vcard.bday person.date_of_birth.strftime("%Y%m%d")
-      vcard.title person.department.name
+      vcard.org person.department.name
       generate_phones
 
       vcard
@@ -28,10 +28,6 @@ module Vcard
       person.phones.each do |phone|
         vcard.tel phone.content, type: phone.category
       end
-    end
-
-    def gender_abbr
-      person.gender == 'Male' ? 'Mr.' : 'Mrs.'
     end
   end
 end

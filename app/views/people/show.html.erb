@@ -4,8 +4,8 @@
   <%= sidebar_button_link 'New Availability', new_person_availability_path(@person) if can? :create, Availability %>
   <%= sidebar_button_link 'New Timecard', new_person_timecard_path(@person) if can? :create, Timecard %>
   <br>
-  <%= raw @qr %>
   <%= image_tag @person.portrait_url if @person.portrait.file.present? %>
+  <%= raw @qr %>
 <% end %>
 
 <h2><%= @person.shortrank %> <%= @person.fullname %> (<%= @person.icsid %>)</h2>
