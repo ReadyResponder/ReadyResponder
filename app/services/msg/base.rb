@@ -22,6 +22,8 @@ class Msg::Base
     return nil unless body
     @event_codename ||= body_words[1].downcase
   end
+  # The alias allows us to treat the event_codename as an
+  # instance attribute
   alias_method :event_codename, :get_event_codename
 
 end
