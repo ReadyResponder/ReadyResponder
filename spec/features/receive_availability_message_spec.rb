@@ -113,8 +113,7 @@ RSpec.describe 'receiving an availability message', type: :request do
           person.availabilities.count }
       end
 
-      it 'returns a plain text response with an error informing the user that the
-      event does not exist' do
+      it 'returns a plain text response with an error informing the user that the event does not exist' do
         post '/texts/receive_text', msg
         expect(response.content_type).to eq(:text)
         expect(response.body).to eq("(201) Event #{event_code} not found")
@@ -190,7 +189,7 @@ RSpec.describe 'receiving an availability message', type: :request do
       let(:event)  { create(:event, id_code: 'code01') }
       let(:body)   { "#{availability_type} #{event.id_code}" }
 
-      it 'sets the availability\'s status as Available' do
+      it 'sets the availability\'s status as Unavailable' do
         post '/texts/receive_text', msg
         availability = person.availabilities.last
         expect(availability.status).to eq('Unavailable')
