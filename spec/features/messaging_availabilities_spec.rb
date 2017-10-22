@@ -41,6 +41,14 @@ RSpec.describe 'receiving an availability message', type: :request do
         expect(response.body).to match(
           /^Recorded Available[\s\S]+start[\s\S]+end[\s\S]+description/)
       end
+
+      it 'cancels previously existing availabilities that match the new one' do
+        previous_availability = create(:availability, person: person,
+          status: 'Available', start_time: event.start_time, end_time: event.end_time)
+
+        expect { post '/texts/receive_text', msg }.to change { 
+          previous_availability.reload.status }.from('Available').to('Cancelled')
+      end
     end
 
     context 'and a non-existent event id' do
@@ -108,6 +116,21 @@ RSpec.describe 'receiving an availability message', type: :request do
           expect(response.body).to match(
             /^Recorded Available[\s\S]+start[\s\S]+end[\s\S]+description/)
         end
+      end
+    end
+  end
+
+  context 'with the unavailable keyword' do
+    let(:availability_type) { 'unavailable' }
+
+    context 'and an existing event id' do
+      let(:event)  { create(:event, id_code: 'code01') }
+      let(:body)   { "#{availability_type} #{event.id_code}" }
+
+      it 'sets the availability\'s status as Available' do
+        post '/texts/receive_text', msg
+        availability = person.availabilities.last
+        expect(availability.status).to eq('Unavailable')
       end
     end
   end
