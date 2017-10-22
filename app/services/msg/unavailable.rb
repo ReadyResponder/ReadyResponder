@@ -18,11 +18,15 @@ class Msg::Unavailable < Msg::Base
     # target = Notification::find_by_code.call(event_codename)
     # TODO Need to verify and save Availabilites as needed.
 
-    Availability.create(person: @person,
-                        status: "Unavailable",
-                        description: description,
-                        start_time: target.start_time,
-                        end_time: target.end_time)
+    availability_creator = AvailabilityCreator.new(person: @person,
+      status: 'Unavailable', description: description, start_time: target.start_time,
+      end_time: target.end_time)
+
+    if availability_creator.call
+      availability_creator.availability
+    else
+      availability_creator.errors.full_messages
+    end
   end
 
   private

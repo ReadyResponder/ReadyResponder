@@ -72,12 +72,12 @@ RSpec.describe 'receiving an availability message', type: :request do
 
         it 'returns an error message' do
           post '/texts/receive_text', msg
-          expect(response.body).to eq('Error, you have already made yourself available during that period')
+          expect(response.body).to match(/Error![\s\S]+/)
         end
       end
 
       context 'given an existing availability that does not have the same status and contains the new one' do
-        let(:previous_availability) { create(:availability, person: person,
+        let!(:previous_availability) { create(:availability, person: person,
           status: 'Unavailable', start_time: event.start_time - 2.hours,
           end_time: event.end_time + 2.hours) }
 
@@ -91,15 +91,15 @@ RSpec.describe 'receiving an availability message', type: :request do
           
           availabilities = person.availabilities.where(status: 'Unavailable').order(:start_time)
 
-          expect(availabilities[0].end_time).to eq(event.start_time)
+          expect(availabilities[0].end_time).to be_within(1.second).of(event.start_time)
         end
 
         it 'splits a person\'s existing availability so that the last one starts at the new availability\'s end_time' do
           post '/texts/receive_text', msg
-          
+
           availabilities = person.availabilities.where(status: 'Unavailable').order(:start_time)
 
-          expect(availabilities[1].start_time).to eq(event.end_time)
+          expect(availabilities[1].start_time).to be_within(1.second).of(event.end_time)
         end
       end
     end
