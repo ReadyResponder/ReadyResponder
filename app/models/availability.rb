@@ -3,8 +3,6 @@ class Availability < ActiveRecord::Base
 
   belongs_to :person
 
-  after_create :cancel_duplicates
-
   validates_presence_of :person, :status, :start_time, :end_time
   validates_chronology :start_time, :end_time
 
@@ -77,15 +75,6 @@ class Availability < ActiveRecord::Base
     return unless person and start_time and end_time and start_time < end_time
     if Availability.where(person: person).active.overlapping(start_time..end_time).where.not(id: id).any?
       errors.add(:base, 'This availability overlaps other active availabilities for the person')
-    end
-  end
-
-  def cancel_duplicates
-    previous_availabilities = person.availabilities.for_time_span(start_time..end_time)
-    previous_availabilities.each do |a|
-      if start_time == a.start_time && end_time == a.end_time
-        a.update(status: "Cancelled") unless self == a
-      end
     end
   end
 end

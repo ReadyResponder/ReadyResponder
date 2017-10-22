@@ -90,21 +90,6 @@ RSpec.describe Availability, type: :model do
     end
   end
 
-  context 'cancel_duplicates' do
-    it 'sets status for previous availabilities with matching start and end times to Cancelled' do
-      start_time = Time.at(0)
-      end_time = start_time + 2.minutes
-      first_availability = create(:availability, person: a_person,
-                                  start_time: start_time, end_time: end_time)
-      second_availability = create(:availability, person: a_person,
-                                   start_time: start_time, end_time: end_time)
-
-      first_availability = first_availability.reload
-      expect(first_availability.status).to eq('Cancelled')
-      expect(second_availability.status).to eq('Unavailable')
-    end
-  end
-
   context 'overlapping scope' do
     it 'returns a chainable relation' do
       expect(described_class.overlapping([0,1])).to be_a_kind_of(ActiveRecord::Relation)
