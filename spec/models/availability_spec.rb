@@ -133,6 +133,28 @@ RSpec.describe Availability, type: :model do
       end
     end
   end
+
+  context 'partially_overlapping scope' do
+    it 'returns a chainable relation' do
+      expect(described_class.partially_overlapping([0,1])).to be_a_kind_of(ActiveRecord::Relation)
+    end
+
+    context 'given 3 availabilites that belong to 3 different people' do
+      let(:people) { create_list(:person, 3) }
+      let!(:first_availability)  { create(:availability, person: people[0],
+                                   start_time: 6.hours.ago, end_time: 3.hours.ago) }
+      let!(:second_availability) { create(:availability, person: people[1],
+                                   start_time: 4.hours.ago, end_time: 1.hour.ago) }
+      let!(:third_availability)  { create(:availability, person: people[2],
+                                   start_time: 2.hours.ago, end_time: 1.hour.from_now) }
+
+      it 'returns the availabilities that contain a part of the given date_range' do
+        date_range = 5.hours.ago..3.hours.ago
+        expect(described_class.partially_overlapping(date_range)).to contain_exactly(
+          second_availability)
+      end
+    end
+  end
   
   context 'containing scope' do
     it 'returns a chainable relation' do
