@@ -17,11 +17,17 @@ class Availability < ActiveRecord::Base
   # Available part of event
   scope :partially_available, ->(range) { where("? > end_time AND end_time > ? OR ? > start_time AND start_time > ?", range.last, range.first, range.last, range.first) }
 
-
+  scope :active, -> { where(status: ['Available', 'Unavailable']).joins(:person).where(people: {status: "Active"}) }
   scope :available, -> { where(status: "Available")}
   scope :unavailable, -> { where(status: "Unavailable")}
+
   scope :in_the_past, -> { where("start_time <= ?", Time.zone.now) }
-  scope :active, -> { where(status: ['Available', 'Unavailable']).joins(:person).where(people: {status: "Active"}) }
+
+  # This scope ties the application to postgres, as it relies
+  # on its range data type implementation
+  scope :overlapping_time, lambda { |range|  
+    where("tsrange(start_time, end_time, '[]') && tsrange(TIMESTAMP?, TIMESTAMP?)",
+          range.first, range.last) }
 
   def to_s
     "Recorded #{status}\n start #{start_time} \n end #{end_time} \n description #{description}"

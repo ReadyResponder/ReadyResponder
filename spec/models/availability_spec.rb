@@ -60,4 +60,30 @@ RSpec.describe Availability, type: :model do
       expect(second_availability.status).to eq('Unavailable')
     end
   end
+
+  context 'overlapping_time scope' do
+    it 'returns a chainable relation' do
+      expect(described_class.overlapping_time([0,1])).to be_a_kind_of(ActiveRecord::Relation)
+    end
+
+    context 'given 3 separate availabilities' do
+      let!(:first_availability)  { create(:availability, person: a_person,
+                                   start_time: 5.hours.ago, end_time: 3.hours.ago) }
+      let!(:second_availability) { create(:availability, person: a_person,
+                                   start_time: 3.hours.ago, end_time: 1.hour.ago) }
+
+      it 'returns both if the given range covers part of each' do
+        date_range = 4.hours.ago..2.hours.ago
+        expect(described_class.overlapping_time(date_range)).to contain_exactly(
+          first_availability, second_availability)
+      end
+
+      it 'returns just one of them if the given range does not cover
+      part of the other one' do
+        date_range = 6.hours.ago..4.hours.ago
+        expect(described_class.overlapping_time(date_range)).to contain_exactly(
+          first_availability)
+      end
+    end
+  end
 end
