@@ -67,11 +67,15 @@ class Availability < ActiveRecord::Base
       end
   end
 
+  def cancel!
+    update(status: 'Cancelled')
+  end
+
   private
 
   def has_no_overlapping_availability
     return unless person and start_time and end_time and start_time < end_time
-    if Availability.where(person: person).active.overlapping(start_time..end_time).any?
+    if Availability.where(person: person).active.overlapping(start_time..end_time).where.not(id: id).any?
       errors.add(:base, 'This availability overlaps other active availabilities for the person')
     end
   end

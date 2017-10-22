@@ -57,6 +57,15 @@ RSpec.describe Availability, type: :model do
     end
   end
 
+  describe 'cancel! method' do
+    let(:availability) { create(:availability, person: a_person, status: 'Available') }
+
+    it 'marks the status of the availability as Cancelled' do
+      expect { availability.cancel! }.to change {
+        availability.reload.status }.from('Available').to('Cancelled')
+    end
+  end
+
   context 'partially_available?' do
     it 'returns false for full availabilities' do
       start_time = Time.current
