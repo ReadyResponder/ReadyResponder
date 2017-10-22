@@ -3,6 +3,14 @@ require 'rails_helper'
 RSpec.describe Availability, type: :model do
   let(:a_person) { build(:person) }
 
+  before(:example) do
+    Timecop.freeze
+  end
+
+  after(:example) do
+    Timecop.return
+  end
+
   describe "creation" do
     it "has a valid factory" do
       @availability = build(:availability, person: a_person)
@@ -61,28 +69,108 @@ RSpec.describe Availability, type: :model do
     end
   end
 
-  context 'overlapping_time scope' do
+  context 'overlapping scope' do
     it 'returns a chainable relation' do
-      expect(described_class.overlapping_time([0,1])).to be_a_kind_of(ActiveRecord::Relation)
+      expect(described_class.overlapping([0,1])).to be_a_kind_of(ActiveRecord::Relation)
     end
 
-    context 'given 3 separate availabilities' do
+    context 'given 3 contiguous availabilities' do
       let!(:first_availability)  { create(:availability, person: a_person,
                                    start_time: 5.hours.ago, end_time: 3.hours.ago) }
       let!(:second_availability) { create(:availability, person: a_person,
                                    start_time: 3.hours.ago, end_time: 1.hour.ago) }
+      let!(:third_availability)  { create(:availability, person: a_person,
+                                   start_time: 1.hour.ago, end_time: 1.hour.from_now) }
 
-      it 'returns both if the given range covers part of each' do
+      it 'returns the availabilities whose duration is partially covered by the given date_range' do
         date_range = 4.hours.ago..2.hours.ago
-        expect(described_class.overlapping_time(date_range)).to contain_exactly(
+        expect(described_class.overlapping(date_range)).to contain_exactly(
           first_availability, second_availability)
       end
 
-      it 'returns just one of them if the given range does not cover
-      part of the other one' do
-        date_range = 6.hours.ago..4.hours.ago
-        expect(described_class.overlapping_time(date_range)).to contain_exactly(
-          first_availability)
+      it 'returns none of them if the given range does not cover any of the availabilities' do
+        date_range = 7.hours.ago..6.hours.ago
+        expect(described_class.overlapping(date_range)).to be_empty
+      end
+
+      it 'returns the availabilities matching the date_range' do
+        date_range = second_availability.start_time..second_availability.end_time
+        expect(described_class.overlapping(date_range)).to contain_exactly(
+          second_availability)
+      end
+
+      it 'does not return availabilities that are contiguous to the given date_range' do
+        date_range = first_availability.end_time..third_availability.start_time
+        expect(described_class.overlapping(date_range)).not_to include(
+          first_availability, third_availability)
+      end
+    end
+  end
+  
+  context 'containing scope' do
+    it 'returns a chainable relation' do
+      expect(described_class.containing([0,1])).to be_a_kind_of(ActiveRecord::Relation)
+    end
+
+    context 'given 3 availabilites that belong to 3 different people' do
+      let(:people) { create_list(:person, 3) }
+      let!(:first_availability)  { create(:availability, person: people[0],
+                                   start_time: 6.hours.ago, end_time: 3.hours.ago) }
+      let!(:second_availability) { create(:availability, person: people[1],
+                                   start_time: 4.hours.ago, end_time: 1.hour.ago) }
+      let!(:third_availability)  { create(:availability, person: people[2],
+                                   start_time: 2.hours.ago, end_time: 1.hour.from_now) }
+
+      it 'returns the availabilities that contain the given date_range' do
+        date_range = 4.hours.ago..3.hours.ago
+        expect(described_class.containing(date_range)).to contain_exactly(
+          first_availability, second_availability)
+      end
+
+      it 'returns the availabilities matching the date_range' do
+        date_range = second_availability.start_time..second_availability.end_time
+        expect(described_class.containing(date_range)).to contain_exactly(
+          second_availability)
+      end
+
+      it 'does not return availabilities that are contiguous to the given date_range' do
+        date_range = first_availability.end_time..third_availability.start_time
+        expect(described_class.containing(date_range)).not_to include(
+          first_availability, third_availability)
+      end
+    end
+  end
+  
+  context 'contained_in scope' do
+    it 'returns a chainable relation' do
+      expect(described_class.contained_in([0,1])).to be_a_kind_of(ActiveRecord::Relation)
+    end
+
+    context 'given 3 availabilites that belong to 3 different people' do
+      let(:people) { create_list(:person, 3) }
+      let!(:first_availability)  { create(:availability, person: people[0],
+                                   start_time: 6.hours.ago, end_time: 3.hours.ago) }
+      let!(:second_availability) { create(:availability, person: people[1],
+                                   start_time: 4.hours.ago, end_time: 1.hour.ago) }
+      let!(:third_availability)  { create(:availability, person: people[2],
+                                   start_time: 2.hours.ago, end_time: 1.hour.from_now) }
+
+      it 'returns the availabilities that fully contained by the given date_range' do
+        date_range = 7.hours.ago..Time.now
+        expect(described_class.contained_in(date_range)).to contain_exactly(
+          first_availability, second_availability)
+      end
+
+      it 'returns the availabilities matching the date_range' do
+        date_range = second_availability.start_time..second_availability.end_time
+        expect(described_class.contained_in(date_range)).to contain_exactly(
+          second_availability)
+      end
+
+      it 'does not return availabilities that are contiguous to the given date_range' do
+        date_range = first_availability.end_time..third_availability.start_time
+        expect(described_class.contained_in(date_range)).not_to include(
+          first_availability, third_availability)
       end
     end
   end

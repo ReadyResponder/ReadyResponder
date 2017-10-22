@@ -23,10 +23,20 @@ class Availability < ActiveRecord::Base
 
   scope :in_the_past, -> { where("start_time <= ?", Time.zone.now) }
 
-  # This scope ties the application to postgres, as it relies
-  # on its range data type implementation
-  scope :overlapping_time, lambda { |range|  
-    where("tsrange(start_time, end_time, '[]') && tsrange(TIMESTAMP?, TIMESTAMP?)",
+  # These scopes tie the application to postgres, as they rely
+  # on its range data type implementation. The ranges are left_bound closed
+  # and right_bound open, as specified by the argument '[)'
+  # reference: https://www.postgresql.org/docs/current/static/rangetypes.html
+  scope :overlapping, lambda { |range|  
+    where("tsrange(start_time, end_time, '[)') && tsrange(TIMESTAMP?, TIMESTAMP?, '[)')",
+          range.first, range.last) }
+
+  scope :containing, lambda { |range|
+    where("tsrange(start_time, end_time, '[)') @> tsrange(TIMESTAMP?, TIMESTAMP?, '[)')",
+          range.first, range.last) }
+
+  scope :contained_in, lambda { |range|
+    where("tsrange(start_time, end_time, '[)') <@ tsrange(TIMESTAMP?, TIMESTAMP?, '[)')",
           range.first, range.last) }
 
   def to_s
