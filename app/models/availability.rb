@@ -8,6 +8,8 @@ class Availability < ActiveRecord::Base
   validates_presence_of :person, :status, :start_time, :end_time
   validates_chronology :start_time, :end_time
 
+  validate :has_no_overlapping_availability
+
   STATUS_CHOICES = [ 'Available', 'Unavailable', "Cancelled" ]
 
   # Available the entire event
@@ -61,6 +63,13 @@ class Availability < ActiveRecord::Base
   end
 
   private
+
+  def has_no_overlapping_availability
+    return unless person and start_time and end_time and start_time < end_time
+    if Availability.where(person: person).active.overlapping(start_time..end_time).any?
+      errors.add(:base, 'This availability overlaps other active availabilities for the person')
+    end
+  end
 
   def cancel_duplicates
     previous_availabilities = person.availabilities.for_time_span(start_time..end_time)

@@ -13,20 +13,47 @@ RSpec.describe Availability, type: :model do
 
   describe "creation" do
     it "has a valid factory" do
-      @availability = build(:availability, person: a_person)
-      expect(@availability).to be_valid
+      availability = build(:availability, person: a_person)
+      expect(availability).to be_valid
     end
   end
 
-  context 'validations' do
+  context 'validation' do
     it { should validate_presence_of(:person) }
     it { should validate_presence_of(:status) }
     it { should validate_presence_of(:start_time) }
     it { should validate_presence_of(:end_time) }
 
     it "requires end_time to be after start_time" do # chronology
-      @availability = build(:availability, person: a_person, start_time: Time.current, end_time: 2.minutes.ago)
-      expect(@availability).not_to be_valid
+      availability = build(:availability, person: a_person, start_time: Time.now, end_time: 2.minutes.ago)
+      expect(availability).not_to be_valid
+    end
+
+    describe 'the start_time and end_time' do
+      let(:availability) { build(:availability, person: a_person,
+        start_time: 2.hours.ago, end_time: 2.hours.from_now) }
+
+      it 'must not overlap one of the person\'s active availabilities' do
+        previous_availability = create(:availability, person: a_person,
+          start_time: 1.hour.ago, end_time: 3.hours.from_now)
+        
+        expect(availability).not_to be_valid
+      end
+
+      it 'can overlap one of the person\'s inactive availabilities' do
+        previous_availability = create(:availability, person: a_person,
+          status: 'Cancelled', start_time: 1.hour.ago, end_time: 3.hours.from_now)
+        
+        expect(availability).to be_valid
+      end
+
+      it 'can overlap someone else\'s availabilities' do
+        someone_else = create(:person)
+        previous_availability = create(:availability, person: someone_else,
+          start_time: 2.hours.ago, end_time: 3.hours.from_now)
+        
+        expect(availability).to be_valid
+      end
     end
   end
 
