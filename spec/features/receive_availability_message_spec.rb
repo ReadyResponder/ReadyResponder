@@ -5,11 +5,20 @@ RSpec.describe 'receiving an availability message', type: :request do
   let!(:person) { phone.person }
   let(:msg)     { { From: phone.content, Body: body } }
 
+  before(:example) do
+    Timecop.freeze
+  end
+
+  after(:example) do
+    Timecop.return
+  end
+
   context 'with the available keyword' do
     let(:availability_type) { 'available' }
 
     context 'and an existing event id' do
-      let(:event)  { create(:event, id_code: 'code01') }
+      let(:event)  { create(:event, id_code: 'code01', start_time: 2.hours.ago,
+                            end_time: 23.hours.from_now) }
       let(:body)   { "#{availability_type} #{event.id_code}" }
 
       it 'creates an availability for the sender' do
@@ -42,12 +51,56 @@ RSpec.describe 'receiving an availability message', type: :request do
           /^Recorded Available[\s\S]+start[\s\S]+end[\s\S]+description/)
       end
 
-      it 'cancels previously existing availabilities that match the new one' do
-        previous_availability = create(:availability, person: person,
-          status: 'Available', start_time: event.start_time, end_time: event.end_time)
+      context 'given an existing availability that has the same status and is contained by the new one' do
+        let!(:previous_availability) { create(:availability, person: person,
+          status: 'Available', start_time: 30.minutes.ago, end_time: 30.minutes.from_now) }
 
-        expect { post '/texts/receive_text', msg }.to change { 
-          previous_availability.reload.status }.from('Available').to('Cancelled')
+        it 'cancels that person\'s existing availability ' do
+          expect { post '/texts/receive_text', msg }.to change { 
+            previous_availability.reload.status }.from('Available').to('Cancelled')
+        end
+      end
+
+      context 'given an existing availability has the same status and contains the new one' do
+        let!(:previous_availability) { create(:availability, person: person,
+          status: 'Available', start_time: event.start_time - 2.hours,
+          end_time: event.end_time + 2.hours) }
+
+        it 'does not create a new availability' do
+          expect { post '/texts/receive_text', msg }.not_to change { Availability.count }
+        end
+
+        it 'returns an error message' do
+          post '/texts/receive_text', msg
+          expect(response.body).to eq('Error, you have already made yourself available during that period')
+        end
+      end
+
+      context 'given an existing availability that does not have the same status and contains the new one' do
+        let(:previous_availability) { create(:availability, person: person,
+          status: 'Unavailable', start_time: event.start_time - 2.hours,
+          end_time: event.end_time + 2.hours) }
+
+        it 'splits a person\'s existing availability into 2 while creating the new one' do
+          expect { post '/texts/receive_text', msg }.to change { 
+            person.availabilities.count }.by 2
+        end
+
+        it 'splits a person\'s existing availability so that the first one ends at the new availability\'s start_time' do
+          post '/texts/receive_text', msg
+          
+          availabilities = person.availabilities.where(status: 'Unavailable').order(:start_time)
+
+          expect(availabilities[0].end_time).to eq(event.start_time)
+        end
+
+        it 'splits a person\'s existing availability so that the last one starts at the new availability\'s end_time' do
+          post '/texts/receive_text', msg
+          
+          availabilities = person.availabilities.where(status: 'Unavailable').order(:start_time)
+
+          expect(availabilities[1].start_time).to eq(event.end_time)
+        end
       end
     end
 
@@ -115,6 +168,16 @@ RSpec.describe 'receiving an availability message', type: :request do
           expect(response.content_type).to eq(:text)
           expect(response.body).to match(
             /^Recorded Available[\s\S]+start[\s\S]+end[\s\S]+description/)
+        end
+
+        context 'given an existing availability that has the same status and is contained by the new one' do
+          let!(:previous_availability) { create(:availability, person: person,
+            status: 'Available', start_time: 30.minutes.ago, end_time: 30.minutes.from_now) }
+
+          it 'cancels that person\'s existing availability ' do
+            expect { post '/texts/receive_text', msg }.to change { 
+              previous_availability.reload.status }.from('Available').to('Cancelled')
+          end
         end
       end
     end

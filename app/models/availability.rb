@@ -26,7 +26,7 @@ class Availability < ActiveRecord::Base
   # These scopes tie the application to postgres, as they rely
   # on its range data type implementation. The ranges are left_bound closed
   # and right_bound open, as specified by the argument '[)'
-  # reference: https://www.postgresql.org/docs/current/static/rangetypes.html
+  # reference: https://www.postgresql.org/docs/9.5/static/rangetypes.html
   scope :overlapping, lambda { |range|  
     where("tsrange(start_time, end_time, '[)') && tsrange(TIMESTAMP?, TIMESTAMP?, '[)')",
           range.first, range.last) }
