@@ -7,7 +7,7 @@ class Person < ActiveRecord::Base
 
   before_save :title_order
 
-  has_many :certs, -> { where("certs.status = 'Active'" ) }
+  has_many :certs, -> { where("certs.status = 'Active'") }
   has_many :recipients
   has_many :notifications, :through => :recipients
   has_many :channels
@@ -18,7 +18,7 @@ class Person < ActiveRecord::Base
   accepts_nested_attributes_for :phones, allow_destroy: true
   accepts_nested_attributes_for :emails, allow_destroy: true
   has_many :courses, through: :certs
-  has_many :skills, through: :courses
+  has_many :skills, -> { where("certs.expiration_date > ?", Date.today) }, through: :courses
   has_and_belongs_to_many :titles
   has_many :timecards
   has_many :events, through: :timecards
