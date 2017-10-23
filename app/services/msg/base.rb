@@ -24,5 +24,5 @@ class Msg::Base
   end
   # The alias allows us to treat the event_codename as an
   # instance attribute
-  alias :event_codename, :get_event_codename
+  alias :event_codename :get_event_codename
 end
