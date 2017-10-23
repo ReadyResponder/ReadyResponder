@@ -13,6 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20171023011304) do
 
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -348,7 +349,7 @@ ActiveRecord::Schema.define(version: 20171023011304) do
     t.string   "street"
     t.string   "city"
     t.string   "state"
-    t.string   "zipcode"
+    t.string   "zipcode",          limit: 10
     t.string   "license_number"
     t.integer  "weight"
     t.integer  "height"
