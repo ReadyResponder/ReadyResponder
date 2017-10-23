@@ -53,7 +53,7 @@ group :test, :development do
   gem 'meta_request'
   gem 'database_cleaner', '1.0.1'
   gem 'test-unit'
-  gem 'pry'
+  gem 'pry-byebug'
 end
 
 group :development do

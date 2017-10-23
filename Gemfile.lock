@@ -230,6 +230,9 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pry-byebug (3.4.3)
+      byebug (>= 9.0, < 9.1)
+      pry (~> 0.10)
     rack (1.6.8)
     rack-contrib (1.4.0)
       git-version-bump (~> 0.15)
@@ -424,7 +427,7 @@ DEPENDENCIES
   paper_trail
   pg (~> 0.17.0)
   protected_attributes
-  pry
+  pry-byebug
   rack
   rails (~> 4.2.7)
   rails-assets-datetimepicker!

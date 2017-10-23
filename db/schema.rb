@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171019014656) do
+ActiveRecord::Schema.define(version: 20171023011304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -241,7 +241,6 @@ ActiveRecord::Schema.define(version: 20171019014656) do
     t.integer  "location_id"
     t.string   "name"
     t.string   "description"
-    t.string   "source"
     t.string   "category"
     t.string   "model"
     t.date     "purchase_date"
@@ -268,6 +267,7 @@ ActiveRecord::Schema.define(version: 20171019014656) do
     t.string   "condition"
     t.integer  "qty"
     t.integer  "grant_id"
+    t.integer  "vendor_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -575,13 +575,15 @@ ActiveRecord::Schema.define(version: 20171019014656) do
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
   create_table "vendors", force: :cascade do |t|
-    t.string "name"
-    t.string "street"
-    t.string "city"
-    t.string "state"
-    t.string "zipcode"
-    t.string "status"
-    t.text   "comments"
+    t.string   "name"
+    t.string   "street"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zipcode"
+    t.string   "status"
+    t.text     "comments"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "versions", force: :cascade do |t|

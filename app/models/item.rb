@@ -24,6 +24,7 @@ class Item < ActiveRecord::Base
   belongs_to :location
   belongs_to :department
   belongs_to :item_type
+  belongs_to :vendor
   belongs_to :grantor, foreign_key: :grant_id, class_name: 'Grant'
   has_many :repairs
   has_many :inspections

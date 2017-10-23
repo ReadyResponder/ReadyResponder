@@ -1,4 +1,4 @@
-class CreateVendor < ActiveRecord::Migration
+class CreateVendors < ActiveRecord::Migration
   def change
     create_table :vendors do |t|
       t.string :name
@@ -8,6 +8,7 @@ class CreateVendor < ActiveRecord::Migration
       t.string :zipcode
       t.string :status
       t.text :comments
+      t.timestamps
     end
   end
 end
