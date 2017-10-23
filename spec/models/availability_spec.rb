@@ -34,14 +34,14 @@ RSpec.describe Availability, type: :model do
         start_time: 2.hours.ago, end_time: 2.hours.from_now) }
 
       it 'must not overlap one of the person\'s active availabilities' do
-        previous_availability = create(:availability, person: a_person,
+        create(:availability, person: a_person,
           start_time: 1.hour.ago, end_time: 3.hours.from_now)
         
         expect(availability).not_to be_valid
       end
 
       it 'can overlap one of the person\'s inactive availabilities' do
-        previous_availability = create(:availability, person: a_person,
+        create(:availability, person: a_person,
           status: 'Cancelled', start_time: 1.hour.ago, end_time: 3.hours.from_now)
         
         expect(availability).to be_valid
@@ -49,7 +49,7 @@ RSpec.describe Availability, type: :model do
 
       it 'can overlap someone else\'s availabilities' do
         someone_else = create(:person)
-        previous_availability = create(:availability, person: someone_else,
+        create(:availability, person: someone_else,
           start_time: 2.hours.ago, end_time: 3.hours.from_now)
         
         expect(availability).to be_valid
