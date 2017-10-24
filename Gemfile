@@ -56,6 +56,9 @@ group :test, :development do
   gem 'database_cleaner', '1.0.1'
   gem 'test-unit'
   gem 'pry'
+
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug'
 end
 
 group :development do
@@ -74,11 +77,6 @@ group :development do
   gem 'noisy_partials', git: 'git://github.com/gwshaw/noisy_partials.git'
 end
 
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
-end
-
 group :production do
   # Use Unicorn as the app server
   gem 'unicorn'
@@ -87,6 +85,9 @@ end
 group :test do
   gem 'shoulda-matchers'
   gem 'simplecov'
+
+  # Allows you to freeze time during tests
+  gem 'timecop'
 end
 
 gem 'sass-rails'

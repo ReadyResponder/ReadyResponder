@@ -3,7 +3,7 @@ class EventsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @events = Event.recent
+    @events = (Event.active + Event.recent).uniq
     @page_title = "Events"
   end
 
@@ -62,6 +62,6 @@ class EventsController < ApplicationController
     params.require(:event).permit(:title, :description, :category,
     :course_id, :duration, :start_time, :end_time, :instructor, :location,
     :id_code, :status, :timecard_ids, :person_ids, :comments,
-    :is_template, :template_id, department_ids: [])
+    :is_template, :template_id, :min_title, department_ids: [])
   end
 end

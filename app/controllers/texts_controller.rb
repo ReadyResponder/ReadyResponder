@@ -36,7 +36,7 @@ class TextsController < ApplicationController
         <Say voice="alice">#{Time.now.to_s}</Say>
       </Response>
       eos
-  render plain: response
+    render plain: response
   end
 
 
