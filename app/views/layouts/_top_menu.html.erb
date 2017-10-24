@@ -41,6 +41,10 @@
             <%= nav_link "Inventory", item_categories_path if can? :read, Item %>
           </li>
 
+          <li>
+            <%= nav_link "Vendors", vendors_path if can? :read, Item %>
+          </li>
+
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Admin<span class="caret"></span></a>
             <ul class="dropdown-menu">

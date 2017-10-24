@@ -33,8 +33,9 @@
   <p><b>Location:</b> <%= @item.location %></p>
 <% end %>
 
-<% if @item.source.present? %>
-  <p><b>Source:</b> <%= @item.source %></p>
+<% binding.pry %>
+<% if @item.vendor.present? %>
+  <p><b>Vendor:</b> <%= @item.vendor.name %></p>
 <% end %>
 
 <% if @item.owner.present? %>

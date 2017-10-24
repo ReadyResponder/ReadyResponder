@@ -1,3 +1,22 @@
-<% Vendors.all.each do |vendor| %>
-  <li><%= vendor.name %>
+<% content_for :sidebar do %>
+  <%= sidebar_button_link 'New Vendor', new_vendor_path if can? :create, Vendor %>
 <% end %>
+
+<table id="item_categories" class="generic_datatable table table-striped table-bordered">
+  <caption><h3><%= @page_title %></h3></caption>
+
+  <thead>
+    <tr>
+      <th>List of Vendors</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% Vendor.all.each do |vendor| %>
+      <tr>
+        <td><%= link_to "#{vendor.name}", vendor_path(vendor.id)%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

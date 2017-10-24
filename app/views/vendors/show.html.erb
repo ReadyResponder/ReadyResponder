@@ -1,0 +1,18 @@
+<table id="vendor_show_page" class="generic_datatable table table-striped table-bordered">
+  <caption><h1><%= @vendor.name %></h1></caption>
+
+  <thead>
+    <tr>
+      <th>List of <%= @vendor.name %> Items</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% @vendor.items do |item| %>
+      <tr>
+        <td><%= item.name%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

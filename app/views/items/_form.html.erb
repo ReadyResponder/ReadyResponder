@@ -3,10 +3,8 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <br>
-    <%= f.label :vendor_id, "Vendors" %>
-    <br>
-    <%= f.collection_select :vendor_id, Vendor.order("name"), :id, :name, include_blank: true %>
+    <%= f.association :vendor, label: "Vendor ", collection: Vendor.order("name") %>
+
     <%= link_to "Add a New Vendor", new_vendor_path(next: request.path) %>
 
     <%= f.association :department, collection: Department.managing_items.order(:name) %>
