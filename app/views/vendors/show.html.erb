@@ -8,8 +8,7 @@
   </thead>
 
   <tbody>
-
-    <% @vendor.items do |item| %>
+    <% @vendor.items.each do |item| %>
       <tr>
         <td><%= item.name%></td>
       </tr>

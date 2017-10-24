@@ -3,4 +3,7 @@ class Vendor < ActiveRecord::Base
 
   validates :name, presence: true
 
+  attr_accessible :name, :street, :city, :state, :zipcode,
+  :status, :comments
+
 end
