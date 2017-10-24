@@ -169,6 +169,7 @@ ActiveRecord::Schema.define(version: 20171018155509) do
     t.string   "id_code"
     t.boolean  "is_template",                         default: false
     t.integer  "template_id"
+    t.string   "min_title"
   end
 
   create_table "grants", force: :cascade do |t|

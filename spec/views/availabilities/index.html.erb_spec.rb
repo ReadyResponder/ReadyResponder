@@ -8,16 +8,16 @@ RSpec.describe "availabilities/index", type: :view do
         :person => @cj,
         :status => "Unavailable",
         :description => "Vacation",
-        :start_time => "2016-09-11 17:00",
-        :end_time => "2016-09-11 18:00"
+        :start_time => 48.hours.ago,
+        :end_time => 25.hours.ago
       ),
       Availability.create!(
-      :person => @cj,
-      :status => "Available",
-      :description => "Pick Me !",
-      :start_time => "2016-09-11 17:00",
-      :end_time => "2016-09-11 18:00"
-      )
+        :person => @cj,
+        :status => "Available",
+        :description => "Pick Me !",
+        :start_time => 24.hours.ago,
+        :end_time => 1.hour.ago
+        )
     ])
   end
 
