@@ -17,6 +17,7 @@
       <%= f.input :instructor %>
     </div>
     <%= f.input :location %>
+    <%= f.input :min_title, as: :select, collection: Person::TITLES %>
     <%= f.association :departments, :as => :check_boxes, include_blank: false,
                       :collection => Department.managing_people %>
     <%= f.input :id_code %>

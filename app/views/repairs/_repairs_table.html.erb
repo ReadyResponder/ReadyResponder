@@ -3,6 +3,7 @@
   <thead>
     <tr>
       <th>Description</th>
+      <th>Condition</th>
       <th>Status</th>
       <th>Repairer</th>
       <th>Cost</th>
@@ -14,6 +15,7 @@
     <% @item.repairs.each do |repair| %>
       <tr>
         <td><%= link_to repair.description, repair_path(repair) %></td>
+        <td><%= repair.condition %></td>
         <td><%= repair.status %></td>
         <td><%= repair.repairer_name %></td>
         <td><%= number_to_currency(repair.cost) %></td>
