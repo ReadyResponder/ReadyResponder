@@ -202,7 +202,7 @@ class Person < ActiveRecord::Base
   end
 
   def valid_skills
-    skills.where("certs.expiration_date > ?", Date.today)
+    skills.where("certs.expiration_date > ?", Time.zone.today)
   end
 
   private
