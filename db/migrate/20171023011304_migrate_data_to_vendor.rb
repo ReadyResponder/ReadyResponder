@@ -7,7 +7,7 @@ class MigrateDataToVendor < ActiveRecord::Migration
       ).first_or_create
 
       item.vendor_id = v.id
-      item.save
+      item.update_columns(vendor_id: v.id)
     end
 
   remove_column :items, :source
