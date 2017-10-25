@@ -58,11 +58,11 @@
 <% end %>
 
 <div class="accordion">
-  <h3>Skills (<%= @person.skills.uniq.count %>)</h3>
+  <h3>Skills (<%= @person.valid_skills.uniq.count %>)</h3>
   <div>
     <table class="table table-striped table-bordered">
       <tbody>
-        <%= render(@person.skills.uniq) || raw("No skills yet !") %>
+        <%= render(@person.valid_skills.uniq) || raw("No skills yet !") %>
       </tbody>
     </table>
   </div>
