@@ -1,0 +1,10 @@
+---
+- name: Install Image Magick and dev dependencies
+  become: True
+  apt: pkg={{ item }} state=installed update_cache=yes
+  with_items:
+    - imagemagick
+    - libmagickcore-dev
+    - libmagickwand-dev
+
+...

@@ -1,0 +1,8 @@
+---
+ruby:
+  version: 2.3.1
+
+rvm:
+  path: /home/vagrant/.rvm/bin/
+
+...

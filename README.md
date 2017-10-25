@@ -104,7 +104,56 @@ $ apt-get install libmagickwand-dev
 
 *Feel free to ask for help!*
 
-### Contributing to ReadyResponder: Coding :smiley:
+### Setup using Vagrant
+
+First, fork and clone the repo. Then copy `Vagrantfile.example` and rename it to just `Vagrantfile`
+
+```shell
+$ cp Vagrantfile.example Vagrantfile
+```
+
+After installing [Vagrant](https://www.vagrantup.com/downloads.html) and [VirtualBox](https://www.virtualbox.org/wiki/Downloads) run command
+
+```shell
+$ vagrant up
+```
+
+to launch an Ubuntu 14.04 machine with all required dependencies installed.
+
+This machine is provisioned using Ansible. The `playbook.yml` file defines the following roles (located in `roles/` folder):
+
+- ubuntu_packages
+- vagrant
+- ruby: installs Ruby version 2.3.1
+- nodejs
+- postgres: installs PostgreSQL 9.5
+- imagemagick
+
+> You can learn more about Ansible on its [official documentation pages](http://docs.ansible.com/ansible/latest/index.html.
+
+The first time the process might take a while. After it finishes provisioning you can login to the Vagrant machine issuing `vagrant ssh` command.
+
+Don't forget to configure your local `database.yml` file. After that you'd only need to run:
+
+1. `bundle install`
+2. `rake db:schema:load`
+3. and `rake db:seed`
+
+to start using Ready Responder
+
+#### Starting rails server
+
+When running rails server inside the vagrant machine (the guest) you'd need to `bind` the server IP to `0.0.0.0` otherwise it won't send any data to the host (your computer).
+
+Launch the web server with command:
+
+```shell
+$ rails server -b 0.0.0.0
+```
+
+> You can read more on the reasoning of this [here](https://stackoverflow.com/a/27996166/1407371) and [here](http://edgeguides.rubyonrails.org/4_2_release_notes.html#default-host-for-rails-server)
+
+## Contributing to ReadyResponder: Coding :smiley:
 
 Get the project code locally and set it up:
 
@@ -136,7 +185,7 @@ Get the project code locally and set it up:
         `db/schema.rb`
         ```shell
         $ bundle exec rake db:create
-        $ bundle exec rake db:schema:load`
+        $ bundle exec rake db:schema:load
         ```
 7. Seed the database with some sample data and create an admin for you to use on the local server
     ```shell
@@ -144,20 +193,21 @@ Get the project code locally and set it up:
     ```
     **You should note the output of the db:seed, as it will spit out the password at the end.**
 
-At this point you should be able to run the rails server via `bundle exec rails s`, the rails console via `bundle exec rails c`, and the tests via `bundle exec rspec spec/`
+At this point you should be able to run the rails server via `bundle exec rails s`, the rails console via `bundle exec rails c`, and the tests via `bundle exec rspec spec/`.
 
-### One-time setup for tests:
+### One-time setup for tests
+
 ```shell
 $ bundle exec rake db:test:prepare
 ```
 
-One more thing to note: The testing framework will run much faster over time if you run it via Spring. When running rake enter `bin/rake` to execute via Spring pre-loader.
+> Note: The testing framework will run much faster over time if you run it via Spring. When running rake enter `bin/rake` to execute via Spring pre-loader.
 
 ## More information
 
 See [the wiki](https://github.com/ReadyResponder/ReadyResponder/wiki)!
 
-### Contributing to ReadyResponder: Community Expectations :raised_hands:
+## Contributing to ReadyResponder: Community Expectations :raised_hands:
 
 We have a [Code of Conduct](CODE_OF_CONDUCT.md) to set clear expectations for community participation. We want your participation in ReadyResponder to be safe, fun, and respectful. We've adopted the ["Contributor Covenant"](http://contributor-covenant.org/) model for our code of conduct, which is the same model that [the Rails project itself](http://rubyonrails.org/conduct/) uses. (Other projects that use a Code of Conduct of this type include [RSpec](https://github.com/rspec/rspec/blob/master/code_of_conduct.md), [Jenkins](https://jenkins-ci.org/conduct/), and [RubyGems](https://github.com/rubygems/rubygems/blob/master/CODE_OF_CONDUCT.md).)
 

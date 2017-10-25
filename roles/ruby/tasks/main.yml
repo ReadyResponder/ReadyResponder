@@ -1,0 +1,27 @@
+---
+- name: Installing RVM
+  become: True
+  become_user: "{{ system.user_name }}"
+  shell: curl -sSL https://get.rvm.io | bash
+  args:
+    creates: /home/{{ system.user_name }}/.rvm/bin/rvm
+
+- name: Installing Ruby
+  become: True
+  become_user: "{{ system.user_name }}"
+  shell: "{{ rvm.path }}/rvm install {{ item }}"
+  with_items:
+    - ruby-{{ ruby.version }}
+
+- name: Set Ruby {{ ruby.version }} as default Ruby
+  become: True
+  become_user: "{{ system.user_name }}"
+  shell: "{{ rvm.path }}/rvm alias create default ruby-{{ ruby.version }}"
+
+  # http://stackoverflow.com/a/22121802/1407371
+- name: Install bundler
+  become: True
+  become_user: "{{ system.user_name }}"
+  command: bash -lc "gem install bundler"
+
+...
