@@ -1,6 +1,7 @@
-<h1>Editing Recipient</h1>
+<% content_for :sidebar do %>
+  <h1>Editing Recipient</h1>
+  <%= sidebar_button_link 'Show', @recipient %>
+  <%= sidebar_button_link 'Back', recipients_path %>
+<% end %>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @recipient %> |
-<%= link_to 'Back', recipients_path %>

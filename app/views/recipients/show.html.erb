@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
-
-<%= link_to 'Edit', edit_recipient_path(@recipient) %> |
-<%= link_to 'Back', recipients_path %>
+<% content_for :sidebar do %>
+  <%= sidebar_button_link 'Edit', edit_recipient_path(@recipient) %>
+  <%= sidebar_button_link 'Back', recipients_path %>
+<% end %>
