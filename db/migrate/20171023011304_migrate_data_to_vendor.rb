@@ -10,7 +10,7 @@ class MigrateDataToVendor < ActiveRecord::Migration
       item.update_columns(vendor_id: v.id)
     end
 
-  remove_column :items, :source
+  rename_column :items, :source, :source_data
   end
 
   def down

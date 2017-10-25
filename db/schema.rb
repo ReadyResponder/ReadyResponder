@@ -268,6 +268,7 @@ ActiveRecord::Schema.define(version: 20171024005752) do
     t.integer  "qty"
     t.integer  "grant_id"
     t.integer  "vendor_id"
+    t.string   "source_data"
   end
 
   add_index "items", ["vendor_id"], name: "index_items_on_vendor_id", using: :btree
