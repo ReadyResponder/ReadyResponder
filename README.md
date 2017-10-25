@@ -129,7 +129,7 @@ This machine is provisioned using Ansible. The `playbook.yml` file defines the f
 - postgres: installs PostgreSQL 9.5
 - imagemagick
 
-> You can learn more about Ansible on its [official documentation pages](http://docs.ansible.com/ansible/latest/index.html.
+> You can learn more about Ansible on its [official documentation pages](http://docs.ansible.com/ansible/latest/index.html).
 
 The first time the process might take a while. After it finishes provisioning you can login to the Vagrant machine issuing `vagrant ssh` command.
 
