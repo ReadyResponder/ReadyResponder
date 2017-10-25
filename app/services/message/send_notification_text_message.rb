@@ -9,7 +9,7 @@ class Message::SendNotificationTextMessage
     begin
       @client = Twilio::REST::Client.new account_sid, auth_token
     rescue
-      return "Unable to authentiacte with Twilio"
+      return "Unable to authenticate with Twilio"
     end
   end
 
@@ -17,14 +17,14 @@ class Message::SendNotificationTextMessage
            sender_number = Setting.get("outbound_text_number"))
     begin
       raise InvalidClient.new('Invalid Twilio Client') if @client.nil?
-      message = @client.account.messages.create(
+      msg = @client.account.messages.create(
                     :body => message,
                     :to => recipient_number,
                     :from => sender_number)
-      Rails.logger.warn "Sent text message: #{message.inspect}"
-      return message
+      Rails.logger.warn "Sent text message: #{msg.inspect}"
+      return msg
     rescue Twilio::REST::RequestError => e
-      return e.message
+      return e
     end
   end
 end
