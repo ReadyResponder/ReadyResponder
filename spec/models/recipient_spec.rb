@@ -32,7 +32,7 @@ RSpec.describe Recipient, type: :model do
 
     context "when twilio call succeeds" do
       before do
-        allow(twilio).to receive(:sms_send) { "success" }
+        allow(twilio).to receive(:sms_send) { instance_double("Twilio::Response", status: "sent", body: "success") }
       end
 
       it "creates message w sent status" do 
