@@ -16,6 +16,7 @@ class TasksController < ApplicationController
 
   def new
     @task = @event.tasks.build
+    @task.status = 'Active'
   end
 
   def create

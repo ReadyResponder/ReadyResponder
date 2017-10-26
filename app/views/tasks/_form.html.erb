@@ -4,7 +4,7 @@
   <div class="form-inputs">
     <%= f.input :title %>
     <%= f.input :priority, as: :select, collection: Task::PRIORITIES %>
-    <%= f.input :status, :as => :select, :collection => ['Active', 'Cancelled'], :selected => 'Active' %>
+    <%= f.input :status, :as => :select, :collection => ['Active', 'Cancelled'] %>
     <%= f.input :description %>
     <%= f.input :location %>
     <%= f.input :street %>
