@@ -13,14 +13,14 @@ class RepairsController < ApplicationController
 
   def new
     @repair = Repair.new
-    @repair.item_id = params[:item_id].presence
+    @repair.item_id = repair_params[:item_id].presence
   end
 
   def edit
   end
 
   def create
-    @repair = Repair.new(params[:repair])
+    @repair = Repair.new(repair_params)
 
     if @repair.save
       redirect_to @repair, notice: 'Repair was successfully created.'
@@ -31,7 +31,7 @@ class RepairsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @repair.update_attributes(params[:repair])
+      if @repair.update_attributes(repair_params)
         redirect_to @repair.item, notice: 'Repair was successfully updated.'
       else
         render action: "edit"
@@ -41,5 +41,10 @@ class RepairsController < ApplicationController
 
   def destroy
     @repair.destroy
+  end
+  private
+  def repair_params
+    params.require(:repair).permit(:category, :comments, :description, :item_id, :person_id, :service_date,
+      :status, :user_id, :cost)
   end
 end

@@ -40,4 +40,9 @@ class TitlesController < ApplicationController
 
     redirect_to titles_url
   end
+
+  private
+  def title_params
+    params.require(:title).permit(:comments, :description, :status, :name, :skill_ids)
+  end
 end

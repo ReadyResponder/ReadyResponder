@@ -23,7 +23,7 @@ class TimecardsController < ApplicationController
   end
 
   def create
-    @timecard = Timecard.new(params[:timecard])
+    @timecard = Timecard.new(timecard_params)
 
     if @timecard.save
       redirect_to @timecard, notice: 'Timecard was successfully created.'
@@ -33,7 +33,7 @@ class TimecardsController < ApplicationController
   end
 
   def update
-    if @timecard.update_attributes(params[:timecard])
+    if @timecard.update_attributes(timecard_params)
       redirect_to timecards_path, notice: 'Timecard was successfully updated.'
     else
       render action: "edit"
@@ -69,4 +69,9 @@ class TimecardsController < ApplicationController
     @timecard.destroy
     redirect_to timecards_path
   end
+
+  private
+  def timecard_params
+    params.require(:timecard).permit(:person_id, :start_time, :end_time, :duration, :comments, :error_code,
+      :description, :status)
 end

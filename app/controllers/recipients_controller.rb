@@ -1,7 +1,7 @@
 class RecipientsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
-  
+
   def index
     @recipients = Recipient.all
   end
@@ -44,6 +44,7 @@ class RecipientsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def recipient_params
-      params[:recipient]
+      params.require(:recipient).permit(:notification_id, :person_id, :status, :response_channel,
+        :response_time)
     end
 end
