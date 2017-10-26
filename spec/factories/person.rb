@@ -5,6 +5,7 @@ FactoryGirl.define do
     sequence (:icsid) {|n| "50#{n}" }
     status "Active"
     start_date Date.yesterday
+    date_of_birth 25.years.ago
     division1 'Command'
     division2 'Command'
     title 'Captain'

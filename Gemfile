@@ -14,6 +14,8 @@ gem 'cancancan'
 #gem "taps"
 #gem 'validates_timeliness', '~> 3.0'
 
+gem 'rqrcode'
+gem 'vcardigan'
 
 gem 'therubyracer'
 gem 'jquery-turbolinks'
