@@ -1,0 +1,51 @@
+---
+- name: Add PostgreSQL Key
+  become: True
+  apt_key: url=https://www.postgresql.org/media/keys/ACCC4CF8.asc state=present
+
+- name: Add PostgreSQL Deb
+  become: True
+  apt_repository: repo={{ repo }} state=present
+
+- name: Install PostgreSQL
+  become: True
+  apt: pkg={{ item }} state=installed update_cache=yes
+  with_items:
+    - python-psycopg2
+    - libpq-dev
+    - postgresql-{{ version }}
+    - postgresql-contrib-{{ version }}
+  notify:
+    - Start Pgsql
+
+- name: Add PostgreSQL Configuration
+  become: True
+  copy: src=postgresql.conf dest=/etc/postgresql/{{ version }}/main/postgresql.conf owner=postgres group=postgres
+
+- name: Add PostgreSQL Security Configuration
+  become: True
+  copy: src=pg_hba.conf dest=/etc/postgresql/{{ version }}/main/pg_hba.conf owner=postgres group=postgres
+
+- name: Restart PostgreSQL
+  become: True
+  service: name=postgresql state=restarted
+
+- name: Add Application User
+  postgresql_user: name={{ user.name }} password={{ user.password }} encrypted=False role_attr_flags='SUPERUSER,INHERIT,CREATEDB,CREATEROLE,REPLICATION' state=present
+  become: True
+  become_user: postgres
+
+- name: Add Application Database
+  postgresql_db: name={{ database.name }} login_user=postgres encoding=UTF8 lc_collate={{ locale }} lc_ctype={{ locale }} owner={{ user.name }} state=present
+  become: True
+  become_user: postgres
+  notify:
+    - Restart Pgsql
+
+- name: Add Test Database
+  postgresql_db: name={{ database.name }}_test login_user=postgres encoding=UTF8 lc_collate={{ locale }} lc_ctype={{ locale }} owner={{ user.name }} state=present
+  become: True
+  become_user: postgres
+  notify:
+    - Restart Pgsql
+...

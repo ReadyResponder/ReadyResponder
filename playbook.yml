@@ -1,0 +1,11 @@
+---
+- hosts: all
+  roles:
+    - ubuntu_packages
+    - vagrant
+    - ruby
+    - nodejs
+    - postgres
+    - imagemagick
+
+...
