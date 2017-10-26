@@ -12,8 +12,6 @@ class Task < ActiveRecord::Base
   has_many :assignments, through: :requirements
   has_many :people, through: :assignments
 
-  before_save :default_status
-
   scope :active, -> { where( status: "Active" ) }
 
   # The following provides the equivalent of:
@@ -22,10 +20,6 @@ class Task < ActiveRecord::Base
   STATUS_CHOICES = STATUS_CHOICES_ARRAY.map.with_index { |v, i| [v, i] }.to_h
 
   PRIORITIES = [['High', 1], ['Medium', 2], ['Low', 3]]
-
-  def default_status
-    self.status = status.presence || 'Active'
-  end
 
   def priority_str
     PRIORITIES[priority - 1][0] if priority.present?
