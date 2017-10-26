@@ -1,0 +1,37 @@
+---
+  # man aptitude for safe upgrade info
+- name: Perform Safe Upgrade
+  become: True
+  apt: upgrade=safe update_cache=yes
+
+- name: Installing packages
+  become: True
+  apt: pkg={{ item }} state=installed update_cache=yes
+  with_items:
+    - curl
+    - git
+    - make
+    - tree
+    - htop
+    - build-essential
+    - python-software-properties
+    - vim
+    - libxslt-dev
+    - libxml2-dev
+    - libgmp-dev
+    - zlib1g-dev
+    - libssl-dev
+    - libreadline6-dev
+    - libyaml-dev
+    - libfontconfig1
+    - libncurses5-dev
+    - unzip
+    - wget
+    - ntp
+  notify:
+    - Start NTP
+
+- name: Set locale to {{ locale }}
+  locale_gen: name={{ locale }} state=present
+
+...
