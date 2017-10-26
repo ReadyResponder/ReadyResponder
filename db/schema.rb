@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171018155509) do
+ActiveRecord::Schema.define(version: 20171026191711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -502,11 +502,11 @@ ActiveRecord::Schema.define(version: 20171018155509) do
     t.float    "longitude"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "location"
     t.integer  "priority"
-    t.string   "status"
+    t.string   "status",      default: "Active"
   end
 
   add_index "tasks", ["event_id"], name: "index_tasks_on_event_id", using: :btree
