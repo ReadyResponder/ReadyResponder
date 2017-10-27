@@ -11,14 +11,14 @@ class CertsController < ApplicationController
   end
 
  def new
-    @cert.person_id = (params[:person_id]) if (params[:person_id]).present?
+    @cert.person_id = (certs_params[:person_id]) if (certs_params[:person_id]).present?
   end
 
   def edit
   end
 
   def create
-    @cert = Cert.new(params[:cert])
+    @cert = Cert.new(certs_params[:cert])
     if @cert.save
       redirect_to person_path(@cert.person), notice: 'Cert was successfully created.'
     else
@@ -27,7 +27,7 @@ class CertsController < ApplicationController
   end
 
   def update
-    if @cert.update_attributes(params[:cert])
+    if @cert.update_attributes(certs_params[:cert])
       redirect_to @cert, notice: 'Cert was successfully updated.'
     else
       render action: "edit"
@@ -37,5 +37,11 @@ class CertsController < ApplicationController
   def destroy
     @cert.destroy
     redirect_to certs_url
+  end
+
+  private
+  def cert_params
+    params.require(:cert).permit(:category, :person_id, :course_id, :expiration_date, :issued_date,
+      :cert_number, :level,  :status, :certification, :comments)
   end
 end

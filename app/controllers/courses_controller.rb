@@ -19,7 +19,7 @@ class CoursesController < ApplicationController
   end
 
   def create
-    @course = Course.new(params[:course])
+    @course = Course.new(course_params)
 
     if @course.save
       redirect_to @course, notice: 'Course was successfully created.'
@@ -29,7 +29,7 @@ class CoursesController < ApplicationController
   end
 
   def update
-    if @course.update_attributes(params[:course])
+    if @course.update_attributes(course_params)
       redirect_to @course, notice: 'Course was successfully updated.'
     else
       render action: "edit"
@@ -39,4 +39,9 @@ class CoursesController < ApplicationController
   def destroy
     @course.destroy
   end
+
+  private
+  def course_params
+    params.require(:course).permit(:category, :comments, :description, :duration, :status, :term, :name,
+      :skill_ids)
 end

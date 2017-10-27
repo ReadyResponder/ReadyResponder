@@ -52,7 +52,7 @@ class AssignmentsController < ApplicationController
   end
 
     def set_requirement
-      @requirement = Requirement.find(params[:requirement_id])
+      @requirement = Requirement.find(assignment_params[:requirement_id])
     end
 
   def assignment_params

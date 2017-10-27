@@ -38,4 +38,9 @@ class ChannelsController < ApplicationController
   def destroy
     @channel.destroy
   end
+  private
+  def channel_params
+    params.require(:channel).permit(:person_id, :name, :status, :content, :priority, :category, :carrier,
+      :last_verified, :usage, :channel_type, :sms_available, :type)
+  end
 end

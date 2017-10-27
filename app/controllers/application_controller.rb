@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   def download
     node = instance_variable_get("@#{controller_name.singularize}")
-    path = node.send(params['type']).path
+    path = node.send(params[:type]).path
     send_file path, x_sendfile: true
   end
 

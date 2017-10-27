@@ -26,7 +26,7 @@ class TextsController < ApplicationController
   end
 
   def say_voice
-    cell = Phone.where(content: params[:From][2..12]).first
+    cell = Phone.where(content: skill_params[:From][2..12]).first
     sender = cell.person if cell
     their_name=sender.firstname || ""
     response= <<-eos
