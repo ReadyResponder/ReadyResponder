@@ -1,8 +1,6 @@
 class Cert < ApplicationRecord
   has_paper_trail
-  
-  # TODO => USE STRONG PARAMETERS
-  # attr_accessible :category, :person_id, :course_id, :expiration_date, :issued_date, :cert_number, :level,  :status, :certification, :comments
+
   belongs_to :person, optional: true
   belongs_to :course, optional: true
   mount_uploader :certification, CertificationUploader

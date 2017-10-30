@@ -9,8 +9,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  # TODO => USE STRONG PARAMETERS
-  # attr_accessible :firstname, :lastname, :role_ids, :username, :email, :password, :password_confirmation, :remember_me
 
   validates_presence_of :username #Other validates are brought in by validatable module above
   # attr_accessible :title, :body
