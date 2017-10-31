@@ -53,6 +53,6 @@ class RequirementsController < ApplicationController
     end
 
     def requirement_params
-      params.require(:requirement).permit(:title_id, :skill_id, :priority, :desired_people, :minimum_people, :maximum_people, :optional, :floating)
+      params.require(:requirement).permit(:title_id, :skill_id, :priority, :desired_people, :minimum_people, :maximum_people, :optional, :floating, :auto_assign)
     end
 end
