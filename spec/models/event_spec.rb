@@ -72,4 +72,30 @@ RSpec.describe Event do
     expect(Event.upcoming.include?(@event)).to be(true)
   end
 
+  describe '#next_event' do
+    let(:event_001) { create :event, start_time: "2017-11-02 03:36:00", end_time: "2017-11-04 03:36:00" }
+    let(:event_002) { create :event, start_time: "2017-11-03 03:36:00", end_time: "2017-11-06 03:36:00" }
+    let(:result) { event_001.next_event }
+    before do 
+      event_002
+    end
+
+    it 'should return event_002' do
+      expect(result).to eq event_002
+    end
+  end
+
+  describe '#previous_event' do
+    let(:event_001) { create :event, start_time: "2017-11-02 03:36:00", end_time: "2017-11-04 03:36:00" }
+    let(:event_002) { create :event, start_time: "2017-11-01 03:36:00", end_time: "2017-11-06 03:36:00" }
+    let(:result) { event_001.previous_event }
+    before do 
+      event_002
+    end
+
+    it 'should return event_002' do
+      expect(result).to eq event_002
+    end
+  end
+
 end
