@@ -72,30 +72,30 @@ RSpec.describe Event do
     expect(Event.upcoming.include?(@event)).to be(true)
   end
 
-  describe '#next_event' do
-    let(:event_001) { create :event, start_time: "2017-11-02 03:36:00", end_time: "2017-11-04 03:36:00" }
-    let(:event_002) { create :event, start_time: "2017-11-03 03:36:00", end_time: "2017-11-06 03:36:00" }
-    let(:result) { event_001.next_event }
-    before do 
-      event_002
+  context 'When has 4 events with different dates' do
+    let(:event_000) { create :event, start_time: 4.days.from_now, end_time: 10.days.from_now }
+    let(:event_001) { create :event, start_time: 2.days.from_now, end_time: 4.days.from_now }
+    let(:event_002) { create :event, start_time: 3.days.from_now, end_time: 7.days.from_now }
+    let(:event_003) { create :event, start_time: 7.days.from_now, end_time: 9.days.from_now }
+    before { setup }
+
+    describe '#next_event' do
+      let(:setup) { event_002 }
+      let(:result) { event_001.next_event }
+
+      it 'should return event_002' do
+        expect(result).to eq event_002
+      end
     end
 
-    it 'should return event_002' do
-      expect(result).to eq event_002
+    describe '#previous_event' do
+      let(:setup) { event_000 }
+      let(:result) { event_003.previous_event }
+
+      it 'should return event_000' do
+        expect(result).to eq event_000
+      end
     end
+    
   end
-
-  describe '#previous_event' do
-    let(:event_001) { create :event, start_time: "2017-11-02 03:36:00", end_time: "2017-11-04 03:36:00" }
-    let(:event_002) { create :event, start_time: "2017-11-01 03:36:00", end_time: "2017-11-06 03:36:00" }
-    let(:result) { event_001.previous_event }
-    before do 
-      event_002
-    end
-
-    it 'should return event_002' do
-      expect(result).to eq event_002
-    end
-  end
-
 end
