@@ -1,6 +1,4 @@
 class ResourceType < ApplicationRecord
-  # TODO => USE STRONG PARAMETERS
-  # attr_accessible :description, :fema_code, :fema_kind, :name, :status
   has_many :items
 
   validates_presence_of :status

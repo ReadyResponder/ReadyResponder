@@ -2,8 +2,6 @@ class Timecard < ApplicationRecord
   has_paper_trail
 
   before_save :calc_duration
-  # TODO => USE STRONG PARAMETERS
-  # attr_accessible :start_time, :end_time, :status, :person_id, :description
 
   belongs_to :person, optional: true
 
