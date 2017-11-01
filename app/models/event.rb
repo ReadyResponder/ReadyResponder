@@ -135,6 +135,14 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def next_event
+    Event.where('start_time > ?', self.start_time).order(:start_time).first
+  end
+
+  def previous_event
+    Event.where('start_time < ?', self.start_time).order(:start_time).first
+  end
+
 private
   def calc_duration #This is also used in timecards; it should be extracted out
      if !(start_time.blank?) and !(end_time.blank?)

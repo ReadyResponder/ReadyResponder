@@ -205,6 +205,10 @@ class Person < ActiveRecord::Base
     skills.where("certs.expiration_date > ?", Time.zone.today)
   end
 
+  def meets?(requirement)
+    titles.include?(requirement.title) 
+  end
+
   private
 
   def check_zipcode
