@@ -329,6 +329,7 @@ ActiveRecord::Schema.define(version: 20171018155509) do
     t.string   "subject"
     t.text     "body"
     t.string   "purpose"
+    t.string   "id_code"
   end
 
   add_index "notifications", ["event_id"], name: "index_notifications_on_event_id", using: :btree
