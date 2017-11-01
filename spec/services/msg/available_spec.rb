@@ -7,6 +7,14 @@ RSpec.describe Msg::Available do
   let(:person)     { build(:person) }
   let(:event_code) { 'event_123' }
 
+  before(:example) do
+    Timecop.freeze
+  end
+
+  after(:example) do
+    Timecop.return
+  end
+
   subject { described_class.new(args) }
 
   describe 'respond' do
@@ -22,16 +30,16 @@ RSpec.describe Msg::Available do
     end
 
     context 'when passed an existing event code' do
-      before(:example) do
-        @event = build(:event)
-        allow(Event).to receive(:find_by_code).with(event_code) { @event }
-      end
-      
-      it 'creates an availability' do
-        expect(subject.respond).to be_an(Availability)
-      end
+      context 'when the start time of the event is in the future' do
+        before(:example) do
+          @event = build(:event, start_time: 1.hour.from_now)
+          allow(Event).to receive(:find_by_code).with(event_code) { @event }
+        end
+        
+        it 'creates an availability' do
+          expect(subject.respond).to be_an(Availability)
+        end
 
-      context 'when the start time of the event is now' do
         describe 'the created availability' do
           let(:availability) { subject.respond }
           
@@ -67,6 +75,8 @@ RSpec.describe Msg::Available do
       context 'when there is an auto-assignable requirement for the event' do
         let(:requirement) { build :requirement }
         before(:example) do
+          @event = build(:event, start_time: 1.hour.from_now)
+          allow(Event).to receive(:find_by_code).with(event_code) { @event }
           allow(requirement.assignments).to receive(:create)
           allow(@event).to receive_message_chain('requirements.find_by') { requirement }
         end
