@@ -42,6 +42,53 @@ RSpec.describe Msg::Available do
           expect(availability.end_time).to eq(@event.end_time)
         end  
       end
+
+      context 'when there is an auto-assignable requirement for the event' do
+        let(:requirement) { build :requirement }
+        before(:example) do
+          allow(requirement.assignments).to receive(:create)
+          allow(@event).to receive_message_chain('requirements.find_by') { requirement }
+        end
+
+        context 'when the requirement is full' do
+          before(:example) do
+            allow(requirement).to receive(:status) { 'Full' }
+          end
+
+          it 'does not create an assignment' do
+            subject.respond
+            expect(requirement.assignments).not_to have_received :create
+          end
+        end
+        
+        context 'when the requirement is not full' do
+          before(:example) do 
+            allow(requirement).to receive(:status) { 'Not Full' }
+          end
+
+          context 'but the person is not qualified' do
+            before(:example) do 
+              allow(person).to receive(:meets?) { false }
+            end
+
+            it 'does not create an assignment' do
+              subject.respond
+              expect(requirement.assignments).not_to have_received :create
+            end
+          end
+
+          context 'and the person is qualified' do
+            before(:example) do
+              allow(person).to receive(:meets?) { true }
+            end
+
+            it 'creates an assignment for the requirement' do
+              subject.respond
+              expect(requirement.assignments).to have_received :create
+            end
+          end
+        end
+      end
     end
 
     context 'when passed the "custom" keyword with 2 timestamps' do
