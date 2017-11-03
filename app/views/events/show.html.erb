@@ -10,6 +10,10 @@
            new_event_notification_path(@event) if can? :create, Notification %>
   <%= sidebar_button_link "New Timecard",
            new_timecard_path(event: @event) if can? :create, Timecard %>
+  <%= sidebar_button_link "Next Event",
+           event_path(next_event(@event)) if can?(:show, Timecard) && next_event(@event)%>
+  <%= sidebar_button_link "Previous Event",
+           event_path(previous_event(@event)) if can?(:show, Timecard) && previous_event(@event) %>
 <% end %>
 
 <p>

@@ -73,14 +73,12 @@ RSpec.describe Event do
   end
 
   context 'When has 4 events with different dates' do
-    let(:event_000) { create :event, start_time: 4.days.from_now, end_time: 10.days.from_now }
-    let(:event_001) { create :event, start_time: 2.days.from_now, end_time: 4.days.from_now }
-    let(:event_002) { create :event, start_time: 3.days.from_now, end_time: 7.days.from_now }
-    let(:event_003) { create :event, start_time: 7.days.from_now, end_time: 9.days.from_now }
-    before { setup }
+    let!(:event_000) { create :event, start_time: 4.days.from_now, end_time: 10.days.from_now }
+    let!(:event_001) { create :event, start_time: 2.days.from_now, end_time: 4.days.from_now }
+    let!(:event_002) { create :event, start_time: 3.days.from_now, end_time: 7.days.from_now }
+    let!(:event_003) { create :event, start_time: 7.days.from_now, end_time: 9.days.from_now }
 
     describe '#next_event' do
-      let(:setup) { event_002 }
       let(:result) { event_001.next_event }
 
       it 'should return event_002' do
@@ -89,7 +87,6 @@ RSpec.describe Event do
     end
 
     describe '#previous_event' do
-      let(:setup) { event_000 }
       let(:result) { event_003.previous_event }
 
       it 'should return event_000' do
