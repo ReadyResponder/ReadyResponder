@@ -175,6 +175,17 @@ RSpec.describe Person do
     end
   end
 
+  describe 'meeting requirement' do
+    let(:title) { create :title }
+    let(:requirement) { build :requirement, title: title }
+
+    context 'has title of requirement' do 
+      let(:person) { create :person, titles: [title] }
+      it 'meets the requirement' do
+        expect(person.meets?(requirement)).to be true
+      end
+    end
+  end
   describe 'associations' do
     it { is_expected.to have_many(:comments) }
   end

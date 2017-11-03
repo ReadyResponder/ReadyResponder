@@ -3,7 +3,8 @@ class Event < ActiveRecord::Base
   before_save :calc_duration, :trim_id_code
 
   validates_presence_of :category, :title, :status, :id_code
-  validates_uniqueness_of :id_code, :title
+  validates_uniqueness_of :title
+  validates_uniqueness_of :id_code, unless: :expired?
 
   validates_presence_of :start_time, :end_time
   validates_chronology :start_time, :end_time
@@ -152,4 +153,9 @@ private
   def trim_id_code
     self.id_code = self.id_code.split[0].downcase
   end
+
+  def expired?
+    Event.where(id_code: id_code).where("end_time > ?", 6.months.ago).empty?
+  end
+
 end
