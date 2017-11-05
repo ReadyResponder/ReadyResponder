@@ -1,0 +1,23 @@
+---
+locale: en_US.UTF-8
+version: 9.5
+repo: 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main'
+install_development_headers: True
+
+database:
+  name: ready_responder
+
+user:
+  name: vagrant
+  password: vagrant
+
+config:
+  shared_buffers: 24MB
+  work_mem: 1MB
+
+  checkpoint_segments: 3
+  checkpoint_completion_target: 0.5
+
+  effective_cache_size: 128MB
+
+...

@@ -3,7 +3,7 @@ class EventsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @events = all_events_except_templates
+    @events = (Event.active + Event.recent).uniq
     @page_title = "Events"
   end
 
@@ -13,7 +13,7 @@ class EventsController < ApplicationController
   end
 
   def archives
-    @archives = all_events_except_templates
+    @archives = Event.actual
     @page_title = "Archives"
   end
 
@@ -58,14 +58,10 @@ class EventsController < ApplicationController
 
   private
 
-  def all_events_except_templates
-    Event.where(is_template: false)
-  end
-
   def event_params
     params.require(:event).permit(:title, :description, :category,
     :course_id, :duration, :start_time, :end_time, :instructor, :location,
     :id_code, :status, :timecard_ids, :person_ids, :comments,
-    :is_template, :template_id, department_ids: [])
+    :is_template, :template_id, :min_title, department_ids: [])
   end
 end

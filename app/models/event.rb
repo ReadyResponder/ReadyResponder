@@ -3,7 +3,8 @@ class Event < ActiveRecord::Base
   before_save :calc_duration, :trim_id_code
 
   validates_presence_of :category, :title, :status, :id_code
-  validates_uniqueness_of :id_code, :title
+  validates_uniqueness_of :title
+  validates_uniqueness_of :id_code, unless: :expired?
 
   validates_presence_of :start_time, :end_time
   validates_chronology :start_time, :end_time
@@ -29,8 +30,10 @@ class Event < ActiveRecord::Base
     ["Scheduled", "In-session"], Time.now )
   }
 
-  scope :actual, -> { where(:is_template => false)}
-  scope :templates, -> { where(:is_template => true, :status => "In-session")}
+  scope :actual, -> { where(is_template: false)}
+  scope :templates, -> { where(is_template: true, status: "In-session")}
+  scope :active, ->  { where(is_template: false, status: ["In-session", "Scheduled"]) }
+  scope :recent, -> { where(is_template: false).where('start_time > ?', 13.months.ago) }
 
   def self.concurrent (range)
     where_clause =  '(:end >= start_time AND start_time >= :start) OR '
@@ -88,7 +91,7 @@ class Event < ActiveRecord::Base
   end
 
   def eligible_people
-    Person.active.where(department: self.departments)
+    Person.active.where(department: self.departments).where("title_order >= ?", Person::TITLE_ORDER[min_title])
   end
 
   def unresponsive_people
@@ -132,6 +135,14 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def next_event
+    Event.where('start_time > ?', self.start_time).order(:start_time).first
+  end
+
+  def previous_event
+    Event.where('start_time < ?', self.start_time).order(start_time: :desc).first
+  end
+
 private
   def calc_duration #This is also used in timecards; it should be extracted out
      if !(start_time.blank?) and !(end_time.blank?)
@@ -142,4 +153,9 @@ private
   def trim_id_code
     self.id_code = self.id_code.split[0].downcase
   end
+
+  def expired?
+    Event.where(id_code: id_code).where("end_time > ?", 6.months.ago).empty?
+  end
+
 end

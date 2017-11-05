@@ -10,6 +10,10 @@
            new_event_notification_path(@event) if can? :create, Notification %>
   <%= sidebar_button_link "New Timecard",
            new_timecard_path(event: @event) if can? :create, Timecard %>
+  <%= sidebar_button_link "Next Event",
+           event_path(next_event(@event)) if can?(:show, Timecard) && next_event(@event)%>
+  <%= sidebar_button_link "Previous Event",
+           event_path(previous_event(@event)) if can?(:show, Timecard) && previous_event(@event) %>
 <% end %>
 
 <p>
@@ -27,6 +31,7 @@
 <% if @event.description.present? %>
   <p><b>Description:</b> <%= @event.description %></p>
 <% end %>
+<p><b> Minimum Event Rank:</b> <%= @event.min_title %></p>
 <p><b>Code:</b> <%= @event.id_code %></p>
 <p><b>Departments:</b> <%= @event.departments.map { |d| d.name } %></p>
 <% if @event.category == "Training" %>

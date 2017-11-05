@@ -35,6 +35,12 @@ RSpec.describe Event do
     expect(@event.id_code).to eq("howdy")
   end
 
+  it "only sends notifications to above a certain rank" do
+    @event = create(:event, min_title: "Director")
+    @testuser = FactoryGirl.create(:person, title: "Recruit")
+    expect(@event.eligible_people).not_to include(@testuser)
+  end
+
   context "finds the correct events as concurrent" do
     it "doesn't find an old event" do
       @old_event = create(:event, id_code: "old", start_time: Time.at(111), end_time: Time.at(222))
@@ -66,4 +72,27 @@ RSpec.describe Event do
     expect(Event.upcoming.include?(@event)).to be(true)
   end
 
+  context 'When has 4 events with different dates' do
+    let!(:event_000) { create :event, start_time: 4.days.from_now, end_time: 10.days.from_now }
+    let!(:event_001) { create :event, start_time: 2.days.from_now, end_time: 4.days.from_now }
+    let!(:event_002) { create :event, start_time: 3.days.from_now, end_time: 7.days.from_now }
+    let!(:event_003) { create :event, start_time: 7.days.from_now, end_time: 9.days.from_now }
+
+    describe '#next_event' do
+      let(:result) { event_001.next_event }
+
+      it 'should return event_002' do
+        expect(result).to eq event_002
+      end
+    end
+
+    describe '#previous_event' do
+      let(:result) { event_003.previous_event }
+
+      it 'should return event_000' do
+        expect(result).to eq event_000
+      end
+    end
+    
+  end
 end

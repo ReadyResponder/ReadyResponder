@@ -6,6 +6,7 @@ RSpec.describe NotificationsController, type: :controller do
   let(:event) { FactoryGirl.create(:event) }
   let(:department) { create(:department) }
   let!(:notification)  { create(:notification,
+                                event: event,
                                 subject: "Howdy from Hopedale",
                                 departments: [department]) }
 

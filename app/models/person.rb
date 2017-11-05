@@ -7,7 +7,7 @@ class Person < ActiveRecord::Base
 
   before_save :title_order
 
-  has_many :certs, -> { where("certs.status = 'Active'" ) }
+  has_many :certs, -> { where("certs.status = 'Active'") }
   has_many :recipients
   has_many :notifications, :through => :recipients
   has_many :channels
@@ -199,6 +199,14 @@ class Person < ActiveRecord::Base
         Date.today.year - self.start_date.year + ( self.start_date.yday < Date.today.yday ? 1 : 0 )
       end
     end
+  end
+
+  def valid_skills
+    skills.where("certs.expiration_date > ?", Time.zone.today)
+  end
+
+  def meets?(requirement)
+    titles.include?(requirement.title) 
   end
 
   private

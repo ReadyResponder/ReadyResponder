@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171024005752) do
+ActiveRecord::Schema.define(version: 20171027173957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -169,6 +169,7 @@ ActiveRecord::Schema.define(version: 20171024005752) do
     t.string   "id_code"
     t.boolean  "is_template",                         default: false
     t.integer  "template_id"
+    t.string   "min_title"
   end
 
   create_table "grants", force: :cascade do |t|
@@ -331,6 +332,7 @@ ActiveRecord::Schema.define(version: 20171024005752) do
     t.string   "subject"
     t.text     "body"
     t.string   "purpose"
+    t.string   "id_code"
   end
 
   add_index "notifications", ["event_id"], name: "index_notifications_on_event_id", using: :btree
@@ -420,6 +422,7 @@ ActiveRecord::Schema.define(version: 20171024005752) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "cost",         precision: 8, scale: 2
+    t.string   "condition"
   end
 
   create_table "requirements", force: :cascade do |t|
@@ -432,8 +435,9 @@ ActiveRecord::Schema.define(version: 20171024005752) do
     t.integer  "desired_people"
     t.boolean  "floating"
     t.boolean  "optional"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.boolean  "auto_assign",    default: false
   end
 
   add_index "requirements", ["skill_id"], name: "index_requirements_on_skill_id", using: :btree

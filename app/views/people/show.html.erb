@@ -5,6 +5,19 @@
   <%= sidebar_button_link 'New Timecard', new_person_timecard_path(@person) if can? :create, Timecard %>
   <br>
   <%= image_tag @person.portrait_url if @person.portrait.file.present? %>
+  <table class="qr">
+    <% @qr.modules.each_index do |x| %>
+        <tr>
+          <% @qr.modules.each_index do |y| %>
+              <% if @qr.dark?(x,y) %>
+                  <td class="black"/>
+              <% else %>
+                  <td class="white"/>
+             <% end %>
+          <% end %>
+        </tr>
+    <% end %>
+  </table>
 <% end %>
 
 <h2><%= @person.shortrank %> <%= @person.fullname %> (<%= @person.icsid %>)</h2>
@@ -58,11 +71,11 @@
 <% end %>
 
 <div class="accordion">
-  <h3>Skills (<%= @person.skills.uniq.count %>)</h3>
+  <h3>Skills (<%= @person.valid_skills.uniq.count %>)</h3>
   <div>
     <table class="table table-striped table-bordered">
       <tbody>
-        <%= render(@person.skills.uniq) || raw("No skills yet !") %>
+        <%= render(@person.valid_skills.uniq) || raw("No skills yet !") %>
       </tbody>
     </table>
   </div>
@@ -104,6 +117,14 @@
   <div>
     <ul>
       <%= render 'timecards/timecards_table', timecards: @person.timecards.most_recent.uniq %>
+    </ul>
+  </div>
+
+  <h3>Comments (<%= @person.comments.count %>)</h3>
+  <div>
+    <ul>
+      <%= render(:partial => "comments/comments_table_for_people",
+                 :locals => { :comments => @person.comments }) %>
     </ul>
   </div>
 </div>

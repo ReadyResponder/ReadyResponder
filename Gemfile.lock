@@ -98,6 +98,7 @@ GEM
     chromedriver-helper (1.0.0)
       archive-zip (~> 0.7.0)
       nokogiri (~> 1.6)
+    chunky_png (1.3.8)
     cocoon (1.2.10)
     coderay (1.1.1)
     coffee-rails (4.2.1)
@@ -160,6 +161,9 @@ GEM
     http_parser.rb (0.6.0)
     i18n (0.8.6)
     io-like (0.3.0)
+    jbuilder (2.7.0)
+      activesupport (>= 4.2.0)
+      multi_json (>= 1.2)
     jquery-rails (4.2.1)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -292,6 +296,8 @@ GEM
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
     rmagick (2.15.4)
+    rqrcode (0.10.1)
+      chunky_png (~> 1.0)
     rspec (3.5.0)
       rspec-core (~> 3.5.0)
       rspec-expectations (~> 3.5.0)
@@ -371,6 +377,7 @@ GEM
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.5)
+    timecop (0.9.1)
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
     turbolinks-source (5.0.0)
@@ -385,6 +392,7 @@ GEM
     unicorn (5.1.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
+    vcardigan (0.0.9)
     warden (1.2.6)
       rack (>= 1.0)
     web-console (3.3.0)
@@ -402,7 +410,6 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-sass (= 3.3.7)
-  byebug
   cancancan
   capistrano-rails
   capybara
@@ -416,6 +423,7 @@ DEPENDENCIES
   geocoder
   guard-livereload
   guard-rspec
+  jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
   jquery-ui-rails
@@ -434,6 +442,7 @@ DEPENDENCIES
   ransack
   redcarpet
   rmagick (~> 2.15.4)
+  rqrcode
   rspec-rails
   sass-rails
   sdoc (~> 0.4.0)
@@ -445,10 +454,12 @@ DEPENDENCIES
   test-unit
   therubyracer
   thin
+  timecop
   turbolinks
   twilio-ruby (~> 4.11.1)
   uglifier (>= 1.0.3)
   unicorn
+  vcardigan
   web-console (~> 3.0)
 
 BUNDLED WITH
