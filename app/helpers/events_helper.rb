@@ -76,6 +76,14 @@ module EventsHelper
     end
   end
 
+  def next_event event
+    event.next_event
+  end
+
+  def previous_event event
+    event.previous_event
+  end
+
   private
     def make_label(text, class_str, tooltip: nil)
       if tooltip

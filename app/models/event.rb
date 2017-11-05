@@ -140,7 +140,7 @@ class Event < ActiveRecord::Base
   end
 
   def previous_event
-    Event.where('start_time < ?', self.start_time).order(:start_time).first
+    Event.where('start_time < ?', self.start_time).order(start_time: :desc).first
   end
 
 private
