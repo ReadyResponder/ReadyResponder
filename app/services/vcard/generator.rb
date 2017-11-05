@@ -15,7 +15,7 @@ module Vcard
       vcard.name person.firstname, person.lastname
       vcard.fullname person.fullname
       vcard.email person.email
-      vcard.bday person.date_of_birth.strftime("%Y%m%d")
+      vcard.bday person.date_of_birth.strftime("%Y%m%d") unless person.date_of_birth.nil?
       vcard.org person.department.name
       generate_phones
 

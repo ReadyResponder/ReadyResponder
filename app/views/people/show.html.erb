@@ -5,7 +5,19 @@
   <%= sidebar_button_link 'New Timecard', new_person_timecard_path(@person) if can? :create, Timecard %>
   <br>
   <%= image_tag @person.portrait_url if @person.portrait.file.present? %>
-  <%= raw @qr %>
+  <table class="qr">
+    <% @qr.modules.each_index do |x| %>
+        <tr>
+          <% @qr.modules.each_index do |y| %>
+              <% if @qr.dark?(x,y) %>
+                  <td class="black"/>
+              <% else %>
+                  <td class="white"/>
+             <% end %>
+          <% end %>
+        </tr>
+    <% end %>
+  </table>
 <% end %>
 
 <h2><%= @person.shortrank %> <%= @person.fullname %> (<%= @person.icsid %>)</h2>
