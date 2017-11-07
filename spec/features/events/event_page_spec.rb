@@ -61,8 +61,6 @@ RSpec.feature 'Event page' do
 
         assigned_responder = create(:person, department: @response_team)
         create(:assignment, requirement: requirement, person: assigned_responder)
-        create(:availability, person: assigned_responder, status: 'Available',
-               start_time: @event.start_time, end_time: @event.end_time)
 
         visit event_path(@event)
 
@@ -70,7 +68,8 @@ RSpec.feature 'Event page' do
         expect(page).to have_css('.event-labels[title="Available"]', text: '0')
         expect(page).to have_css('.event-labels[title="Partially Available"]', text: '0')
         expect(page).to have_css('.event-labels[title="Unavailable"]', text: '0')
-        expect(page).to have_css('.event-labels[title="No Response"]', text: '0')
+        # The person has not yet responded, even though she is assigned
+        expect(page).to have_css('.event-labels[title="No Response"]', text: '1')
       end
 
       scenario 'shows available people by department' do
