@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171027173957) do
+ActiveRecord::Schema.define(version: 20171111221642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,7 +140,10 @@ ActiveRecord::Schema.define(version: 20171027173957) do
     t.string   "division2"
     t.boolean  "manage_people", default: false
     t.boolean  "manage_items",  default: false
+    t.integer  "title_id"
   end
+
+  add_index "departments", ["title_id"], name: "index_departments_on_title_id", using: :btree
 
   create_table "departments_events", id: false, force: :cascade do |t|
     t.integer "department_id", null: false
@@ -541,6 +544,7 @@ ActiveRecord::Schema.define(version: 20171027173957) do
     t.text     "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "order"
   end
 
   create_table "unique_ids", force: :cascade do |t|
@@ -599,6 +603,7 @@ ActiveRecord::Schema.define(version: 20171027173957) do
 
   add_foreign_key "assignments", "people"
   add_foreign_key "assignments", "requirements"
+  add_foreign_key "departments", "titles"
   add_foreign_key "notifications", "events"
   add_foreign_key "requirements", "skills"
   add_foreign_key "requirements", "tasks"
