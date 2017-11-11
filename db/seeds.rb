@@ -69,6 +69,23 @@ jake = Person.create(
    icsid: "323", deployable: true
   )
 
+director = Title.create([
+ { name: 'Director', order: 1, status: 'Active' },
+ { name: 'Chief', order: 3, status: 'Active' },
+ { name: 'Deputy Chief', order: 5, status: 'Active' },
+ { name: 'Captain', order: 7, status: 'Active' },
+ { name: 'Lieutenant', order: 9, status: 'Active' },
+ { name: 'Sargeant', order: 11, status: 'Active' },
+ { name: 'Corporal', order: 13, status: 'Corporal' },
+ { name: 'Senior Officer', order: 15, status: 'Active' },
+ { name: 'Officer', order: 17, status: 'Active' },
+ { name: 'CERT Member', order: 19, status: 'Active' },
+ { name: 'Dispatcher', order: 19, status: 'Active' },
+ { name: 'Student Officer', order: 21, status: 'Active' },
+ { name: 'Recruit', order: 23, status: 'Active' },
+ { name: 'Applicant', order: 25, status: 'Active' }
+])
+
 
 # This should be updated when we can assign the department.
 # Add department: Department.where(shortname: "DPW")
