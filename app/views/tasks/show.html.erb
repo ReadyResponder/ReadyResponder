@@ -31,6 +31,12 @@
   <p>(<%= @task.latitude %>, <%= @task.longitude %>)</p>
 <% end %>
 
+<script src="https://openlayers.org/en/v4.5.0/build/ol.js" type="text/javascript"></script>
+
+<% if @task.latitude.present? and @task.longitude.present? %>
+  <div id="map" class="map"></div>
+<% end %>
+
 <div class='task-tabs'>
   <ul class="nav nav-tabs">
     <li class="active"><a class='task-tabs-anchor' href="#task-requirement-tab" data-toggle="tab">Requirements</a></li>
