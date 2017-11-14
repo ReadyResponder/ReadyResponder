@@ -242,7 +242,6 @@ ActiveRecord::Schema.define(version: 20171027173957) do
     t.integer  "location_id"
     t.string   "name"
     t.string   "description"
-    t.string   "source_data"
     t.string   "category"
     t.string   "model"
     t.date     "purchase_date"
@@ -269,6 +268,7 @@ ActiveRecord::Schema.define(version: 20171027173957) do
     t.string   "condition"
     t.integer  "qty"
     t.integer  "grant_id"
+    t.string   "source_data"
     t.integer  "vendor_id"
   end
 

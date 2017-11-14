@@ -1,13 +1,14 @@
 class VendorsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
-  
+
   def index
     @vendors = Vendor.all
   end
 
   def show
     @vendor = Vendor.find(params[:id])
+    @items = @vendor.items
   end
 
   def new
