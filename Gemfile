@@ -55,7 +55,9 @@ group :test, :development do
   gem 'meta_request'
   gem 'database_cleaner', '1.0.1'
   gem 'test-unit'
-  gem 'pry-byebug'
+  gem 'pry'
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console		
+  gem 'byebug'
 end
 
 group :development do
