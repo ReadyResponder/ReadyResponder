@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :item do
     name "EMA-10"
     description "Ford F-150"
-    source "Main Street Ford"
+    association :vendor, factory: :vendor
     category "Vehicle"
     qty 1
     brand 'Ford'
