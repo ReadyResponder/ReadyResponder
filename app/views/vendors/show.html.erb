@@ -10,7 +10,7 @@
   <tbody>
     <% @items.each do |item| %>
       <tr>
-        <td><%= item.name%></td>
+        <td><%= link_to item.name, item_path(item)%></td>
       </tr>
     <% end %>
   </tbody>
