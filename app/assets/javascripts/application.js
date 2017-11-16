@@ -21,3 +21,4 @@
 //= require cocoon
 //= require_tree "."
 //= stub "event_scheduler"
+//= require ol
