@@ -15,7 +15,7 @@
 
     <% @vendors.each do |vendor| %>
       <tr>
-        <td><%= link_to vendor.name, vendor_path(vendor.id)%></td>
+        <td><%= link_to vendor.name, vendor %></td>
       </tr>
     <% end %>
   </tbody>
