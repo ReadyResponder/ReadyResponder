@@ -1,1 +1,15 @@
-<%= render 'form' %>
+<h1> Add a Vendor </h1>
+<%= simple_form_for @vendor do |f| %>
+<%= f.error_notification %>
+
+  <%= hidden_field_tag :next, params[:next] %>
+
+  <%= f.input :name %>
+  <%= f.input :street %>
+  <%= f.input :city %>
+  <%= f.input :state %>
+  <%= f.input :zipcode %>
+  <%= f.input :comments %>
+
+  <%= f.button :submit %>
+<% end %>
