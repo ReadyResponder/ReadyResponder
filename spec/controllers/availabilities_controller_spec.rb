@@ -69,12 +69,12 @@ RSpec.describe AvailabilitiesController, type: :controller do
   describe 'PATCH update' do
     let(:av_person_inactive)       { create(:inactive_person, :firstname => 'Alex') }
     let(:availability) { create(:availability, person: av_person_inactive) }
-    let(:person2)       { create(:person, :firstname => 'Bane') }
+    let(:active_person)       { create(:person, :firstname => 'Bane') }
     let(:inactive_person) { create(:inactive_person) }
     start_time = Time.now.strftime('%Y-%m-%d %H:%M')
     end_time = 1.days.from_now.strftime('%Y-%m-%d %H:%M')  
     let!(:availability_params) do
-      {:person_id => person2.id, :status => "Available", :description => "Meeting", :start_time => start_time, :end_time => end_time}
+      {:person_id => active_person.id, :status => "Available", :description => "Meeting", :start_time => start_time, :end_time => end_time}
     end
 
     context 'success' do
@@ -105,7 +105,7 @@ RSpec.describe AvailabilitiesController, type: :controller do
         patch :update, { :availability => invalid_availability_params, :id => availability.id} 
 
         expect(assigns(:availability)).to eq(availability)
-        expect(assigns(:people_collection)).to eq([av_person_inactive, person2]), "Should set only active persons, sorted by name"
+        expect(assigns(:people_collection)).to eq([av_person_inactive, active_person]), "Should set only active persons, except person belonging to the availability, sorted by name"
         expect(response).to render_template(:edit)
 
         availability.reload
