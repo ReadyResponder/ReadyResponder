@@ -14,7 +14,6 @@ RSpec.describe Assignment, type: :model do
 
   it { is_expected.to delegate_method(:task).to(:requirement) }
   it { is_expected.to delegate_method(:event).to(:task) }
-  it { is_expected.to delegate_method(:department).to(:person) }
 
   it { is_expected.to validate_presence_of(:person) }
 

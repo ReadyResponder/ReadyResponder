@@ -6,7 +6,6 @@ class Assignment < ActiveRecord::Base
 
   delegate :task, to: :requirement
   delegate :event, to: :task
-  delegate :department, to: :person
 
   validates_presence_of :person
 
