@@ -31,7 +31,8 @@ RSpec.feature 'Event page' do
 
         expect(page).to have_content @event.title
         expect(page).to have_content @event.id_code
-        expect(page).to have_content @departments.map(&:name)
+        expect(page).to have_content @departments[0].name
+        expect(page).to have_content @departments[1].name
         expect(page).to have_content @event.min_title
         expect(page).to have_content @event.description
         expect(page).to have_content @event.status
@@ -64,12 +65,18 @@ RSpec.feature 'Event page' do
 
         visit event_path(@event)
 
-        expect(page).to have_css('.event-labels[title="Assigned to THIS Event"]', text: '1')
-        expect(page).to have_css('.event-labels[title="Available"]', text: '0')
-        expect(page).to have_css('.event-labels[title="Partially Available"]', text: '0')
-        expect(page).to have_css('.event-labels[title="Unavailable"]', text: '0')
-        # The person has not yet responded, even though she is assigned
-        expect(page).to have_css('.event-labels[title="No Response"]', text: '1')
+        within("table#event-status tr##{@response_team.name.parameterize}-status") do
+          expect(page).to have_css('.event-labels[title="Assigned to THIS Event"]', text: '1')
+          expect(page).to have_css('.event-labels[title="Available"]', text: '0')
+          expect(page).to have_css('.event-labels[title="Partially Available"]', text: '0')
+          expect(page).to have_css('.event-labels[title="Unavailable"]', text: '0')
+          # The person has not yet responded, even though she is assigned
+          expect(page).to have_css('.event-labels[title="No Response"]', text: '1')
+        end
+        within("table#event-status tr##{@medical_reserve.name.parameterize}-status") do
+          expect(page).to have_css('.event-labels[title="Assigned to THIS Event"]', text: '0')
+          expect(page).to have_css('.event-labels[title="No Response"]', text: '0')
+        end
       end
 
       scenario 'shows available people by department' do
@@ -79,11 +86,16 @@ RSpec.feature 'Event page' do
 
         visit event_path(@event)
 
-        expect(page).to have_css('.event-labels[title="Assigned to THIS Event"]', text: '0')
-        expect(page).to have_css('.event-labels[title="Available"]', text: '1')
-        expect(page).to have_css('.event-labels[title="Partially Available"]', text: '0')
-        expect(page).to have_css('.event-labels[title="Unavailable"]', text: '0')
-        expect(page).to have_css('.event-labels[title="No Response"]', text: '0')
+        within("table#event-status tr##{@medical_reserve.name.parameterize}-status") do
+          expect(page).to have_css('.event-labels[title="Assigned to THIS Event"]', text: '0')
+          expect(page).to have_css('.event-labels[title="Available"]', text: '1')
+          expect(page).to have_css('.event-labels[title="Partially Available"]', text: '0')
+          expect(page).to have_css('.event-labels[title="Unavailable"]', text: '0')
+          expect(page).to have_css('.event-labels[title="No Response"]', text: '0')
+        end
+        within("table#event-status tr##{@response_team.name.parameterize}-status") do
+          expect(page).to have_css('.event-labels[title="Available"]', text: '0')
+        end
       end
 
       scenario 'shows partially available people by department' do
@@ -93,11 +105,16 @@ RSpec.feature 'Event page' do
 
         visit event_path(@event)
 
-        expect(page).to have_css('.event-labels[title="Assigned to THIS Event"]', text: '0')
-        expect(page).to have_css('.event-labels[title="Available"]', text: '0')
-        expect(page).to have_css('.event-labels[title="Partially Available"]', text: '1')
-        expect(page).to have_css('.event-labels[title="Unavailable"]', text: '0')
-        expect(page).to have_css('.event-labels[title="No Response"]', text: '0')
+        within("table#event-status tr##{@response_team.name.parameterize}-status") do
+          expect(page).to have_css('.event-labels[title="Assigned to THIS Event"]', text: '0')
+          expect(page).to have_css('.event-labels[title="Available"]', text: '0')
+          expect(page).to have_css('.event-labels[title="Partially Available"]', text: '1')
+          expect(page).to have_css('.event-labels[title="Unavailable"]', text: '0')
+          expect(page).to have_css('.event-labels[title="No Response"]', text: '0')
+        end
+        within("table#event-status tr##{@medical_reserve.name.parameterize}-status") do
+          expect(page).to have_css('.event-labels[title="Partially Available"]', text: '0')
+        end
       end
 
       scenario 'shows unavailable people by department' do
@@ -107,11 +124,16 @@ RSpec.feature 'Event page' do
 
         visit event_path(@event)
 
-        expect(page).to have_css('.event-labels[title="Assigned to THIS Event"]', text: '0')
-        expect(page).to have_css('.event-labels[title="Available"]', text: '0')
-        expect(page).to have_css('.event-labels[title="Partially Available"]', text: '0')
-        expect(page).to have_css('.event-labels[title="Unavailable"]', text: '1')
-        expect(page).to have_css('.event-labels[title="No Response"]', text: '0')
+        within("table#event-status tr##{@medical_reserve.name.parameterize}-status") do
+          expect(page).to have_css('.event-labels[title="Assigned to THIS Event"]', text: '0')
+          expect(page).to have_css('.event-labels[title="Available"]', text: '0')
+          expect(page).to have_css('.event-labels[title="Partially Available"]', text: '0')
+          expect(page).to have_css('.event-labels[title="Unavailable"]', text: '1')
+          expect(page).to have_css('.event-labels[title="No Response"]', text: '0')
+        end
+        within("table#event-status tr##{@response_team.name.parameterize}-status") do
+          expect(page).to have_css('.event-labels[title="Unavailable"]', text: '0')
+        end
       end
 
       scenario 'shows people that did not respond by department' do
@@ -120,11 +142,16 @@ RSpec.feature 'Event page' do
 
         visit event_path(@event)
 
-        expect(page).to have_css('.event-labels[title="Assigned to THIS Event"]', text: '0')
-        expect(page).to have_css('.event-labels[title="Available"]', text: '0')
-        expect(page).to have_css('.event-labels[title="Partially Available"]', text: '0')
-        expect(page).to have_css('.event-labels[title="Unavailable"]', text: '0')
-        expect(page).to have_css('.event-labels[title="No Response"]', text: '1')
+        within("table#event-status tr##{@response_team.name.parameterize}-status") do
+          expect(page).to have_css('.event-labels[title="Assigned to THIS Event"]', text: '0')
+          expect(page).to have_css('.event-labels[title="Available"]', text: '0')
+          expect(page).to have_css('.event-labels[title="Partially Available"]', text: '0')
+          expect(page).to have_css('.event-labels[title="Unavailable"]', text: '0')
+          expect(page).to have_css('.event-labels[title="No Response"]', text: '1')
+        end
+        within("table#event-status tr##{@medical_reserve.name.parameterize}-status") do
+          expect(page).to have_css('.event-labels[title="No Response"]', text: '0')
+        end
       end
     end
   end
