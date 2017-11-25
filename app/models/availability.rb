@@ -10,10 +10,6 @@ class Availability < ActiveRecord::Base
 
   STATUS_CHOICES = [ 'Available', 'Unavailable', "Cancelled" ]
 
-  # Available the entire event
-  scope :for_time_span, ->(range) { where("end_time >= ?", range.last).
-                               where("start_time <= ?", range.first) }
-
   # Available part of event
   scope :partially_available, ->(range) { where("? > end_time AND end_time > ? OR ? > start_time AND start_time > ?", range.last, range.first, range.last, range.first) }
 

@@ -50,10 +50,6 @@ class Event < ActiveRecord::Base
     title
   end
 
-  def responses
-    Availability.containing(start_time..end_time).active
-  end
-
   def unavailabilities
     Availability.overlapping(start_time..end_time).active.unavailable
   end
