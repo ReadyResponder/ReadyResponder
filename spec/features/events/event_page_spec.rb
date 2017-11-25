@@ -137,8 +137,8 @@ RSpec.feature 'Event page' do
       end
 
       scenario 'shows people that did not respond by department' do
-        unresponsive_responder = create(:person, department: @response_team,
-                                        title_order: 30)
+        # Create an unresponsive person, someone with no associated availability
+        create(:person, department: @response_team, title_order: 30)
 
         visit event_path(@event)
 
