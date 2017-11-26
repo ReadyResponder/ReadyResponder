@@ -20,8 +20,6 @@ module Loggable
       def modified_by
         if paper_trail.try(:originator)
           User.find(paper_trail.try(:originator))
-        else
-          raise "Loggable module must be used in conjunction with Paper Trail"
         end
       end
 
