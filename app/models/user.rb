@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_paper_trail
+  include Loggable
 
   has_and_belongs_to_many :roles
   has_many :system_activity_logs

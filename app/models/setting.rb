@@ -1,5 +1,6 @@
 class Setting < ActiveRecord::Base
   has_paper_trail
+  include Loggable
 
   validates_presence_of :name, :key, :value, :category, :status
 

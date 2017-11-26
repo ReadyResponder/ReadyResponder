@@ -1,5 +1,6 @@
 class Grant < ActiveRecord::Base
   has_paper_trail
+  include Loggable
 
   attr_accessible :name, :description, :start_date, :end_date, :status
 

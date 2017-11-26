@@ -1,5 +1,6 @@
 class Repair < ActiveRecord::Base
   has_paper_trail
+  include Loggable
 
   attr_accessible :category, :comments, :description,
                   :item_id, :person_id, :service_date,
