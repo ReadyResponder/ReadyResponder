@@ -2,3 +2,16 @@
   width: 1000px;
   height: 350px;
   }
+
+.filter-table {
+  border: none;
+
+  td {
+    border: none;
+    padding-right: 10px;
+
+    &:last-of-type {
+      padding-right: 0;
+    }
+  }
+}

@@ -77,8 +77,9 @@ Rails.application.routes.draw do
   resources :courses
   resources :certs
 
-  resources :analytics do
+  resources :analytics, except: [:new, :create, :show, :index, :edit, :update, :destroy] do
     get 'calendar_chart', on: :collection
+    get 'system_activity_logs', on: :collection
   end
 
   get 'events/templates', to: 'events#templates'
