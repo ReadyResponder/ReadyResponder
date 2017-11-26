@@ -6,5 +6,5 @@ class SystemActivityLog < ActiveRecord::Base
   validates :message, :category, presence: true
 
   scope :for_category, ->(category) { where(category: category) }
-  scope :on_date, ->(date) { where("DATE(updated_at) = ?", date) }
+  scope :on_date, ->(date) { where("DATE(created_at) = ?", date) }
 end
