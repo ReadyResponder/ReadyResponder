@@ -4,4 +4,7 @@ class SystemActivityLog < ActiveRecord::Base
   belongs_to :user
 
   validates :message, :category, presence: true
+
+  scope :for_category, ->(category) { where(category: category) }
+  scope :on_date, ->(date) { where("DATE(updated_at) = ?", date) }
 end
