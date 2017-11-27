@@ -18,11 +18,17 @@ class Msg::Available < Msg::Base
     # target = Notification::find_by_code.call(event_codename)
     # TODO Need to verify and save Availabilites as needed.
     
+    start = [target.start_time, Time.zone.now].max
     availability_creator = AvailabilityCreator.new(person: @person,
-      status: 'Available', description: description, start_time: target.start_time,
+      status: 'Available', description: description, start_time: start,
       end_time: target.end_time)
 
     if availability_creator.call
+      requirement = target.requirements.find_by(auto_assign: true) 
+      if requirement && requirement.status != 'Full' && @person.meets?(requirement)
+        requirement.assignments.create(person: @person, status: 'New', 
+          start_time: target.start_time, end_time: target.end_time)          
+      end
       availability_creator.availability
     else
       "Error! #{availability_creator.errors.full_messages.join('; ')}."

@@ -22,6 +22,7 @@ class Notification < ActiveRecord::Base
   validates :status, inclusion: { in: VALID_STATUSES }
   validate :notification_has_at_least_one_recipient
   validates_presence_of :subject
+  validates_uniqueness_of :id_code, unless: :expired?
 
   def available_statuses
     if status
@@ -70,6 +71,11 @@ private
     if departments.blank?
       errors[:departments] << "All recipients can't be blank"
     end
+  end
+
+  def expired?
+    Notification.where(id_code: id_code)
+      .select { |notification| notification.end_time > 6.months.ago }.empty?
   end
 
 end

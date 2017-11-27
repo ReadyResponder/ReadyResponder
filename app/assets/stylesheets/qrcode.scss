@@ -1,18 +1,18 @@
-table {
+table.qr {
   border-width: 0;
   border-style: none;
   border-color: #0000ff;
   border-collapse: collapse;
   margin: 10px;
-}
 
-td {
-  border-left: solid 3px #000;
-  padding: 0;
-  margin: 0;
-  width: 0px;
-  height: 3px;
-}
+  td {
+    border-left: solid 3px #000;
+    padding: 0;
+    margin: 0;
+    width: 0px;
+    height: 3px;
+  }
 
-td.black { border-color: #000; }
-td.white { border-color: #fff; }
+  td.black { border-color: #000; }
+  td.white { border-color: #fff; }
+}
