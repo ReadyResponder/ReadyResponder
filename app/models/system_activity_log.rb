@@ -1,4 +1,9 @@
 class SystemActivityLog < ActiveRecord::Base
+  has_paper_trail
+
+  attr_accessible :user, :message, :category
+  belongs_to :user
+
   LOGGED_MODELS = [
     "Assignment",
     "Availability",
@@ -28,10 +33,6 @@ class SystemActivityLog < ActiveRecord::Base
     "UniqueId",
     "User"
   ]
-
-  has_paper_trail
-
-  belongs_to :user
 
   validates :message, :category, presence: true
 
