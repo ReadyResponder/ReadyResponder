@@ -18,8 +18,10 @@ module Loggable
       end
 
       def modified_by
-        if paper_trail.try(:originator)
-          User.find(paper_trail.try(:originator))
+        user_id = paper_trail.try(:originator)
+
+        if user_id && User.exists?(user_id)
+          User.find(user_id)
         end
       end
 
