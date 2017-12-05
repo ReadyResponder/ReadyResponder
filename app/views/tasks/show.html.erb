@@ -33,7 +33,14 @@
 
 <% if @task.latitude.present? and @task.longitude.present? %>
   <div id="map" class="map" style="height:250px"></div>
+  <div style="display: none;">
+  <a class="overlay" id="task" target="_blank" href=""><%= @task.title %></a>
+  <div id="marker" title="Marker"></div>
+</div>
   <script type="text/javascript">
+  var popup = new ol.Overlay({
+    element: document.getElementById('popup')
+  });
   var map = new ol.Map({
     target: 'map',
     layers: [
@@ -46,6 +53,21 @@
       zoom: 16
     })
   });
+
+  var pos = ol.proj.fromLonLat([<%= @task.longitude %>, <%= @task.latitude %>]);
+
+  var marker = new ol.Overlay({
+    position: pos,
+    element: document.getElementById('marker'),
+    stopEvent: false
+  });
+  map.addOverlay(marker);
+
+  var task = new ol.Overlay({
+    position: pos,
+    element: document.getElementById('task')
+  });
+  map.addOverlay(task);
 </script>
 <% end %>
 
