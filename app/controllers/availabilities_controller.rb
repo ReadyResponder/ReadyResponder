@@ -27,11 +27,7 @@ class AvailabilitiesController < ApplicationController
   end
 
   def edit
-    @people_collection = Person.active
-    
-    # Ensure person is included in @people_collection
-    @people_collection |= [@availability.person] if @availability.person
-    @people_collection = @people_collection.sort_by {|firstname, middleinitial, lastname| "#{firstname} #{middleinitial} #{lastname}"}.compact
+    set_people
   end
 
   def create
@@ -47,6 +43,8 @@ class AvailabilitiesController < ApplicationController
     if @availability.update(availability_params)
       redirect_to @availability, notice: 'Availability was successfully updated.'
     else
+      set_availability
+      set_people
       render :edit
     end
   end
@@ -65,5 +63,13 @@ class AvailabilitiesController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def availability_params
       params.require(:availability).permit(:person_id, :start_time, :end_time, :status, :description)
+    end
+
+    def set_people
+      @people_collection = Person.active
+      
+      # Ensure person is included in @people_collection
+      @people_collection |= [@availability.person] if @availability.person
+      @people_collection = @people_collection.sort_by {|firstname, middleinitial, lastname| "#{firstname} #{middleinitial} #{lastname}"}.compact
     end
 end

@@ -65,4 +65,56 @@ RSpec.describe AvailabilitiesController, type: :controller do
       end
     end
   end
+
+  describe 'PATCH update' do
+    let(:av_person_inactive)       { create(:inactive_person, :firstname => 'Alex') }
+    let(:availability) { create(:availability, person: av_person_inactive) }
+    let(:active_person)       { create(:person, :firstname => 'Bane') }
+    let(:inactive_person) { create(:inactive_person) }
+    start_time = Time.now.strftime('%Y-%m-%d %H:%M')
+    end_time = 1.days.from_now.strftime('%Y-%m-%d %H:%M')  
+    let!(:availability_params) do
+      {:person_id => active_person.id, :status => "Available", :description => "Meeting", :start_time => start_time, :end_time => end_time}
+    end
+
+    context 'success' do
+      it 'updates all attributes and redirects to show' do 
+        patch :update, { :availability => availability_params, :id => availability.id}
+
+        expect(assigns(:availability)).to eq(availability)
+        expect(response).to redirect_to(availability_path(availability))
+        expect(flash[:notice]).to eq('Availability was successfully updated.')
+
+        availability.reload
+        availability_params.each do |key, value|  
+          actual_val = [:start_time, :end_time].include?(key) ? availability.send(key).strftime('%Y-%m-%d %H:%M') : availability.send(key)
+          expect(actual_val).to eq(value), "Should update #{key} to #{value}"                     
+        end
+      end
+    end
+
+    context 'with errors' do      
+      let(:invalid_availability_params) do
+        availability_params.tap do |params|
+          params[:start_time] = end_time
+          params[:end_time] = start_time
+        end
+      end      
+
+      it 'does not updates and renders edit with correct assignments' do         
+        patch :update, { :availability => invalid_availability_params, :id => availability.id} 
+
+        expect(assigns(:availability)).to eq(availability)
+        expect(assigns(:people_collection)).to eq([av_person_inactive, active_person]), "Should set only active persons, except person belonging to the availability, sorted by name"
+        expect(response).to render_template(:edit)
+
+        availability.reload
+        availability_params.each do |key, value|          
+          actual_val = [:start_time, :end_time].include?(key) ? availability.send(key).strftime('%Y-%m-%d %H:%M') : availability.send(key)
+          expect(actual_val).not_to eq(value), "Should not update #{key}"
+        end
+      end      
+    end
+  end
+
 end
