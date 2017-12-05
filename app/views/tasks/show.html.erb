@@ -31,6 +31,24 @@
   <p>(<%= @task.latitude %>, <%= @task.longitude %>)</p>
 <% end %>
 
+<% if @task.latitude.present? and @task.longitude.present? %>
+  <div id="map" class="map" style="height:250px"></div>
+  <script type="text/javascript">
+  var map = new ol.Map({
+    target: 'map',
+    layers: [
+      new ol.layer.Tile({
+        source: new ol.source.OSM()
+      })
+    ],
+    view: new ol.View({
+      center: ol.proj.fromLonLat([<%= @task.longitude %>, <%= @task.latitude %>]),
+      zoom: 16
+    })
+  });
+</script>
+<% end %>
+
 <div class='task-tabs'>
   <ul class="nav nav-tabs">
     <li class="active"><a class='task-tabs-anchor' href="#task-requirement-tab" data-toggle="tab">Requirements</a></li>
