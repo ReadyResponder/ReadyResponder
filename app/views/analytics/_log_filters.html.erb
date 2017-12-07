@@ -1,0 +1,31 @@
+<h5>Filter by:</h5>
+
+  <table class="filter-table">
+    <tr>
+      <%= form_tag(system_activity_logs_analytics_path, method: :get) do %>
+        <td>
+          Date:
+          <%= select_date @date,
+            {:include_blank => true, :default => nil},
+            prefix: :date
+          %>
+        </td>
+
+        <td>
+          Category:
+          <%= select_tag :category,
+            options_for_select(SystemActivityLog::LOGGED_MODELS, @category),
+            {:include_blank => true, :default => nil}
+          %>
+        </td>
+
+        <td><%= submit_tag "Apply" %></td>
+      <% end %>
+        <td>
+          <%= button_to "Clear",
+            system_activity_logs_analytics_path,
+            method: :get
+          %>
+        </td>
+    </tr>
+  </table>

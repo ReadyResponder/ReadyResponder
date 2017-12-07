@@ -1,6 +1,7 @@
 class Person < ActiveRecord::Base
   has_paper_trail
   include Commentable
+  include Loggable
 
   include ActiveModel::ForbiddenAttributesProtection
   mount_uploader :portrait, PortraitUploader
