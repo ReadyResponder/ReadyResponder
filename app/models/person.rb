@@ -70,6 +70,10 @@ class Person < ActiveRecord::Base
     (fname + " " + (self.middleinitial || "") + " " + self.lastname).squeeze(" ")
   end
 
+  def <=>(other)
+    self.fullname.downcase <=> other.fullname.downcase
+  end
+
   def shortrank
     ranks = { 'Director' => 'Dir', 'Chief' => "Chief", "Deputy Chief" => "Deputy", "Captain" => "Capt",
             "Lieutenant" => "Lt", "Sargeant" => "Sgt", "Corporal" => "Cpl",

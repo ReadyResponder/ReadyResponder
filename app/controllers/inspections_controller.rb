@@ -14,9 +14,11 @@ class InspectionsController < ApplicationController
 
   def new
     @inspection = @item.inspections.build
+    set_inspectors
   end
 
-  def edit
+  def edit    
+    set_inspectors
   end
 
   def create
@@ -55,5 +57,11 @@ class InspectionsController < ApplicationController
     params.require(:inspection).permit(
       :inspection_date, :status, :comments, :person_id
     )
+  end
+
+  def set_inspectors
+    @inspectors = Person.active    
+    (@inspectors << @inspection.person) if @inspection.try(:person)
+    @inspectors = @inspectors.sort
   end
 end
