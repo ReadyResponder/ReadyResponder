@@ -54,9 +54,22 @@ class Person < ActiveRecord::Base
   scope :squad1, -> { order("title_order, start_date ASC").where( division2: "Squad 1", status: "Active" ) }
   scope :squad2, -> { order("title_order, start_date ASC").where( division2: "Squad 2", status: "Active" ) }
   scope :of_dept, -> (department) { where(department: department) }
+  
+  scope :titled_equal_or_higher_than, lambda { |title|
+    where('title_order <= ?',
+          Person::TITLE_ORDER.fetch(title, DEFAULT_TITLE_ORDER))
+  }
 
-  TITLES = ['Director','Chief','Deputy','Captain', 'Lieutenant','Sargeant', 'Corporal', 'Senior Officer', 'Officer', 'CERT Member', 'Dispatcher', 'Recruit']
-  TITLE_ORDER = {'Director' => 1, 'Chief' => 3, 'Deputy Chief' => 5,'Captain' => 7, 'Lieutenant' => 9, 'Sargeant' => 11, 'Corporal' => 13, 'Senior Officer' => 15, 'Officer' => 17, 'CERT Member' => 19, 'Dispatcher' => 19, 'Student Officer' => 21, 'Recruit' => 23, 'Applicant' => 25}
+  TITLES = ['Director','Chief','Deputy','Captain', 'Lieutenant','Sargeant',
+            'Corporal', 'Senior Officer', 'Officer', 'CERT Member', 'Dispatcher',
+            'Recruit']
+  TITLE_ORDER = {'Director' => 1, 'Chief' => 3, 'Deputy Chief' => 5,
+                 'Captain' => 7, 'Lieutenant' => 9, 'Sargeant' => 11,
+                 'Corporal' => 13, 'Senior Officer' => 15, 'Officer' => 17,
+                 'CERT Member' => 19, 'Dispatcher' => 19,
+                 'Student Officer' => 21, 'Recruit' => 23, 'Applicant' => 25}
+  DEFAULT_TITLE_ORDER = 30
+
   DIVISION1 = ['Division 1', 'Division 2', "Division 3", "Recruit", 'Command']
   DIVISION2 = ['Command', 'Squad 1', 'Squad 2']
   STATUS = ['Leave of Absence', 'Inactive', 'Active', 'Applicant','Prospect','Declined']
@@ -84,7 +97,7 @@ class Person < ActiveRecord::Base
   end
 
   def title_order
-    self.title_order = TITLE_ORDER[self.title] || 30
+    title_order = TITLE_ORDER[title] || DEFAULT_TITLE_ORDER
   end
 
   def name

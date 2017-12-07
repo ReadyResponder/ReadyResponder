@@ -95,14 +95,14 @@ class Event < ActiveRecord::Base
   end
 
   def eligible_people
-    Person.active.where(department: departments).where("title_order >= ?", Person::TITLE_ORDER[min_title])
+    Person.active.of_dept(departments).titled_equal_or_higher_than(min_title)
   end
 
   # Building a single scope to fetch these records as a single relation is
   # hard (we need people without availabilities, as well as people whose
   # availabilities do not overlap the event's). Since using math operators on
-  # relations converts them to arrays, I chose to fetch the people ids and then
-  # build a new relation from those.
+  # relations converts them to arrays, thus the choice to fetch the people ids
+  # and then build a new relation from those.
   def unresponsive_people
     people_ids = eligible_people.pluck(:id) - 
       Person.active.joins(:availabilities).merge(Availability.overlapping(start_time..end_time)).pluck(:id)

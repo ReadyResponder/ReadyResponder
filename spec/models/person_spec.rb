@@ -202,4 +202,34 @@ RSpec.describe Person do
       expect(Person.all.sort).to eq([person2, person6, person5, person3, person4, person1])
     end
   end
+
+  context 'titled_equal_or_higher_than scope' do
+    it 'returns a chainable relation' do
+      expect(described_class.titled_equal_or_higher_than('a title'))
+        .to be_a_kind_of(ActiveRecord::Relation)
+    end
+
+    context 'given 3 people with different titles' do
+      let!(:person_1) { create(:person, title_order: 1) }
+      let!(:person_2) { create(:person, title_order: 2) }
+      let!(:person_3) { create(:person, title_order: 3) }
+
+      let(:title_order) { { 'title a' => 1, 'title b' => 2,
+                            'title c' => 3, 'title d' => 4 } }
+      let(:default_title_order) { 5 }
+
+      it 'returns the ones titled higher than or equal to the given title' do
+        stub_const('Person::TITLE_ORDER', title_order)
+        expect(described_class.titled_equal_or_higher_than('title b'))
+          .to contain_exactly(person_1, person_2)
+      end
+
+      it 'returns all people titled higher than the default title order '\
+         'when an invalid title is given' do
+        stub_const('Person::DEFAULT_TITLE_ORDER', default_title_order)
+        expect(described_class.titled_equal_or_higher_than('no title'))
+          .to contain_exactly(person_1, person_2, person_3)
+      end
+    end
+  end
 end
