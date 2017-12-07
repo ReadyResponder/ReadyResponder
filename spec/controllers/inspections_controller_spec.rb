@@ -1,6 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe InspectionsController, type: :controller do
+RSpec.describe InspectionsController, type: :controller do  
+  let(:active_person) { create(:person, firstname: 'Aaon' ) }
+  let(:inactive_person) { create(:inactive_person, firstname: 'Aaby' ) }
   let(:item) { create(:item) }
   let!(:inspections) { create_list(:inspection, 3, item_id: item.id) }
   let(:inspection) { inspections.first }
@@ -25,13 +27,17 @@ RSpec.describe InspectionsController, type: :controller do
     end
   end
 
-  describe '#new' do
+  describe '#new' do    
     subject { get :new, item_id: item.id }
 
-    before { subject }
+    before { 
+      active_person
+      inactive_person
+      subject }
 
-    it 'sets the item' do
+    it 'sets the item and inspectors' do      
       expect(assigns[:item]).to eq(item)
+      expect(assigns[:inspectors]).to eq([active_person, item.owner]), "Should assign only active persons as inspectors"
     end
 
     it 'builds a new inspection for an item & renders' do
@@ -42,9 +48,12 @@ RSpec.describe InspectionsController, type: :controller do
 
   describe '#edit' do
     it 'assigns an inspection & renders' do
-      get :show, id: inspection.id
+      active_person
+      inspection.update_attribute(:person_id, inactive_person.id)
+      get :edit, id: inspection.id
 
       expect(assigns[:inspection]).to eq(inspection)
+      expect(assigns[:inspectors]).to eq([inactive_person, active_person, item.owner])
       expect(response).to be_success
     end
   end

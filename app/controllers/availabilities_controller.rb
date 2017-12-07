@@ -22,8 +22,8 @@ class AvailabilitiesController < ApplicationController
     @availability.person = person if person
 
     people = Person.active
-    people |= [person]
-    @people_collection = people.sort_by {|firstname, middleinitial, lastname| "#{firstname} #{middleinitial} #{lastname}"}.compact
+    people |= [person] if person
+    @people_collection = people.sort
   end
 
   def edit
@@ -70,6 +70,6 @@ class AvailabilitiesController < ApplicationController
       
       # Ensure person is included in @people_collection
       @people_collection |= [@availability.person] if @availability.person
-      @people_collection = @people_collection.sort_by {|firstname, middleinitial, lastname| "#{firstname} #{middleinitial} #{lastname}"}.compact
+      @people_collection = @people_collection.sort
     end
 end
