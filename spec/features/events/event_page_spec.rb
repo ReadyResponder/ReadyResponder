@@ -48,7 +48,7 @@ RSpec.feature 'Event page' do
         @medical_reserve = create(:department, name: 'Medical Reserve Dept.')
         @event = create(:event, departments: [@response_team, @medical_reserve],
                         start_time: 1.day.from_now, end_time: 3.days.from_now,
-                        min_title: Person::TITLE_ORDER.keys.first)
+                        min_title: Person::TITLE_ORDER.keys.last)
       end
 
       after(:each) do
@@ -60,7 +60,9 @@ RSpec.feature 'Event page' do
         title = create(:title)
         requirement = create(:requirement, task: task, title: title)
 
-        assigned_responder = create(:person, department: @response_team)
+        assigned_responder = create(:person, department: @response_team,
+                                    title_order: 1)
+
         create(:assignment, requirement: requirement, person: assigned_responder)
 
         visit event_path(@event)
@@ -138,7 +140,7 @@ RSpec.feature 'Event page' do
 
       scenario 'shows people that did not respond by department' do
         # Create an unresponsive person, someone with no associated availability
-        create(:person, department: @response_team, title_order: 30)
+        create(:person, department: @response_team, title_order: 3)
 
         visit event_path(@event)
 
