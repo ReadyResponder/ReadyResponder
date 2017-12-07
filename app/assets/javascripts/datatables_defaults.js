@@ -22,7 +22,7 @@ $(document).ready(function() {
   $("table.generic_datatable").dataTable();
 
   $(".accordion").accordion({
-   activate(event, ui) {
+   activate: function(event,ui) {
       $($.fn.dataTable.tables(true)).DataTable()
          .columns.adjust();
       }
