@@ -1,5 +1,7 @@
 class Event < ActiveRecord::Base
   has_paper_trail
+  include Loggable
+
   before_save :calc_duration, :trim_id_code
 
   validates_presence_of :category, :title, :status, :id_code,
