@@ -189,4 +189,17 @@ RSpec.describe Person do
   describe 'associations' do
     it { is_expected.to have_many(:comments) }
   end
+
+  describe 'sort' do
+    it 'sorts based on first_name, last_name and middleinitial accordingly' do
+      person1 = create(:person, firstname: 'Baily', lastname: 'joss') #6   
+      person2 = create(:person, firstname: 'AAA', lastname: 'Amose') #1
+      person3 = create(:person, firstname: 'Alex', lastname: 'Bane', middleinitial: 'Andy') #4
+      person4 = create(:person, firstname: 'Alex', lastname: 'Bane', middleinitial: 'Bndy') #5
+      person5 = create(:person, firstname: 'Agon', lastname: 'Jane', middleinitial: 'Sndy') #3
+      person6 = create(:person, firstname: 'aaon', lastname: 'Amose', middleinitial: 'Mndy') #2
+      
+      expect(Person.all.sort).to eq([person2, person6, person5, person3, person4, person1])
+    end
+  end
 end
