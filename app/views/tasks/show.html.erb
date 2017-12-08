@@ -35,7 +35,7 @@
   <div id="map" class="map" style="height:250px"></div>
   <div style="display: none;">
   <a class="overlay" id="task" target="_blank" href=""><%= @task.title %></a>
-  <div id="marker" title="Marker"></div>
+  <div id="marker" title="Marker"><%= image_tag "location.png" %></div>
 </div>
   <script type="text/javascript">
   var popup = new ol.Overlay({
@@ -45,7 +45,7 @@
     target: 'map',
     layers: [
       new ol.layer.Tile({
-        source: new ol.source.OSM()
+        source: new ol.source.OSM() 
       })
     ],
     view: new ol.View({
