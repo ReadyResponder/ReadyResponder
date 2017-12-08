@@ -4,11 +4,11 @@ class Event < ActiveRecord::Base
 
   before_save :calc_duration, :trim_id_code
 
-  validates_presence_of :category, :title, :status, :id_code
+  validates_presence_of :category, :title, :status, :id_code,
+                        :start_time, :end_time
+
   validates_uniqueness_of :title
   validates_uniqueness_of :id_code, unless: :expired?
-
-  validates_presence_of :start_time, :end_time
   validates_chronology :start_time, :end_time
 
   belongs_to :template, :class_name => "Event"
@@ -53,15 +53,15 @@ class Event < ActiveRecord::Base
   end
 
   def unavailabilities
-    responses.unavailable + partial_responses.unavailable
+    Availability.overlapping(start_time..end_time).active.unavailable
   end
 
   def unavailable_people
-    unavailabilities.map{|a| a.person}
+    Person.active.joins(:availabilities).merge(unavailabilities)
   end
 
   def partial_responses
-    Availability.partially_available(self.start_time..self.end_time).active
+    Availability.partially_overlapping(start_time..end_time).active
   end
 
   def partial_availabilities
@@ -69,11 +69,13 @@ class Event < ActiveRecord::Base
   end
 
   def partially_available_people
-    partial_availabilities.includes(:person).map{|a| a.person}.uniq
+    Person.active.joins(:availabilities).
+      merge(Availability.partially_overlapping(start_time..end_time).available)
   end
 
   def partial_responding_people
-    self.partial_responses.map { |a| a.person }
+    Person.active.joins(:availabilities).
+      merge(Availability.partially_overlapping(start_time..end_time))
   end
 
   def availabilities
@@ -81,23 +83,32 @@ class Event < ActiveRecord::Base
   end
 
   def available_people
-    responses.includes(:person).available.map{|a|a.person}.uniq
+    Person.active.joins(:availabilities).
+      merge(Availability.containing(start_time..end_time).available)
   end
 
   def responses
-    Availability.for_time_span(self.start_time..self.end_time).active
+    Availability.containing(start_time..end_time).active
   end
 
   def responding_people
-    self.responses.map { |a| a.person }
+    Person.active.joins(:availabilities).
+      merge(Availability.containing(start_time..end_time))
   end
 
   def eligible_people
-    Person.active.where(department: self.departments).where("title_order <= ?", Person::TITLE_ORDER[min_title])
+    Person.active.of_dept(departments).titled_equal_or_higher_than(min_title)
   end
 
+  # Building a single scope to fetch these records as a single relation is
+  # hard (we need people without availabilities, as well as people whose
+  # availabilities do not overlap the event's). Since using math operators on
+  # relations converts them to arrays, thus the choice to fetch the people ids
+  # and then build a new relation from those.
   def unresponsive_people
-    eligible_people - responding_people - partial_responding_people
+    people_ids = eligible_people.pluck(:id) - 
+      Person.active.joins(:availabilities).merge(Availability.overlapping(start_time..end_time)).pluck(:id)
+    Person.where(id: people_ids)
   end
 
   def manhours

@@ -28,16 +28,37 @@
   <% end %>
   (<%= format_time_span(@event.start_time, @event.end_time, @event.duration) %>)
 </p>
+
 <% if @event.description.present? %>
   <p><b>Description:</b> <%= @event.description %></p>
 <% end %>
+
 <p><b> Minimum Event Rank:</b> <%= @event.min_title %></p>
+
 <p><b>Code:</b> <%= @event.id_code %></p>
-<p><b>Departments:</b> <%= @event.departments.map { |d| d.name } %></p>
+
+<p><b>Departments:</b> <%= @event.departments.map { |d| d.name }.join(', ') %></p>
+
 <% if @event.category == "Training" %>
   <p><%= @event.course.blank? ? "Training" : @event.course.name %> by <%= @event.instructor %></p>
 <% end %>
-<%= display_event_status(@event) %>
+
+<p><%= event_status_label(@event) %></p>
+
+<table id="event-status" class="table table-nonfluid">
+  <thead><tr>
+    <td><strong>Department</strong></td>
+    <td><strong>Responses</strong></td>
+  </tr></thead>
+  <tbody>
+    <% @event.departments.each do |department| %>
+      <%= content_tag 'tr', id: "#{department.name.parameterize}-status" do %>
+        <td><%= department.name %></td>
+        <td><%= display_event_status_by_dept(@event, department) %></td>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
 
 <div class='event-tabs'>
   <ul class="nav nav-tabs">

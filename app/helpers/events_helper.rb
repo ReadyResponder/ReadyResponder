@@ -4,23 +4,20 @@ module EventsHelper
     make_label(event.status, event_label_class(event.status))
   end
 
-  def display_event_status(event)
-    assignees            = event.assignments.active.count.to_s
-    available            = event.availabilities.count.to_s
-    partially_available  = event.partial_availabilities.count.to_s
-    unavailable          = event.unavailabilities.count.to_s
-    no_response          = event.unresponsive_people.count.to_s
-    content_tag(:div) {
-      capture do
-        concat event_status_label(event)
-        concat content_tag(:span, 'Personnel:', class: 'event-labels')
-        concat make_label(assignees, 'label label-info event-labels', tooltip: 'Assigned to THIS Event')
-        concat make_label(available, 'label label-success event-labels', tooltip: 'Available')
-        concat make_label(partially_available, 'label label-warning event-labels', tooltip: 'Partially Available')
-        concat make_label(unavailable, 'label label-danger event-labels', tooltip: 'Unavailable')
-        concat make_label(no_response, 'label label-default event-labels', tooltip: 'No Response')
-      end
-    }
+  def display_event_status_by_dept(event, department)
+    assignees           = event.people.active.of_dept(department).count.to_s
+    available           = event.available_people.of_dept(department).count.to_s
+    partially_available = event.partially_available_people.of_dept(department).count.to_s
+    unavailable         = event.unavailable_people.of_dept(department).count.to_s
+    no_response         = event.unresponsive_people.of_dept(department).count.to_s
+
+    capture do
+      concat make_label(assignees, 'label label-info event-labels', tooltip: 'Assigned to THIS Event')
+      concat make_label(available, 'label label-success event-labels', tooltip: 'Available')
+      concat make_label(partially_available, 'label label-warning event-labels', tooltip: 'Partially Available')
+      concat make_label(unavailable, 'label label-danger event-labels', tooltip: 'Unavailable')
+      concat make_label(no_response, 'label label-default event-labels', tooltip: 'No Response')
+    end
   end
 
   def elapsed_time(timecard)
