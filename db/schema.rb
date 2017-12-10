@@ -25,12 +25,6 @@ ActiveRecord::Schema.define(version: 20171030083331) do
     t.datetime "updated_at"
   end
 
-  create_table "ar_internal_metadata", primary_key: "key", force: :cascade do |t|
-    t.string   "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "assignments", force: :cascade do |t|
     t.integer  "person_id"
     t.integer  "requirement_id"
@@ -164,7 +158,7 @@ ActiveRecord::Schema.define(version: 20171030083331) do
     t.string   "description"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.integer  "duration"
+    t.decimal  "duration",    precision: 7, scale: 2
     t.string   "category"
     t.string   "status"
     t.datetime "created_at"
@@ -173,7 +167,7 @@ ActiveRecord::Schema.define(version: 20171030083331) do
     t.text     "comments"
     t.string   "error_code"
     t.string   "id_code"
-    t.boolean  "is_template", default: false
+    t.boolean  "is_template",                         default: false
     t.integer  "template_id"
     t.string   "min_title"
   end
@@ -335,8 +329,6 @@ ActiveRecord::Schema.define(version: 20171030083331) do
     t.string   "subject"
     t.text     "body"
     t.string   "purpose"
-    t.string   "event_statuses"
-    t.string   "event_assigned"
     t.string   "id_code"
   end
 

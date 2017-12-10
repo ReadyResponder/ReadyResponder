@@ -1,3 +1,4 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/4.5.0/ol.js"></script>
 <% content_for :sidebar do %>
   <%= sidebar_button_link 'Return to Event', @task.event %>
   <%= sidebar_button_link 'Edit Task', edit_task_path(@task) if can? :edit, @task %>
@@ -29,6 +30,46 @@
 
 <% if @task.latitude.present? and @task.longitude.present? %>
   <p>(<%= @task.latitude %>, <%= @task.longitude %>)</p>
+<% end %>
+
+<% if @task.latitude.present? and @task.longitude.present? %>
+  <div id="map" class="map" style="height:250px"></div>
+  <div style="display: none;">
+  <a class="overlay" id="task" target="_blank" href=""><%= @task.title %></a>
+  <div id="marker" title="Marker"><%= image_tag "location.png" %></div>
+</div>
+  <script type="text/javascript">
+  var popup = new ol.Overlay({
+    element: document.getElementById('popup')
+  });
+  var map = new ol.Map({
+    target: 'map',
+    layers: [
+      new ol.layer.Tile({
+        source: new ol.source.OSM() 
+      })
+    ],
+    view: new ol.View({
+      center: ol.proj.fromLonLat([<%= @task.longitude %>, <%= @task.latitude %>]),
+      zoom: 16
+    })
+  });
+
+  var pos = ol.proj.fromLonLat([<%= @task.longitude %>, <%= @task.latitude %>]);
+
+  var marker = new ol.Overlay({
+    position: pos,
+    element: document.getElementById('marker'),
+    stopEvent: false
+  });
+  map.addOverlay(marker);
+
+  var task = new ol.Overlay({
+    position: pos,
+    element: document.getElementById('task')
+  });
+  map.addOverlay(task);
+</script>
 <% end %>
 
 <div class='task-tabs'>
