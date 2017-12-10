@@ -7,7 +7,7 @@
     } %>
 
     <%= f.input :status, as: :select, collection: Inspection::STATUS_CHOICES, selected: "Incomplete" %>
-    <%= f.input :person_id, as: :select, collection: Person.all, allow_blank: true, label: 'Inspector' %>
+    <%= f.input :person_id, as: :select, collection: @inspectors, allow_blank: true, label: 'Inspector' %>
     <%= f.input :comments %>
   </div>
 

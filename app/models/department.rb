@@ -1,5 +1,6 @@
 class Department < ActiveRecord::Base
   has_paper_trail
+  include Loggable
 
   serialize :division1, Array
   serialize :division2, Array

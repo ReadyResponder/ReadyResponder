@@ -15,6 +15,6 @@ scheduler.attachEvent("onTemplatesReady", function(){
 scheduler.init('index-event-scheduler', new Date(),"month");
 scheduler.load("events.json", "json");
 scheduler.attachEvent("onClick", function (id, e){
-       window.location.href = `events/${id}`;
+       window.location.href = "events/" + id;
        return true;
   });

@@ -1,5 +1,6 @@
 class ItemCategory < ActiveRecord::Base
   has_paper_trail
+  include Loggable
 
   has_many :item_types
 

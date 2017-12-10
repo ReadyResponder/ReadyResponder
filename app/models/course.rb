@@ -1,5 +1,6 @@
 class Course < ActiveRecord::Base
   has_paper_trail
+  include Loggable
 
   attr_accessible :category, :comments, :description, :duration, :status, :term, :name, :skill_ids
   has_many :certs
