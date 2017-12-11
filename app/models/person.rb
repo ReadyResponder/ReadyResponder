@@ -228,6 +228,10 @@ class Person < ActiveRecord::Base
     titles.include?(requirement.title) 
   end
 
+  def upcoming_events(count = 10)
+    self.department.events.limit(count)
+  end
+
   private
 
   def check_zipcode

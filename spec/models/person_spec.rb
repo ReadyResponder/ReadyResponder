@@ -232,4 +232,30 @@ RSpec.describe Person do
       end
     end
   end
+
+  describe 'upcoming_events' do
+    let(:department) { create :department }
+    let(:person) { create :person, department: department }
+    let(:e1) { create :event, departments: [department] }
+    let(:e2) { create :event, departments: [department] }
+    let(:e3) { create :event, departments: [department] }
+    let(:e4) { create :event, departments: [department] }
+    let(:e5) { create :event, departments: [department] }
+    let(:e6) { create :event, departments: [department] }
+    let(:e7) { create :event, departments: [department] }
+    let(:e8) { create :event, departments: [department] }
+    let(:e9) { create :event, departments: [department] }
+    let(:e10) { create :event, departments: [department] }
+    let(:e11) { create :event, departments: [department] }
+    let(:e12) { create :event, departments: [department] }
+
+    context 'should return events based on count' do       
+      it 'returns 10 events by default' do
+        expect(person.upcoming_events).to eq [e3, e4, e5, e6, e7, e8, e9, e10, e11, e12]        
+      end
+      it 'returns 7 events when the number is passed explictly' do
+        expect(person.upcoming_events(7)).to eq [e6, e7, e8, e9, e10, e11, e12]        
+      end      
+    end
+  end
 end
