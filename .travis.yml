@@ -4,6 +4,11 @@ env:
     - COVERAGE=true
 addons:
   postgresql: "9.4"
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
 services:
   - postgresql
 language: ruby
