@@ -158,7 +158,7 @@ ActiveRecord::Schema.define(version: 20171030083331) do
     t.string   "description"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.decimal  "duration",    precision: 7, scale: 2
+    t.decimal  "duration", precision: 7, scale: 2
     t.string   "category"
     t.string   "status"
     t.datetime "created_at"
@@ -167,7 +167,7 @@ ActiveRecord::Schema.define(version: 20171030083331) do
     t.text     "comments"
     t.string   "error_code"
     t.string   "id_code"
-    t.boolean  "is_template",                         default: false
+    t.boolean  "is_template", default: false
     t.integer  "template_id"
     t.string   "min_title"
   end
