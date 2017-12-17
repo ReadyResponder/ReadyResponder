@@ -229,7 +229,11 @@ class Person < ActiveRecord::Base
   end
 
   def upcoming_events(count = 10)
-    self.department.events.limit(count)
+    setting = Setting.find_or_create_upcoming_events_setting
+
+    upcoming_events_count = (setting.active? && setting.value.present?) ? setting.value : count
+
+    self.department.events.limit(upcoming_events_count)
   end
 
   private
