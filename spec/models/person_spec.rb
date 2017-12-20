@@ -261,7 +261,7 @@ RSpec.describe Person do
       end
 
       it 'uses existing setting' do
-        setting = Setting.create(:key => 'UPCOMING_EVENTS_COUNT', :value => 5, :category => 'Person', :status => 'Active')
+        Setting.create(:key => 'UPCOMING_EVENTS_COUNT', :value => 5, :category => 'Person', :status => 'Active')
 
         expect(person.upcoming_events).to eq [e8, e9, e10, e11, e12]        
       end
