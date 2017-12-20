@@ -147,6 +147,41 @@ class Event < ApplicationRecord
     return true
   end
 
+  def self.staffing_level
+    begin
+      relevant_events = self.current_or_next_events
+      event_staffing = relevant_events.map { |event| event.staffing_level }
+      event_staffing.min
+    rescue => e
+      puts e
+      -1
+    end
+  end
+
+  def self.current_or_next_events
+    current_events = self.current_events
+    events = current_events.empty? ? [self.next_event] : current_events
+  end
+
+  def self.current_events
+    self.where("start_time < ?", Time.now)
+        .where("end_time > ?", Time.now)
+  end
+
+  def self.next_event
+    next_event = self.where("start_time > ?", Time.now)
+        .order("start_time ASC")
+        .first
+    raise '---Error: There are no events---' unless next_event
+    next_event
+  end
+
+  def staffing_level
+    tasks = self.tasks
+    raise '---Error: Event has no tasks---' if tasks.empty?
+    tasks.map { |task| task.staffing_value }.min
+  end
+
 private
   def calc_duration #This is also used in timecards; it should be extracted out
      if !(start_time.blank?) and !(end_time.blank?)
