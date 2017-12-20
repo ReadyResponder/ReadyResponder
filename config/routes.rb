@@ -99,6 +99,10 @@ Rails.application.routes.draw do
 
   resources :assignments, except: [:new, :create], constraints: { id: /\d+/ }
 
+  namespace :api, defaults: {format: :json} do
+    get '/staffinglevel', to: 'alert#staffing_level'
+  end
+
   root "landing#index"
 
 end
