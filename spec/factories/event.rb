@@ -5,7 +5,6 @@ FactoryGirl.define do
     description "A good time was had by all"
     category "Training"
     status "Scheduled"
-    departments ["CERT"] # TODO: make deparments build actual department objects
     start_time Time.current
     end_time 23.hours.from_now
   end
