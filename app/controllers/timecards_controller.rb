@@ -74,4 +74,5 @@ class TimecardsController < ApplicationController
   def timecard_params
     params.require(:timecard).permit(:person_id, :start_time, :end_time, :duration, :comments, :error_code,
       :description, :status)
+  end
 end

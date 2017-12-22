@@ -55,11 +55,12 @@ private
     end
   end
 
+  # in hours
   def calc_duration
     if start_time.blank? or end_time.blank?
       self.duration = 0
     else
-      self.duration = ((end_time - start_time) / 1.hour).round(2) || 0
+      self.duration = ((end_time - start_time) / (3600)).round(2) || 0
     end
   end
 end
