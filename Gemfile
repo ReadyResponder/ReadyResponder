@@ -24,6 +24,7 @@ gem 'twilio-ruby',             '~> 4.11.1'
 #gem "taps"
 #gem 'validates_timeliness', '~> 3.0'
 gem 'devise'
+gem 'jbuilder'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-datetimepicker'
