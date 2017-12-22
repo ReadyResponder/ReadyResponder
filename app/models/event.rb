@@ -42,6 +42,14 @@ class Event < ApplicationRecord
 
   CATEGORY_CHOICES = ['Training', 'Patrol', 'Meeting', 'Admin', 'Event']
   STATUS_CHOICES = ['Scheduled', 'In-session', 'Completed', 'Cancelled', "Closed"]
+  STAFFING_LEVELS = {
+    500 => 'Error',
+    0 => 'Empty',
+    1 => 'Inadequate',
+    2 => 'Adequate',
+    3 => 'Satisfied',
+    4 => 'Full'
+  }
 
   def to_s
     title
@@ -150,12 +158,22 @@ class Event < ApplicationRecord
   def self.staffing_level
     begin
       relevant_events = self.current_or_next_events
-      event_staffing = relevant_events.map { |event| event.staffing_level }
-      event_staffing.min
+      event_staffings = relevant_events.map do |event| 
+        { staffing_number: event.staffing_level, 
+          staffing_percentage: event.staffing_percentage }
+      end
+      event_staffing = event_staffings.min_by { |staffing| staffing[:staffing_number] }
+      self.build_staffing_level(event_staffing[:staffing_number], event_staffing[:staffing_percentage])
     rescue => e
       puts e
-      -1
+      self.build_staffing_level(500, "NaN")
     end
+  end
+
+  def self.build_staffing_level(staffing_number, staffing_percentage)
+    { staffing_level_number: staffing_number,
+      staffing_level_name: STAFFING_LEVELS[staffing_number],
+      staffing_level_percentage: staffing_percentage }
   end
 
   def self.current_or_next_events
@@ -164,12 +182,14 @@ class Event < ApplicationRecord
   end
 
   def self.current_events
-    self.where("start_time < ?", Time.now)
+    self.where("status in (?)", ["Scheduled", "In-session"])
+        .where("start_time < ?", Time.now)
         .where("end_time > ?", Time.now)
   end
 
   def self.next_event
-    next_event = self.where("start_time > ?", Time.now)
+    next_event = self.where("status in (?)", ["Scheduled", "In-session"])
+        .where("start_time > ?", Time.now)
         .order("start_time ASC")
         .first
     raise '---Error: There are no events---' unless next_event
@@ -178,8 +198,14 @@ class Event < ApplicationRecord
 
   def staffing_level
     tasks = self.tasks
-    raise '---Error: Event has no tasks---' if tasks.empty?
-    tasks.map { |task| task.staffing_value }.min
+    return 0 if tasks.empty? # TODO: verify an event with no tasks should be considered empty.
+    @staffing_level_number = tasks.map { |task| task.staffing_value }.min
+  end
+
+  # TODO: update this once staffing % meaning is clarified.
+  def staffing_percentage
+    @staffing_level_number ||= self.staffing_level
+    @staffing_level_number * 20 + 20
   end
 
 private
