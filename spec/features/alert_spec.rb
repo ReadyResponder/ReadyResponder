@@ -14,10 +14,10 @@ require 'rails_helper'
 # Let's say I have a shelter event, with two tasks. Medical intake and parking. 
 # If medical intake were satisfied, but parking was empty, the event should be Empty.
 #
-# Event.staffing_level returns the worst case staffing level of all currently happening events
+# Event.staffing_level[:staffing_level_number] returns the worst case staffing level of all currently happening events
 # if there are no currently happening events it returns the staffing level of the next event to occur.
 # the method returns an integer 0-4 as follows: { 'Empty' => 0, 'Inadequate' => 1, 'Adequate' => 2, 'Satisfied' => 3, 'Full' => 4}
-# errors return -1
+# errors return 500
 
 RSpec.describe Event do
 
@@ -54,7 +54,7 @@ RSpec.describe Event do
       end
 
       it "returns 0 when at least 1 task is Empty" do
-        expect(Event.staffing_level).to eq(0)
+        expect(Event.staffing_level[:staffing_level_number]).to eq(0)
       end
 
       it "returns 1 when at least 1 task is Inadequate and no tasks are worse" do
@@ -62,7 +62,7 @@ RSpec.describe Event do
           person: person1,
           requirement: @requirement1
         })
-        expect(Event.staffing_level).to eq(1)
+        expect(Event.staffing_level[:staffing_level_number]).to eq(1)
       end
 
       it "returns 2 when at least 1 task is Adquate and no tasks are worse" do
@@ -72,7 +72,7 @@ RSpec.describe Event do
             requirement: @requirement1
           })
         end
-        expect(Event.staffing_level).to eq(2)
+        expect(Event.staffing_level[:staffing_level_number]).to eq(2)
       end
 
       it "returns 3 when at least 1 task is Satisfied and no tasks are worse" do
@@ -82,7 +82,7 @@ RSpec.describe Event do
             requirement: @requirement1
           })
         end
-        expect(Event.staffing_level).to eq(3)
+        expect(Event.staffing_level[:staffing_level_number]).to eq(3)
       end
 
       it "returns 4 when all tasks are Full" do
@@ -92,7 +92,7 @@ RSpec.describe Event do
             requirement: @requirement1
           })
         end
-        expect(Event.staffing_level).to eq(4)
+        expect(Event.staffing_level[:staffing_level_number]).to eq(4)
       end
 
       it "uses the worst case task if event has multiple tasks" do
@@ -119,7 +119,7 @@ RSpec.describe Event do
           person: person4,
           requirement: @requirement2
         })
-        expect(Event.staffing_level).to eq(1)
+        expect(Event.staffing_level[:staffing_level_number]).to eq(1)
       end
     end
 
@@ -178,7 +178,7 @@ RSpec.describe Event do
           })
         end
 
-        expect(Event.staffing_level).to eq(1)
+        expect(Event.staffing_level[:staffing_level_number]).to eq(1)
       end
     end
 
@@ -211,12 +211,12 @@ RSpec.describe Event do
             requirement: @requirement1
           })
         end
-        expect(Event.staffing_level).to eq(2)
+        expect(Event.staffing_level[:staffing_level_number]).to eq(2)
       end
     end
 
-    it "returns -1 on error" do
-      expect(Event.staffing_level).to eq(-1)
+    it "returns 500 on error" do
+      expect(Event.staffing_level[:staffing_level_number]).to eq(500)
     end
   end
 end
