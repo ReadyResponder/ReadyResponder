@@ -228,10 +228,8 @@ class Person < ActiveRecord::Base
     titles.include?(requirement.title) 
   end
 
-  def upcoming_events(count = 10)
-    setting = Setting.find_or_create_upcoming_events_setting
-
-    upcoming_events_count = (setting.active? && setting.value.present?) ? setting.value : count
+  def upcoming_events
+    upcoming_events_count = Setting.get_value('UPCOMING_EVENTS_COUNT', 10)
 
     self.department.events.limit(upcoming_events_count)
   end

@@ -14,14 +14,23 @@ RSpec.describe "Settings" do
     end
   end
 
-  describe "find_or_create_upcoming_events_setting" do
-    it 'creates upcomins events setting with defaults' do      
-      setting = Setting.find_or_create_upcoming_events_setting(:value => 5)
+  describe "get_value" do
+    it 'returns value in the setting if present' do 
+      Setting.create(:key => 'EVENTS_COUNT', :value => 10, :category => 'Person', :status => 'Active', :name => 'upcoming_events_count')       
+      expect(Setting.get_value('EVENTS_COUNT', 5)).to eq 10
+    end
 
-      expect(setting.status).to eq 'Active'
-      expect(setting.value).to eq '5'
-      expect(setting.category).to eq 'Person'
-      expect(setting.name).to eq 'Upcoming events count'
+    it 'returns fallback value if the setting is inactive' do 
+      Setting.create(:key => 'EVENTS', :value => 10, :category => 'Person', :status => 'Inactive', :name => 'upcoming_events_count')       
+      expect(Setting.get_value('EVENTS', 5)).to eq 5
+    end    
+
+    it 'returns fallback value if setting is not present' do      
+      expect(Setting.get_value('UNAVILABLE_EVENT', 5)).to eq 5
+    end
+
+    it 'returns nil when both setting and fallback value is not present' do      
+      expect(Setting.get_value('UNAVILABLE_EVENT')).to eq nil
     end
   end
 end

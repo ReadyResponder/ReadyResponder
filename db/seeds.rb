@@ -135,3 +135,13 @@ Setting.find_or_create_by(key: 'TIMECARD_MAXIMUM_HOURS') do |setting|
   setting.status = 'Active'
   setting.required = true
 end
+
+Setting.find_or_create_by(key: 'UPCOMING_EVENTS_COUNT') do |setting|
+  setting.name = 'Upcoming events count'
+  setting.description = 'No of upcoming events to be displayed'
+  setting.value = 10
+  setting.category = 'Person'
+  setting.status = 'Active'  
+  setting.required = true
+end
+

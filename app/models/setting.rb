@@ -18,17 +18,9 @@ class Setting < ActiveRecord::Base
     self.status == 'Active'
   end
 
-  def self.find_or_create_upcoming_events_setting(options = {})
-    find_or_create_with_defaults('UPCOMING_EVENTS_COUNT', {
-      :name => 'Upcoming events count',
-      :value => 10,
-      :category => 'Person',
-      :status => 'Active',
-      }.merge(options))
-  end
-
-  def self.find_or_create_with_defaults(key, options = {})
-    create_with(options).find_or_create_by!(:key => key)
+  def self.get_value(key, fallback_value = nil)    
+    value = get(key)
+    (Integer value rescue value) || fallback_value
   end
   
 end
