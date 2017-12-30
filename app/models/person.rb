@@ -229,7 +229,7 @@ class Person < ActiveRecord::Base
   end
 
   def upcoming_events
-    upcoming_events_count = Setting.get_value('UPCOMING_EVENTS_COUNT', 10)
+    upcoming_events_count = Setting.get_integer('UPCOMING_EVENTS_COUNT', 10)
 
     self.department.events.limit(upcoming_events_count)
   end

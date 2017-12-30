@@ -17,10 +17,13 @@ class Setting < ActiveRecord::Base
   def active?
     self.status == 'Active'
   end
-
-  def self.get_value(key, fallback_value = nil)    
+  
+  # this method should be used only for the settings that have integer values
+  # converts the given string to integer, if not possible returns nil.
+  def self.get_integer(key, fallback_value = nil)    
     value = get(key)
-    (Integer value rescue value) || fallback_value
-  end
+    (Integer(value) rescue nil) || fallback_value
+  end  
   
 end
+

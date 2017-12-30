@@ -14,23 +14,28 @@ RSpec.describe "Settings" do
     end
   end
 
-  describe "get_value" do
+  describe "get_integer" do
     it 'returns value in the setting if present' do 
       Setting.create(:key => 'EVENTS_COUNT', :value => 10, :category => 'Person', :status => 'Active', :name => 'upcoming_events_count')       
-      expect(Setting.get_value('EVENTS_COUNT', 5)).to eq 10
+      expect(Setting.get_integer('EVENTS_COUNT', 5)).to eq 10
     end
 
     it 'returns fallback value if the setting is inactive' do 
       Setting.create(:key => 'EVENTS', :value => 10, :category => 'Person', :status => 'Inactive', :name => 'upcoming_events_count')       
-      expect(Setting.get_value('EVENTS', 5)).to eq 5
-    end    
+      expect(Setting.get_integer('EVENTS', 5)).to eq 5
+    end  
+
+    it 'returns nil when the value cannot be converted to integer' do   
+      Setting.create(:key => 'EVENTS', :value => '10asdfasf', :category => 'Person', :status => 'Inactive', :name => 'upcoming_events_count')          
+      expect(Setting.get_integer('EVENTS')).to eq nil
+    end  
 
     it 'returns fallback value if setting is not present' do      
-      expect(Setting.get_value('UNAVILABLE_EVENT', 5)).to eq 5
+      expect(Setting.get_integer('UNAVILABLE_EVENT', 5)).to eq 5
     end
 
     it 'returns nil when both setting and fallback value is not present' do      
-      expect(Setting.get_value('UNAVILABLE_EVENT')).to eq nil
-    end
+      expect(Setting.get_integer('UNAVILABLE_EVENT')).to eq nil
+    end    
   end
 end
