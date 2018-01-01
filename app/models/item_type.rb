@@ -1,5 +1,6 @@
 class ItemType < ActiveRecord::Base
   has_paper_trail
+  include Loggable
 
   attr_accessible :is_a_group, :is_groupable, :name, :parent_id, :status,
     :description, :item_category_id, :item_type_image

@@ -1,6 +1,7 @@
 class Notification < ActiveRecord::Base
 #  serialize :departments, Array
   has_paper_trail
+  include Loggable
 
   has_and_belongs_to_many :departments
   belongs_to :event

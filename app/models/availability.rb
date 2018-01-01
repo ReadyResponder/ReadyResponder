@@ -1,5 +1,6 @@
 class Availability < ActiveRecord::Base
   has_paper_trail
+  include Loggable
 
   belongs_to :person
 
@@ -9,10 +10,6 @@ class Availability < ActiveRecord::Base
   validate :has_no_overlapping_availability
 
   STATUS_CHOICES = [ 'Available', 'Unavailable', "Cancelled" ]
-
-  # Available the entire event
-  scope :for_time_span, ->(range) { where("end_time >= ?", range.last).
-                               where("start_time <= ?", range.first) }
 
   # Available part of event
   scope :partially_available, ->(range) { where("? > end_time AND end_time > ? OR ? > start_time AND start_time > ?", range.last, range.first, range.last, range.first) }
@@ -29,6 +26,10 @@ class Availability < ActiveRecord::Base
   # reference: https://www.postgresql.org/docs/9.5/static/rangetypes.html
   scope :overlapping, lambda { |range|  
     where("tsrange(start_time, end_time, '[)') && tsrange(TIMESTAMP?, TIMESTAMP?, '[)')",
+          range.first, range.last) }
+
+  scope :not_overlapping, lambda { |range|  
+    where.not("tsrange(start_time, end_time, '[)') && tsrange(TIMESTAMP?, TIMESTAMP?, '[)')",
           range.first, range.last) }
 
   scope :partially_overlapping, lambda { |range|

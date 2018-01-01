@@ -19,10 +19,10 @@ RSpec.describe Availability, type: :model do
   end
 
   context 'validation' do
-    it { should validate_presence_of(:person) }
-    it { should validate_presence_of(:status) }
-    it { should validate_presence_of(:start_time) }
-    it { should validate_presence_of(:end_time) }
+    it { is_expected.to validate_presence_of(:person) }
+    it { is_expected.to validate_presence_of(:status) }
+    it { is_expected.to validate_presence_of(:start_time) }
+    it { is_expected.to validate_presence_of(:end_time) }
 
     it "requires end_time to be after start_time" do # chronology
       availability = build(:availability, person: a_person, start_time: Time.now, end_time: 2.minutes.ago)
@@ -124,6 +124,33 @@ RSpec.describe Availability, type: :model do
         date_range = first_availability.end_time..third_availability.start_time
         expect(described_class.overlapping(date_range)).not_to include(
           first_availability, third_availability)
+      end
+    end
+  end
+
+  context 'not_overlapping scope' do
+    it 'returns a chainable relation' do
+      expect(described_class.not_overlapping([0,1])).to be_a_kind_of(ActiveRecord::Relation)
+    end
+
+    context 'given 3 contiguous availabilities' do
+      let!(:first_availability)  { create(:availability, person: a_person,
+                                   start_time: 5.hours.ago, end_time: 3.hours.ago) }
+      let!(:second_availability) { create(:availability, person: a_person,
+                                   start_time: 3.hours.ago, end_time: 1.hour.ago) }
+      let!(:third_availability)  { create(:availability, person: a_person,
+                                   start_time: 1.hour.ago, end_time: 1.hour.from_now) }
+
+      it 'returns the availabilities whose duration does not overlap the given date_range' do
+        date_range = 5.hours.ago..2.hours.ago
+        expect(described_class.not_overlapping(date_range)).to contain_exactly(
+          third_availability)
+      end
+
+      it 'returns an availability that begins at the end of the given date_range' do
+        date_range = 7.hours.ago..1.hour.ago
+        expect(described_class.not_overlapping(date_range)).to contain_exactly(
+          third_availability)
       end
     end
   end

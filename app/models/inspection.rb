@@ -1,5 +1,6 @@
 class Inspection < ActiveRecord::Base
   has_paper_trail
+  include Loggable
 
   belongs_to :item
   belongs_to :person

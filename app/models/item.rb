@@ -1,5 +1,6 @@
 class Item < ActiveRecord::Base
   has_paper_trail
+  include Loggable
 
   attr_accessible :category, :description, :location_id, :qty,
                   :model, :brand, :name, :owner_id, :po_number,

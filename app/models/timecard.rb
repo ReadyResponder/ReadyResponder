@@ -1,5 +1,6 @@
 class Timecard < ActiveRecord::Base
   has_paper_trail
+  include Loggable
 
   before_save :calc_duration
   attr_accessible :start_time, :end_time, :status, :person_id, :description

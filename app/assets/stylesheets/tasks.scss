@@ -10,3 +10,14 @@
     margin-top: 10px;
   }
 }
+#marker {
+  width: 20px;
+  height: 20px;
+  padding-bottom: 5px;
+}
+#task {
+  padding-left: 20px;
+}
+#task:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}

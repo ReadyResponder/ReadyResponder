@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171027173957) do
+ActiveRecord::Schema.define(version: 20171030083331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,12 +23,6 @@ ActiveRecord::Schema.define(version: 20171027173957) do
     t.string   "loggable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "ar_internal_metadata", primary_key: "key", force: :cascade do |t|
-    t.string   "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "assignments", force: :cascade do |t|
@@ -164,7 +158,7 @@ ActiveRecord::Schema.define(version: 20171027173957) do
     t.string   "description"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.integer  "duration"
+    t.decimal  "duration", precision: 7, scale: 2
     t.string   "category"
     t.string   "status"
     t.datetime "created_at"
@@ -338,8 +332,6 @@ ActiveRecord::Schema.define(version: 20171027173957) do
     t.string   "subject"
     t.text     "body"
     t.string   "purpose"
-    t.string   "event_statuses"
-    t.string   "event_assigned"
     t.string   "id_code"
   end
 
@@ -502,6 +494,14 @@ ActiveRecord::Schema.define(version: 20171027173957) do
   end
 
   add_index "skills_titles", ["skill_id", "title_id"], name: "index_skills_titles_on_skill_id_and_title_id", using: :btree
+
+  create_table "system_activity_logs", force: :cascade do |t|
+    t.integer  "user_id"
+    t.text     "message",    null: false
+    t.string   "category",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "tasks", force: :cascade do |t|
     t.integer  "event_id"

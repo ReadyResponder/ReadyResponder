@@ -35,13 +35,14 @@ Department.create([
   {name: "Inactive Department", shortname: "inactive", status: "Inactive", division1: ["Division 1", "Division 2"], division2: ["Squad 1", "Squad 2"]},
   {name: "Police", shortname: "BAUX", status: "Active", division1: ["Division 1", "Division 2"], division2: ["Squad 1", "Squad 2"]}
   ])
-  cert = Department.create({name: "Community Emergency Response Team",
-                            shortname: "CERT",
-                            status: "Active",
-                            manage_people: true,
-                            manage_items: true,
-                            division1: ["Division 1", "Division 2"],
-                            division2: ["Squad 1", "Squad 2"]})
+
+cert = Department.create({name: "Community Emergency Response Team",
+                          shortname: "CERT",
+                          status: "Active",
+                          manage_people: true,
+                          manage_items: true,
+                          division1: ["Division 1", "Division 2"],
+                          division2: ["Squad 1", "Squad 2"]})
 mrc = Department.create({name: "Medical Reserve Corp",
                           shortname: "MRC",
                           status: "Active",
