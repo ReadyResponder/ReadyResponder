@@ -3,7 +3,7 @@
 
   <div class="form-inputs">
     <%= f.association :person,
-                collection: Person.active.where(:department => @requirement.event.departments).sort_by {|firstname, middleinitial, lastname| "#{firstname} #{middleinitial} #{lastname}"}.compact %>
+                collection: Person.active.where(:department => @requirement.event.departments).sort %>
     <%= f.input :start_time, as: :string, label: "Start Time",
                 input_html: { class: "datetimepicker", size: 11,
                               value: format_datetime_value(f.object.start_time) } %>

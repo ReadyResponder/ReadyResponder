@@ -1,5 +1,6 @@
 class Comment < ActiveRecord::Base
   has_paper_trail
+  include Loggable
 
   belongs_to :commentable, :polymorphic => true
 

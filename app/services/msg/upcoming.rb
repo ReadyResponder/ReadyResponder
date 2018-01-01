@@ -1,9 +1,8 @@
 class Msg::Upcoming < Msg::Base
   # method called with: @params (From: String, Body: String), @person (Person Object)
-  def respond
-    events = Event.upcoming.limit(10)
+  def respond    
     response = ""
-    @person.department.events.each do |event|
+    @person.upcoming_events.each do |event|
       if event.people.include?(@person)
         response += "🔷 "
       elsif event.available_people.include?(@person)

@@ -1,0 +1,25 @@
+<h3>System Activity Logs</h3>
+
+<%= render "log_filters" %>
+
+<table id="logs" class="datatable table table-striped table-bordered" >
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Category</th>
+      <th>Message</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @logs.each do |log| %>
+      <tr>
+        <td><%= log.user.fullname %></td>
+        <td><%= log.category %></td>
+        <td><%= log.message %></td>
+        <td><%= log.created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

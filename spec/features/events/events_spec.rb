@@ -12,64 +12,6 @@ RSpec.describe "Events" do
   # removed sidebar so disabling this test for now
   # get_basic_editor_views('event',['Training', 'Status'])
 
-  describe "search" do
-    it "finds current event", js: true do
-      @event_two = create(:event, title: "another event")
-      @event_three = create(:event, title: "different event")
-      visit events_path
-      fill_in "Search", with: "current title"
-      within_table("events") do
-      	within("tbody") do
-      	  expect(page).to have_content(@current.title)
-          expect(page).not_to have_content(@event_two.title)
-          expect(page).not_to have_content(@event_three.title)
-      	end
-      end
-    end
-
-    it "finds template event", js: true do
-      @event_two = create(:event, title: "another event", is_template: true)
-      @event_three = create(:event, title: "different event", is_template: true)
-      visit events_templates_path
-      fill_in "Search", with: "template title"
-      within_table("templates") do
-      	within("tbody") do
-      	  expect(page).to have_content(@template.title)
-          expect(page).not_to have_content(@event_two.title)
-          expect(page).not_to have_content(@event_three.title)
-      	end
-      end
-    end
-
-    it "finds archive event", js: true do
-      @event_two = create(:event, title: "another event")
-      @event_three = create(:event, title: "different event")
-      visit events_archives_path
-      fill_in "Search", with: "archive title"
-      within_table("archives") do
-      	within("tbody") do
-      	  expect(page).to have_content(@archive.title)
-          expect(page).not_to have_content(@event_two.title)
-          expect(page).not_to have_content(@event_three.title)
-      	end
-      end
-    end
-
-    it "finds no results", js: true do
-      visit events_archives_path
-      fill_in "Search", with: "this will not find anything"
-      within_table("archives") do
-      	within("tbody") do
-      	  expect(page).not_to have_content(@template.title)
-          expect(page).not_to have_content(@current.title)
-          expect(page).not_to have_content(@recent.title)
-          expect(page).not_to have_content(@archive.title)
-          expect(page).to have_content("No matching records found")
-      	end
-      end
-    end
-  end
-
   describe "creates" do
     it "events", js: true do
       @person1 = create(:person)
@@ -221,14 +163,6 @@ RSpec.describe "Events" do
           expect(page).to have_content(@completed.title)
           expect(page).not_to have_content(@template.title)
       	end
-      end
-    end
-
-    it "an edit form" do
-      @event = create(:event, :meeting, title: "Something divine")
-      visit edit_event_path(@event)
-      within("#sidebar") do
-        expect(page).to have_content("Cancel")
       end
     end
 

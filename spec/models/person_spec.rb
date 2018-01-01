@@ -189,4 +189,73 @@ RSpec.describe Person do
   describe 'associations' do
     it { is_expected.to have_many(:comments) }
   end
+
+  describe 'sort' do
+    it 'sorts based on first_name, last_name and middleinitial accordingly' do
+      person1 = create(:person, firstname: 'Baily', lastname: 'joss') #6   
+      person2 = create(:person, firstname: 'AAA', lastname: 'Amose') #1
+      person3 = create(:person, firstname: 'Alex', lastname: 'Bane', middleinitial: 'Andy') #4
+      person4 = create(:person, firstname: 'Alex', lastname: 'Bane', middleinitial: 'Bndy') #5
+      person5 = create(:person, firstname: 'Agon', lastname: 'Jane', middleinitial: 'Sndy') #3
+      person6 = create(:person, firstname: 'aaon', lastname: 'Amose', middleinitial: 'Mndy') #2
+      
+      expect(Person.all.sort).to eq([person2, person6, person5, person3, person4, person1])
+    end
+  end
+
+  context 'titled_equal_or_higher_than scope' do
+    it 'returns a chainable relation' do
+      expect(described_class.titled_equal_or_higher_than('a title'))
+        .to be_a_kind_of(ActiveRecord::Relation)
+    end
+
+    context 'given 3 people with different titles' do
+      let!(:person_1) { create(:person, title_order: 1) }
+      let!(:person_2) { create(:person, title_order: 2) }
+      let!(:person_3) { create(:person, title_order: 3) }
+
+      let(:title_order) { { 'title a' => 1, 'title b' => 2,
+                            'title c' => 3, 'title d' => 4 } }
+      let(:default_title_order) { 5 }
+
+      it 'returns the ones titled higher than or equal to the given title' do
+        stub_const('Person::TITLE_ORDER', title_order)
+        expect(described_class.titled_equal_or_higher_than('title b'))
+          .to contain_exactly(person_1, person_2)
+      end
+
+      it 'returns all people titled higher than the default title order '\
+         'when an invalid title is given' do
+        stub_const('Person::DEFAULT_TITLE_ORDER', default_title_order)
+        expect(described_class.titled_equal_or_higher_than('no title'))
+          .to contain_exactly(person_1, person_2, person_3)
+      end
+    end
+  end
+
+  describe 'upcoming_events' do
+    let(:department) { create :department }
+    let(:person) { create :person, department: department }
+    let(:e1) { create :event, departments: [department] }
+    let(:e2) { create :event, departments: [department] }
+    let(:e3) { create :event, departments: [department] }
+    let(:e4) { create :event, departments: [department] }
+    let(:e5) { create :event, departments: [department] }
+    let(:e6) { create :event, departments: [department] }
+    let(:e7) { create :event, departments: [department] }
+    let(:e8) { create :event, departments: [department] }
+    let(:e9) { create :event, departments: [department] }
+    let(:e10) { create :event, departments: [department] }
+    let(:e11) { create :event, departments: [department] }
+    let(:e12) { create :event, departments: [department] }
+
+    context 'should return events based on count' do       
+      it 'returns 10 events by default' do
+        expect(person.upcoming_events).to eq [e3, e4, e5, e6, e7, e8, e9, e10, e11, e12]        
+      end
+      it 'returns 7 events when the number is passed explictly' do
+        expect(person.upcoming_events(7)).to eq [e6, e7, e8, e9, e10, e11, e12]        
+      end      
+    end
+  end
 end
