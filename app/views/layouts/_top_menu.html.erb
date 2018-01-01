@@ -18,6 +18,7 @@
             <ul class="split-dropdown dropdown-menu">
               <%= nav_link "Applicants", applicants_people_path %>
               <%= nav_link "Inactive", inactive_people_path %>
+              <%= nav_link "Vendors", vendors_path if can? :read, Vendor %>
               <%= nav_link "Everybody", everybody_people_path %>
             </ul>
           </li>
@@ -39,10 +40,6 @@
 
           <li>
             <%= nav_link "Inventory", item_categories_path if can? :read, Item %>
-          </li>
-
-          <li>
-            <%= nav_link "Vendors", vendors_path if can? :read, Vendor %>
           </li>
 
           <li class="dropdown">
