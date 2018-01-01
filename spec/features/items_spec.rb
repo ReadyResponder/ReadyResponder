@@ -12,6 +12,7 @@ RSpec.describe Item do
 
   it "a new item form with appropriate fields" do
     visit new_item_type_item_path(item_type)
+    binding.pry
     fill_in('item_model', :with => 'Model T')
     expect(find_field('item_status').value).to have_content('Unassigned')
   end

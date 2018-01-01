@@ -5,7 +5,7 @@
   <div class="form-inputs">
     <%= f.association :vendor, label: "Vendor ", collection: Vendor.order("name") %>
 
-    <%= link_to ("Add a New Vendor", new_vendor_path(next: request.path)) if can?(:create, Vendor) %>
+    <%= link_to("Add a New Vendor", new_vendor_path(next: request.path)) if can?(:create, Vendor) %>
 
     <%= f.association :department, collection: Department.managing_items.order(:name) %>
     <%= f.association :location, :collection => Department.all, :as => :grouped_select, :group_method => :locations %>
