@@ -37,6 +37,17 @@ RSpec.describe "Inspection" do
     end
   end
 
+  context "on item index" do
+    let(:an_item) { create(:item, item_type_id: 1) }
+    let!(:an_inspection) { create(:inspection, item: an_item, inspection_date: 1.day.ago) }
+    let!(:an_older_inspection) { create(:inspection, item: an_item, inspection_date: 2.days.ago) }
+    it "should show last inspection date" do
+      visit item_type_path(an_item.item_type_id)
+      expect(page).to have_content(an_inspection.inspection_date)
+      expect(page).not_to have_content(an_older_inspection.inspection_date)
+    end
+  end
+
   context "from an item" do
     let!(:item)  { create(:item) }
     it "should create an inspection for that item" do
