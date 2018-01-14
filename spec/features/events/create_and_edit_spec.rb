@@ -8,11 +8,12 @@ RSpec.feature 'Event creation and edition', js: true do
 
     scenario 'I can click on the "+" link to access a form where I can create a new event' do
       visit events_path
-      
+      page.execute_script "window.scrollBy(0,1500)"
+
       within 'table caption' do
         click_link '+'
       end
-      
+
       fill_in 'Title', with: 'Some event'
       select 'Meeting', from: 'event_category'
       select 'Completed', from: 'event_status'
@@ -21,7 +22,7 @@ RSpec.feature 'Event creation and edition', js: true do
       fill_in 'End Time', with: 4.hours.from_now.strftime('%Y-%m-%d %rH:%M')
       # This moves the cursor out from the Time selector, clearing the popup
       # so selenium can then click on create
-      fill_in 'Id code', with: 'event03' 
+      fill_in 'Id code', with: 'event03'
       click_on 'Create'
 
       expect(page).to have_content 'Event was successfully created'
@@ -33,6 +34,7 @@ RSpec.feature 'Event creation and edition', js: true do
       event = create(:event, status: 'In-session', start_time: 1.hour.from_now, end_time: 3.hours.from_now)
 
       visit events_path
+      page.execute_script "window.scrollBy(0,1500)"
       within 'table#events tbody tr' do
         click_link 'Edit'
       end
@@ -43,6 +45,7 @@ RSpec.feature 'Event creation and edition', js: true do
       end
 
       fill_in 'Title', with: 'A new smashing title!'
+      page.execute_script "window.scrollBy(0,1500)"
       click_on 'Update'
 
       expect(page).to have_content 'Event was successfully updated'
@@ -50,4 +53,3 @@ RSpec.feature 'Event creation and edition', js: true do
     end
   end
 end
-
