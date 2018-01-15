@@ -53,7 +53,7 @@ RSpec.describe "a user" do
 
     it "can edit people" do
       visit people_path
-      within_table("people") do
+      within_table("index-people") do
         expect(page).to have_content("Active")
         expect(page).to have_content('Edit') # Need to scope this, or it will fail on Edith
       end
