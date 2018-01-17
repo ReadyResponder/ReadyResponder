@@ -14,7 +14,7 @@ jQuery ->
               ]
 
   # initialize people dataTables()
-  $peopleTable = $('#people').dataTable(tableOptions);
+  $peopleTable = $('#index-people').dataTable(tableOptions);
   $everybodyTable = $('#everybody').dataTable(tableOptions);
   $inactiveTable = $('#inactive').dataTable(tableOptions);
 
@@ -22,7 +22,7 @@ jQuery ->
   # dept checkbox filters rendered in shared
   $.fn.dataTableExt.afnFiltering.push((settings, data) ->
     # add table ID to array if you would like it to be included in filtering
-    allowedTables = ['people', 'everybody', 'inactive'];
+    allowedTables = ['index-people', 'everybody', 'inactive'];
     if ( $.inArray( settings.nTable.getAttribute('id'), allowedTables ) == -1 )
        # if not table should be ignored
        return true;
@@ -47,7 +47,7 @@ jQuery ->
 #logic handling internal checkboxes to dataTable()
   $.fn.dataTableExt.afnFiltering.push((settings, data) ->
     # add table ID to array if you would like it to be included in filtering
-    allowedTables = ['people'];
+    allowedTables = ['index-people'];
     if ( $.inArray( settings.nTable.getAttribute('id'), allowedTables ) == -1 )
        # if not table should be ignored
        return true;
