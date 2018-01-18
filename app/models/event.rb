@@ -106,7 +106,7 @@ class Event < ActiveRecord::Base
   # relations converts them to arrays, thus the choice to fetch the people ids
   # and then build a new relation from those.
   def unresponsive_people
-    people_ids = eligible_people.pluck(:id) - 
+    people_ids = eligible_people.pluck(:id) -
       Person.active.joins(:availabilities).merge(Availability.overlapping(start_time..end_time)).pluck(:id)
     Person.where(id: people_ids)
   end
@@ -139,7 +139,6 @@ class Event < ActiveRecord::Base
       new_task = template_task.dup
       new_task.start_time = start_time
       new_task.end_time = end_time
-      new_task.save
       self.tasks << new_task
       template_task.requirements.each do |req|
         logger.info ">>>>> Duplicating #{template_task.title} requirement #{req}"
