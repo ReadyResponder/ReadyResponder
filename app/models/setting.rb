@@ -22,7 +22,7 @@ class Setting < ActiveRecord::Base
   # converts the given string to integer, if not possible returns nil.
   def self.get_integer(key, fallback_value = nil)    
     value = get(key)
-    (Integer(value) rescue nil) || fallback_value
+    Integer(value) rescue fallback_value
   end  
   
 end
