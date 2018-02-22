@@ -22,7 +22,6 @@ class NotificationsController < ApplicationController
     @notification.subject += "for #{@event.title} [#{@event.id_code}] "
     @notification.subject += "from #{start_time_display} to #{end_time_display}"
     # @statuses = @notification.available_statuses
-    @statuses = ["Active"]
     @notification.status = "Active"
   end
 
@@ -67,6 +66,7 @@ class NotificationsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
 
     def set_form_values
+      @statuses = ["Active"]
       @event = params[:event_id].present? ? Event.find(params[:event_id]) : @notification.event
       @dept_choices = @event ? @event.departments.managing_people : Department.managing_people
       @purpose_choices = [["Request for Availability", "Availability"],

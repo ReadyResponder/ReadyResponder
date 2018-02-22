@@ -36,6 +36,20 @@ RSpec.describe "Notifications" do
           expect(page).to have_content "Notification was successfully created."
         end
       end
+      it "should display errors if form not filled out correctly" do
+        allow_any_instance_of(Notification).to receive(:activate!).and_return(nil)
+        allow_any_instance_of(Notification).to receive(:event).and_return(event)
+        visit event_path(event)
+        click_on 'New Notification'
+        fill_in 'Subject', with: "Please respond"
+        select 'Active', :from => 'Status'
+        click_on 'Create Notification'
+        expect(page).to have_content "All recipients can't be blank"
+        #verifies form fields are still valid after errors 
+        fill_in 'Subject', with: "Please respond"
+        select 'Active', :from => 'Status'
+        check 'Valid Dept'
+      end
     end
   end
 end

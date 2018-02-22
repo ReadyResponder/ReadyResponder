@@ -55,7 +55,7 @@ class Person < ActiveRecord::Base
   scope :squad1, -> { order("title_order, start_date ASC").where( division2: "Squad 1", status: "Active" ) }
   scope :squad2, -> { order("title_order, start_date ASC").where( division2: "Squad 2", status: "Active" ) }
   scope :of_dept, -> (department) { where(department: department) }
-  
+
   scope :titled_equal_or_higher_than, lambda { |title|
     where('title_order <= ?',
           Person::TITLE_ORDER.fetch(title, DEFAULT_TITLE_ORDER))
@@ -134,7 +134,7 @@ class Person < ActiveRecord::Base
   end
 
   def responded?(target)
-    return false if !target.respond_to?(:start_time) || !target.respond_to?(:end_time)
+    return false if !target.respond_to?(:start_time) || !target.respond_to?(:end_time) || self.availabilities.empty?
     self.availabilities.for_time_span(target.start_time..target.end_time).count > 0
   end
 
@@ -225,7 +225,7 @@ class Person < ActiveRecord::Base
   end
 
   def meets?(requirement)
-    titles.include?(requirement.title) 
+    titles.include?(requirement.title)
   end
 
   def upcoming_events(count = 10)

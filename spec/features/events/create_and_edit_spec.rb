@@ -13,7 +13,7 @@ RSpec.feature 'Event creation and edition', js: true do
       within 'table caption' do
         click_link '+'
       end
-
+      page.execute_script "window.scrollBy(0,1500)"
       fill_in 'Title', with: 'Some event'
       select 'Meeting', from: 'event_category'
       select 'Completed', from: 'event_status'
