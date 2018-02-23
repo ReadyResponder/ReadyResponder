@@ -31,5 +31,19 @@ RSpec.describe Notification do
         expect(notification).to be_valid
       end
     end
+    context 'id code' do
+      it 'accepts only unique id codes' do
+        notification_one = create(:notification, departments: [build(:department)], id_code: 1)
+        expect(notification_one).to be_valid
+        notification_two = build(:notification, departments: [build(:department)], id_code: 1)
+        expect{notification_two.save!}.to raise_error(ActiveRecord::RecordInvalid, 'Validation failed: Id code has already been taken')
+      end
+      it 'allows blanks' do
+        notification = build(:notification, departments: [build(:department)])
+        notification.id_code = nil
+        notification.save!
+        expect(notification).to be_valid
+      end
+    end
   end
 end
