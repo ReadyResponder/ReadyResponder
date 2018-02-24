@@ -13,13 +13,13 @@ RSpec.feature 'Event creation and edition', js: true do
       within 'table caption' do
         click_link '+'
       end
-      page.execute_script "window.scrollBy(0,1500)"
+
       fill_in 'Title', with: 'Some event'
       select 'Meeting', from: 'event_category'
       select 'Completed', from: 'event_status'
       fill_in 'Description', with: 'Really Long Text...'
-      fill_in 'Start Time', with: 2.hours.from_now.strftime('%Y-%m-%d %rH:%M')
-      fill_in 'End Time', with: 4.hours.from_now.strftime('%Y-%m-%d %rH:%M')
+      fill_in 'Start Time', with: 2.hours.from_now.strftime('%Y-%m-%d %H:%M')
+      fill_in 'End Time', with: 4.hours.from_now.strftime('%Y-%m-%d %H:%M')
       # This moves the cursor out from the Time selector, clearing the popup
       # so selenium can then click on create
       fill_in 'Id code', with: 'event03'
