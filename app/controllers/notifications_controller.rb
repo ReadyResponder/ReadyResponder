@@ -17,8 +17,8 @@ class NotificationsController < ApplicationController
   def new
     if @event.present?
       @notification = @event.notifications.new
-      start_time_display = @event.start_time.strftime('%a %b %d %k:%M')
-      end_time_display = @event.end_time.strftime('%a %b %d %k:%M')
+      @event.start_time.strftime('%a %b %d %k:%M')
+      @event.end_time.strftime('%a %b %d %k:%M')
     else
       @notification = Notification.new
     end
