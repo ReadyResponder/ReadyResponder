@@ -75,4 +75,6 @@ jQuery ->
       $('#event_end_time').datetimepicker('setOptions', {startDate: eventStartTime})
 
 $(document).ready ->
-  $("#js-events-current-checkbox").prop('checked', true)
+  $("#js-events-current-checkbox").prop('checked', false)
+  $("#js-events-current-checkbox").click()
+  
