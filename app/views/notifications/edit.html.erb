@@ -1,7 +1,10 @@
 <% content_for :sidebar do %>
   <h1>Editing Notification</h1>
-  <%= sidebar_button_link 'Cancel', notifications_path %>
+  <%= sidebar_button_link 'Cancel', :back %>
 <% end %>
 
-
-<%= render 'form' %>
+<% if @event.present? %>
+  <%= render 'event_form' %>
+<% else %>
+  <%= render 'form' %>
+<% end %>

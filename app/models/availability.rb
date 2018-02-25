@@ -24,11 +24,11 @@ class Availability < ActiveRecord::Base
   # on its range data type implementation. The ranges are left_bound closed
   # and right_bound open, as specified by the argument '[)'
   # reference: https://www.postgresql.org/docs/9.5/static/rangetypes.html
-  scope :overlapping, lambda { |range|  
+  scope :overlapping, lambda { |range|
     where("tsrange(start_time, end_time, '[)') && tsrange(TIMESTAMP?, TIMESTAMP?, '[)')",
           range.first, range.last) }
 
-  scope :not_overlapping, lambda { |range|  
+  scope :not_overlapping, lambda { |range|
     where.not("tsrange(start_time, end_time, '[)') && tsrange(TIMESTAMP?, TIMESTAMP?, '[)')",
           range.first, range.last) }
 
@@ -44,6 +44,10 @@ class Availability < ActiveRecord::Base
   scope :contained_in, lambda { |range|
     where("tsrange(start_time, end_time, '[)') <@ tsrange(TIMESTAMP?, TIMESTAMP?, '[)')",
           range.first, range.last) }
+
+  scope :for_time_span, lambda { |range|
+    where("end_time >= ?", range.last).
+    where("start_time <= ?", range.first) }
 
   def to_s
     "Recorded #{status}\n start #{start_time} \n end #{end_time} \n description #{description}"

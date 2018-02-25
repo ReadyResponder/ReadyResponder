@@ -13,11 +13,28 @@ RSpec.describe "Notifications" do
         expect(page).to have_content("Howdy")
       end
     end
-    context "from an event" do
+    context "create a notification" do
       let!(:valid_department)  { create(:department, manage_people: true, name: 'Valid Dept') }
       let!(:invalid_department)  { create(:department, manage_people: false, name: 'Invalid Dept') }
       let!(:event)  { create(:event, departments: [valid_department]) }
-      it "should create a notification for that event" do
+      it "can create a notification without event" do
+        allow_any_instance_of(Notification).to receive(:activate!).and_return(nil)
+        visit notifications_path
+
+        click_link '+'
+        within(".form-inputs") do
+          expect(page).not_to have_content('Event')
+        end
+        fill_in 'Subject', with: "Please respond"
+        select 'Active', :from => 'Status'
+        check 'Valid Dept'
+        click_on 'Create Notification'
+        within("#flash_notice") do
+          expect(page).to have_content "Notification was successfully created."
+        end
+        expect(page.current_path).to eq notification_path(Notification.last.id)
+      end
+      it "can create a notification from that event" do
         allow_any_instance_of(Notification).to receive(:activate!).and_return(nil)
         allow_any_instance_of(Notification).to receive(:event).and_return(event)
         visit event_path(event)
@@ -26,6 +43,9 @@ RSpec.describe "Notifications" do
           expect(page).to have_content('New Notification')
         end
         click_on 'New Notification'
+        within(".form-inputs") do
+          expect(page).to have_content('Event')
+        end
         expect(page).to have_content('Valid Dept')
         expect(page).to_not have_content('Invalid Dept')
         fill_in 'Subject', with: "Please respond"
@@ -35,6 +55,7 @@ RSpec.describe "Notifications" do
         within("#flash_notice") do
           expect(page).to have_content "Notification was successfully created."
         end
+        expect(page.current_path).to eq event_path(event)
       end
       it "should display errors if form not filled out correctly" do
         allow_any_instance_of(Notification).to receive(:activate!).and_return(nil)
@@ -45,7 +66,7 @@ RSpec.describe "Notifications" do
         select 'Active', :from => 'Status'
         click_on 'Create Notification'
         expect(page).to have_content "All recipients can't be blank"
-        #verifies form fields are still valid after errors 
+        #verifies form fields are still valid after errors
         fill_in 'Subject', with: "Please respond"
         select 'Active', :from => 'Status'
         check 'Valid Dept'

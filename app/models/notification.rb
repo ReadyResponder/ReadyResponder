@@ -33,10 +33,12 @@ class Notification < ActiveRecord::Base
   end
 
   def start_time
+    return nil if self.event.nil?
     self.event.start_time
   end
 
   def end_time
+    return nil if self.event.nil?
     self.event.end_time
   end
 
