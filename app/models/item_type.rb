@@ -9,6 +9,8 @@ class ItemType < ActiveRecord::Base
 
   belongs_to :item_category
   has_many :items
+  has_many :taggings, :as => :taggable
+  has_many :tags, :through => :taggings
 
   validates_presence_of :item_category_id, :status, :name
 
