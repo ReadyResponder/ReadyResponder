@@ -1,5 +1,5 @@
 <h3 class="data-table-title"><%= @page_title%></h3>
-<% if can? :create, Event %>
+<% if can? :create, Notification %>
   <a role="button" class='js-create-notification add-btn btn' href='<%= new_notification_path %>'><p>+</p></a>
 <% end %>
 <%= render(partial: 'notifications/notifications_table', locals: { notifications: @notifications }) %>
