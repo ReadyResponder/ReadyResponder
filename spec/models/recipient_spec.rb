@@ -14,17 +14,19 @@ RSpec.describe Recipient, type: :model do
     let(:twilio) { Message::SendNotificationTextMessage.new }
     let(:recipient) { create(:recipient) }
 
-    context "when twilio returns error" do 
+    context "when twilio returns error" do
       before do
         allow(twilio).to receive(:sms_send) { Twilio::REST::RequestError.new("oops") }
       end
 
       it "creates message w error status" do
+        pending "See issue 649"
         recipient.notify! twilio
         expect(recipient.messages.first.status).to eq("error")
       end
 
       it "persists error in message body" do
+        pending "See issue 649"
         recipient.notify! twilio
         expect(recipient.messages.first.body).to eq("oops")
       end
@@ -35,16 +37,17 @@ RSpec.describe Recipient, type: :model do
         allow(twilio).to receive(:sms_send) { instance_double("Twilio::Response", status: "sent", body: "success") }
       end
 
-      it "creates message w sent status" do 
+      it "creates message w sent status" do
+        pending "See issue 649"
         recipient.notify! twilio
         expect(recipient.messages.first.status).to eq("sent")
       end
 
-      it "persists response in message body" do 
+      it "persists response in message body" do
+        pending "See issue 649"
         recipient.notify! twilio
         expect(recipient.messages.first.body).to eq("success")
       end
     end
   end
-
 end

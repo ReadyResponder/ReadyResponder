@@ -1,6 +1,7 @@
 # ReadyResponder
 
 **Project Build Status:** [![Build Status](https://api.travis-ci.org/ReadyResponder/ReadyResponder.svg?branch=development)](https://travis-ci.org/ReadyResponder/ReadyResponder) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/2155146098fe428d9f6e11951f5ed75a)](https://www.codacy.com/app/kfallon/ReadyResponder?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ReadyResponder/ReadyResponder&amp;utm_campaign=Badge_Grade) [![Code Climate](https://codeclimate.com/github/ReadyResponder/ReadyResponder/badges/gpa.svg)](https://codeclimate.com/github/ReadyResponder/ReadyResponder)
+[![Open Source Helpers](https://www.codetriage.com/readyresponder/readyresponder/badges/users.svg)](https://www.codetriage.com/readyresponder/readyresponder)
 
 ### This application aids volunteer organizations to manage personnel, equipment, and scheduling.
 
