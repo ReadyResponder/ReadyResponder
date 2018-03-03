@@ -1,6 +1,5 @@
-<% content_for :sidebar do %>
-  <h4>Create a notification <br/>from an Event</h4>
-  <%#= sidebar_button_link 'New Notification', new_notification_path %>
+<h3 class="data-table-title"><%= @page_title%></h3>
+<% if can? :create, Notification %>
+  <a role="button" class='js-create-notification add-btn btn' href='<%= new_notification_path %>'><p>+</p></a>
 <% end %>
-
-<%= render(partial: 'notifications/notifications_table', locals: { notifications: @notifications, title: @page_title }) %>
+<%= render(partial: 'notifications/notifications_table', locals: { notifications: @notifications }) %>
