@@ -228,8 +228,10 @@ class Person < ActiveRecord::Base
     titles.include?(requirement.title)
   end
 
-  def upcoming_events(count = 10)
-    self.department.events.limit(count)
+  def upcoming_events
+    upcoming_events_count = Setting.get_integer('UPCOMING_EVENTS_COUNT', 10)
+
+    self.department.events.limit(upcoming_events_count)
   end
 
   private

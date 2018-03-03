@@ -245,17 +245,25 @@ RSpec.describe Person do
     let(:e7) { create :event, departments: [department] }
     let(:e8) { create :event, departments: [department] }
     let(:e9) { create :event, departments: [department] }
-    let(:e10) { create :event, departments: [department] }
-    let(:e11) { create :event, departments: [department] }
-    let(:e12) { create :event, departments: [department] }
+    let(:e10) { create :event, departments: [department] }    
+    Setting.where(:key => 'UPCOMING_EVENTS_COUNT').destroy_all
+    let(:setting) { Setting.find_or_create_by(:key => 'UPCOMING_EVENTS_COUNT', :value => 5, :category => 'Person', :status => 'Active', :name => 'upcoming_events_count') }
 
-    context 'should return events based on count' do       
-      it 'returns 10 events by default' do
-        expect(person.upcoming_events).to eq [e3, e4, e5, e6, e7, e8, e9, e10, e11, e12]        
+    context 'with settings' do    
+      it 'returns count from setting' do        
+        expect(person.upcoming_events).to eq [e6, e7, e8, e9, e10]        
       end
-      it 'returns 7 events when the number is passed explictly' do
-        expect(person.upcoming_events(7)).to eq [e6, e7, e8, e9, e10, e11, e12]        
-      end      
+    end
+
+    context 'without settings' do
+      it 'uses fallback value when setting is not available' do        
+        setting.destroy
+        expect(person.upcoming_events).to eq [e1, e2, e3, e4, e5, e6, e7, e8, e9, e10]        
+      end
+      it 'returns fallback value when setting is inactive' do
+        setting.update_attribute(:status, 'Inactive')
+        expect(person.upcoming_events).to eq [e1, e2, e3, e4, e5, e6, e7, e8, e9, e10]        
+      end            
     end
   end
 end
