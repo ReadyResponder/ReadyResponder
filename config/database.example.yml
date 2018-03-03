@@ -3,8 +3,8 @@ development:
   encoding: unicode
   database: lims_development
   pool: 5
-  username: matt
-  password: B00thbay
+  username: <%= ENV['matt'] %>
+  password: <%= ENV['B00thbay'] %>
   min_messages: WARNING
   template: template0  #template0 resolves an issue with SQL_ASCII vs UTF-8 encoding
   host: localhost
