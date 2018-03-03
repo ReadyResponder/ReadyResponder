@@ -168,22 +168,36 @@ class Person < ActiveRecord::Base
       age
   end
 
-  def skilled?(skill_name)
-    skill = Skill.find_by_name(skill_name)
-    if skill.blank?
-      false
-    else
-      self.skills.include?(skill)
-    end
+  def skilled?(skill)
+    return false if skill.blank?
+    skill = Skill.find_by_name(skill) if skill.is_a? String
+    self.skills.include?(skill)
   end
 
-  def qualified?(title_name)
-    title = Title.find_by_name(title_name)
+  def qualified?(title)
+    title = Title.find_by_name(title) if title.is_a? String
     if title
       (title.skills - self.skills).empty?  # then true
     else
       false
     end
+  end
+
+  def titled?(title)
+    titles.include? title
+  end
+  def titled_and_qualified?(title)
+    titled?(title) && qualified?(title)
+  end
+
+  # returns true if this person has ANY of the
+  # supplied titles or skills
+  def has_any_of_titles_or_skills?(titles_and_skills)
+    titles_and_skills.each do | ts |
+      return true if ts.is_a?(Title) && titled_and_qualified?(ts)
+      return true if ts.is_a?(Skill) && skilled?(ts)
+    end
+    false
   end
 
   def missing_skills(title)

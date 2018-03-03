@@ -117,6 +117,145 @@ RSpec.describe Person do
     end
   end
 
+  describe 'titled?' do
+    it 'should return true if the person has the title' do
+      title = build(:title)
+      person = build(:person, titles: [title])
+      expect(person.titled?(title)).to be true
+    end
+    it "should return false if the person doesn't have the title" do
+      title = build(:title)
+      person = build(:person, titles: [])
+      expect(person.titled?(title)).to be false
+    end
+    it "should return false if a nil title is passed in" do
+      title = build(:title)
+      person = build(:person, titles: [title])
+      expect(person.titled?(nil)).to be false
+    end
+  end
+  describe 'skilled?' do
+    it 'should work with the name of the skill' do
+      person = build(:person)
+      skill1 = create(:skill)
+      allow(person).to(receive(:skills).and_return([skill1]))
+      expect(person.skilled?(skill1.name)).to be true
+    end
+    it 'should return true if the person has the skill' do
+      person = build(:person)
+      skill1 = create(:skill)
+      skill2 = create(:skill)
+      allow(person).to(receive(:skills).and_return([skill1, skill2]))
+      expect(person.skilled?(skill2)).to be true
+    end
+    it "should return false if the person has only different skills" do
+      person = build(:person)
+      skill1 = create(:skill)
+      skill2 = create(:skill)
+      allow(person).to(receive(:skills).and_return([skill1]))
+      expect(person.skilled?(skill2)).to be false
+
+    end
+    it "should return false if the person has no skills" do
+      person = build(:person)
+      skill2 = create(:skill)
+      expect(person.skilled?(skill2)).to be false
+    end
+    it "should return false if the skill passed in is nil" do
+      person = build(:person)
+      expect(person.skilled?(nil)).to be false
+    end
+    it "should return false if the skill passed in is empty string" do
+      person = build(:person)
+      expect(person.skilled?('')).to be false
+    end
+  end
+  describe 'qualified?' do
+    it 'should work with the name of the title' do
+      title = create(:title)
+      person = build(:person, titles: [title])
+      expect(person.qualified?(title.name)).to be true
+
+    end
+    it "should return false if they already have the title but not skills" do
+      skill1 = create(:skill)
+      skill2 = create(:skill)
+      title = create(:title, skills: [skill1, skill2])
+      person = build(:person, titles: [title])
+      expect(person.qualified?(title)).to be false
+    end
+    it "should return true if they have all the skills for the title" do
+      person = build(:person)
+      skill1 = create(:skill)
+      skill2 = create(:skill)
+      title = create(:title, skills: [skill1, skill2])
+      allow(person).to(receive(:skills).and_return([skill1, skill2]))
+      expect(person.qualified?(title)).to be true
+    end
+    it "should return false if they don't have all the skills for the title" do
+      person = build(:person)
+      skill1 = create(:skill)
+      skill2 = create(:skill)
+      title = create(:title, skills: [skill1, skill2])
+      allow(person).to(receive(:skills).and_return([skill1]))
+      expect(person.qualified?(title)).to be false
+
+    end
+    it "should return false if the title passed in is nil" do
+      person = build(:person)
+      expect(person.qualified?(nil)).to be false
+    end
+    it "should return false if the title passed in is empty string" do
+      person = build(:person)
+      expect(person.qualified?('')).to be false
+    end
+  end
+  describe 'titled_and_qualified?' do
+    it 'should return true if you are titled and qualified' do
+      person = build(:person)
+      title = build(:title)
+      allow(person).to(receive(:titled?).and_return(true))
+      allow(person).to(receive(:qualified?).and_return(true))
+      expect(person.titled_and_qualified?(title)).to be true
+    end
+    it 'should return false if you are titled but not qualified' do
+      person = build(:person)
+      title = build(:title)
+      allow(person).to(receive(:titled?).and_return(true))
+      allow(person).to(receive(:qualified?).and_return(false))
+      expect(person.titled_and_qualified?(title)).to be false
+
+    end
+    it 'should return false if you are qualified but not titled' do
+      person = build(:person)
+      title = build(:title)
+      allow(person).to(receive(:titled?).and_return(false))
+      allow(person).to(receive(:qualified?).and_return(true))
+      expect(person.titled_and_qualified?(title)).to be false
+
+    end
+  end
+  describe 'has_any_of_title_or_skills?' do
+    it "returns true if the person has a matching title" do
+      title = create(:title)
+      person = build(:person, titles: [title])
+      expect(person.has_any_of_titles_or_skills?([title])).to be true
+    end
+    it "returns true if the person has a matching skill" do
+      person = build(:person)
+      skill = create(:skill)
+      allow(person).to(receive(:skills).and_return([skill]))
+      expect(person.has_any_of_titles_or_skills?([skill])).to be true
+    end
+
+    it "returns false if the person has no matching title or skill" do
+      person = build(:person)
+      skill = create(:skill)
+      title = create(:title)
+      expect(person.has_any_of_titles_or_skills?([skill, title])).to be false
+
+    end
+  end
   describe 'skills' do
     subject { create :person }
     let(:evoc_course) { create :course, skills: [skill] }
