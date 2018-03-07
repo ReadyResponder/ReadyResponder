@@ -13,6 +13,7 @@
       <th>Staffing Filled (of desired)</th>
       <th>Minimum</th>
       <th>Maximum</th>
+      <th>Auto-Assign</th>
       <th>Optional</th>
       <th>Floating</th>
       <th></th>
@@ -29,6 +30,7 @@
         <td><%= requirement.minimum_people %></td>
         <td><%= requirement.maximum_people %></td>
         <td><%= requirement.optional ? "Yes" : "No" %></td>
+        <td><%= requirement.auto_assign ? "Yes" : "No" %></td>
         <td><%= requirement.floating ? "Yes" : "No" %></td>
         <td><%= table_button_link 'Edit', edit_requirement_path(requirement) if can? :edit, requirement %></td>
       </tr>
