@@ -7,14 +7,14 @@ jQuery ->
                 ## https://datatables.net/extensions/responsive/priority
                 { responsivePriority: 1, targets: [1, 3, 7] },
                 { visible: false, targets: [0, 2, 4]  },
-                { orderData: 1, targets: 1 }
-                { orderData: 3, targets: 3 }
-                { orderData: 5, targets: 5 }
+                { orderData: 0, targets: 1 }
+                { orderData: 2, targets: 3 }
+                { orderData: 4, targets: 5 }
                 { orderable: false, targets: -1 }
               ]
 
   # initialize people dataTables()
-  $peopleTable = $('#people').dataTable(tableOptions);
+  $peopleTable = $('#index-people').dataTable(tableOptions);
   $everybodyTable = $('#everybody').dataTable(tableOptions);
   $inactiveTable = $('#inactive').dataTable(tableOptions);
 
@@ -22,7 +22,7 @@ jQuery ->
   # dept checkbox filters rendered in shared
   $.fn.dataTableExt.afnFiltering.push((settings, data) ->
     # add table ID to array if you would like it to be included in filtering
-    allowedTables = ['people', 'everybody', 'inactive'];
+    allowedTables = ['index-people', 'everybody', 'inactive'];
     if ( $.inArray( settings.nTable.getAttribute('id'), allowedTables ) == -1 )
        # if not table should be ignored
        return true;
@@ -47,7 +47,7 @@ jQuery ->
 #logic handling internal checkboxes to dataTable()
   $.fn.dataTableExt.afnFiltering.push((settings, data) ->
     # add table ID to array if you would like it to be included in filtering
-    allowedTables = ['people'];
+    allowedTables = ['index-people'];
     if ( $.inArray( settings.nTable.getAttribute('id'), allowedTables ) == -1 )
        # if not table should be ignored
        return true;
@@ -99,4 +99,5 @@ jQuery ->
         });
 
   $(document).ready ->
+    $("#js-people-active-checkbox").prop('checked', false)
     $("#js-people-active-checkbox").click()

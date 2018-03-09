@@ -7,6 +7,7 @@
       <th>Status</th>
       <th>Condition</th>
       <th>Location</th>
+      <th>Last Inspection</th>
       <th></th>
     </tr>
   </thead>
@@ -19,6 +20,7 @@
         <td><%= item_status_label(item) %></td>
         <td><%= item_condition_label(item) %></td>
         <td><%= item.location.name if item.location %></td>
+        <td><%= item.last_inspection_date %></td>
         <td><%= table_button_link 'Edit', edit_item_path(item) unless cannot? :edit, item %></td>
       </tr>
     <% end %>

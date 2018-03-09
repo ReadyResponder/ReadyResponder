@@ -74,7 +74,8 @@ RSpec.feature 'Events filtering', js: true do
 
       scenario 'I can filter the set by current and/or recent events' do
         visit events_path
-
+        page.execute_script "window.scrollBy(0,1500)"
+        
         check   'js-events-current-checkbox'
         uncheck 'js-events-recent-checkbox'
 
@@ -103,7 +104,7 @@ RSpec.feature 'Events filtering', js: true do
           expect(page).to have_content @recent_event.title
           expect(page).not_to have_content @past_event.title
           expect(page).not_to have_content @template_event.title
-        end 
+        end
 
         uncheck 'js-events-current-checkbox'
         uncheck 'js-events-recent-checkbox'

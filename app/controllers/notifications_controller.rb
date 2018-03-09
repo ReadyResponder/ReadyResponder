@@ -15,14 +15,15 @@ class NotificationsController < ApplicationController
   end
 
   def new
-    @notification = @event.notifications.new
-    start_time_display = @event.start_time.strftime('%a %b %d %k:%M')
-    end_time_display = @event.end_time.strftime('%a %b %d %k:%M')
+    if @event.present?
+      @notification = @event.notifications.new
+      @event.start_time.strftime('%a %b %d %k:%M')
+      @event.end_time.strftime('%a %b %d %k:%M')
+    else
+      @notification = Notification.new
+    end
     @notification.subject = "Please provide availability "
-    @notification.subject += "for #{@event.title} [#{@event.id_code}] "
-    @notification.subject += "from #{start_time_display} to #{end_time_display}"
     # @statuses = @notification.available_statuses
-    @statuses = ["Active"]
     @notification.status = "Active"
   end
 
@@ -41,7 +42,7 @@ class NotificationsController < ApplicationController
           return render :new
         end
       end
-      redirect_to @notification.event, notice: 'Notification was successfully created.'
+      redirect_to @notification.event || @notification, notice: 'Notification was successfully created.'
     else
       render :new
     end
@@ -52,7 +53,7 @@ class NotificationsController < ApplicationController
       if @notification.status == "Active"
         @notification.activate!
       end
-      redirect_to @notification.event, notice: 'Notification was successfully updated.'
+      redirect_to @notification.event || @notification, notice: 'Notification was successfully updated.'
     else
       render :edit
     end
@@ -67,6 +68,7 @@ class NotificationsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
 
     def set_form_values
+      @statuses = ["Active"]
       @event = params[:event_id].present? ? Event.find(params[:event_id]) : @notification.event
       @dept_choices = @event ? @event.departments.managing_people : Department.managing_people
       @purpose_choices = [["Request for Availability", "Availability"],

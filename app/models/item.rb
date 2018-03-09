@@ -38,7 +38,7 @@ class Item < ActiveRecord::Base
            reject_if: :all_blank
 
   STATUS_CHOICES = ['Assigned', 'Unassigned', 'Retired']
-  CONDITION_CHOICES = ['Ready', 'In-Service - Maintenance', 
+  CONDITION_CHOICES = ['Ready', 'In-Service - Maintenance',
                        'In-Service - Degraded', 'Out of Service']
 
   def to_s
@@ -52,6 +52,10 @@ class Item < ActiveRecord::Base
   def location_name
     return location.name if location
     "Unknown"
+  end
+
+  def last_inspection_date
+    inspections.order('inspection_date DESC').first.inspection_date
   end
 
   def set_repair_condition

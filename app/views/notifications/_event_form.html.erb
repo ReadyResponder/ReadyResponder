@@ -1,7 +1,12 @@
 <%= simple_form_for(@notification) do |f| %>
+  <h3><%= "#{@event.title} [#{@event.id_code}] "  %></h3>
+  <h4>(<%= format_time_span(@event.start_time, @event.end_time, @event.duration) %>)</h4>
   <%= f.error_notification %>
 
   <div class="form-inputs">
+    <%= f.association :event,
+                      collection: Event.upcoming + [@event],
+                      include_blank: false %>
     <%= f.input :subject, :hint => "Used for text messages" %>
     <%#= f.input :body, :hint => "Not used for text messages" %>
     <%= f.input :purpose, as: :select, collection: @purpose_choices,

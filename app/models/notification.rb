@@ -22,7 +22,7 @@ class Notification < ActiveRecord::Base
   validates :status, inclusion: { in: VALID_STATUSES }
   validate :notification_has_at_least_one_recipient
   validates_presence_of :subject
-  validates_uniqueness_of :id_code, unless: :expired?
+  validates :id_code, presence: true, allow_blank: true, uniqueness: true
 
   def available_statuses
     if status
@@ -33,10 +33,12 @@ class Notification < ActiveRecord::Base
   end
 
   def start_time
+    return nil if self.event.nil?
     self.event.start_time
   end
 
   def end_time
+    return nil if self.event.nil?
     self.event.end_time
   end
 
@@ -73,9 +75,11 @@ private
     end
   end
 
-  def expired?
-    Notification.where(id_code: id_code)
-      .select { |notification| notification.end_time > 6.months.ago }.empty?
-  end
+  # possible future validation
+  # def expired?
+  #   return false if id_code.present?
+  #   Notification.where(id_code: id_code)
+  #     .select { |notification| notification.end_time > 6.months.ago }.empty?
+  # end
 
 end
