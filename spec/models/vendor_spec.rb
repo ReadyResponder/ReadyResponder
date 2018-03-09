@@ -7,6 +7,7 @@ RSpec.describe Vendor, type: :model do
 
   describe "validations" do
     it { is_expected.to validate_presence_of(:name) }
+    
     it "is not valid without a name" do
       subject.name = "testing"
       expect(subject).to be_valid

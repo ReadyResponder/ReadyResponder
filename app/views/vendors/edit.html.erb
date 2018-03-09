@@ -1,11 +1,13 @@
-<h1> Add a Vendor </h1>
+<h1> Edit <%= @vendor.name  %> </h1>
 <%= simple_form_for @vendor do |f| %>
 <%= f.error_notification %>
 
   <%= hidden_field_tag :next, params[:next] %>
 
   <%= f.input :name %>
-  <%= f.hidden_field :status, value: "Active" =%>
+  <%= f.label :status %>
+  <br>
+  <%= f.select :status, ["Active", "Inactive"] =%>
   <%= f.input :street %>
   <%= f.input :city %>
   <%= f.input :state %>

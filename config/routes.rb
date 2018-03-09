@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     resources :item_types
   end
 
-  resources :vendors, only: [:index, :show, :new, :create]
+  resources :vendors
 
   resources :people do
     collection do
