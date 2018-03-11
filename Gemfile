@@ -3,9 +3,9 @@ source 'https://rubygems.org'
 gem 'rails', '~> 4.2.10'
 
 gem 'rack'
-gem 'ransack'
+gem 'ransack', '~> 1.8.6'
 gem 'carrierwave'
-gem "pg", "~> 0.17.0"
+gem "pg", "~> 0.21"
 gem 'rmagick', '~> 2.15.4'
 gem 'simple_form'
 gem 'redcarpet'
@@ -38,7 +38,7 @@ gem 'cocoon'
 
 group :test, :development do
   gem 'thin'
-  gem "rspec-rails"
+  gem "rspec-rails", '~> 3.7'
   # gem 'rspec-activemodel-mocks' # TODO: remove if we no longer need mock_model or stub_model
   gem "factory_girl_rails"
   gem "capybara"
