@@ -14,7 +14,7 @@
   </thead>
   <tbody>
       <!-- Full available -->
-    <% (availabilities + partial_availabilities).each do |a| %>
+    <% availabilities.each do |a| %>
       <tr <%== availability_status_class(a, @event) %>>
         <td><%= Person::TITLE_ORDER[a.person.title] %></td>
         <td><%= link_to availability_status_label(a, @event), a %></td>
