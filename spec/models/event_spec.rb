@@ -118,4 +118,54 @@ RSpec.describe Event do
       end
     end
   end
+
+  context "partial response" do
+    let (:start_time){ 1.day.from_now }
+    let (:end_time){2.days.from_now }
+    let (:p1){create(:person)}
+    let (:p2){create(:person)}
+    let (:p3){create(:person)}
+    let (:a1){create(:availability, person: p1,
+                 start_time: start_time - 1.hour, end_time: end_time - 1.hour)}
+    let (:a2){create(:availability, person: p1,
+                 start_time: start_time + 1.hour, end_time: end_time + 1.hour)}
+    let (:a3){create(:availability, person: p1,
+                 start_time: start_time + 1.hour, end_time: end_time - 1.hour)}
+    let (:a4){create(:availability, person: p1,
+                 start_time: start_time , end_time: end_time )}
+    let (:a5){create(:availability, person: p1,
+                     start_time: start_time - 1.hour, end_time: end_time + 1.hour)}
+    let (:a6){create(:availability, person: p1,
+                     start_time: start_time - 2.hour, end_time: start_time - 1.hour)}
+    let (:a7){create(:availability, person: p1,
+                     start_time: end_time + 1.hour, end_time: end_time + 2.hour)}
+
+    let(:event){create(:event, status: "Scheduled",
+                     start_time: start_time, end_time: end_time)}
+    it "should include partial responses that are < start_time and < end time" do
+      expect(event.partial_responses).to include(a1)
+    end
+
+    it "should include partial responses that are > start time and < end time" do
+      expect(event.partial_responses).to include(a3)
+    end
+
+    it "should include partial responses that are > start time and > end time" do
+      expect(event.partial_responses).to include(a2)
+    end
+
+    it "should not include responses that are = start_time and = end_time" do
+      expect(event.partial_responses).not_to include(a4)
+    end
+    it "should not include responses that are < start_time and > end_time" do
+      expect(event.partial_responses).not_to include(a5)
+    end
+    it "should not include responses that are entirely before start_time" do
+      expect(event.partial_responses).not_to include(a6)
+    end
+    it "should not include responses that are entirely after end_time" do
+      expect(event.partial_responses).not_to include(a7)
+    end
+
+  end
 end
