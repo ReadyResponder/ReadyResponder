@@ -93,7 +93,7 @@ class Event < ActiveRecord::Base
   end
 
   def responses
-    Availability.containing(start_time..end_time).active
+    Availability.containing(start_time..end_time).active.order(:status, :start_time)
   end
 
   def responding_people
