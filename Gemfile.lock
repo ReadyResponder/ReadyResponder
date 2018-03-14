@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/gwshaw/noisy_partials.git
+  remote: https://github.com/gwshaw/noisy_partials.git
   revision: 9e7110bb400cd7d366adc706d7ce0934cfd3c0eb
   specs:
     noisy_partials (0.0.0)
