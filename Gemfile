@@ -74,7 +74,7 @@ group :development do
 
   # Helps you figure out where a piece of the UI is coming from by
   # adding comments to the source code at the begin and end of each template.
-  gem 'noisy_partials', git: 'git://github.com/gwshaw/noisy_partials.git'
+  gem 'noisy_partials', git: 'https://github.com/gwshaw/noisy_partials.git'
 end
 
 group :production do
