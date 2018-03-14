@@ -1,13 +1,13 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.2.7'
+gem 'rails', '~> 4.2.7', '>= 4.2.7.1'
 
 gem 'rack'
-gem 'ransack'
+gem 'ransack', '>= 1.8.2'
 gem 'carrierwave'
 gem "pg", "~> 0.17.0"
 gem 'rmagick', '~> 2.15.4'
-gem 'simple_form'
+gem 'simple_form', '>= 3.3.1'
 gem 'redcarpet'
 gem 'geocoder'
 gem 'cancancan'
@@ -18,7 +18,7 @@ gem 'rqrcode'
 gem 'vcardigan'
 
 gem 'therubyracer'
-gem 'jquery-turbolinks'
+gem 'jquery-turbolinks', '>= 2.1.0'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-datetimepicker'
@@ -28,7 +28,7 @@ end
 gem 'twilio-ruby', '~> 4.11.1'
 
 #Handles authentication
-gem 'devise', '~> 3.0'
+gem 'devise', '~> 3.5', '>= 3.5.10'
 
 # For model versioning
 gem 'paper_trail'
@@ -38,10 +38,10 @@ gem 'cocoon'
 
 group :test, :development do
   gem 'thin'
-  gem "rspec-rails"
+  gem "rspec-rails", ">= 3.5.2"
   # gem 'rspec-activemodel-mocks' # TODO: remove if we no longer need mock_model or stub_model
-  gem "factory_girl_rails"
-  gem "capybara"
+  gem "factory_girl_rails", ">= 4.7.0"
+  gem "capybara", ">= 2.8.1"
   # Use selenium and chrome for handling JS automated testing
   gem 'selenium-webdriver'
   gem 'chromedriver-helper', '1.0.0'
@@ -52,7 +52,7 @@ group :test, :development do
   gem "letter_opener"
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'meta_request'
+  gem 'meta_request', '>= 0.4.0'
   gem 'database_cleaner', '1.0.1'
   gem 'test-unit'
   gem 'pry'
@@ -63,7 +63,7 @@ end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 3.0'
+  gem 'web-console', '~> 3.3', '>= 3.3.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
@@ -90,15 +90,15 @@ group :test do
   gem 'timecop'
 end
 
-gem 'sass-rails'
+gem 'sass-rails', '>= 5.0.6'
 gem 'uglifier', '>= 1.0.3'
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails'
+gem 'coffee-rails', '>= 4.2.1'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+gem 'jquery-rails', '>= 4.2.1'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -114,7 +114,7 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 # # This is used by Capistrano, but 2.8 has issues
 # gem "net-ssh", "~> 2.7.0"
 
-gem 'jquery-ui-rails'
+gem 'jquery-ui-rails', '>= 5.0.5'
 gem 'bootstrap-sass', '3.3.7'
 # gem 'chosen-rails'
 
