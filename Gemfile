@@ -47,7 +47,6 @@ group :test, :development do
   gem 'chromedriver-helper', '1.0.0'
   gem "guard-rspec", require: false
   gem 'guard-livereload'
-  gem "mailcatcher"
   gem "launchy"
   gem "letter_opener"
   gem 'better_errors'
