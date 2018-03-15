@@ -10,16 +10,13 @@ class Requirement < ActiveRecord::Base
   delegate :event, :to => :task
 
   validates :task, presence: true
-
-  # validates :skill, presence: title.blank?
-  # validates :title, presence: skill.blank?
-  validate  :valid_title_or_skill
-  # ^^^ guarantees one or the other has been set (not both)
-
   validates :minimum_people, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :maximum_people, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :desired_people, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+
   validate :valid_people_numbers
+  validate :valid_title_or_skill
+
 
   STATUS_CHOICES_ARRAY = ['Empty', 'Inadequate', 'Adequate', 'Satisfied', 'Full']
   STATUS_CHOICES = STATUS_CHOICES_ARRAY.map.with_index { |v, i| [v, i] }.to_h
@@ -80,25 +77,25 @@ class Requirement < ActiveRecord::Base
     def valid_people_numbers
       if (minimum_people.present? and maximum_people.present? and desired_people.present?)
         if maximum_people < minimum_people
-          errors.add(:maximum_people, "must be greater-than or equal to 'minumum_people")
+          errors.add :maximum_people, "must be greater than or equal to 'minimum_people'"
         end
         if desired_people < minimum_people
-          errors.add(:desired_people, "must be greater-than or equal to 'minumum_people")
+          errors.add :desired_people, "must be greater than or equal to 'minimum_people'"
         end
         if desired_people > maximum_people
-          errors.add(:desired_people, "must be less-than or equal to 'maxumum_people")
+          errors.add :desired_people, "must be less than or equal to 'maximum_people'"
         end
       end
     end
 
     def valid_title_or_skill
       if title.blank? && skill.blank?
-        errors.add(:title, "must have a title or a skill")
-        errors.add(:skill, "must have a title or a skill")
+        errors.add :title, "a requirement must have either a title or a skill"
+        errors.add :skill, "a requirement must have either a title or a skill"
       end
       if title.present? && skill.present?
-        errors.add(:title, "must have only a title or a skill")
-        errors.add(:skill, "must have only a title or a skill")
+        errors.add :title, "a requirement can't have both a title and a skill"
+        errors.add :skill, "a requirement can't have both a title and a skill"
       end
     end
 end
