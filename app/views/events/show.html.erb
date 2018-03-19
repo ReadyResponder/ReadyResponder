@@ -75,14 +75,13 @@
     <div class="tab-pane" id="event-availability-tab">
       <div id="event_availabilities" >
         <%= render(:partial => "availabilities/availabilities_table",
-                   :locals => { :availabilities => ( @event.responses +
-                                Assignment.active.for_time_span(@event.start_time..@event.end_time)),
-                                :partial_availabilities => ( @event.partial_responses)} ) \
-                                 || "No Availabilities yet !" %>
+                   :locals => { :availabilities => @responses_and_assignments })
+        %>
 
         <%= render(partial: "people/people_table",
                    locals: { people: @event.unresponsive_people,
-                             title: "No Response" }) || "Everyone Responded !" %>
+                             title: "No Response" })
+        %>
       </div>
     </div>
     <div class="tab-pane" id="event-notification-tab">
