@@ -19,6 +19,8 @@ class EventsController < ApplicationController
 
   def show
     @timecards = Timecard.active.overlapping_time(@event.start_time..@event.end_time)
+    @responses_and_assignments = ( @event.responses +
+       Assignment.active.for_time_span(@event.start_time..@event.end_time)).to_a
     @page_title = @event.title
     @last_editor = last_editor(@event)
   end
