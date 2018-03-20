@@ -23,6 +23,9 @@
 # Ignore database settings
 /config/database.yml
 
+# Ignore dotenv configuration
+.env
+
 # Ignore rspec profiling data
 /spec/examples.txt
 

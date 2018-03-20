@@ -37,6 +37,7 @@ gem 'paper_trail'
 gem 'cocoon'
 
 group :test, :development do
+  gem 'dotenv-rails'
   gem 'thin'
   gem "rspec-rails"
   # gem 'rspec-activemodel-mocks' # TODO: remove if we no longer need mock_model or stub_model
