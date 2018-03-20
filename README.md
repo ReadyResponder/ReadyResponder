@@ -14,10 +14,11 @@ The goal of Ready Responder is to offer volunteer groups a program that allows t
 * Web-based user interface, available from both desktop and mobile
 * Tracks complete data of personnel, including attendance, responsiveness, and training
 * Tracks equipment, including serial numbers, sources, grants, and service records
+* Contacts members via SMS to alert them
+* Produces QR Codes of people to allow easier addition into a cell phone
 
 ## Upcoming Features
 
-* Will produce QR Codes of people to allow easier addition into a cell phone
 * Will produce QR code to allow people to sign up for events
 * Will contact members via email, SMS and VOIP to alert them
 
@@ -35,7 +36,6 @@ Things you'll need to install before running ReadyResponder locally are:
 * Ruby Programming Language
 * The `bundler` gem
 * PostgreSQL (version 9) database
-* SQLite (a dependency of the [mailcatcher gem](https://github.com/sj26/mailcatcher))
 * ImageMagick (a dependency of the rmagick gem, used to process images)
 
 For **ruby**, you can find a detailed list of options on the [official Ruby website](
@@ -69,12 +69,6 @@ Install PostgreSQL
 $ brew install postgres
 ```
 
-Install SQLite:
-
-```shell
-$ brew install sqlite
-```
-
 Install ImageMagick
 
 ```shell
@@ -89,12 +83,6 @@ Install PostgreSQL
 
 ```shell
 $ apt-get install postgresql libpq-dev
-```
-
-Install SQLite
-
-```shell
-$ apt-get install sqlite3 libsqlite3-dev
 ```
 
 Install ImageMagick
@@ -121,7 +109,11 @@ Get the project code locally and set it up:
 4. `cd ReadyResponder`
 5. `bundle install`
 6. Set up the local database
-    1. Ensure you have a user for the database
+    1. Ensure the Postgres server is started
+        ```shell
+        $ pg_ctl -D /usr/local/var/postgres start
+        ```
+    2. Ensure you have a user for the database
         ```shell
         $ sudo -i -u postgres
         $ createuser -P --interactive <database-username>
@@ -130,14 +122,14 @@ Get the project code locally and set it up:
         Enter a password and answer the prompts, you will have a user (role)
         named <database-username> with the selected privileges. **Make sure the new
         role can create databases**
-    2. Copy the example database configuration file
+    3. Copy the example database configuration file
         ```shell
         $ cp config/database.example.yml config/database.yml
         ```
-    3. Fill in the copied file with your database user information and add
+    4. Fill in the copied file with your database user information and add
         an entry with `host: localhost`. Edit both the `development` and `test`
         keys
-    4. Create the databases (test and development) and apply the schema defined in
+    5. Create the databases (test and development) and apply the schema defined in
         `db/schema.rb`
         ```shell
         $ bundle exec rake db:create
