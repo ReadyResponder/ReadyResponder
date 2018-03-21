@@ -65,6 +65,10 @@ class Event < ActiveRecord::Base
     Availability.partially_overlapping(start_time..end_time).active
   end
 
+  def full_responses
+    Availability.for_time_span(start_time..end_time).active
+  end
+
   def partial_availabilities
     partial_responses.available
   end
@@ -89,7 +93,7 @@ class Event < ActiveRecord::Base
   end
 
   def responses
-    Availability.containing(start_time..end_time).active
+    Availability.containing(start_time..end_time).active.order(:status, :start_time)
   end
 
   def responding_people
