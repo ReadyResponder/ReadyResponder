@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171030083331) do
+ActiveRecord::Schema.define(version: 20180225232638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -158,7 +158,7 @@ ActiveRecord::Schema.define(version: 20171030083331) do
     t.string   "description"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.decimal  "duration", precision: 7, scale: 2
+    t.decimal  "duration",    precision: 7, scale: 2
     t.string   "category"
     t.string   "status"
     t.datetime "created_at"
@@ -167,7 +167,7 @@ ActiveRecord::Schema.define(version: 20171030083331) do
     t.text     "comments"
     t.string   "error_code"
     t.string   "id_code"
-    t.boolean  "is_template", default: false
+    t.boolean  "is_template",                         default: false
     t.integer  "template_id"
     t.string   "min_title"
   end
@@ -197,10 +197,19 @@ ActiveRecord::Schema.define(version: 20171030083331) do
     t.text     "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
   end
 
   add_index "inspection_questions", ["inspection_id"], name: "index_inspection_questions_on_inspection_id", using: :btree
   add_index "inspection_questions", ["question_id"], name: "index_inspection_questions_on_question_id", using: :btree
+  add_index "inspection_questions", ["taggable_type", "taggable_id"], name: "index_inspection_questions_on_taggable_type_and_taggable_id", using: :btree
+
+  create_table "inspection_tags", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "inspections", force: :cascade do |t|
     t.integer  "item_id"
@@ -221,9 +230,13 @@ ActiveRecord::Schema.define(version: 20171030083331) do
     t.string   "name"
     t.string   "status"
     t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
   end
+
+  add_index "item_categories", ["taggable_type", "taggable_id"], name: "index_item_categories_on_taggable_type_and_taggable_id", using: :btree
 
   create_table "item_types", force: :cascade do |t|
     t.string   "name"
@@ -236,7 +249,11 @@ ActiveRecord::Schema.define(version: 20171030083331) do
     t.integer  "item_category_id"
     t.string   "description"
     t.string   "item_type_image"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
   end
+
+  add_index "item_types", ["taggable_type", "taggable_id"], name: "index_item_types_on_taggable_type_and_taggable_id", using: :btree
 
   create_table "items", force: :cascade do |t|
     t.integer  "location_id"
@@ -499,6 +516,15 @@ ActiveRecord::Schema.define(version: 20171030083331) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "tagging", id: false, force: :cascade do |t|
+    t.integer "inspection_tag_id"
+    t.integer "taggable_id"
+    t.string  "taggable_type"
+  end
+
+  add_index "tagging", ["inspection_tag_id"], name: "index_tagging_on_inspection_tag_id", using: :btree
+  add_index "tagging", ["taggable_type", "taggable_id"], name: "index_tagging_on_taggable_type_and_taggable_id", using: :btree
 
   create_table "tasks", force: :cascade do |t|
     t.integer  "event_id"

@@ -22,6 +22,11 @@ module ApplicationHelper
     end
   end
 
+  # Errors helper function
+  def error_messages_for(object)
+    render(partial: 'application/error_messages', locals: {object: object})
+  end
+
   # Wrapper for link_to (Rails)
   # Automatically adds class and/or delete confirmation (if absent),
   # before passing them on to link_to.

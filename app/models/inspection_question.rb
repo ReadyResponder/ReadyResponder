@@ -4,4 +4,6 @@ class InspectionQuestion < ActiveRecord::Base
 
   belongs_to :inspection
   belongs_to :question
+  has_many :taggings, :as => :taggable
+  has_many :tags, :through => :taggings
 end

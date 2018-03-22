@@ -1,0 +1,20 @@
+<% content_for :sidebar do %>
+  <%= sidebar_button_link 'New Inspection Tag', new_inspection_tag_path if can? :create, InspectionTag %>
+<% end %>
+
+<table class="generic_datatable table table-striped table-bordered">
+  <caption><h3><%= @page_title %></h3></caption>
+
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @inspection_tags.each do |tag| %>
+    <tr>
+      <td><%= tag.name %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
