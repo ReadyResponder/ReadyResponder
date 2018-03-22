@@ -56,6 +56,8 @@ Rails.application.routes.draw do
 
   resources :repairs
   resources :inspections, except: [:new, :create], constraints: { id: /\d+/ }
+  resources :inspection_tags, only: [:index, :new, :create]
+
   resources :items do
     resources :repairs
     resources :inspections, only: [:new, :create]
