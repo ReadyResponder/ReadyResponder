@@ -23,6 +23,7 @@ RSpec.feature 'Event creation and edition', js: true do
       # This moves the cursor out from the Time selector, clearing the popup
       # so selenium can then click on create
       fill_in 'Id code', with: 'event03'
+      select 'Recruit', :from => 'event_min_title'
       click_on 'Create'
 
       expect(page).to have_content 'Event was successfully created'

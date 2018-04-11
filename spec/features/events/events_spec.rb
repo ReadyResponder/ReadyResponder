@@ -22,11 +22,12 @@ RSpec.describe "Events" do
       visit new_event_path
       fill_in "Title", with: "Standard Event"
       select 'Meeting', :from => 'event_category'
-      select('Completed', :from => 'event_status')
+      select 'Completed', :from => 'event_status'
       fill_in "Description", with: "Really Long Text..."
       fill_in "Start Time", with: "2013-10-31 18:30"
       fill_in "End Time", with: "2013-10-31 23:55"
       fill_in "event_id_code", with: "Code"
+      select 'Recruit', :from => 'event_min_title'
       click_on 'Create'
       expect(page).to have_content "Event was successfully created."
 

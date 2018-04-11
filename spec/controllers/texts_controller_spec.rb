@@ -31,7 +31,8 @@ RSpec.describe TextsController, type: :controller do
                            category: 'Event',
                            id_code: 'iet1',
                            start_time: 3.days.from_now,
-                           end_time: 4.days.from_now)
+                           end_time: 4.days.from_now,
+                           min_title: "Recruit")
       channel = FactoryGirl.create(:channel,
                                     content: "+15555555555",
                                     # currently only works with US phone numbers

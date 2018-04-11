@@ -16,6 +16,7 @@ RSpec.describe "Events" do
       fill_in "Start Time", with: "2013-10-31 18:30"
       fill_in "End Time", with: "2013-10-31 23:55"
       fill_in "event_id_code", with: "The_Code"
+      select 'Recruit', :from => 'event_min_title'
       click_on 'Create'
       expect(page).to have_content "Event was successfully created."
       expect(page).to have_content "the_code" # Should be lower case
@@ -37,6 +38,7 @@ RSpec.describe "Events" do
       fill_in "Start Time", with: "2013-10-31 18:30"
       fill_in "End Time", with: "2013-10-31 23:55"
       fill_in "event_id_code", with: "The_Code"
+      select 'Recruit', :from => 'event_min_title'
       click_on 'Create'
       expect(page).to have_content "Event was successfully created."
       expect(page).to have_content @task1.title
