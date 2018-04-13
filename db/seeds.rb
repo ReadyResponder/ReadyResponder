@@ -60,14 +60,14 @@ jane = Person.create(
    firstname: "Jane", lastname: "Doe", status: "Active", gender: "Female",
    start_date: 3.years.ago, department: mrc,
    nickname: "Janey", division1: "Division 1", division2: "Team 2",
-   icsid: "321", deployable: true
+   icsid: "321", deployable: true, title: "Recruit"
   )
 
 jake = Person.create(
    firstname: "Jake", lastname: "D", status: "Active", gender: "Male",
    start_date: 1.years.ago, department: cert,
    division1: "Division 1", division2: "Squad 1",
-   icsid: "323", deployable: true
+   icsid: "323", deployable: true, title: "Deputy"
   )
 
 
@@ -90,7 +90,7 @@ ResourceType.create([
 Event.create([{ title: "Sample Event", status: "Scheduled", category: "Event",
                 description: "Something to see", id_code: "howdy",
                 start_time: 24.hours.from_now, end_time: 27.hours.from_now,
-                is_template: false, departments: [cert]
+                is_template: false, departments: [cert], min_title: "Recruit"
                 }])
 
 comms = ItemCategory.find_or_create_by(name: "Communication") do |item_cat|
@@ -141,7 +141,6 @@ Setting.find_or_create_by(key: 'UPCOMING_EVENTS_COUNT') do |setting|
   setting.description = 'No of upcoming events to be displayed'
   setting.value = 10
   setting.category = 'Person'
-  setting.status = 'Active'  
+  setting.status = 'Active'
   setting.required = true
 end
-

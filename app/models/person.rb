@@ -6,7 +6,7 @@ class Person < ActiveRecord::Base
   include ActiveModel::ForbiddenAttributesProtection
   mount_uploader :portrait, PortraitUploader
 
-  before_save :title_order
+  before_validation :calculate_title_order
 
   has_many :certs, -> { where("certs.status = 'Active'") }
   has_many :recipients
@@ -29,9 +29,9 @@ class Person < ActiveRecord::Base
 
   belongs_to :department
 
-  validates_presence_of :firstname, :lastname, :status, :department
-  validates_uniqueness_of :icsid, :allow_nil => true, :allow_blank => true   # this needs to be scoped to active members, or more sophisticated rules
-  validates_length_of :state, :is =>2, :allow_nil => true, :allow_blank => true
+  validates_presence_of :firstname, :lastname, :status, :department, :title_order, :title
+  validates_uniqueness_of :icsid, :allow_nil => true, :allow_blank => true, :case_sensitive => false   # this needs to be scoped to active members, or more sophisticated rules
+  validates_length_of :state, :is => 2, :allow_nil => true, :allow_blank => true
   validates_numericality_of  :height, :weight, :allow_nil => true, :allow_blank => true
   validates_presence_of :division2, :unless => "division1.blank?"
   validates_presence_of :division1, :unless => "division2.blank?"
@@ -64,7 +64,7 @@ class Person < ActiveRecord::Base
   TITLES = ['Director','Chief','Deputy','Captain', 'Lieutenant','Sargeant',
             'Corporal', 'Senior Officer', 'Officer', 'CERT Member', 'Dispatcher',
             'Recruit']
-  TITLE_ORDER = {'Director' => 1, 'Chief' => 3, 'Deputy Chief' => 5,
+  TITLE_ORDER = {'Director' => 1, 'Chief' => 3, 'Deputy' => 5,
                  'Captain' => 7, 'Lieutenant' => 9, 'Sargeant' => 11,
                  'Corporal' => 13, 'Senior Officer' => 15, 'Officer' => 17,
                  'CERT Member' => 19, 'Dispatcher' => 19,
@@ -81,8 +81,9 @@ class Person < ActiveRecord::Base
   end
 
   def fullname
-    fname = self.nickname ||= self.firstname
-    (fname + " " + (self.middleinitial || "") + " " + self.lastname).squeeze(" ")
+    (self.firstname.capitalize + " " +
+    (self.middleinitial.nil? ? "" : self.middleinitial.capitalize) + " " +
+     self.lastname.capitalize).squeeze(" ")
   end
 
   def <=>(other)
@@ -90,19 +91,15 @@ class Person < ActiveRecord::Base
   end
 
   def shortrank
-    ranks = { 'Director' => 'Dir', 'Chief' => "Chief", "Deputy Chief" => "Deputy", "Captain" => "Capt",
+    ranks = { 'Director' => 'Dir', 'Chief' => "Chief", "Deputy" => "Deputy", "Captain" => "Capt",
             "Lieutenant" => "Lt", "Sargeant" => "Sgt", "Corporal" => "Cpl",
             "Senior Officer" => "SrO", "Officer" => "Ofc", "Dispatcher" => "Dsp",
             "CERT Member" => "TM", "Recruit" => "Rct" }
     ranks[self.title] || ''
   end
 
-  def title_order
-    title_order = TITLE_ORDER[title] || DEFAULT_TITLE_ORDER
-  end
-
   def name
-    (self.firstname + " " + self.lastname)
+    (self.firstname.capitalize + " " + self.lastname.capitalize)
   end
 
   def sar_level
@@ -235,6 +232,10 @@ class Person < ActiveRecord::Base
   end
 
   private
+
+  def calculate_title_order
+    self.title_order = TITLE_ORDER[self.title].nil? ? DEFAULT_TITLE_ORDER : TITLE_ORDER[self.title]
+  end
 
   def check_zipcode
     return unless zipcode.present? && !zipcode.match(/^(?:[1-9]|0(?!0{4}))\d{4}(?:[-\s]\d{4})?$/)

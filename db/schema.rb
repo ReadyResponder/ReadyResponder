@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171030083331) do
+ActiveRecord::Schema.define(version: 20180413193159) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -158,7 +158,7 @@ ActiveRecord::Schema.define(version: 20171030083331) do
     t.string   "description"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.decimal  "duration", precision: 7, scale: 2
+    t.decimal  "duration",    precision: 7, scale: 2
     t.string   "category"
     t.string   "status"
     t.datetime "created_at"
@@ -167,9 +167,9 @@ ActiveRecord::Schema.define(version: 20171030083331) do
     t.text     "comments"
     t.string   "error_code"
     t.string   "id_code"
-    t.boolean  "is_template", default: false
+    t.boolean  "is_template",                         default: false
     t.integer  "template_id"
-    t.string   "min_title"
+    t.string   "min_title",                                           null: false
   end
 
   create_table "grants", force: :cascade do |t|
@@ -362,14 +362,14 @@ ActiveRecord::Schema.define(version: 20171030083331) do
     t.decimal  "total_hours",                 precision: 7, scale: 2
     t.date     "start_date"
     t.date     "end_date"
-    t.string   "title"
+    t.string   "title",                                                            null: false
     t.string   "division1"
     t.string   "division2"
     t.integer  "position",                                            default: 30
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "duration"
-    t.integer  "title_order"
+    t.integer  "title_order",                                                      null: false
     t.string   "error_code"
     t.string   "prefix_name"
     t.string   "middlename"

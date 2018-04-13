@@ -5,6 +5,8 @@ FactoryGirl.define do
     description "A good time was had by all"
     category "Training"
     status "Scheduled"
+    min_title "Recruit"
+    departments [ FactoryGirl.build(:department) ]
     start_time Time.current
     end_time 23.hours.from_now
 
