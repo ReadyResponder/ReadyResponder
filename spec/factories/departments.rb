@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :department do
-    name "Medical Reserve Corps"
+    sequence(:name) { |n| "Medical Reserve Corps #{n}"}
     shortname "MRC"
     manage_people true
     status "Active"
