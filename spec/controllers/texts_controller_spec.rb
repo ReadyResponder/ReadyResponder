@@ -21,6 +21,7 @@ require 'rails_helper'
 RSpec.describe TextsController, type: :controller do
 
   let(:person){FactoryGirl.build :person}
+  let(:department){FactoryGirl.build :department}
 
   describe "POST #receive_text" do
     it "renders an info message" do
@@ -32,7 +33,8 @@ RSpec.describe TextsController, type: :controller do
                            id_code: 'iet1',
                            start_time: 3.days.from_now,
                            end_time: 4.days.from_now,
-                           min_title: "Recruit")
+                           min_title: "Recruit",
+                           departments: [department])
       channel = FactoryGirl.create(:channel,
                                     content: "+15555555555",
                                     # currently only works with US phone numbers

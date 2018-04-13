@@ -5,7 +5,7 @@ class Event < ActiveRecord::Base
   before_save :calc_duration, :trim_id_code
 
   validates_presence_of :category, :title, :status, :id_code,
-                        :start_time, :end_time, :min_title
+                        :start_time, :end_time, :min_title, :departments
 
   validates_uniqueness_of :title
   validates_uniqueness_of :id_code, unless: :expired?

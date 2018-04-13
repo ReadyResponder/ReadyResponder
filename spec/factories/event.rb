@@ -8,6 +8,7 @@ FactoryGirl.define do
     start_time Time.current
     end_time 23.hours.from_now
     min_title "Recruit"
+    departments [ FactoryGirl.build(:department) ]
 
     trait :training do
       category "Training"
