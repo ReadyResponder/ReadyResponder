@@ -4,6 +4,7 @@ RSpec.feature 'Event creation and edition', js: true do
   context 'logged in as an Editor' do
     before(:each) do
       sign_in_as('Editor')
+      @department = create(:department)
     end
 
     scenario 'I can click on the "+" link to access a form where I can create a new event' do
@@ -23,6 +24,8 @@ RSpec.feature 'Event creation and edition', js: true do
       # This moves the cursor out from the Time selector, clearing the popup
       # so selenium can then click on create
       fill_in 'Id code', with: 'event03'
+      select 'Recruit', :from => 'event_min_title'
+      check @department.name
       click_on 'Create'
 
       expect(page).to have_content 'Event was successfully created'
@@ -31,7 +34,7 @@ RSpec.feature 'Event creation and edition', js: true do
     end
 
     scenario 'I can select an event to edit and then change one or more of its attributes' do
-      event = create(:event, status: 'In-session', start_time: 1.hour.from_now, end_time: 3.hours.from_now)
+      event = create(:event, status: 'In-session', start_time: 1.hour.from_now, end_time: 3.hours.from_now, departments: [@department])
 
       visit events_path
       page.execute_script "window.scrollBy(0,1500)"

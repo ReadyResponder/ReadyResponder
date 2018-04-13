@@ -3,10 +3,11 @@ require 'rails_helper'
 RSpec.describe "Events" do
   before(:each) do
     sign_in_as('Editor')
-    @template = create(:event, title: "template title", is_template: true)
-    @current = create(:event, title: "current title", status: "In-session")
-    @recent = create(:event, title: "recent title")
-    @archive = create(:event, title: "archive title", status: "Completed")
+    @department = create(:department)
+    @template = create(:event, title: "template title", is_template: true, departments: [@department])
+    @current = create(:event, title: "current title", status: "In-session", departments: [@department])
+    @recent = create(:event, title: "recent title", departments: [@department])
+    @archive = create(:event, title: "archive title", status: "Completed", departments: [@department])
   end
 
   # removed sidebar so disabling this test for now
@@ -22,11 +23,13 @@ RSpec.describe "Events" do
       visit new_event_path
       fill_in "Title", with: "Standard Event"
       select 'Meeting', :from => 'event_category'
-      select('Completed', :from => 'event_status')
+      select 'Completed', :from => 'event_status'
       fill_in "Description", with: "Really Long Text..."
       fill_in "Start Time", with: "2013-10-31 18:30"
       fill_in "End Time", with: "2013-10-31 23:55"
       fill_in "event_id_code", with: "Code"
+      select 'Recruit', :from => 'event_min_title'
+      check @department.name
       click_on 'Create'
       expect(page).to have_content "Event was successfully created."
 
