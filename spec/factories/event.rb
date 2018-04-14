@@ -6,7 +6,7 @@ FactoryGirl.define do
     category "Training"
     status "Scheduled"
     min_title "Recruit"
-    departments [ FactoryGirl.build(:department) ]
+    departments {[FactoryGirl.create(:department)]}
     start_time Time.current
     end_time 23.hours.from_now
 
