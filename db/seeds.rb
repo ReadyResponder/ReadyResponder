@@ -60,14 +60,14 @@ jane = Person.create(
    firstname: "Jane", lastname: "Doe", status: "Active", gender: "Female",
    start_date: 3.years.ago, department: mrc,
    nickname: "Janey", division1: "Division 1", division2: "Team 2",
-   icsid: "321", deployable: true, title: "Recruit"
+   icsid: "321", deployable: true, title: 'Recruit'
   )
 
 jake = Person.create(
    firstname: "Jake", lastname: "D", status: "Active", gender: "Male",
    start_date: 1.years.ago, department: cert,
    division1: "Division 1", division2: "Squad 1",
-   icsid: "323", deployable: true, title: "Deputy"
+   icsid: "323", deployable: true, title: 'Deputy'
   )
 
 

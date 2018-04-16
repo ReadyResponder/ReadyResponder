@@ -60,6 +60,9 @@ RSpec.feature 'Event page' do
         task  = create(:task, event: @event)
         title = create(:title)
         requirement = create(:requirement, task: task, title: title)
+        different_event = create(:event, departments: [@response_team, @medical_reserve],
+                        start_time: 2.day.from_now, end_time: 4.days.from_now,
+                        min_title: Person::TITLE_ORDER.keys.last)
 
         assigned_responder = create(:person, department: @response_team,
                                     title_order: 1)
@@ -79,6 +82,16 @@ RSpec.feature 'Event page' do
         within("table#event-status tr##{@medical_reserve.name.parameterize}-status") do
           expect(page).to have_css('.event-labels[title="Assigned to THIS Event"]', text: '0')
           expect(page).to have_css('.event-labels[title="No Response"]', text: '0')
+        end
+
+        visit event_path(different_event)
+
+        within("table#event-status tr##{@response_team.name.parameterize}-status") do
+          expect(page).not_to have_css('.event-labels[title="Assigned to THIS Event"]', text: '1')
+        end
+
+        within("table#availabilities") do
+          expect(page).not_to have_content(assigned_responder.name)
         end
       end
 
