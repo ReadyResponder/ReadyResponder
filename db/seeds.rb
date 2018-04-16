@@ -8,26 +8,27 @@
 
 # I have added some objects whose status is Inactive to ensure they don't appear.
 
-manager_role = Role.find_or_create_by(name: "Manager")
-if User.count == 0
-  password = (0...6).map { ('a'..'z').to_a[rand(26)] }.join.upcase
-  puts "The initial user password is #{password}"
-  puts "The initial user name is 'bdoe@example.com'"
-  admin_user = User.create(username: "bdoe",
-                           email: "bdoe@example.com",
-                           firstname: "Bob", lastname: "Doe",
-                           password: password,
-                           password_confirmation: password
-                           )
-  admin_user.roles << manager_role
-end
+# Roles & Admin User
+manager_role = Role.find_or_create_by(name: 'Manager')
+  if User.count == 0
+    password = (0...6).map { ('a'..'z').to_a[rand(26)] }.join.upcase
+    puts "The initial user password is #{password}"
+    puts "The initial user name is 'bdoe@example.com'"
+    admin_user = User.create(username: 'bdoe',
+                             email: 'bdoe@example.com',
+                             firstname: 'Bob', lastname: 'Doe',
+                             password: password,
+                             password_confirmation: password
+                             )
+    admin_user.roles << manager_role
+  end
 
-Role.find_or_create_by(name: "Editor")
-Role.find_or_create_by(name: "Author")
-Role.find_or_create_by(name: "Depositor")
-Role.find_or_create_by(name: "Trainer")
-Role.find_or_create_by(name: "Admin")
-Role.find_or_create_by(name: "Reader")
+  Role.find_or_create_by(name: 'Editor')
+  Role.find_or_create_by(name: 'Author')
+  Role.find_or_create_by(name: 'Depositor')
+  Role.find_or_create_by(name: 'Trainer')
+  Role.find_or_create_by(name: 'Admin')
+  Role.find_or_create_by(name: 'Reader')
 
 # Departments are where people call home.
 Department.create([
@@ -44,11 +45,11 @@ cert = Department.create({name: "Community Emergency Response Team",
                           division1: ["Division 1", "Division 2"],
                           division2: ["Squad 1", "Squad 2"]})
 mrc = Department.create({name: "Medical Reserve Corp",
-                          shortname: "MRC",
-                          status: "Active",
-                          manage_people: true,
-                          division1: ["Division 1", "Division 2"],
-                          division2: ["Team 1", "Team 2"]})
+                         shortname: "MRC",
+                         status: "Active",
+                         manage_people: true,
+                         division1: ["Division 1", "Division 2"],
+                         division2: ["Team 1", "Team 2"]})
 Skill.create([
   {name: "EMT-B", status: "Active"},
   {name: "First Responder First Aid", status: "Active"},
@@ -144,3 +145,66 @@ Setting.find_or_create_by(key: 'UPCOMING_EVENTS_COUNT') do |setting|
   setting.status = 'Active'
   setting.required = true
 end
+<<<<<<< HEAD
+=======
+
+# SEEDS NEEDED:
+# activities
+          # - <content: nil, author: nil, loggable_id: nil, loggable_type: nil>
+# assignments
+          # - <person_id: nil, requirement_id: nil, start_time: nil, end_time: nil, status: nil, duration: nil>
+# availabilities
+          # - <start_time: nil, end_time: nil, status: nil, description: nil, person_id: nil>
+# certs
+          # - <person_id: nil, course_id: nil, status: nil, category: nil, level: nil, cert_number: nil, issued_date: nil, expiration_date: nil, comments: nil, updated_by: nil, created_by: nil, grade: nil, event_id: nil, certification: nil>
+# channels
+          # - <person_id: nil, name: nil, status: nil, content: nil, priority: nil, category: nil, carrier: nil, last_verified: nil, usage: nil, channel_type: nil, sms_available: false, type: nil>
+# comments
+          # - <title: "", description: nil, commentable_id: nil, commentable_type: nil, person_id: nil>
+# courses
+          # - < name: nil, status: nil, description: nil, comments: nil, category: nil, duration: nil, term: nil>
+# events
+          # * only one.. should be two
+# grants
+          # * only one.. should be two
+# helpdocs
+          # (??)
+# inspections
+          # - <item_id: nil, person_id: nil, inspection_date: nil, mileage: nil, repair_needed: nil, status: nil, comments: nil, category: nil>
+# item_types
+          # * only one.. should be two
+# items
+          # * only one.. should be two
+# messages
+          # - <subject: nil, status: nil, body: nil, sent_at: nil, recipient_id: nil, channel_id: nil>
+# moves
+          # - <item_id: nil, locatable_id: nil, locatable_type: nil, comments: nil, reason: nil>
+# notifications
+          # - <event_id: nil, author_id: nil, status: nil, time_to_live: nil, interval: nil, iterations_to_escalation: nil, scheduled_start_time: nil, start_time: nil, channels: nil, groups: nil, departments: nil, divisions: nil, subject: nil, body: nil, purpose: nil>
+# questions
+          # - <prompt: nil, response_choices: nil, category: nil, status: nil, comments: nil>
+# recipients
+          # - <notification_id: nil, person_id: nil, status: nil, response_channel: nil, response_time: nil>
+# repairs
+          # - <item_id: nil, user_id: nil, person_id: nil, category: nil, service_date: nil, status: nil, description: nil, comments: nil, cost: nil>
+# requirements
+          # - <task_id: nil, skill_id: nil, title_id: nil, priority: nil, minimum_people: nil, maximum_people: nil, desired_people: nil, floating: nil, optional: nil>
+# resource_types
+          # * only one.. should be two
+# tasks
+          # - <event_id: nil, title: nil, description: nil, street: nil, city: nil, state: nil, zipcode: nil, latitude: nil, longitude: nil, start_time: nil, end_time: nil, location: nil, priority: nil, status: nil>
+# - timecards
+          # - <person_id: nil, start_time: nil, end_time: nil, duration: nil, comments: nil, error_code: nil, description: nil, status: nil>
+# - titles
+          # - <name: nil, status: nil, description: nil, comments: nil>
+# - versions (??)
+
+# JOINS
+# - inspections_questions
+# - departments_events
+# - departments_notifications
+# - courses_skills
+# - roles_users
+# - skills_titles
+# - peoples_titles
+>>>>>>> 683d9e2a853bc02ec4590844931f228e47623b5f
