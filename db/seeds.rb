@@ -145,8 +145,6 @@ Setting.find_or_create_by(key: 'UPCOMING_EVENTS_COUNT') do |setting|
   setting.status = 'Active'
   setting.required = true
 end
-<<<<<<< HEAD
-=======
 
 # SEEDS NEEDED:
 # activities
