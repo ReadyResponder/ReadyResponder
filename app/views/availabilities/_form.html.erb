@@ -1,5 +1,11 @@
 <%= simple_form_for(@availability) do |f| %>
-  <%= f.error_notification %>
+  <% if @availability.errors.count > 0 %>
+    <ul class="alert alert-danger">
+      <% @availability.errors.full_messages.each do |msg| %>
+        <li style="margin: 0 15px"><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
 
   <div class="form-inputs">
     <%= f.association :person, collection: @people_collection %>
