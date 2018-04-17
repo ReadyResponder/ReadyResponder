@@ -68,7 +68,7 @@ class Person < ActiveRecord::Base
                  'Captain' => 7, 'Lieutenant' => 9, 'Sargeant' => 11,
                  'Corporal' => 13, 'Senior Officer' => 15, 'Officer' => 17,
                  'CERT Member' => 19, 'Dispatcher' => 19,
-                 'Student Officer' => 21, 'Recruit' => 23, 'Applicant' => 25}
+                 'Student Officer' => 21, 'Recruit' => 23, 'Applicant' => 25, 'Unknown' => 100}
   DEFAULT_TITLE_ORDER = 30
 
   DIVISION1 = ['Division 1', 'Division 2', "Division 3", "Recruit", 'Command']
