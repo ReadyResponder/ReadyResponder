@@ -81,9 +81,10 @@ class Person < ActiveRecord::Base
   end
 
   def fullname
-    (self.firstname.capitalize + " " +
-    (self.middleinitial.nil? ? "" : self.middleinitial.capitalize) + " " +
-     self.lastname.capitalize).squeeze(" ")
+    first_or_nickname = self.nickname.blank? ? self.firstname : self.nickname
+    (first_or_nickname.camelize + " " +
+    (self.middleinitial.nil? ? "" : self.middleinitial.camelize) + " " +
+     self.lastname.camelize).squeeze(" ")
   end
 
   def <=>(other)
@@ -99,7 +100,7 @@ class Person < ActiveRecord::Base
   end
 
   def name
-    (self.firstname.capitalize + " " + self.lastname.capitalize)
+    (self.firstname.camelize + " " + self.lastname.camelize)
   end
 
   def sar_level

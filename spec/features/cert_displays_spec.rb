@@ -32,7 +32,7 @@ RSpec.describe "Cert" do
       expect(page).to have_link(person.fullname)
       expect(page).to have_link(cert.course.name)
       click_on person.fullname
-      expect(page).to have_content('Cj')
+      expect(page).to have_content('CJ')
     end
 
     it "a new cert form with an issued date field" do

@@ -273,6 +273,24 @@ RSpec.describe Person do
     end
   end
 
+  describe 'fullname' do
+    let!(:person_with_nickname) {create :person, nickname: 'tom', firstname: 'thomas', lastname: 'smith'}
+    let!(:person) {create :person, nickname: '', firstname: 'roger', lastname: 'smith'}
+    let!(:person_with_middleinitial) {create :person, nickname: nil, firstname: 'john', middleinitial: 'g', lastname: 'smith'}
+
+    it 'will return nickname + lastname in camelcase' do
+      expect(person_with_nickname.fullname).to eq 'Tom Smith'
+    end
+
+    it 'will return firstname + lastname in camelcase' do
+      expect(person.fullname).to eq 'Roger Smith'
+    end
+
+    it 'will return firstname + middleinitial + lastname in camelcase' do
+      expect(person_with_middleinitial.fullname).to eq 'John G Smith'
+    end
+  end
+
   describe 'upcoming_events' do
     let(:department) { create :department }
     let(:person) { create :person, department: department }

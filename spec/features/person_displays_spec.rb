@@ -41,7 +41,7 @@ RSpec.describe "Person" do
       end
       expect(page).not_to have_content(@dpw.shortname)
       expect(page).to have_content('Home') # This is in the nav bar
-      expect(page).to have_content('Cj')
+      expect(page).to have_content('CJ')
       expect(page).to have_content('Sierra') # Should only show active people from depts managed by people
       expect(page).not_to have_content('Adam')
       expect(page).not_to have_content('Priscilla')

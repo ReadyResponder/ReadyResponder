@@ -24,6 +24,6 @@ RSpec.describe "availabilities/index", type: :view do
   it "renders a list of availabilities" do
     render
     assert_select "tr>td", :text => "Available".to_s, :count => 1
-    assert_select "tr>td", :text => "Cj Doe".to_s, :count => 2
+    assert_select "tr>td", :text => "CJ Doe".to_s, :count => 2
   end
 end
