@@ -269,7 +269,7 @@ RSpec.describe Person do
       expect(student_officer.title_order).to eq 21
       expect(recruit.title_order).to eq 23
       expect(applicant.title_order).to eq 25
-      expect(no_title.title_order).to eq 30
+      expect(no_title.title_order).to eq 100
     end
   end
 
