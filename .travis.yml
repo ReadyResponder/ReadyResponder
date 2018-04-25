@@ -21,7 +21,6 @@ before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
-# uncomment this line if your project needs to run something other than `rake`:
 script: bundle exec rails db:schema:load && bundle exec rspec spec
 bundler_args: --without development production doc
 after_script:
