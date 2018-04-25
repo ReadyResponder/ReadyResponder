@@ -56,7 +56,7 @@ RSpec.describe Event do
 
   it "only sends notifications to above a certain rank" do
     event = create(:event, min_title: "Director")
-    user = FactoryGirl.create(:person, title: "Recruit")
+    user = FactoryBot.create(:person, title: "Recruit")
     expect(event.eligible_people).not_to include(user)
   end
 

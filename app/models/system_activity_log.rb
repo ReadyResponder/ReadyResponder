@@ -1,7 +1,7 @@
-class SystemActivityLog < ActiveRecord::Base
+class SystemActivityLog < ApplicationRecord
   has_paper_trail
-
-  attr_accessible :user, :message, :category
+  # rails 5 deprecation
+  # attr_accessible :user, :message, :category
   belongs_to :user
 
   LOGGED_MODELS = [

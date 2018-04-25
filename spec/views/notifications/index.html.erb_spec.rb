@@ -1,19 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe "notifications/index", type: :view do
-  let(:user) { FactoryGirl.create :user }
+  let(:user) { FactoryBot.create :user }
   let(:department) { create(:department) }
 
   before(:each) do
     assign(:notifications, [
-      FactoryGirl.create(:notification,
+      FactoryBot.create(:notification,
         event: create(:event),
         status: "Active",
         subject: "Please respond",
         channels: "Text",
         departments: [department]
       ),
-      FactoryGirl.create(:notification,
+      FactoryBot.create(:notification,
         event: create(:event),
         status: "Complete",
         subject: "Please respond",

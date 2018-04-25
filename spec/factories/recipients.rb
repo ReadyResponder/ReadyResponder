@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :recipient do
     association :notification, factory: :notification
     association :person, factory: :person

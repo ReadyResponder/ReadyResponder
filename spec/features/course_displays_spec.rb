@@ -37,14 +37,14 @@ RSpec.describe "Course" do
     it "a new course form that creates a course" do
       visit new_course_path
       expect(page).to have_content('New Course')
-      fill_in 'course_name', :with => 'Basket Weaving'
-      select('Active', :from => 'course_status')
-      fill_in 'course_description', :with => 'A creative and fulfilling pastime'
+      fill_in 'course_name', with: 'Basket Weaving'
+      select('Active', from: 'course_status')
+      fill_in 'course_description', with: 'A creative and fulfilling pastime'
       #select('Active', :from => 'course_skill')
-      select('General', :from => 'course_category')
-      fill_in 'course_duration', :with => '2'
-      fill_in 'course_term', :with => '20'
-      fill_in 'course_comments', :with => 'Not for the faint of heart'
+      select('General', from: 'course_category')
+      fill_in 'course_duration', with: '2'
+      fill_in 'course_term', with: '20'
+      fill_in 'course_comments', with: 'Not for the faint of heart'
       click_on 'Create Course'
       visit courses_path
       expect(page).to have_content('Basket Weaving')
@@ -53,7 +53,7 @@ RSpec.describe "Course" do
     it 'should update a course' do
       an_example = create(:course, name: 'Zombie Hunting')
       visit edit_course_path(an_example)
-      fill_in 'course_name', :with => 'Skydiving'
+      fill_in 'course_name', with: 'Skydiving'
       click_on 'Update Course'
       visit courses_path
       expect(page).not_to have_content('Zombie Hunting')

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CertsControllerTest < ActionController::TestCase
   setup do
-    @cert = FactoryGirl.create(:cert)
+    @cert = FactoryBot.create(:cert)
     @person = @cert.person
 
   end

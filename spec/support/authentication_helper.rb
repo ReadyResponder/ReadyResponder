@@ -27,7 +27,7 @@ module AuthenticationHelper
 
   def login_manager
     @request.env["devise.mapping"] = Devise.mappings[:user]
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     r = create(:role, name: 'Manager')
     user.roles << r
     sign_in user

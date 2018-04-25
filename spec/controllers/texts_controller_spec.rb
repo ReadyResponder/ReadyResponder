@@ -20,12 +20,12 @@ require 'rails_helper'
 
 RSpec.describe TextsController, type: :controller do
 
-  let(:person){FactoryGirl.build :person}
-  let(:department){FactoryGirl.build :department}
+  let(:person){FactoryBot.build :person}
+  let(:department){FactoryBot.build :department}
 
   describe "POST #receive_text" do
     it "renders an info message" do
-      # people = FactoryGirl.create_list(:person, 3)
+      # people = FactoryBot.create_list(:person, 3)
       event = Event.create!(title: "test info event",
                            description: "test info event desc.",
                            status: 'Scheduled',
@@ -35,19 +35,15 @@ RSpec.describe TextsController, type: :controller do
                            end_time: 4.days.from_now,
                            min_title: "Recruit",
                            departments: [department])
-      channel = FactoryGirl.create(:channel,
+      channel = FactoryBot.create(:channel,
                                     content: "+15555555555",
                                     # currently only works with US phone numbers
                                     person: person)
 
-      params = {Body: "iNFo #{event.id_code}",
-                # case of keyword shouldn't matter.
-                # 1st line is thrown out
-                From: "+15555555555"}
                 # note the +1 that is NOT in the channel
                 # Phone numbers are in E.164 format (e.g. +16175551212)
                 # https://en.wikipedia.org/wiki/E.164
-      post "receive_text", params
+      post "receive_text", params: { Body: "iNFo #{event.id_code}", From: "+15555555555" }
       assert_response :success
       msg = @response.body
       expect(msg.include? "Unknown Keyword").to eq false

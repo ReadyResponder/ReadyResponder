@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "settings/index", type: :view do
-  let(:user) { FactoryGirl.create :user }
+  let(:user) { FactoryBot.create :user }
   before(:each) do
     assign(:settings, [
       Setting.create!(name: "User Name",

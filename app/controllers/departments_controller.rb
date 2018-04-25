@@ -1,5 +1,5 @@
 class DepartmentsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   before_action :format_divisions, :only => [:create, :update]
   load_and_authorize_resource
 
@@ -64,9 +64,10 @@ class DepartmentsController < ApplicationController
     @page_title = "Dept: #{@department.shortname}"
   end
 
+  private
   def department_params
     params.require(:department).permit(:name, :shortname, :status,
       :contact_id, :description, :manage_items, :manage_people,
-      :division1 => [], :division2 => [])
+      division1: [], division2: [])
   end
 end

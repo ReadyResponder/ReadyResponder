@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "notifications/new", type: :view do
   before(:each) do
-    @event = FactoryGirl.create(:event)
+    @event = FactoryBot.create(:event)
     assign(:notification, Notification.new(
       :event => @event,
       :status => "Active",

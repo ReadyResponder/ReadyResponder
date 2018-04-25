@@ -1,4 +1,4 @@
-class Notification < ActiveRecord::Base
+class Notification < ApplicationRecord
 #  serialize :departments, Array
   has_paper_trail
   include Loggable

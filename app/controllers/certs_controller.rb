@@ -1,5 +1,5 @@
 class CertsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_and_authorize_resource
 
   def index
@@ -18,7 +18,7 @@ class CertsController < ApplicationController
   end
 
   def create
-    @cert = Cert.new(params[:cert])
+    @cert = Cert.new(cert_params)
     if @cert.save
       redirect_to person_path(@cert.person), notice: 'Cert was successfully created.'
     else
@@ -27,7 +27,7 @@ class CertsController < ApplicationController
   end
 
   def update
-    if @cert.update_attributes(params[:cert])
+    if @cert.update_attributes(cert_params)
       redirect_to @cert, notice: 'Cert was successfully updated.'
     else
       render action: "edit"
@@ -37,5 +37,11 @@ class CertsController < ApplicationController
   def destroy
     @cert.destroy
     redirect_to certs_url
+  end
+
+  private
+
+  def cert_params
+    params.require(:cert).permit(:category, :person_id, :course_id, :expiration_date, :issued_date, :cert_number, :level,  :status, :certification, :comments)
   end
 end

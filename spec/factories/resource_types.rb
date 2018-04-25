@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :resource_type do
     name "MyString"
     status "MyString"
