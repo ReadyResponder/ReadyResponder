@@ -64,7 +64,6 @@ class DepartmentsController < ApplicationController
     @page_title = "Dept: #{@department.shortname}"
   end
 
-  private
   def department_params
     params.require(:department).permit(:name, :shortname, :status,
       :contact_id, :description, :manage_items, :manage_people,

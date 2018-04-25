@@ -35,7 +35,7 @@ RSpec.describe TextsController, type: :controller do
                            end_time: 4.days.from_now,
                            min_title: "Recruit",
                            departments: [department])
-      channel = FactoryBot.create(:channel,
+              FactoryBot.create(:channel,
                                     content: "+15555555555",
                                     # currently only works with US phone numbers
                                     person: person)
