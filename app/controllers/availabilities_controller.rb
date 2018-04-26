@@ -35,6 +35,7 @@ class AvailabilitiesController < ApplicationController
     if @availability.save
       redirect_to @availability, notice: 'Availability was successfully created.'
     else
+      set_people
       render :new
     end
   end
@@ -67,7 +68,7 @@ class AvailabilitiesController < ApplicationController
 
     def set_people
       @people_collection = Person.active
-      
+
       # Ensure person is included in @people_collection
       @people_collection |= [@availability.person] if @availability.person
       @people_collection = @people_collection.sort

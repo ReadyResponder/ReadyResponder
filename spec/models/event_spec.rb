@@ -11,6 +11,7 @@ RSpec.describe Event do
     it { is_expected.to validate_presence_of(:id_code) }
     it { is_expected.to validate_presence_of(:start_time) }
     it { is_expected.to validate_presence_of(:end_time) }
+    it { is_expected.to validate_presence_of(:departments) }
 
     it { is_expected.to validate_uniqueness_of(:title) }
     it { is_expected.to validate_uniqueness_of(:id_code) }
