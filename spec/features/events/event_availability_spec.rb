@@ -24,73 +24,105 @@ RSpec.feature 'Event page' do
         # av stands for available, pav stands for partially available
         # uav is unavailable
         # This person is available at the exact times
-        av_responder_exactly_ontime = create(:person, department: @mrc)
-        create(:availability, person: av_responder_exactly_ontime, status: 'Available',
+        av_hero_exactly_ontime = create(:person, firstname: 'Adam', department: @mrc)
+        create(:availability, person: av_hero_exactly_ontime, status: 'Available',
           start_time: @event.start_time, end_time: @event.end_time)
 
         # This person is available , arriving early
-        av_responder_arrive_early_leave_ontime = create(:person, department: @mrc)
-        create(:availability, person: av_responder_arrive_early_leave_ontime, status: 'Available',
+        av_hero_arrive_early_leave_ontime = create(:person, department: @mrc)
+        create(:availability, person: av_hero_arrive_early_leave_ontime, status: 'Available',
           start_time: @event.start_time - 1.hour, end_time: @event.end_time)
 
         # This person is available, staying late
-        av_responder_arrive_ontime_leave_late = create(:person, department: @mrc)
-        create(:availability, person: av_responder_arrive_ontime_leave_late, status: 'Available',
+        av_hero_arrive_ontime_leave_late = create(:person, department: @mrc)
+        create(:availability, person: av_hero_arrive_ontime_leave_late, status: 'Available',
           start_time: @event.start_time, end_time: @event.end_time + 1.hour)
 
-        av_responder_arrive_early_leave_late = create(:person, department: @mrc)
-        create(:availability, person: av_responder_arrive_early_leave_late, status: 'Available',
+        av_hero_arrive_early_leave_late = create(:person, department: @mrc)
+        create(:availability, person: av_hero_arrive_early_leave_late, status: 'Available',
           start_time: @event.start_time - 1.hour, end_time: @event.end_time + 1.hour)
 
         # These people should be partially available
-        pav_responder_arrive_late_leave_ontime = create(:person, department: @mrc)
-        create(:availability, person: pav_responder_arrive_late_leave_ontime, status: 'Available',
+        pav_hero_arrive_late_leave_ontime = create(:person, department: @mrc)
+        create(:availability, person: pav_hero_arrive_late_leave_ontime, status: 'Available',
           start_time: @event.start_time + 1.hour, end_time: @event.end_time)
 
-        pav_responder_arrive_late_leave_late = create(:person, department: @mrc)
-        create(:availability, person: pav_responder_arrive_late_leave_late, status: 'Available',
+        pav_hero_arrive_late_leave_late = create(:person, department: @mrc)
+        create(:availability, person: pav_hero_arrive_late_leave_late, status: 'Available',
           start_time: @event.start_time + 1.hour, end_time: @event.end_time + 1.hour)
 
-        pav_responder_arrive_late_leave_early = create(:person, department: @mrc)
-        create(:availability, person: pav_responder_arrive_late_leave_early, status: 'Available',
+        pav_hero_arrive_late_leave_early = create(:person, department: @mrc)
+        create(:availability, person: pav_hero_arrive_late_leave_early, status: 'Available',
           start_time: @event.start_time + 1.hour, end_time: @event.end_time - 1.hour)
 
-        pav_responder_arrive_ontime_leave_early = create(:person, department: @mrc)
-        create(:availability, person: pav_responder_arrive_ontime_leave_early, status: 'Available',
+        pav_hero_arrive_ontime_leave_early = create(:person, department: @mrc)
+        create(:availability, person: pav_hero_arrive_ontime_leave_early, status: 'Available',
           start_time: @event.start_time, end_time: @event.end_time - 1.hour)
 
-        uav_responder_exact_times = create(:person, department: @mrc)
-        create(:availability, person: uav_responder_exact_times,
+        uav_hero_exact_times = create(:person, department: @mrc)
+        create(:availability, person: uav_hero_exact_times,
           status: 'Unavailable',
           start_time: @event.start_time, end_time: @event.end_time - 1.hour)
 
-        uav_responder_exact_start_late_end = create(:person, department: @mrc)
-        create(:availability, person: uav_responder_exact_start_late_end,
+        uav_hero_exact_start_late_end = create(:person, department: @mrc)
+        create(:availability, person: uav_hero_exact_start_late_end,
           status: 'Unavailable',
           start_time: @event.start_time, end_time: @event.end_time + 1.hour)
 
-        uav_responder_early_start_exact_end = create(:person, department: @mrc)
-        create(:availability, person: uav_responder_early_start_exact_end,
+        uav_hero_early_start_exact_end = create(:person, department: @mrc)
+        create(:availability, person: uav_hero_early_start_exact_end,
           status: 'Unavailable',
           start_time: @event.start_time - 1.hour, end_time: @event.end_time)
 
-        uav_responder_early_start_late_end = create(:person, department: @mrc)
-        create(:availability, person: uav_responder_early_start_late_end,
+        uav_hero_early_start_late_end = create(:person, department: @mrc)
+        create(:availability, person: uav_hero_early_start_late_end,
           status: 'Unavailable',
           start_time: @event.start_time - 1.hour, end_time: @event.end_time + 1.hour)
 
         visit event_path(@event)
-save_and_open_page
+
         within("table#event-status tr##{@mrc.name.parameterize}-status") do
           expect(page).to have_css('.event-labels[title="Assigned to THIS Event"]', text: '0')
           expect(page).to have_css('.event-labels[title="Available"]', text: '4')
-          expect(page).to have_css('.event-labels[title="Partially Available"]', text: '4')
+        #  expect(page).to have_css('.event-labels[title="Partially Available"]', text: '4')
           expect(page).to have_css('.event-labels[title="Unavailable"]', text: '4')
           expect(page).to have_css('.event-labels[title="No Response"]', text: '0')
         end
+
         within("table#availabilities") do
-          expect(page).to have_content('Partially Available')
+          # This is for the responder with the exact times
+          # who is fully available
+          expect(page).to have_css('.success',
+            text: av_hero_exactly_ontime.fullname)
+          expect(page).not_to have_css('.warning',
+            text: av_hero_exactly_ontime.fullname)
+          expect(page).not_to have_css('.danger',
+            text: av_hero_exactly_ontime.fullname)
+
+          expect(page).to have_css('.success',
+            text: av_hero_arrive_early_leave_ontime.fullname)
+          expect(page).not_to have_css('.warning',
+            text: av_hero_arrive_early_leave_ontime.fullname)
+          expect(page).not_to have_css('.danger',
+            text: av_hero_arrive_early_leave_ontime.fullname)
+
+          expect(page).to have_css('.success',
+            text: av_hero_arrive_ontime_leave_late.fullname)
+          expect(page).not_to have_css('.warning',
+            text: av_hero_arrive_ontime_leave_late.fullname)
+          expect(page).not_to have_css('.danger',
+            text: av_hero_arrive_ontime_leave_late.fullname)
+
+          expect(page).to have_css('.success',
+            text: av_hero_arrive_early_leave_late.fullname,
+            :count => 1)
+          expect(page).not_to have_css('.warning',
+            text: av_hero_arrive_early_leave_late.fullname)
+          expect(page).not_to have_css('.danger',
+            text: av_hero_arrive_early_leave_late.fullname)
+
         end
+
       end
     end
   end
