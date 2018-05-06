@@ -4,8 +4,8 @@ module TasksHelper
     return "class=\"#{color}\"" if color
   end
 
-  def task_staffing_label
-    content_tag(:span, @task.staffing_level, class: task_label_class(@task.staffing_level))
+  def task_staffing_label(task)
+    content_tag(:span, task.staffing_level, class: task_label_class(task.staffing_level))
   end
 
   def task_priority_label(task)

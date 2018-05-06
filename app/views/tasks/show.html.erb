@@ -14,7 +14,7 @@
 </p>
 <span class="h3"><%= format_time_span(@task.start_time, @task.end_time) %></span>
 
-<p><%= task_staffing_label %>
+<p><%= task_staffing_label(@task) %>
   Requirements met: <%= @task.requirements_met_count %>/<%= @task.requirements_count %></p>
 
 <% if @task.description.present? %>
