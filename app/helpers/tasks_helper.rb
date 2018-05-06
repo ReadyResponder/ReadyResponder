@@ -14,6 +14,11 @@ module TasksHelper
                 class: task_priority_label_class(task.priority))
   end
 
+  def has_latitude_longitude?
+    @task.latitude.present? and
+    @task.longitude.present?
+  end
+
   def task_address
     city = @task.city
     city = @task.city + ', ' if @task.city.present?
