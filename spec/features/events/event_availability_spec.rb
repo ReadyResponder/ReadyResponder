@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.feature 'Event page' do
-  context 'logged in as an Editor and given an event with departments and rank' do
-    before(:each) do
+  context 'logged in as an Editor and given an event' do
+    before(:all) do
       sign_in_as('Editor')
     end
 
-    context 'given an event with departments where members have differing availabilities' do
+    context 'where members have differing availabilities' do
       before(:each) do
         Timecop.freeze
 
@@ -20,7 +20,7 @@ RSpec.feature 'Event page' do
         Timecop.return
       end
 
-      scenario 'shows partially available people properly' do
+      scenario 'shows availablity properly' do
         # av stands for available, pav stands for partially available
         # uav is unavailable
         # This person is available at the exact times
@@ -84,30 +84,32 @@ RSpec.feature 'Event page' do
         within("table#event-status tr##{@mrc.name.parameterize}-status") do
           expect(page).to have_css('.event-labels[title="Assigned to THIS Event"]', text: '0')
           expect(page).to have_css('.event-labels[title="Available"]', text: '4')
-        #  expect(page).to have_css('.event-labels[title="Partially Available"]', text: '4')
+          expect(page).to have_css('.event-labels[title="Partially Available"]', text: '4')
           expect(page).to have_css('.event-labels[title="Unavailable"]', text: '4')
           expect(page).to have_css('.event-labels[title="No Response"]', text: '0')
         end
 
         within("table#availabilities") do
-          # This is for the responder with the exact times
-          # who is fully available
+        # First, people who are fully available
           expect(page).to have_css('.success',
-            text: av_hero_exactly_ontime.fullname)
+            text: av_hero_exactly_ontime.fullname,
+            :count => 1)
           expect(page).not_to have_css('.warning',
             text: av_hero_exactly_ontime.fullname)
           expect(page).not_to have_css('.danger',
             text: av_hero_exactly_ontime.fullname)
 
           expect(page).to have_css('.success',
-            text: av_hero_arrive_early_leave_ontime.fullname)
+            text: av_hero_arrive_early_leave_ontime.fullname,
+            :count => 1)
           expect(page).not_to have_css('.warning',
             text: av_hero_arrive_early_leave_ontime.fullname)
           expect(page).not_to have_css('.danger',
             text: av_hero_arrive_early_leave_ontime.fullname)
 
           expect(page).to have_css('.success',
-            text: av_hero_arrive_ontime_leave_late.fullname)
+            text: av_hero_arrive_ontime_leave_late.fullname,
+            :count => 1)
           expect(page).not_to have_css('.warning',
             text: av_hero_arrive_ontime_leave_late.fullname)
           expect(page).not_to have_css('.danger',
@@ -120,6 +122,49 @@ RSpec.feature 'Event page' do
             text: av_hero_arrive_early_leave_late.fullname)
           expect(page).not_to have_css('.danger',
             text: av_hero_arrive_early_leave_late.fullname)
+
+        # Then people who are partially available
+          expect(page).not_to have_css('.success',
+            text: pav_hero_arrive_late_leave_ontime.fullname)
+          expect(page).to have_css('.warning',
+            text: pav_hero_arrive_late_leave_ontime.fullname,
+            :count => 1)
+          expect(page).not_to have_css('.danger',
+            text: pav_hero_arrive_late_leave_ontime.fullname)
+
+          expect(page).not_to have_css('.success',
+            text: pav_hero_arrive_late_leave_late.fullname)
+          expect(page).to have_css('.warning',
+            text: pav_hero_arrive_late_leave_late.fullname,
+            :count => 1)
+          expect(page).not_to have_css('.danger',
+            text: pav_hero_arrive_late_leave_late.fullname)
+
+          expect(page).not_to have_css('.success',
+            text: pav_hero_arrive_late_leave_early.fullname)
+          expect(page).to have_css('.warning',
+            text: pav_hero_arrive_late_leave_early.fullname,
+            :count => 1)
+          expect(page).not_to have_css('.danger',
+            text: pav_hero_arrive_late_leave_early.fullname)
+
+          expect(page).not_to have_css('.success',
+            text: pav_hero_arrive_ontime_leave_early.fullname)
+          expect(page).to have_css('.warning',
+            text: pav_hero_arrive_ontime_leave_early.fullname,
+            :count => 1)
+          expect(page).not_to have_css('.danger',
+            text: pav_hero_arrive_ontime_leave_early.fullname)
+
+        # Finally, people who are not available at all
+          expect(page).not_to have_css('.success',
+            text: uav_hero_exact_times.fullname)
+          expect(page).not_to have_css('.warning',
+            text: uav_hero_exact_times.fullname)
+          expect(page).to have_css('.danger',
+            text: uav_hero_exact_times.fullname,
+            :count => 1)
+
 
         end
 
