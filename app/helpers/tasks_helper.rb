@@ -20,12 +20,17 @@ module TasksHelper
   end
 
   def task_address
-    city = @task.city
-    city = @task.city + ', ' if @task.city.present?
+    comma = if @task.city.present? && @task.state.present?
+              ', '
+            else
+              ''
+            end
+
+    city_state = @task.city + comma + @task.state
 
     content_tag :div do
       concat content_tag(:p, @task.street)
-      concat content_tag(:p, city + @task.state + " #{@task.zipcode}")
+      concat content_tag(:p, city_state + " #{@task.zipcode}")
     end
   end
 
