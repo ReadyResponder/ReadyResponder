@@ -24,70 +24,96 @@ RSpec.feature 'Event page' do
         # av stands for available, pav stands for partially available
         # uav is unavailable
         # This person is available at the exact times
-        av_hero_exactly_ontime = create(:person, firstname: 'Adam', department: @mrc)
+        av_hero_exactly_ontime = create(:person,
+                   lastname: 'Av-arrive-ontime-leave-ontime',
+                   department: @mrc)
         create(:availability, person: av_hero_exactly_ontime, status: 'Available',
           start_time: @event.start_time, end_time: @event.end_time)
 
         # This person is available , arriving early
-        av_hero_arrive_early_leave_ontime = create(:person, department: @mrc)
+        av_hero_arrive_early_leave_ontime = create(:person,
+                   lastname: 'Av-arrive-early-leave-ontime',
+                   department: @mrc)
         create(:availability, person: av_hero_arrive_early_leave_ontime, status: 'Available',
           start_time: @event.start_time - 1.hour, end_time: @event.end_time)
 
         # This person is available, staying late
-        av_hero_arrive_ontime_leave_late = create(:person, department: @mrc)
+        av_hero_arrive_ontime_leave_late = create(:person,
+                   lastname: 'Av-arrive-ontime-leave-late',
+                   department: @mrc)
         create(:availability, person: av_hero_arrive_ontime_leave_late, status: 'Available',
           start_time: @event.start_time, end_time: @event.end_time + 1.hour)
 
-        av_hero_arrive_early_leave_late = create(:person, department: @mrc)
+        av_hero_arrive_early_leave_late = create(:person,
+                   lastname: 'Av-arrive-early-leave-late',
+                   department: @mrc)
         create(:availability, person: av_hero_arrive_early_leave_late, status: 'Available',
           start_time: @event.start_time - 1.hour, end_time: @event.end_time + 1.hour)
 
         # These people should be partially available
-        pav_hero_arrive_late_leave_ontime = create(:person, department: @mrc)
+        pav_hero_arrive_late_leave_ontime = create(:person,
+                   lastname: 'Pav-arrive-late-leave-ontime',
+                   department: @mrc)
         create(:availability, person: pav_hero_arrive_late_leave_ontime, status: 'Available',
           start_time: @event.start_time + 1.hour, end_time: @event.end_time)
 
-        pav_hero_arrive_late_leave_late = create(:person, department: @mrc)
+        pav_hero_arrive_late_leave_late = create(:person,
+                   lastname: 'Pav-arrive-late-leave-late',
+                   department: @mrc)
         create(:availability, person: pav_hero_arrive_late_leave_late, status: 'Available',
           start_time: @event.start_time + 1.hour, end_time: @event.end_time + 1.hour)
 
-        pav_hero_arrive_late_leave_early = create(:person, department: @mrc)
+        pav_hero_arrive_late_leave_early = create(:person,
+                   lastname: 'Pav-arrive-late-leave-early',
+                   department: @mrc)
         create(:availability, person: pav_hero_arrive_late_leave_early, status: 'Available',
           start_time: @event.start_time + 1.hour, end_time: @event.end_time - 1.hour)
 
-        pav_hero_arrive_ontime_leave_early = create(:person, department: @mrc)
+        pav_hero_arrive_ontime_leave_early = create(:person,
+                  lastname: 'Pav-arrive-ontime-leave-early',
+                  department: @mrc)
         create(:availability, person: pav_hero_arrive_ontime_leave_early, status: 'Available',
           start_time: @event.start_time, end_time: @event.end_time - 1.hour)
 
-        uav_hero_exact_times = create(:person, department: @mrc)
+        pav_hero_arrive_early_leave_early = create(:person,
+                  lastname: 'Pav-arrive-early-leave-early',
+                  department: @mrc)
+        create(:availability, person: pav_hero_arrive_early_leave_early, status: 'Available',
+          start_time: @event.start_time - 1.hour, end_time: @event.end_time - 1.hour)
+
+        # And now people who are completely unavailable
+        uav_hero_exact_times = create(:person,
+                   lastname: 'Uav-arrive-ontime-leave-ontime',
+                   department: @mrc)
         create(:availability, person: uav_hero_exact_times,
           status: 'Unavailable',
           start_time: @event.start_time, end_time: @event.end_time - 1.hour)
 
-        uav_hero_exact_start_late_end = create(:person, department: @mrc)
-        create(:availability, person: uav_hero_exact_start_late_end,
-          status: 'Unavailable',
-          start_time: @event.start_time, end_time: @event.end_time + 1.hour)
+        uav_hero_start_ontime_leave_late = create(:person,
+                   lastname: 'Uav-start-ontime-leave-late',
+                   department: @mrc)
+        create(:availability, person: uav_hero_start_ontime_leave_late,
+                   status: 'Unavailable',
+                   start_time: @event.start_time,
+                   end_time: @event.end_time + 1.hour)
 
-        uav_hero_early_start_exact_end = create(:person, department: @mrc)
+        uav_hero_early_start_exact_end = create(:person,
+                   lastname: 'Uav-start-early-leave-ontime',
+                   department: @mrc)
         create(:availability, person: uav_hero_early_start_exact_end,
-          status: 'Unavailable',
-          start_time: @event.start_time - 1.hour, end_time: @event.end_time)
+                    status: 'Unavailable',
+                    start_time: @event.start_time - 1.hour,
+                    end_time: @event.end_time)
 
-        uav_hero_early_start_late_end = create(:person, department: @mrc)
-        create(:availability, person: uav_hero_early_start_late_end,
-          status: 'Unavailable',
-          start_time: @event.start_time - 1.hour, end_time: @event.end_time + 1.hour)
+        uav_hero_start_early_leave_late = create(:person,
+                    lastname: 'Uav-start-early-leave-late',
+                    department: @mrc)
+        create(:availability, person: uav_hero_start_early_leave_late,
+                    status: 'Unavailable',
+                    start_time: @event.start_time - 1.hour,
+                    end_time: @event.end_time + 1.hour)
 
         visit event_path(@event)
-
-        within("table#event-status tr##{@mrc.name.parameterize}-status") do
-          expect(page).to have_css('.event-labels[title="Assigned to THIS Event"]', text: '0')
-          expect(page).to have_css('.event-labels[title="Available"]', text: '4')
-          expect(page).to have_css('.event-labels[title="Partially Available"]', text: '4')
-          expect(page).to have_css('.event-labels[title="Unavailable"]', text: '4')
-          expect(page).to have_css('.event-labels[title="No Response"]', text: '0')
-        end
 
         within("table#availabilities") do
         # First, people who are fully available
@@ -165,9 +191,37 @@ RSpec.feature 'Event page' do
             text: uav_hero_exact_times.fullname,
             :count => 1)
 
+          expect(page).not_to have_css('.success',
+            text: uav_hero_start_ontime_leave_late.fullname)
+          expect(page).not_to have_css('.warning',
+            text: uav_hero_start_ontime_leave_late.fullname)
+          expect(page).to have_css('.danger',
+            text: uav_hero_start_ontime_leave_late.fullname,
+            :count => 1)
 
+          expect(page).not_to have_css('.success',
+            text: uav_hero_early_start_exact_end.fullname)
+          expect(page).not_to have_css('.warning',
+            text: uav_hero_early_start_exact_end.fullname)
+          expect(page).to have_css('.danger',
+            text: uav_hero_early_start_exact_end.fullname,
+            :count => 1)
+
+          expect(page).not_to have_css('.success',
+            text: uav_hero_start_early_leave_late.fullname)
+          expect(page).not_to have_css('.warning',
+            text: uav_hero_start_early_leave_late.fullname)
+          expect(page).to have_css('.danger',
+            text: uav_hero_start_early_leave_late.fullname,
+            :count => 1)
         end
-
+        within("table#event-status tr##{@mrc.name.parameterize}-status") do
+          expect(page).to have_css('.event-labels[title="Assigned to THIS Event"]', text: '0')
+          expect(page).to have_css('.event-labels[title="Available"]', text: '4')
+          expect(page).to have_css('.event-labels[title="Partially Available"]', text: '5')
+          expect(page).to have_css('.event-labels[title="Unavailable"]', text: '4')
+          expect(page).to have_css('.event-labels[title="No Response"]', text: '0')
+        end
       end
     end
   end
