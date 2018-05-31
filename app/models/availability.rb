@@ -61,6 +61,7 @@ class Availability < ActiveRecord::Base
 
   def self.process_data
     availabilities = Availability.available
+    return nil if availabilities.empty?
     start_time = availabilities.map(&:start_time).min.to_datetime
     end_time = availabilities.map(&:end_time).max.to_datetime
     data = []
