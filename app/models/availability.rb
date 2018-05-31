@@ -36,7 +36,7 @@ class Availability < ActiveRecord::Base
     overlapping(range).where('(start_time >= :start_time AND end_time < :end_time) OR
                               (start_time < :start_time AND end_time > :start_time AND end_time < :end_time) OR
                               (end_time > :start_time AND start_time < :start_time AND end_time < :end_time) OR
-                              (start_time > :start_time AND end_time > :end_time)', start_time: range.first, end_time: range.last) }
+                              (start_time > :start_time AND end_time >= :end_time)', start_time: range.first, end_time: range.last) }
 
   scope :containing, lambda { |range|
     where("tsrange(start_time, end_time, '[)') @> tsrange(TIMESTAMP?, TIMESTAMP?, '[)')",
