@@ -8,26 +8,27 @@
 
 # I have added some objects whose status is Inactive to ensure they don't appear.
 
-manager_role = Role.find_or_create_by(name: "Manager")
-if User.count == 0
-  password = (0...6).map { ('a'..'z').to_a[rand(26)] }.join.upcase
-  puts "The initial user password is #{password}"
-  puts "The initial user name is 'bdoe@example.com'"
-  admin_user = User.create(username: "bdoe",
-                           email: "bdoe@example.com",
-                           firstname: "Bob", lastname: "Doe",
-                           password: password,
-                           password_confirmation: password
-                           )
-  admin_user.roles << manager_role
-end
+# Roles & Admin User
+manager_role = Role.find_or_create_by(name: 'Manager')
+  if User.count == 0
+    password = (0...6).map { ('a'..'z').to_a[rand(26)] }.join.upcase
+    puts "The initial user password is #{password}"
+    puts "The initial user name is 'bdoe@example.com'"
+    admin_user = User.create(username: 'bdoe',
+                             email: 'bdoe@example.com',
+                             firstname: 'Bob', lastname: 'Doe',
+                             password: password,
+                             password_confirmation: password
+                             )
+    admin_user.roles << manager_role
+  end
 
-Role.find_or_create_by(name: "Editor")
-Role.find_or_create_by(name: "Author")
-Role.find_or_create_by(name: "Depositor")
-Role.find_or_create_by(name: "Trainer")
-Role.find_or_create_by(name: "Admin")
-Role.find_or_create_by(name: "Reader")
+  Role.find_or_create_by(name: 'Editor')
+  Role.find_or_create_by(name: 'Author')
+  Role.find_or_create_by(name: 'Depositor')
+  Role.find_or_create_by(name: 'Trainer')
+  Role.find_or_create_by(name: 'Admin')
+  Role.find_or_create_by(name: 'Reader')
 
 # Departments are where people call home.
 Department.create([
@@ -44,11 +45,11 @@ cert = Department.create({name: "Community Emergency Response Team",
                           division1: ["Division 1", "Division 2"],
                           division2: ["Squad 1", "Squad 2"]})
 mrc = Department.create({name: "Medical Reserve Corp",
-                          shortname: "MRC",
-                          status: "Active",
-                          manage_people: true,
-                          division1: ["Division 1", "Division 2"],
-                          division2: ["Team 1", "Team 2"]})
+                         shortname: "MRC",
+                         status: "Active",
+                         manage_people: true,
+                         division1: ["Division 1", "Division 2"],
+                         division2: ["Team 1", "Team 2"]})
 Skill.create([
   {name: "EMT-B", status: "Active"},
   {name: "First Responder First Aid", status: "Active"},
@@ -60,14 +61,14 @@ jane = Person.create(
    firstname: "Jane", lastname: "Doe", status: "Active", gender: "Female",
    start_date: 3.years.ago, department: mrc,
    nickname: "Janey", division1: "Division 1", division2: "Team 2",
-   icsid: "321", deployable: true
+   icsid: "321", deployable: true, title: 'Recruit'
   )
 
 jake = Person.create(
    firstname: "Jake", lastname: "D", status: "Active", gender: "Male",
    start_date: 1.years.ago, department: cert,
    division1: "Division 1", division2: "Squad 1",
-   icsid: "323", deployable: true
+   icsid: "323", deployable: true, title: 'Deputy'
   )
 
 
@@ -90,7 +91,7 @@ ResourceType.create([
 Event.create([{ title: "Sample Event", status: "Scheduled", category: "Event",
                 description: "Something to see", id_code: "howdy",
                 start_time: 24.hours.from_now, end_time: 27.hours.from_now,
-                is_template: false, departments: [cert]
+                is_template: false, departments: [cert], min_title: "Recruit"
                 }])
 
 comms = ItemCategory.find_or_create_by(name: "Communication") do |item_cat|
@@ -141,7 +142,6 @@ Setting.find_or_create_by(key: 'UPCOMING_EVENTS_COUNT') do |setting|
   setting.description = 'No of upcoming events to be displayed'
   setting.value = 10
   setting.category = 'Person'
-  setting.status = 'Active'  
+  setting.status = 'Active'
   setting.required = true
 end
-

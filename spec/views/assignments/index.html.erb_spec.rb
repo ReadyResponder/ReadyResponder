@@ -14,7 +14,9 @@ RSpec.describe "assignments/index", type: :view do
     @assignments = [@requirement.assignments.create(
       :person => cj,
       :status => "Notified",
-      :duration => "9.99"
+      :duration => "9.99",
+      :start_time => "2017-02-26 11:41:15",
+      :end_time => "2017-02-26 11:41:15"
     )]
 
     allow(controller).to receive(:current_user).and_return(user)

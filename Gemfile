@@ -37,6 +37,7 @@ gem 'paper_trail'
 gem 'cocoon'
 
 group :test, :development do
+  gem 'dotenv-rails'
   gem 'thin'
   gem "rspec-rails"
   # gem 'rspec-activemodel-mocks' # TODO: remove if we no longer need mock_model or stub_model
@@ -47,7 +48,6 @@ group :test, :development do
   gem 'chromedriver-helper', '1.0.0'
   gem "guard-rspec", require: false
   gem 'guard-livereload'
-  gem "mailcatcher"
   gem "launchy"
   gem "letter_opener"
   gem 'better_errors'
@@ -74,7 +74,7 @@ group :development do
 
   # Helps you figure out where a piece of the UI is coming from by
   # adding comments to the source code at the begin and end of each template.
-  gem 'noisy_partials', git: 'git://github.com/gwshaw/noisy_partials.git'
+  gem 'noisy_partials', git: 'https://github.com/gwshaw/noisy_partials.git'
 end
 
 group :production do

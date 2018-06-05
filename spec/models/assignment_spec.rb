@@ -16,12 +16,14 @@ RSpec.describe Assignment, type: :model do
   it { is_expected.to delegate_method(:event).to(:task) }
 
   it { is_expected.to validate_presence_of(:person) }
+  it { is_expected.to validate_presence_of(:start_time) }
+  it { is_expected.to validate_presence_of(:end_time) }
 
   context 'active scope' do
     it 'returns a chainable relation' do
       expect(described_class.active).to be_a_kind_of(ActiveRecord::Relation)
     end
-    
+
     context 'given 3 assignments with different statuses' do
       let(:person) { create(:person) }
       let!(:new_assignment)       { create(:assignment, person: person,
@@ -47,11 +49,11 @@ RSpec.describe Assignment, type: :model do
     context 'given 3 overlapping assignments with different durations' do
       let(:person) { create(:person) }
       let!(:assignment_1) { create(:assignment, person: person,
-                            start_time: 4.hours.ago, end_time: 2.hour.ago) } 
+                            start_time: 4.hours.ago, end_time: 2.hour.ago) }
       let!(:assignment_2) { create(:assignment, person: person,
-                            start_time: 4.hours.ago, end_time: 1.hour.ago) } 
+                            start_time: 4.hours.ago, end_time: 1.hour.ago) }
       let!(:assignment_3) { create(:assignment, person: person,
-                            start_time: 2.hours.ago, end_time: 1.hours.ago) } 
+                            start_time: 2.hours.ago, end_time: 1.hours.ago) }
 
       it 'only returns the assignments that contain the given interval' do
         expect(described_class.for_time_span(2.hours.ago..1.hour.ago)).to contain_exactly(

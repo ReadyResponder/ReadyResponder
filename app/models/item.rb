@@ -55,6 +55,7 @@ class Item < ActiveRecord::Base
   end
 
   def last_inspection_date
+    return nil if inspections.empty?
     inspections.order('inspection_date DESC').first.inspection_date
   end
 

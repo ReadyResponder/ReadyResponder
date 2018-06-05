@@ -2,7 +2,7 @@
 
 <h1>Listing Assignments</h1>
 
-<table>
+<table class='assignments'>
   <thead>
     <tr>
       <th>Person</th>
@@ -18,7 +18,7 @@
   <tbody>
     <% @assignments.each do |assignment| %>
       <tr>
-        <td><%= assignment.person %></td>
+        <td><%= link_to assignment.person.name, assignment_path(assignment) %></td>
         <td><%= assignment.requirement %></td>
         <td><%= assignment.start_time %></td>
         <td><%= assignment.end_time %></td>

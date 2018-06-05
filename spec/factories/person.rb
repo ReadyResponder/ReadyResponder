@@ -9,9 +9,10 @@ FactoryGirl.define do
     division1 'Command'
     division2 'Command'
     title 'Captain'
+    title_order 7
     gender 'Female'
     association :department, factory: :department
-  
+
     factory :active_person do
     end
 

@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/gwshaw/noisy_partials.git
+  remote: https://github.com/gwshaw/noisy_partials.git
   revision: 9e7110bb400cd7d366adc706d7ce0934cfd3c0eb
   specs:
     noisy_partials (0.0.0)
@@ -122,6 +122,10 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
     docile (1.1.5)
+    dotenv (2.2.1)
+    dotenv-rails (2.2.1)
+      dotenv (= 2.2.1)
+      railties (>= 3.2, < 5.2)
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
@@ -191,14 +195,6 @@ GEM
     lumberjack (1.0.10)
     mail (2.6.6)
       mime-types (>= 1.16, < 4)
-    mailcatcher (0.6.5)
-      eventmachine (= 1.0.9.1)
-      mail (~> 2.3)
-      rack (~> 1.5)
-      sinatra (~> 1.2)
-      skinny (~> 0.2.3)
-      sqlite3 (~> 1.3)
-      thin (~> 1.5.0)
     meta_request (0.4.0)
       callsite (~> 0.0, >= 0.0.11)
       rack-contrib (~> 1.1)
@@ -238,8 +234,6 @@ GEM
     rack-contrib (1.4.0)
       git-version-bump (~> 0.15)
       rack (~> 1.4)
-    rack-protection (1.5.3)
-      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.7.1)
@@ -342,13 +336,6 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
-    sinatra (1.4.7)
-      rack (~> 1.5)
-      rack-protection (~> 1.4)
-      tilt (>= 1.3, < 3)
-    skinny (0.2.4)
-      eventmachine (~> 1.0.0)
-      thin (>= 1.5, < 1.7)
     slop (3.6.0)
     spring (1.7.2)
     sprockets (3.7.1)
@@ -358,7 +345,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sqlite3 (1.3.11)
     sshkit (1.11.2)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
@@ -417,6 +403,7 @@ DEPENDENCIES
   coffee-rails
   database_cleaner (= 1.0.1)
   devise (~> 3.0)
+  dotenv-rails
   factory_girl_rails
   geocoder
   guard-livereload
@@ -427,7 +414,6 @@ DEPENDENCIES
   jquery-ui-rails
   launchy
   letter_opener
-  mailcatcher
   meta_request
   noisy_partials!
   paper_trail

@@ -8,7 +8,9 @@ RSpec.describe "assignments/edit", type: :view do
       :person => @cj,
       :requirement => nil,
       :status => "New",
-      :duration => "9.99"
+      :duration => "9.99",
+      :start_time => "2017-02-26 11:41:15",
+      :end_time => "2017-02-26 11:41:15"
     ))
   end
 

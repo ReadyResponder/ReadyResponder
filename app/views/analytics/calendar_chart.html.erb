@@ -1,1 +1,5 @@
-<div id='chartContainer' class='chart-container'></div>
+<% if @data.nil? %>
+  <h2>There are currently no availabilities!</h2>
+<% else %>
+  <div id='chartContainer' class='chart-container'></div>
+<% end %>
