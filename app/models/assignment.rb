@@ -8,7 +8,7 @@ class Assignment < ActiveRecord::Base
   delegate :task, to: :requirement
   delegate :event, to: :task
 
-  validates_presence_of :person
+  validates_presence_of :person, :start_time, :end_time
 
   STATUS_CHOICES = [ 'New', 'Active', 'Cancelled' ]
 

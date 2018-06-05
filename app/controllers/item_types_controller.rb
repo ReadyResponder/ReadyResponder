@@ -12,7 +12,7 @@ class ItemTypesController < ApplicationController
 
   def new
     @item_type = ItemType.new
-    @item_type.item_category = ItemCategory.find(params[:item_category_id])
+    @item_type.item_category = ItemCategory.find(params[:item_category_id]) if params[:item_category_id]
     @item_type.status = "Active"
   end
 
@@ -38,6 +38,7 @@ class ItemTypesController < ApplicationController
 
   def destroy
     @item_type.destroy
+    redirect_to item_types_url
   end
 
   private

@@ -5,7 +5,7 @@ class Event < ActiveRecord::Base
   before_save :calc_duration, :trim_id_code
 
   validates_presence_of :category, :title, :status, :id_code,
-                        :start_time, :end_time
+                        :start_time, :end_time, :min_title, :departments
 
   validates_uniqueness_of :title
   validates_uniqueness_of :id_code, unless: :expired?
@@ -65,6 +65,10 @@ class Event < ActiveRecord::Base
     Availability.partially_overlapping(start_time..end_time).active
   end
 
+  def full_responses
+    Availability.for_time_span(start_time..end_time).active
+  end
+
   def partial_availabilities
     partial_responses.available
   end
@@ -89,7 +93,10 @@ class Event < ActiveRecord::Base
   end
 
   def responses
-    Availability.containing(start_time..end_time).active
+    people_ids = eligible_people.pluck(:id)
+    availabiltiies = Availability.where(person: people_ids).containing(start_time..end_time) +
+                    Availability.where(person: people_ids).partially_overlapping(start_time..end_time)
+    availabiltiies.uniq
   end
 
   def responding_people

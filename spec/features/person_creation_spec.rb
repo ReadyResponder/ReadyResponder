@@ -22,6 +22,7 @@ RSpec.feature "Users can create new people" do
     select "Active", from: "person_status" #"Status" also matches Channel status
     # Used `find` instead of select, as `select Department.first.id, from: "person_department_id"` raises "Ambiguous match" error
     find(:css, '#person_department_id > option:nth-child(2)').select_option
+    select "Recruit", from: "Rank"
     page.execute_script "window.scrollBy(0,1500)"
     click_button "Create Person"
     expect(page).to have_content "Person was successfully created."
@@ -38,6 +39,7 @@ RSpec.feature "Users can create new people" do
     fill_in "Start date", with: "2017-01-01"
     fill_in "Application date", with: "2017-12-01"
     find(:css, '#person_department_id > option:nth-child(2)').select_option
+    select "Recruit", from: "Rank"
     page.execute_script "window.scrollBy(0,1500)"
     click_button "Create Person"
     expect(page).to have_content "Start date cannot be before the application date"

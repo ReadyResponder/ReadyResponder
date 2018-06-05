@@ -36,14 +36,14 @@ RSpec.describe Availability, type: :model do
       it 'must not overlap one of the person\'s active availabilities' do
         create(:availability, person: a_person,
           start_time: 1.hour.ago, end_time: 3.hours.from_now)
-        
+
         expect(availability).not_to be_valid
       end
 
       it 'can overlap one of the person\'s inactive availabilities' do
         create(:availability, person: a_person,
           status: 'Cancelled', start_time: 1.hour.ago, end_time: 3.hours.from_now)
-        
+
         expect(availability).to be_valid
       end
 
@@ -51,7 +51,7 @@ RSpec.describe Availability, type: :model do
         someone_else = create(:person)
         create(:availability, person: someone_else,
           start_time: 2.hours.ago, end_time: 3.hours.from_now)
-        
+
         expect(availability).to be_valid
       end
     end
@@ -63,6 +63,22 @@ RSpec.describe Availability, type: :model do
     it 'marks the status of the availability as Cancelled' do
       expect { availability.cancel! }.to change {
         availability.reload.status }.from('Available').to('Cancelled')
+    end
+  end
+
+  describe 'self.process_data' do
+    it 'returns nil if there are no available availabilites' do
+      expect(Availability.process_data).to eq(nil)
+      create(:availability, person: a_person,
+            start_time: 1.day.ago, end_time: 1.day.from_now)
+      expect(Availability.process_data).to eq(nil)
+    end
+    it 'returns array of hashes if availabilities are found' do
+      create(:availability, person: a_person,
+            start_time: 1.day.ago, end_time: 1.day.from_now, status: 'Available')
+      result = Availability.process_data
+      expect(result).to be_a_kind_of(Array)
+      expect(result[0][0]).to be_a_kind_of(Hash)
     end
   end
 
@@ -156,12 +172,29 @@ RSpec.describe Availability, type: :model do
   end
 
   context 'partially_overlapping scope' do
+    let (:start_time){ 1.day.from_now }
+    let (:end_time){2.days.from_now }
+    let(:people) { create_list(:person, 7) }
+    let (:a1){create(:availability, person: people[0],
+                 start_time: start_time - 1.hour, end_time: end_time - 1.hour)}
+    let (:a2){create(:availability, person: people[1],
+                 start_time: start_time + 1.hour, end_time: end_time + 1.hour)}
+    let (:a3){create(:availability, person: people[2],
+                 start_time: start_time + 1.hour, end_time: end_time - 1.hour)}
+    let (:a4){create(:availability, person: people[3],
+                 start_time: start_time , end_time: end_time )}
+    let (:a5){create(:availability, person: people[4],
+                     start_time: start_time - 1.hour, end_time: end_time + 1.hour)}
+    let (:a6){create(:availability, person: people[5],
+                     start_time: start_time - 2.hour, end_time: start_time - 1.hour)}
+    let (:a7){create(:availability, person: people[6],
+                     start_time: end_time + 1.hour, end_time: end_time + 2.hour)}
+
     it 'returns a chainable relation' do
       expect(described_class.partially_overlapping([0,1])).to be_a_kind_of(ActiveRecord::Relation)
     end
 
     context 'given 3 availabilites that belong to 3 different people' do
-      let(:people) { create_list(:person, 3) }
       let!(:first_availability)  { create(:availability, person: people[0],
                                    start_time: 6.hours.ago, end_time: 3.hours.ago) }
       let!(:second_availability) { create(:availability, person: people[1],
@@ -169,14 +202,40 @@ RSpec.describe Availability, type: :model do
       let!(:third_availability)  { create(:availability, person: people[2],
                                    start_time: 2.hours.ago, end_time: 1.hour.from_now) }
 
+
+
+
       it 'returns the availabilities that contain a part of the given date_range' do
         date_range = 5.hours.ago..3.hours.ago
         expect(described_class.partially_overlapping(date_range)).to contain_exactly(
           second_availability)
       end
     end
+
+    context "confirmation of date comparison" do
+      let(:results){Availability.partially_overlapping((start_time..end_time))}
+      it "should include partial responses that are < start_time and < end time" do
+        expect(results).to include(a1)
+      end
+
+      it "should include partial responses that are > start time and < end time" do
+        expect(results).to include(a3)
+      end
+
+      it "should include partial responses that are > start time and > end time" do
+        expect(results).to include(a2)
+      end
+
+      it "should not include responses that are entirely before start_time" do
+        expect(results).not_to include(a6)
+      end
+      it "should not include responses that are entirely after end_time" do
+        expect(results).not_to include(a7)
+      end
+
+    end
   end
-  
+
   context 'containing scope' do
     it 'returns a chainable relation' do
       expect(described_class.containing([0,1])).to be_a_kind_of(ActiveRecord::Relation)
@@ -210,7 +269,7 @@ RSpec.describe Availability, type: :model do
       end
     end
   end
-  
+
   context 'contained_in scope' do
     it 'returns a chainable relation' do
       expect(described_class.contained_in([0,1])).to be_a_kind_of(ActiveRecord::Relation)
