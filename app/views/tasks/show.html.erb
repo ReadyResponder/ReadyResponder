@@ -21,18 +21,13 @@
   <p><b>Description:</b> <%= @task.description %></p>
 <% end %>
 
-<% if @task.street.present? and @task.city.present? and @task.state.present? and @task.zipcode.present? %>
-  <p>
-    <%= @task.street %><br>
-    <%= @task.city %>, <%= @task.state %> <%= @task.zipcode %>
-  </p>
-<% end %>
+<%= task_address %>
 
-<% if @task.latitude.present? and @task.longitude.present? %>
+<% if has_latitude_longitude? %>
   <p>(<%= @task.latitude %>, <%= @task.longitude %>)</p>
 <% end %>
 
-<% if @task.latitude.present? and @task.longitude.present? %>
+<% if has_latitude_longitude? %>
   <div id="map" class="map" style="height:250px"></div>
   <div style="display: none;">
   <a id="task" target="_blank" href=""><%= @task.title %></a>
