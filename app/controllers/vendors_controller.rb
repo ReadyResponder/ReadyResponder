@@ -32,9 +32,9 @@ class VendorsController < ApplicationController
     @vendor = Vendor.find(params[:id])
 
     if @vendor.update_attributes(vendor_params)
-      redirect_to vendor_path(@vendor), notice: "Vendor was successfully created"
+      redirect_to vendor_path(@vendor), notice: "Vendor was successfully updated"
     else
-      flash[:alert] = @venor.error.full_messages.join(", ")
+      flash[:alert] = @vendor.error.full_messages.join(", ")
       render action: edit
     end
   end
