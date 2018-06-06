@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe InspectionsController, type: :controller do  
+RSpec.describe InspectionsController, type: :controller do
   let(:active_person) { create(:person, firstname: 'Aaon' ) }
   let(:inactive_person) { create(:inactive_person, firstname: 'Aaby' ) }
   let(:item) { create(:item) }
@@ -14,35 +14,35 @@ RSpec.describe InspectionsController, type: :controller do
       get :index
 
       expect(assigns[:inspections]).to eq(Inspection.all)
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe '#show' do
     it 'assigns an inspection & renders' do
-      get :show, id: inspection.id
+      get :show, params: { id: inspection.id }
 
       expect(assigns[:inspection]).to eq(inspection)
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
-  describe '#new' do    
-    subject { get :new, item_id: item.id }
+  describe '#new' do
+    subject { get :new, params: { item_id: item.id } }
 
-    before { 
+    before {
       active_person
       inactive_person
       subject }
 
-    it 'sets the item and inspectors' do      
+    it 'sets the item and inspectors' do
       expect(assigns[:item]).to eq(item)
       expect(assigns[:inspectors]).to eq([active_person, item.owner]), "Should assign only active persons as inspectors"
     end
 
     it 'builds a new inspection for an item & renders' do
       expect(assigns[:inspection]).to have_attributes(item_id: item.id)
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -50,11 +50,11 @@ RSpec.describe InspectionsController, type: :controller do
     it 'assigns an inspection & renders' do
       active_person
       inspection.update_attribute(:person_id, inactive_person.id)
-      get :edit, id: inspection.id
+      get :edit, params: { id: inspection.id }
 
       expect(assigns[:inspection]).to eq(inspection)
       expect(assigns[:inspectors]).to eq([inactive_person, active_person, item.owner])
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -66,7 +66,7 @@ RSpec.describe InspectionsController, type: :controller do
       }
     end
 
-    subject { post :create, inspection_params }
+    subject { post :create, params: inspection_params }
 
     context 'with a successful save' do
       it 'creates a new inspection' do
@@ -88,7 +88,7 @@ RSpec.describe InspectionsController, type: :controller do
         end
       end
 
-      subject { post :create, invalid_inspection_params }
+      subject { post :create, params: invalid_inspection_params }
 
       it "doesn't create a new inspection" do
         expect { subject }.to_not change { Inspection.count }
@@ -110,7 +110,7 @@ RSpec.describe InspectionsController, type: :controller do
       }
     end
 
-    subject { put :update, inspection_params }
+    subject { put :update, params: inspection_params }
 
     context 'with a successful update' do
       it 'updates the inspection' do
@@ -132,7 +132,7 @@ RSpec.describe InspectionsController, type: :controller do
         end
       end
 
-      subject { put :update, invalid_inspection_params }
+      subject { put :update, params: invalid_inspection_params }
 
       it "doesn't create a new inspection" do
         expect { subject }.to_not change { inspection.status }
@@ -147,7 +147,7 @@ RSpec.describe InspectionsController, type: :controller do
   end
 
   describe '#destroy' do
-    subject { delete :destroy, id: inspection.id }
+    subject { delete :destroy, params: { id: inspection.id } }
 
     it 'deletes an inspection' do
       subject

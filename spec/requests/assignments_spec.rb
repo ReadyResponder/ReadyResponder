@@ -8,10 +8,10 @@ RSpec.describe "assignments", :type => :request do
     end
 
     it "assignments#create" do
-      assignment_attributes = FactoryGirl.attributes_for(:assignment)
+      assignment_attributes = FactoryBot.attributes_for(:assignment)
 
       expect {
-        post "/requirements/1/assignments", { assignment: assignment_attributes }
+        post "/requirements/1/assignments", params: { assignment: assignment_attributes }
       }.to_not change(Assignment, :count)
 
       expect(response).to redirect_to new_user_session_path
@@ -39,7 +39,7 @@ RSpec.describe "assignments", :type => :request do
 
     it "assignments#update" do
       assignment_attributes = @assignment.attributes.except("id", "created_at", "updated_at")
-      patch assignment_path(id: @assignment.id), { assignment: assignment_attributes }
+      patch assignment_path(id: @assignment.id), params: { assignment: assignment_attributes }
       expect(response).to redirect_to new_user_session_path
     end
   end

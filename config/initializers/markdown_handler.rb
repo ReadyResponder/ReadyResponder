@@ -2,7 +2,7 @@ module ActionView
   module Template::Handlers
   class MarkdownHandler
     class_attribute :default_format
-    self.default_format = Mime::HTML
+    self.default_format = Mime[:HTML]
     def erb
       @erb ||= ActionView::Template.registered_template_handler(:erb)
     end
@@ -18,4 +18,3 @@ end
 
 ActionView::Template.register_template_handler(
   :md, ActionView::Template::Handlers::MarkdownHandler.new)
-

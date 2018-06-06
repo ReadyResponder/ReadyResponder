@@ -7,10 +7,10 @@ RSpec.describe "Departments", :type => :request do
     end
 
     it "departments#create" do
-      department_attributes = FactoryGirl.attributes_for(:department)
+      department_attributes = FactoryBot.attributes_for(:department)
 
       expect {
-        post "/departments", { department: department_attributes }
+        post "/departments", params: { department: department_attributes }
       }.to_not change(Department, :count)
 
       expect(response).to redirect_to new_user_session_path
@@ -43,7 +43,7 @@ RSpec.describe "Departments", :type => :request do
 
     it "departments#update" do
       department_attributes = @department.attributes.except("id", "created_at", "updated_at")
-      patch department_path(id: @department.id), { department: department_attributes }
+      patch department_path(id: @department.id), params: { department: department_attributes }
       expect(response).to redirect_to new_user_session_path
     end
   end

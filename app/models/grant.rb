@@ -1,8 +1,9 @@
-class Grant < ActiveRecord::Base
+class Grant < ApplicationRecord
   has_paper_trail
   include Loggable
 
-  attr_accessible :name, :description, :start_date, :end_date, :status
+  # rails 5 deprecation
+  # attr_accessible :name, :description, :start_date, :end_date, :status
 
   validate :end_date_after_start_date?
 

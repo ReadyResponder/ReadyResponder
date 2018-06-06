@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CoursesControllerTest < ActionController::TestCase
   setup do
-    @course = FactoryGirl.create(:course, name: "MADL Driving")
+    @course = FactoryBot.create(:course, name: "MADL Driving")
   end
 
   test "should get index" do
@@ -18,7 +18,7 @@ class CoursesControllerTest < ActionController::TestCase
 
   test "should create course" do
     assert_difference('Course.count') do
-      @course = FactoryGirl.create(:course, id: 10, name: "MADL Driving")
+      @course = FactoryBot.create(:course, id: 10, name: "MADL Driving")
     end
 
     #assert_redirected_to course_path(assigns(:course))

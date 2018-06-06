@@ -18,12 +18,12 @@ RSpec.describe Grant do
     end
 
     it "create new grant" do
-      fill_in('grant_name', :with => 'foo')
-      fill_in('grant_description', :with => 'bar')
-      fill_in('grant_start_date', :with => '10-10-2010')
-      fill_in('grant_end_date', :with => '10-10-2012')
+      fill_in('grant_name', with: 'foo')
+      fill_in('grant_description', with: 'bar')
+      fill_in('grant_start_date', with: '10-10-2010')
+      fill_in('grant_end_date', with: '10-10-2012')
       click_button('Create Grant')
-
+      
       expect(Grant.last.name).to eq('foo')
     end
   end
@@ -42,7 +42,7 @@ RSpec.describe Grant do
     end
 
     it "successful edit should update data in grants table" do
-      fill_in('grant_name', :with => 'foo update')
+      fill_in('grant_name', with: 'foo update')
       click_button('Update Grant')
 
       expect(Grant.last.name).to eq('foo update')

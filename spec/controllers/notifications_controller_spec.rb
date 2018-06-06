@@ -3,7 +3,7 @@ require 'rails_helper'
 # https://github.com/plataformatec/devise/wiki/How-To:-Test-controllers-with-Rails-3-and-4-(and-RSpec)
 
 RSpec.describe NotificationsController, type: :controller do
-  let(:event) { FactoryGirl.create(:event) }
+  let(:event) { FactoryBot.create(:event) }
   let(:department) { create(:department) }
   let!(:notification)  { create(:notification,
                                 event: event,
@@ -19,14 +19,14 @@ RSpec.describe NotificationsController, type: :controller do
   describe "GET" do
     it "should get index" do
       get 'index'
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe "GET #edit" do
     it "assigns the requested notification" do
       event.notifications << notification
-      get :edit, {:id => notification.to_param}
+      get :edit, params: { id: notification.to_param }
       expect(assigns(:notification)).to eq(notification)
     end
   end
@@ -34,10 +34,10 @@ RSpec.describe NotificationsController, type: :controller do
   describe 'POST #create' do
     let(:notification_params) { { notification: {} } }
     let(:notification) do
-      FactoryGirl.build(:notification,
+      FactoryBot.build(:notification,
                         status: 'Active',
-                        event: FactoryGirl.create(:event),
-                        departments: [FactoryGirl.build(:department)])
+                        event: FactoryBot.create(:event),
+                        departments: [FactoryBot.build(:department)])
     end
 
     before do
@@ -47,7 +47,7 @@ RSpec.describe NotificationsController, type: :controller do
     context 'successfully initialized client' do
       it 'delivers the notification' do
         expect(notification).to receive(:activate!)
-        post :create, { notification: { subject: anything } }
+        post :create, params: { notification: { subject: anything } }
         expect(subject).to redirect_to(notification.event)
       end
     end
@@ -56,7 +56,7 @@ RSpec.describe NotificationsController, type: :controller do
       it 'rescues an error and sets a flash message' do
         expect(notification).to receive(:activate!)
                             .and_raise(Message::SendNotificationTextMessage::InvalidClient)
-        post :create, { notification: { subject: anything } }
+        post :create, params: { notification: { subject: anything } }
         expect(subject).to render_template(:new)
       end
     end

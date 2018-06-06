@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_and_authorize_resource
 
   def index
@@ -62,7 +62,7 @@ class EventsController < ApplicationController
   def event_params
     params.require(:event).permit(:title, :description, :category,
     :course_id, :duration, :start_time, :end_time, :instructor, :location,
-    :id_code, :status, :timecard_ids, :person_ids, :comments,
-    :is_template, :template_id, :min_title, department_ids: [])
+    :id_code, :status, :comments, :is_template, :template_id, :min_title,
+    :department_ids => [], :timecard_ids => [], :person_ids => [])
   end
 end

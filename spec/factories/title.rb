@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :title do
     status "Active"
     sequence (:name) {|n|  "Skill#{n}" }

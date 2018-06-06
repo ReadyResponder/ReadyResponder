@@ -31,8 +31,8 @@ RSpec.describe "user" do
     visit edit_user_path(@user)
     expect(page).to have_content("Home")
     expect(page).to have_css('#sidebar')
-    expect(page).to have_field('user_lastname', :with => "Doe")
-    fill_in 'user_lastname', :with => "Ford"
+    expect(page).to have_field('user_lastname', with: "Doe")
+    fill_in 'user_lastname', with: "Ford"
     click_on 'Update'
     expect(page).to have_content("Ford")
     expect(page).not_to have_content("Doe")

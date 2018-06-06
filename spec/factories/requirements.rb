@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :requirement do
     minimum_people 1
     maximum_people 1

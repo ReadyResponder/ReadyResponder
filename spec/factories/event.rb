@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :event do
     sequence(:title) { |n| "Training Event #{n}" }
     sequence(:id_code) { |n| "code_#{n}" }
@@ -6,7 +6,7 @@ FactoryGirl.define do
     category "Training"
     status "Scheduled"
     min_title "Recruit"
-    departments {[FactoryGirl.create(:department)]}
+    departments {[FactoryBot.create(:department)]}
     start_time Time.current
     end_time 23.hours.from_now
 

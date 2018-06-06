@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "departments/index", :type => :view do
-  let(:user) { FactoryGirl.create :user }
+  let(:user) { FactoryBot.create :user }
   before(:each) do
     assign(:departments, [
       Department.create!(

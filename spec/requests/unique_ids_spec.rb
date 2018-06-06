@@ -7,10 +7,10 @@ RSpec.describe "UniqueIds", :type => :request do
     end
 
     it "unique_ids#create" do
-      unique_id_attributes = FactoryGirl.attributes_for(:unique_id)
+      unique_id_attributes = FactoryBot.attributes_for(:unique_id)
 
       expect {
-        post "/unique_ids", { unique_id: unique_id_attributes }
+        post "/unique_ids", params: { unique_id: unique_id_attributes }
       }.to_not change(UniqueId, :count)
 
       expect(response).to redirect_to new_user_session_path
@@ -38,7 +38,7 @@ RSpec.describe "UniqueIds", :type => :request do
 
     it "unique_ids#update" do
       unique_id_attributes = @unique_id.attributes.except("id", "created_at", "updated_at")
-      patch unique_id_path(id: @unique_id.id), { unique_id: unique_id_attributes }
+      patch unique_id_path(id: @unique_id.id), params: { unique_id: unique_id_attributes }
       expect(response).to redirect_to new_user_session_path
     end
   end

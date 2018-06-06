@@ -1,5 +1,5 @@
 class SkillsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_and_authorize_resource
 
   # GET /skills
@@ -43,7 +43,7 @@ class SkillsController < ApplicationController
   # POST /skills
   # POST /skills.json
   def create
-    @skill = Skill.new(params[:skill])
+    @skill = Skill.new(skill_params)
 
     respond_to do |format|
       if @skill.save
@@ -62,7 +62,7 @@ class SkillsController < ApplicationController
     @skill = Skill.find(params[:id])
 
     respond_to do |format|
-      if @skill.update_attributes(params[:skill])
+      if @skill.update_attributes(skill_params)
         format.html { redirect_to skills_url, notice: 'Skill was successfully updated.' }
         format.json { head :no_content }
       else
@@ -82,5 +82,11 @@ class SkillsController < ApplicationController
       format.html { redirect_to skills_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def skill_params
+    params.require(:skill).permit(:name, :status, course_ids: [], title_ids: [])
   end
 end
