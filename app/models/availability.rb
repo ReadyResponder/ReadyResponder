@@ -36,7 +36,7 @@ class Availability < ApplicationRecord
     overlapping(range).where('(start_time >= :start_time AND end_time < :end_time) OR
                               (start_time < :start_time AND end_time > :start_time AND end_time < :end_time) OR
                               (end_time > :start_time AND start_time < :start_time AND end_time < :end_time) OR
-                              (start_time > :start_time AND end_time > :end_time)', start_time: range.first, end_time: range.last) }
+                              (start_time > :start_time AND end_time >= :end_time)', start_time: range.first, end_time: range.last) }
 
   scope :containing, lambda { |range|
     where("tsrange(start_time, end_time, '[)') @> tsrange(TIMESTAMP?, TIMESTAMP?, '[)')",
@@ -61,6 +61,7 @@ class Availability < ApplicationRecord
 
   def self.process_data
     availabilities = Availability.available
+    return nil if availabilities.empty?
     start_time = availabilities.map(&:start_time).min.to_datetime
     end_time = availabilities.map(&:end_time).max.to_datetime
     data = []

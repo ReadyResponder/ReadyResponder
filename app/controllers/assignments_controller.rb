@@ -2,7 +2,7 @@ class AssignmentsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
 
-  before_action :set_requirement, only: [:new, :create, :edit, :update]
+  before_action :set_requirement, only: [:new, :create]
   before_action :set_assignment, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -35,7 +35,7 @@ class AssignmentsController < ApplicationController
 
   def update
     if @assignment.update(assignment_params)
-      redirect_to @requirement, notice: 'Assignment was successfully updated.'
+      redirect_to @assignment.requirement, notice: 'Assignment was successfully updated.'
     else
       render :edit
     end
@@ -51,9 +51,9 @@ class AssignmentsController < ApplicationController
     @assignment = Assignment.find(params[:id])
   end
 
-    def set_requirement
-      @requirement = Requirement.find(params[:requirement_id])
-    end
+  def set_requirement
+    @requirement = Requirement.find(params[:requirement_id])
+  end
 
   def assignment_params
     params.require(:assignment).permit(:person_id, :requirement_id, :start_time, :end_time, :status, :duration)
