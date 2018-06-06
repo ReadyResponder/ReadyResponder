@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :vendor do
     name "EMA-29"
     street "Washington st"
