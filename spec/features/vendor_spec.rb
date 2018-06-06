@@ -12,6 +12,5 @@ RSpec.describe Vendor do
     click_button("Create Vendor")
 
     expect(page).to have_content("Vendor was successfully created")
-    expect(Vendor.last.status).to eq("Active")
   end
 end

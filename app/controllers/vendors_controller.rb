@@ -20,6 +20,7 @@ class VendorsController < ApplicationController
     if @vendor.save
       redirect_to params[:next] || vendors_path, notice: "Vendor was successfully created"
     else
+      flash[:alert] = @vendor.errors.full_messages.join(", ")
       render "new"
     end
   end
@@ -34,7 +35,7 @@ class VendorsController < ApplicationController
     if @vendor.update_attributes(vendor_params)
       redirect_to vendor_path(@vendor), notice: "Vendor was successfully updated"
     else
-      flash[:alert] = @vendor.error.full_messages.join(", ")
+      flash[:alert] = @vendor.errors.full_messages.join(", ")
       render "edit"
     end
   end
