@@ -101,7 +101,7 @@ RSpec.describe VendorsController, type: :controller do
       post :create, vendor: invalid, next: new_item_path
 
       expect(response).to render_template :new
-      expect(flash[:alert]).to eq "Name can't be blank"
+      expect(flash[:alert]).to eq("Name can't be blank")
       expect(Vendor.count).to eq(1)
     end
 
@@ -109,7 +109,7 @@ RSpec.describe VendorsController, type: :controller do
       post :create, vendor: invalid, next: vendors_path
 
       expect(response).to render_template :new
-      expect(flash[:alert]).to eq "Name can't be blank"
+      expect(flash[:alert]).to eq("Name can't be blank")
       expect(Vendor.count).to eq(1)
     end
   end
