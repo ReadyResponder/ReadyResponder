@@ -1,4 +1,4 @@
-class Question < ActiveRecord::Base
+class Question < ApplicationRecord
   has_paper_trail
   include Loggable
 

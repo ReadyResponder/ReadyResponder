@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_and_authorize_resource
 
   def index
@@ -12,11 +12,16 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update_attributes(params[:user])
+    if @user.update_attributes(user_params)
       redirect_to @user, notice: 'User was successfully updated.'
     else
       render action: "edit"
     end
   end
 
+  private
+
+  def user_params
+    params.require(:user).permit(:firstname, :lastname, :username, :email, :password, :password_confirmation, :remember_me, :role_ids => [])
+  end
 end

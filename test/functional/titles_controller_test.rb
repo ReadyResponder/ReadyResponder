@@ -2,7 +2,7 @@ require 'test_helper'
 
 class TitlesControllerTest < ActionController::TestCase
   setup do
-    @title = FactoryGirl.create(:title, name: "Police Officer")
+    @title = FactoryBot.create(:title, name: "Police Officer")
   end
 
   test "should get index" do

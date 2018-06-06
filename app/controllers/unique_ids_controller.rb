@@ -1,7 +1,7 @@
 class UniqueIdsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_and_authorize_resource
-  
+
   def index
     @unique_ids = UniqueId.all
   end
@@ -45,7 +45,7 @@ class UniqueIdsController < ApplicationController
     # Use this method to whitelist the permissible parameters. Example:
     # params.require(:person).permit(:name, :age)
     # Also, you can specialize this method with per-user checking of permissible attributes.
-    def unique_id_params
-      params.require(:unique_id).permit(:category, :item, :status, :value)
-    end
+  def unique_id_params
+    params.require(:unique_id).permit(:category, :item, :status, :value)
+  end
 end

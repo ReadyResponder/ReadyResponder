@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "resource_types/index", :type => :view do
-  let(:user) { FactoryGirl.create :user }
+  let(:user) { FactoryBot.create :user }
   before(:each) do
     assign(:resource_types, [
       ResourceType.create!(

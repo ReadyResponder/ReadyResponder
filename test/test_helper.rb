@@ -15,5 +15,5 @@ class ActiveSupport::TestCase
 end
 
 ActionController::TestCase.class_eval do
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 end

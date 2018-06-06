@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :grant do
     name "BIG_GRANT"
     description "big grant from XYZ corp"

@@ -1,14 +1,15 @@
-class Item < ActiveRecord::Base
+class Item < ApplicationRecord
   has_paper_trail
   include Loggable
 
-  attr_accessible :category, :description, :location_id, :qty,
-                  :model, :brand, :name, :owner_id, :po_number,
-                  :value, :grant, :purchase_amt, :purchase_date,
-                  :sell_amt, :sell_date, :stock_number,
-                  :vendor_id, :status, :condition, :comments, :item_image,
-                  :department_id, :resource_type_id, :item_type_id,
-                  :unique_ids_attributes, :grant_id
+  # rails 5 deprecation
+  # attr_accessible :category, :description, :location_id, :qty,
+  #                 :model, :brand, :name, :owner_id, :po_number,
+  #                 :value, :grant, :purchase_amt, :purchase_date,
+  #                 :sell_amt, :sell_date, :stock_number,
+  #                 :vendor_id, :status, :condition, :comments, :item_image,
+  #                 :department_id, :resource_type_id, :item_type_id,
+  #                 :unique_ids_attributes, :grant_id
 
   # validates_chronology :purchase_date, :sell_date     # ? - if so, needs a test
   # validates_chronology :grantstart, :grantexpiration  # ? - if so, needs a test

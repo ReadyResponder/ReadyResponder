@@ -1,5 +1,5 @@
 class TextsController < ApplicationController
-#  skip_before_filter  :verify_authenticity_token
+#  skip_before_action  :verify_authenticity_token
 #  to your controller. This way all incoming requests to
 #  the controller skips the :verify_authenticity_token filter.
 # Alternatively
@@ -55,7 +55,6 @@ class TextsController < ApplicationController
       "NumSegments"=>"1",  "ApiVersion"=>"2010-04-01"}
 =end
   def text_params
-    params.require(:text).permit(:To, :From, :Body,
-      :MessageSid, :MessagingServiceSid, :AccountSid )
+    params.require(:text).permit(:To, :From, :Body, :MessageSid, :MessagingServiceSid, :AccountSid )
   end
 end

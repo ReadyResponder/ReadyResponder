@@ -12,16 +12,16 @@ RSpec.describe ItemTypesController, type: :controller do
       get :index
 
       expect(assigns[:item_types].sort).to eq([item_type, item_type2].sort)
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe '#show' do
     it 'assigns an item_type & renders' do
-      get :show, id: item_type.id
+      get :show, params: { id: item_type.id }
 
       expect(assigns[:item_type]).to eq(item_type)
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -31,17 +31,17 @@ RSpec.describe ItemTypesController, type: :controller do
         get :new
 
         expect(assigns[:item_type]).to have_attributes(status: 'Active')
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
 
     context 'with item_category' do
       it 'builds a new item_type & renders' do
-        get :new, item_category_id: item_category.id
+        get :new, params: { item_category_id: item_category.id }
 
         expect(assigns[:item_type]).to have_attributes(status: 'Active')
         expect(assigns[:item_type]).to have_attributes(item_category_id: item_category.id)
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
 
@@ -49,10 +49,10 @@ RSpec.describe ItemTypesController, type: :controller do
 
   describe '#edit' do
     it 'assigns an item_type & renders' do
-      get :edit, id: item_type.id
+      get :edit, params: { id: item_type.id }
 
       expect(assigns[:item_type]).to eq(item_type)
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -68,7 +68,7 @@ RSpec.describe ItemTypesController, type: :controller do
       }
     end
 
-    subject { post :create, item_type_params }
+    subject { post :create, params: item_type_params }
 
     context 'with a successful save' do
       it 'creates a new item_type' do
@@ -90,7 +90,7 @@ RSpec.describe ItemTypesController, type: :controller do
         }
       end
 
-      subject { post :create, invalid_item_type_params }
+      subject { post :create, params: invalid_item_type_params }
 
       it "doesn't create a new item_type" do
         expect { subject }.to_not change { ItemType.count }
@@ -112,7 +112,7 @@ RSpec.describe ItemTypesController, type: :controller do
       }
     end
 
-    subject { put :update, item_type_params }
+    subject { put :update, params: item_type_params }
 
     context 'with a successful update' do
       it 'updates the item_type' do
@@ -135,7 +135,7 @@ RSpec.describe ItemTypesController, type: :controller do
         end
       end
 
-      subject { put :update, invalid_item_type_params }
+      subject { put :update, params: invalid_item_type_params }
 
       it "doesn't create a new item_type" do
         expect { subject }.to_not change { item_type.name }
@@ -151,7 +151,7 @@ RSpec.describe ItemTypesController, type: :controller do
 
   describe '#destroy' do
     it 'deletes an item_type' do
-      delete :destroy, id: item_type.id
+      delete :destroy, params: { id: item_type.id }
 
       expect { item_type.reload }.to raise_error(ActiveRecord::RecordNotFound)
       expect(response).to redirect_to(item_types_url)

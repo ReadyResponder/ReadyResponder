@@ -7,10 +7,10 @@ RSpec.describe "Activities" do
     end
 
     it "activities#create" do
-      activity_attributes = FactoryGirl.attributes_for(:activity)
+      activity_attributes = FactoryBot.attributes_for(:activity)
 
       expect {
-        post "/activities", { activity: activity_attributes }
+        post "/activities", params: { activity: activity_attributes }
       }.to_not change(Activity, :count)
 
       expect(response).to redirect_to new_user_session_path
@@ -38,7 +38,7 @@ RSpec.describe "Activities" do
 
     it "activities#update" do
       activity_attributes = @activity.attributes.except("id", "created_at", "updated_at")
-      patch activity_path(id: @activity.id), { activity: activity_attributes }
+      patch activity_path(id: @activity.id), params: { activity: activity_attributes }
       expect(response).to redirect_to new_user_session_path
     end
   end

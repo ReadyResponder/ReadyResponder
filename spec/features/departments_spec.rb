@@ -7,8 +7,8 @@ RSpec.feature "Department" do
       r = create(:role, name: 'Editor')
       somebody.roles << r
       visit new_user_session_path
-      fill_in 'user_email', :with => somebody.email
-      fill_in 'user_password', :with => somebody.password
+      fill_in 'user_email', with: somebody.email
+      fill_in 'user_password', with: somebody.password
       click_on 'Sign in'
       @department = create(:department, name: "Technology", status: "Active")
     end

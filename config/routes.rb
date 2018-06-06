@@ -69,7 +69,7 @@ Rails.application.routes.draw do
   get '/uploads/person/portrait/:id/:basename.:extension', controller: 'people', action: 'download', type: 'portrait'
   get '/uploads/cert/certification/:id/:basename.:extension', controller: 'certs', action: 'download', type: 'certification'
 
-  get 'landing/help', as: 'help', path: '/help'
+  get 'landing/help', as: 'help', to: 'landing#help'
 
   devise_for :users
   resources :users

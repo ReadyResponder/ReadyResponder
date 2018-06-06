@@ -15,7 +15,6 @@
 //= require bootstrap-sprockets
 //= require jquery_ujs
 //= require datatables
-//= require jquery-ui/accordion
 //= require datetimepicker
 //= require jquery-ui
 //= require cocoon
