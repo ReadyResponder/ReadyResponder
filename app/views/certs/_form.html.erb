@@ -3,7 +3,7 @@
 
   <div class="form-inputs">
     <%= f.association :person %>
-    <%= f.association :course %>
+    <%= f.association :courses %>
     <%= f.input :status, :as => :select, :collection => ['Active', 'Inactive'] %>
     <%= f.input :level, :hint => 'eg. EMT-Basic', :input_html => { :size => 22 } %>
     <%= f.input :cert_number, :label => 'Certification Number',:hint => "eg. Driver's License S number", :input_html => { :size => 22 } %>
