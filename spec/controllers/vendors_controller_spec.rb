@@ -29,7 +29,7 @@ RSpec.describe VendorsController, type: :controller do
 
   describe "GET#show" do
     it "displays the items" do
-      get :show, id: amazon.id
+      get :show, params: { id: amazon.id }
 
       expect(assigns[:vendor]).to eq(amazon)
       expect(assigns[:items]).to include(item)
@@ -38,7 +38,7 @@ RSpec.describe VendorsController, type: :controller do
 
   describe "GET#new" do
     it "shows a form" do
-      get :new, id: amazon.id
+      get :new, params: { id: amazon.id }
 
       expect(response).to render_template :new
     end
@@ -46,7 +46,7 @@ RSpec.describe VendorsController, type: :controller do
 
   describe "GET#edit" do
     it "shows a form" do
-      get :edit, id: amazon.id
+      get :edit, params: { id: amazon.id }
 
       expect(response).to render_template :edit
     end
@@ -55,7 +55,7 @@ RSpec.describe VendorsController, type: :controller do
   describe "PATCH#update" do
     context "with valid params" do
       it "successfully updates" do
-        get :update, id: amazon.id, vendor: { name: "Google" }
+        get :update, params: { id: amazon.id, vendor: { name: "Google" } }
 
         vendor = assigns(:vendor)
         expect(response).to be_redirect
@@ -67,8 +67,8 @@ RSpec.describe VendorsController, type: :controller do
 
     context "with invalid params" do
       it "rendors an error message" do
-        microsoft = create(:vendor, name: "microsoft")
-        get :update, id: amazon.id, vendor: { name: "microsoft" }
+        create(:vendor, name: "microsoft")
+        get :update, params: { id: amazon.id, vendor: { name: "microsoft" } }
 
         expect(flash[:alert]).to eq("Name has already been taken")
         expect(Vendor.count).to eq(2)
@@ -79,14 +79,14 @@ RSpec.describe VendorsController, type: :controller do
   describe "POST#create" do
     context "with valid params" do
       it "creates a new vendor" do
-        post :create, vendor: valid, next: new_item_path
+        post :create, params: { vendor: valid, next: new_item_path }
 
         expect(response).to redirect_to new_item_path
         expect(Vendor.count).to eq(2)
       end
 
       it "creates a new vendor" do
-        post :create, vendor: valid, next: vendors_path
+        post :create, params: { vendor: valid, next: vendors_path }
 
         expect(response).to redirect_to vendors_path
         expect(flash[:notice]).to eq("Vendor was successfully created")
@@ -98,7 +98,7 @@ RSpec.describe VendorsController, type: :controller do
 
   context "with invalid params" do
     it "rendors an error" do
-      post :create, vendor: invalid, next: new_item_path
+      post :create, params: { vendor: invalid, next: new_item_path }
 
       expect(response).to render_template :new
       expect(flash[:alert]).to eq("Name can't be blank")
@@ -106,7 +106,7 @@ RSpec.describe VendorsController, type: :controller do
     end
 
     it "creates a new vendor" do
-      post :create, vendor: invalid, next: vendors_path
+      post :create, params: { vendor: invalid, next: vendors_path }
 
       expect(response).to render_template :new
       expect(flash[:alert]).to eq("Name can't be blank")

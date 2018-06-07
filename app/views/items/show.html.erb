@@ -34,7 +34,7 @@
 <% end %>
 
 <% if @item.vendor.present? %>
-  <p><b>Vendor:</b> <%= @item.vendor.name %></p>
+  <p><b>Vendor:</b> <%= link_to @item.vendor.name, @item.vendor %></p>
 <% end %>
 
 <% if @item.owner.present? %>

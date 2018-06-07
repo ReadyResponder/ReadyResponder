@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
-<%= sidebar_button_link 'Return to List of Vendors', vendors_path %>
-<%= sidebar_button_link 'Edit Vendor', edit_vendor_path(@vendor) if can? :edit, @vendor %>
+  <%= sidebar_button_link 'Return to List of Vendors', vendors_path %>
+  <%= sidebar_button_link 'Edit Vendor', edit_vendor_path(@vendor) if can? :edit, @vendor %>
 <% end %>
 
 <table id="vendor_show_page" class="generic_datatable table table-striped table-bordered">

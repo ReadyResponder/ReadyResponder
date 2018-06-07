@@ -1,5 +1,5 @@
 class VendorsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_and_authorize_resource
 
   def index
@@ -43,6 +43,6 @@ class VendorsController < ApplicationController
   private
 
   def vendor_params
-    params.require(:vendor).permit(:id, :name, :street, :city, :state, :zipcode, :status, :comments)
+    params.require(:vendor).permit(:name, :street, :city, :state, :zipcode, :status, :comments)
   end
 end
