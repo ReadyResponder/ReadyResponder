@@ -1,5 +1,5 @@
 class GrantsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_and_authorize_resource
 
   def index
@@ -21,7 +21,7 @@ class GrantsController < ApplicationController
   end
 
   def create
-    @grant = Grant.new(params[:grant])
+    @grant = Grant.new(grant_params)
 
     if @grant.save
       redirect_to @grant, notice: 'Grant was successfully created.'

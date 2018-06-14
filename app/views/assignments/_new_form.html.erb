@@ -1,9 +1,9 @@
-<%= simple_form_for [@assignment] do |f| %>
+<%= simple_form_for [@requirement, @assignment] do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
     <%= f.association :person,
-                collection: Person.active.where(:department => @assignment.requirement.event.departments).sort %>
+                collection: Person.active.where(:department => @requirement.event.departments).sort %>
     <%= f.input :start_time, as: :string, label: "Start Time",
                 input_html: { class: "datetimepicker", size: 11,
                               value: format_datetime_value(f.object.start_time) } %>

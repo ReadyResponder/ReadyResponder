@@ -22,31 +22,31 @@ RSpec.describe 'receiving an availability message', type: :request do
       let(:body)   { "#{availability_type} #{event.id_code}" }
 
       it 'creates an availability for the sender' do
-        expect { post '/texts/receive_text', msg }.to change { 
+        expect { post '/texts/receive_text', params: msg }.to change {
           person.availabilities.count }.by 1
       end
 
       it 'sets the availability\'s status as Available' do
-        post '/texts/receive_text', msg
+        post '/texts/receive_text', params: msg
         availability = person.availabilities.last
         expect(availability.status).to eq('Available')
       end
 
       it 'sets the new availability\'s start_time to the one of the event' do
-        post '/texts/receive_text', msg
+        post '/texts/receive_text', params: msg
         availability = person.availabilities.last
         expect(availability.start_time).to be_within(1.second).of(event.start_time)
       end
 
       it 'sets the new availability\'s end_time to the one of the event' do
-        post '/texts/receive_text', msg
+        post '/texts/receive_text', params: msg
         availability = person.availabilities.last
         expect(availability.end_time).to be_within(1.second).of(event.end_time)
       end
 
       it 'returns a plain text response with information about the new availability' do
-        post '/texts/receive_text', msg
-        expect(response.content_type).to eq(:text)
+        post '/texts/receive_text', params: msg
+        expect(response.content_type).to eq('text/plain')
         expect(response.body).to match(
           /^Recorded Available[\s\S]+start[\s\S]+end[\s\S]+description/)
       end
@@ -56,7 +56,7 @@ RSpec.describe 'receiving an availability message', type: :request do
                                               status: 'Available', start_time: 2.hours.from_now, end_time: 4.hours.from_now) }
 
         it 'cancels that person\'s existing availability ' do
-          expect { post '/texts/receive_text', msg }.to change { 
+          expect { post '/texts/receive_text', params: msg }.to change {
             previous_availability.reload.status }.from('Available').to('Cancelled')
         end
       end
@@ -67,11 +67,11 @@ RSpec.describe 'receiving an availability message', type: :request do
           end_time: event.end_time + 2.hours) }
 
         it 'does not create a new availability' do
-          expect { post '/texts/receive_text', msg }.not_to change { Availability.count }
+          expect { post '/texts/receive_text', params: msg }.not_to change { Availability.count }
         end
 
         it 'returns an error message' do
-          post '/texts/receive_text', msg
+          post '/texts/receive_text', params: msg
           expect(response.body).to match(/Error![\s\S]+/)
         end
       end
@@ -82,20 +82,20 @@ RSpec.describe 'receiving an availability message', type: :request do
           end_time: event.end_time + 2.hours) }
 
         it 'splits a person\'s existing availability into 2 while creating the new one' do
-          expect { post '/texts/receive_text', msg }.to change { 
+          expect { post '/texts/receive_text', params: msg }.to change {
             person.availabilities.count }.by 2
         end
 
         it 'splits a person\'s existing availability so that the first one ends at the new availability\'s start_time' do
-          post '/texts/receive_text', msg
-          
+          post '/texts/receive_text', params: msg
+
           availabilities = person.availabilities.where(status: 'Unavailable').order(:start_time)
 
           expect(availabilities[0].end_time).to be_within(1.second).of(event.start_time)
         end
 
         it 'splits a person\'s existing availability so that the last one starts at the new availability\'s end_time' do
-          post '/texts/receive_text', msg
+          post '/texts/receive_text', params: msg
 
           availabilities = person.availabilities.where(status: 'Unavailable').order(:start_time)
 
@@ -109,26 +109,26 @@ RSpec.describe 'receiving an availability message', type: :request do
       let(:body)       { "#{availability_type} #{event_code}" }
 
       it 'does not create a new availability' do
-        expect { post '/texts/receive_text', msg }.not_to change { 
+        expect { post '/texts/receive_text', params: msg }.not_to change {
           person.availabilities.count }
       end
 
       it 'returns a plain text response with an error informing the user that the event does not exist' do
-        post '/texts/receive_text', msg
-        expect(response.content_type).to eq(:text)
+        post '/texts/receive_text', params: msg
+        expect(response.content_type).to eq('text/plain')
         expect(response.body).to eq("(201) Event #{event_code} not found")
       end
     end
 
     context 'and the custom keyword' do
       let(:body) { "#{availability_type} custom #{start_time} #{end_time}" }
-      
+
       context 'with no start_time and/or end_time' do
         let(:start_time) { '123 123' }
         let(:end_time)   { nil }
 
         it 'returns a plain text response with an error and a sample' do
-          post '/texts/receive_text', msg
+          post '/texts/receive_text', params: msg
           expect(response.body).to match(/\AError! Sample.*$/)
         end
       end
@@ -138,33 +138,33 @@ RSpec.describe 'receiving an availability message', type: :request do
         let(:end_time)   { 1.hour.from_now.strftime('%Y-%m-%d %H:%M') }
 
         it 'creates an availability for the sender' do
-          expect { post '/texts/receive_text', msg }.to change { 
+          expect { post '/texts/receive_text', params: msg }.to change {
             person.availabilities.count }.by 1
         end
 
         it 'sets the availability\'s status as Available' do
-          post '/texts/receive_text', msg
+          post '/texts/receive_text', params: msg
           availability = person.availabilities.last
           expect(availability.status).to eq('Available')
         end
 
         it 'sets the new availability\'s start_time to the one of the event' do
-          post '/texts/receive_text', msg
+          post '/texts/receive_text', params: msg
           availability = person.availabilities.last
           result = availability.start_time.strftime '%Y-%m-%d %H:%M'
           expect(result).to eq(start_time)
         end
 
         it 'sets the new availability\'s end_time to the one of the event' do
-          post '/texts/receive_text', msg
+          post '/texts/receive_text', params: msg
           availability = person.availabilities.last
           result = availability.end_time.strftime '%Y-%m-%d %H:%M'
           expect(result).to eq(end_time)
         end
 
         it 'returns a plain text response with information about the new availability' do
-          post '/texts/receive_text', msg
-          expect(response.content_type).to eq(:text)
+          post '/texts/receive_text', params: msg
+          expect(response.content_type).to eq('text/plain')
           expect(response.body).to match(
             /^Recorded Available[\s\S]+start[\s\S]+end[\s\S]+description/)
         end
@@ -174,7 +174,7 @@ RSpec.describe 'receiving an availability message', type: :request do
             status: 'Available', start_time: 30.minutes.ago, end_time: 30.minutes.from_now) }
 
           it 'cancels that person\'s existing availability ' do
-            expect { post '/texts/receive_text', msg }.to change { 
+            expect { post '/texts/receive_text', params: msg }.to change {
               previous_availability.reload.status }.from('Available').to('Cancelled')
           end
         end
@@ -190,7 +190,7 @@ RSpec.describe 'receiving an availability message', type: :request do
       let(:body)   { "#{availability_type} #{event.id_code}" }
 
       it 'sets the availability\'s status as Unavailable' do
-        post '/texts/receive_text', msg
+        post '/texts/receive_text', params: msg
         availability = person.availabilities.last
         expect(availability.status).to eq('Unavailable')
       end

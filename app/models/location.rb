@@ -1,9 +1,10 @@
-class Location < ActiveRecord::Base
+class Location < ApplicationRecord
   has_paper_trail
   include Loggable
 
-  attr_accessible :category, :comments, :description, :department_id,
-                  :floor, :container, :lat, :lon, :name, :status
+  # rails 5 deprecation
+  # attr_accessible :category, :comments, :description, :department_id,
+  #                 :floor, :container, :lat, :lon, :name, :status
   has_many :moves
   belongs_to :department
   def to_s

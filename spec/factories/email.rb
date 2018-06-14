@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :email do
     content 'sierra@example.com'
     priority 1

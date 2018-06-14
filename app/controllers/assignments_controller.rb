@@ -1,5 +1,5 @@
 class AssignmentsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_and_authorize_resource
 
   before_action :set_requirement, only: [:new, :create]
@@ -15,6 +15,7 @@ class AssignmentsController < ApplicationController
 
   def new
     @assignment = Assignment.new
+    @assignment.requirement = @requirement
     @assignment.status = "New"
     @assignment.start_time = @requirement.start_time
     @assignment.end_time = @requirement.end_time
@@ -25,7 +26,6 @@ class AssignmentsController < ApplicationController
 
   def create
     @assignment = @requirement.assignments.new(assignment_params)
-
     if @assignment.save
       redirect_to @requirement, notice: 'Assignment was successfully created.'
     else

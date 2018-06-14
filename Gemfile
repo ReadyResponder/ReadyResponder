@@ -1,17 +1,17 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.2.7'
+gem 'rails', '~> 5.2.0'
 
 gem 'rack'
 gem 'ransack'
 gem 'carrierwave'
-gem "pg", "~> 0.17.0"
+gem 'pg', '~> 1.0.0'
 gem 'rmagick', '~> 2.15.4'
-gem 'simple_form'
+gem 'simple_form', '~> 4.0.0'
 gem 'redcarpet'
 gem 'geocoder'
 gem 'cancancan'
-#gem "taps"
+#gem 'taps'
 #gem 'validates_timeliness', '~> 3.0'
 
 gem 'rqrcode'
@@ -28,7 +28,7 @@ end
 gem 'twilio-ruby', '~> 4.11.1'
 
 #Handles authentication
-gem 'devise', '~> 3.0'
+gem 'devise', '~> 4.4.3'
 
 # For model versioning
 gem 'paper_trail'
@@ -39,24 +39,23 @@ gem 'cocoon'
 group :test, :development do
   gem 'dotenv-rails'
   gem 'thin'
-  gem "rspec-rails"
+  gem 'rspec-rails'
   # gem 'rspec-activemodel-mocks' # TODO: remove if we no longer need mock_model or stub_model
-  gem "factory_girl_rails"
-  gem "capybara"
+  gem "factory_bot_rails", "~> 4.0"
+  gem 'capybara'
   # Use selenium and chrome for handling JS automated testing
   gem 'selenium-webdriver'
   gem 'chromedriver-helper', '1.0.0'
-  gem "guard-rspec", require: false
+  gem 'guard-rspec', require: false
   gem 'guard-livereload'
-  gem "launchy"
-  gem "letter_opener"
+  gem 'launchy'
+  gem 'letter_opener'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
   gem 'database_cleaner', '1.0.1'
   gem 'test-unit'
   gem 'pry'
-
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 end
@@ -85,7 +84,8 @@ end
 group :test do
   gem 'shoulda-matchers'
   gem 'simplecov'
-
+  gem 'puma'
+  gem 'rails-controller-testing'
   # Allows you to freeze time during tests
   gem 'timecop'
 end
@@ -93,7 +93,7 @@ end
 gem 'sass-rails'
 gem 'uglifier', '>= 1.0.3'
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails'
+gem 'coffee-rails', '~> 4.2.2'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -112,10 +112,8 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 # # Deploy with Capistrano
 # gem 'capistrano', '~> 2.15'
 # # This is used by Capistrano, but 2.8 has issues
-# gem "net-ssh", "~> 2.7.0"
+# gem 'net-ssh', '~> 2.7.0'
 
 gem 'jquery-ui-rails'
 gem 'bootstrap-sass', '3.3.7'
 # gem 'chosen-rails'
-
-gem 'protected_attributes'

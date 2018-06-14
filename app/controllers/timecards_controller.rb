@@ -1,5 +1,5 @@
 class TimecardsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_and_authorize_resource
 
   before_action :set_referrer_path, only: [:edit, :new]
@@ -25,7 +25,7 @@ class TimecardsController < ApplicationController
   end
 
   def create
-    @timecard = Timecard.new(params[:timecard])
+    @timecard = Timecard.new(timecard_params)
 
     if @timecard.save
       redirect_to referrer_or(@timecard), notice: 'Timecard was successfully created.'
@@ -35,7 +35,7 @@ class TimecardsController < ApplicationController
   end
 
   def update
-    if @timecard.update_attributes(params[:timecard])
+    if @timecard.update_attributes(timecard_params)
       redirect_to referrer_or(timecards_path), notice: 'Timecard was successfully updated.'
     else
       render action: "edit"
@@ -70,5 +70,11 @@ class TimecardsController < ApplicationController
   def destroy
     @timecard.destroy
     redirect_to timecards_path
+  end
+
+  private
+
+  def timecard_params
+    params.require(:timecard).permit(:start_time, :end_time, :status, :person_id, :description)
   end
 end

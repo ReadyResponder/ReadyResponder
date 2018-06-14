@@ -1,4 +1,4 @@
-class Recipient < ActiveRecord::Base
+class Recipient < ApplicationRecord
   belongs_to :notification
   belongs_to :person
   has_many :messages

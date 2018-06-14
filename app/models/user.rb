@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   has_paper_trail
   include Loggable
 
@@ -12,7 +12,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :firstname, :lastname, :role_ids, :username, :email, :password, :password_confirmation, :remember_me
+  # not allowed in rails 5, you must use strong parameters, create private method user_params
+  # attr_accessible :firstname, :lastname, :role_ids, :username, :email, :password, :password_confirmation, :remember_me
 
   validates_presence_of :username #Other validates are brought in by validatable module above
   # attr_accessible :title, :body

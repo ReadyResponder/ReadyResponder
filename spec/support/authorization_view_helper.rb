@@ -3,7 +3,7 @@ module AuthorizationViewHelper
   def get_basic_editor_views(model_name, things_to_look_for)
     it "gets the index" do
       # I was unable to get the later attributes call to work
-      # unless factorygirl call was within the test
+      # unless FactoryBot call was within the test
       @sample_object = create(model_name.to_sym)
       model_path = url_for(:action => 'index', :controller => model_name.pluralize)
       visit model_path
@@ -41,7 +41,7 @@ module AuthorizationViewHelper
     nested_model_controller = nested_model_name.pluralize.to_sym
 
     it "gets the index" do
-      # I was unable to get the later attributes call to work unless factorygirl call was within the test
+      # I was unable to get the later attributes call to work unless FactoryBot call was within the test
       @sample_object = create(nested_model)
       index_model_path = url_for(action: :index, controller: nested_model_controller)
       visit index_model_path

@@ -1,5 +1,5 @@
 class RepairsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_and_authorize_resource
 
   def index
@@ -20,7 +20,7 @@ class RepairsController < ApplicationController
   end
 
   def create
-    @repair = Repair.new(params[:repair])
+    @repair = Repair.new(repair_params)
 
     if @repair.save
       redirect_to @repair, notice: 'Repair was successfully created.'
@@ -31,7 +31,7 @@ class RepairsController < ApplicationController
   end
 
   def update
-      if @repair.update_attributes(params[:repair])
+      if @repair.update_attributes(repair_params)
         redirect_to @repair.item, notice: 'Repair was successfully updated.'
         @repair.item.set_repair_condition
       else
@@ -41,5 +41,13 @@ class RepairsController < ApplicationController
 
   def destroy
     @repair.destroy
+  end
+
+  private
+
+  def repair_params
+    params.require(:repair).permit(:category, :comments, :description,
+                    :item_id, :person_id, :service_date,
+                    :status, :user_id, :cost, :condition)
   end
 end

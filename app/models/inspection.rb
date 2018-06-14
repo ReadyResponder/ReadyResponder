@@ -1,4 +1,4 @@
-class Inspection < ActiveRecord::Base
+class Inspection < ApplicationRecord
   has_paper_trail
   include Loggable
 

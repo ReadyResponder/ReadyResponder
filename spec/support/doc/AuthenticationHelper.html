@@ -133,8 +133,8 @@
           <div class="method-source-code" id="sign_me_in-source">
             <pre><span class="ruby-comment"># File authentication_helper.rb, line 2</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">sign_me_in</span>
-  <span class="ruby-identifier">somebody</span> = <span class="ruby-constant">FactoryGirl</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:user</span>)
-  <span class="ruby-identifier">r</span> = <span class="ruby-constant">FactoryGirl</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:role</span>, <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">'Editor'</span>)
+  <span class="ruby-identifier">somebody</span> = <span class="ruby-constant">FactoryBot</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:user</span>)
+  <span class="ruby-identifier">r</span> = <span class="ruby-constant">FactoryBot</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:role</span>, <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">'Editor'</span>)
   <span class="ruby-identifier">somebody</span>.<span class="ruby-identifier">roles</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">r</span>
   <span class="ruby-identifier">visit</span> <span class="ruby-identifier">new_user_session_path</span>
   <span class="ruby-identifier">fill_in</span> <span class="ruby-string">'user_email'</span>, <span class="ruby-value">:with</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">somebody</span>.<span class="ruby-identifier">email</span>
