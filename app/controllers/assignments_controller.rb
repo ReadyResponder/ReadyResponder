@@ -16,6 +16,7 @@ class AssignmentsController < ApplicationController
   def new
     @assignment = Assignment.new
     @assignment.status = "New"
+    @assignment.requirement = @requirement
     @assignment.start_time = @requirement.start_time
     @assignment.end_time = @requirement.end_time
   end
