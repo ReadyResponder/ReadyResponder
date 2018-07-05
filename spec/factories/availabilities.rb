@@ -4,5 +4,6 @@ FactoryBot.define do
     end_time 15.hours.from_now
     status "Unavailable"
     description "Vacation"
+    person
   end
 end
