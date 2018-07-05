@@ -17,8 +17,8 @@ class NotificationsController < ApplicationController
   def new
     if @event.present?
       @notification = @event.notifications.new
-      @event.start_time.strftime('%a %b %d %k:%M')
-      @event.end_time.strftime('%a %b %d %k:%M')
+      start_time_display = @event.start_time.strftime('%a %b %d %k:%M')
+      end_time_display = @event.end_time.strftime('%a %b %d %k:%M')
       @notification.subject = "Please provide availability "
       @notification.subject += "for #{@event.title} [#{@event.id_code}] "
       @notification.subject += "from #{start_time_display} to #{end_time_display}"
