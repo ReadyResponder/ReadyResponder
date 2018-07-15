@@ -55,7 +55,7 @@ class Event < ApplicationRecord
     2 => 'Adequate',
     3 => 'Satisfied',
     4 => 'Full'
-  }
+  }.freeze
 
   def to_s
     title
@@ -163,68 +163,35 @@ class Event < ApplicationRecord
     end
   end
 
-  def next_event
-    Event.where('start_time > ?', self.start_time).order(:start_time).first
-  end
+  # def next_event
+  #   Event.where('start_time > ?', self.start_time).order(:start_time).first
+  # end
 
-  def previous_event
-    Event.where('start_time < ?', self.start_time).order(start_time: :desc).first
-  end
-
-  def self.staffing_level
-    begin
-      relevant_events = self.current_or_next_events
-      event_staffings = relevant_events.map do |event|
-        { staffing_number: event.staffing_level,
-          staffing_percentage: event.staffing_percentage }
-      end
-      event_staffing = event_staffings.min_by { |staffing| staffing[:staffing_number] }
-      self.build_staffing_level(event_staffing[:staffing_number], event_staffing[:staffing_percentage])
-    rescue => e
-      puts e
-      self.build_staffing_level(500, "NaN")
-    end
-  end
-
-  def self.build_staffing_level(staffing_number, staffing_percentage)
-    { staffing_level_number: staffing_number,
-      staffing_level_name: STAFFING_LEVELS[staffing_number],
-      staffing_level_percentage: staffing_percentage }
-  end
-
-  def self.current_or_next_events
-    current_events = self.current_events
-    current_events.empty? ? [self.next_event] : current_events
-  end
-
-  def self.current_events
-    self.where("status in (?)", ["Scheduled", "In-session"])
-        .where("start_time < ?", Time.now)
-        .where("end_time > ?", Time.now)
-  end
-
-  def self.next_event
-    next_event = self.where("status in (?)", ["Scheduled", "In-session"])
-        .where("start_time > ?", Time.now)
-        .order("start_time ASC")
-        .first
-    raise '---Error: There are no events---' unless next_event
-    next_event
-  end
+  # def previous_event
+  #   Event.where('start_time < ?', self.start_time).order(start_time: :desc).first
+  # end
 
   def staffing_level
+    {
+      staffing_level_number: staffing_number,
+      staffing_level_name: STAFFING_LEVELS[staffing_number],
+      staffing_level_percentage: staffing_percentage
+    }
+  end
+
+  private
+
+  def staffing_number
     tasks = self.tasks
     return 0 if tasks.empty? # TODO: verify an event with no tasks should be considered empty.
-    @staffing_level_number = tasks.map { |task| task.staffing_value }.min
+    @staffing_number ||= tasks.map(&:staffing_value).min
   end
 
   # TODO: update this once staffing % meaning is clarified.
   def staffing_percentage
-    @staffing_level_number ||= self.staffing_level
-    @staffing_level_number * 20 + 20
+    staffing_number * 20 + 20
   end
 
-private
   def calc_duration #This is also used in timecards; it should be extracted out
      if !(start_time.blank?) and !(end_time.blank?)
       self.duration = ((end_time - start_time) / 1.hour).round(2) || 0
@@ -238,5 +205,4 @@ private
   def expired?
     Event.where(id_code: id_code).where("end_time > ?", 6.months.ago).empty?
   end
-
 end

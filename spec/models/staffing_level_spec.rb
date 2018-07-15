@@ -16,7 +16,7 @@ require 'rails_helper'
 # If medical intake were satisfied, but parking was empty, the event should be
 # Empty.
 #
-# Event.staffing_level[:staffing_level_number] returns the worst case
+# StaffingLevel.staffing_level[:staffing_level_number] returns the worst case
 # staffing-level of all currently happening events.
 # If there are no currently happening events, it returns the staffing level of
 # the next event to occur.
@@ -33,17 +33,16 @@ require 'rails_helper'
 #
 # errors return 500
 
-RSpec.describe Event do
-
-  describe "Event.staffing_level" do
-    let(:department) { create(:department, { shortname: "CERT" })}
-    let(:person1) { create(:person, { department: department }) }
-    let(:person2) { create(:person, { department: department }) }
-    let(:person3) { create(:person, { department: department }) }
-    let(:person4) { create(:person, { department: department }) }
-    let(:person5) { create(:person, { department: department }) }
-    let(:title1) { create(:title, { name: "title 1" })}
-    let(:title2) { create(:title, { name: "title 2" })}
+RSpec.describe StaffingLevel do
+  describe ".staffing_level" do
+    let(:department) { create(:department, shortname: "CERT")}
+    let(:person1) { create(:person, department: department) }
+    let(:person2) { create(:person, department: department) }
+    let(:person3) { create(:person, department: department) }
+    let(:person4) { create(:person, department: department) }
+    let(:person5) { create(:person, department: department) }
+    let(:title1) { create(:title, name: "title 1")}
+    let(:title2) { create(:title, name: "title 2")}
 
     context "single currently happening event" do
       before(:each) do
@@ -68,7 +67,7 @@ RSpec.describe Event do
       end
 
       it "returns 0 when at least 1 task is Empty" do
-        expect(Event.staffing_level[:staffing_level_number]).to eq(0)
+        expect(StaffingLevel.staffing_level[:staffing_level_number]).to eq(0)
       end
 
       it "returns 1 when at least 1 task is Inadequate and no tasks are worse" do
@@ -76,7 +75,7 @@ RSpec.describe Event do
           person: person1,
           requirement: @requirement1
         })
-        expect(Event.staffing_level[:staffing_level_number]).to eq(1)
+        expect(StaffingLevel.staffing_level[:staffing_level_number]).to eq(1)
       end
 
       it "returns 2 when at least 1 task is Adquate and no tasks are worse" do
@@ -86,7 +85,7 @@ RSpec.describe Event do
             requirement: @requirement1
           })
         end
-        expect(Event.staffing_level[:staffing_level_number]).to eq(2)
+        expect(StaffingLevel.staffing_level[:staffing_level_number]).to eq(2)
       end
 
       it "returns 3 when at least 1 task is Satisfied and no tasks are worse" do
@@ -96,7 +95,7 @@ RSpec.describe Event do
             requirement: @requirement1
           })
         end
-        expect(Event.staffing_level[:staffing_level_number]).to eq(3)
+        expect(StaffingLevel.staffing_level[:staffing_level_number]).to eq(3)
       end
 
       it "returns 4 when all tasks are Full" do
@@ -106,7 +105,7 @@ RSpec.describe Event do
             requirement: @requirement1
           })
         end
-        expect(Event.staffing_level[:staffing_level_number]).to eq(4)
+        expect(StaffingLevel.staffing_level[:staffing_level_number]).to eq(4)
       end
 
       it "uses the worst case task if event has multiple tasks" do
@@ -133,7 +132,7 @@ RSpec.describe Event do
           person: person4,
           requirement: @requirement2
         })
-        expect(Event.staffing_level[:staffing_level_number]).to eq(1)
+        expect(StaffingLevel.staffing_level[:staffing_level_number]).to eq(1)
       end
     end
 
@@ -192,7 +191,7 @@ RSpec.describe Event do
           })
         end
 
-        expect(Event.staffing_level[:staffing_level_number]).to eq(1)
+        expect(StaffingLevel.staffing_level[:staffing_level_number]).to eq(1)
       end
     end
 
@@ -225,12 +224,15 @@ RSpec.describe Event do
             requirement: @requirement1
           })
         end
-        expect(Event.staffing_level[:staffing_level_number]).to eq(2)
+        expect(StaffingLevel.staffing_level[:staffing_level_number]).to eq(2)
       end
     end
 
-    it "returns 500 on error" do
-      expect(Event.staffing_level[:staffing_level_number]).to eq(500)
+    context "when there is an internal server error" do
+      it "returns 500" do
+
+        expect(StaffingLevel.staffing_level[:staffing_level_number]).to eq(500)
+      end
     end
   end
 end
