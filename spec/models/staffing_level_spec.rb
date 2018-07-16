@@ -230,8 +230,15 @@ RSpec.describe StaffingLevel do
 
     context "when there is an internal server error" do
       it "returns 500" do
+        staffing_level = StaffingLevel.new
+        allow(staffing_level).to(
+          receive(:current_or_next_events).and_raise(StandardError.new("error"))
+        )
+        allow(StaffingLevel).to receive(:new).and_return(staffing_level)
 
-        expect(StaffingLevel.staffing_level[:staffing_level_number]).to eq(500)
+        result = StaffingLevel.staffing_level
+
+        expect(result[:staffing_level_number]).to eq(500)
       end
     end
   end

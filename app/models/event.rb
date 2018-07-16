@@ -163,13 +163,13 @@ class Event < ApplicationRecord
     end
   end
 
-  # def next_event
-  #   Event.where('start_time > ?', self.start_time).order(:start_time).first
-  # end
+  def next_event
+    Event.where('start_time > ?', self.start_time).order(:start_time).first
+  end
 
-  # def previous_event
-  #   Event.where('start_time < ?', self.start_time).order(start_time: :desc).first
-  # end
+  def previous_event
+    Event.where('start_time < ?', self.start_time).order(start_time: :desc).first
+  end
 
   def staffing_level
     {
@@ -193,9 +193,9 @@ class Event < ApplicationRecord
   end
 
   def calc_duration #This is also used in timecards; it should be extracted out
-     if !(start_time.blank?) and !(end_time.blank?)
+    if !(start_time.blank?) and !(end_time.blank?)
       self.duration = ((end_time - start_time) / 1.hour).round(2) || 0
-     end
+    end
   end
 
   def trim_id_code
