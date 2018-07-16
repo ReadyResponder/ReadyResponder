@@ -4,7 +4,7 @@ RSpec.describe "GET /api/staffinglevel", type: :request do
   context "When there are no events" do
     it "returns the error staffing level" do
       expected_json = {
-        "staffing_level_name" => "Error",
+        "staffing_level_name" => "Error: There are no events to have a staffing level for",
         "staffing_level_number" => 500,
         "staffing_level_percentage" => "NaN"
       }

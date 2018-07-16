@@ -27,7 +27,7 @@ class StaffingLevel
     elsif !next_event.empty?
       next_event
     else
-      raise StandardError.new("No events to have a staffing level")
+      raise StandardError.new("There are no events to have a staffing level for")
     end
   end
 
