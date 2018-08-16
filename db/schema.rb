@@ -232,6 +232,7 @@ ActiveRecord::Schema.define(version: 2018_04_17_162835) do
     t.integer "location_id"
     t.string "name"
     t.string "description"
+    t.string "source_data"
     t.string "category"
     t.string "model"
     t.date "purchase_date"
@@ -258,7 +259,6 @@ ActiveRecord::Schema.define(version: 2018_04_17_162835) do
     t.string "condition"
     t.integer "qty"
     t.integer "grant_id"
-    t.string "source_data"
     t.integer "vendor_id"
     t.index ["vendor_id"], name: "index_items_on_vendor_id"
   end
@@ -324,6 +324,7 @@ ActiveRecord::Schema.define(version: 2018_04_17_162835) do
     t.string "event_statuses"
     t.string "event_assigned"
     t.string "id_code"
+    t.text "individuals"
     t.index ["event_id"], name: "index_notifications_on_event_id"
   end
 
