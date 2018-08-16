@@ -2,6 +2,10 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 5.2.0'
 
+# This is needed until upstream projects update their gemspecs
+# This avoids a vulnerability in 3.7.1
+gem 'sprockets', '3.7.2'
+
 gem 'rack'
 gem 'ransack'
 gem 'carrierwave'
