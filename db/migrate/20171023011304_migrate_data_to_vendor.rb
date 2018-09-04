@@ -1,4 +1,4 @@
-class MigrateDataToVendor < ActiveRecord::Migration
+class MigrateDataToVendor < ActiveRecord::Migration[4.2]
   def up
 
     Item.all.each do |item|
