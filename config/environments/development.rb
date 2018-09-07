@@ -58,4 +58,9 @@ Rails.application.configure do
   # Suppress complaints when a console cannot be shown for a given IP address or content type.
   config.web_console.whiny_requests = false
 
+  # Forms created with JavaScript can now have protection against code-injection attacks. 
+  # Each form in the application will each have their own CSRF token that is specified to the action and method for that form.
+  config.action_controller.per_form_csrf_tokens = true
+  config.action_controller.forgery_protection_origin_check = true
+
 end

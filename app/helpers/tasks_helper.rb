@@ -14,6 +14,26 @@ module TasksHelper
                 class: task_priority_label_class(task.priority))
   end
 
+  def has_latitude_longitude?
+    @task.latitude.present? and
+    @task.longitude.present?
+  end
+
+  def task_address
+    comma = if @task.city.present? && @task.state.present?
+              ', '
+            else
+              ''
+            end
+
+    city_state = @task.city + comma + @task.state
+
+    content_tag :div do
+      concat content_tag(:p, @task.street)
+      concat content_tag(:p, city_state + " #{@task.zipcode}")
+    end
+  end
+
   private
     def task_label_class(task_status)
       return nil if task_status.blank?

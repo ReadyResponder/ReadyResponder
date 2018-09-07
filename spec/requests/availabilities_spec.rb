@@ -7,10 +7,10 @@ RSpec.describe "Availabilities", type: :request do
     end
 
     it "availabilities#create" do
-      availability_attributes = FactoryGirl.attributes_for(:availability)
+      availability_attributes = FactoryBot.attributes_for(:availability)
 
       expect {
-        post "/availabilities", { availability: availability_attributes }
+        post "/availabilities", params: { availability: availability_attributes }
       }.to_not change(Availability, :count)
 
       expect(response).to redirect_to new_user_session_path
@@ -42,7 +42,7 @@ RSpec.describe "Availabilities", type: :request do
     it "availabilities#update" do
       allow(@availability).to receive(:id).and_return(1)
       availability_attributes = @availability.attributes.except("id", "created_at", "updated_at")
-      patch availability_path(id: @availability.id), { availability: availability_attributes }
+      patch availability_path(id: @availability.id), params: { availability: availability_attributes }
       expect(response).to redirect_to new_user_session_path
     end
   end

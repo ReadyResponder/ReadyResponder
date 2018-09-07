@@ -1,8 +1,9 @@
-class Course < ActiveRecord::Base
+class Course < ApplicationRecord
   has_paper_trail
   include Loggable
 
-  attr_accessible :category, :comments, :description, :duration, :status, :term, :name, :skill_ids
+  # rails 5 deprecation
+  # attr_accessible :category, :comments, :description, :duration, :status, :term, :name, :skill_ids
   has_many :certs
   has_many :people, :through => :certs
   has_many :events, :through => :certs

@@ -1,4 +1,4 @@
-class Requirement < ActiveRecord::Base
+class Requirement < ApplicationRecord
   has_paper_trail
   include Loggable
 

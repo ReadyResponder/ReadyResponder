@@ -42,7 +42,7 @@ RSpec.describe AnalyticsController, type: :controller do
 
       context 'when the date filter has been provided' do
         before do
-          get :system_activity_logs,
+          get :system_activity_logs, params:
             { date:
               {
                 "year" => year,
@@ -63,7 +63,7 @@ RSpec.describe AnalyticsController, type: :controller do
 
       context 'when the category filter has been provided' do
         before do
-          get :system_activity_logs, { category: category }
+          get :system_activity_logs, params: { category: category }
         end
 
         it 'assigns ivars correctly' do
@@ -75,7 +75,7 @@ RSpec.describe AnalyticsController, type: :controller do
 
       context 'when both filters have been provided' do
         before do
-          get :system_activity_logs,
+          get :system_activity_logs, params:
             { date:
               {
                 "year" => year,

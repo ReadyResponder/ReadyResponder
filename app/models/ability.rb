@@ -33,6 +33,7 @@ class Ability
       can [:read, :update, :create, :edit], Skill
       can [:read, :update, :create, :edit], Task
       can [:read, :update, :create, :edit, :verify], Timecard
+      can [:read, :update, :create, :edit], Vendor
       can :read, :all
     elsif roles.include? 'Trainer'
       can [:read, :create], Activity
@@ -44,10 +45,11 @@ class Ability
       can [:read, :update, :create, :edit], Requirement
       can [:read, :update, :create, :edit], Task
       can [:read], [Person, Channel, Timecard, Item, Skill, Inspection, Repair]
+      can [:read, :update, :create, :edit], Vendor
    elsif roles.include? 'Reader'
       can [:read], [Person, Channel, Timecard, Cert, ItemCategory, ItemType,
                     Item, Event, Task, Course, Skill, Inspection, Repair,
-                    Activity, Department]
+                    Activity, Department, Vendor]
       can [:templates, :archives], Event
       can [:signin, :download, :orgchart], Person
     end

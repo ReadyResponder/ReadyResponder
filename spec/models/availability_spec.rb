@@ -66,6 +66,22 @@ RSpec.describe Availability, type: :model do
     end
   end
 
+  describe 'self.process_data' do
+    it 'returns nil if there are no available availabilites' do
+      expect(Availability.process_data).to eq(nil)
+      create(:availability, person: a_person,
+            start_time: 1.day.ago, end_time: 1.day.from_now)
+      expect(Availability.process_data).to eq(nil)
+    end
+    it 'returns array of hashes if availabilities are found' do
+      create(:availability, person: a_person,
+            start_time: 1.day.ago, end_time: 1.day.from_now, status: 'Available')
+      result = Availability.process_data
+      expect(result).to be_a_kind_of(Array)
+      expect(result[0][0]).to be_a_kind_of(Hash)
+    end
+  end
+
   context 'partially_available?' do
     it 'returns false for full availabilities' do
       start_time = Time.current

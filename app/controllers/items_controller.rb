@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_and_authorize_resource
 
   def index
@@ -28,7 +28,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(params[:item])
+    @item = Item.new(item_params)
     if @item.save
       redirect_to @item, notice: 'Item was successfully created.'
     else
@@ -38,7 +38,7 @@ class ItemsController < ApplicationController
 
   def update
     @item = Item.find(params[:id])
-    if @item.update_attributes(params[:item])
+    if @item.update_attributes(item_params)
       redirect_to @item, notice: 'Item was successfully updated.'
     else
       render action: "edit"
@@ -49,5 +49,17 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     @item.destroy
     format.html { redirect_to items_url }
+  end
+
+  private
+
+  def item_params
+    params.require(:item).permit(:category, :description, :location_id, :qty,
+                    :model, :brand, :name, :owner_id, :po_number,
+                    :value, :grant, :purchase_amt, :purchase_date,
+                    :sell_amt, :sell_date, :stock_number,
+                    :vendor_id, :status, :condition, :comments, :item_image,
+                    :department_id, :resource_type_id, :item_type_id,
+                    :unique_ids_attributes, :grant_id)
   end
 end

@@ -39,6 +39,12 @@
 
           <li>
             <%= nav_link "Inventory", item_categories_path if can? :read, Item %>
+            <li class="nav-item dropdown">
+              <a class="nav-link split-dropdown dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+              <ul class="split-dropdown dropdown-menu">
+                <%= nav_link "Vendors", vendors_path if can? :read, Vendor %>
+              </ul>
+            </li>
           </li>
 
           <li class="dropdown">

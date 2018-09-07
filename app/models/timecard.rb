@@ -1,23 +1,24 @@
-class Timecard < ActiveRecord::Base
+class Timecard < ApplicationRecord
   has_paper_trail
   include Loggable
 
   before_save :calc_duration
-  attr_accessible :start_time, :end_time, :status, :person_id, :description
+  # rails 5 deprecation
+  # attr_accessible :start_time, :end_time, :status, :person_id, :description
 
   belongs_to :person
 
   scope :verified, -> { where(:status => 'Verified')}
-  
+
   scope :most_recent, -> { order(:start_time) }
-  
+
   scope :active, -> { where(status: ['Incomplete', 'Unverified', 'Error', 'Verified']) }
-  
+
   scope :working, -> { where(end_time: nil, status: 'Incomplete') }
-  
+
   scope :older_than, lambda { |hour_amount|
     where('start_time < ?', Time.now - hour_amount.hours) }
-  
+
 
   scope :open_for_more_than, -> (hour_amount) { working.older_than(hour_amount) }
 

@@ -1,5 +1,5 @@
 class ItemTypesController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_and_authorize_resource
 
   def index
@@ -47,8 +47,7 @@ class ItemTypesController < ApplicationController
   # params.require(:person).permit(:name, :age)
   # Also, you can specialize this method with per-user checking of permissible attributes.
   def item_type_params
-    params.require(:item_type).permit(:is_a_group, :is_groupable,
-                               :name, :parent_id, :status, :item_category_id,
+    params.require(:item_type).permit(:is_a_group, :is_groupable, :name, :parent_id, :status, :item_category_id,
                                     :description, :item_type_image )
   end
 end
