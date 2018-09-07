@@ -1,6 +1,6 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot_rails
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :repair do
     item_id 1
     user_id 1

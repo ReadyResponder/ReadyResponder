@@ -1,8 +1,8 @@
-class Cert < ActiveRecord::Base
+class Cert < ApplicationRecord
   has_paper_trail
   include Loggable
-
-  attr_accessible :category, :person_id, :course_id, :expiration_date, :issued_date, :cert_number, :level,  :status, :certification, :comments
+  # rails 5 deprecated this and recommends using strong parameters
+  # attr_accessible :category, :person_id, :course_id, :expiration_date, :issued_date, :cert_number, :level,  :status, :certification, :comments
   belongs_to :person
   belongs_to :course
   mount_uploader :certification, CertificationUploader

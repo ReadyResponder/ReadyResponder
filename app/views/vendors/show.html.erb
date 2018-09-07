@@ -1,0 +1,23 @@
+<% content_for :sidebar do %>
+  <%= sidebar_button_link 'Return to List of Vendors', vendors_path %>
+  <%= sidebar_button_link 'Edit Vendor', edit_vendor_path(@vendor) if can? :edit, @vendor %>
+<% end %>
+
+<table id="vendor_show_page" class="generic_datatable table table-striped table-bordered">
+  <caption><h1><%= @vendor.name %></h1></caption>
+  <caption><h3><%= @vendor.status %></h3></caption>
+
+  <thead>
+    <tr>
+      <th>List of <%= @vendor.name %> Items</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= link_to item.name, item_path(item)%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

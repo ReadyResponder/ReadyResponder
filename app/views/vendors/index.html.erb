@@ -1,0 +1,16 @@
+
+<table id="List_of_vendors" class="generic_datatable table table-striped table-bordered">
+  <caption><h3><%= @page_title %></h3></caption>
+
+  <thead>
+      <h1>List of Vendors </h1> <%= link_to 'Add New Vendor', new_vendor_path(next: request.path) if can? :create, Vendor %>
+  </thead>
+
+  <tbody>
+    <% @vendors.each do |vendor| %>
+      <tr>
+        <td><%= link_to vendor.name, vendor %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -15,7 +15,8 @@
     <%= f.input :qty %>
     <%= f.input :stock_number %>
     <%= f.input :description %>
-    <%= f.input :source %>
+    <%= f.association :vendor, label: "Vendor ", collection: Vendor.order("name") %>
+    <%= link_to("Add a New Vendor", new_vendor_path(next: request.path)) if can?(:create, Vendor) %>
     <%= f.input :po_number %>
     <%= f.input :value, :placeholder => 'Replacement price' %>
     <%= f.input :grant, :placeholder => 'Grant name, if applicable' %>

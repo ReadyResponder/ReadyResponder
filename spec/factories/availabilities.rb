@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :availability do
     start_time Time.now
     end_time 15.hours.from_now

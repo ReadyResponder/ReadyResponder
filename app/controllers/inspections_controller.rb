@@ -17,7 +17,7 @@ class InspectionsController < ApplicationController
     set_inspectors
   end
 
-  def edit    
+  def edit
     set_inspectors
   end
 
@@ -54,13 +54,11 @@ class InspectionsController < ApplicationController
   end
 
   def inspection_params
-    params.require(:inspection).permit(
-      :inspection_date, :status, :comments, :person_id
-    )
+    params.require(:inspection).permit(:inspection_date, :status, :comments, :person_id)
   end
 
   def set_inspectors
-    @inspectors = Person.active    
+    @inspectors = Person.active.to_a
     (@inspectors << @inspection.person) if @inspection.try(:person)
     @inspectors = @inspectors.sort
   end

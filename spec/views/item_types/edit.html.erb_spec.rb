@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "item_types/edit", :type => :view do
-  let!(:item_category) { FactoryGirl.create :item_category}
+  let!(:item_category) { FactoryBot.create :item_category}
 
   before(:each) do
     @item_type = assign(:item_type, ItemType.create!(

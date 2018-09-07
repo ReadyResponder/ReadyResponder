@@ -1,0 +1,19 @@
+<%= simple_form_for @assignment do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :person,
+                collection: Person.active.where(:department => @assignment.requirement.event.departments).sort %>
+    <%= f.input :start_time, as: :string, label: "Start Time",
+                input_html: { class: "datetimepicker", size: 11,
+                              value: format_datetime_value(f.object.start_time) } %>
+    <%= f.input :end_time, as: :string, label: "End Time",
+                input_html: { class: "datetimepicker", size: 11,
+                              value: format_datetime_value(f.object.end_time) } %>
+    <%= f.input :status, :as => :select, :collection => Assignment::STATUS_CHOICES %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

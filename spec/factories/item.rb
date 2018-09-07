@@ -1,10 +1,9 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot_rails
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :item do
     name "EMA-10"
     description "Ford F-150"
-    source "Main Street Ford"
     category "Vehicle"
     qty 1
     brand 'Ford'

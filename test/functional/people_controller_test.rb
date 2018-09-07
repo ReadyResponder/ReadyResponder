@@ -2,7 +2,7 @@ require 'test_helper'
 
 class PeopleControllerTest < ActionController::TestCase
   setup do
-    @person = FactoryGirl.create(:person, icsid: "509")
+    @person = FactoryBot.create(:person, icsid: "509")
 
   end
 

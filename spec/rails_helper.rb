@@ -14,6 +14,7 @@ require 'capybara/rspec'
 require 'selenium/webdriver'
 require 'devise'
 
+Capybara.server = :puma, { Silent: true }
 Capybara.register_driver :headless_chrome do |app|
   capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
     chromeOptions: { args: %w(headless disable-gpu) }
@@ -86,7 +87,7 @@ RSpec.configure do |config|
 
   config.include ApplicationHelper
 
-  config.include Devise::TestHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :controller
   config.include MailerMacros, type: :mailer
   config.extend AuthorizationViewHelper, type: :feature
   config.include AuthenticationHelper

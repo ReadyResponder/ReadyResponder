@@ -2,8 +2,8 @@ require 'test_helper'
 
 class SkillsControllerTest < ActionController::TestCase
   setup do
-    @title = FactoryGirl.create(:title, name: "Police Officer")
-    @skill = FactoryGirl.create(:skill, name: "Driving")
+    @title = FactoryBot.create(:title, name: "Police Officer")
+    @skill = FactoryBot.create(:skill, name: "Driving")
   end
 
   test "should get index" do

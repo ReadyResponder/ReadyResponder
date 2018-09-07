@@ -1,5 +1,5 @@
 class PeopleController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_and_authorize_resource
   before_action :manage_people_depts, only: [:applicants, :index]
   before_action :load_all_depts, only: [:inactive, :everybody]
@@ -137,8 +137,7 @@ class PeopleController < ApplicationController
       :firstname, :lastname, :status, :icsid, :department_id,
       :city, :state, :zipcode, :start_date, :end_date,
       :application_date, :title, :gender, :portrait, :date_of_birth,
-      :division1, :division2, :channels_attributes, :title_ids,
-      :title_order, :old_comments, :nickname,
+      :division1, :division2, :title_order, :old_comments, :nickname,
       :channels_attributes => [],
       :title_ids => [],
       phones_attributes: [:id, :category, :content, :name, :status,

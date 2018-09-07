@@ -26,8 +26,8 @@ RSpec.describe "Person" do
   describe "forms should display" do
     it "a new person form with appropriate fields" do
       visit new_person_path
-      fill_in('First Name', :with => 'John')
-      fill_in('Last Name', :with => 'Jacobie')
+      fill_in('First Name', with: 'John')
+      fill_in('Last Name', with: 'Jacobie')
       expect(page).to have_select("Gender")
       expect(find_field('person_state').value).to eq 'MA'
       click_button "Create Person"
@@ -37,8 +37,8 @@ RSpec.describe "Person" do
     it "an edit form with values filled in" do
       person = create(:person, icsid: "509")
       visit edit_person_path(person)
-      expect(page).to have_field("First Name", :with => "CJ")
-      expect(page).to have_select("person_gender", :selected => "Female")
+      expect(page).to have_field("First Name", with: "CJ")
+      expect(page).to have_select("person_gender", selected: "Female")
       click_button "Update Person"
       expect(page).not_to have_content("Error")
     end
@@ -50,10 +50,10 @@ RSpec.describe "Person" do
       cj.channels << create(:channel, type: "Phone", channel_type: 'Phone', content: '+19785551212', category: "Mobile Phone")
       expect {
         visit edit_person_path(cj)
-        fill_in('Zipcode', :with => '02108')
+        fill_in('Zipcode', with: '02108')
         click_button "Update Person"
         expect(page).not_to have_content("Error")
-        expect(cj.reload.zipcode).to eq("02108")
+        expect(cj.reload.zipcode).to eq('02108')
       }.not_to change(Channel, :count)
     end
 

@@ -1,7 +1,7 @@
 class MovesController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_and_authorize_resource
-  
+
   # GET /moves
   # GET /moves.json
   def index
@@ -43,7 +43,7 @@ class MovesController < ApplicationController
   # POST /moves
   # POST /moves.json
   def create
-    @move = Move.new(params[:move])
+    @move = Move.new(move_params)
 
     respond_to do |format|
       if @move.save
@@ -62,7 +62,7 @@ class MovesController < ApplicationController
     @move = Move.find(params[:id])
 
     respond_to do |format|
-      if @move.update_attributes(params[:move])
+      if @move.update_attributes(move_params)
         format.html { redirect_to @move, notice: 'Move was successfully updated.' }
         format.json { head :no_content }
       else
@@ -82,5 +82,11 @@ class MovesController < ApplicationController
       format.html { redirect_to moves_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def move_params
+    params.require(:move).permit(:comments, :item_id, :locatable_id, :locatable_type, :reason)
   end
 end

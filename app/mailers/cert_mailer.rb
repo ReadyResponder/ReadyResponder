@@ -1,5 +1,5 @@
-class CertMailer < ActionMailer::Base
-  default from: "records@billericaema.org"
+class CertMailer < ApplicationMailer
+  default from: 'records@billericaema.org'
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:

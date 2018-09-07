@@ -1,5 +1,5 @@
 class TitlesController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_and_authorize_resource
 
   def index
@@ -18,7 +18,7 @@ class TitlesController < ApplicationController
   end
 
   def create
-    @title = Title.new(params[:title])
+    @title = Title.new(title_params)
 
     if @title.save
       redirect_to @title, notice: 'Title was successfully created.'
@@ -28,7 +28,7 @@ class TitlesController < ApplicationController
   end
 
   def update
-    if @title.update_attributes(params[:title])
+    if @title.update_attributes(title_params)
       redirect_to @title, notice: 'Title was successfully updated.'
     else
       render action: "edit"
@@ -39,5 +39,11 @@ class TitlesController < ApplicationController
     @title.destroy
 
     redirect_to titles_url
+  end
+
+  private
+
+  def title_params
+    params.require(:title).permit(:comments, :description, :status, :name, skill_ids: [])
   end
 end

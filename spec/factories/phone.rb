@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :phone do
     name "Main Phone"
     content "+19785551212"

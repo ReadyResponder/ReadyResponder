@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "assignments/index", type: :view do
-  let(:user) { FactoryGirl.create :user }
+  let(:user) { FactoryBot.create :user }
   let(:task) { create :task }
   let (:skill) { create :skill }
 

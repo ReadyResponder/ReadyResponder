@@ -1,4 +1,4 @@
-class Person < ActiveRecord::Base
+class Person < ApplicationRecord
   has_paper_trail
   include Commentable
   include Loggable
@@ -30,11 +30,11 @@ class Person < ActiveRecord::Base
   belongs_to :department
 
   validates_presence_of :firstname, :lastname, :status, :department, :title_order, :title
-  validates_uniqueness_of :icsid, :allow_nil => true, :allow_blank => true, :case_sensitive => false   # this needs to be scoped to active members, or more sophisticated rules
-  validates_length_of :state, :is => 2, :allow_nil => true, :allow_blank => true
-  validates_numericality_of  :height, :weight, :allow_nil => true, :allow_blank => true
-  validates_presence_of :division2, :unless => "division1.blank?"
-  validates_presence_of :division1, :unless => "division2.blank?"
+  validates_uniqueness_of :icsid, allow_nil: true, allow_blank: true, case_sensitive: false   # this needs to be scoped to active members, or more sophisticated rules
+  validates_length_of :state, is: 2, allow_nil: true, allow_blank: true
+  validates_numericality_of  :height, :weight, allow_nil: true, allow_blank: true
+  validates_presence_of :division2, unless: -> { division1.blank? }
+  validates_presence_of :division1, unless: -> { division2.blank? }
   validates_chronology :start_date, :end_date
 
   validate :start_date_cannot_be_before_application_date, :check_zipcode

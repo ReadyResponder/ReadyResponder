@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "item_types/index", :type => :view do
-  let(:user) { FactoryGirl.create :user }
-  let!(:item_category) { FactoryGirl.create :item_category}
+  let(:user) { FactoryBot.create :user }
+  let!(:item_category) { FactoryBot.create :item_category}
   before(:each) do
     assign(:item_types, [
       ItemType.create!(

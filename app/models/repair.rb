@@ -1,10 +1,11 @@
-class Repair < ActiveRecord::Base
+class Repair < ApplicationRecord
   has_paper_trail
   include Loggable
 
-  attr_accessible :category, :comments, :description,
-                  :item_id, :person_id, :service_date,
-                  :status, :user_id, :cost, :condition
+  # rails 5 deprecation
+  # attr_accessible :category, :comments, :description,
+  #                 :item_id, :person_id, :service_date,
+  #                 :status, :user_id, :cost, :condition
   belongs_to :item
   belongs_to :person
   delegate :item_category, :to => :item
@@ -15,7 +16,7 @@ class Repair < ActiveRecord::Base
   STATUS_CHOICES = ['Needed', 'In-progress', 'Awaiting Parts',
                     'Completed - Repaired', 'Completed - No Trouble Found']
   CATEGORY_CHOICES = ['Repair', 'Inspection' ]
-  CONDITION_CHOICES = ['Ready', 'In-Service - Maintenance', 
+  CONDITION_CHOICES = ['Ready', 'In-Service - Maintenance',
                        'In-Service - Degraded', 'Out of Service' ]
 
   def repairer_name

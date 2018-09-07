@@ -1,5 +1,5 @@
 class NotificationsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_and_authorize_resource
 
   before_action :set_form_values, only: [:new, :edit, :create, :update]
@@ -17,12 +17,14 @@ class NotificationsController < ApplicationController
   def new
     if @event.present?
       @notification = @event.notifications.new
-      @event.start_time.strftime('%a %b %d %k:%M')
-      @event.end_time.strftime('%a %b %d %k:%M')
+      start_time_display = @event.start_time.strftime('%a %b %d %k:%M')
+      end_time_display = @event.end_time.strftime('%a %b %d %k:%M')
+      @notification.subject = "Please provide availability "
+      @notification.subject += "for #{@event.title} [#{@event.id_code}] "
+      @notification.subject += "from #{start_time_display} to #{end_time_display}"
     else
       @notification = Notification.new
     end
-    @notification.subject = "Please provide availability "
     # @statuses = @notification.available_statuses
     @notification.status = "Active"
   end
@@ -82,6 +84,6 @@ class NotificationsController < ApplicationController
     params.require(:notification).permit(:subject, :body, :event_id, :status,
        :author_id, :time_to_live, :interval, :iterations_to_escalation,
        :groups, :scheduled_start_time, :start_time, :channels, :purpose,
-       :divisions, :department_ids => [])
+       :divisions, department_ids: [])
   end
 end
