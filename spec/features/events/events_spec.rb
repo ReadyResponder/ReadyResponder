@@ -172,9 +172,6 @@ RSpec.describe "Events" do
     it "an event page" do
       @event = create(:event, :meeting)
       visit event_path(@event)
-      within('#sidebar') do
-        expect(page).to have_content "Return to"
-      end
       expect(page).to have_content(@event.title)
       expect(current_path).to eq(event_path(@event))
     end
