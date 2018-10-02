@@ -1,7 +1,6 @@
 <% content_for :sidebar do %>
   <h2>Requirement</h2>
   <%= sidebar_button_link 'Return to Task', @requirement.task %>
-  <%= sidebar_button_link 'Return to Event', @requirement.task.event %>
   <%= sidebar_button_link 'Edit Requirement',
            edit_requirement_path(@requirement) if can? :edit, @requirement %>
   <%= sidebar_button_link "New Assignment",

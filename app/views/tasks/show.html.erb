@@ -1,6 +1,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/4.5.0/ol.js"></script>
 <% content_for :sidebar do %>
-  <%= sidebar_button_link 'Return to Event', @task.event %>
   <%= sidebar_button_link 'Edit Task', edit_task_path(@task) if can? :edit, @task %>
   <%= sidebar_button_link 'New Requirement', new_task_requirement_path(@task) if can? :create, Requirement %>
 <% end %>
@@ -41,7 +40,7 @@
     target: 'map',
     layers: [
       new ol.layer.Tile({
-        source: new ol.source.OSM() 
+        source: new ol.source.OSM()
       })
     ],
     view: new ol.View({
