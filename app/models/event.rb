@@ -94,9 +94,9 @@ class Event < ApplicationRecord
 
   def responses
     people_ids = eligible_people.pluck(:id)
-    availabiltiies = Availability.where(person: people_ids).containing(start_time..end_time) +
-                    Availability.where(person: people_ids).partially_overlapping(start_time..end_time)
-    availabiltiies.uniq
+    availabiltiies = Availability.where(person: people_ids).containing(start_time..end_time).or(
+                    Availability.where(person: people_ids).partially_overlapping(start_time..end_time))
+    availabiltiies.active.uniq
   end
 
   def responding_people
