@@ -99,10 +99,6 @@ class Event < ApplicationRecord
     availabiltiies.active.uniq
   end
 
-  def active_responses
-    responses.select {|availability| availability.status != "Cancelled"}
-  end
-
   def responding_people
     Person.active.joins(:availabilities).
       merge(Availability.containing(start_time..end_time))
