@@ -1,6 +1,10 @@
 <% content_for :sidebar do %>
-  <h3>Editing Event</h3>
   <%= sidebar_button_link 'Cancel Edit', :back %>
 <% end %>
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to 'Events', events_path %></li>
+  <li class="breadcrumb-item active">Edit Event: <%= @event.title %></li>
+</ol>
 
 <%= render 'form' %>

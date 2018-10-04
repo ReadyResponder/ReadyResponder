@@ -5,11 +5,15 @@
   <p id="notice"><%= notice %></p>
 <% end %>
 
-<p><h4><%= link_to @assignment.event.title, @assignment.event %></h4></p>
-<p><h4><%= link_to @assignment.task, @assignment.task %></h4></p>
-<p><h4><%= link_to @assignment.requirement, @assignment.requirement %></h4></p>
-<p><h4><%= link_to @assignment.person.to_s, @assignment.person %></h4></p>
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to 'Events', events_path %></li>
+  <li class="breadcrumb-item"><%= link_to @assignment.event.title, @assignment.event %></li>
+  <li class="breadcrumb-item"><%= link_to @assignment.task, @assignment.task %></li>
+  <li class="breadcrumb-item"><%= link_to @assignment.requirement, @assignment.requirement %></li>
+  <li class="breadcrumb-item active"><%= @assignment.person.to_s %></h4></li>
+</ol>
 
+<p><h4><%= link_to @assignment.person.to_s, @assignment.person %></h4></p>
 
 <p>
   <strong>Start time:</strong>
