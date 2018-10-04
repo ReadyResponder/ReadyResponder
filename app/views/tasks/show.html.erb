@@ -4,8 +4,13 @@
   <%= sidebar_button_link 'New Requirement', new_task_requirement_path(@task) if can? :create, Requirement %>
 <% end %>
 
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to 'Events', events_path %></li>
+  <li class="breadcrumb-item"><%= link_to @task.event.title, event_path(@task.event) %></li>
+  <li class="breadcrumb-item active"><%= @task.title %></li>
+</ol>
+
 <p>
-  <span class="h3"><%= link_to @task.event.title, event_path(@task.event) %></span></br>
   <span class="h3"><%= @task.title %></span>
   <% if @task.location.present? %>
     <%= @task.location %>
