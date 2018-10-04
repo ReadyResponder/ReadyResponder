@@ -10,6 +10,7 @@
       <th>Desired</th>
       <th>Max</th>
       <th>Optional</th>
+      <th>Auto-Assign</th>
       <th>Floating</th>
       <th></th>
     </tr>
@@ -20,12 +21,13 @@
         <td <%== sorting_order(requirement.priority) %>><%= requirement_priority_label(requirement) %></td>
         <td><%= link_to requirement, requirement %></td>
         <td <%== sorting_order(requirement.status_value) %>><%= requirement_status_label(requirement) %></td>
-        <td><ol><%= render partial: "events/assignee", collection: requirement.assignees %></ol></td>        
+        <td><ol><%= render partial: "events/assignee", collection: requirement.assignees %></ol></td>
         <td><%= requirement.number_filled %></td>
         <td><%= requirement.minimum_people %></td>
         <td><%= requirement.desired_people %></td>
         <td><%= requirement.maximum_people %></td>
         <td><%= requirement.optional ? "Yes" : "No" %></td>
+        <td><%= requirement.auto_assign ? "Yes" : "No" %></td>
         <td><%= requirement.floating ? "Yes" : "No" %></td>
         <td><%= table_button_link 'Edit', edit_requirement_path(requirement) if can? :edit, requirement %></td>
       </tr>
