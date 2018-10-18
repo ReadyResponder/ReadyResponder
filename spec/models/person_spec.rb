@@ -9,6 +9,40 @@ RSpec.describe Person do
     it { is_expected.to have_many(:inspectors) }
     it { is_expected.to validate_presence_of(:department) }
 
+    describe 'title presence for active person' do
+      let(:person) { build :person }
+      context 'with active status' do
+        context 'title is present' do
+          it 'is valid' do
+            expect(person.valid?).to be true
+          end
+        end
+        context 'title is not present' do
+          it 'is not valid' do
+            person.title = nil
+            expect(person.valid?).to be false
+          end
+        end
+      end
+
+      (Person::STATUS - ['Active']).each do |status|
+        context "with #{status} status" do
+          before(:each) { person.status = status }
+          context 'title is present' do
+            it 'is valid' do
+              expect(person.valid?).to be true
+            end
+          end
+          context 'title is not present' do
+            it 'is valid' do
+              person.title = nil
+              expect(person.valid?).to be true
+            end
+          end
+        end
+      end
+    end
+
     describe 'divisions' do
       context 'division 1 present' do
         it 'is invalid if division 2 is blank' do
@@ -324,4 +358,25 @@ RSpec.describe Person do
       end
     end
   end
+
+  describe 'active' do
+    let(:person) { build :person }
+
+    context 'with active status' do
+      it 'returns true' do
+        person.status = 'Active'
+        expect(person.active?).to be true
+      end
+    end
+
+    context 'with status other than active' do
+      (Person::STATUS - ['Active']).each do |status|
+        it 'returns false' do
+          person.status = status
+          expect(person.active?).to be false
+        end
+      end
+    end
+  end
+
 end
