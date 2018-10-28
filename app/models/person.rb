@@ -35,7 +35,6 @@ class Person < ApplicationRecord
   validates_numericality_of  :height, :weight, allow_nil: true, allow_blank: true
   validates_presence_of :division2, unless: -> { division1.blank? }
   validates_presence_of :division1, unless: -> { division2.blank? }
-  validates_presence_of :title, if: -> { active? }
   validates_chronology :start_date, :end_date
 
   validate :start_date_cannot_be_before_application_date, :check_zipcode
@@ -231,10 +230,6 @@ class Person < ApplicationRecord
     upcoming_events_count = Setting.get_integer('UPCOMING_EVENTS_COUNT', 10)
 
     self.department.events.limit(upcoming_events_count)
-  end
-
-  def active?
-    status == 'Active'
   end
 
   private
