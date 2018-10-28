@@ -54,7 +54,7 @@
       </div>
 
     <%= f.input :icsid, label: 'ICS id', :input_html => { :size => 5 } %>
-    <%= f.input :title, :as => :select, label: 'Rank', :collection => Person::TITLES %>
+    <%= f.input :title, :as => :select, label: 'Rank', :collection => Person::TITLES, :required => false %>
     <%= f.association :titles %>
     <%= f.input :start_date, as: :string,
                 input_html: { class: 'datepicker', size: 11,
