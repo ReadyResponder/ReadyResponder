@@ -3,5 +3,10 @@
   <h3>(for <%= @task.event.title %>)</h3>
   <%= sidebar_button_link 'Cancel Edit', :back %>
 <% end %>
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to 'Events', events_path %></li>
+  <li class="breadcrumb-item"><%= link_to @task.event.title, event_path(@task.event) %></li>
+  <li class="breadcrumb-item active">Edit Task: <%= @task.title %></li>
+</ol>
 
 <%= render 'form' %>

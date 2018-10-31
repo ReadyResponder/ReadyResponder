@@ -14,11 +14,11 @@ class AvailabilitiesController < ApplicationController
 
   def new
     person = Person.find(params[:person_id]) if params.include? "person_id"
-    event = Event.find(params[:event_id]) if params.include? "event_id"
-    event = Event.new if event.blank?
+    @event = Event.find(params[:event_id]) if params.include? "event_id"
+    @event = Event.new if @event.blank?
 
-    @availability = Availability.new(start_time: event.start_time,
-                                     end_time: event.end_time)
+    @availability = Availability.new(start_time: @event.start_time,
+                                     end_time: @event.end_time)
     @availability.person = person if person
 
     people = Person.active

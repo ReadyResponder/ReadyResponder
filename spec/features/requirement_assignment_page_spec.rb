@@ -25,7 +25,7 @@ RSpec.feature 'Requirement Assignment page' do
 
         click_on 'New Assignment'
 
-        expect(page).to have_content 'New Assignment:'
+        expect(page).to have_content 'New Assignment'
         expect(page).to have_content @requirement.title
         expect(page).to have_content @assignment.requirement
         select @person, from: 'Person'
