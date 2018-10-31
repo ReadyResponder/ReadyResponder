@@ -4,4 +4,10 @@
   <%= sidebar_button_link 'Return to Tasks List', tasks_path %>
 <% end %>
 
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to 'Events', events_path %></li>
+  <li class="breadcrumb-item"><%= link_to @event.title, event_path(@event) %></li>
+  <li class="breadcrumb-item active">New Task</li>
+</ol>
+
 <%= render 'form' %>
