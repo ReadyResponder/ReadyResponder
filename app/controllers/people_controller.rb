@@ -47,6 +47,7 @@ class PeopleController < ApplicationController
     vcard = Vcard::Generator.call(@person)
     @qr = RQRCode::QRCode.new(vcard.to_s, level: :q)
     @last_editor = last_editor(@person)
+    @comment = Comment.new
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @person }
