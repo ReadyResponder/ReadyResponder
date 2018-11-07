@@ -4,6 +4,7 @@
   <% end %>
   <thead>
     <tr>
+      <th>Creation Date</th>
       <th>Subject</th>
       <th>Status</th>
       <th>Event</th>
@@ -18,6 +19,7 @@
   <tbody>
     <% notifications.each do |notification| %>
       <tr>
+        <td><%= notification.created_at.strftime('%a %b %d %k:%M') if notification.created_at %></td> 
         <td><%= link_to truncate(notification.subject, length: 60), notification_path(notification) %></td>
         <td><%= notification.status %></td>
         <td><%= notification.event ? (link_to notification.event.title, notification.event) : 'None' %></td>

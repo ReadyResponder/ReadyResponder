@@ -2,4 +2,9 @@
   <%= sidebar_button_link 'Cancel', events_path %>
 <% end %>
 
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to 'Events', events_path %></li>
+  <li class="breadcrumb-item active">New Event</li>
+</ol>
+
 <%= render 'form' %>

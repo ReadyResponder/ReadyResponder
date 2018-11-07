@@ -15,6 +15,11 @@
            event_path(previous_event(@event)) if can?(:show, Timecard) && previous_event(@event) %>
 <% end %>
 
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to 'Events', events_path %></li>
+  <li class="breadcrumb-item active"><%= @event.title %></li>
+</ol>
+
 <p>
   <span class="h3">
     <% if @event.category.present? %>

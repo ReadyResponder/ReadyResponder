@@ -4,7 +4,6 @@ RSpec.describe Person do
   describe 'validations' do
     subject { build :person }
     it { is_expected.to validate_length_of(:state).is_equal_to 2 }
-    it { is_expected.to validate_presence_of(:title) }
     it { is_expected.to validate_uniqueness_of(:icsid).case_insensitive }
     it { is_expected.to have_many(:inspectors) }
     it { is_expected.to validate_presence_of(:department) }
