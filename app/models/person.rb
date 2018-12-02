@@ -229,7 +229,7 @@ class Person < ApplicationRecord
   def upcoming_events
     upcoming_events_count = Setting.get_integer('UPCOMING_EVENTS_COUNT', 10)
 
-    self.department.events.limit(upcoming_events_count).upcoming
+    self.department.events.upcoming.limit(upcoming_events_count)
   end
 
   private
