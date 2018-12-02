@@ -25,5 +25,10 @@ FactoryBot.define do
     trait :event do
       category "Event"
     end
+
+    trait :upcoming do
+      status 'Scheduled'
+      end_time Date.tomorrow
+    end
   end
 end
