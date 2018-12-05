@@ -308,25 +308,25 @@ RSpec.describe Person do
 
     context 'with settings' do
       it 'returns count from setting' do
-        expect(person.upcoming_events).to eq [e6, e7, e8, e9, e10]
+        expect(person.upcoming_events).to contain_exactly e6, e7, e8, e9, e10
       end
 
       it 'returns only the upcoming events' do
         e7.update!(status: 'Closed')
         e9.update!(start_time: 2.days.ago, end_time: 1.day.ago)
 
-        expect(person.upcoming_events).to eq [e6, e8, e10]
+        expect(person.upcoming_events).to contain_exactly e6, e8, e10
       end
     end
 
     context 'without settings' do
       it 'uses fallback value when setting is not available' do
         setting.destroy
-        expect(person.upcoming_events).to eq [e1, e2, e3, e4, e5, e6, e7, e8, e9, e10]
+        expect(person.upcoming_events).to contain_exactly e1, e2, e3, e4, e5, e6, e7, e8, e9, e10
       end
       it 'returns fallback value when setting is inactive' do
         setting.update_attribute(:status, 'Inactive')
-        expect(person.upcoming_events).to eq [e1, e2, e3, e4, e5, e6, e7, e8, e9, e10]
+        expect(person.upcoming_events).to contain_exactly e1, e2, e3, e4, e5, e6, e7, e8, e9, e10
       end
 
       it 'returns only the upcoming events' do
@@ -334,7 +334,7 @@ RSpec.describe Person do
         e3.update!(start_time: 2.hours.ago, end_time: 1.minute.ago)
         e7.update!(start_time: 24.hours.ago, end_time: 20.hours.ago)
 
-        expect(person.upcoming_events).to eq [e2, e4, e5, e6, e8, e9, e10]
+        expect(person.upcoming_events).to contain_exactly e2, e4, e5, e6, e8, e9, e10
       end
     end
   end
