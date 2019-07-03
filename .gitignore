@@ -39,3 +39,5 @@ playbook.retry
 test_models.rb
 Procfile
 uploads/
+
+.docker-sync/

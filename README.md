@@ -96,6 +96,28 @@ $ apt-get install libmagickwand-dev
 #### Vagrant Setup
 
 We also have a Vagrant + Ansible setup so you can start quickly. See [Vagrant + Ansible](roles/)
+#### Docker 
+```text
+# first time only...
+$ docker-compose build
+
+# booting and running...
+# every time
+$ docker-sync start
+$ docker-compose up
+
+# first time only...
+$ docker-compose exec app bin/rake db:create
+# (& and when you add / update migrations...)
+$ docker-compose exec app bin/rake db:migrate
+$ docker-compose exec app bin/rake db:test:prepare
+
+# Running tests within the container
+$ docker-compose exec app bin/bundle exec rspec
+
+# shutting down 
+$ docker-compose down
+```
 
 ## Contributing to ReadyResponder: Coding :smiley:
 

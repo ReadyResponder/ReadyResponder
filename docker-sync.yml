@@ -1,0 +1,11 @@
+version: "2"
+syncs:
+  app-sync:
+    sync_strategy: 'rsync'
+    src: './'
+    sync_host_port: 10872
+    sync_excludes: ['.gitignore', '.git/', 'tmp', 'log', 'README.md', 'postgres-data/', '.docker*']
+    sync_args: '-v --inplace'
+    notify_terminal: false
+    watch_excludes: ['.*/.git', '.gitignore', 'docker-*.yml', 'Dockerfile', 'postgres-data', '.docker*']
+    watch_args: '-v'

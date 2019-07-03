@@ -1,0 +1,22 @@
+app:
+  build: .
+  ports:
+    - 3000:3000
+    - 35729:35729 #livereload port
+  links:
+    - postgres
+  volumes:
+    # - './:/app' 
+    # link project root to /app so that local changes
+    # are immediately visible inside the container
+    # but... it's SLOW on macs 
+    # See issue 77 https://github.com/docker/for-mac/issues/77
+    # Instead we'll use docker-sync-stack
+    - app-sync:/app:nocopy
+
+postgres:
+  image: postgres:9.4
+  ports:
+    - 5432
+  volumes:
+    - './postgres-data:/var/lib/postgresql/data'

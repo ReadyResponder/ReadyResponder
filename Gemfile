@@ -41,6 +41,7 @@ gem 'paper_trail'
 gem 'cocoon'
 
 group :test, :development do
+  gem 'docker-sync'
   gem 'dotenv-rails'
   gem 'thin'
   gem 'rspec-rails'
