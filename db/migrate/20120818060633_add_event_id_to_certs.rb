@@ -1,4 +1,4 @@
-class AddEventIdToCerts < ActiveRecord::Migration
+class AddEventIdToCerts < ActiveRecord::Migration[4.2]
   def change
     rename_column :certs, :id_number, :cert_number
     add_column :certs, :grade, :string

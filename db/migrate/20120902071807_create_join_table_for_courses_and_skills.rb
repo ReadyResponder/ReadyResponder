@@ -1,4 +1,4 @@
-class CreateJoinTableForCoursesAndSkills < ActiveRecord::Migration
+class CreateJoinTableForCoursesAndSkills < ActiveRecord::Migration[4.2]
   def change
     create_table :courses_skills, :id => false do |t|
       t.integer :course_id

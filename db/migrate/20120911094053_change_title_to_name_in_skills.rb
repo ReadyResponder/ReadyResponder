@@ -1,4 +1,4 @@
-class ChangeTitleToNameInSkills < ActiveRecord::Migration
+class ChangeTitleToNameInSkills < ActiveRecord::Migration[4.2]
   def up
     rename_column :skills, :title, :name
     rename_column :titles, :title, :name
