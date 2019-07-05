@@ -1,0 +1,24 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  min_messages: WARNING
+  template: template0  #template0 resolves an issue with SQL_ASCII vs UTF-8 encoding
+
+
+development:
+  <<: *default
+  database: ready_responder_development
+  host: postgres
+  username: postgres
+
+
+test:
+  <<: *default
+  database: ready_responder_test
+  host: postgres
+  username: postgres
+
+production:
+  <<: *default
+  database: ready_responder_production

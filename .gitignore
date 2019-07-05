@@ -20,9 +20,6 @@
 /public/uploads
 *.DS_Store
 
-# Ignore database settings
-/config/database.yml
-
 # Ignore dotenv configuration
 .env
 
