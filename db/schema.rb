@@ -68,6 +68,11 @@ ActiveRecord::Schema.define(version: 2018_10_18_140320) do
     t.index ["person_id"], name: "index_certs_on_person_id"
   end
 
+  create_table "certs_courses", id: :serial, force: :cascade do |t|
+    t.integer "cert_id"
+    t.integer "course_id"
+  end
+
   create_table "channels", id: :serial, force: :cascade do |t|
     t.integer "person_id"
     t.string "name"
@@ -91,8 +96,8 @@ ActiveRecord::Schema.define(version: 2018_10_18_140320) do
   create_table "comments", id: :serial, force: :cascade do |t|
     t.string "title", limit: 50, default: ""
     t.text "description"
-    t.string "commentable_type"
     t.integer "commentable_id"
+    t.string "commentable_type"
     t.integer "person_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -325,7 +330,7 @@ ActiveRecord::Schema.define(version: 2018_10_18_140320) do
     t.index ["event_id"], name: "index_notifications_on_event_id"
   end
 
-  create_table "people", force: :cascade do |t|
+  create_table "people", id: :serial, force: :cascade do |t|
     t.string "firstname"
     t.string "lastname"
     t.string "status"
@@ -357,8 +362,8 @@ ActiveRecord::Schema.define(version: 2018_10_18_140320) do
     t.string "division1"
     t.string "division2"
     t.integer "position", default: 30
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer "duration"
     t.integer "title_order", null: false
     t.string "error_code"
