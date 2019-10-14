@@ -10,7 +10,11 @@ class Assignment < ApplicationRecord
 
   validates_presence_of :person, :start_time, :end_time
 
-  STATUS_CHOICES = [ 'New', 'Active', 'Cancelled' ]
+  STATUS_CHOICES = [
+    STATUS_NEW = 'New',
+    STATUS_ACTIVE = 'Active',
+    STATUS_CANCELLED = 'Cancelled'
+  ]
 
   scope :active, -> { where( status: ["New", "Active"] ) }
 
