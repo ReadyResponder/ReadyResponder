@@ -1,11 +1,13 @@
 <% content_for :sidebar do %>
+  <h3> Edit Requirement </h3>
   <%= sidebar_button_link 'Cancel Edit', :back %>
 <% end %>
 
-<span class="h3">
-  Event: <%= link_to @requirement.task.event,
-              event_path(@requirement.task.event) %>
-</span></br>
-<span class="h3">Task: <%= link_to @requirement.task, task_path(@requirement.task) %></span></br>
-<span class="h3"> Edit Requirement </span></br></br>
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to 'Events', events_path %></li>
+  <li class="breadcrumb-item"><%= link_to @requirement.task.event, event_path(@requirement.task.event) %></li>
+  <li class="breadcrumb-item"><%= link_to @requirement.task, task_path(@requirement.task) %></li>
+  <li class="breadcrumb-item active">Edit Requirement: <%= @requirement.title.presence || @requirement.skill.presence || 'requirement' %></li>
+</ol>
+
 <%= render 'form' %>

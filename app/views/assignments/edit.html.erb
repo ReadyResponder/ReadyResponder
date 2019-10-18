@@ -3,4 +3,16 @@
   <p id="notice"><%= notice %></p>
 <% end %>
 
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to 'Events', events_path %></li>
+  <%- if @assignment.event %>
+    <li class="breadcrumb-item"><%= link_to @assignment.event.title, @assignment.event %></li>
+  <% end %>
+  <%- if @assignment&.task&.persisted? %>
+    <li class="breadcrumb-item"><%= link_to @assignment.task, @assignment.task %></li>
+  <% end %>
+  <li class="breadcrumb-item"><%= link_to @assignment.requirement, @assignment.requirement %></li>
+  <li class="breadcrumb-item active">Edit: <%= @assignment.person.to_s %></h4></li>
+</ol>
+
 <%= render 'edit_form' %>

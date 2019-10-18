@@ -1,6 +1,14 @@
 <% content_for :sidebar do %>
-  <h4>New Assignment:</br> <%= @requirement %> </br> <%= @requirement.task %></h4>
+  <h3>New Assignment</h3>
   <p id="notice"><%= notice %></p>
 <% end %>
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to 'Events', events_path %></li>
+  <li class="breadcrumb-item"><%= link_to @requirement.task.event.title, event_path(@requirement.task.event) %></li>
+  <li class="breadcrumb-item"><%= link_to @requirement.task.title, task_path(@requirement.task)%></li>
+  <li class="breadcrumb-item"><%= @requirement.title.presence || @requirement.skill.presence || 'requirement' %></li>
+  <li class="breadcrumb-item active">New Assignment</li>
+</ol>
 
 <%= render 'new_form' %>

@@ -1,5 +1,4 @@
 <% content_for :sidebar do %>
-  <%= sidebar_button_link 'Return to Events', events_path %>
   <%= sidebar_button_link 'Edit Event',
            edit_event_path(@event) if can? :edit, @event %>
   <%= sidebar_button_link 'New Task',
@@ -15,6 +14,11 @@
   <%= sidebar_button_link "Previous Event",
            event_path(previous_event(@event)) if can?(:show, Timecard) && previous_event(@event) %>
 <% end %>
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to 'Events', events_path %></li>
+  <li class="breadcrumb-item active"><%= @event.title %></li>
+</ol>
 
 <p>
   <span class="h3">

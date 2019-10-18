@@ -29,7 +29,7 @@ class Person < ApplicationRecord
 
   belongs_to :department
 
-  validates_presence_of :firstname, :lastname, :status, :department, :title_order, :title
+  validates_presence_of :firstname, :lastname, :status, :department, :title_order
   validates_uniqueness_of :icsid, allow_nil: true, allow_blank: true, case_sensitive: false   # this needs to be scoped to active members, or more sophisticated rules
   validates_length_of :state, is: 2, allow_nil: true, allow_blank: true
   validates_numericality_of  :height, :weight, allow_nil: true, allow_blank: true
@@ -229,7 +229,7 @@ class Person < ApplicationRecord
   def upcoming_events
     upcoming_events_count = Setting.get_integer('UPCOMING_EVENTS_COUNT', 10)
 
-    self.department.events.limit(upcoming_events_count)
+    self.department.events.upcoming.limit(upcoming_events_count)
   end
 
   private
