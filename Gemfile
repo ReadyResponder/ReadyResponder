@@ -46,7 +46,7 @@ group :test, :development do
   gem 'capybara'
   # Use selenium and chrome for handling JS automated testing
   gem 'selenium-webdriver'
-  gem 'chromedriver-helper', '1.0.0'
+  gem 'webdrivers', '~> 4.0'
   gem 'guard-rspec', require: false
   gem 'guard-livereload'
   gem 'launchy'
