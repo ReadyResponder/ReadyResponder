@@ -18,10 +18,10 @@
       <tr class='<%= column_color_class(e) %>'>
         <td><%= link_to e.title, e %></td>
         <td><%= e.location %></td>
-        <td><time>
+        <td data-order='<%= e.start_time %>'><time>
           <%= e.start_time.strftime('%a, %b %d, %y %k:%M') if e.start_time  %>
         </time></td>
-        <td><time>
+        <td data-order='<%= e.end_time %>'><time>
           <%= e.end_time.strftime('%a, %b %d, %y %k:%M') if e.end_time  %>
         </time></td>
         <td><%= e.duration %></td>

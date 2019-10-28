@@ -1,14 +1,17 @@
 <% content_for :sidebar do %>
   <h2>Requirement</h2>
-  <%= sidebar_button_link 'Return to Task', @requirement.task %>
   <%= sidebar_button_link 'Edit Requirement',
            edit_requirement_path(@requirement) if can? :edit, @requirement %>
   <%= sidebar_button_link "New Assignment",
            new_requirement_assignment_path(@requirement) if can? :create, Assignment %>
 <% end %>
 
-<span class="h3"><%= link_to @requirement.task.event.title, event_path(@requirement.task.event) %></span><br>
-<span class="h3"><%= link_to @requirement.task.title, task_path(@requirement.task)%></span><br>
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to 'Events', events_path %></li>
+  <li class="breadcrumb-item"><%= link_to @requirement.task.event.title, event_path(@requirement.task.event) %></li>
+  <li class="breadcrumb-item"><%= link_to @requirement.task.title, task_path(@requirement.task)%></li>
+  <li class="breadcrumb-item active"><%= @requirement.title.presence || @requirement.skill.presence || 'requirement' %></li>
+</ol>
 
 <p>
   <span class="h4">

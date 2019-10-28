@@ -10,7 +10,9 @@ class Task < ApplicationRecord
   validates_chronology :start_time, :end_time
 
   has_many :requirements
-  has_many :assignments, through: :requirements
+  has_many :assignments,
+           -> { where(status: [Assignment::STATUS_ACTIVE, Assignment::STATUS_NEW]) },
+           through: :requirements
   has_many :people, through: :assignments
 
   scope :active, -> { where( status: "Active" ) }

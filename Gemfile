@@ -15,8 +15,6 @@ gem 'simple_form', '~> 4.0.0'
 gem 'redcarpet'
 gem 'geocoder'
 gem 'cancancan'
-#gem 'taps'
-#gem 'validates_timeliness', '~> 3.0'
 
 gem 'rqrcode'
 gem 'vcardigan'
@@ -44,12 +42,11 @@ group :test, :development do
   gem 'dotenv-rails'
   gem 'thin'
   gem 'rspec-rails'
-  # gem 'rspec-activemodel-mocks' # TODO: remove if we no longer need mock_model or stub_model
   gem "factory_bot_rails", "~> 4.0"
   gem 'capybara'
   # Use selenium and chrome for handling JS automated testing
   gem 'selenium-webdriver'
-  gem 'chromedriver-helper', '1.0.0'
+  gem 'webdrivers', '~> 4.0'
   gem 'guard-rspec', require: false
   gem 'guard-livereload'
   gem 'launchy'
@@ -74,7 +71,6 @@ group :development do
   # Use Capistrano for deployment
   gem 'capistrano-rails'
 
-
   # Helps you figure out where a piece of the UI is coming from by
   # adding comments to the source code at the begin and end of each template.
   gem 'noisy_partials', git: 'https://github.com/gwshaw/noisy_partials.git'
@@ -98,8 +94,6 @@ gem 'sass-rails'
 gem 'uglifier', '>= 1.0.3'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2.2'
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -112,12 +106,5 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
-
-# # Deploy with Capistrano
-# gem 'capistrano', '~> 2.15'
-# # This is used by Capistrano, but 2.8 has issues
-# gem 'net-ssh', '~> 2.7.0'
-
 gem 'jquery-ui-rails'
 gem 'bootstrap-sass', '3.3.7'
-# gem 'chosen-rails'
