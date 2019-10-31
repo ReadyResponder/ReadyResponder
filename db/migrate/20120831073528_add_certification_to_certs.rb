@@ -1,4 +1,4 @@
-class AddCertificationToCerts < ActiveRecord::Migration
+class AddCertificationToCerts < ActiveRecord::Migration[4.2]
   def change
     add_column :certs, :certification, :string
   end

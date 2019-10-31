@@ -1,4 +1,4 @@
-class CreateDepartmentsEventsJoinTable < ActiveRecord::Migration
+class CreateDepartmentsEventsJoinTable < ActiveRecord::Migration[4.2]
   def change
     create_join_table :departments, :events do |t|
       t.index [:department_id, :event_id]

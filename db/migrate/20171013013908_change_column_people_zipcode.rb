@@ -1,4 +1,4 @@
-class ChangeColumnPeopleZipcode < ActiveRecord::Migration
+class ChangeColumnPeopleZipcode < ActiveRecord::Migration[4.2]
   def up
     change_column :people, :zipcode, :string, limit: 10
   end

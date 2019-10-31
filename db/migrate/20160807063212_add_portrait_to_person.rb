@@ -1,4 +1,4 @@
-class AddPortraitToPerson < ActiveRecord::Migration
+class AddPortraitToPerson < ActiveRecord::Migration[4.2]
   def change
     add_column :people, :portrait, :string
   end

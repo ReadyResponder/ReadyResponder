@@ -1,4 +1,4 @@
-class AddDepartmentsNotificationsTable < ActiveRecord::Migration
+class AddDepartmentsNotificationsTable < ActiveRecord::Migration[4.2]
   def change
     unless table_exists? :departments_notifications
       create_table :departments_notifications, :id => false do |t|

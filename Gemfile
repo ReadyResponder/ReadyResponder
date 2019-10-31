@@ -15,7 +15,7 @@ gem 'simple_form', '~> 5.0.0'
 gem 'redcarpet'
 gem 'geocoder'
 gem 'cancancan'
-
+gem 'acts-as-taggable-on', '~> 6.0' #must be this version for Rails5
 gem 'rqrcode'
 gem 'vcardigan'
 

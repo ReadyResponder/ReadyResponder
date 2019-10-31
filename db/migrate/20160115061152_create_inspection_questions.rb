@@ -1,4 +1,4 @@
-class CreateInspectionQuestions < ActiveRecord::Migration
+class CreateInspectionQuestions < ActiveRecord::Migration[4.2]
   def change
     create_table :inspection_questions do |t|
       t.references :inspection
