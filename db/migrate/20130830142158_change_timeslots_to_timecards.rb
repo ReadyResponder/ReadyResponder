@@ -1,4 +1,4 @@
-class ChangeTimeslotsToTimecards < ActiveRecord::Migration
+class ChangeTimeslotsToTimecards < ActiveRecord::Migration[4.2]
   def up
     rename_table :timeslots, :timecards
   end

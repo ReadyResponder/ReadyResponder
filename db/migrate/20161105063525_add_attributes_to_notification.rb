@@ -1,4 +1,4 @@
-class AddAttributesToNotification < ActiveRecord::Migration
+class AddAttributesToNotification < ActiveRecord::Migration[4.2]
   def change
     unless column_exists? :notifications, :subject
       add_column :notifications, :subject, :string
