@@ -1,5 +1,7 @@
 class Person < ApplicationRecord
   has_paper_trail
+  acts_as_taggable # Alias for acts_as_taggable_on :tags
+  
   include Commentable
   include Loggable
 

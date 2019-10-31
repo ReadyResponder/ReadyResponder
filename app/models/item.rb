@@ -1,5 +1,7 @@
 class Item < ApplicationRecord
   has_paper_trail
+  acts_as_taggable # Alias for acts_as_taggable_on :tags
+  acts_as_taggable_on :conditions
   include Loggable
 
   # rails 5 deprecation

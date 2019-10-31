@@ -1,5 +1,8 @@
 class Event < ApplicationRecord
   has_paper_trail
+  acts_as_taggable # Alias for acts_as_taggable_on :tags
+  acts_as_taggable_on  :categories
+
   include Loggable
 
   before_save :calc_duration, :trim_id_code
