@@ -1,4 +1,4 @@
-class AdjustItemsTable < ActiveRecord::Migration
+class AdjustItemsTable < ActiveRecord::Migration[4.2]
 def change
     add_column :items, :icsid, :string
     add_column :items, :po_number, :string

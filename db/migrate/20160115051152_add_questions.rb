@@ -1,4 +1,4 @@
-class AddQuestions < ActiveRecord::Migration
+class AddQuestions < ActiveRecord::Migration[4.2]
   def up
     create_table :questions do |t|
       t.string :prompt

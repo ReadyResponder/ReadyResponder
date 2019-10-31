@@ -1,4 +1,4 @@
-class AddFloorToLocations < ActiveRecord::Migration
+class AddFloorToLocations < ActiveRecord::Migration[4.2]
   def change
     add_column :locations, :floor, :string
     add_column :locations, :container, :string

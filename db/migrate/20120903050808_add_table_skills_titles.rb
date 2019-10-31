@@ -1,4 +1,4 @@
-class AddTableSkillsTitles < ActiveRecord::Migration
+class AddTableSkillsTitles < ActiveRecord::Migration[4.2]
   def change
       create_table :skills_titles, :id => false do |t|
 	t.integer :skill_id
