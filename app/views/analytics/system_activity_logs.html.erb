@@ -15,7 +15,7 @@
   <tbody>
     <% @logs.each do |log| %>
       <tr>
-        <td><%= log.user.fullname %></td>
+        <td><%= log.user.present? ? log.user.fullname : "Unknown User" %></td>
         <td><%= log.category %></td>
         <td><%= log.message %></td>
         <td><%= log.created_at %></td>
