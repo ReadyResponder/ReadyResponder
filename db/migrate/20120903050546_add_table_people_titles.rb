@@ -1,4 +1,4 @@
-class AddTablePeopleTitles < ActiveRecord::Migration
+class AddTablePeopleTitles < ActiveRecord::Migration[4.2]
   def change
     create_table :people_titles, :id => false do |t|
       t.integer :person_id

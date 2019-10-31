@@ -1,4 +1,4 @@
-class EnforceDepartmentShortnameRequired < ActiveRecord::Migration
+class EnforceDepartmentShortnameRequired < ActiveRecord::Migration[4.2]
   def change
     
     # use raw sql to update any departments with null shortname

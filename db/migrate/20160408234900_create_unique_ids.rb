@@ -1,4 +1,4 @@
-class CreateUniqueIds < ActiveRecord::Migration
+class CreateUniqueIds < ActiveRecord::Migration[4.2]
   def change
     create_table :unique_ids do |t|
       t.belongs_to :item
