@@ -91,8 +91,8 @@ ActiveRecord::Schema.define(version: 2019_10_31_013911) do
   create_table "comments", id: :serial, force: :cascade do |t|
     t.string "title", limit: 50, default: ""
     t.text "description"
-    t.integer "commentable_id"
     t.string "commentable_type"
+    t.integer "commentable_id"
     t.integer "person_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -150,7 +150,7 @@ ActiveRecord::Schema.define(version: 2019_10_31_013911) do
     t.string "description"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.integer "duration"
+    t.decimal "duration", precision: 7, scale: 2
     t.string "category"
     t.string "status"
     t.datetime "created_at"
@@ -321,14 +321,11 @@ ActiveRecord::Schema.define(version: 2019_10_31_013911) do
     t.string "subject"
     t.text "body"
     t.string "purpose"
-    t.string "event_statuses"
-    t.string "event_assigned"
     t.string "id_code"
-    t.text "individuals"
     t.index ["event_id"], name: "index_notifications_on_event_id"
   end
 
-  create_table "people", id: :serial, force: :cascade do |t|
+  create_table "people", force: :cascade do |t|
     t.string "firstname"
     t.string "lastname"
     t.string "status"
@@ -360,8 +357,8 @@ ActiveRecord::Schema.define(version: 2019_10_31_013911) do
     t.string "division1"
     t.string "division2"
     t.integer "position", default: 30
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "duration"
     t.integer "title_order", null: false
     t.string "error_code"

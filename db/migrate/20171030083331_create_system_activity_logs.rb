@@ -1,4 +1,4 @@
-class CreateSystemActivityLogs < ActiveRecord::Migration
+class CreateSystemActivityLogs < ActiveRecord::Migration[4.2]
   def change
     create_table :system_activity_logs do |t|
       t.references :user

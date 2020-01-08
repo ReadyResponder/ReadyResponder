@@ -1,4 +1,4 @@
-class AddTypeToChannel < ActiveRecord::Migration
+class AddTypeToChannel < ActiveRecord::Migration[4.2]
   def self.up
     add_column :channels, :channel_type, :string
     add_column :channels, :sms_available, :boolean, :default => false
