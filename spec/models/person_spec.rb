@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Person do
+  describe 'tags' do
+    it 'is valid to add tags' do
+      person = build :person, tag_list: "SAR, shelter"
+      expect(person).to be_valid
+    end
+  end
+
   describe 'validations' do
     subject { build :person }
     it { is_expected.to validate_length_of(:state).is_equal_to 2 }
