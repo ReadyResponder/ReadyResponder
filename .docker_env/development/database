@@ -1,0 +1,4 @@
+# for the postgres image
+POSTGRES_USER=postgres
+POSTGRES_DB=lims_development
+

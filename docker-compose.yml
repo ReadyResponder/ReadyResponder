@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+
+  rails:
+    build: .
+    ports:
+      - "3000:3000"
+      - "4000:4000" # for capybara
+    volumes:
+      - .:/usr/src/app
+      - gem_cache:/gems
+    env_file:
+      # TODO: dynamically swap these based on deploy target
+      - .docker_env/development/database
+      - .docker_env/development/rails
+    environment:
+      - GEM_HOME=/gems
+    stdin_open: true
+    tty: true
+
+  database:
+    image: postgres:latest
+    env_file:
+      - .docker_env/development/database
+    volumes:
+      # persist the db data between runs
+      - db_data:/var/lib/postgresql/data
+    # Sometimes it's useful to expose the db
+    # to processes outside of the container.
+    # Uncomment the following to do that.
+    # ports:
+    #   - "5432:5432"
+
+  # We’ve opted for the debug, rather than the standard version of this
+  # image, because it includes and runs a VNC server. This gives us the
+  # option to visually see Chrome running inside the container using a VNC
+  # client. Useful if you want to actually see the tests running.
+  selenium_chrome:
+    image: selenium/standalone-chrome-debug
+    logging:
+      driver: none
+    ports:
+      - "5900:5900"
+volumes:
+  db_data:
+  gem_cache:

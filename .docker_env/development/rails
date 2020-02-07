@@ -1,0 +1,7 @@
+DATABASE_HOST=database
+# POSTGRES_PORT=5432
+DB_NAME_TEST=lims_test
+DB_NAME_DEV=lims_dev
+RR_USERNAME=postgres
+# RR_PASSWORD=something_great_if_youre_in_production
+

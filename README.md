@@ -97,6 +97,24 @@ $ apt-get install libmagickwand-dev
 
 We also have a Vagrant + Ansible setup so you can start quickly. See [Vagrant + Ansible](roles/)
 
+## Running in Docker
+Assuming you've got docker installed just run
+
+```
+docker-compose up -d
+```
+note: if you want it to run as a foreground process leave off the `-d`
+
+The _first_ time you run it you'll also need to populate the database, so 
+run this.
+
+```
+docker-compose exec rails bin/setup
+```
+
+At the end of the output you'll see the username and password for the default user.
+
+
 ## Contributing to ReadyResponder: Coding :smiley:
 
 Get the project code locally and set it up:
