@@ -1,0 +1,26 @@
+default: &default
+  adapter:  postgresql
+  encoding: unicode
+  database: <%= ENV['DB_NAME_DEV'] %>
+  host:     <%= ENV["DATABASE_HOST"] %>
+  pool:     <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV['RR_USERNAME'] %>
+  password: <%= ENV['RR_PASSWORD'] %>
+  min_messages: WARNING
+  template: template0  #template0 resolves an issue with SQL_ASCII vs UTF-8 encoding
+
+test:
+  <<: *default
+  database: <%= ENV["DB_NAME_TEST"] %>
+
+development:
+  <<: *default
+
+uat:
+  <<: *default
+
+production:
+  <<: *default
+  database: <%= ENV["DB_NAME_PROD"] %>
+
+
