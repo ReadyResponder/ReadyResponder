@@ -75,6 +75,8 @@ Install ImageMagick
 $ brew install imagemagick@6
 ```
 
+[Install for OSX version 10.15, *Catalina*, and above.](install_osx_catalina.md)
+
 #### Dependencies - Ubuntu
 
 Run `apt-get update` before you install the dependencies.
