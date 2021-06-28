@@ -48,6 +48,14 @@ class Event < ApplicationRecord
 
   CATEGORY_CHOICES = ['Training', 'Patrol', 'Meeting', 'Admin', 'Event']
   STATUS_CHOICES = ['Scheduled', 'In-session', 'Completed', 'Cancelled', "Closed"]
+  STAFFING_LEVELS = {
+    500 => 'Error',
+    0 => 'Empty',
+    1 => 'Inadequate',
+    2 => 'Adequate',
+    3 => 'Satisfied',
+    4 => 'Full'
+  }.freeze
 
   def to_s
     title
@@ -163,11 +171,31 @@ class Event < ApplicationRecord
     Event.where('start_time < ?', self.start_time).order(start_time: :desc).first
   end
 
-private
+  def staffing_level
+    {
+      staffing_level_number: staffing_number,
+      staffing_level_name: STAFFING_LEVELS[staffing_number],
+      staffing_level_percentage: staffing_percentage
+    }
+  end
+
+  private
+
+  def staffing_number
+    tasks = self.tasks
+    return 0 if tasks.empty? # TODO: verify an event with no tasks should be considered empty.
+    @staffing_number ||= tasks.map(&:staffing_value).min
+  end
+
+  # TODO: update this once staffing % meaning is clarified.
+  def staffing_percentage
+    staffing_number * 20 + 20
+  end
+
   def calc_duration #This is also used in timecards; it should be extracted out
-     if !(start_time.blank?) and !(end_time.blank?)
+    if !(start_time.blank?) and !(end_time.blank?)
       self.duration = ((end_time - start_time) / 1.hour).round(2) || 0
-     end
+    end
   end
 
   def trim_id_code
@@ -177,5 +205,4 @@ private
   def expired?
     Event.where(id_code: id_code).where("end_time > ?", 6.months.ago).empty?
   end
-
 end
