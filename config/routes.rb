@@ -103,6 +103,8 @@ Rails.application.routes.draw do
 
   resources :assignments, except: [:new, :create], constraints: { id: /\d+/ }
 
+  resources :comments, only: [:create]
+
   root "landing#index"
 
 end

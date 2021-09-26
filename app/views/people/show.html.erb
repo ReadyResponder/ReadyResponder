@@ -129,6 +129,12 @@
   </div>
 </div>
 
+<h4>Add Comment</h4>
+<%= simple_form_for @comment do |f| %>
+  <%= f.input :description, label: false %>
+  <%= f.button :submit %>
+<% end %>
+
 <% content_for :parking do %>
   <table class="table table-striped table-bordered">
     <thead>
